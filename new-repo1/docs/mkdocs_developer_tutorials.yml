@@ -1,0 +1,12 @@
+nav:
+- Getting started as developer:
+  - 00 - Getting started as developer: docs/developer/tutorials/Getting started as
+      developer/00 - Getting started as developer.md
+  - 01 - Organizing the repository internals: docs/developer/tutorials/Getting started
+      as developer/01 - Organizing the repository internals.md
+  - 02 - Handling the database relationships: docs/developer/tutorials/Getting started
+      as developer/02 - Handling the database relationships.md
+  - 03 - Doing the artifact dependencie: docs/developer/tutorials/Getting started
+      as developer/03 - Doing the artifact dependencie.md
+  - 04 - Handling the database contexts: docs/developer/tutorials/Getting started
+      as developer/04 - Handling the database contexts.md

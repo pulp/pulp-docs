@@ -1,0 +1,10 @@
+nav:
+- Getting started as sys-admin:
+  - 00 - Getting started as sys-admin: docs/sys-admin/tutorials/Getting started as
+      sys-admin/00 - Getting started as sys-admin.md
+  - 01 - Organizing the content relationships: docs/sys-admin/tutorials/Getting started
+      as sys-admin/01 - Organizing the content relationships.md
+  - 02 - Configuring the artifact dependencie: docs/sys-admin/tutorials/Getting started
+      as sys-admin/02 - Configuring the artifact dependencie.md
+  - 03 - Setting the artifact signals: docs/sys-admin/tutorials/Getting started as
+      sys-admin/03 - Setting the artifact signals.md

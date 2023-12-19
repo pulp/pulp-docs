@@ -1,0 +1,8 @@
+nav:
+- Getting started as content-manager:
+  - 00 - Getting started as content-manager: docs/content-manager/tutorials/Getting
+      started as content-manager/00 - Getting started as content-manager.md
+  - 01 - Deploying the content signals: docs/content-manager/tutorials/Getting started
+      as content-manager/01 - Deploying the content signals.md
+  - 02 - Handling the repository signals: docs/content-manager/tutorials/Getting started
+      as content-manager/02 - Handling the repository signals.md
