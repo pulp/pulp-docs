@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multirepo-prototype"
+version = "0.0.1"
+dependencies = [
+    "mkdocs-material",
+    "mkdocs-material[imaging]",
+    "mkdocs-multirepo-plugin",
+    "Faker",
+]
+
+[project.scripts]
+mk_mkdocs = "mk_mkdocs.main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+
