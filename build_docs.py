@@ -33,7 +33,7 @@ def get_repo_content_grouped(persona: str, content_type: str):
     return content_list
 
 
-def get_repo_content_flat(persona: str, content_type:str):
+def get_repo_content_flat(persona: str, content_type: str):
     """Return [{title: import-url}]"""
     content_list = []
     for repo, repomd in REPOSITORIES.items():
@@ -49,18 +49,31 @@ def import_from(repo: str, docs_dir: str = "docs/*", branch="main", config="docs
 
 
 def main():
-    tutorials = {"Tutorials": get_repo_content_flat("content-manager", "tutorials")}
+    # section
+    tutorials = [
+        {"Overview": "tutorials/index.md"},
+        {"Tutorials": get_repo_content_flat("content-manager", "tutorials")}
+    ]
     guides = [
-        {"For Content-Management": get_repo_content_grouped("content-manager", "guides")},
+        {"Overview": "guides/index.md"},
+        {"For Content-Management": get_repo_content_grouped(
+            "content-manager", "guides")},
         {"For Sys-Admins": get_repo_content_grouped("sys-admin", "guides")},
     ]
+    learn = [
+        {"Overview": "learn/index.md"},
+    ]
+    reference = [
+        {"Overview": "reference/index.md"},
+    ]
+
+    # main navigation
     navigation = [
         {"Home": "index.md"},
-        {"Getting Started": [
-            {"Overview": "tutorials/index.md"}, tutorials]},
-        {"Guides": [{"Overview": "guides/index.md"}, *guides]},
-        {"Learn": [{"Overview": "learn/index.md"}]},
-        {"Reference": [{"Overview": "reference/index.md"}]},
+        {"Getting Started": tutorials},
+        {"Guides": guides},
+        {"Learn": learn},
+        {"Reference": reference},
     ]
 
     # template substitution
