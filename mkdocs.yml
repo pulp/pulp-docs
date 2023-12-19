@@ -1,25 +1,85 @@
 nav:
   - Home: index.md
   - Getting Started:
-    - Overview: tutorials/index.md
-    - Tutorials:
-      - RPM Package: '!import file:///home/pbrochad/workspace/multirepo-prototype/new_repo1?branch=main&docs_dir=docs/*&config=docs/mkdocs_content-manager_tutorials.yml'
-      - Debian Package: '!import file:///home/pbrochad/workspace/multirepo-prototype/new_repo2?branch=main&docs_dir=docs/*&config=docs/mkdocs_content-manager_tutorials.yml'
-      - Maven: '!import file:///home/pbrochad/workspace/multirepo-prototype/new_repo3?branch=main&docs_dir=docs/*&config=docs/mkdocs_content-manager_tutorials.yml'
+    - Overview: getting_started/index.md
+    - Quickstart:
+      - getting_started/quickstart/01-overview.md
+      - getting_started/quickstart/02-setup.md
+      - getting_started/quickstart/03-installation.md
+      - getting_started/quickstart/04-configuration.md
+      - getting_started/quickstart/05-deployment.md
+      - getting_started/quickstart/06-conclusion.md
+    - Fundamentals:
+      - getting_started/fundamentals/On autonomous Database deployment.md
+      - getting_started/fundamentals/About autonomous Model deployment.md
+      - getting_started/fundamentals/On scalable Database ecossystem.md
+      - getting_started/fundamentals/Understanding complex Model deployment.md
   - Guides:
     - Overview: guides/index.md
     - For Content-Management:
-      - RPM Package: '!import file:///home/pbrochad/workspace/multirepo-prototype/new_repo1?branch=main&docs_dir=docs/*&config=docs/mkdocs_content-manager_guides.yml'
-      - Debian Package: '!import file:///home/pbrochad/workspace/multirepo-prototype/new_repo2?branch=main&docs_dir=docs/*&config=docs/mkdocs_content-manager_guides.yml'
-      - Maven: '!import file:///home/pbrochad/workspace/multirepo-prototype/new_repo3?branch=main&docs_dir=docs/*&config=docs/mkdocs_content-manager_guides.yml'
+      - RPM Package:
+        - new-repo1/docs/content-manager/guides/How to do get light fight..md
+      - Debian Package:
+        - new-repo2/docs/content-manager/guides/How to bind world none..md
+        - new-repo2/docs/content-manager/guides/How to do already choose boy..md
+        - new-repo2/docs/content-manager/guides/How to bind since here..md
+        - new-repo2/docs/content-manager/guides/How to generate run realize something..md
+      - Maven:
+        - new-repo3/docs/content-manager/guides/How to generate buy..md
     - For Sys-Admins:
-      - RPM Package: '!import file:///home/pbrochad/workspace/multirepo-prototype/new_repo1?branch=main&docs_dir=docs/*&config=docs/mkdocs_sys-admin_guides.yml'
-      - Debian Package: '!import file:///home/pbrochad/workspace/multirepo-prototype/new_repo2?branch=main&docs_dir=docs/*&config=docs/mkdocs_sys-admin_guides.yml'
-      - Maven: '!import file:///home/pbrochad/workspace/multirepo-prototype/new_repo3?branch=main&docs_dir=docs/*&config=docs/mkdocs_sys-admin_guides.yml'
+      - RPM Package:
+        - new-repo1/docs/sys-admin/guides/How to generate each there..md
+        - new-repo1/docs/sys-admin/guides/How to create mention wind..md
+      - Debian Package:
+        - new-repo2/docs/sys-admin/guides/How to update war..md
+        - new-repo2/docs/sys-admin/guides/How to create win crime..md
+        - new-repo2/docs/sys-admin/guides/How to update treatment raise collection..md
+      - Maven:
+        - new-repo3/docs/sys-admin/guides/How to create story wrong newspaper..md
+        - new-repo3/docs/sys-admin/guides/How to generate store loss pretty..md
+        - new-repo3/docs/sys-admin/guides/How to delete side back create..md
   - Learn:
     - Overview: learn/index.md
+    - For Content-Management:
+      - RPM Package:
+        - 'new-repo1/docs/content-manager/learn/In perspective: resilient Database configuration.md'
+        - new-repo1/docs/content-manager/learn/On flexible Artifact ecossystem.md
+      - Debian Package:
+        - new-repo2/docs/content-manager/learn/Understanding complex Content configuration.md
+        - new-repo2/docs/content-manager/learn/On resilient Repository setup.md
+        - new-repo2/docs/content-manager/learn/About scalable Model deployment.md
+      - Maven:
+        - new-repo3/docs/content-manager/learn/About autonomous Repository configuration.md
+        - 'new-repo3/docs/content-manager/learn/In perspective: flexible Repository
+          setup.md'
+        - 'new-repo3/docs/content-manager/learn/In perspective: modular Repository configuration.md'
+    - For Sys-Admins:
+      - RPM Package:
+        - new-repo1/docs/sys-admin/learn/Understanding autonomous Model deployment.md
+        - new-repo1/docs/sys-admin/learn/On resilient Content configuration.md
+        - new-repo1/docs/sys-admin/learn/Understanding flexible Model ecossystem.md
+      - Debian Package:
+        - new-repo2/docs/sys-admin/learn/On modular Model setup.md
+      - Maven:
+        - new-repo3/docs/sys-admin/learn/On scalable Database configuration.md
+        - 'new-repo3/docs/sys-admin/learn/In perspective: complex Database deployment.md'
+        - new-repo3/docs/sys-admin/learn/Understanding modular Content setup.md
   - Reference:
     - Overview: reference/index.md
+    - Repository Map: reference/01-repository-map.md
+    - Glossary: reference/02-glossary.md
+  - Development:
+    - Overview: development/index.md
+    - Quickstart:
+      - development/quickstart/01-doc-workflow.md
+      - development/quickstart/02-code-workflow.md
+    - Onboarding:
+      - development/onboarding/On autonomous Database deployment.md
+      - development/onboarding/About autonomous Model deployment.md
+      - development/onboarding/On scalable Database ecossystem.md
+      - development/onboarding/Understanding complex Model deployment.md
+    - Guides:
+      - development/guides/How to bind analysis trade..md
         
 
 
@@ -63,6 +123,20 @@ plugins:
   - multirepo:
       cleanup: true
       keep_docs_dir: true
+      nav_repos:
+        - import_url: file:///home/pbrochad/workspace/multirepo-prototype/new_repo1?branch=main
+          imports:
+          - docs/*
+          name: new_repo1
+        - import_url: file:///home/pbrochad/workspace/multirepo-prototype/new_repo2?branch=main
+          imports:
+          - docs/*
+          name: new_repo2
+        - import_url: file:///home/pbrochad/workspace/multirepo-prototype/new_repo3?branch=main
+          imports:
+          - docs/*
+          name: new_repo3
+
 
 extra:
   social:

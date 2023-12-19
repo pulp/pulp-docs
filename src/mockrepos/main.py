@@ -89,7 +89,7 @@ class ContentFactory:
             return "{} {}".format(self.faker.word(
                 ext_word_list=verbs), self.faker.sentence(nb_words=3).lower())
         # optional kwargs
-        title = title or "How to {}".format(gen_imperative())
+        title = title or "How to {}".format(gen_imperative()[:-1])
         repository = repository or "default"
         persona = persona or self.faker.word(
             ext_word_list=["admin", "dev", "norm"])
@@ -131,7 +131,7 @@ class ContentFactory:
                             self.faker.word(ext_word_list=subject_complement)])
 
         def gen_section():
-            return (self.faker.sentence(), "\n\n".join(self.faker.texts(nb_texts=randint(3, 5), max_nb_chars=randint(200, 400))))
+            return (self.faker.sentence()[:-1], "\n\n".join(self.faker.texts(nb_texts=randint(3, 5), max_nb_chars=randint(200, 400))))
 
         title = title or gen_title()
         persona = persona or self.faker.word(
@@ -139,7 +139,7 @@ class ContentFactory:
         repository = repository or "default"
 
         template_vars = {
-            "tags":  ["guide", persona],
+            "tags":  ["learn", persona],
             "created":  "0.1.0",
             "updated":  [],
             "title":  title,
@@ -172,7 +172,7 @@ class ContentFactory:
             return " ".join([self.faker.word(ext_word_list=verb).title(), self.faker.word(ext_word_list=subject), self.faker.word(ext_word_list=adjective)])
 
         def gen_section():
-            return (self.faker.sentence(), "\n\n".join(self.faker.texts(nb_texts=randint(3, 5), max_nb_chars=randint(200, 400))))
+            return (self.faker.sentence()[:-1], "\n\n".join(self.faker.texts(nb_texts=randint(3, 5), max_nb_chars=randint(200, 400))))
 
         persona = persona or self.faker.word(
             ext_word_list=["admin", "dev", "norm"])
@@ -198,7 +198,7 @@ class ContentFactory:
         for i in range(randint(2, 4)):
             section_title = "0{} - {}".format(i+1, gen_section_title())
             template_vars = {
-                "tags":  ["guide", persona],
+                "tags":  ["tutorial", persona],
                 "created":  "0.1.0",
                 "updated":  [],
                 "title":  section_title,

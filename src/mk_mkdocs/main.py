@@ -1,9 +1,11 @@
 
 import argparse
+import json
 import os
 import subprocess
 import sys
 import typing as t
+from collections import defaultdict
 from pathlib import Path
 
 import yaml
@@ -29,7 +31,7 @@ def load_same_structure(doc_basepath: Path) -> dict:
     return {"mkdocs": {"nav": yaml_tree}}
 
 
-def load_flat(doc_basepath: Path) -> dict:
+def load_flat_navs(doc_basepath: Path) -> dict:
     navs = {}
     for content_type in CONTENT_TYPES:
         for persona in PERSONAS:
@@ -43,11 +45,11 @@ def load_flat(doc_basepath: Path) -> dict:
                 tutorial_name = list(_files)[0].parts[-2]
                 navs[f"mkdocs_{persona}_{content_type}"] = {
                     "nav": [{tutorial_name: process_glob(files)}]}
-
     return navs
 
 
-def update_repo(doc_basepath: Path, loader=load_same_structure):
+def generate_yamls(doc_basepath: Path, loader=load_same_structure):
+    """Create mkdocs yaml file for each combination of {persona}{content-type}"""
     # clean yaml files
     old_yamls = doc_basepath.glob("*.yml")
     for old in old_yamls:
@@ -60,6 +62,55 @@ def update_repo(doc_basepath: Path, loader=load_same_structure):
         with open(doc_basepath / mkdocs_filename, "w") as file:
             print(f"Created {mkdocs_filename}")
             yaml.dump(mkdocs_nav, file)
+
+
+def load_repo_filetree(doc_basepath: Path):
+    """
+    Load repository filetree as dict object
+
+    Example:
+        {
+            admin_guides: [
+                {'name': 'Guide 1', 'type': 'file', 'path': 'path/to/guide-1'},
+                ...
+            ],
+            dev_tutorials: [
+                {'name': 'Tutorial 1', 'type': 'dir', 'path': 'path/to/tutorial-1/', 'children': ['file-1.md', ..., 'file-n.md']},
+                ...
+            ],
+        }
+    """
+    doctree = defaultdict(list)
+    for content_type in CONTENT_TYPES:
+        for persona in PERSONAS:
+            files = doc_basepath.glob(f"{persona}/{content_type}/*")
+            # breakpoint()
+            for file in files:
+                if file.is_file():
+                    doctree[f"{persona}_{content_type}"].append({
+                        'name': file.name,
+                        'type': "file",
+                        # 'path': str(file.relative_to("docs")),
+                        'path': str(file),
+                    })
+                else:
+                    doctree[f"{persona}_{content_type}"].append({
+                        'name': file.name,
+                        'type': "dir",
+                        # 'path': str(file.relative_to("docs")),
+                        'path': str(file),
+                        'children': [child.name for child in file.glob("*.md")],
+                    })
+    return doctree
+
+
+def generate_doctree(doc_basepath: Path):
+    """Generate a json file containing listing of .md files and other metadata."""
+    filename = doc_basepath / "doctree.json"
+    doctree = load_repo_filetree(doc_basepath)
+    with open(filename, "w") as file:
+        json.dump(doctree, file)
+    print(f"Created {filename}")
 
 
 def commit_changes(basepath: Path):
@@ -93,19 +144,21 @@ def main():
     parser.add_argument(
         "basepaths", nargs="+", help="The basepath to look for docs folder")
     parser.add_argument("--commit", action="store_true")
+    parser.add_argument("--doctree", action="store_true")
     args = parser.parse_args()
 
     # choose loaders
     loaders = {
-        "flat": load_flat,
+        "flat": load_flat_navs,
         "original": load_same_structure,
     }
     loader = loaders[args.loader]
 
     errors = []
-    for repo_basepath in args.basepaths:
+    # process all repos passed as arguments
+    for repo_name in args.basepaths:
         # check filesystem
-        basepath = Path(repo_basepath)
+        basepath = Path(repo_name)
         docs_basepath = Path(basepath / "docs")
         if not docs_basepath.exists():
             errors.append(
@@ -113,12 +166,15 @@ def main():
             continue
 
         # load filetree and dump as yaml
-        print(f"Updating {repo_basepath}")
-        update_repo(docs_basepath, loader=loader)
+        print(f"Updating {repo_name}")
+        if args.doctree:
+            generate_doctree(docs_basepath)
+        else:
+            generate_yamls(docs_basepath, loader=loader)
 
         # git
         if args.commit:
-            print(f"Commiting to {repo_basepath}")
+            print(f"Commiting to {repo_name}")
             commit_changes(basepath)
 
     for error in errors:

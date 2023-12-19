@@ -1,3 +1,0 @@
-# Foo
-
-this is foo
