@@ -1,8 +1,0 @@
-nav:
-- Getting started as content-manager:
-  - 00 - Getting started as content-manager: docs/content-manager/tutorials/Getting
-      started as content-manager/00 - Getting started as content-manager.md
-  - 01 - Organizing the content dependencie: docs/content-manager/tutorials/Getting
-      started as content-manager/01 - Organizing the content dependencie.md
-  - 02 - Handling the database internals: docs/content-manager/tutorials/Getting started
-      as content-manager/02 - Handling the database internals.md

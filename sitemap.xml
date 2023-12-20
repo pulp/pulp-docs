@@ -2,582 +2,632 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://github.com/pulp/pulpcore/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/pulp/pulpcore/_index/</loc>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/tags/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/development/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/development/guides/How%20to%20bind%20analysis%20trade./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/development/onboarding/About%20autonomous%20Model%20deployment/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/development/onboarding/On%20autonomous%20Database%20deployment/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/development/onboarding/On%20scalable%20Database%20ecossystem/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/development/onboarding/Understanding%20complex%20Model%20deployment/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/development/quickstart/01-doc-workflow/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/development/quickstart/02-code-workflow/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/development/quickstart/_03-commit-guide/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/development/quickstart/_Getting%20started%20as%20developer/00%20-%20Getting%20started%20as%20developer/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/development/quickstart/_Getting%20started%20as%20developer/01%20-%20Organizing%20the%20repository%20internals/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/development/quickstart/_Getting%20started%20as%20developer/02%20-%20Handling%20the%20database%20relationships/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/development/quickstart/_Getting%20started%20as%20developer/03%20-%20Doing%20the%20artifact%20dependencie/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/development/quickstart/_Getting%20started%20as%20developer/04%20-%20Handling%20the%20database%20contexts/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/getting_started/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/getting_started/fundamentals/About%20autonomous%20Model%20deployment/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/getting_started/fundamentals/On%20autonomous%20Database%20deployment/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/getting_started/fundamentals/On%20scalable%20Database%20ecossystem/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/getting_started/fundamentals/Understanding%20complex%20Model%20deployment/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/getting_started/quickstart/01-overview/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/getting_started/quickstart/02-setup/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/getting_started/quickstart/03-installation/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/getting_started/quickstart/04-configuration/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/getting_started/quickstart/05-deployment/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/getting_started/quickstart/06-conclusion/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/guides/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/learn/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/reference/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/reference/01-repository-map/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/reference/02-glossary/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/pulp/pulpcore/new-repo1/CHANGELOG/</loc>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/content-manager/guides/How%20to%20do%20get%20light%20fight./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/content-manager/learn/In%20perspective%3A%20resilient%20Database%20configuration/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/content-manager/learn/On%20flexible%20Artifact%20ecossystem/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/content-manager/tutorials/Getting%20started%20as%20content-manager/00%20-%20Getting%20started%20as%20content-manager/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/content-manager/tutorials/Getting%20started%20as%20content-manager/01%20-%20Deploying%20the%20content%20signals/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/content-manager/tutorials/Getting%20started%20as%20content-manager/02%20-%20Handling%20the%20repository%20signals/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/developer/guides/How%20to%20bind%20analysis%20trade./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/developer/learn/About%20autonomous%20Model%20deployment/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/developer/learn/On%20autonomous%20Database%20deployment/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/developer/learn/On%20scalable%20Database%20ecossystem/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/developer/learn/Understanding%20complex%20Model%20deployment/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/developer/tutorials/Getting%20started%20as%20developer/00%20-%20Getting%20started%20as%20developer/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/developer/tutorials/Getting%20started%20as%20developer/01%20-%20Organizing%20the%20repository%20internals/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/developer/tutorials/Getting%20started%20as%20developer/02%20-%20Handling%20the%20database%20relationships/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/developer/tutorials/Getting%20started%20as%20developer/03%20-%20Doing%20the%20artifact%20dependencie/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/developer/tutorials/Getting%20started%20as%20developer/04%20-%20Handling%20the%20database%20contexts/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/pulp/pulpcore/new-repo1/docs/reference/main/</loc>
+         <lastmod>2023-12-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/pulp/pulpcore/new-repo1/docs/reference/models/artifacts/</loc>
+         <lastmod>2023-12-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/pulp/pulpcore/new-repo1/docs/reference/models/remotes/</loc>
+         <lastmod>2023-12-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/pulp/pulpcore/new-repo1/docs/reference/models/repository/</loc>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/sys-admin/guides/How%20to%20create%20mention%20wind./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/sys-admin/guides/How%20to%20generate%20each%20there./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/sys-admin/learn/On%20resilient%20Content%20configuration/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/sys-admin/learn/Understanding%20autonomous%20Model%20deployment/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/sys-admin/learn/Understanding%20flexible%20Model%20ecossystem/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/sys-admin/tutorials/Getting%20started%20as%20sys-admin/00%20-%20Getting%20started%20as%20sys-admin/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/sys-admin/tutorials/Getting%20started%20as%20sys-admin/01%20-%20Doing%20the%20repository%20relationships/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo1/docs/sys-admin/tutorials/Getting%20started%20as%20sys-admin/02%20-%20Deploying%20the%20model%20infrastructure/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/pulp/pulpcore/new-repo2/CHANGELOG/</loc>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/content-manager/guides/How%20to%20bind%20since%20here./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/content-manager/guides/How%20to%20bind%20world%20none./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/content-manager/guides/How%20to%20do%20already%20choose%20boy./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/content-manager/guides/How%20to%20generate%20run%20realize%20something./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/content-manager/learn/About%20scalable%20Model%20deployment/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/content-manager/learn/On%20resilient%20Repository%20setup/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/content-manager/learn/Understanding%20complex%20Content%20configuration/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/content-manager/tutorials/Getting%20started%20as%20content-manager/00%20-%20Getting%20started%20as%20content-manager/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/content-manager/tutorials/Getting%20started%20as%20content-manager/01%20-%20Configuring%20the%20artifact%20infrastructure/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/content-manager/tutorials/Getting%20started%20as%20content-manager/02%20-%20Configuring%20the%20content%20contexts/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/developer/guides/How%20to%20bind%20break./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/developer/guides/How%20to%20do%20subject./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/developer/learn/On%20flexible%20Model%20configuration/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/developer/learn/Understanding%20autonomous%20Artifact%20setup/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/developer/learn/Understanding%20complex%20Repository%20ecossystem/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/developer/learn/Understanding%20complex%20Repository%20setup/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/developer/tutorials/Getting%20started%20as%20developer/00%20-%20Getting%20started%20as%20developer/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/developer/tutorials/Getting%20started%20as%20developer/01%20-%20Doing%20the%20repository%20dependencie/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/developer/tutorials/Getting%20started%20as%20developer/02%20-%20Organizing%20the%20database%20relationships/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/developer/tutorials/Getting%20started%20as%20developer/03%20-%20Organizing%20the%20repository%20internals/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/pulp/pulpcore/new-repo2/docs/reference/main/</loc>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/sys-admin/guides/How%20to%20create%20win%20crime./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/sys-admin/guides/How%20to%20update%20treatment%20raise%20collection./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/sys-admin/guides/How%20to%20update%20war./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/sys-admin/learn/On%20modular%20Model%20setup/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/sys-admin/tutorials/Getting%20started%20as%20sys-admin/00%20-%20Getting%20started%20as%20sys-admin/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/sys-admin/tutorials/Getting%20started%20as%20sys-admin/01%20-%20Handling%20the%20artifact%20signals/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/sys-admin/tutorials/Getting%20started%20as%20sys-admin/02%20-%20Configuring%20the%20database%20signals/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/sys-admin/tutorials/Getting%20started%20as%20sys-admin/03%20-%20Deploying%20the%20content%20dependencie/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo2/docs/sys-admin/tutorials/Getting%20started%20as%20sys-admin/04%20-%20Setting%20the%20database%20dependencie/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/pulp/pulpcore/new-repo3/CHANGELOG/</loc>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/content-manager/guides/How%20to%20generate%20buy./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/content-manager/learn/About%20autonomous%20Repository%20configuration/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/content-manager/learn/In%20perspective%3A%20flexible%20Repository%20setup/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/content-manager/learn/In%20perspective%3A%20modular%20Repository%20configuration/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/content-manager/tutorials/Getting%20started%20as%20content-manager/00%20-%20Getting%20started%20as%20content-manager/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/content-manager/tutorials/Getting%20started%20as%20content-manager/01%20-%20Organizing%20the%20content%20dependencie/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/content-manager/tutorials/Getting%20started%20as%20content-manager/02%20-%20Handling%20the%20database%20internals/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/developer/guides/How%20to%20create%20federal%20entire./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/developer/guides/How%20to%20create%20money%20let%20charge./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/developer/guides/How%20to%20do%20couple%20first./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/developer/guides/How%20to%20do%20eight%20near%20number./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/developer/guides/How%20to%20generate%20vote%20student./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/developer/learn/About%20modular%20Content%20setup/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/developer/learn/In%20perspective%3A%20scalable%20Database%20setup/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/developer/learn/Understanding%20autonomous%20Database%20ecossystem/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/developer/learn/Understanding%20resilient%20Content%20setup/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/developer/tutorials/Getting%20started%20as%20developer/00%20-%20Getting%20started%20as%20developer/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/developer/tutorials/Getting%20started%20as%20developer/01%20-%20Organizing%20the%20repository%20dependencie/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/developer/tutorials/Getting%20started%20as%20developer/02%20-%20Setting%20the%20content%20relationships/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/developer/tutorials/Getting%20started%20as%20developer/03%20-%20Handling%20the%20content%20relationships/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/pulp/pulpcore/new-repo3/docs/reference/main/</loc>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/sys-admin/guides/How%20to%20create%20story%20wrong%20newspaper./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/sys-admin/guides/How%20to%20delete%20side%20back%20create./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/sys-admin/guides/How%20to%20generate%20store%20loss%20pretty./</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/sys-admin/learn/In%20perspective%3A%20complex%20Database%20deployment/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/sys-admin/learn/On%20scalable%20Database%20configuration/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/sys-admin/learn/Understanding%20modular%20Content%20setup/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/sys-admin/tutorials/Getting%20started%20as%20sys-admin/00%20-%20Getting%20started%20as%20sys-admin/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/sys-admin/tutorials/Getting%20started%20as%20sys-admin/01%20-%20Organizing%20the%20content%20relationships/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/sys-admin/tutorials/Getting%20started%20as%20sys-admin/02%20-%20Configuring%20the%20artifact%20dependencie/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/new-repo3/docs/sys-admin/tutorials/Getting%20started%20as%20sys-admin/03%20-%20Setting%20the%20artifact%20signals/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/pulp/pulpcore/tags/</loc>
-         <lastmod>2023-12-19</lastmod>
+         <lastmod>2023-12-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

@@ -1,8 +1,0 @@
-nav:
-- Getting started as content-manager:
-  - 00 - Getting started as content-manager: docs/content-manager/tutorials/Getting
-      started as content-manager/00 - Getting started as content-manager.md
-  - 01 - Configuring the artifact infrastructure: docs/content-manager/tutorials/Getting
-      started as content-manager/01 - Configuring the artifact infrastructure.md
-  - 02 - Configuring the content contexts: docs/content-manager/tutorials/Getting
-      started as content-manager/02 - Configuring the content contexts.md
