@@ -1,6 +1,5 @@
 #!/bin/bash
 # Update repositories (stage all and commit)
-
 REPOSITORIES=(new_repo1 new_repo2 new_repo3)
 for repo in ${REPOSITORIES[@]}
 do

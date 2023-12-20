@@ -70,6 +70,7 @@ nav:
     - Glossary: reference/02-glossary.md
     - Repositories:
       - RPM Package:
+        - '&#128279; Rest API': https://docs.pulpproject.org/pulp_rpm/restapi.html
         - Code API:
           - new-repo1/docs/reference/main.md
           - Models:
@@ -78,10 +79,12 @@ nav:
             - new-repo1/docs/reference/models/artifacts.md
         - Changelog: new-repo1/CHANGELOG.md
       - Debian Package:
+        - '&#128279; Rest API': https://docs.pulpproject.org/pulp_deb/restapi.html
         - Code API:
           - new-repo2/docs/reference/main.md
         - Changelog: new-repo2/CHANGELOG.md
       - Maven:
+        - '&#128279; Rest API': https://docs.pulpproject.org/pulp_maven/restapi.html
         - Code API:
           - new-repo3/docs/reference/main.md
         - Changelog: new-repo3/CHANGELOG.md
@@ -104,7 +107,6 @@ site_name: Pulp Project
 site_url: https://github.com/pulp/pulpcore
 repo_url: https://github.com/pulp/pulpcore
 repo_name: pulp/pulpcore
-copyright: Pulp Project. A Red Hat Community Project. All rights reserved.
 theme:
   name: material
   custom_dir: docs/overrides

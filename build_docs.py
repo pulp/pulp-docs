@@ -17,16 +17,19 @@ REPOSITORIES = {
         "title": "RPM Package",
         "url": f"{BASE_URL}/new_repo1",
         "code_basepaths": ["new_repo1"],
+        "rest_api_link": "https://docs.pulpproject.org/pulp_rpm/restapi.html",
     },
     "new_repo2": {
         "title": "Debian Package",
         "url": f"{BASE_URL}/new_repo2",
         "code_basepaths": ["new_repo2"],
+        "rest_api_link": "https://docs.pulpproject.org/pulp_deb/restapi.html",
     },
     "new_repo3": {
         "title": "Maven",
         "url": f"{BASE_URL}/new_repo3",
         "code_basepaths": ["new_repo3"],
+        "rest_api_link": "https://docs.pulpproject.org/pulp_maven/restapi.html",
     },
 }
 
@@ -95,6 +98,7 @@ def RepoReference():
                 code_api.append({subtitle: children})
         name = reponame.replace("_", "-")  # workaround
         repochild = [
+            {"&#128279; Rest API": repodata["rest_api_link"]},
             {"Code API": code_api},
             {"Changelog": f"{name}/CHANGELOG.md"},
         ]
