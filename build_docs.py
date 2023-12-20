@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import json
-import os
 import sys
 import tempfile
 from pathlib import Path
@@ -44,7 +43,14 @@ def get_doctrees():
     return doctrees
 
 
+# Data about all documenation files from each repo organized by {persona}_{content-type}
+# See how a 'doctree.json' looks like
 doc_trees = get_doctrees()
+
+
+def import_from(repo: str, docs_dir: str = "docs/*", branch="main", config="docs/mkdocs.yml"):
+    url = "file:///home/pbrochad/workspace/multirepo-prototype"
+    return f'!import {url}/{repo}?branch={branch}&docs_dir={docs_dir}&config={config}'
 
 
 def sanitize_path(path: str):
@@ -84,11 +90,6 @@ def RepoReference():
     return content_list
 
 
-def import_from(repo: str, docs_dir: str = "docs/*", branch="main", config="docs/mkdocs.yml"):
-    url = "file:///home/pbrochad/workspace/multirepo-prototype"
-    return f'!import {url}/{repo}?branch={branch}&docs_dir={docs_dir}&config={config}'
-
-
 def CoreContent(content_path: str):
     glob_result = Path(f"docs/{content_path}").glob("*")
     files = []
@@ -106,6 +107,7 @@ def CoreContent(content_path: str):
 
 
 def get_multirepo_imports():
+    """Import definitions for all Pulp Project repositories."""
     multirepos_import = []
     for reponame, repodata in REPOSITORIES.items():
         multirepos_import.append({
@@ -117,12 +119,12 @@ def get_multirepo_imports():
 
 
 def get_mkdocstrings_paths():
+    """Paths discoverable by mkdocstrings plugin for generating reference doc."""
     return ["temp_dir/{}".format(name.replace("_", "-")) for name, _ in REPOSITORIES.items()]
 
 
-def main():
-
-    # section
+def get_navigation():
+    """The dynamic generated 'nav' section of mkdocs.yml"""
     getting_started = [
         {"Overview": "getting_started/index.md"},
         {"Quickstart": CoreContent("getting_started/quickstart/")},
@@ -160,12 +162,16 @@ def main():
         {"Reference": reference},
         {"Development": development},
     ]
+    return navigation
 
-    # template substitution
+
+def main():
+    # dynamic generated mkdocs.yml sections
+    navigation = get_navigation()
     multirepo_imports = get_multirepo_imports()
     mkdocstrings_paths = get_mkdocstrings_paths()
-    print(mkdocstrings_paths)
 
+    # creating mkdocs.yml with dynamic sections
     jinja = Environment(loader=FileSystemLoader(Path()))
     template = jinja.get_template("mkdocs.yml.j2")
     result = template.render(
