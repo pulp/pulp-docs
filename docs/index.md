@@ -1,9 +1,4 @@
 ---
-hide:
-  - navigation
-  - toc
+template: layouts/home.html
+title: Pulp Project
 ---
-
-# Welcome to the Pulp Project!
-
-This is a landing page.
