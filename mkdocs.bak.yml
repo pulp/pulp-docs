@@ -69,15 +69,10 @@ nav:
     - Repository Map: reference/01-repository-map.md
     - Glossary: reference/02-glossary.md
     - Repositories:
-      - RPM Package:
-        - Code API: new-repo1/docs/reference/main.md
-        - Changelog: new-repo1/CHANGELOG.md
-      - Debian Package:
-        - Code API: new-repo2/docs/reference/main.md
-        - Changelog: new-repo2/CHANGELOG.md
-      - Maven:
-        - Code API: new-repo3/docs/reference/main.md
-        - Changelog: new-repo3/CHANGELOG.md
+      - New Repo 1:
+          - Code API:
+            - 'new-repo1/docs/reference/main.md'
+          - Changelog: 'new-repo1/CHANGELOG.md'
   - Development:
     - Overview: development/index.md
     - Quickstart:
@@ -138,31 +133,27 @@ plugins:
             - temp_dir/new-repo1
             - temp_dir/new-repo2
             - temp_dir/new-repo3
-
-
   - tags:
       tags_file: tags.md
   - multirepo:
-      cleanup: true
+      cleanup: false
       keep_docs_dir: true
       nav_repos:
         - import_url: file:///home/pbrochad/workspace/multirepo-prototype/new_repo1?branch=main
           imports:
           - docs/*
-          - codebase
+          - codebase/*
           - CHANGELOG.md
           name: new_repo1
         - import_url: file:///home/pbrochad/workspace/multirepo-prototype/new_repo2?branch=main
           imports:
           - docs/*
-          - new_repo2
-          - CHANGELOG.md
+          - new_repo2/*
           name: new_repo2
         - import_url: file:///home/pbrochad/workspace/multirepo-prototype/new_repo3?branch=main
           imports:
           - docs/*
-          - new_repo3
-          - CHANGELOG.md
+          - new_repo3/*
           name: new_repo3
 
 

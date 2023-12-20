@@ -9,6 +9,8 @@ dependencies = [
     "mkdocs-material",
     "mkdocs-material[imaging]",
     "mkdocs-multirepo-plugin",
+    "mkdocstrings",
+    "Jinja2",
     "Faker",
 ]
 

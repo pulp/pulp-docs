@@ -37,6 +37,15 @@ theme:
 
 plugins:
   - search
+  - mkdocstrings:
+      handlers: 
+        python:
+          options:
+            show_source: false
+            docstring_section_style: table # table, list, spacy
+          paths:
+{{mkdocstrings_paths}}
+
   - tags:
       tags_file: tags.md
   - multirepo:

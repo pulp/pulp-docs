@@ -17,14 +17,17 @@ REPOSITORIES = {
     "new_repo1": {
         "title": "RPM Package",
         "url": f"{BASE_URL}/new_repo1",
+        "code_basepath": "codebase",
     },
     "new_repo2": {
         "title": "Debian Package",
         "url": f"{BASE_URL}/new_repo2",
+        "code_basepath": "new_repo2",
     },
     "new_repo3": {
         "title": "Maven",
         "url": f"{BASE_URL}/new_repo3",
+        "code_basepath": "new_repo3",
     },
 }
 
@@ -44,42 +47,40 @@ def get_doctrees():
 doc_trees = get_doctrees()
 
 
+def sanitize_path(path: str):
+    """Replace _ for - in the reponame because its tweaked by the plugin"""
+    parts = Path(path).parts
+    newparts = (parts[0].replace("_", "-"),) + parts[1:]
+    return str(Path("/".join(newparts)))
+
+
 def RepoContent(persona: str, content_type: str):
     """
-    Fetch content from repositories for @persona and @content_type.
+    Collect content from repositories for @persona and @content_type.
 
     Return:
         one-level:  [{title: import-url}, ...]
         two-levels: [{title: [{title: import-url}, ...]}]
     """
-    def sanitize_path(path: str):
-        """Replace _ for - in the reponame because its tweaked by the plugin"""
-        parts = Path(path).parts
-        newparts = (parts[0].replace("_", "-"),) + parts[1:]
-        return str(Path("/".join(newparts)))
 
     content_list = []
     for reponame, repodata in REPOSITORIES.items():
         contents = doc_trees[reponame][f"{persona}_{content_type}"]
         repochild = [sanitize_path(content["path"]) for content in contents]
         content_list.append({repodata['title']: repochild})
-    # breakpoint()
     return content_list
 
 
-def _RepoContent(persona: str, content_type: str):
-    """
-    Fetch content from repositories for @persona and @content_type.
-
-    Return:
-        one-level:  [{title: import-url}, ...]
-        two-levels: [{title: [{title: import-url}, ...]}]
-    """
+def RepoReference():
+    """Collect reference data from repositories."""
     content_list = []
-    for repo, repomd in REPOSITORIES.items():
-        repo_title = repomd["title"]
-        content_list.append({repo_title: import_from(
-            repo, config=f"docs/mkdocs_{persona}_{content_type}.yml")})
+    for reponame, repodata in REPOSITORIES.items():
+        name = reponame.replace("_", "-")
+        repochild = [
+            {"Code API": f"{name}/docs/reference/main.md"},
+            {"Changelog": f"{name}/CHANGELOG.md"},
+        ]
+        content_list.append({repodata['title']: repochild})
     return content_list
 
 
@@ -110,9 +111,13 @@ def get_multirepo_imports():
         multirepos_import.append({
             "name": reponame,
             "import_url": repodata["url"] + "?branch=main",
-            "imports": ["docs/*"],
+            "imports": ["docs/*", repodata["code_basepath"], "CHANGELOG.md"],
         })
     return multirepos_import
+
+
+def get_mkdocstrings_paths():
+    return ["temp_dir/{}".format(name.replace("_", "-")) for name, _ in REPOSITORIES.items()]
 
 
 def main():
@@ -137,7 +142,7 @@ def main():
         {"Overview": "reference/index.md"},
         {"Repository Map": "reference/01-repository-map.md"},
         {"Glossary": "reference/02-glossary.md"},
-        # {"Repositories": RepoContent("dev", "reference")},
+        {"Repositories": RepoReference()},
     ]
     development = [
         {"Overview": "development/index.md"},
@@ -157,12 +162,16 @@ def main():
     ]
 
     # template substitution
+    multirepo_imports = get_multirepo_imports()
+    mkdocstrings_paths = get_mkdocstrings_paths()
+    print(mkdocstrings_paths)
+
     jinja = Environment(loader=FileSystemLoader(Path()))
     template = jinja.get_template("mkdocs.yml.j2")
-    multirepo_imports = get_multirepo_imports()
-    print(multirepo_imports)
     result = template.render(
         navigation=indent(yaml.dump(navigation), prefix="  "),
+        mkdocstrings_paths=indent(
+            yaml.dump(mkdocstrings_paths), prefix="  "*6),
         multirepo_imports=indent(yaml.dump(multirepo_imports), prefix="  "*4)
     )
 
