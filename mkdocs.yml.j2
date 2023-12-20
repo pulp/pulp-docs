@@ -37,6 +37,8 @@ theme:
 
 plugins:
   - search
+  - tags:
+      tags_file: tags.md
   - mkdocstrings:
       handlers: 
         python:
@@ -45,9 +47,6 @@ plugins:
             docstring_section_style: table # table, list, spacy
           paths:
 {{mkdocstrings_paths}}
-
-  - tags:
-      tags_file: tags.md
   - multirepo:
       cleanup: true
       keep_docs_dir: true
@@ -62,7 +61,8 @@ extra:
       link: https://discourse.pulpproject.org/
 
 extra_css:
-  - stylesheets/extra.css
+  - css/extra.css
+  - css/mkdocstrings.css
 
 markdown_extensions:
   # Python Markdown

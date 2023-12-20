@@ -16,17 +16,17 @@ REPOSITORIES = {
     "new_repo1": {
         "title": "RPM Package",
         "url": f"{BASE_URL}/new_repo1",
-        "code_basepath": "codebase",
+        "code_basepaths": ["new_repo1"],
     },
     "new_repo2": {
         "title": "Debian Package",
         "url": f"{BASE_URL}/new_repo2",
-        "code_basepath": "new_repo2",
+        "code_basepaths": ["new_repo2"],
     },
     "new_repo3": {
         "title": "Maven",
         "url": f"{BASE_URL}/new_repo3",
-        "code_basepath": "new_repo3",
+        "code_basepaths": ["new_repo3"],
     },
 }
 
@@ -81,9 +81,21 @@ def RepoReference():
     """Collect reference data from repositories."""
     content_list = []
     for reponame, repodata in REPOSITORIES.items():
-        name = reponame.replace("_", "-")
+        contents = doc_trees[reponame]["reference"]
+        code_api = []
+        for content in contents:
+            if content["type"] == "file":
+                code_api.append(sanitize_path(content["path"]))
+            else:
+
+                subtitle = content["name"].title()
+                _basepath = sanitize_path(content["path"])
+                children = [
+                    f"{_basepath}/{child}" for child in content["children"]]
+                code_api.append({subtitle: children})
+        name = reponame.replace("_", "-")  # workaround
         repochild = [
-            {"Code API": f"{name}/docs/reference/main.md"},
+            {"Code API": code_api},
             {"Changelog": f"{name}/CHANGELOG.md"},
         ]
         content_list.append({repodata['title']: repochild})
@@ -113,13 +125,17 @@ def get_multirepo_imports():
         multirepos_import.append({
             "name": reponame,
             "import_url": repodata["url"] + "?branch=main",
-            "imports": ["docs/*", repodata["code_basepath"], "CHANGELOG.md"],
+            "imports": ["docs/*", *repodata["code_basepaths"], "CHANGELOG.md"],
         })
     return multirepos_import
 
 
 def get_mkdocstrings_paths():
-    """Paths discoverable by mkdocstrings plugin for generating reference doc."""
+    """
+    Paths discoverable by mkdocstrings plugin for generating reference doc.
+
+    For more info, see: https://github.com/jdoiro3/mkdocs-multirepo-plugin/issues/110
+    """
     return ["temp_dir/{}".format(name.replace("_", "-")) for name, _ in REPOSITORIES.items()]
 
 

@@ -70,13 +70,20 @@ nav:
     - Glossary: reference/02-glossary.md
     - Repositories:
       - RPM Package:
-        - Code API: new-repo1/docs/reference/main.md
+        - Code API:
+          - new-repo1/docs/reference/main.md
+          - Models:
+            - new-repo1/docs/reference/models/repository.md
+            - new-repo1/docs/reference/models/remotes.md
+            - new-repo1/docs/reference/models/artifacts.md
         - Changelog: new-repo1/CHANGELOG.md
       - Debian Package:
-        - Code API: new-repo2/docs/reference/main.md
+        - Code API:
+          - new-repo2/docs/reference/main.md
         - Changelog: new-repo2/CHANGELOG.md
       - Maven:
-        - Code API: new-repo3/docs/reference/main.md
+        - Code API:
+          - new-repo3/docs/reference/main.md
         - Changelog: new-repo3/CHANGELOG.md
   - Development:
     - Overview: development/index.md
@@ -128,6 +135,8 @@ theme:
 
 plugins:
   - search
+  - tags:
+      tags_file: tags.md
   - mkdocstrings:
       handlers: 
         python:
@@ -139,9 +148,6 @@ plugins:
             - temp_dir/new-repo2
             - temp_dir/new-repo3
 
-
-  - tags:
-      tags_file: tags.md
   - multirepo:
       cleanup: true
       keep_docs_dir: true
@@ -149,7 +155,7 @@ plugins:
         - import_url: file:///home/pbrochad/workspace/multirepo-prototype/new_repo1?branch=main
           imports:
           - docs/*
-          - codebase
+          - new_repo1
           - CHANGELOG.md
           name: new_repo1
         - import_url: file:///home/pbrochad/workspace/multirepo-prototype/new_repo2?branch=main
@@ -174,7 +180,8 @@ extra:
       link: https://discourse.pulpproject.org/
 
 extra_css:
-  - stylesheets/extra.css
+  - css/extra.css
+  - css/mkdocstrings.css
 
 markdown_extensions:
   # Python Markdown

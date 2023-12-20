@@ -66,7 +66,7 @@ def generate_yamls(doc_basepath: Path, loader=load_same_structure):
 
 def load_repo_filetree(doc_basepath: Path):
     """
-    Load repository filetree as dict object
+    Load repository filetree as dict object.
 
     Example:
         {
@@ -78,6 +78,9 @@ def load_repo_filetree(doc_basepath: Path):
                 {'name': 'Tutorial 1', 'type': 'dir', 'path': 'path/to/tutorial-1/', 'children': ['file-1.md', ..., 'file-n.md']},
                 ...
             ],
+            reference: [
+                {'name': }
+    ]
         }
     """
     doctree = defaultdict(list)
@@ -101,6 +104,24 @@ def load_repo_filetree(doc_basepath: Path):
                         'path': str(file),
                         'children': [child.name for child in file.glob("*.md")],
                     })
+    # Reference
+    # LIMITATION: Support for only two nesting levels because its easier in general
+    for file in Path(doc_basepath / "reference").glob("*"):
+        if file.is_file():
+            doctree["reference"].append({
+                'name': file.name,
+                'type': "file",
+                # 'path': str(file.relative_to("docs")),
+                'path': str(file),
+            })
+        else:
+            doctree["reference"].append({
+                'name': file.name,
+                'type': "dir",
+                # 'path': str(file.relative_to("docs")),
+                'path': str(file),
+                'children': [child.name for child in file.glob("*.md")],
+            })
     return doctree
 
 
