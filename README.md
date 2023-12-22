@@ -1,7 +1,35 @@
-# Unified Documentation builder for Pulp Project
+# pulp-docs: Unified multirepo documenation
 
-This is a demo of using [Diataxis](#) ideas to scafold a new unified documentation for the Pulp Project with mkdocs.
-The primary concerts of the demo is to orient content organization.
+<!--toc:start-->
+- [pulp-docs: Unified multirepo documenation](#pulp-docs-unified-multirepo-documenation)
+  - [Overview](#overview)
+  - [How it works](#how-it-works)
+  - [Runninng Locally](#runninng-locally)
+<!--toc:end-->
+
+Python Package to help aggregating Pulp's multirepo ecosystem into a unified doc.
+
+## Overview
+
+This packages is:
+
+- A `mkdocs-macros-plugin` [pluget]() (see here).
+- A repository for common doc website asset (see here)
+- A centralized entrypoint for installing doc-related packages/tooling.
+- A possible CLI for doc-related stuff, although nothing is implemented yet.
+
+The idea is that each repository should install `pulp-docs` and imediatelly be able run the unified website server.
+Also, this should be used for the production build.
+
+## How it works
+
+Through a `mkdocs-macro-plugin` hook (called in early stages of mkdocs processing), we inject the following steps:
+
+1. Download all source code needed for the build (either copying from local filesystem or downloading from GH)
+1. Configure `mkdocstrings` to find each repo codebase
+1. Configure `mkdocs` navigation by leveraging our `/docs` content organization structure
+
+And thats it, the magic is done.
 
 ## Runninng Locally
 
@@ -13,17 +41,3 @@ Hopefully, this should run the fixture setup:
 $ pip install -r requirements.txt
 $ mkdocs serve
 ```
-
-## TODO
-
-- Basic features:
-  - [x] **Aggregation**: aggregate content from repositories in the desired main-schema.
-  - [x] **Reference Build**: figure out how to build each repository Reference section, or if that will be pre-build individually.
-  - [x] **REST Api Build**: building the restapi docs is not trivial, so I added a workaround (link to existing pages).
-  - [ ] **GitHub Downloader**: downloader to get the latests release codebase from a repo. (currently mocking w/ local copies)
-  - [ ] **Flexbile Configuration**: currently, the fixture repos are hardcoded
-- Others:
-  - [ ] **`pulp-docs build + serve`**: create this command to build the docs
-  - [ ] **CI Build**: create CI.
-  - [ ] **Test with forks**: assure it works with the real repository.
-
