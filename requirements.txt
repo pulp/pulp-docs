@@ -21,7 +21,9 @@ click==8.1.7
     #   mkdocs
     #   mkdocstrings
 colorama==0.4.6
-    # via mkdocs-material
+    # via
+    #   griffe
+    #   mkdocs-material
 cssselect2==0.7.0
     # via cairosvg
 defusedxml==0.7.1
@@ -30,11 +32,14 @@ faker==21.0.0
     # via pulp-docs (pyproject.toml)
 ghp-import==2.1.0
     # via mkdocs
+griffe==0.38.1
+    # via mkdocstrings-python
 idna==3.6
     # via requests
 jinja2==3.1.2
     # via
     #   mkdocs
+    #   mkdocs-macros-plugin
     #   mkdocs-material
     #   mkdocstrings
     #   pulp-docs (pyproject.toml)
@@ -55,16 +60,23 @@ mergedeep==1.3.4
 mkdocs==1.5.3
     # via
     #   mkdocs-autorefs
+    #   mkdocs-macros-plugin
     #   mkdocs-material
     #   mkdocstrings
 mkdocs-autorefs==0.5.0
     # via mkdocstrings
+mkdocs-macros-plugin==1.0.5
+    # via pulp-docs (pyproject.toml)
 mkdocs-material[imaging]==9.5.2
     # via pulp-docs (pyproject.toml)
 mkdocs-material-extensions==1.3.1
     # via mkdocs-material
-mkdocstrings==0.24.0
-    # via pulp-docs (pyproject.toml)
+mkdocstrings[python]==0.24.0
+    # via
+    #   mkdocstrings-python
+    #   pulp-docs (pyproject.toml)
+mkdocstrings-python==1.7.5
+    # via mkdocstrings
 packaging==23.2
     # via mkdocs
 paginate==0.5.6
@@ -91,9 +103,11 @@ python-dateutil==2.8.2
     # via
     #   faker
     #   ghp-import
+    #   mkdocs-macros-plugin
 pyyaml==6.0.1
     # via
     #   mkdocs
+    #   mkdocs-macros-plugin
     #   pymdown-extensions
     #   pyyaml-env-tag
 pyyaml-env-tag==0.1
@@ -104,6 +118,8 @@ requests==2.31.0
     # via mkdocs-material
 six==1.16.0
     # via python-dateutil
+termcolor==2.4.0
+    # via mkdocs-macros-plugin
 tinycss2==1.2.1
     # via
     #   cairosvg

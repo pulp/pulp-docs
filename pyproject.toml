@@ -8,7 +8,8 @@ version = "0.0.1"
 dependencies = [
     "mkdocs-material",
     "mkdocs-material[imaging]",
-    "mkdocstrings",
+    "mkdocstrings[python]",
+    "mkdocs-macros-plugin",
     "Jinja2",
     "Faker",
 ]

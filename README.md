@@ -14,12 +14,6 @@ $ pip install -r requirements.txt
 $ mkdocs serve
 ```
 
-### 2. Run Server
-
-```bash
-$ mkdocs serve
-```
-
 ## TODO
 
 - Basic features:
