@@ -3,19 +3,18 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "multirepo-prototype"
+name = "pulp-docs"
 version = "0.0.1"
 dependencies = [
     "mkdocs-material",
     "mkdocs-material[imaging]",
-    "mkdocs-multirepo-plugin",
     "mkdocstrings",
     "Jinja2",
     "Faker",
 ]
 
 [project.scripts]
-mk_mkdocs = "mk_mkdocs.main"
+pulp-docs = "pulp_docs.main:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
