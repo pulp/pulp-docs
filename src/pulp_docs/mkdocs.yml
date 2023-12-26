@@ -2,10 +2,12 @@ site_name: Pulp Project
 # site_url: https://github.com/pulp/pulpcore
 repo_url: https://github.com/pulp/pulpcore
 repo_name: pulp/pulpcore
+
+docs_dir: .
 theme:
   name: material
   # custom_dir: docs/overrides
-  logo: template/assets/logo.png
+  logo: pulp-docs/assets/logo.png
   features:
 #    - navigation.footer # customize this color later
     - navigation.tabs
@@ -36,9 +38,9 @@ theme:
 plugins:
   - search
   - macros:
-      module_name: 'src/pulp_docs/mkdocs_macros'
+      module_name: 'mkdocs_macros'
   - tags:
-      tags_file: template/tags.md
+      tags_file: pulp-docs/tags.md
   - mkdocstrings:
       handlers: 
         python:
@@ -59,8 +61,8 @@ extra:
       link: https://discourse.pulpproject.org/
 
 extra_css:
-  - template/css/extra.css
-  - template/css/mkdocstrings.css
+  - pulp-docs/css/extra.css
+  - pulp-docs/css/mkdocstrings.css
 
 markdown_extensions:
   # Python Markdown

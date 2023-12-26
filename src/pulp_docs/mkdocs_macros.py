@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import yaml
+from importlib_resources import as_file, files
 
 WORKDIR = Path("tests/fixtures").absolute()
 
@@ -146,7 +147,7 @@ def prepare_repositories(TMPDIR: Path):
         - repo_sources:
             The directory where each **repository source** is downloaded.
             Contains the whole source tree of that repository.
-        - repo_docs/template:
+        - repo_docs/pulp-docs:
             The common asserts used to configure the whole mkdocs site (lives in pulp-docs).
 
     Returns: (Path(repo_docs), Path(repo_sources))
@@ -161,7 +162,7 @@ def prepare_repositories(TMPDIR: Path):
                 repo1/{full-repo-source}
                 ...
             repo_docs/
-                template/
+                pulp-docs/
                     assets/...
                     tags.md
                 {for-each-repo}/
@@ -194,7 +195,9 @@ def prepare_repositories(TMPDIR: Path):
         rest_api_page.write_text(f"{md_title}\n\n{md_body}")
 
     # Copy template-files (from this plugin) to tmpdir
-    shutil.copytree(Path("docs"), repo_docs_dir / "template")
+    data_file_docs = files("pulp_docs").joinpath("docs")
+    with as_file(data_file_docs) as _docs:
+        shutil.copytree(_docs, repo_docs_dir / "pulp-docs")
     shutil.copy(WORKDIR / "core" / "docs" /
                 "index.md", repo_docs_dir / "index.md")
     return (repo_docs_dir, repo_sources_dir)
