@@ -3,13 +3,11 @@ site_name: Pulp Project
 repo_url: https://github.com/pulp/pulpcore
 repo_name: pulp/pulpcore
 
-docs_dir: .
+docs_dir: docs
 theme:
   name: material
-  # custom_dir: docs/overrides
   logo: pulp-docs/assets/logo.png
   features:
-#    - navigation.footer # customize this color later
     - navigation.tabs
     - navigation.sections
     - navigation.path
@@ -47,11 +45,6 @@ plugins:
           options:
             show_source: false
             docstring_section_style: table # table, list, spacy
-          # paths:
-          #   - tmp_dir/repo_sources/core
-          #   - tmp_dir/repo_sources/new_repo1
-          #   - tmp_dir/repo_sources/new_repo2
-          #   - tmp_dir/repo_sources/new_repo3
 
 extra:
   social:
@@ -74,17 +67,15 @@ markdown_extensions:
   - md_in_html
   - toc:
       permalink: true
-
-      # Python Markdown Extensions
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.betterem:
       smart_enable: all
   - pymdownx.caret
   - pymdownx.details
-  # - pymdownx.emoji:
-  #     emoji_index: !!python/name:material.extensions.emoji.twemoji
-  #     emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.keys

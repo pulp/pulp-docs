@@ -1,0 +1,16 @@
+meta:
+  rest_api_template: https://docs.pulpproject.org/{}/restapi.html  
+  workdir: 
+
+repos:
+  core:
+    - name: pulpcore
+      title: Common
+  content:
+    - name: pulp_rpm
+      title: Rpm Package!!!
+    - name: pulp_deb
+      title: Debian Package !!!
+    - name: pulp_maven
+      title: Maven
+  other: []

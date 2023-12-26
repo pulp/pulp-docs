@@ -3,36 +3,78 @@ import os
 import shutil
 import tempfile
 import typing as t
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import yaml
 from importlib_resources import as_file, files
 
 WORKDIR = Path("tests/fixtures").absolute()
+RESTAPI_TEMPLATE = "https://docs.pulpproject.org/{}/restapi.html"
+PERSONAS = ("dev", "sys-admin", "content-manager")
 
 
 @dataclass
 class Repo:
     title: str
     name: str
-    rest_api_url: str
 
     @property
     def url(self):
         return WORKDIR / self.name
 
+    @property
+    def rest_api_url(self):
+        return RESTAPI_TEMPLATE.format(self.name)
 
-RESTAPI_TEMPLATE = "https://docs.pulpproject.org/{}/restapi.html"
-PERSONAS = ("dev", "sys-admin", "content-manager")
-COMMON_REPO = [Repo("Pulp Core", "core", RESTAPI_TEMPLATE.format("pulpcore"))]
-CONTENT_REPOS = [
-    Repo("Rpm Packages", "new_repo1", RESTAPI_TEMPLATE.format("pulp_rpm")),
-    Repo("Debian Packages", "new_repo2", RESTAPI_TEMPLATE.format("pulp_deb")),
-    Repo("Maven", "new_repo3", RESTAPI_TEMPLATE.format("pulp_maven")),
+
+@dataclass
+class Repos:
+    core: Repo
+    content: t.List[Repo] = field(default_factory=list)
+    other: t.List[Repo] = field(default_factory=list)
+
+    @property
+    def all(self):
+        return [self.core] + self.content + self.other
+
+    @classmethod
+    def from_yaml(cls, path: str):
+        """
+        Load repositories listing from yaml file
+
+        Example:
+            ```yaml
+            repos:
+                core:
+                  name:
+                  title:
+                content:
+                  - name: pulp_rpm
+                    title: Rpm Package
+                  - name: pulp_maven
+                    title: Maven
+            ```
+        """
+        file = Path(path)
+        if not file.exists():
+            raise ValueError("File does not exist:", file)
+
+        with open(file, "r") as f:
+            data = yaml.load(f, Loader=yaml.SafeLoader)
+        repos = data["repos"]
+        core_repo = Repo(**repos["core"][0])
+        content_repos = [Repo(**repo) for repo in repos["content"]]
+        other_repos = [Repo(**repo) for repo in repos["other"]]
+        return Repos(core=core_repo, content=content_repos, other=other_repos)
+
+
+DEFAULT_CORE = Repo("Pulp Core", "core")
+DEFAULT_CONTENT_REPOS = [
+    Repo("Rpm Packages", "new_repo1"),
+    Repo("Debian Packages", "new_repo2"),
+    Repo("Maven", "new_repo3"),
 ]
-OTHER_REPOS = []  # type: ignore
-ALL_REPOS = COMMON_REPO + CONTENT_REPOS + OTHER_REPOS
 
 
 def create_clean_tmpdir(project_dir: Path):
@@ -56,7 +98,7 @@ def download_repo(origin: Path, dest: Path):
         raise NotImplementedError("No support for remote download yet.")
 
 
-def get_navigation(tmpdir: Path):
+def get_navigation(tmpdir: Path, repos: Repos):
     """The dynamic generated 'nav' section of mkdocs.yml"""
 
     # {repo}/docs/{persona}/{content-type}/*md
@@ -69,7 +111,7 @@ def get_navigation(tmpdir: Path):
 
     def expand_repos(template_str: str):
         _nav = {}
-        for repo in CONTENT_REPOS:
+        for repo in repos.content:
             lookup_path = tmpdir / template_str.format(repo=repo.name)
             _repo_content = get_children(lookup_path)
             _nav[repo.title] = _repo_content
@@ -77,7 +119,7 @@ def get_navigation(tmpdir: Path):
 
     def expand_reference(template_str: str):
         _nav = {}
-        for repo in ALL_REPOS:
+        for repo in repos.all:
             lookup_path = tmpdir / template_str.format(repo=repo.name)
             _repo_content = get_children(lookup_path)
             reference_section = [
@@ -135,7 +177,7 @@ def get_navigation(tmpdir: Path):
     return navigation
 
 
-def prepare_repositories(TMPDIR: Path):
+def prepare_repositories(TMPDIR: Path, repos: Repos):
     """
     Download repositories into tmpdir and organize them in a convenient way
     to mkdocs and its plugins.
@@ -153,7 +195,7 @@ def prepare_repositories(TMPDIR: Path):
     Returns: (Path(repo_docs), Path(repo_sources))
 
     Example:
-        The final structure will be something like: 
+        The final structure will be something like:
 
         ```
         tmpdir/
@@ -172,9 +214,11 @@ def prepare_repositories(TMPDIR: Path):
 
         ```
     """
+
+    # Download/copy source code to tmpdir
     repo_sources_dir = TMPDIR / "repo_sources"
     repo_docs_dir = TMPDIR / "repo_docs"
-    for repo in ALL_REPOS:
+    for repo in repos.all:
         # 1. Download repo (copy locally or fetch from GH)
         this_src_dir = repo_sources_dir / repo.name
         this_doc_dir = repo_docs_dir / repo.name
@@ -205,14 +249,21 @@ def prepare_repositories(TMPDIR: Path):
 
 def define_env(env):
     """The mkdocs-marcros 'on_configuration' hook. Used to setup the project."""
+    # Load repository listing
+    pulpdocs_repos_list = os.environ.get("PULPDOCS_REPO_LIST", None)
+    if pulpdocs_repos_list:
+        repos = Repos.from_yaml(Path(pulpdocs_repos_list))
+    else:
+        repos = Repos(core=DEFAULT_CORE, content=DEFAULT_CONTENT_REPOS)
+
     # Create tmp_dir with desired repos
     TMPDIR = create_clean_tmpdir(env.project_dir)
-    docs_dir, source_dir = prepare_repositories(TMPDIR)
+    docs_dir, source_dir = prepare_repositories(TMPDIR, repos)
 
     # Configure mkdocstrings
-    code_sources = [str(source_dir / repo.name) for repo in ALL_REPOS]
+    code_sources = [str(source_dir / repo.name) for repo in repos.all]
     env.conf["plugins"]["mkdocstrings"].config["handlers"]["python"]["paths"] = code_sources
 
     # Configure mkdocs navigation
     env.conf["docs_dir"] = docs_dir
-    env.conf["nav"] = get_navigation(docs_dir)
+    env.conf["nav"] = get_navigation(docs_dir, repos)
