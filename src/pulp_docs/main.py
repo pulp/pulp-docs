@@ -37,8 +37,8 @@ def main(config: Config):
 def serve(config: Config):
     """Run mkdocs server"""
     mkdocs_file = files("pulp_docs").joinpath("mkdocs.yml")
-    print(mkdocs_file)
     cmd = ("mkdocs", "serve", "-f", mkdocs_file)
+    print("Running:", " ".join(str(s) for s in cmd))
     subprocess.run(cmd)
 
 
