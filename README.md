@@ -13,10 +13,10 @@ Python Package to help aggregating Pulp's multirepo ecosystem into a unified doc
 
 This packages is:
 
-- A `mkdocs-macros-plugin` [pluget]() (see here).
-- A repository for common doc website asset (see here)
-- A centralized entrypoint for installing doc-related packages/tooling.
-- A possible CLI for doc-related stuff, although nothing is implemented yet.
+- A `mkdocs-macros-plugin` [pluget](https://mkdocs-macros-plugin.readthedocs.io/en/latest/pluglets/). [relevant-code]()
+- A repository for common doc website asset. [relevant-code](https://github.com/pedro-psb/pulp-docs/tree/main/src/pulp_docs/docs)
+- A centralized entrypoint for installing doc-related packages/tooling. (via its own requirements)
+- A CLI for doc-related tasks, like serving and building. [relevant-code](https://github.com/pedro-psb/pulp-docs/blob/main/src/pulp_docs/main.py)
 
 The idea is that each repository should install `pulp-docs` and imediatelly be able run the unified website server.
 Also, this should be used for the production build.
@@ -39,5 +39,12 @@ Hopefully, this should run the fixture setup:
 
 ```bash
 $ pip install -r requirements.txt
-$ mkdocs serve
+$ pulp-docs serve
 ```
+
+For other command, see:
+
+```bash
+$ pulp-docs --help
+```
+
