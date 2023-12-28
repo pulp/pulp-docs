@@ -21,7 +21,7 @@ pulp-docs = "pulp_docs.main:main"
 include-package-data=true
 
 [tool.setuptools.package-data]
-pulp_docs = ["mkdocs.yml", "docs/"]
+pulp_docs = ["data/**"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

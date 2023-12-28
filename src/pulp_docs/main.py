@@ -1,11 +1,14 @@
+"""
+The main CLI module.
+
+It defines its interface.
+"""
 import subprocess
 import sys
 from pathlib import Path
 
 import click
 from importlib_resources import files
-
-from pulp_docs.fetch_repos import LocalRepo, download_repos
 
 TMP_DIR = Path("tmp")
 WORKDIR = Path.home() / "workspace" / "multirepo-prototype"
@@ -19,7 +22,7 @@ class Config:
     def __init__(self):
         self.verbose = False
         self.workdir = Path()
-        self.mkdocs_file = files("pulp_docs").joinpath("mkdocs.yml")
+        self.mkdocs_file = files("pulp_docs").joinpath("data/mkdocs.yml")
 
 
 pass_config = click.make_pass_decorator(Config, ensure=True)
