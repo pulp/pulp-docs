@@ -1,5 +1,5 @@
 site_name: Pulp Project
-# site_url: https://github.com/pulp/pulpcore
+site_url: https://staging-docs.pulpproject.org/
 repo_url: https://github.com/pulp/pulpcore
 repo_name: pulp/pulpcore
 

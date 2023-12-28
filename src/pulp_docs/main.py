@@ -19,6 +19,7 @@ class Config:
     def __init__(self):
         self.verbose = False
         self.workdir = Path()
+        self.mkdocs_file = files("pulp_docs").joinpath("mkdocs.yml")
 
 
 pass_config = click.make_pass_decorator(Config, ensure=True)
@@ -36,9 +37,28 @@ def main(config: Config):
 @pass_config
 def serve(config: Config):
     """Run mkdocs server"""
-    mkdocs_file = files("pulp_docs").joinpath("mkdocs.yml")
-    cmd = ("mkdocs", "serve", "-f", mkdocs_file)
+    options = (
+        ("--config-file", config.mkdocs_file),
+    )
+    cmd = ["mkdocs", "serve"]
+    for opt in options:
+        cmd.extend(opt)
     print("Running:", " ".join(str(s) for s in cmd))
+    subprocess.run(cmd)
+
+
+@main.command()
+@pass_config
+def build(config: Config):
+    """Build mkdocs site"""
+    options = (
+        ("--config-file", config.mkdocs_file),
+        ("--site-dir", str(Path("site").absolute())),
+    )
+    cmd = ["mkdocs", "build"]
+    for opt in options:
+        cmd.extend(opt)
+    print("Building:", " ".join(str(s) for s in cmd))
     subprocess.run(cmd)
 
 
