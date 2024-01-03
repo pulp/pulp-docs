@@ -5,12 +5,8 @@ meta:
 repos:
   core:
     - name: pulpcore
-      title: Common
-  content:
-    - name: pulp_rpm
-      title: Rpm Package!!!
-    - name: pulp_deb
-      title: Debian Package !!!
-    - name: pulp_maven
-      title: Maven
+      owner: pulp
+      title: Pulp Core
+      branch: main
+  content: []
   other: []

@@ -4,6 +4,7 @@ The main CLI module.
 It defines its interface.
 """
 import subprocess
+import os
 import sys
 from pathlib import Path
 
@@ -19,10 +20,17 @@ def get_abspath(name: str) -> Path:
 
 
 class Config:
+    """
+    Params:
+        mkdocs_file: the base mkdocs used in serving/building
+        repolist: the configuration repositories (which and how to fetch)
+    """
+
     def __init__(self):
         self.verbose = False
         self.workdir = Path()
         self.mkdocs_file = files("pulp_docs").joinpath("data/mkdocs.yml")
+        self.repolist = files("pulp_docs").joinpath("data/repolist.yml")
 
 
 pass_config = click.make_pass_decorator(Config, ensure=True)
@@ -40,20 +48,31 @@ def main(config: Config):
 @pass_config
 def serve(config: Config):
     """Run mkdocs server"""
+    env = os.environ.copy()
+    env.update({
+        "PULPDOCS_BASE_REPOLIST": str(config.repolist.absolute())
+    })
+
     options = (
         ("--config-file", config.mkdocs_file),
     )
     cmd = ["mkdocs", "serve"]
+
     for opt in options:
         cmd.extend(opt)
     print("Running:", " ".join(str(s) for s in cmd))
-    subprocess.run(cmd)
+    subprocess.run(cmd, env=env)
 
 
 @main.command()
 @pass_config
 def build(config: Config):
     """Build mkdocs site"""
+    env = os.environ.copy()
+    env.update({
+        "PULPDOCS_BASE_REPOLIST": str(config.repolist.absolute())
+    })
+
     options = (
         ("--config-file", config.mkdocs_file),
         ("--site-dir", str(Path("site").absolute())),
@@ -62,7 +81,7 @@ def build(config: Config):
     for opt in options:
         cmd.extend(opt)
     print("Building:", " ".join(str(s) for s in cmd))
-    subprocess.run(cmd)
+    subprocess.run(cmd, env=env)
 
 
 @main.command()
