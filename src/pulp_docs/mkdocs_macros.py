@@ -28,17 +28,22 @@ from pulp_docs.plugin_repos import Repos
 # the name of the docs in the source repositories
 SRC_DOCS_DIRNAME = "staging_docs"
 
+# the dir to lookup for local repo checkouts
+CHECKOUT_WORKDIR = Path().absolute().parent
+
 log = logging.getLogger("mkdocs")
 
 
-def create_clean_tmpdir(custom_tmpdir: t.Optional[Path] = None):
+def create_clean_tmpdir(custom_tmpdir: t.Optional[Path] = None, use_cache: bool = True):
     tmpdir_basepath = (
         Path(custom_tmpdir) if custom_tmpdir else Path(tempfile.gettempdir())
     )
     tmpdir = tmpdir_basepath / "pulp-docs-tmp"
-    if tmpdir.exists():
+
+    # Clean tmpdir only if not using cache
+    if tmpdir.exists() and use_cache is False:
         shutil.rmtree(tmpdir)
-    tmpdir.mkdir()
+        tmpdir.mkdir()
     return tmpdir
 
 
@@ -82,15 +87,21 @@ def prepare_repositories(TMPDIR: Path, repos: Repos):
     # Download/copy source code to tmpdir
     repo_sources = TMPDIR / "repo_sources"
     repo_docs = TMPDIR / "repo_docs"
+    shutil.rmtree(repo_sources, ignore_errors=True)
+    shutil.rmtree(repo_docs, ignore_errors=True)
+
     for repo in repos.all:
-        # 1. Download repo (copy locally or fetch from GH)
+        # 1. Check for local checkout if config doesnt specify a local_basepath
+        checkout_dir = Path().absolute().parent / repo.name
+        if repo.local_basepath is None and checkout_dir.exists():
+            repo.status.use_local_checkout = True
+            repo.local_basepath = Path().absolute().parent
+
+        # 2. Download repo (copy locally or fetch from GH)
         this_src_dir = repo_sources / repo.name
-        log.info(
-            "[pulp-docs] Downloading '{}', at '{}'".format(repo.name, this_src_dir)
-        )
         repo.download(dest_dir=this_src_dir)
 
-        # 2. Isolate docs dir from codebase (makes mkdocs happy)
+        # 3. Isolate docs dir from codebase (makes mkdocs happy)
         this_docs_dir = repo_docs / repo.name
         log.info(
             "Moving doc files:\nfrom '{}'\nto '{}'".format(this_src_dir, this_docs_dir)
@@ -100,20 +111,21 @@ def prepare_repositories(TMPDIR: Path, repos: Repos):
         try:
             shutil.copy(this_src_dir / "CHANGELOG.md", this_docs_dir / "CHANGELOG.md")
         except FileNotFoundError:
-            log.warn("CHANGELOG.md does not exist. Keep going")
+            repo.status.has_changelog = False
 
         try:
             shutil.copy(this_src_dir / "README.md", this_docs_dir / "README.md")
         except FileNotFoundError:
-            log.warn("README.md does not exist. Keep going")
+            repo.status.has_readme = False
 
-        # 3. Generate REST Api pages (workaround)
-        log.info("Generating REST_API page")
-        rest_api_page = this_docs_dir / "docs" / "rest_api.md"
-        rest_api_page.touch()
-        md_title = f"# {repo.title} REST Api"
-        md_body = f"[{repo.rest_api_link}]({repo.rest_api_link})"
-        rest_api_page.write_text(f"{md_title}\n\n{md_body}")
+        # 4. Generate REST Api pages (workaround)
+        if repo.type == "content":
+            log.info("Generating REST_API page")
+            rest_api_page = this_docs_dir / "docs" / "rest_api.md"
+            rest_api_page.touch()
+            md_title = f"# {repo.title} REST Api"
+            md_body = f"[{repo.rest_api_link}]({repo.rest_api_link})"
+            rest_api_page.write_text(f"{md_title}\n\n{md_body}")
 
     # Copy template-files (from this plugin) to tmpdir
     log.info("[pulp-docs] Moving pulp-docs /docs to final destination")
@@ -124,8 +136,25 @@ def prepare_repositories(TMPDIR: Path, repos: Repos):
         repo_sources / repos.core.name / SRC_DOCS_DIRNAME / "index.md",
         repo_docs / "index.md",
     )
-    log.info("[pulp-docs] Done downloading sources.")
+
+    # Log
+    log.info("[pulp-docs] Done downloading sources. Here are the sources used:")
+    for repo in repos.all:
+        log.info({repo.name: repo.status})
+
     return (repo_docs, repo_sources)
+
+
+def log_local_checkout(repos: Repos):
+    """Emit log.info about local checkout being used or warn if none."""
+    local_checkouts = [
+        repo.name for repo in repos.all if repo.status.use_local_checkout is True
+    ]
+
+    log.info(f"[pulp-docs] CHECKOUT_WORKDIR={str(CHECKOUT_WORKDIR)}")
+    log.info(f"[pulp-docs] Local checkouts in use: {local_checkouts}")
+    if len(local_checkouts) == 0:
+        log.warning("[pulp-docs] No local checkouts found. Serving in read-only mode.")
 
 
 def create_no_content_page(tmpdir: Path):
@@ -233,33 +262,41 @@ def get_navigation(tmpdir: Path, repos: Repos):
 
 def define_env(env):
     """The mkdocs-marcros 'on_configuration' hook. Used to setup the project."""
-    # ===
+    # Load configuration from environment
     log.info("[pulp-docs] Loading configuration from environ")
     base_repolist = os.environ.get("PULPDOCS_BASE_REPOLIST", None)
-    log.info(f"{base_repolist=}\n")
 
-    log.info("[pulp-docs] Loading repolist file")
-    if base_repolist == "testing":
-        repos = Repos.test_fixtures()
-    else:
+    if base_repolist:
         repos = Repos.from_yaml(Path(base_repolist))
-    log.info(f"{repos}")
+    else:
+        repos = (
+            Repos.test_fixtures()
+        )  # try to use fixtures if there is no BASE_REPOLIST
+    log.info(f"Repository configurations loaded: {[repo.name for repo in repos.all]}")
 
-    # ===
+    # Download and organize repository files
     log.info("[pulp-docs] Preparing repositories")
     TMPDIR = create_clean_tmpdir()
     docs_dir, source_dir = prepare_repositories(TMPDIR, repos)
 
-    # ===
+    # Configure mkdocstrings
     log.info("[pulp-docs] Configuring mkdocstrings")
     code_sources = [str(source_dir / repo.name) for repo in repos.all]
     env.conf["plugins"]["mkdocstrings"].config["handlers"]["python"][
         "paths"
     ] = code_sources
 
-    # ===
+    # Configure navigation
     log.info("[pulp-docs] Configuring navigation")
     env.conf["docs_dir"] = docs_dir
     env.conf["nav"] = get_navigation(docs_dir, repos)
 
     log.info("[pulp-docs] Done with pulp-docs.")
+    env.conf["pulp_repos"] = repos
+
+
+def on_post_build(env):
+    # Log relevant most useful information for end-user
+    log.info("*" * 79)
+    log_local_checkout(repos=env.conf["pulp_repos"])
+    log.info("*" * 79)

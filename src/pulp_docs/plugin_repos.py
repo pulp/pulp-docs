@@ -6,6 +6,7 @@ Their purpose is to facilitate declaring and downloading the source-code.
 from __future__ import annotations
 
 import logging
+import os
 import shutil
 import subprocess
 import tarfile
@@ -25,6 +26,20 @@ RESTAPI_TEMPLATE = "https://docs.pulpproject.org/{}/restapi.html"
 
 
 @dataclass
+class RepoStatus:
+    """
+    Usefull status information about a downloaded repository.
+    """
+
+    download_source: t.Optional[str] = None
+    use_local_checkout: bool = False
+    has_readme: bool = True
+    has_changelog: bool = True
+    has_staging_docs: bool = True
+    using_cache: bool = False
+
+
+@dataclass
 class Repo:
     """
     A git/gh repository representation.
@@ -37,6 +52,8 @@ class Repo:
     owner: str = "pulp"
     branch: str = "main"
     local_basepath: t.Optional[Path] = None
+    status: RepoStatus = RepoStatus()
+    type: t.Optional[str] = None
 
     @property
     def local_url(self):
@@ -47,53 +64,78 @@ class Repo:
     def rest_api_link(self):
         return RESTAPI_TEMPLATE.format(self.name)
 
-    def download(self, dest_dir: Path) -> Path:
+    def download(self, dest_dir: Path) -> str:
         """
         Download repository source from url into the {dest_dir} Path.
 
+        Uses local in the following cases and order (else, downloads from github):
+        - local_basepath is explicitly set
+        - parent directory contain dir with self.name
+
         For remote download, uses GitHub API to get latest source code:
-        https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#get-the-latest-release
 
         Args:
             dest: The destination directory where source files will be saved.
+                e.g /tmp/pulp-tmp/repo_sources/pulpcore
+        Returns:
+            The download url used
         """
-        # Copy from local filesystem
+        log.info("Downloading '{}' to '{}'".format(self.name, dest_dir.absolute()))
+
+        # Download from local filesystem
+        download_url = None
         if self.local_basepath is not None:
+            log.warning(f"Using local checkout: {str(self.local_url)}")
+            download_url = self.local_url.absolute()
             shutil.copytree(
                 self.local_url,
                 dest_dir,
                 ignore=shutil.ignore_patterns("tests", "*venv*", "__pycache__"),
             )
-            return self.local_basepath
+        # Download from remote
+        elif not dest_dir.exists():
+            download_url = download_from_gh_main(
+                dest_dir, self.owner, self.name, self.branch
+            )
+        else:
+            log.warning(f"Using cache: {str(dest_dir.absolute())}")
+            self.status.using_cache = True
+            download_url = str(dest_dir.absolute())
 
-        # or Download from remote
-        # download_from_gh_latest(dest_dir, self.owner, self.name)
-        download_from_gh_main(dest_dir, self.owner, self.name, self.branch)
-        return dest_dir
+        # Return url used
+        self.status.download_source = str(download_url)
+        return self.status.download_source
 
 
 def download_from_gh_main(dest_dir: Path, owner: str, name: str, branch: str):
-    """Download repository source-code from main"""
+    """
+    Download repository source-code from main
+
+    Returns the download url.
+    """
     url = f"https://github.com/{owner}/{name}.git"
     cmd = ("git", "clone", "--depth", "1", "--branch", branch, url, str(dest_dir))
     log.info("Downloading from Github with:\n{}".format(" ".join(cmd)))
     try:
         subprocess.run(cmd, check=True)
-    except subprocess.CalledProcessError as e:
+    except subprocess.CalledProcessError:
         log.error(
             "An error ocurred while trying to download '{name}' source-code:".format(
                 name=name
             )
         )
-        log.error(f"{e}")
+        raise
     log.info("Done.")
+    return url
 
 
 def download_from_gh_latest(dest_dir: Path, owner: str, name: str):
     """
-    Download repository source-code from latest GitHub Release.
+    Download repository source-code from latest GitHub Release (w/ GitHub API).
 
-    Uses GitHub API.
+    See: https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#get-the-latest-release
+
+    Returns the download url.
     """
     latest_release_link_url = (
         "https://api.github.com/repos/{}/{}/releases/latest".format(owner, name)
@@ -117,6 +159,7 @@ def download_from_gh_latest(dest_dir: Path, owner: str, name: str):
     # Reference:
     # https://www.python-httpx.org/quickstart/#binary-response-content
     # https://docs.python.org/3/library/tarfile.html#tarfile.TarFile.extractall
+    return latest_release_tar_url
 
 
 @dataclass
@@ -149,25 +192,38 @@ class Repos:
                     title: Maven
             ```
         """
+        log.info("[pulp-docs] Loading repolist file from repofile.yml")
         file = Path(path)
         if not file.exists():
             raise ValueError("File does not exist:", file)
+        log.info(f"repofile={str(file.absolute())}")
 
         with open(file, "r") as f:
             data = yaml.load(f, Loader=yaml.SafeLoader)
         repos = data["repos"]
-        core_repo = Repo(**repos["core"][0])
-        content_repos = [Repo(**repo) for repo in repos["content"]]
-        other_repos = [Repo(**repo) for repo in repos["other"]]
+        core_repo = Repo(**repos["core"][0], type="core")
+        content_repos = [Repo(**repo, type="content") for repo in repos["content"]]
+        other_repos = [Repo(**repo, type="other") for repo in repos["other"]]
         return Repos(core=core_repo, content=content_repos, other=other_repos)
 
     @classmethod
     def test_fixtures(cls):
         """Factory of test Repos. Uses fixtures shipped in package data."""
-        DEFAULT_CORE = Repo("Pulp Core", "core")
+        log.info("[pulp-docs] Loading repolist file from fixtures")
+        DEFAULT_CORE = Repo("Pulp Core", "core", type="core")
         DEFAULT_CONTENT_REPOS = [
-            Repo("Rpm Packages", "new_repo1", local_basepath=FIXTURE_WORKDIR),
-            Repo("Debian Packages", "new_repo2", local_basepath=FIXTURE_WORKDIR),
-            Repo("Maven", "new_repo3", local_basepath=FIXTURE_WORKDIR),
+            Repo(
+                "Rpm Packages",
+                "new_repo1",
+                local_basepath=FIXTURE_WORKDIR,
+                type="content",
+            ),
+            Repo(
+                "Debian Packages",
+                "new_repo2",
+                local_basepath=FIXTURE_WORKDIR,
+                type="content",
+            ),
+            Repo("Maven", "new_repo3", local_basepath=FIXTURE_WORKDIR, type="content"),
         ]
         return Repos(core=DEFAULT_CORE, content=DEFAULT_CONTENT_REPOS)
