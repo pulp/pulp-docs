@@ -28,12 +28,13 @@ from pulp_docs.plugin_repos import Repos
 # the name of the docs in the source repositories
 SRC_DOCS_DIRNAME = "staging_docs"
 
-log = logging.getLogger('mkdocs')
+log = logging.getLogger("mkdocs")
 
 
 def create_clean_tmpdir(custom_tmpdir: t.Optional[Path] = None):
-    tmpdir_basepath = Path(custom_tmpdir) if custom_tmpdir else Path(
-        tempfile.gettempdir())
+    tmpdir_basepath = (
+        Path(custom_tmpdir) if custom_tmpdir else Path(tempfile.gettempdir())
+    )
     tmpdir = tmpdir_basepath / "pulp-docs-tmp"
     if tmpdir.exists():
         shutil.rmtree(tmpdir)
@@ -85,25 +86,24 @@ def prepare_repositories(TMPDIR: Path, repos: Repos):
         # 1. Download repo (copy locally or fetch from GH)
         this_src_dir = repo_sources / repo.name
         log.info(
-            "[pulp-docs] Downloading '{}', at '{}'".format(repo.name, this_src_dir))
+            "[pulp-docs] Downloading '{}', at '{}'".format(repo.name, this_src_dir)
+        )
         repo.download(dest_dir=this_src_dir)
 
         # 2. Isolate docs dir from codebase (makes mkdocs happy)
         this_docs_dir = repo_docs / repo.name
-        log.info("Moving doc files:\nfrom '{}'\nto '{}'".format(
-            this_src_dir, this_docs_dir))
-        shutil.copytree(this_src_dir / SRC_DOCS_DIRNAME,
-                        this_docs_dir / "docs")
+        log.info(
+            "Moving doc files:\nfrom '{}'\nto '{}'".format(this_src_dir, this_docs_dir)
+        )
+        shutil.copytree(this_src_dir / SRC_DOCS_DIRNAME, this_docs_dir / "docs")
 
         try:
-            shutil.copy(this_src_dir / "CHANGELOG.md",
-                        this_docs_dir / "CHANGELOG.md")
+            shutil.copy(this_src_dir / "CHANGELOG.md", this_docs_dir / "CHANGELOG.md")
         except FileNotFoundError:
             log.warn("CHANGELOG.md does not exist. Keep going")
 
         try:
-            shutil.copy(this_src_dir / "README.md",
-                        this_docs_dir / "README.md")
+            shutil.copy(this_src_dir / "README.md", this_docs_dir / "README.md")
         except FileNotFoundError:
             log.warn("README.md does not exist. Keep going")
 
@@ -120,8 +120,10 @@ def prepare_repositories(TMPDIR: Path, repos: Repos):
     data_file_docs = files("pulp_docs").joinpath("data/docs")
     with as_file(data_file_docs) as _docs:
         shutil.copytree(_docs, repo_docs / "pulp-docs")
-    shutil.copy(repo_sources / repos.core.name / SRC_DOCS_DIRNAME /
-                "index.md", repo_docs / "index.md")
+    shutil.copy(
+        repo_sources / repos.core.name / SRC_DOCS_DIRNAME / "index.md",
+        repo_docs / "index.md",
+    )
     log.info("[pulp-docs] Done downloading sources.")
     return (repo_docs, repo_sources)
 
@@ -135,12 +137,16 @@ def create_no_content_page(tmpdir: Path):
 
 def get_navigation(tmpdir: Path, repos: Repos):
     """The dynamic generated 'nav' section of mkdocs.yml"""
+
     # {repo}/docs/{persona}/{content-type}/*md
     # {repo}/docs/reference/*md
     def get_children(path: t.Union[str, Path]):
         _path = tmpdir / path if isinstance(path, str) else path
-        result = [str(file.relative_to(tmpdir))
-                  for file in _path.glob("*.md") if not file.name.startswith("_")]
+        result = [
+            str(file.relative_to(tmpdir))
+            for file in _path.glob("*.md")
+            if not file.name.startswith("_")
+        ]
         return result
 
     def expand_repos(template_str: str):
@@ -171,41 +177,50 @@ def get_navigation(tmpdir: Path, repos: Repos):
 
     getting_started = [
         {"Overview": from_core("docs/sections/getting_started/index.md")},
-        {"Quickstart": get_children(
-            from_core("docs/sections/getting_started/quickstart"))},
-        {"Fundamentals": get_children(
-            from_core("docs/sections/getting_started/fundamentals"))}
+        {
+            "Quickstart": get_children(
+                from_core("docs/sections/getting_started/quickstart")
+            )
+        },
+        {
+            "Fundamentals": get_children(
+                from_core("docs/sections/getting_started/fundamentals")
+            )
+        },
     ]
-    guides= [
+    guides = [
         {"Overview": from_core("docs/sections/guides/index.md")},
-        {"For Content-Management": expand_repos(
-            "{repo}/docs/content-manager/guides")},
+        {"For Content-Management": expand_repos("{repo}/docs/content-manager/guides")},
         {"For Sys-Admins": expand_repos("{repo}/docs/sys-admin/guides")},
     ]
-    learn= [
+    learn = [
         {"Overview": from_core("docs/sections/learn/index.md")},
-        {"For Content-Management": expand_repos(
-            "{repo}/docs/content-manager/learn")},
+        {"For Content-Management": expand_repos("{repo}/docs/content-manager/learn")},
         {"For Sys-Admins": expand_repos("{repo}/docs/sys-admin/learn")},
     ]
-    reference= [
+    reference = [
         {"Overview": from_core("docs/sections/reference/index.md")},
-        {"Repository Map": from_core(
-            "docs/sections/reference/01-repository-map.md")},
+        {"Repository Map": from_core("docs/sections/reference/01-repository-map.md")},
         {"Glossary": from_core("docs/sections/reference/02-glossary.md")},
         {"Repositories": expand_reference("{repo}/docs/reference")},
     ]
-    development= [
+    development = [
         {"Overview": from_core("docs/sections/development/index.md")},
-        {"Quickstart": get_children(
-            from_core("docs/sections/development/quickstart/"))},
-        {"Onboarding": get_children(
-            from_core("docs/sections/development/onboarding/"))},
+        {
+            "Quickstart": get_children(
+                from_core("docs/sections/development/quickstart/")
+            )
+        },
+        {
+            "Onboarding": get_children(
+                from_core("docs/sections/development/onboarding/")
+            )
+        },
         {"Guides": get_children("core/docs/sections/development/guides/")},
     ]
 
     # main navigation
-    navigation= [
+    navigation = [
         {"Home": "index.md"},
         {"Getting Started": getting_started},
         {"Guides": guides},
@@ -220,29 +235,31 @@ def define_env(env):
     """The mkdocs-marcros 'on_configuration' hook. Used to setup the project."""
     # ===
     log.info("[pulp-docs] Loading configuration from environ")
-    base_repolist= os.environ.get("PULPDOCS_BASE_REPOLIST", None)
+    base_repolist = os.environ.get("PULPDOCS_BASE_REPOLIST", None)
     log.info(f"{base_repolist=}\n")
 
     log.info("[pulp-docs] Loading repolist file")
     if base_repolist == "testing":
-        repos= Repos.test_fixtures()
+        repos = Repos.test_fixtures()
     else:
-        repos= Repos.from_yaml(Path(base_repolist))
+        repos = Repos.from_yaml(Path(base_repolist))
     log.info(f"{repos}")
 
     # ===
     log.info("[pulp-docs] Preparing repositories")
-    TMPDIR= create_clean_tmpdir()
-    docs_dir, source_dir= prepare_repositories(TMPDIR, repos)
+    TMPDIR = create_clean_tmpdir()
+    docs_dir, source_dir = prepare_repositories(TMPDIR, repos)
 
     # ===
     log.info("[pulp-docs] Configuring mkdocstrings")
-    code_sources= [str(source_dir / repo.name) for repo in repos.all]
-    env.conf["plugins"]["mkdocstrings"].config["handlers"]["python"]["paths"]= code_sources
+    code_sources = [str(source_dir / repo.name) for repo in repos.all]
+    env.conf["plugins"]["mkdocstrings"].config["handlers"]["python"][
+        "paths"
+    ] = code_sources
 
     # ===
     log.info("[pulp-docs] Configuring navigation")
-    env.conf["docs_dir"]= docs_dir
-    env.conf["nav"]= get_navigation(docs_dir, repos)
+    env.conf["docs_dir"] = docs_dir
+    env.conf["nav"] = get_navigation(docs_dir, repos)
 
     log.info("[pulp-docs] Done with pulp-docs.")

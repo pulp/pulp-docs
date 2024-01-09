@@ -49,13 +49,9 @@ def main(config: Config):
 def serve(config: Config):
     """Run mkdocs server"""
     env = os.environ.copy()
-    env.update({
-        "PULPDOCS_BASE_REPOLIST": str(config.repolist.absolute())
-    })
+    env.update({"PULPDOCS_BASE_REPOLIST": str(config.repolist.absolute())})
 
-    options = (
-        ("--config-file", config.mkdocs_file),
-    )
+    options = (("--config-file", config.mkdocs_file),)
     cmd = ["mkdocs", "serve"]
 
     for opt in options:
@@ -69,9 +65,7 @@ def serve(config: Config):
 def build(config: Config):
     """Build mkdocs site"""
     env = os.environ.copy()
-    env.update({
-        "PULPDOCS_BASE_REPOLIST": str(config.repolist.absolute())
-    })
+    env.update({"PULPDOCS_BASE_REPOLIST": str(config.repolist.absolute())})
 
     options = (
         ("--config-file", config.mkdocs_file),

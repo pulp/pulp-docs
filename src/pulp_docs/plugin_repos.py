@@ -18,7 +18,7 @@ from pathlib import Path
 import httpx
 import yaml
 
-log = logging.getLogger('mkdocs')
+log = logging.getLogger("mkdocs")
 
 FIXTURE_WORKDIR = Path("tests/fixtures").absolute()
 RESTAPI_TEMPLATE = "https://docs.pulpproject.org/{}/restapi.html"
@@ -31,6 +31,7 @@ class Repo:
 
     The real repository content is plugin sourcecode and markdown documentation.
     """
+
     title: str
     name: str
     owner: str = "pulp"
@@ -58,8 +59,11 @@ class Repo:
         """
         # Copy from local filesystem
         if self.local_basepath is not None:
-            shutil.copytree(self.local_url, dest_dir, ignore=shutil.ignore_patterns(
-                "tests", "*venv*", "__pycache__"))
+            shutil.copytree(
+                self.local_url,
+                dest_dir,
+                ignore=shutil.ignore_patterns("tests", "*venv*", "__pycache__"),
+            )
             return self.local_basepath
 
         # or Download from remote
@@ -77,7 +81,10 @@ def download_from_gh_main(dest_dir: Path, owner: str, name: str, branch: str):
         subprocess.run(cmd, check=True)
     except subprocess.CalledProcessError as e:
         log.error(
-            "An error ocurred while trying to download '{name}' source-code:".format(name=name))
+            "An error ocurred while trying to download '{name}' source-code:".format(
+                name=name
+            )
+        )
         log.error(f"{e}")
     log.info("Done.")
 
@@ -88,8 +95,9 @@ def download_from_gh_latest(dest_dir: Path, owner: str, name: str):
 
     Uses GitHub API.
     """
-    latest_release_link_url = "https://api.github.com/repos/{}/{}/releases/latest".format(
-        owner, name)
+    latest_release_link_url = (
+        "https://api.github.com/repos/{}/{}/releases/latest".format(owner, name)
+    )
 
     print("Fetching latest release with:", latest_release_link_url)
     response = httpx.get(latest_release_link_url)
@@ -114,6 +122,7 @@ def download_from_gh_latest(dest_dir: Path, owner: str, name: str):
 @dataclass
 class Repos:
     """A collection of Repos"""
+
     core: Repo
     content: t.List[Repo] = field(default_factory=list)
     other: t.List[Repo] = field(default_factory=list)
@@ -158,8 +167,7 @@ class Repos:
         DEFAULT_CORE = Repo("Pulp Core", "core")
         DEFAULT_CONTENT_REPOS = [
             Repo("Rpm Packages", "new_repo1", local_basepath=FIXTURE_WORKDIR),
-            Repo("Debian Packages", "new_repo2",
-                 local_basepath=FIXTURE_WORKDIR),
+            Repo("Debian Packages", "new_repo2", local_basepath=FIXTURE_WORKDIR),
             Repo("Maven", "new_repo3", local_basepath=FIXTURE_WORKDIR),
         ]
         return Repos(core=DEFAULT_CORE, content=DEFAULT_CONTENT_REPOS)
