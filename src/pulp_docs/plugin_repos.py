@@ -22,6 +22,7 @@ import yaml
 log = logging.getLogger("mkdocs")
 
 FIXTURE_WORKDIR = Path("tests/fixtures").absolute()
+DOWNLOAD_CACHE_DIR = Path(tempfile.gettempdir()) / "repo_downloads"
 RESTAPI_TEMPLATE = "https://docs.pulpproject.org/{}/restapi.html"
 
 
@@ -56,15 +57,10 @@ class Repo:
     type: t.Optional[str] = None
 
     @property
-    def local_url(self):
-        """Return local url for respository as {self.local_basepath}/{self.name}"""
-        return self.local_basepath / self.name
-
-    @property
     def rest_api_link(self):
         return RESTAPI_TEMPLATE.format(self.name)
 
-    def download(self, dest_dir: Path) -> str:
+    def download(self, dest_dir: Path, clear_cache: bool = False) -> str:
         """
         Download repository source from url into the {dest_dir} Path.
 
@@ -77,33 +73,50 @@ class Repo:
         Args:
             dest: The destination directory where source files will be saved.
                 e.g /tmp/pulp-tmp/repo_sources/pulpcore
+            clear_cache: Whether the cache should be cleared before downloading.
         Returns:
             The download url used
         """
         log.info("Downloading '{}' to '{}'".format(self.name, dest_dir.absolute()))
 
-        # Download from local filesystem
-        download_url = None
-        if self.local_basepath is not None:
-            log.warning(f"Using local checkout: {str(self.local_url)}")
-            download_url = self.local_url.absolute()
-            shutil.copytree(
-                self.local_url,
-                dest_dir,
-                ignore=shutil.ignore_patterns("tests", "*venv*", "__pycache__"),
-            )
-        # Download from remote
-        elif not dest_dir.exists():
-            download_url = download_from_gh_main(
-                dest_dir, self.owner, self.name, self.branch
-            )
-        else:
-            log.warning(f"Using cache: {str(dest_dir.absolute())}")
-            self.status.using_cache = True
-            download_url = str(dest_dir.absolute())
+        if clear_cache is True:
+            log.info("Clearing cache dir")
+            shutil.rmtree(DOWNLOAD_CACHE_DIR, ignore_errors=True)
+            DOWNLOAD_CACHE_DIR.mkdir()
 
-        # Return url used
-        self.status.download_source = str(download_url)
+        cached_repo = Path(DOWNLOAD_CACHE_DIR / self.name).absolute()
+        download_from = cached_repo
+        copy_path = cached_repo
+        log_header = ""
+
+        # from local filesystem
+        if self.local_basepath is not None:
+            log_header = "Using local checkout"
+            download_from = Path(self.local_basepath / self.name).absolute()
+            copy_path = download_from
+        # from cache
+        elif cached_repo.exists():
+            log_header = "Using cache in tmpdir"
+            download_from = cached_repo
+            copy_path = cached_repo
+            self.status.using_cache = True
+        # from remote
+        elif not cached_repo.exists():
+            log_header = "Downloading from remote"
+            download_from = download_from_gh_main(
+                DOWNLOAD_CACHE_DIR / self.name, self.owner, self.name, self.branch
+            )
+            copy_path = DOWNLOAD_CACHE_DIR / self.name
+
+        # copy from source/cache to pulp-docs workdir
+        log.info(f"{log_header}: source={download_from}, copied_from={copy_path}")
+        shutil.copytree(
+            copy_path,
+            dest_dir,
+            ignore=shutil.ignore_patterns("tests", "*venv*", "__pycache__"),
+        )
+
+        self.status.download_source = str(download_from)
         return self.status.download_source
 
 
@@ -118,13 +131,12 @@ def download_from_gh_main(dest_dir: Path, owner: str, name: str, branch: str):
     log.info("Downloading from Github with:\n{}".format(" ".join(cmd)))
     try:
         subprocess.run(cmd, check=True)
-    except subprocess.CalledProcessError:
+    except subprocess.CalledProcessError as e:
         log.error(
-            "An error ocurred while trying to download '{name}' source-code:".format(
-                name=name
-            )
+            f"An error ocurred while trying to download '{name}' source-code:\n{e}"
         )
         raise
+
     log.info("Done.")
     return url
 

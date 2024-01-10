@@ -23,6 +23,7 @@ from pathlib import Path
 
 from importlib_resources import as_file, files
 
+from pulp_docs.main import Config
 from pulp_docs.plugin_repos import Repos
 
 # the name of the docs in the source repositories
@@ -47,7 +48,7 @@ def create_clean_tmpdir(custom_tmpdir: t.Optional[Path] = None, use_cache: bool 
     return tmpdir
 
 
-def prepare_repositories(TMPDIR: Path, repos: Repos):
+def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
     """
     Download repositories into tmpdir and organize them in a convenient way
     to mkdocs and its plugins.
@@ -99,7 +100,7 @@ def prepare_repositories(TMPDIR: Path, repos: Repos):
 
         # 2. Download repo (copy locally or fetch from GH)
         this_src_dir = repo_sources / repo.name
-        repo.download(dest_dir=this_src_dir)
+        repo.download(dest_dir=this_src_dir, clear_cache=config.clear_cache)
 
         # 3. Isolate docs dir from codebase (makes mkdocs happy)
         this_docs_dir = repo_docs / repo.name
@@ -145,23 +146,30 @@ def prepare_repositories(TMPDIR: Path, repos: Repos):
     return (repo_docs, repo_sources)
 
 
-def log_local_checkout(repos: Repos):
-    """Emit log.info about local checkout being used or warn if none."""
-    local_checkouts = [
-        repo.name for repo in repos.all if repo.status.use_local_checkout is True
-    ]
+def print_user_repo(repos: Repos, config: Config):
+    """Emit report  about local checkout being used or warn if none."""
+    local_checkouts = []
+    cached_repos = []
+    downloaded_repos = []
+    for repo in repos.all:
+        record = {repo.name: repo.status.download_source}
+        if repo.status.use_local_checkout is True:
+            local_checkouts.append(record)
+        elif repo.status.using_cache is True:
+            cached_repos.append(record)
+        else:
+            downloaded_repos.append(record)
 
-    log.info(f"[pulp-docs] CHECKOUT_WORKDIR={str(CHECKOUT_WORKDIR)}")
-    log.info(f"[pulp-docs] Local checkouts in use: {local_checkouts}")
+    # log.info(
+    #     f"[pulp-docs] CHECKOUT_WORKDIR={str(CHECKOUT_WORKDIR)} (where pulp-docs is looking for local checkouts)"
+    # )
+    log.info(f"[pulp-docs] Config: {config.get_environ_dict()}")
+    log.info(f"[pulp-docs] Cached repos: {cached_repos}")
+    log.info(f"[pulp-docs] Downloaded repos: {downloaded_repos}")
     if len(local_checkouts) == 0:
         log.warning("[pulp-docs] No local checkouts found. Serving in read-only mode.")
-
-
-def create_no_content_page(tmpdir: Path):
-    """Create placeholder.md file to be used when section is empty"""
-    placeholder_page = Path(tmpdir / "placeholder.md")
-    placeholder_page.write_text("# Placeholder Page\n\nNo content here yet.")
-    return placeholder_page
+    else:
+        log.info(f"[pulp-docs] Local checkouts: {local_checkouts}")
 
 
 def get_navigation(tmpdir: Path, repos: Repos):
@@ -264,10 +272,10 @@ def define_env(env):
     """The mkdocs-marcros 'on_configuration' hook. Used to setup the project."""
     # Load configuration from environment
     log.info("[pulp-docs] Loading configuration from environ")
-    base_repolist = os.environ.get("PULPDOCS_BASE_REPOLIST", None)
+    config = Config(from_environ=True)
 
-    if base_repolist:
-        repos = Repos.from_yaml(Path(base_repolist))
+    if config.repolist:
+        repos = Repos.from_yaml(config.repolist)
     else:
         repos = (
             Repos.test_fixtures()
@@ -277,7 +285,7 @@ def define_env(env):
     # Download and organize repository files
     log.info("[pulp-docs] Preparing repositories")
     TMPDIR = create_clean_tmpdir()
-    docs_dir, source_dir = prepare_repositories(TMPDIR, repos)
+    docs_dir, source_dir = prepare_repositories(TMPDIR, repos, config)
 
     # Configure mkdocstrings
     log.info("[pulp-docs] Configuring mkdocstrings")
@@ -293,10 +301,11 @@ def define_env(env):
 
     log.info("[pulp-docs] Done with pulp-docs.")
     env.conf["pulp_repos"] = repos
+    env.conf["pulp_config"] = config
 
 
 def on_post_build(env):
     # Log relevant most useful information for end-user
     log.info("*" * 79)
-    log_local_checkout(repos=env.conf["pulp_repos"])
+    print_user_repo(repos=env.conf["pulp_repos"], config=env.conf["pulp_config"])
     log.info("*" * 79)

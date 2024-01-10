@@ -3,8 +3,8 @@ The main CLI module.
 
 It defines its interface.
 """
-import subprocess
 import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -21,16 +21,34 @@ def get_abspath(name: str) -> Path:
 
 class Config:
     """
+    Configuration shared among CLI and mkdocs_macro.py hooks.
+
     Params:
         mkdocs_file: the base mkdocs used in serving/building
         repolist: the configuration repositories (which and how to fetch)
+        clear_cache: whether to clear cache before downloading from remote
     """
 
-    def __init__(self):
-        self.verbose = False
-        self.workdir = Path()
-        self.mkdocs_file = files("pulp_docs").joinpath("data/mkdocs.yml")
-        self.repolist = files("pulp_docs").joinpath("data/repolist.yml")
+    def __init__(self, from_environ: bool = False):
+        if from_environ is False:
+            self.verbose = False
+            self.workdir = Path().absolute()
+            self.mkdocs_file = files("pulp_docs").joinpath("data/mkdocs.yml").absolute()
+            self.repolist = files("pulp_docs").joinpath("data/repolist.yml").absolute()
+            self.clear_cache = False
+        else:
+            self.verbose = bool(os.environ["PULPDOCS_VERBOSE"])
+            self.workdir = Path(os.environ["PULPDOCS_WORKDIR"])
+            self.mkdocs_file = Path(os.environ["PULPDOCS_MKDOCS_FILE"])
+            self.repolist = Path(os.environ["PULPDOCS_REPOLIST"])
+            self.clear_cache = (
+                False
+                if os.environ["PULPDOCS_CLEAR_CACHE"].lower() in ("f", "false")
+                else True
+            )
+
+    def get_environ_dict(self):
+        return {f"PULPDOCS_{k.upper()}": str(v) for k, v in self.__dict__.items()}
 
 
 pass_config = click.make_pass_decorator(Config, ensure=True)
@@ -45,11 +63,18 @@ def main(config: Config):
 
 
 @main.command()
+@click.option(
+    "--clear-cache",
+    default=False,
+    is_flag=True,
+    help="Whether to clear the cache before serving (default=False).",
+)
 @pass_config
-def serve(config: Config):
-    """Run mkdocs server"""
+def serve(config: Config, clear_cache: bool):
+    """Run mkdocs server."""
     env = os.environ.copy()
-    env.update({"PULPDOCS_BASE_REPOLIST": str(config.repolist.absolute())})
+    config.clear_cache = clear_cache
+    env.update(config.get_environ_dict())
 
     options = (("--config-file", config.mkdocs_file),)
     cmd = ["mkdocs", "serve"]
@@ -63,7 +88,7 @@ def serve(config: Config):
 @main.command()
 @pass_config
 def build(config: Config):
-    """Build mkdocs site"""
+    """Build mkdocs site."""
     env = os.environ.copy()
     env.update({"PULPDOCS_BASE_REPOLIST": str(config.repolist.absolute())})
 
@@ -80,16 +105,8 @@ def build(config: Config):
 
 @main.command()
 @pass_config
-def pull(config: Config):
-    """Pull repositories source from remote into WORKDIR"""
-    repolist = [
-        LocalRepo("Pulp Rpm", get_abspath("new_repo1")),
-        LocalRepo("Pulp Rpm", get_abspath("new_repo2")),
-        LocalRepo("Pulp Rpm", get_abspath("new_repo3")),
-    ]
-
-    repo_paths = download_repos(repolist, TMP_DIR)
-    print(repo_paths)
+def status(config: Config):
+    """Print relevant information about repositories that will be used."""
 
 
 if __name__ == "__main__":
