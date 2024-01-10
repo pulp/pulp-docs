@@ -92,17 +92,11 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
     shutil.rmtree(repo_docs, ignore_errors=True)
 
     for repo in repos.all:
-        # 1. Check for local checkout if config doesnt specify a local_basepath
-        checkout_dir = Path().absolute().parent / repo.name
-        if repo.local_basepath is None and checkout_dir.exists():
-            repo.status.use_local_checkout = True
-            repo.local_basepath = Path().absolute().parent
-
-        # 2. Download repo (copy locally or fetch from GH)
+        # 1. Download repo (copy locally or fetch from GH)
         this_src_dir = repo_sources / repo.name
         repo.download(dest_dir=this_src_dir, clear_cache=config.clear_cache)
 
-        # 3. Isolate docs dir from codebase (makes mkdocs happy)
+        # 2. Isolate docs dir from codebase (makes mkdocs happy)
         this_docs_dir = repo_docs / repo.name
         log.info(
             "Moving doc files:\nfrom '{}'\nto '{}'".format(this_src_dir, this_docs_dir)
@@ -119,7 +113,7 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
         except FileNotFoundError:
             repo.status.has_readme = False
 
-        # 4. Generate REST Api pages (workaround)
+        # 3. Generate REST Api pages (workaround)
         if repo.type == "content":
             log.info("Generating REST_API page")
             rest_api_page = this_docs_dir / "docs" / "rest_api.md"
@@ -151,8 +145,14 @@ def print_user_repo(repos: Repos, config: Config):
     local_checkouts = []
     cached_repos = []
     downloaded_repos = []
+
+    # prepare data for user report
     for repo in repos.all:
-        record = {repo.name: repo.status.download_source}
+        record = {
+            "name": repo.name,
+            "download_source": repo.status.download_source,
+            "refs": repo.branch,
+        }
         if repo.status.use_local_checkout is True:
             local_checkouts.append(record)
         elif repo.status.using_cache is True:
@@ -160,9 +160,12 @@ def print_user_repo(repos: Repos, config: Config):
         else:
             downloaded_repos.append(record)
 
-    # log.info(
-    #     f"[pulp-docs] CHECKOUT_WORKDIR={str(CHECKOUT_WORKDIR)} (where pulp-docs is looking for local checkouts)"
-    # )
+        # TODO: improve this refspec comparision heuristics
+        if repo.status.original_refs and (repo.status.original_refs not in repo.branch):
+            log.warning(
+                f"[pulp-docs] Original repo ref is '{repo.status.original_refs}', but local one is '{repo.branch}'."
+            )
+
     log.info(f"[pulp-docs] Config: {config.get_environ_dict()}")
     log.info(f"[pulp-docs] Cached repos: {cached_repos}")
     log.info(f"[pulp-docs] Downloaded repos: {downloaded_repos}")
@@ -276,6 +279,7 @@ def define_env(env):
 
     if config.repolist:
         repos = Repos.from_yaml(config.repolist)
+        repos.update_local_checkouts()
     else:
         repos = (
             Repos.test_fixtures()

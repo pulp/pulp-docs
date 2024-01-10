@@ -38,7 +38,7 @@ class RepoStatus:
     has_changelog: bool = True
     has_staging_docs: bool = True
     using_cache: bool = False
-
+    original_refs: t.Optional[str] = None # as defined in repolist.yml
 
 @dataclass
 class Repo:
@@ -181,6 +181,19 @@ class Repos:
     core: Repo
     content: t.List[Repo] = field(default_factory=list)
     other: t.List[Repo] = field(default_factory=list)
+
+    def update_local_checkouts(self):
+        """Update repos to use local checkout, if exists in the parent dir of CWD"""
+        for repo in self.all:
+            checkout_dir = Path().absolute().parent / repo.name
+            if repo.local_basepath is None and checkout_dir.exists():
+                repo.status.use_local_checkout = True
+                repo.local_basepath = Path().absolute().parent
+                # looks like 'refs/head/main'
+                checkout_refs = Path(checkout_dir / ".git" / "HEAD").read_text()
+                checkout_refs = checkout_refs[len("ref: ") :].replace("\n", "")
+                repo.status.original_refs = repo.branch
+                repo.branch = checkout_refs
 
     @property
     def all(self):
