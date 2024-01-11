@@ -35,12 +35,9 @@ CHECKOUT_WORKDIR = Path().absolute().parent
 log = logging.getLogger("mkdocs")
 
 
-def create_clean_tmpdir(custom_tmpdir: t.Optional[Path] = None, use_cache: bool = True):
-    tmpdir_basepath = (
-        Path(custom_tmpdir) if custom_tmpdir else Path(tempfile.gettempdir())
-    )
+def create_clean_tmpdir(use_cache: bool = True):
+    tmpdir_basepath = Path(tempfile.gettempdir()).absolute()
     tmpdir = tmpdir_basepath / "pulp-docs-tmp"
-
     # Clean tmpdir only if not using cache
     if tmpdir.exists() and use_cache is False:
         shutil.rmtree(tmpdir)

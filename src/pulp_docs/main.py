@@ -6,6 +6,7 @@ It defines its interface.
 import os
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 import click
@@ -90,7 +91,7 @@ def serve(config: Config, clear_cache: bool):
 def build(config: Config):
     """Build mkdocs site."""
     env = os.environ.copy()
-    env.update({"PULPDOCS_BASE_REPOLIST": str(config.repolist.absolute())})
+    env.update(config.get_environ_dict())
 
     options = (
         ("--config-file", config.mkdocs_file),
@@ -100,7 +101,8 @@ def build(config: Config):
     for opt in options:
         cmd.extend(opt)
     print("Building:", " ".join(str(s) for s in cmd))
-    subprocess.run(cmd, env=env)
+    result = subprocess.run(cmd, env=env)
+    sys.exit(result.returncode)
 
 
 @main.command()
