@@ -18,6 +18,8 @@ jobs:
           python-version: 3.8
       - name:
         run: |
+          pip install build
           python -m build
           pip install dist/*.whl
           pulp-docs build
+          tree site
