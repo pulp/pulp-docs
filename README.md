@@ -1,10 +1,9 @@
-# pulp-docs: Unified multirepo documenation
+# pulp-docs: Unified multirepo documentation
 
 <!--toc:start-->
-- [pulp-docs: Unified multirepo documenation](#pulp-docs-unified-multirepo-documenation)
-  - [Overview](#overview)
-  - [How it works](#how-it-works)
-  - [Runninng Locally](#runninng-locally)
+- [Overview](#overview)
+- [How it works](#how-it-works)
+- [Runninng Locally](#runninng-locally)
 <!--toc:end-->
 
 Python Package to help aggregating Pulp's multirepo ecosystem into a unified doc.
@@ -25,17 +24,17 @@ Also, this should be used for the production build.
 
 Through a `mkdocs-macro-plugin` hook (called in early stages of mkdocs processing), we inject the following steps:
 
-1. Download all source code needed for the build (either copying from local filesystem or downloading from GH)
+1. Read `repolist.yml` packaged with `pulp-docs` to know which repos/urls to use
+1. Download/Move all source code required to dir under `tempfile.gettempdir()`
+    - Uses `../{repo}` if available OR
+    - Uses existing cached `{tmpdir}/{repo}` if available OR
+    - Downloads from github
 1. Configure `mkdocstrings` to find each repo codebase
 1. Configure `mkdocs` navigation by leveraging our `/docs` content organization structure
 
 And thats it, the magic is done.
 
 ## Runninng Locally
-
-Fixtures are fake respositories with code and docs. They are located in `tests/fixtures/`.
-
-Hopefully, this should run the fixture setup:
 
 ```bash
 $ pip install -r requirements.txt
