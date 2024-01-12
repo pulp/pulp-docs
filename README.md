@@ -34,16 +34,19 @@ Through a `mkdocs-macro-plugin` hook (called in early stages of mkdocs processin
 
 And thats it, the magic is done.
 
-## Runninng Locally
+## Setup
+
+Recommended of getting it up and running:
 
 ```bash
-$ pip install -r requirements.txt
+$ virtualenv --python python3.8 pulpdocs-venv
+$ . pulpdocs-venv/bin/activate
+$ pip install git+https://github.com/pedro-psb/pulp-docs
+$ pulp-docs --help
 $ pulp-docs serve
 ```
 
-For other command, see:
-
-```bash
-$ pulp-docs --help
-```
+Known issues:
+- doesn't work with newer versions of python, like 3.12
+- doesn't work with pipx (some problem with data assets packaging)
 
