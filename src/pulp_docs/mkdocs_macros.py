@@ -14,8 +14,8 @@ It's used here mainly to:
     2. Configure mkdocstrings plugin to find the source code
 
 """
+import json
 import logging
-import os
 import shutil
 import tempfile
 import typing as t
@@ -98,8 +98,12 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
         log.info(
             "Moving doc files:\nfrom '{}'\nto '{}'".format(this_src_dir, this_docs_dir)
         )
-        shutil.copytree(this_src_dir / SRC_DOCS_DIRNAME, this_docs_dir / "docs")
 
+        try:
+            shutil.copytree(this_src_dir / SRC_DOCS_DIRNAME, this_docs_dir / "docs")
+        except FileNotFoundError:
+            Path(this_docs_dir / "docs").mkdir(parents=True)
+            repo.status.has_staging_docs = False
         try:
             shutil.copy(this_src_dir / "CHANGELOG.md", this_docs_dir / "CHANGELOG.md")
         except FileNotFoundError:
@@ -139,9 +143,13 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
 
 def print_user_repo(repos: Repos, config: Config):
     """Emit report  about local checkout being used or warn if none."""
+    print("*" * 79)
+    log.info("[pulp-docs] Summary info about the build. Use -v for more info")
+
     local_checkouts = []
     cached_repos = []
     downloaded_repos = []
+    warn_msgs = []
 
     # prepare data for user report
     for repo in repos.all:
@@ -159,17 +167,36 @@ def print_user_repo(repos: Repos, config: Config):
 
         # TODO: improve this refspec comparision heuristics
         if repo.status.original_refs and (repo.status.original_refs not in repo.branch):
-            log.warning(
-                f"[pulp-docs] Original repo ref is '{repo.status.original_refs}', but local one is '{repo.branch}'."
+            warn_msgs.append(
+                f"[pulp-docs] Original {repo.name!r} ref is {repo.status.original_refs!r}, but local one is '{repo.branch}'."
             )
 
-    log.info(f"[pulp-docs] Config: {config.get_environ_dict()}")
-    log.info(f"[pulp-docs] Cached repos: {cached_repos}")
-    log.info(f"[pulp-docs] Downloaded repos: {downloaded_repos}")
     if len(local_checkouts) == 0:
-        log.warning("[pulp-docs] No local checkouts found. Serving in read-only mode.")
+        warn_msgs.append(
+            "[pulp-docs] No local checkouts found. Serving in read-only mode."
+        )
+
+    import rich
+
+    if config.verbose:
+        report = {
+            "config": config.get_environ_dict(),
+            "cached_repos": cached_repos,
+            "downloaded_repos": downloaded_repos,
+            "local_checkouts": local_checkouts,
+        }
     else:
-        log.info(f"[pulp-docs] Local checkouts: {local_checkouts}")
+        report = {
+            "cached_repos": [repo["name"] for repo in cached_repos],
+            "downloaded_repos": [repo["name"] for repo in downloaded_repos],
+            "local_checkouts": [repo["name"] for repo in local_checkouts],
+        }
+
+    rich.print_json(json.dumps(report, indent=4))
+
+    for msg in warn_msgs:
+        log.warning(msg)
+    print("*" * 79)
 
 
 def get_navigation(tmpdir: Path, repos: Repos):
@@ -307,6 +334,4 @@ def define_env(env):
 
 def on_post_build(env):
     # Log relevant most useful information for end-user
-    log.info("*" * 79)
     print_user_repo(repos=env.conf["pulp_repos"], config=env.conf["pulp_config"])
-    log.info("*" * 79)

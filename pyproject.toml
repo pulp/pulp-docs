@@ -11,6 +11,7 @@ dependencies = [
     "mkdocs-macros-plugin",
     "importlib_resources",
     "httpx",
+    "rich",
 ]
 
 [project.scripts]

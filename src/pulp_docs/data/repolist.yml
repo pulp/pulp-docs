@@ -8,5 +8,13 @@ repos:
       owner: pulp
       title: Pulp Core
       branch: main
-  content: []
-  other: []
+  content:
+    - name: pulp_maven
+      owner: pulp
+      title: Maven
+      branch: main
+  other:
+    - name: pulp-oci-images
+      owner: pulp
+      title: Pulp OCI Images
+      branch: latest

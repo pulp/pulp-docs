@@ -33,7 +33,7 @@ def test_build(tmp_path):
 
     runner = CliRunner()
     with runner.isolated_filesystem(temp_dir=tmp_path):
-        os.chdir(dest_path) # using local checkout depends on cwd
+        os.chdir(dest_path)  # using local checkout depends on cwd
         result = runner.invoke(main, "build", env={"TMPDIR": str(tmp_path.absolute())})
         assert result.exit_code == 0
         assert Path("site").exists()

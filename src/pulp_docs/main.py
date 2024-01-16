@@ -20,6 +20,10 @@ def get_abspath(name: str) -> Path:
     return Path(WORKDIR / name).absolute()
 
 
+def cast_bool(value: str) -> bool:
+    return False if value.lower() in ("f", "false") else True
+
+
 class Config:
     """
     Configuration shared among CLI and mkdocs_macro.py hooks.
@@ -38,15 +42,11 @@ class Config:
             self.repolist = files("pulp_docs").joinpath("data/repolist.yml").absolute()
             self.clear_cache = False
         else:
-            self.verbose = bool(os.environ["PULPDOCS_VERBOSE"])
+            self.verbose = cast_bool(os.environ["PULPDOCS_VERBOSE"])
             self.workdir = Path(os.environ["PULPDOCS_WORKDIR"])
             self.mkdocs_file = Path(os.environ["PULPDOCS_MKDOCS_FILE"])
             self.repolist = Path(os.environ["PULPDOCS_REPOLIST"])
-            self.clear_cache = (
-                False
-                if os.environ["PULPDOCS_CLEAR_CACHE"].lower() in ("f", "false")
-                else True
-            )
+            self.clear_cache = cast_bool(os.environ["PULPDOCS_CLEAR_CACHE"])
 
     def get_environ_dict(self):
         return {f"PULPDOCS_{k.upper()}": str(v) for k, v in self.__dict__.items()}
@@ -56,11 +56,13 @@ pass_config = click.make_pass_decorator(Config, ensure=True)
 
 
 @click.group()
+@click.option("--verbose", "-v", is_flag=True)
 @pass_config
-def main(config: Config):
+def main(config: Config, verbose: bool):
     """
     This is pulp-docs, a cli tool to help run and build multirepo documenation within Pulp project.
     """
+    config.verbose = verbose
 
 
 @main.command()
