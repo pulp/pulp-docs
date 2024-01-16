@@ -60,7 +60,7 @@ pass_config = click.make_pass_decorator(Config, ensure=True)
 @pass_config
 def main(config: Config, verbose: bool):
     """
-    This is pulp-docs, a cli tool to help run and build multirepo documenation within Pulp project.
+    This is pulp-docs, a cli tool to help run and build multirepo documentation within Pulp project.
     """
     config.verbose = verbose
 
@@ -72,11 +72,13 @@ def main(config: Config, verbose: bool):
     is_flag=True,
     help="Whether to clear the cache before serving (default=False).",
 )
+@click.option("--verbose", "-v", is_flag=True)
 @pass_config
-def serve(config: Config, clear_cache: bool):
+def serve(config: Config, clear_cache: bool, verbose: bool):
     """Run mkdocs server."""
     env = os.environ.copy()
     config.clear_cache = clear_cache
+    config.verbose = verbose
     env.update(config.get_environ_dict())
 
     options = (("--config-file", config.mkdocs_file),)
@@ -92,6 +94,7 @@ def serve(config: Config, clear_cache: bool):
 @pass_config
 def build(config: Config):
     """Build mkdocs site."""
+    config.verbose = True
     env = os.environ.copy()
     env.update(config.get_environ_dict())
 

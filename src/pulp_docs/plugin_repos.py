@@ -34,7 +34,6 @@ class RepoStatus:
 
     def __init__(self, **kwargs):
         self.download_source = kwargs.get("download_source", None)
-        self.download_source = kwargs.get("download_source", None)
         self.use_local_checkout = kwargs.get("use_local_checkout", False)
         self.has_readme = kwargs.get("has_readme", True)
         self.has_changelog = kwargs.get("has_changelog", True)
@@ -56,7 +55,7 @@ class Repo:
     owner: str = "pulp"
     branch: str = "main"
     local_basepath: t.Optional[Path] = None
-    status: RepoStatus = RepoStatus()
+    status: RepoStatus = field(default_factory=lambda: RepoStatus())
     type: t.Optional[str] = None
 
     @property
