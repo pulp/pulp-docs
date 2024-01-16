@@ -15,7 +15,7 @@ dependencies = [
 ]
 
 [project.scripts]
-pulp-docs = "pulp_docs.main:main"
+pulp-docs = "pulp_docs.cli:main"
 
 [tool.setuptools]
 include-package-data=true

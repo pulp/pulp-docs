@@ -6,15 +6,7 @@ import pytest
 import subprocess
 from click.testing import CliRunner
 
-from pulp_docs.main import main
-
-
-# @pytest.fixture(scope="session")
-# def my_tmp_path(tmp_path_factory):
-#     _tmp_path = tmp_path_factory.mktemp("data")
-#     breakpoint()
-#     shutil.copytree("tests/fixtures", _tmp_path)
-#     return tmp_path_factory.getbasetemp()
+from pulp_docs.cli import main
 
 
 def test_trivial():
@@ -26,14 +18,15 @@ def test_trivial():
 def test_build(tmp_path):
     """Sanity check build cmd"""
     # setup folder structure so test uses local fixtures
-    fixture_path = Path("tests/fixtures/pulpcore").absolute()
-    dest_path = tmp_path / "workdir" / fixture_path.name
+    fixture_path = Path("tests/fixtures").absolute()
+    dest_path = tmp_path / "workdir"
     shutil.copytree(fixture_path, dest_path)
-    subprocess.run(["git", "-C", str(dest_path.absolute()), "init"])
+    for dir in os.scandir(dest_path):
+        subprocess.run(["git", "-C", str(Path(dir).absolute()), "init"])
 
     runner = CliRunner()
     with runner.isolated_filesystem(temp_dir=tmp_path):
-        os.chdir(dest_path)  # using local checkout depends on cwd
+        os.chdir(dest_path / "pulpcore")  # using local checkout depends on cwd
         result = runner.invoke(main, "build", env={"TMPDIR": str(tmp_path.absolute())})
         assert result.exit_code == 0
         assert Path("site").exists()

@@ -15,7 +15,7 @@ This packages is:
 - A `mkdocs-macros-plugin` [pluget](https://mkdocs-macros-plugin.readthedocs.io/en/latest/pluglets/). [relevant-code]()
 - A repository for common doc website asset. [relevant-code](https://github.com/pedro-psb/pulp-docs/tree/main/src/pulp_docs/docs)
 - A centralized entrypoint for installing doc-related packages/tooling. (via its own requirements)
-- A CLI for doc-related tasks, like serving and building. [relevant-code](https://github.com/pedro-psb/pulp-docs/blob/main/src/pulp_docs/main.py)
+- A CLI for doc-related tasks, like serving and building. [relevant-code](https://github.com/pedro-psb/pulp-docs/blob/main/src/pulp_docs/cli.py)
 
 The idea is that each repository should install `pulp-docs` and imediatelly be able run the unified website server.
 Also, this should be used for the production build.
