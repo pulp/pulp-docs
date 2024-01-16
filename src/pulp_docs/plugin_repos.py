@@ -26,19 +26,22 @@ DOWNLOAD_CACHE_DIR = Path(tempfile.gettempdir()) / "repo_downloads"
 RESTAPI_TEMPLATE = "https://docs.pulpproject.org/{}/restapi.html"
 
 
-@dataclass
+# @dataclass # raising errors in py311/312
 class RepoStatus:
     """
     Usefull status information about a downloaded repository.
     """
 
-    download_source: t.Optional[str] = None
-    use_local_checkout: bool = False
-    has_readme: bool = True
-    has_changelog: bool = True
-    has_staging_docs: bool = True
-    using_cache: bool = False
-    original_refs: t.Optional[str] = None # as defined in repolist.yml
+    def __init__(self, **kwargs):
+        self.download_source = kwargs.get("download_source", None)
+        self.download_source = kwargs.get("download_source", None)
+        self.use_local_checkout = kwargs.get("use_local_checkout", False)
+        self.has_readme = kwargs.get("has_readme", True)
+        self.has_changelog = kwargs.get("has_changelog", True)
+        self.has_staging_docs = kwargs.get("has_staging_docs", True)
+        self.using_cache = kwargs.get("using_cache", False)
+        self.original_refs = kwargs.get("original_refs", None)
+
 
 @dataclass
 class Repo:

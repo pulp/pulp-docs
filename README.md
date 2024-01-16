@@ -36,17 +36,11 @@ And thats it, the magic is done.
 
 ## Setup
 
-Recommended of getting it up and running:
+Recommended way for daily usage:
 
 ```bash
-$ virtualenv --python python3.8 pulpdocs-venv
-$ . pulpdocs-venv/bin/activate
-$ pip install git+https://github.com/pedro-psb/pulp-docs
-$ pulp-docs --help
+$ pipx install git+https://github.com/pedro-psb/pulp-docs --include-deps
 $ pulp-docs serve
 ```
 
-Known issues:
-- doesn't work with newer versions of python, like 3.12
-- doesn't work with pipx (some problem with data assets packaging)
-
+For development, use your prefered method!
