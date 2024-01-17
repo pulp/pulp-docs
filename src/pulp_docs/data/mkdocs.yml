@@ -35,6 +35,7 @@ theme:
 
 plugins:
   - search
+  - site-urls
   - macros:
       module_name: '../mkdocs_macros'
   - tags:
@@ -45,7 +46,6 @@ plugins:
           options:
             show_source: false
             docstring_section_style: table # table, list, spacy
-
 extra:
   social:
     - icon: fontawesome/brands/github-alt
