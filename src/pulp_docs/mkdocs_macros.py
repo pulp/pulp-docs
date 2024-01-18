@@ -131,7 +131,7 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
     with as_file(data_file_docs) as _docs:
         shutil.copytree(_docs, repo_docs / "pulp-docs")
     shutil.copy(
-        repo_sources / repos.core.name / SRC_DOCS_DIRNAME / "index.md",
+        repo_sources / repos.core_repo.name / SRC_DOCS_DIRNAME / "index.md",
         repo_docs / "index.md",
     )
 

@@ -180,9 +180,9 @@ def download_from_gh_latest(dest_dir: Path, owner: str, name: str):
 class Repos:
     """A collection of Repos"""
 
-    core: Repo
-    content: t.List[Repo] = field(default_factory=list)
-    other: t.List[Repo] = field(default_factory=list)
+    core_repo: Repo
+    content_repos: t.List[Repo] = field(default_factory=list)
+    other_repos: t.List[Repo] = field(default_factory=list)
 
     def update_local_checkouts(self):
         """Update repos to use local checkout, if exists in the parent dir of CWD"""
@@ -199,7 +199,7 @@ class Repos:
 
     @property
     def all(self):
-        return [self.core] + self.content + self.other
+        return [self.core_repo] + self.content_repos + self.other_repos
 
     @classmethod
     def from_yaml(cls, path: str):
@@ -231,7 +231,9 @@ class Repos:
         core_repo = Repo(**repos["core"][0], type="core")
         content_repos = [Repo(**repo, type="content") for repo in repos["content"]]
         other_repos = [Repo(**repo, type="other") for repo in repos["other"]]
-        return Repos(core=core_repo, content=content_repos, other=other_repos)
+        return Repos(
+            core_repo=core_repo, content_repos=content_repos, other_repos=other_repos
+        )
 
     @classmethod
     def test_fixtures(cls):
@@ -253,4 +255,4 @@ class Repos:
             ),
             Repo("Maven", "new_repo3", local_basepath=FIXTURE_WORKDIR, type="content"),
         ]
-        return Repos(core=DEFAULT_CORE, content=DEFAULT_CONTENT_REPOS)
+        return Repos(core_repo=DEFAULT_CORE, content_repos=DEFAULT_CONTENT_REPOS)
