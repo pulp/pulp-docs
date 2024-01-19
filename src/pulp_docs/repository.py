@@ -112,11 +112,15 @@ class Repo:
 
         # copy from source/cache to pulp-docs workdir
         log.info(f"{log_header}: source={download_from}, copied_from={src_copy_path}")
-        gitignore_files = [
-            f
-            for f in Path(src_copy_path / ".gitignore").read_text().splitlines()
-            if f and not f.startswith("#")
-        ]
+
+        gitignore_files = []
+        repo_gitignore = Path(src_copy_path / ".gitignore")
+        if repo_gitignore.exists():
+            gitignore_files = [
+                f
+                for f in repo_gitignore.read_text().splitlines()
+                if f and not f.startswith("#")
+            ]
         shutil.copytree(
             src_copy_path,
             dest_dir,

@@ -41,6 +41,9 @@ class Config:
             self.mkdocs_file = files("pulp_docs").joinpath("data/mkdocs.yml").absolute()
             self.repolist = files("pulp_docs").joinpath("data/repolist.yml").absolute()
             self.clear_cache = False
+
+            if env_mkdocs := os.environ.get("PULPDOCS_MKDOCS_FILE"):
+                self.mkdocs_file = Path(env_mkdocs)
         else:
             self.verbose = cast_bool(os.environ["PULPDOCS_VERBOSE"])
             self.workdir = Path(os.environ["PULPDOCS_WORKDIR"])
@@ -114,6 +117,7 @@ def build(config: Config):
 @pass_config
 def status(config: Config):
     """Print relevant information about repositories that will be used."""
+    raise NotImplementedError
 
 
 if __name__ == "__main__":

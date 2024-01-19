@@ -44,3 +44,23 @@ $ pulp-docs serve
 ```
 
 For development, use your prefered method!
+
+## How to share inter-repo "unofficial" work
+
+If you want to share work you are doing in muliple forks, you can share a custom `repolist.yml` which points to your forks.
+
+Then, anyone can test them locally by overriting your `repolist.yml` like so:
+
+```bash
+$ cat "path/to/my/repolist.yml"
+repos:
+  core:
+    - name: pulpcore
+      owner: some-github-username
+      title: Pulp Core
+      branch: main
+(...)
+$ export PULPDOCS_MKDOCS_FILE="path/to/my/repolist.yml"
+$ pulp-docs serve
+```
+
