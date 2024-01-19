@@ -88,19 +88,19 @@ class Repo:
 
         cached_repo = Path(DOWNLOAD_CACHE_DIR / self.name).absolute()
         download_from = cached_repo
-        copy_path = cached_repo
+        src_copy_path = cached_repo
         log_header = ""
 
         # from local filesystem
         if self.local_basepath is not None:
             log_header = "Using local checkout"
             download_from = Path(self.local_basepath / self.name).absolute()
-            copy_path = download_from
+            src_copy_path = download_from
         # from cache
         elif cached_repo.exists():
             log_header = "Using cache in tmpdir"
             download_from = cached_repo
-            copy_path = cached_repo
+            src_copy_path = cached_repo
             self.status.using_cache = True
         # from remote
         elif not cached_repo.exists():
@@ -108,14 +108,19 @@ class Repo:
             download_from = download_from_gh_main(
                 DOWNLOAD_CACHE_DIR / self.name, self.owner, self.name, self.branch
             )
-            copy_path = DOWNLOAD_CACHE_DIR / self.name
+            src_copy_path = DOWNLOAD_CACHE_DIR / self.name
 
         # copy from source/cache to pulp-docs workdir
-        log.info(f"{log_header}: source={download_from}, copied_from={copy_path}")
+        log.info(f"{log_header}: source={download_from}, copied_from={src_copy_path}")
+        gitignore_files = [
+            f
+            for f in Path(src_copy_path / ".gitignore").read_text().splitlines()
+            if f and not f.startswith("#")
+        ]
         shutil.copytree(
-            copy_path,
+            src_copy_path,
             dest_dir,
-            ignore=shutil.ignore_patterns("tests", "*venv*", "__pycache__"),
+            ignore=shutil.ignore_patterns(*gitignore_files),
         )
 
         self.status.download_source = str(download_from)
