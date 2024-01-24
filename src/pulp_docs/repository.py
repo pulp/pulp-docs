@@ -41,6 +41,9 @@ class RepoStatus:
         self.using_cache = kwargs.get("using_cache", False)
         self.original_refs = kwargs.get("original_refs", None)
 
+    def __str__(self):
+        return str(self.__dict__)
+
 
 @dataclass
 class Repo:

@@ -31,6 +31,9 @@ from pathlib import Path
 
 from pulp_docs.repository import Repos
 
+ADMIN_NAME = "admin"
+USER_NAME = "user"
+
 
 def get_navigation(tmpdir: Path, repos: Repos):
     """
@@ -38,8 +41,60 @@ def get_navigation(tmpdir: Path, repos: Repos):
 
     Replace by another generation function to change how content is structured.
     """
-    NAV_GENERATOR_FUNCTION = grouped_by_content_type
+    # NAV_GENERATOR_FUNCTION = grouped_by_content_type
+    NAV_GENERATOR_FUNCTION = grouped_by_persona
     return NAV_GENERATOR_FUNCTION(tmpdir, repos)
+
+
+def grouped_by_persona(tmpdir: Path, repos: Repos):
+    """
+    A specific nav generator function.
+
+    Organizes content (roughly) with the pattern.
+        {persona}/
+            Overview/
+            {repos}/
+                {content-type}
+    """
+    f = AgregationUtils(tmpdir, repos)
+    # Aggregation and Grouping
+    help_section = [
+        {"Overview": f.section_file("help/index.md")},
+        {
+            "Bugs, Feature and Backport Requests": f.section_file(
+                "help/bugs-features.md"
+            )
+        },
+    ]
+    usage_section = [
+        {"Overview": f.section_file("usage/index.md")},
+    ]
+    admin_section = [
+        {"Overview": f.section_file("admin/index.md")},
+    ]
+    reference_section = [
+        {"Overview": f.section_file("reference/index.md")},
+        {"Repository Map": f.section_file("reference/01-repository-map.md")},
+        {"Glossary": f.section_file("reference/02-glossary.md")},
+        {"Repositories": f.repo_reference_grouping()},
+    ]
+    development_section = [
+        {"Overview": f.section_file("development/index.md")},
+        {"Quickstart": f.section_children("development/quickstart/")},
+        {"Onboarding": f.section_children("development/onboarding/")},
+        {"Guides": f.section_children("/development/guides/")},
+    ]
+
+    # Main Section
+    navigation = [
+        {"Home": "index.md"},
+        {"Usage": usage_section},
+        {"Administration": admin_section},
+        {"Development": development_section},
+        {"Reference": reference_section},
+        {"Help": help_section},
+    ]
+    return navigation
 
 
 def grouped_by_content_type(tmpdir: Path, repos: Repos):
@@ -62,21 +117,13 @@ def grouped_by_content_type(tmpdir: Path, repos: Repos):
     ]
     guides = [
         {"Overview": f.section_file("guides/index.md")},
-        {
-            "For Content-Management": f.repo_grouping(
-                "{repo}/docs/content-manager/guides"
-            )
-        },
-        {"For Sys-Admins": f.repo_grouping("{repo}/docs/sys-admin/guides")},
+        {"For Content-Management": f.repo_grouping("{repo}/docs/{user}/guides")},
+        {"For Sys-Admins": f.repo_grouping("{repo}/docs/{admin}/guides")},
     ]
     learn = [
         {"Overview": f.section_file("learn/index.md")},
-        {
-            "For Content-Management": f.repo_grouping(
-                "{repo}/docs/content-manager/learn"
-            )
-        },
-        {"For Sys-Admins": f.repo_grouping("{repo}/docs/sys-admin/learn")},
+        {"For Content-Management": f.repo_grouping("{repo}/docs/{user}/learn")},
+        {"For Sys-Admins": f.repo_grouping("{repo}/docs/{admin}/learn")},
     ]
     reference = [
         {"Overview": f.section_file("reference/index.md")},
@@ -120,7 +167,7 @@ class AgregationUtils:
             for file in _path.glob("*.md")
             if not file.name.startswith("_")
         ]
-        return result
+        return sorted(result)
 
     def repo_grouping(self, template_str: str):
         """
@@ -150,7 +197,9 @@ class AgregationUtils:
             raise ValueError("Malformed template_str. See docstring for usage.")
 
         for repo in selected_repos:
-            lookup_path = self.tmpdir / template_str.format(repo=repo.name)
+            lookup_path = self.tmpdir / template_str.format(
+                repo=repo.name, admin=ADMIN_NAME, user=USER_NAME
+            )
             _repo_content = self.get_children(lookup_path)
             _nav[repo.title] = _repo_content
         return _nav
@@ -183,12 +232,13 @@ class AgregationUtils:
             _nav[repo.title] = reference_section
         return _nav
 
-    def section_file(self, url: str):
+    def section_file(self, section_and_filename: str):
         """Get a markdown file from the website section folder."""
         basepath = "pulpcore/docs/sections"
-        return f"{basepath}/{url}"
+        return f"{basepath}/{section_and_filename}"
 
-    def section_children(self, url: str):
+    def section_children(self, section_name: str):
         """Get children markdown files from the website section folder."""
         basepath = "pulpcore/docs/sections"
-        return self.get_children(f"{basepath}/{url}")
+        section = self.get_children(f"{basepath}/{section_name}")
+        return section

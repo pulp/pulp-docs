@@ -27,6 +27,7 @@ a.autorefs-external:hover::after {
 }
 
 /* Colors */
+/*
 [data-md-color-scheme="default"] {
   --doc-symbol-attribute-fg-color: #0079ff;
   --doc-symbol-function-fg-color: #00dfa2;
@@ -54,25 +55,26 @@ a.autorefs-external:hover::after {
   --doc-symbol-class-bg-color: #46c2cb1a;
   --doc-symbol-module-bg-color: #f2f7a11a;
 }
+ */
 
 /* */
 .doc-symbol-attribute::after {
-  content: "A";
+  content: "attr";
 }
 
 .doc-symbol-function::after {
-  content: "F";
+  content: "func";
 }
 
 .doc-symbol-method::after {
-  content: "M";
+  content: "meth";
 }
 
 .doc-symbol-class::after {
-  content: "C";
+  content: "class";
 }
 
 .doc-symbol-module::after {
-  content: "M";
+  content: "mod";
 }
 

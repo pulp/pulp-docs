@@ -138,7 +138,7 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
     # Log
     log.info("[pulp-docs] Done downloading sources. Here are the sources used:")
     for repo in repos.all:
-        log.info({repo.name: repo.status})
+        log.info({repo.name: str(repo.status)})
 
     return (repo_docs, repo_sources)
 
@@ -234,6 +234,17 @@ def define_env(env):
     log.info("[pulp-docs] Done with pulp-docs.")
     env.conf["pulp_repos"] = repos
     env.conf["pulp_config"] = config
+
+
+def on_pre_page_macros(env):
+    """The mkdocs-macros hook just before an inidvidual page render."""
+    # Configure the edit_url with correct repository and path
+    repo = env.page.file.url.partition("/")[0]
+    edit_url = env.page.edit_url.replace(
+        "https://github.com/pulp/pulpcore/edit/master/",
+        f"https://github.com/pulp/{repo}/edit/master/",
+    ).replace("/docs/", f"/{SRC_DOCS_DIRNAME}/")
+    env.page.edit_url = edit_url
 
 
 def on_post_build(env):
