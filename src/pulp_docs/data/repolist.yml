@@ -13,6 +13,10 @@ repos:
       owner: pulp
       title: Maven
       branch: main
+    - name: pulp_gem
+      owner: pulp
+      title: Gem
+      branch: main
   other:
     - name: pulp-oci-images
       owner: pulp

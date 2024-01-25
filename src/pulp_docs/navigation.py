@@ -34,6 +34,13 @@ from pulp_docs.repository import Repos
 ADMIN_NAME = "admin"
 USER_NAME = "user"
 
+DISPLAY_NAMES = {
+    "guides": "How-to",
+    "learn": "Learn",
+    "tutorials": "Tutorials",
+    "reference": "Reference",
+}
+
 
 def get_navigation(tmpdir: Path, repos: Repos):
     """
@@ -66,11 +73,38 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
             )
         },
     ]
+    # pulpcore_tutorial
     usage_section = [
         {"Overview": f.section_file("usage/index.md")},
+        {
+            "Getting Started": {
+                "Tutorial": f.get_children("pulpcore/docs/user/tutorials"),
+                "Learn": f.get_children("pulpcore/docs/user/learn"),
+                "How-to": f.get_children("pulpcore/docs/user/guides"),
+            }
+        },
+        {
+            "Plugins": f.repo_grouping(
+                "{repo}/docs/user/{content}", repo_types=["content"]
+            )
+        },
+        {"Extras": f.repo_grouping("{repo}/docs/user/{content}", repo_types=["other"])},
     ]
     admin_section = [
         {"Overview": f.section_file("admin/index.md")},
+        {
+            "Getting Started": {
+                "Tutorial": f.get_children("pulpcore/docs/admin/tutorials"),
+                "Learn": f.get_children("pulpcore/docs/admin/learn"),
+                "How-to": f.get_children("pulpcore/docs/admin/guides"),
+            }
+        },
+        {
+            "Plugins": f.repo_grouping(
+                "{repo}/docs/admin/{content}", repo_types=["content"]
+            )
+        },
+        {"Extras": f.repo_grouping("{repo}/docs/admin/{content}", repo_types=["other"])},
     ]
     reference_section = [
         {"Overview": f.section_file("reference/index.md")},
@@ -80,16 +114,26 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
     ]
     development_section = [
         {"Overview": f.section_file("development/index.md")},
-        {"Quickstart": f.section_children("development/quickstart/")},
-        {"Onboarding": f.section_children("development/onboarding/")},
-        {"Guides": f.section_children("/development/guides/")},
+        {
+            "Getting Started": {
+                "Tutorial": f.get_children("pulpcore/docs/dev/tutorials"),
+                "Learn": f.get_children("pulpcore/docs/dev/learn"),
+                "How-to": f.get_children("pulpcore/docs/dev/guides"),
+            }
+        },
+        {
+            "Plugins": f.repo_grouping(
+                "{repo}/docs/dev/{content}", repo_types=["content"]
+            )
+        },
+        {"Extras": f.repo_grouping("{repo}/docs/dev/{content}", repo_types=["other"])},
     ]
 
     # Main Section
     navigation = [
         {"Home": "index.md"},
-        {"Usage": usage_section},
-        {"Administration": admin_section},
+        {"User Manual": usage_section},
+        {"Admin Manual": admin_section},
         {"Development": development_section},
         {"Reference": reference_section},
         {"Help": help_section},
@@ -169,40 +213,92 @@ class AgregationUtils:
         ]
         return sorted(result)
 
-    def repo_grouping(self, template_str: str):
+    def repo_grouping(
+        self,
+        template_str: str,
+        repo_types: list[str] = None,
+        content_types: list[str] = None,
+    ):
         """
         Get all markdown files that matches @template_str basepath and group by repos.
 
-        The @template_str should contain:
-            {repo} - use 'content' and 'other' repo types
-            {content-repo} - use 'content' repos only
-            {other-repo} - use 'other' repos only
+        Arguments:
+            template_str: The template with fields to expand. Accepts combination of '{repo}' and '{content}'
+            repos: The set of repos to use. Accepts list with combination of "core", "content" and "other"
+            content_types: The set of content-types to use. Accepts combination of "guides", "learn" and "tutorial"
 
         Example:
-            >>> expand_repos("{repo}/docs/dev/guides")
+            ```python
+            >>> repo_grouping("{repo}/docs/dev/guides")
             {
                 "repoA": ["docs/dev/guides/file1.md", "docs/dev/guides/file2.md"],
                 "repoB": ["docs/dev/guides/file3.md", "docs/dev/guides/file4.md"],
             }
+            >>> repo_grouping("{repo}/docs/dev/{content}", content=["guide", "learn"])
+            {
+                "repoA": [
+                    {"How-to": ["docs/dev/guides/file1.md", "docs/dev/guides/file2.md"]},
+                    {"Learn": ["docs/dev/learn/file1.md", "docs/dev/learn/file2.md"]},
+                ],
+                "repoB": [...]
+
+            }
+            ```
         """
         _nav = {}
-        selected_repos = None
-        if "{repo}" in template_str:
-            selected_repos = self.repos.other_repos + self.repos.content_repos
-        elif "{content-repo}" in template_str:
-            selected_repos = self.repos.content_repos
-        elif "{other-repo}" in template_str:
-            selected_repos = self.repos.other_repos
-        else:
-            raise ValueError("Malformed template_str. See docstring for usage.")
+        _expand_content_types = "{content}" in template_str
 
-        for repo in selected_repos:
-            lookup_path = self.tmpdir / template_str.format(
-                repo=repo.name, admin=ADMIN_NAME, user=USER_NAME
-            )
-            _repo_content = self.get_children(lookup_path)
-            _nav[repo.title] = _repo_content
+        # Selected  a set of repos
+        selected_repos = []
+        selected_content = content_types or ["tutorials", "guides", "learn"]
+        if not repo_types:  # default case
+            selected_repos = self.repos.all
+        else:
+            for repo_name in repo_types:
+                selected_repos.extend(getattr(self.repos, f"{repo_name}_repos"))
+
+        # Dont expand content-types
+        if not _expand_content_types:
+            for repo in selected_repos:
+                lookup_path = self.tmpdir / template_str.format(
+                    repo=repo.name, admin=ADMIN_NAME, user=USER_NAME
+                )
+                _repo_content = self.get_children(lookup_path)
+                if _repo_content:
+                    _nav[repo.title] = _repo_content
+        # Expand content-types
+        else:
+            for repo in selected_repos:
+                _nav[repo.title] = {}
+                for content_type in selected_content:
+                    lookup_path = self.tmpdir / template_str.format(
+                        repo=repo.name,
+                        admin=ADMIN_NAME,
+                        user=USER_NAME,
+                        content=content_type,
+                    )
+                    _repo_content = self.get_children(lookup_path)
+
+                    # special treatment to quickstart tutorial
+                    quickstart_file = self._pop_quickstart_from(_repo_content)
+                    if content_type.lower() == "tutorials" and quickstart_file:
+                        _nav[repo.title]["Quickstart"] = quickstart_file  # type: ignore
+
+                    # doesnt render content-type section if no files inside
+                    if _repo_content:
+                        content_type_name = DISPLAY_NAMES[content_type]
+                        _nav[repo.title][content_type_name] = _repo_content  # type: ignore
+
         return _nav
+
+    def _pop_quickstart_from(self, pathlist: list[str]) -> t.Optional[str]:
+        """Get quickstart.md file from filelist with case and variations tolerance"""
+        for path in pathlist:
+            filename = path.split("/")[-1]
+            if filename.lower() in ("quickstart.md", "quick-start.md"):
+                pathlist.remove(path)
+                return path
+        return None
 
     def repo_reference_grouping(self):
         """

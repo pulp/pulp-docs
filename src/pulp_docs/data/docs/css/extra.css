@@ -18,3 +18,8 @@
 .md-nav__item .md-nav__link--active {
     font-style: italic;
 }
+
+h2 {
+   font-weight: bold; 
+}
+

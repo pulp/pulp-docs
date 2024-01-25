@@ -8,6 +8,7 @@ theme:
   name: material
   logo: pulp-docs/assets/logo.png
   features:
+    - content.code.annotate
     - navigation.tabs
     - navigation.sections
     - navigation.path
@@ -15,7 +16,6 @@ theme:
     - navigation.top
     - search.suggest
     - search.highlight
-    - content.tabs.link
     - content.code.annotation
     - content.code.copy
     - content.action.edit
@@ -95,6 +95,9 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
