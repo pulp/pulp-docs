@@ -26,6 +26,7 @@ Note that you either specify:
 """
 from __future__ import annotations
 
+import os
 import typing as t
 from pathlib import Path
 
@@ -35,11 +36,14 @@ ADMIN_NAME = "admin"
 USER_NAME = "user"
 
 DISPLAY_NAMES = {
-    "guides": "How-to",
-    "learn": "Learn",
+    "guides": "How-to Guides",
+    "learn": "Learn More",
     "tutorials": "Tutorials",
     "reference": "Reference",
 }
+GUIDES = DISPLAY_NAMES["guides"]
+LEARN = DISPLAY_NAMES["learn"]
+TUTORIALS = DISPLAY_NAMES["tutorials"]
 
 
 def get_navigation(tmpdir: Path, repos: Repos):
@@ -77,11 +81,13 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
     usage_section = [
         {"Overview": f.section_file("usage/index.md")},
         {
-            "Getting Started": {
-                "Tutorial": f.get_children("pulpcore/docs/user/tutorials"),
-                "Learn": f.get_children("pulpcore/docs/user/learn"),
-                "How-to": f.get_children("pulpcore/docs/user/guides"),
-            }
+            "Getting Started": [
+                f.section(
+                    "The Tutorial", f.get_children, "pulpcore/docs/user/tutorials"
+                ),
+                f.section(LEARN, f.get_children, "pulpcore/docs/user/learn"),
+                f.section(GUIDES, f.get_children, "pulpcore/docs/user/guides"),
+            ]
         },
         {
             "Plugins": f.repo_grouping(
@@ -93,30 +99,28 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
     admin_section = [
         {"Overview": f.section_file("admin/index.md")},
         {
-            "Getting Started": {
-                "Tutorial": f.get_children("pulpcore/docs/admin/tutorials"),
-                "Learn": f.get_children("pulpcore/docs/admin/learn"),
-                "How-to": f.get_children("pulpcore/docs/admin/guides"),
-            }
+            "Getting Started": [
+                f.section("Tutorial", f.get_children, "pulpcore/docs/admin/tutorials"),
+                {"Learn": f.get_children("pulpcore/docs/admin/learn")},
+                {"How-to": f.get_children("pulpcore/docs/admin/guides")},
+            ]
         },
         {
             "Plugins": f.repo_grouping(
                 "{repo}/docs/admin/{content}", repo_types=["content"]
             )
         },
-        {"Extras": f.repo_grouping("{repo}/docs/admin/{content}", repo_types=["other"])},
-    ]
-    reference_section = [
-        {"Overview": f.section_file("reference/index.md")},
-        {"Repository Map": f.section_file("reference/01-repository-map.md")},
-        {"Glossary": f.section_file("reference/02-glossary.md")},
-        {"Repositories": f.repo_reference_grouping()},
+        {
+            "Extras": f.repo_grouping(
+                "{repo}/docs/admin/{content}", repo_types=["other"]
+            )
+        },
     ]
     development_section = [
         {"Overview": f.section_file("development/index.md")},
         {
             "Getting Started": {
-                "Tutorial": f.get_children("pulpcore/docs/dev/tutorials"),
+                "Contributing": f.get_children("pulpcore/docs/dev/tutorials"),
                 "Learn": f.get_children("pulpcore/docs/dev/learn"),
                 "How-to": f.get_children("pulpcore/docs/dev/guides"),
             }
@@ -127,6 +131,12 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
             )
         },
         {"Extras": f.repo_grouping("{repo}/docs/dev/{content}", repo_types=["other"])},
+    ]
+    reference_section = [
+        {"Overview": f.section_file("reference/index.md")},
+        {"Repository Map": f.section_file("reference/01-repository-map.md")},
+        {"Glossary": f.section_file("reference/02-glossary.md")},
+        {"Repositories": f.repo_reference_grouping()},
     ]
 
     # Main Section
@@ -141,83 +151,57 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
     return navigation
 
 
-def grouped_by_content_type(tmpdir: Path, repos: Repos):
-    """
-    A specific nav generator function.
-
-    Organizes content (roughly) with the pattern.
-        {content-type}/
-            Overview/
-            {persona}/
-                {repos}
-    """
-    f = AgregationUtils(tmpdir, repos)
-
-    # Aggregation and Grouping
-    getting_started = [
-        {"Overview": f.section_file("getting_started/index.md")},
-        {"Quickstart": f.section_children("getting_started/quickstart")},
-        {"Fundamentals": f.section_children("getting_started/fundamentals")},
-    ]
-    guides = [
-        {"Overview": f.section_file("guides/index.md")},
-        {"For Content-Management": f.repo_grouping("{repo}/docs/{user}/guides")},
-        {"For Sys-Admins": f.repo_grouping("{repo}/docs/{admin}/guides")},
-    ]
-    learn = [
-        {"Overview": f.section_file("learn/index.md")},
-        {"For Content-Management": f.repo_grouping("{repo}/docs/{user}/learn")},
-        {"For Sys-Admins": f.repo_grouping("{repo}/docs/{admin}/learn")},
-    ]
-    reference = [
-        {"Overview": f.section_file("reference/index.md")},
-        {"Repository Map": f.section_file("reference/01-repository-map.md")},
-        {"Glossary": f.section_file("reference/02-glossary.md")},
-        {"Repositories": f.repo_reference_grouping()},
-    ]
-    development = [
-        {"Overview": f.section_file("development/index.md")},
-        {"Quickstart": f.section_children("development/quickstart/")},
-        {"Onboarding": f.section_children("development/onboarding/")},
-        {"Guides": f.section_children("/development/guides/")},
-    ]
-
-    # Main Section
-    navigation = [
-        {"Home": "index.md"},
-        {"Getting Started": getting_started},
-        {"Guides": guides},
-        {"Learn": learn},
-        {"Reference": reference},
-        {"Development": development},
-    ]
-    return navigation
-
-
 class AgregationUtils:
     def __init__(self, tmpdir: Path, repos: Repos):
         self.tmpdir = tmpdir
         self.repos = repos
 
+    def _sort(self, filelist: list) -> list:
+        sorted_filelist = []
+        return sorted_filelist
+
+    def section(self, name: str, fn: t.Callable, *args, **kwargs) -> dict:
+        """
+        Create section with @name by calling the @fn aggregation function.
+
+        A section look like {"Name": [file1, file2, ...]}
+
+        If @fn return is empty, no section is rendered.
+        """
+        section = fn(*args, **kwargs)
+        return {name: section} if section else {"": ""}
+
     def get_children(self, path: t.Union[str, Path]) -> list[str]:
         """
-        Get all markdown files contained in @path non recursively.
+        Get all markdown files contained in @path recursively.
 
-        Excludes files which startswith "_".
+        Uses the dirname.title() as the subsection name if there are subdirs.
         """
-        _path = self.tmpdir / path if isinstance(path, str) else path
-        result = [
-            str(file.relative_to(self.tmpdir))
-            for file in _path.glob("*.md")
-            if not file.name.startswith("_")
-        ]
-        return sorted(result)
+        basepath = self.tmpdir / path if isinstance(path, str) else path
+        if not basepath.exists():
+            return []
+
+        def _get_tree(_path):
+            """Recursive scandir"""
+            with os.scandir(_path) as it:
+                children = []
+                for entry in sorted(it, key=lambda x: x.name):
+                    if entry.is_file() and entry.name.endswith(".md"):
+                        filename = str(Path(entry.path).relative_to(self.tmpdir))
+                        children.append(filename)
+                    elif entry.is_dir():
+                        sub_section = {entry.name.title(): _get_tree(entry)}
+                        children.append(sub_section)
+            return children
+
+        result = _get_tree(basepath)
+        return result
 
     def repo_grouping(
         self,
         template_str: str,
-        repo_types: list[str] = None,
-        content_types: list[str] = None,
+        repo_types: t.Optional[list[str]] = None,
+        content_types: t.Optional[list[str]] = None,
     ):
         """
         Get all markdown files that matches @template_str basepath and group by repos.
