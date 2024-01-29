@@ -83,7 +83,7 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
         {
             "Getting Started": [
                 f.section(
-                    "The Tutorial", f.get_children, "pulpcore/docs/user/tutorials"
+                    "Intro Tutorial", f.get_children, "pulpcore/docs/user/tutorials"
                 ),
                 f.section(LEARN, f.get_children, "pulpcore/docs/user/learn"),
                 f.section(GUIDES, f.get_children, "pulpcore/docs/user/guides"),
@@ -100,30 +100,36 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
         {"Overview": f.section_file("admin/index.md")},
         {
             "Getting Started": [
-                f.section("Tutorial", f.get_children, "pulpcore/docs/admin/tutorials"),
-                {"Learn": f.get_children("pulpcore/docs/admin/learn")},
-                {"How-to": f.get_children("pulpcore/docs/admin/guides")},
+                f.section(
+                    "Intro Tutorial", f.get_children, "pulpcore/docs/admin/tutorials"
+                ),
+                f.section(LEARN, f.get_children, "pulpcore/docs/admin/learn"),
+                f.section(GUIDES, f.get_children, "pulpcore/docs/admin/guides"),
             ]
         },
-        {
-            "Plugins": f.repo_grouping(
-                "{repo}/docs/admin/{content}", repo_types=["content"]
-            )
-        },
-        {
-            "Extras": f.repo_grouping(
-                "{repo}/docs/admin/{content}", repo_types=["other"]
-            )
-        },
+        f.section(
+            "Plugins",
+            f.repo_grouping,
+            "{repo}/docs/admin/{content}",
+            repo_types=["content"],
+            hide_empty_section=False,
+        ),
+        f.section(
+            "Extras",
+            f.repo_grouping,
+            "{repo}/docs/admin/{content}",
+            repo_types=["other"],
+            hide_empty_section=False,
+        ),
     ]
     development_section = [
         {"Overview": f.section_file("development/index.md")},
         {
-            "Getting Started": {
-                "Contributing": f.get_children("pulpcore/docs/dev/tutorials"),
-                "Learn": f.get_children("pulpcore/docs/dev/learn"),
-                "How-to": f.get_children("pulpcore/docs/dev/guides"),
-            }
+            "Getting Started": [
+                f.section("Quickstarts", f.get_children, "pulpcore/docs/dev/tutorials"),
+                f.section(LEARN, f.get_children, "pulpcore/docs/dev/learn"),
+                f.section(GUIDES, f.get_children, "pulpcore/docs/dev/guides"),
+            ]
         },
         {
             "Plugins": f.repo_grouping(
@@ -156,19 +162,19 @@ class AgregationUtils:
         self.tmpdir = tmpdir
         self.repos = repos
 
-    def _sort(self, filelist: list) -> list:
-        sorted_filelist = []
-        return sorted_filelist
-
     def section(self, name: str, fn: t.Callable, *args, **kwargs) -> dict:
         """
         Create section with @name by calling the @fn aggregation function.
 
         A section look like {"Name": [file1, file2, ...]}
 
-        If @fn return is empty, no section is rendered.
+        Params:
+            hide_empty_section: Hide section if @fn return is empty. Default=True
         """
+        hide_empty_section = kwargs.pop("hide_empty_section", False)
         section = fn(*args, **kwargs)
+        if hide_empty_section is False:
+            return {name: section}
         return {name: section} if section else {"": ""}
 
     def get_children(self, path: t.Union[str, Path]) -> list[str]:
@@ -253,7 +259,7 @@ class AgregationUtils:
         # Expand content-types
         else:
             for repo in selected_repos:
-                _nav[repo.title] = {}
+                repo_nav = {}
                 for content_type in selected_content:
                     lookup_path = self.tmpdir / template_str.format(
                         repo=repo.name,
@@ -266,13 +272,14 @@ class AgregationUtils:
                     # special treatment to quickstart tutorial
                     quickstart_file = self._pop_quickstart_from(_repo_content)
                     if content_type.lower() == "tutorials" and quickstart_file:
-                        _nav[repo.title]["Quickstart"] = quickstart_file  # type: ignore
+                        repo_nav["Quickstart"] = quickstart_file  # type: ignore
 
                     # doesnt render content-type section if no files inside
                     if _repo_content:
                         content_type_name = DISPLAY_NAMES[content_type]
-                        _nav[repo.title][content_type_name] = _repo_content  # type: ignore
-
+                        repo_nav[content_type_name] = _repo_content  # type: ignore
+                if repo_nav:
+                    _nav[repo.title] = repo_nav
         return _nav
 
     def _pop_quickstart_from(self, pathlist: list[str]) -> t.Optional[str]:
