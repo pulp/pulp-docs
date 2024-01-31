@@ -19,7 +19,17 @@
     font-style: italic;
 }
 
-h2 {
-   font-weight: bold; 
+.md-typeset .grid {
+    max-width: 800px; /* <-- adjust to fit */
+    margin-inline: auto;
 }
 
+.hero-header {
+    max-width: 800px; /* <-- adjust to fit */
+    text-align: center;
+    margin-inline: auto;
+}
+
+.landing-page-h1 {
+    display: None;
+}
