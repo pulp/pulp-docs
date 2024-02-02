@@ -238,12 +238,21 @@ def define_env(env):
 
 def on_pre_page_macros(env):
     """The mkdocs-macros hook just before an inidvidual page render."""
+    repos: Repos = env.conf["pulp_repos"]  # type: ignore
+
     # Configure the edit_url with correct repository and path
-    repo = env.page.file.url.partition("/")[0]
-    edit_url = env.page.edit_url.replace(
-        "https://github.com/pulp/pulpcore/edit/master/",
-        f"https://github.com/pulp/{repo}/edit/master/",
-    ).replace("/docs/", f"/{SRC_DOCS_DIRNAME}/")
+    src_uri = env.page.file.src_uri.replace("/docs/", f"/{SRC_DOCS_DIRNAME}/")
+    if src_uri != "index.md":
+        repo, _, path = src_uri.partition("/")
+    else:
+        repo = "pulpcore"
+        path = f"{SRC_DOCS_DIRNAME}/index.md"
+
+    repo_obj = repos.get(repo)
+    repo_branch = "main"
+    if repo_obj:
+        repo_branch = repo_obj.status.original_refs
+    edit_url = f"https://github.com/pulp/{repo}/edit/{repo_branch}/{path}"
     env.page.edit_url = edit_url
 
 

@@ -209,6 +209,10 @@ class Repos:
                 repo.status.original_refs = repo.branch
                 repo.branch = checkout_refs
 
+    def get(self, repo_name: str) -> t.Optional[Repo]:
+        repo = [r for r in self.all if r.name == repo_name] or [None]
+        return repo[0]
+
     @property
     def all(self):
         return [self.core_repo] + self.content_repos + self.other_repos
