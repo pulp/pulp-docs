@@ -6,7 +6,7 @@ repo_name: pulp/pulpcore
 docs_dir: docs
 theme:
   name: material
-  logo: pulp-docs/assets/logo.png
+  logo: pulp-docs/docs/assets/logo.png
   features:
     - content.code.annotate
     - navigation.tabs
@@ -41,7 +41,7 @@ plugins:
   - macros:
       module_name: '../mkdocs_macros'
   - tags:
-      tags_file: pulp-docs/tags.md
+      tags_file: pulp-docs/docs/tags.md
   - mkdocstrings:
       handlers: 
         python:
@@ -66,8 +66,8 @@ extra:
       link: https://discourse.pulpproject.org/
 
 extra_css:
-  - pulp-docs/css/extra.css
-  - pulp-docs/css/mkdocstrings.css
+  - pulp-docs/docs/css/extra.css
+  - pulp-docs/docs/css/mkdocstrings.css
 
 markdown_extensions:
   # Python Markdown

@@ -18,11 +18,10 @@ import json
 import logging
 import shutil
 import tempfile
-import typing as t
+import time
 from pathlib import Path
 
 import rich
-from importlib_resources import as_file, files
 
 from pulp_docs.cli import Config
 from pulp_docs.navigation import get_navigation
@@ -91,6 +90,9 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
     shutil.rmtree(repo_docs, ignore_errors=True)
 
     for repo in repos.all:
+        start = time.perf_counter()
+        # if repo.name == "pulp-docs":
+        # breakpoint()
         # 1. Download repo (copy locally or fetch from GH)
         this_src_dir = repo_sources / repo.name
         repo.download(dest_dir=this_src_dir, clear_cache=config.clear_cache)
@@ -125,11 +127,11 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
             md_body = f"[{repo.rest_api_link}]({repo.rest_api_link})"
             rest_api_page.write_text(f"{md_title}\n\n{md_body}")
 
+        end = time.perf_counter()
+        duration = end - start
+        log.info(f"{repo.name} completed in {duration:.2} sec")
+
     # Copy template-files (from this plugin) to tmpdir
-    log.info("[pulp-docs] Moving pulp-docs /docs to final destination")
-    data_file_docs = files("pulp_docs").joinpath("data/docs")
-    with as_file(data_file_docs) as _docs:
-        shutil.copytree(_docs, repo_docs / "pulp-docs")
     shutil.copy(
         repo_sources / repos.core_repo.name / SRC_DOCS_DIRNAME / "index.md",
         repo_docs / "index.md",
@@ -158,7 +160,7 @@ def print_user_repo(repos: Repos, config: Config):
         record = {
             "name": repo.name,
             "download_source": repo.status.download_source,
-            "refs": repo.branch,
+            "refs": repo.branch_in_use,
         }
         if repo.status.use_local_checkout is True:
             local_checkouts.append(record)
@@ -168,9 +170,9 @@ def print_user_repo(repos: Repos, config: Config):
             downloaded_repos.append(record)
 
         # TODO: improve this refspec comparision heuristics
-        if repo.status.original_refs and (repo.status.original_refs not in repo.branch):
+        if repo.branch not in repo.branch_in_use:
             warn_msgs.append(
-                f"[pulp-docs] Original {repo.name!r} ref is {repo.status.original_refs!r}, but local one is '{repo.branch}'."
+                f"[pulp-docs] Original {repo.name!r} ref is {repo.branch!r}, but local one is '{repo.branch_in_use}'."
             )
 
     if len(local_checkouts) == 0:
@@ -249,9 +251,7 @@ def on_pre_page_macros(env):
         path = f"{SRC_DOCS_DIRNAME}/index.md"
 
     repo_obj = repos.get(repo)
-    repo_branch = "main"
-    if repo_obj:
-        repo_branch = repo_obj.status.original_refs
+    repo_branch = getattr(repo_obj, "branch", "main")
     edit_url = f"https://github.com/pulp/{repo}/edit/{repo_branch}/{path}"
     env.page.edit_url = edit_url
 

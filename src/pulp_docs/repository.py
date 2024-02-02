@@ -19,6 +19,8 @@ from pathlib import Path
 import httpx
 import yaml
 
+from pulp_docs.utils.general import get_git_ignored_files
+
 log = logging.getLogger("mkdocs")
 
 FIXTURE_WORKDIR = Path("tests/fixtures").absolute()
@@ -57,9 +59,13 @@ class Repo:
     name: str
     owner: str = "pulp"
     branch: str = "main"
+    branch_in_use: t.Optional[str] = None
     local_basepath: t.Optional[Path] = None
     status: RepoStatus = field(default_factory=lambda: RepoStatus())
     type: t.Optional[str] = None
+
+    def __post_init__(self):
+        self.branch_in_use = self.branch_in_use or self.branch
 
     @property
     def rest_api_link(self):
@@ -109,21 +115,17 @@ class Repo:
         elif not cached_repo.exists():
             log_header = "Downloading from remote"
             download_from = download_from_gh_main(
-                DOWNLOAD_CACHE_DIR / self.name, self.owner, self.name, self.branch
+                DOWNLOAD_CACHE_DIR / self.name,
+                self.owner,
+                self.name,
+                self.branch_in_use,
             )
             src_copy_path = DOWNLOAD_CACHE_DIR / self.name
 
         # copy from source/cache to pulp-docs workdir
         log.info(f"{log_header}: source={download_from}, copied_from={src_copy_path}")
 
-        gitignore_files = []
-        repo_gitignore = Path(src_copy_path / ".gitignore")
-        if repo_gitignore.exists():
-            gitignore_files = [
-                f
-                for f in repo_gitignore.read_text().splitlines()
-                if f and not f.startswith("#")
-            ]
+        gitignore_files = get_git_ignored_files(Path(src_copy_path))
         shutil.copytree(
             src_copy_path,
             dest_dir,
@@ -206,8 +208,7 @@ class Repos:
                 # looks like 'refs/head/main'
                 checkout_refs = Path(checkout_dir / ".git" / "HEAD").read_text()
                 checkout_refs = checkout_refs[len("ref: ") :].replace("\n", "")
-                repo.status.original_refs = repo.branch
-                repo.branch = checkout_refs
+                repo.branch_in_use = checkout_refs
 
     def get(self, repo_name: str) -> t.Optional[Repo]:
         repo = [r for r in self.all if r.name == repo_name] or [None]
@@ -270,5 +271,8 @@ class Repos:
                 type="content",
             ),
             Repo("Maven", "new_repo3", local_basepath=FIXTURE_WORKDIR, type="content"),
+            Repo(
+                "Docs Tool", "pulp-docs", local_basepath=FIXTURE_WORKDIR, type="other"
+            ),
         ]
         return Repos(core_repo=DEFAULT_CORE, content_repos=DEFAULT_CONTENT_REPOS)

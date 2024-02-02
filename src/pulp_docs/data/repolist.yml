@@ -22,3 +22,7 @@ repos:
       owner: pulp
       title: Pulp OCI Images
       branch: latest
+    - name: pulp-docs
+      owner: pedro-psb
+      title: Docs Tool
+      branch: main
