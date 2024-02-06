@@ -17,6 +17,10 @@ repos:
       owner: pulp
       title: Gem
       branch: main
+    - name: pulp_python
+      owner: pulp
+      title: Python
+      branch: main
   other:
     - name: pulp-oci-images
       owner: pulp
