@@ -1,6 +1,5 @@
 meta:
   rest_api_template: https://docs.pulpproject.org/{}/restapi.html  
-  workdir: 
 
 repos:
   core:
@@ -21,6 +20,34 @@ repos:
       owner: pulp
       title: Python
       branch: main
+    - name: pulp_ansible
+      owner: pulp
+      title: Ansible
+      branch: main
+    - name: pulp-certguard
+      owner: pulp
+      title: Certguard
+      branch: main
+    - name: pulp_container
+      owner: pulp
+      title: Container
+      branch: main
+    - name: pulp_deb
+      owner: pulp
+      title: Debian
+      branch: main
+    - name: pulp_ostree
+      owner: pulp
+      title: OSTree
+      branch: main
+    - name: pulp_rpm
+      owner: pulp
+      title: RPM
+      branch: main
+    # - name: pulp_file
+    #   nested_under: pulp/pulpcore/pulp_file
+    #   title: File
+    #   branch: main
   other:
     - name: pulp-oci-images
       owner: pulp
@@ -29,4 +56,24 @@ repos:
     - name: pulp-docs
       owner: pedro-psb
       title: Docs Tool
+      branch: main
+    - name: pulp-operator
+      owner: pulp
+      title: Operator
+      branch: main
+    - name: pulp-cli
+      owner: pulp
+      title: Pulp CLI
+      branch: main
+    # - name: pulp_glue
+    #   nested_under: pulp/pulp-cli/pulp_glue
+    #   title: Pulp Glue
+    #   branch: main
+    - name: pulp-openapi-generator
+      owner: pulp
+      title: OpenAPI Generator
+      branch: main
+    - name: pulpcore-selinux
+      owner: pulp
+      title: Selinux
       branch: main
