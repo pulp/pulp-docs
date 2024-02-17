@@ -24,8 +24,9 @@ from pathlib import Path
 import rich
 
 from pulp_docs.cli import Config
+from pulp_docs.constants import RESTAPI_URL_TEMPLATE
 from pulp_docs.navigation import get_navigation
-from pulp_docs.repository import Repos
+from pulp_docs.repository import Repo, Repos, SubPackage
 
 # the name of the docs in the source repositories
 SRC_DOCS_DIRNAME = "staging_docs"
@@ -91,47 +92,23 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
 
     for repo in repos.all:
         start = time.perf_counter()
-        # if repo.name == "pulp-docs":
-        # breakpoint()
-        # 1. Download repo (copy locally or fetch from GH)
-        this_src_dir = repo_sources / repo.name
-        repo.download(dest_dir=this_src_dir, clear_cache=config.clear_cache)
-
-        # 2. Isolate docs dir from codebase (makes mkdocs happy)
+        # handle subpcakges nested under repositories
         this_docs_dir = repo_docs / repo.name
-        log.info(
-            "Moving doc files:\nfrom '{}'\nto '{}'".format(this_src_dir, this_docs_dir)
-        )
+        if not isinstance(repo, SubPackage):
+            this_src_dir = repo_sources / repo.name
+            repo.download(dest_dir=this_src_dir, clear_cache=config.clear_cache)
+        else:
+            this_src_dir = repo_sources / repo.subpackage_of / repo.name
 
-        try:
-            shutil.copytree(this_src_dir / SRC_DOCS_DIRNAME, this_docs_dir / "docs")
-        except FileNotFoundError:
-            Path(this_docs_dir / "docs").mkdir(parents=True)
-            repo.status.has_staging_docs = False
-        try:
-            shutil.copy(this_src_dir / "CHANGELOG.md", this_docs_dir / "CHANGELOG.md")
-        except FileNotFoundError:
-            repo.status.has_changelog = False
-
-        try:
-            shutil.copy(this_src_dir / "README.md", this_docs_dir / "README.md")
-        except FileNotFoundError:
-            repo.status.has_readme = False
-
-        # 3. Generate REST Api pages (workaround)
+        # install and post-process
+        _install_doc_files(this_src_dir, this_docs_dir, repo)
         if repo.type == "content":
-            log.info("Generating REST_API page")
-            rest_api_page = this_docs_dir / "docs" / "rest_api.md"
-            rest_api_page.touch()
-            md_title = f"# {repo.title} REST Api"
-            md_body = f"[{repo.rest_api_link}]({repo.rest_api_link})"
-            rest_api_page.write_text(f"{md_title}\n\n{md_body}")
+            _generate_rest_api_page(this_docs_dir, repo.name, repo.title)
 
         end = time.perf_counter()
-        duration = end - start
-        log.info(f"{repo.name} completed in {duration:.2} sec")
+        log.info(f"{repo.name} completed in {end - start:.2} sec")
 
-    # Copy template-files (from this plugin) to tmpdir
+    # Copy core-files (shipped with pulp-docs) to tmpdir
     shutil.copy(
         repo_sources / repos.core_repo.name / SRC_DOCS_DIRNAME / "index.md",
         repo_docs / "index.md",
@@ -143,6 +120,37 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
         log.info({repo.name: str(repo.status)})
 
     return (repo_docs, repo_sources)
+
+
+def _install_doc_files(src_dir: Path, docs_dir: Path, repo: Repo):
+    """Copy only doc-related files from src_dir to doc_dir"""
+    log.info(f"Moving doc files:\nfrom '{src_dir}'\nto '{docs_dir}'")
+
+    try:
+        shutil.copytree(src_dir / SRC_DOCS_DIRNAME, docs_dir / "docs")
+    except FileNotFoundError:
+        Path(docs_dir / "docs").mkdir(parents=True)
+        repo.status.has_staging_docs = False
+    try:
+        shutil.copy(src_dir / "CHANGELOG.md", docs_dir / "CHANGELOG.md")
+    except FileNotFoundError:
+        repo.status.has_changelog = False
+
+    try:
+        shutil.copy(src_dir / "README.md", docs_dir / "README.md")
+    except FileNotFoundError:
+        repo.status.has_readme = False
+
+
+def _generate_rest_api_page(docs_dir: Path, repo_name: str, repo_title: str):
+    """Create page that contain a link to the rest api, based on the project url template"""
+    log.info("Generating REST_API page")
+    rest_api_page = docs_dir / "docs" / "rest_api.md"
+    rest_api_page.touch()
+    restapi_url = RESTAPI_URL_TEMPLATE.format(repo_name)
+    md_title = f"# {repo_title} REST Api"
+    md_body = f"[{restapi_url}]({restapi_url})"
+    rest_api_page.write_text(f"{md_title}\n\n{md_body}")
 
 
 def print_user_repo(repos: Repos, config: Config):
