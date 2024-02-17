@@ -1,5 +1,6 @@
 ADMIN_NAME = "admin"
 USER_NAME = "user"
+RESTAPI_URL_TEMPLATE = "https://docs.pulpproject.org/{}/restapi.html"
 
 DISPLAY_NAMES = {
     "guides": "How-to Guides",

@@ -1,4 +1,5 @@
 meta:
+  version: 1
   rest_api_template: https://docs.pulpproject.org/{}/restapi.html  
 
 repos:
@@ -24,10 +25,6 @@ repos:
       owner: pulp
       title: Ansible
       branch: main
-    - name: pulp-certguard
-      owner: pulp
-      title: Certguard
-      branch: main
     - name: pulp_container
       owner: pulp
       title: Container
@@ -44,10 +41,13 @@ repos:
       owner: pulp
       title: RPM
       branch: main
-    # - name: pulp_file
-    #   nested_under: pulp/pulpcore/pulp_file
-    #   title: File
-    #   branch: main
+    # subpackages
+    - name: pulp_certguard
+      title: Certguard
+      subpackage_of: pulpcore
+    - name: pulp_file
+      title: File
+      subpackage_of: pulpcore
   other:
     - name: pulp-oci-images
       owner: pulp

@@ -12,6 +12,7 @@ import subprocess
 import tarfile
 import tempfile
 import typing as t
+from collections import ChainMap, defaultdict
 from dataclasses import dataclass, field
 from io import BytesIO
 from pathlib import Path
@@ -25,7 +26,6 @@ log = logging.getLogger("mkdocs")
 
 FIXTURE_WORKDIR = Path("tests/fixtures").absolute()
 DOWNLOAD_CACHE_DIR = Path(tempfile.gettempdir()) / "repo_downloads"
-RESTAPI_TEMPLATE = "https://docs.pulpproject.org/{}/restapi.html"
 
 
 # @dataclass # raising errors in py311/312
@@ -61,6 +61,7 @@ class Repo:
     branch: str = "main"
     branch_in_use: t.Optional[str] = None
     local_basepath: t.Optional[Path] = None
+    subpackages: t.Optional[t.List] = None
     status: RepoStatus = field(default_factory=lambda: RepoStatus())
     type: t.Optional[str] = None
 
@@ -191,6 +192,20 @@ def download_from_gh_latest(dest_dir: Path, owner: str, name: str):
 
 
 @dataclass
+class SubPackage:
+    """A package that lives under another Repo."""
+
+    name: str
+    title: str
+    subpackage_of: str
+    type: t.Optional[str] = None
+    status: RepoStatus = field(default_factory=lambda: RepoStatus())
+    local_basepath = None
+    branch_in_use = ""
+    branch = ""
+
+
+@dataclass
 class Repos:
     """A collection of Repos"""
 
@@ -216,7 +231,25 @@ class Repos:
 
     @property
     def all(self):
-        return [self.core_repo] + self.content_repos + self.other_repos
+        """The set of repositories and subpackages"""
+        repos = [self.core_repo] + self.content_repos + self.other_repos
+        subpackages = []
+        for repo in repos:
+            if repo.subpackages:
+                subpackages.extend(repo.subpackages)
+        return repos + subpackages
+
+    def get_repos(self, type="all"):
+        """Get a set of repositories and subpackages by type."""
+        if type == "all":
+            return self.all
+
+        repos_and_pkgs = []
+        for repo in self.all:
+            if getattr(repo, "subpackages", None):
+                repos_and_pkgs.extend(repo.subpackages)
+
+        return [repo for repo in repos_and_pkgs if repo.type == type]
 
     @classmethod
     def from_yaml(cls, path: str):
@@ -242,14 +275,34 @@ class Repos:
             raise ValueError("File does not exist:", file)
         log.info(f"repofile={str(file.absolute())}")
 
+        # Create Repo objects from yaml data
+        repos: t.Dict[str, t.List] = {}
+        nested_packages: t.Dict[str, t.List[SubPackage]] = {}
         with open(file, "r") as f:
             data = yaml.load(f, Loader=yaml.SafeLoader)
-        repos = data["repos"]
-        core_repo = Repo(**repos["core"][0], type="core")
-        content_repos = [Repo(**repo, type="content") for repo in repos["content"]]
-        other_repos = [Repo(**repo, type="other") for repo in repos["other"]]
+            for repo_type in ("core", "content", "other"):
+                repos[repo_type] = []
+                for repo in data["repos"][repo_type]:
+                    # Collect nested packages
+                    if parent_package := repo.get("subpackage_of", None):
+                        nested_packages.setdefault(parent_package, []).append(
+                            SubPackage(**repo, type=repo_type)
+                        )
+                        continue
+                    # Create regular packages
+                    repos[repo_type].append(Repo(**repo, type=repo_type))
+
+        # Update Repo objects that contain subpackages
+        for parent_repo_name, subpackages_list in nested_packages.items():
+            flat_repos = repos["core"] + repos["content"] + repos["other"]
+            for repo in flat_repos:
+                if repo.name == parent_repo_name:
+                    repo.subpackages = subpackages_list
+
         return Repos(
-            core_repo=core_repo, content_repos=content_repos, other_repos=other_repos
+            core_repo=repos["core"][0],
+            content_repos=repos["content"],
+            other_repos=repos["other"],
         )
 
     @classmethod
