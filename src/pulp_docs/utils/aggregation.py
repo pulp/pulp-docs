@@ -119,9 +119,10 @@ class AgregationUtils:
                     _repo_content = self.get_children(lookup_path)
 
                     # special treatment to quickstart tutorial
-                    quickstart_file = self._pop_quickstart_from(_repo_content)
-                    if content_type.lower() == "tutorials" and quickstart_file:
-                        repo_nav["Quickstart"] = quickstart_file  # type: ignore
+                    if content_type.lower() == "tutorials":
+                        quickstart_file = self._pop_quickstart_from(_repo_content)
+                        if quickstart_file:
+                            repo_nav["Quickstart"] = quickstart_file  # type: ignore
 
                     # doesnt render content-type section if no files inside
                     if _repo_content:
@@ -134,6 +135,9 @@ class AgregationUtils:
     def _pop_quickstart_from(self, pathlist: t.List[str]) -> t.Optional[str]:
         """Get quickstart.md file from filelist with case and variations tolerance"""
         for path in pathlist:
+            if not isinstance(path, str):
+                continue
+
             filename = path.split("/")[-1]
             if filename.lower() in ("quickstart.md", "quick-start.md"):
                 pathlist.remove(path)
