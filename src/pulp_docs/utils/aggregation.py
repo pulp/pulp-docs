@@ -93,8 +93,7 @@ class AgregationUtils:
         if not repo_types:  # default case
             selected_repos = self.repos.all
         else:
-            for repo_name in repo_types:
-                selected_repos.extend(self.repos.get_repos(type=type))
+            selected_repos.extend(self.repos.get_repos(repo_types=repo_types))
 
         # Dont expand content-types
         if not _expand_content_types:
