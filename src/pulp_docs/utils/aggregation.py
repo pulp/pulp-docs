@@ -1,6 +1,7 @@
 import os
 import typing as t
 from pathlib import Path
+import re
 
 from pulp_docs.constants import Names
 from pulp_docs.repository import Repos

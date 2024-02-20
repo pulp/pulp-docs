@@ -134,9 +134,11 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
     ]
     reference_section = [
         {"Overview": f.section_file("reference/index.md")},
-        {"Repository Map": f.section_file("reference/01-repository-map.md")},
+        {"Rest API": "pulp-docs/docs/rest_api.md"},
         {"Glossary": f.section_file("reference/02-glossary.md")},
-        {"Repositories": f.repo_reference_grouping()},
+        {"Pulpcore": f.section(Names.CORE, f.get_children, "pulpcore/docs/reference")},
+        {"Plugins": f.repo_grouping("{repo}/docs/reference", repo_types=["content"])},
+        {"Extra": f.repo_grouping("{repo}/docs/reference", repo_types=["other"])},
     ]
 
     # Main Section
