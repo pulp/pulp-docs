@@ -239,17 +239,15 @@ class Repos:
                 subpackages.extend(repo.subpackages)
         return repos + subpackages
 
-    def get_repos(self, type="all"):
+    def get_repos(self, repo_types: t.Optional[t.List] = None):
         """Get a set of repositories and subpackages by type."""
-        if type == "all":
+        # Default case
+        if repo_types is None:
             return self.all
 
-        repos_and_pkgs = []
-        for repo in self.all:
-            if getattr(repo, "subpackages", None):
-                repos_and_pkgs.extend(repo.subpackages)
-
-        return [repo for repo in repos_and_pkgs if repo.type == type]
+        # Filter by repo_types
+        repos_and_pkgs = self.all
+        return [repo for repo in repos_and_pkgs if repo.type in repo_types]
 
     @classmethod
     def from_yaml(cls, path: str):

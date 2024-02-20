@@ -90,23 +90,23 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
     shutil.rmtree(repo_sources, ignore_errors=True)
     shutil.rmtree(repo_docs, ignore_errors=True)
 
-    for repo in repos.all:
+    for repo_or_pkg in repos.all:
         start = time.perf_counter()
         # handle subpcakges nested under repositories
-        this_docs_dir = repo_docs / repo.name
-        if not isinstance(repo, SubPackage):
-            this_src_dir = repo_sources / repo.name
-            repo.download(dest_dir=this_src_dir, clear_cache=config.clear_cache)
+        this_docs_dir = repo_docs / repo_or_pkg.name
+        if not isinstance(repo_or_pkg, SubPackage):
+            this_src_dir = repo_sources / repo_or_pkg.name
+            repo_or_pkg.download(dest_dir=this_src_dir, clear_cache=config.clear_cache)
         else:
-            this_src_dir = repo_sources / repo.subpackage_of / repo.name
+            this_src_dir = repo_sources / repo_or_pkg.subpackage_of / repo_or_pkg.name
 
         # install and post-process
-        _install_doc_files(this_src_dir, this_docs_dir, repo)
-        if repo.type == "content":
-            _generate_rest_api_page(this_docs_dir, repo.name, repo.title)
+        _install_doc_files(this_src_dir, this_docs_dir, repo_or_pkg)
+        if repo_or_pkg.type == "content":
+            _generate_rest_api_page(this_docs_dir, repo_or_pkg.name, repo_or_pkg.title)
 
         end = time.perf_counter()
-        log.info(f"{repo.name} completed in {end - start:.2} sec")
+        log.info(f"{repo_or_pkg.name} completed in {end - start:.2} sec")
 
     # Copy core-files (shipped with pulp-docs) to tmpdir
     shutil.copy(
@@ -116,8 +116,8 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
 
     # Log
     log.info("[pulp-docs] Done downloading sources. Here are the sources used:")
-    for repo in repos.all:
-        log.info({repo.name: str(repo.status)})
+    for repo_or_pkg in repos.all:
+        log.info({repo_or_pkg.name: str(repo_or_pkg.status)})
 
     return (repo_docs, repo_sources)
 
