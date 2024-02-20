@@ -65,6 +65,9 @@ extra:
       link: https://github.com/pulp
     - icon: fontawesome/brands/discourse
       link: https://discourse.pulpproject.org/
+  analytics:
+    provider: google
+    property: G-8M0N5XEY4W
 
 extra_css:
   - pulp-docs/docs/css/extra.css
