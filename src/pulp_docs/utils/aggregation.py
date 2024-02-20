@@ -45,12 +45,16 @@ class AgregationUtils:
                         filename = str(Path(entry.path).relative_to(self.tmpdir))
                         children.append(filename)
                     elif entry.is_dir():
-                        sub_section = {entry.name.title(): _get_tree(entry)}
+                        dir_title = self.normalize_title(entry.name)
+                        sub_section = {dir_title: _get_tree(entry)}
                         children.append(sub_section)
             return children
 
         result = _get_tree(basepath)
         return result
+
+    def normalize_title(self, raw_title: str):
+        return raw_title.replace("_", " ").title()
 
     def repo_grouping(
         self,
