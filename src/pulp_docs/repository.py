@@ -203,6 +203,10 @@ class SubPackage:
     local_basepath = None
     branch_in_use = ""
     branch = ""
+    owner = ""
+
+    def __post_init__(self):
+        self.owner = self.subpackage_of
 
 
 @dataclass

@@ -56,16 +56,8 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
                     {content-type}
     """
     f = AgregationUtils(tmpdir, repos)
-    help_section = [
-        {"Overview": f.section_file("help/index.md")},
-        {
-            "Bugs, Feature and Backport Requests": f.section_file(
-                "help/bugs-features.md"
-            )
-        },
-    ]
     usage_section = [
-        {"Overview": f.section_file("usage/index.md")},
+        {"Overview": f.section_file("user/index.md")},
         {
             "Pulpcore": [
                 f.section(
@@ -113,7 +105,7 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
         ),
     ]
     development_section = [
-        {"Overview": f.section_file("development/index.md")},
+        {"Overview": f.section_file("dev/index.md")},
         {
             "Pulpcore": [
                 f.section(
@@ -132,13 +124,10 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
         },
         {"Extras": f.repo_grouping("{repo}/docs/dev/{content}", repo_types=["other"])},
     ]
-    reference_section = [
-        {"Overview": f.section_file("reference/index.md")},
-        {"Rest API": "pulp-docs/docs/rest_api.md"},
-        {"Glossary": f.section_file("reference/02-glossary.md")},
-        {"Pulpcore": f.section(Names.CORE, f.get_children, "pulpcore/docs/reference")},
-        {"Plugins": f.repo_grouping("{repo}/docs/reference", repo_types=["content"])},
-        {"Extra": f.repo_grouping("{repo}/docs/reference", repo_types=["other"])},
+    help_section = [
+        {"Overview": f.section_file("help/index.md")},
+        {"How to use this documentation": f.section_file("help/bugs-features.md")},
+        {"Changelog": f.repo_grouping("{repo}/CHANGES.md")},
     ]
 
     # Main Section
@@ -146,8 +135,7 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
         {"Home": "index.md"},
         {"User Manual": usage_section},
         {"Admin Manual": admin_section},
-        {"Development": development_section},
-        {"Reference": reference_section},
+        {"Developer Manual": development_section},
         {"Help": help_section},
     ]
     return navigation

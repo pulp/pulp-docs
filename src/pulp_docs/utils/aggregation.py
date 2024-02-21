@@ -178,7 +178,7 @@ class AgregationUtils:
 
     def section_file(self, section_and_filename: str):
         """Get a markdown file from the website section folder."""
-        basepath = "pulpcore/docs/sections"
+        basepath = "pulp-docs/docs/sections"
         return f"{basepath}/{section_and_filename}"
 
     def section_children(self, section_name: str):

@@ -253,7 +253,21 @@ def define_env(env):
     @env.macro
     def get_repos(repo_type="content"):
         "Return repo names by type"
-        return sorted(repos.get_repos(repo_types=[repo_type]), key=lambda x: x.title)
+        _repo_type = [repo_type] if repo_type else None
+        repos_list = sorted(
+            repos.get_repos(repo_types=_repo_type), key=lambda x: x.title
+        )
+        repos_data = [
+            {
+                "title": repo.title,
+                "version": "3.12.1",
+                "rest_api": f"https://docs.pulpproject.org/{repo.name}/restapi.html",
+                "codebase_url": f"https://github.com/{repo.owner}/{repo.name}",
+                "changelog_url": f"site:pulp-docs/docs/sections/help/changelogs/{repo.name}.md",
+            }
+            for repo in repos_list
+        ]
+        return repos_data
 
 
 def on_pre_page_macros(env):
