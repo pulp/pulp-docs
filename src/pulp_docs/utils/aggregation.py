@@ -1,7 +1,7 @@
 import os
+import re
 import typing as t
 from pathlib import Path
-import re
 
 from pulp_docs.constants import Names
 from pulp_docs.repository import Repos
@@ -94,7 +94,12 @@ class AgregationUtils:
 
         # Selected  a set of repos
         selected_repos = []
-        selected_content = content_types or ["tutorials", "guides", "learn", "reference"]
+        selected_content = content_types or [
+            "tutorials",
+            "guides",
+            "learn",
+            "reference",
+        ]
         if not repo_types:  # default case
             selected_repos = self.repos.all
         else:
@@ -103,38 +108,60 @@ class AgregationUtils:
         # Dont expand content-types
         if not _expand_content_types:
             for repo in selected_repos:
-                lookup_path = self.tmpdir / template_str.format(
-                    repo=repo.name, admin=Names.ADMIN, user=Names.USER
-                )
+                lookup_path = self._parse_template_str(template_str, repo.name)
                 _repo_content = self.get_children(lookup_path)
                 if _repo_content:
-                    _nav[repo.title] = _repo_content if len(_repo_content) > 1 else _repo_content[0]
+                    _nav[repo.title] = (
+                        _repo_content if len(_repo_content) > 1 else _repo_content[0]
+                    )
         # Expand content-types
         else:
             for repo in selected_repos:
                 repo_nav = {}
+                # Include index.md if present in staging_docs/{persona}/index.md
+                persona_basepath = self._parse_template_str(
+                    template_str, repo.name, "placeholder"
+                ).parent
+                index_path = persona_basepath / "index.md"
+                if index_path.exists():
+                    repo_nav["Overview"] = str(index_path.relative_to(self.tmpdir))
+
                 for content_type in selected_content:
-                    lookup_path = self.tmpdir / template_str.format(
-                        repo=repo.name,
-                        admin=Names.ADMIN,
-                        user=Names.USER,
-                        content=content_type,
+                    # Get repo files from content-type and persona
+                    lookup_path = self._parse_template_str(
+                        template_str, repo.name, content_type
                     )
                     _repo_content = self.get_children(lookup_path)
 
-                    # special treatment to quickstart tutorial
-                    if content_type.lower() == "tutorials":
-                        quickstart_file = self._pop_quickstart_from(_repo_content)
-                        if quickstart_file:
-                            repo_nav["Quickstart"] = quickstart_file  # type: ignore
-
-                    # doesnt render content-type section if no files inside
+                    # Prevent rendering content-type section if there are no files
                     if _repo_content:
                         content_type_name = Names.get(content_type)
                         repo_nav[content_type_name] = _repo_content  # type: ignore
                 if repo_nav:
                     _nav[repo.title] = repo_nav
         return _nav or ["#"]
+
+    def _parse_template_str(
+        self, template_str: str, repo_name: str, content_type: t.Optional[str] = None
+    ) -> Path:
+        """
+        Replace template_str with repo_name and content_type.
+
+        Additionally, normalized {admin} {user} and {dev} names:
+        - {repo}/docs/dev/{content}
+        - {repo}/docs/{admin}/{content} -> uses constant for {admin}
+
+        TODO: deprecate this method of template string and use dataclasses instead.
+        """
+        kwargs = {
+            "repo": repo_name,
+            "admin": Names.ADMIN,
+            "user": Names.USER,
+        }
+        if content_type:
+            kwargs["content"] = content_type
+
+        return self.tmpdir / template_str.format(**kwargs)
 
     def _pop_quickstart_from(self, pathlist: t.List[str]) -> t.Optional[str]:
         """Get quickstart.md file from filelist with case and variations tolerance"""
