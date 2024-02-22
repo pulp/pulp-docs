@@ -56,16 +56,8 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
                     {content-type}
     """
     f = AgregationUtils(tmpdir, repos)
-    help_section = [
-        {"Overview": f.section_file("help/index.md")},
-        {
-            "Bugs, Feature and Backport Requests": f.section_file(
-                "help/bugs-features.md"
-            )
-        },
-    ]
     usage_section = [
-        {"Overview": f.section_file("usage/index.md")},
+        {"Overview": f.section_file("user/index.md")},
         {
             "Pulpcore": [
                 f.section(
@@ -113,7 +105,7 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
         ),
     ]
     development_section = [
-        {"Overview": f.section_file("development/index.md")},
+        {"Overview": f.section_file("dev/index.md")},
         {
             "Pulpcore": [
                 f.section(
@@ -126,17 +118,30 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
             ]
         },
         {
-            "Plugins": f.repo_grouping(
-                "{repo}/docs/dev/{content}", repo_types=["content"]
-            )
-        },
+            "Plugins": f.repo_grouping( "{repo}/docs/dev/{content}", repo_types=["content"] ) },
         {"Extras": f.repo_grouping("{repo}/docs/dev/{content}", repo_types=["other"])},
     ]
-    reference_section = [
-        {"Overview": f.section_file("reference/index.md")},
-        {"Repository Map": f.section_file("reference/01-repository-map.md")},
-        {"Glossary": f.section_file("reference/02-glossary.md")},
-        {"Repositories": f.repo_reference_grouping()},
+    help_section = [
+        *f.get_children("pulp-docs/docs/sections/help/community"),
+        {"Documentation Usage": f.get_children("pulp-docs/docs/sections/help/using-this-doc")},
+        {
+            "Changelogs": [
+                {"Pulpcore": "pulpcore/changes/changelog.md"},
+                {
+                    "Plugins": sorted(
+                        f.repo_grouping(
+                            "{repo}/changes", repo_types=["content"]
+                        ).items()
+                    )
+                },
+                {
+                    "Extra": sorted(
+                        f.repo_grouping("{repo}/changes", repo_types=["other"]).items()
+                    )
+                },
+            ]
+        },
+        {"Governance": f.get_children("pulp-docs/docs/sections/help/governance")},
     ]
 
     # Main Section
@@ -144,8 +149,7 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
         {"Home": "index.md"},
         {"User Manual": usage_section},
         {"Admin Manual": admin_section},
-        {"Development": development_section},
-        {"Reference": reference_section},
+        {"Developer Manual": development_section},
         {"Help": help_section},
     ]
     return navigation

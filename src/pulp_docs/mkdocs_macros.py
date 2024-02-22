@@ -101,7 +101,7 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
             this_src_dir = repo_sources / repo_or_pkg.subpackage_of / repo_or_pkg.name
 
         # install and post-process
-        _install_doc_files(this_src_dir, this_docs_dir, repo_or_pkg)
+        _place_doc_files(this_src_dir, this_docs_dir, repo_or_pkg)
         if repo_or_pkg.type == "content":
             _generate_rest_api_page(this_docs_dir, repo_or_pkg.name, repo_or_pkg.title)
 
@@ -122,7 +122,7 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
     return (repo_docs, repo_sources)
 
 
-def _install_doc_files(src_dir: Path, docs_dir: Path, repo: Repo):
+def _place_doc_files(src_dir: Path, docs_dir: Path, repo: Repo):
     """Copy only doc-related files from src_dir to doc_dir"""
     log.info(f"Moving doc files:\nfrom '{src_dir}'\nto '{docs_dir}'")
 
@@ -131,15 +131,24 @@ def _install_doc_files(src_dir: Path, docs_dir: Path, repo: Repo):
     except FileNotFoundError:
         Path(docs_dir / "docs").mkdir(parents=True)
         repo.status.has_staging_docs = False
-    try:
-        shutil.copy(src_dir / "CHANGELOG.md", docs_dir / "CHANGELOG.md")
-    except FileNotFoundError:
-        repo.status.has_changelog = False
 
-    try:
-        shutil.copy(src_dir / "README.md", docs_dir / "README.md")
-    except FileNotFoundError:
-        repo.status.has_readme = False
+    # Get CHANGELOG
+    # TODO: remove reading .rst (plugins should provide markdown CHANGELOG)
+    repo.status.has_changelog = False
+    changes_dir = Path(docs_dir / "changes")
+    changes_dir.mkdir(exist_ok=True)
+    for changelog_name in ("CHANGELOG.md", "CHANGES.md", "CHANGES.rst"):
+        changelog_path = Path(src_dir / changelog_name)
+        if changelog_path.exists():
+            shutil.copy(changelog_path, changes_dir / "changelog.md")
+            repo.status.has_changelog = True
+            return
+
+    # Create placeholder, case it was not possible to fetch one
+    empty_changelog = changes_dir / "changelog.md"
+    empty_changelog.write_text(
+        "# Changelog\n\nThe repository does not provide a changelog or there was a problem fetching it."
+    )
 
 
 def _generate_rest_api_page(docs_dir: Path, repo_name: str, repo_title: str):
@@ -243,7 +252,28 @@ def define_env(env):
 
     log.info("[pulp-docs] Done with pulp-docs.")
     env.conf["pulp_repos"] = repos
+    env.config["pulp_repos"] = repos
     env.conf["pulp_config"] = config
+
+    # Extra config
+    @env.macro
+    def get_repos(repo_type="content"):
+        "Return repo names by type"
+        _repo_type = [repo_type] if repo_type else None
+        repos_list = sorted(
+            repos.get_repos(repo_types=_repo_type), key=lambda x: x.title
+        )
+        repos_data = [
+            {
+                "title": repo.title,
+                "version": "3.12.1",
+                "rest_api_url": f"https://docs.pulpproject.org/{repo.name}/restapi.html",
+                "codebase_url": f"https://github.com/{repo.owner}/{repo.name}",
+                "changelog_url": f"site:{repo.name}/changes/changelog/",
+            }
+            for repo in repos_list
+        ]
+        return repos_data
 
 
 def on_pre_page_macros(env):
