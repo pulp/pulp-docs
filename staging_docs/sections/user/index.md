@@ -3,9 +3,12 @@ hide:
   - toc
 ---
 <div class="hero-header" markdown>
-# Overview
 
-## This section is for users who need to need create sync, publish and interact with repositories.
+<h1 class="landing-page-h1"></h1>
+
+## This section is for **users**
+
+Common needs are to *create, sync, publish and interact with repositories*.
 
 
 
@@ -15,26 +18,15 @@ hide:
 
     ---
     
-    Complete the started tutorial [here](#).
+    Complete the starter tutorial to learn in pratice the basics of managing content in Pulp.
 
     
 -   **Understand the docs**
     
     ---
 
-    Get familiar withhow to use this documentation works. [here](#)
-
-- **Explore**
-
-    ---
-
-    Some content
-
-- **Engage**
-
-    ---
-
-    Some content
+    Pulp has a rich ecosystem of plugins.
+    Understanding the docs can help you find information more efficiently.
 
 </div>
 </div>

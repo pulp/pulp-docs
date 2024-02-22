@@ -118,16 +118,30 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
             ]
         },
         {
-            "Plugins": f.repo_grouping(
-                "{repo}/docs/dev/{content}", repo_types=["content"]
-            )
-        },
+            "Plugins": f.repo_grouping( "{repo}/docs/dev/{content}", repo_types=["content"] ) },
         {"Extras": f.repo_grouping("{repo}/docs/dev/{content}", repo_types=["other"])},
     ]
     help_section = [
-        {"Overview": f.section_file("help/index.md")},
-        {"How to use this documentation": f.section_file("help/bugs-features.md")},
-        {"Changelog": f.repo_grouping("{repo}/CHANGES.md")},
+        *f.get_children("pulp-docs/docs/sections/help/community"),
+        {"Documentation Usage": f.get_children("pulp-docs/docs/sections/help/using-this-doc")},
+        {
+            "Changelogs": [
+                {"Pulpcore": "pulpcore/changes/changelog.md"},
+                {
+                    "Plugins": sorted(
+                        f.repo_grouping(
+                            "{repo}/changes", repo_types=["content"]
+                        ).items()
+                    )
+                },
+                {
+                    "Extra": sorted(
+                        f.repo_grouping("{repo}/changes", repo_types=["other"]).items()
+                    )
+                },
+            ]
+        },
+        {"Governance": f.get_children("pulp-docs/docs/sections/help/governance")},
     ]
 
     # Main Section

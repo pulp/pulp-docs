@@ -68,7 +68,7 @@ class AgregationUtils:
 
         Arguments:
             template_str: The template with fields to expand. Accepts combination of '{repo}' and '{content}'
-            repos: The set of repos to use. Accepts list with combination of "core", "content" and "other"
+            repo_types: The set of repos to use. Accepts list with combination of "core", "content" and "other"
             content_types: The set of content-types to use. Accepts combination of "guides", "learn" and "tutorial"
 
         Example:
@@ -94,7 +94,7 @@ class AgregationUtils:
 
         # Selected  a set of repos
         selected_repos = []
-        selected_content = content_types or ["tutorials", "guides", "learn"]
+        selected_content = content_types or ["tutorials", "guides", "learn", "reference"]
         if not repo_types:  # default case
             selected_repos = self.repos.all
         else:
@@ -108,7 +108,7 @@ class AgregationUtils:
                 )
                 _repo_content = self.get_children(lookup_path)
                 if _repo_content:
-                    _nav[repo.title] = _repo_content
+                    _nav[repo.title] = _repo_content if len(_repo_content) > 1 else _repo_content[0]
         # Expand content-types
         else:
             for repo in selected_repos:
