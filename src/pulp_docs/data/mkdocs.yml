@@ -52,8 +52,8 @@ plugins:
             show_symbol_type_toc: true
             docstring_section_style: table # table, list, spacy
             # heading_level: 2
-            # show_root_heading: false
-            # show_root_toc_entry: false
+            show_root_heading: true
+            show_root_toc_entry: true
             show_if_no_docstring: false
             show_signature_annotations: false
             separate_signature: false

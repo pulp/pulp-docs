@@ -65,10 +65,6 @@ repos:
       owner: pulp
       title: Pulp CLI
       branch: main
-    # - name: pulp_glue
-    #   nested_under: pulp/pulp-cli/pulp_glue
-    #   title: Pulp Glue
-    #   branch: main
     - name: pulp-openapi-generator
       owner: pulp
       title: OpenAPI Generator
@@ -77,3 +73,11 @@ repos:
       owner: pulp
       title: Selinux
       branch: main
+    - name: oci_env
+      owner: pulp
+      title: OCI Env
+      branch: main
+    # subpackages
+    - name: pulp-glue
+      title: Pulp Glue
+      subpackage_of: pulp-cli
