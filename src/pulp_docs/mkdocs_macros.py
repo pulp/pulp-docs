@@ -16,6 +16,7 @@ It's used here mainly to:
 """
 import json
 import logging
+import os
 import shutil
 import tempfile
 import time
@@ -123,11 +124,43 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
 
 
 def _place_doc_files(src_dir: Path, docs_dir: Path, repo: Repo):
-    """Copy only doc-related files from src_dir to doc_dir"""
+    """
+    Copy only doc-related files from src_dir to doc_dir.
+
+    Examples:
+        ```
+        # src_dir
+        $WORKSPACE/pulpcore/
+        $WORKSPACE/pulpcore/pulp_glue
+
+        # docs_dir
+        $TMPDIR/repo_docs/pulpcore/docs
+        $TMPDIR/repo_docs/pulp_glue/docs
+        ```
+
+    """
     log.info(f"Moving doc files:\nfrom '{src_dir}'\nto '{docs_dir}'")
 
     try:
         shutil.copytree(src_dir / SRC_DOCS_DIRNAME, docs_dir / "docs")
+        # [WORKAROUND] for allowing mkdocstrings to find "unexpected packages".
+        # Also injects __init__.py so references are
+        # Example: having pulp-cli/pulpcore/cli
+        # Mostly usefull for pulp-cli, where this kind of organization makes sense.
+        # It may be worth considering generalizing this treatment, so repos can define
+        # the packages to be included in mkdocstrings path.
+        # See: https://mkdocstrings.github.io/python/usage/#using-the-paths-option
+        if repo.name != "pulpcore" and "pulpcore" in os.listdir(src_dir):
+            repo_source_path = src_dir.parent
+            for child in Path(src_dir / "pulpcore").glob("*"):
+                if child.is_dir():
+                    Path(child / "__init__.py").touch(exist_ok=True)
+            shutil.copytree(
+                src_dir / "pulpcore",
+                repo_source_path / "pulpcore" / "pulpcore",
+                dirs_exist_ok=True,
+            )
+
     except FileNotFoundError:
         Path(docs_dir / "docs").mkdir(parents=True)
         repo.status.has_staging_docs = False
@@ -240,7 +273,19 @@ def define_env(env):
 
     # Configure mkdocstrings
     log.info("[pulp-docs] Configuring mkdocstrings")
-    code_sources = [str(source_dir / repo.name) for repo in repos.all]
+    code_sources = []
+    for repo_or_package in repos.all:
+        # Handle subpackages or repos
+        if isinstance(repo_or_package, SubPackage):
+            repo_or_package_path = (
+                repo_or_package.subpackage_of + "/" + repo_or_package.name
+            )
+        else:
+            repo_or_package_path = repo_or_package.name
+
+        # Add to mkdocstring pythonpath
+        code_sources.append(str(source_dir / repo_or_package_path))
+
     env.conf["plugins"]["mkdocstrings"].config["handlers"]["python"][
         "paths"
     ] = code_sources
