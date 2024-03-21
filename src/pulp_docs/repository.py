@@ -126,11 +126,12 @@ class Repo:
         # copy from source/cache to pulp-docs workdir
         log.info(f"{log_header}: source={download_from}, copied_from={src_copy_path}")
 
-        gitignore_files = get_git_ignored_files(Path(src_copy_path))
+        # ignore files lisetd in .gitignore and files that starts with "."
+        ignore_patterns = get_git_ignored_files(Path(src_copy_path)) + [".*"]
         shutil.copytree(
             src_copy_path,
             dest_dir,
-            ignore=shutil.ignore_patterns(*gitignore_files),
+            ignore=shutil.ignore_patterns(*ignore_patterns),
         )
 
         self.status.download_source = str(download_from)
