@@ -23,7 +23,7 @@ There are basic markdown features recommended for use in Pulp.
     ```
 
 - This is enabled by [mkdocs-site-urls](https://github.com/octoprint/mkdocs-site-urls) plugin.
-- This is preferred over *relative* links because of our complex structure. See tradeoffs [here](https://github.com/pedro-psb/pulp-docs/issues/2)
+- This is preferred over *relative* links because of our complex structure. See tradeoffs [here](https://github.com/pulp/pulp-docs/issues/2)
 
 
 ### Codeblocks

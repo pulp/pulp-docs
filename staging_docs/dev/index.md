@@ -13,7 +13,7 @@ It was developed as part of [The new Pulp "Unified Docs"](https://hackmd.io/eE3k
 
 Through a `mkdocs-macro-plugin` hook (called in early stages of mkdocs processing), we inject the following steps:
 
-1. Read [`repolist.yml`](https://github.com/pedro-psb/pulp-docs/blob/main/src/pulp_docs/data/repolist.yml) packaged with `pulp-docs` to know which repos/urls to use
+1. Read [`repolist.yml`](https://github.com/pulp/pulp-docs/blob/main/src/pulp_docs/data/repolist.yml) packaged with `pulp-docs` to know which repos/urls to use
 1. Download and Place all source code required to dir under `tempfile.gettempdir()`
     - Uses `../{repo}` if available OR
     - Uses existing cached `{tmpdir}/{repo}` if available OR
@@ -27,13 +27,13 @@ Recommended way for daily usage:
 === "pipx"
 
     ```bash
-    pipx install git+https://github.com/pedro-psb/pulp-docs --include-deps
+    pipx install git+https://github.com/pulp/pulp-docs --include-deps
     pulp-docs serve
     ```
 
 === "pip"
 
     ```bash
-    pip --user install git+https://github.com/pedro-psb/pulp-docs
+    pip --user install git+https://github.com/pulp/pulp-docs
     pulp-docs serve
     ```
