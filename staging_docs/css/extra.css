@@ -29,7 +29,13 @@
     text-align: center;
     margin-inline: auto;
 }
+.hide-h1 {
+    position: absolute;
+    left: -999px
+}
 
-.landing-page-h1 {
-    display: None;
+:root {
+  --md-primary-fg-color:        #347dbe;
+  --md-primary-fg-color--light: #ECB7B7;
+  --md-primary-fg-color--dark:  #90030C;/
 }

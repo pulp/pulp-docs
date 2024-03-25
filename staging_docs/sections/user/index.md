@@ -2,9 +2,10 @@
 hide:
   - toc
 ---
-<div class="hero-header" markdown>
 
-<h1 class="landing-page-h1"></h1>
+# User Guide {.hide-h1}
+
+<div class="hero-header" markdown>
 
 ## This section is for **users**
 

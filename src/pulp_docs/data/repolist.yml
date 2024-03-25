@@ -54,8 +54,8 @@ repos:
       title: Pulp OCI Images
       branch: latest
     - name: pulp-docs
-      owner: pedro-psb
-      title: Docs Tool
+      owner: pulp
+      title: Pulp Docs
       branch: main
     - name: pulp-operator
       owner: pulp

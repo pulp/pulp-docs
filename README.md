@@ -24,7 +24,7 @@ Also, this should be used for the production build.
 
 Through a `mkdocs-macro-plugin` hook (called in early stages of mkdocs processing), we inject the following steps:
 
-1. Read [`repolist.yml`](https://github.com/pedro-psb/pulp-docs/blob/main/src/pulp_docs/data/repolist.yml) packaged with `pulp-docs` to know which repos/urls to use
+1. Read [`repolist.yml`](https://github.com/pulp/pulp-docs/blob/main/src/pulp_docs/data/repolist.yml) packaged with `pulp-docs` to know which repos/urls to use
 1. Download/Move all source code required to dir under `tempfile.gettempdir()`
     - Uses `../{repo}` if available OR
     - Uses existing cached `{tmpdir}/{repo}` if available OR
@@ -39,7 +39,7 @@ And thats it, the magic is done.
 Recommended way for daily usage:
 
 ```bash
-pipx install git+https://github.com/pedro-psb/pulp-docs --include-deps
+pipx install git+https://github.com/pulp/pulp-docs --include-deps
 pulp-docs serve
 ```
 

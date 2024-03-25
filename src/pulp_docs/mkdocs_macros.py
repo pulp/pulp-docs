@@ -111,7 +111,7 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
 
     # Copy core-files (shipped with pulp-docs) to tmpdir
     shutil.copy(
-        repo_sources / repos.core_repo.name / SRC_DOCS_DIRNAME / "index.md",
+        repo_sources / "pulp-docs" / SRC_DOCS_DIRNAME / "index.md",
         repo_docs / "index.md",
     )
 
