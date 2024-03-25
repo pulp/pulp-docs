@@ -2,8 +2,10 @@
 hide:
   - toc
 ---
+
+# Developer Guide {.hide-h1}
+
 <div class="hero-header" markdown>
-<h1 class="landing-page-h1"></h1>
 
 ## This section is for Pulp **developers**
 

@@ -6,7 +6,7 @@ repo_name: pulp/pulpcore
 docs_dir: docs
 theme:
   name: material
-  logo: pulp-docs/docs/assets/logo.png
+  logo: pulp-docs/docs/assets/pulp_logo_icon.svg
   favicon: pulp-docs/docs/assets/favicon.ico
   features:
     - content.code.annotate
@@ -25,7 +25,7 @@ theme:
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
+      primary: custom
       accent: black
       toggle:
         icon: material/toggle-switch-off-outline 
