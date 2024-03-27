@@ -24,6 +24,7 @@ Note that you either specify:
 2. "/path/to/file.md" -> uses markdown '# title' or the filename, if former isnt present.
 
 """
+
 from __future__ import annotations
 
 from pathlib import Path

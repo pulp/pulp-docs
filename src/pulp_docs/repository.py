@@ -3,6 +3,7 @@ The classes representing plugins git/git-hub repositories.
 
 Their purpose is to facilitate declaring and downloading the source-code.
 """
+
 from __future__ import annotations
 
 import logging

@@ -14,6 +14,7 @@ It's used here mainly to:
     2. Configure mkdocstrings plugin to find the source code
 
 """
+
 import json
 import logging
 import os
