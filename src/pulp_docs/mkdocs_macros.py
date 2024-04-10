@@ -273,7 +273,11 @@ def define_env(env):
     # Workaround for making "pulpcore/cli/common" from pulp-cli be available as:
     # '::: pulpcore.cli.common' (from any markdown)
     # This should be a general solution.
-    shutil.copytree(source_dir / "pulp-cli/pulpcore", source_dir / "pulpcore/pulpcore", dirs_exist_ok=True)
+    shutil.copytree(
+        source_dir / "pulp-cli/pulpcore",
+        source_dir / "pulpcore/pulpcore",
+        dirs_exist_ok=True,
+    )
     Path(source_dir / "pulpcore/pulpcore/cli/__init__.py").touch(exist_ok=True)
     Path(source_dir / "pulpcore/pulpcore/cli/common/__init__.py").touch(exist_ok=True)
 
@@ -286,6 +290,12 @@ def define_env(env):
     env.conf["docs_dir"] = docs_dir
     env.conf["nav"] = get_navigation(docs_dir, repos)
 
+    # Try to watch CWD/staging_docs
+    watched_workdir = Path("staging_docs")
+    if watched_workdir.exists():
+        env.conf["watch"].append(str(watched_workdir.resolve()))
+
+    # Pass relevant data for future processing
     log.info("[pulp-docs] Done with pulp-docs.")
     env.conf["pulp_repos"] = repos
     env.config["pulp_repos"] = repos

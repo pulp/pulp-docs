@@ -36,6 +36,8 @@ theme:
         icon: material/toggle-switch
         name: Switch to light mode    
 
+hooks:
+  - '../mkdocs_hooks.py'
 plugins:
   - search
   - site-urls
