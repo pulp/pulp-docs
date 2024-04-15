@@ -7,7 +7,8 @@ name = "pulp-docs"
 version = "0.0.1"
 dependencies = [
     "mkdocs-material",
-    "mkdocstrings[python]>=1.9.1",
+    "mkdocstrings",
+    "mkdocstrings-python>=1.9.1",
     "mkdocs-macros-plugin",
     "mkdocs-site-urls",
     "importlib_resources",
