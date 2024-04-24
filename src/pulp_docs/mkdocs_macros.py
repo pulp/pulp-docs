@@ -144,13 +144,11 @@ def _place_doc_files(src_dir: Path, docs_dir: Path, repo: Repo):
 
     try:
         shutil.copytree(src_dir / SRC_DOCS_DIRNAME, docs_dir / "docs")
-
     except FileNotFoundError:
         Path(docs_dir / "docs").mkdir(parents=True)
         repo.status.has_staging_docs = False
 
-    # Get CHANGELOG
-    # TODO: remove reading .rst (plugins should provide markdown CHANGELOG)
+    # Get changelog
     repo.status.has_changelog = False
     changes_dir = Path(docs_dir / "changes")
     changes_dir.mkdir(exist_ok=True)
@@ -160,6 +158,15 @@ def _place_doc_files(src_dir: Path, docs_dir: Path, repo: Repo):
             shutil.copy(changelog_path, changes_dir / "changelog.md")
             repo.status.has_changelog = True
             return
+
+    # Create redirect message for nested packages
+    if isinstance(repo, SubPackage):
+        empty_changelog = changes_dir / "changelog.md"
+        changes_url = f"site:{repo.subpackage_of}/changes/changelog/"
+        empty_changelog.write_text(
+            f"# Changelog\n\nThe changelog for this package is nested under [{repo.subpackage_of}]({changes_url})."
+        )
+        return
 
     # Create placeholder, case it was not possible to fetch one
     empty_changelog = changes_dir / "changelog.md"
