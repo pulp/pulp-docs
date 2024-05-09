@@ -1,0 +1,46 @@
+name: "Generate REST-API data"
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: "main-${{ github.ref_name }}-${{ github.workflow }}"
+  cancel-in-progress: true
+
+jobs:
+  update-restapi-data:
+    runs-on: ubuntu-latest
+    steps:
+      # Setup pulp instance
+      - uses: "actions/checkout@v4"
+        with:
+          fetch-depth: 0
+          path: "pulp-docs"
+
+      - uses: "actions/checkout@v4"
+        with:
+          fetch-depth: 1
+          repository: "pulp/pulp-openapi-generator"
+          path: "pulp-openapi-generator"
+
+      - uses: "actions/setup-python@v4"
+        with:
+          python-version: "3.11"
+
+      - name: "Setup and run Pulp instance"
+        run: "pulp-docs/.github/workflows/scripts/setup-pulp.sh"
+
+      # Generate api.json
+      - name: "Generate api.json OpenApi schema"
+        run: |
+          echo "Generating OpenAPI schema"
+
+      # Commit api.json
+      - name: "Configure Git with pulpbot name and email"
+        run: |
+          git config --global user.name 'pulpbot'
+          git config --global user.email 'pulp-infra@redhat.com'
+      - name: commit-changes
+        run: |
+          echo "Commiting changes"

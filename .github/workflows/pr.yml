@@ -1,7 +1,7 @@
 name: "pulp-docs CI"
 
-on:
-  pull_request:
+# on:
+  # pull_request:
 
 concurrency:
   group: "main-${{ github.ref_name }}-${{ github.workflow }}"
