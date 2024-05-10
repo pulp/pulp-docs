@@ -12,6 +12,7 @@ dependencies = [
     "mkdocs-macros-plugin",
     "mkdocs-site-urls",
     "mkdocs-literate-nav",
+    "mkdocs-swagger-ui-tag",
     "importlib_resources",
     "httpx",
     "rich",

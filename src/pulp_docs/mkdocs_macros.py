@@ -17,12 +17,12 @@ It's used here mainly to:
 
 import json
 import logging
-import os
 import shutil
 import tempfile
 import time
 from pathlib import Path
 
+import httpx
 import rich
 
 from pulp_docs.cli import Config
@@ -89,6 +89,7 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
     # Download/copy source code to tmpdir
     repo_sources = TMPDIR / "repo_sources"
     repo_docs = TMPDIR / "repo_docs"
+    api_src_dir = TMPDIR / "api_json"
     shutil.rmtree(repo_sources, ignore_errors=True)
     shutil.rmtree(repo_docs, ignore_errors=True)
 
@@ -102,10 +103,13 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
         else:
             this_src_dir = repo_sources / repo_or_pkg.subpackage_of / repo_or_pkg.name
 
+        # restapi
+        if repo_or_pkg.type in ("content", "core"):
+            _download_api_json(api_src_dir, repo_or_pkg.name)
+            _generate_rest_api_page(this_src_dir, repo_or_pkg.name, repo_or_pkg.title)
+
         # install and post-process
-        _place_doc_files(this_src_dir, this_docs_dir, repo_or_pkg)
-        if repo_or_pkg.type == "content":
-            _generate_rest_api_page(this_docs_dir, repo_or_pkg.name, repo_or_pkg.title)
+        _place_doc_files(this_src_dir, this_docs_dir, repo_or_pkg, api_src_dir)
 
         end = time.perf_counter()
         log.info(f"{repo_or_pkg.name} completed in {end - start:.2} sec")
@@ -124,7 +128,27 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
     return (repo_docs, repo_sources)
 
 
-def _place_doc_files(src_dir: Path, docs_dir: Path, repo: Repo):
+def _download_api_json(api_dir: Path, repo_name: str):
+    api_json_path = api_dir / f"{repo_name}/api.json"
+    if api_json_path.exists():
+        log.info(f"{repo_name} api.json already downloaded.")
+        return
+
+    log.info(f"Downloading api.json for {repo_name}")
+    api_url_1 = "https://docs.pulpproject.org/{repo_name}/api.json"
+    api_url_2 = "https://docs.pulpproject.org/{repo_name}/_static/api.json"
+    response = httpx.get(api_url_1.format(repo_name=repo_name))
+    if response.is_error:
+        response = httpx.get(api_url_2.format(repo_name=repo_name))
+    if response.is_error:
+        raise Exception("Couldnt get rest api page")
+
+    api_json_path.parent.mkdir(parents=True, exist_ok=True)
+    api_json_path.write_text(json.dumps(response.json()))
+    log.info("Done.")
+
+
+def _place_doc_files(src_dir: Path, docs_dir: Path, repo: Repo, api_src_dir: Path):
     """
     Copy only doc-related files from src_dir to doc_dir.
 
@@ -147,6 +171,11 @@ def _place_doc_files(src_dir: Path, docs_dir: Path, repo: Repo):
     except FileNotFoundError:
         Path(docs_dir / "docs").mkdir(parents=True)
         repo.status.has_staging_docs = False
+
+    # Get restapi
+    if repo.type in ("content", "core"):
+        api_json = api_src_dir / f"{repo.name}/api.json"
+        shutil.copy(api_json, docs_dir / "docs/api.json")
 
     # Get changelog
     repo.status.has_changelog = False
@@ -175,15 +204,24 @@ def _place_doc_files(src_dir: Path, docs_dir: Path, repo: Repo):
     )
 
 
+RESTAPI_TEMPLATE = """\
+---
+hide:
+  - toc
+---
+
+# {repo_title} REST Api
+
+<swagger-ui src="api.json"/>
+"""
+
+
 def _generate_rest_api_page(docs_dir: Path, repo_name: str, repo_title: str):
     """Create page that contain a link to the rest api, based on the project url template"""
     log.info("Generating REST_API page")
-    rest_api_page = docs_dir / "docs" / "rest_api.md"
-    rest_api_page.touch()
-    restapi_url = RESTAPI_URL_TEMPLATE.format(repo_name)
-    md_title = f"# {repo_title} REST Api"
-    md_body = f"[{restapi_url}]({restapi_url})"
-    rest_api_page.write_text(f"{md_title}\n\n{md_body}")
+    rest_api_page = docs_dir / "staging_docs" / "rest_api.md"
+    rest_api_page.parent.mkdir(parents=True, exist_ok=True)
+    rest_api_page.write_text(RESTAPI_TEMPLATE.format(repo_title=repo_title))
 
 
 def print_user_repo(repos: Repos, config: Config):
