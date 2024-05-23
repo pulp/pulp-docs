@@ -58,7 +58,7 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
     """
     f = AgregationUtils(tmpdir, repos)
     SECTION_HOST = "pulp-docs"
-    CHANGES_PATH = "{repo}/changes/changelog.md"
+    CHANGES_PATH = "{repo}/changes.md"
 
     # Manual section for each persona
     manual_nav = {}
