@@ -150,26 +150,26 @@ def _place_doc_files(src_dir: Path, docs_dir: Path, repo: Repo):
 
     # Get changelog
     repo.status.has_changelog = False
-    changes_dir = Path(docs_dir / "changes")
+    changes_dir = Path(docs_dir)
     changes_dir.mkdir(exist_ok=True)
     for changelog_name in ("CHANGELOG.md", "CHANGES.md", "CHANGES.rst"):
         changelog_path = Path(src_dir / changelog_name)
         if changelog_path.exists():
-            shutil.copy(changelog_path, changes_dir / "changelog.md")
+            shutil.copy(changelog_path, changes_dir / "changes.md")
             repo.status.has_changelog = True
             return
 
     # Create redirect message for nested packages
     if isinstance(repo, SubPackage):
-        empty_changelog = changes_dir / "changelog.md"
-        changes_url = f"site:{repo.subpackage_of}/changes/changelog/"
+        empty_changelog = changes_dir / "changes.md"
+        changes_url = f"site:{repo.subpackage_of}/changes/"
         empty_changelog.write_text(
             f"# Changelog\n\nThe changelog for this package is nested under [{repo.subpackage_of}]({changes_url})."
         )
         return
 
     # Create placeholder, case it was not possible to fetch one
-    empty_changelog = changes_dir / "changelog.md"
+    empty_changelog = changes_dir / "changes.md"
     empty_changelog.write_text(
         "# Changelog\n\nThe repository does not provide a changelog or there was a problem fetching it."
     )
@@ -322,7 +322,7 @@ def define_env(env):
                 "version": "3.12.1",
                 "rest_api_url": f"https://docs.pulpproject.org/{repo.name}/restapi.html",
                 "codebase_url": f"https://github.com/{repo.owner}/{repo.name}",
-                "changelog_url": f"site:{repo.name}/changes/changelog/",
+                "changelog_url": f"site:{repo.name}/changes/",
             }
             for repo in repos_list
         ]
