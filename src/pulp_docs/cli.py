@@ -1,73 +1,31 @@
 """
 The main CLI module.
-
-It defines its interface.
 """
 
-import os
-import subprocess
-import sys
-import tempfile
 import typing as t
 from pathlib import Path
 
 import click
-from importlib_resources import files
-
-TMP_DIR = Path("tmp")
-WORKDIR = Path.home() / "workspace" / "multirepo-prototype"
+from pulp_docs.main import Config, PulpDocs
 
 
-def get_abspath(name: str) -> Path:
-    return Path(WORKDIR / name).absolute()
+class PulpDocsContext:
+    def __init__(self):
+        self.config = Config()
+        self.pulp_docs = PulpDocs()
 
 
-def cast_bool(value: str) -> bool:
-    return False if value.lower() in ("f", "false") else True
-
-
-class Config:
-    """
-    Configuration shared among CLI and mkdocs_macro.py hooks.
-
-    Params:
-        mkdocs_file: the base mkdocs used in serving/building
-        repolist: the configuration repositories (which and how to fetch)
-        clear_cache: whether to clear cache before downloading from remote
-    """
-
-    def __init__(self, from_environ: bool = False):
-        if from_environ is False:
-            self.verbose = False
-            self.workdir = Path().absolute()
-            self.mkdocs_file = files("pulp_docs").joinpath("data/mkdocs.yml").absolute()
-            self.repolist = files("pulp_docs").joinpath("data/repolist.yml").absolute()
-            self.clear_cache = False
-
-            if env_mkdocs := os.environ.get("PULPDOCS_MKDOCS_FILE"):
-                self.mkdocs_file = Path(env_mkdocs)
-        else:
-            self.verbose = cast_bool(os.environ["PULPDOCS_VERBOSE"])
-            self.workdir = Path(os.environ["PULPDOCS_WORKDIR"])
-            self.mkdocs_file = Path(os.environ["PULPDOCS_MKDOCS_FILE"])
-            self.repolist = Path(os.environ["PULPDOCS_REPOLIST"])
-            self.clear_cache = cast_bool(os.environ["PULPDOCS_CLEAR_CACHE"])
-
-    def get_environ_dict(self):
-        return {f"PULPDOCS_{k.upper()}": str(v) for k, v in self.__dict__.items()}
-
-
-pass_config = click.make_pass_decorator(Config, ensure=True)
+pass_pulpdocs_context = click.make_pass_decorator(PulpDocsContext, ensure=True)
 
 
 @click.group()
 @click.option("--verbose", "-v", is_flag=True)
-@pass_config
-def main(config: Config, verbose: bool):
+@pass_pulpdocs_context
+def main(ctx: PulpDocsContext, verbose: bool):
     """
     This is pulp-docs, a cli tool to help run and build multirepo documentation within Pulp project.
     """
-    config.verbose = verbose
+    ctx.config.verbose = verbose
 
 
 # mkdocs help wrapper
@@ -95,62 +53,44 @@ no_reload_help = "Disable the live reloading in the development server."
 )
 @click.option("--no-livereload", "livereload", flag_value=False, help=no_reload_help)
 @click.option("--livereload", "livereload", flag_value=True, default=True, hidden=True)
-@pass_config
+@pass_pulpdocs_context
 def serve(
-    config: Config,
+    ctx: PulpDocsContext,
     clear_cache: bool,
     verbose: bool,
     watch: t.List[Path],
     livereload: bool,
 ):
     """Run mkdocs server."""
-    env = os.environ.copy()
+    config = ctx.config
+    pulpdocs = ctx.pulp_docs
+
     config.clear_cache = clear_cache
     config.verbose = verbose
-    env.update(config.get_environ_dict())
+    config.watch = watch
+    config.livereload = livereload
 
-    watch_list = [("--watch", watched) for watched in watch]
-    flag_list = []
-    if livereload is False:
-        flag_list.append(("--no-livereload",))
-
-    options: t.List[tuple] = [("--config-file", config.mkdocs_file)]
-    options.extend(watch_list)
-    options.extend(flag_list)
-
-    cmd = ["mkdocs", "serve"]
-    for opt in options:
-        cmd.extend(opt)
-    print("Running:", " ".join(str(s) for s in cmd))
-    subprocess.run(cmd, env=env)
+    dry_run = True if config.test_mode else False
+    pulpdocs.serve(config, dry_run=dry_run)
 
 
 @main.command()
-@pass_config
-def build(config: Config):
+@pass_pulpdocs_context
+def build(ctx: PulpDocsContext):
     """Build mkdocs site."""
-    config.verbose = True
-    env = os.environ.copy()
-    env.update(config.get_environ_dict())
+    config = ctx.config
+    pulpdocs = ctx.pulp_docs
 
-    options = (
-        ("--config-file", config.mkdocs_file),
-        ("--site-dir", str(Path("site").absolute())),
-    )
-    cmd = ["mkdocs", "build"]
-    for opt in options:
-        cmd.extend(opt)
-    print("Building:", " ".join(str(s) for s in cmd))
-    result = subprocess.run(cmd, env=env)
-    sys.exit(result.returncode)
+    config.verbose = True
+
+    dry_run = True if config.test_mode else False
+    pulpdocs.build(config, dry_run=dry_run)
 
 
 @main.command()
-@pass_config
-def status(config: Config):
+@pass_pulpdocs_context
+def status(ctx: PulpDocsContext):
     """Print relevant information about repositories that will be used."""
-    raise NotImplementedError
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    config = ctx.config
+    pulpdocs = ctx.pulp_docs
+    pulpdocs.status(config)
