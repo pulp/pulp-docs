@@ -45,6 +45,8 @@ plugins:
       module_name: '../mkdocs_macros'
   - tags:
       tags_file: pulp-docs/docs/tags.md
+  - literate-nav:
+      nav_file: _SUMMARY.md
   - mkdocstrings:
       handlers: 
         python:

@@ -57,93 +57,31 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
                     {content-type}
     """
     f = AgregationUtils(tmpdir, repos)
-    usage_section = [
-        {"Overview": f.section_file("user/index.md")},
-        {
-            "Pulpcore": [
-                f.section(
-                    Names.PULPCORE_TUTORIAL,
-                    f.get_children,
-                    "pulpcore/docs/user/tutorials",
-                ),
-                f.section(Names.LEARN, f.get_children, "pulpcore/docs/user/learn"),
-                f.section(Names.GUIDES, f.get_children, "pulpcore/docs/user/guides"),
-            ]
-        },
-        {
-            "Plugins": f.repo_grouping(
-                "{repo}/docs/user/{content}", repo_types=["content"]
-            )
-        },
-        {"Extras": f.repo_grouping("{repo}/docs/user/{content}", repo_types=["other"])},
-    ]
-    admin_section = [
-        {"Overview": f.section_file("admin/index.md")},
-        {
-            "Pulpcore": [
-                f.section(
-                    Names.PULPCORE_TUTORIAL,
-                    f.get_children,
-                    "pulpcore/docs/admin/tutorials",
-                ),
-                f.section(Names.LEARN, f.get_children, "pulpcore/docs/admin/learn"),
-                f.section(Names.GUIDES, f.get_children, "pulpcore/docs/admin/guides"),
-            ]
-        },
-        f.section(
-            "Plugins",
-            f.repo_grouping,
-            "{repo}/docs/admin/{content}",
-            repo_types=["content"],
-            hide_empty_section=False,
-        ),
-        f.section(
-            "Extras",
-            f.repo_grouping,
-            "{repo}/docs/admin/{content}",
-            repo_types=["other"],
-            hide_empty_section=False,
-        ),
-    ]
-    development_section = [
-        {"Overview": f.section_file("dev/index.md")},
-        {
-            "Pulpcore": [
-                f.section(
-                    Names.PULPCORE_TUTORIAL,
-                    f.get_children,
-                    "pulpcore/docs/dev/tutorials",
-                ),
-                f.section(Names.LEARN, f.get_children, "pulpcore/docs/dev/learn"),
-                f.section(Names.GUIDES, f.get_children, "pulpcore/docs/dev/guides"),
-            ]
-        },
-        {
-            "Plugins": f.repo_grouping(
-                "{repo}/docs/dev/{content}", repo_types=["content"]
-            )
-        },
-        {"Extras": f.repo_grouping("{repo}/docs/dev/{content}", repo_types=["other"])},
-    ]
+    SECTION_HOST = "pulp-docs"
+    CHANGES_PATH = "{repo}/changes/changelog.md"
+
+    # Manual section for each persona
+    manual_nav = {}
+    for section in ("user", "admin", "dev"):
+        TEMPLATE_STRING = "{repo}/docs/%s/{content}" % section
+        section_nav = [
+            {"Overview": f"{SECTION_HOST}/docs/sections/{section}/index.md"},
+            {"Core": f.repo_grouping(TEMPLATE_STRING, repo_types=["core"])},
+            {"Plugins": f.repo_grouping(TEMPLATE_STRING, repo_types=["content"])},
+            {"Extras": f.repo_grouping(TEMPLATE_STRING, repo_types=["other"])},
+        ]
+        manual_nav[section] = section_nav
+
+    # Custom help section
     help_section = [
-        {"Overview": f.section_file("help/index.md")},
-        {"Community": f.get_children("pulp-docs/docs/sections/help/community")},
-        {"More": f.get_children("pulp-docs/docs/sections/help/more")},
+        {"Overview": f"{SECTION_HOST}/docs/sections/help/index.md"},
+        {"Community": f"{SECTION_HOST}/docs/sections/help/community/"},
+        {"More": f"{SECTION_HOST}/docs/sections/help/more/"},
         {
             "Changelogs": [
-                {"Pulpcore": "pulpcore/changes/changelog.md"},
-                {
-                    "Plugins": sorted(
-                        f.repo_grouping(
-                            "{repo}/changes", repo_types=["content"]
-                        ).items()
-                    )
-                },
-                {
-                    "Extra": sorted(
-                        f.repo_grouping("{repo}/changes", repo_types=["other"]).items()
-                    )
-                },
+                {"Core": f.changes_grouping(CHANGES_PATH, repo_types=["core"])},
+                {"Plugins": f.changes_grouping(CHANGES_PATH, repo_types=["content"])},
+                {"Extra": f.changes_grouping(CHANGES_PATH, repo_types=["other"])},
             ]
         },
     ]
@@ -151,9 +89,9 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
     # Main Section
     navigation = [
         {"Home": "index.md"},
-        {"User Manual": usage_section},
-        {"Admin Manual": admin_section},
-        {"Developer Manual": development_section},
+        {"User Manual": manual_nav["user"]},
+        {"Admin Manual": manual_nav["admin"]},
+        {"Developer Manual": manual_nav["dev"]},
         {"Help": help_section},
     ]
     return navigation

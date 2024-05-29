@@ -27,33 +27,6 @@ class AgregationUtils:
             return {name: section}
         return {name: section} if section else {"": ""}
 
-    def get_children(self, path: t.Union[str, Path]) -> t.List[str]:
-        """
-        Get all markdown files contained in @path recursively.
-
-        Uses the dirname.title() as the subsection name if there are subdirs.
-        """
-        basepath = self.tmpdir / path if isinstance(path, str) else path
-        if not basepath.exists():
-            return []
-
-        def _get_tree(_path):
-            """Recursive scandir"""
-            with os.scandir(_path) as it:
-                children = []
-                for entry in sorted(it, key=lambda x: x.name):
-                    if entry.is_file() and entry.name.endswith(".md"):
-                        filename = str(Path(entry.path).relative_to(self.tmpdir))
-                        children.append(filename)
-                    elif entry.is_dir():
-                        dir_title = self.normalize_title(entry.name)
-                        sub_section = {dir_title: _get_tree(entry)}
-                        children.append(sub_section)
-            return children
-
-        result = _get_tree(basepath)
-        return result
-
     def normalize_title(self, raw_title: str):
         return raw_title.replace("_", " ").title()
 
@@ -89,57 +62,80 @@ class AgregationUtils:
             }
             ```
         """
-        _nav = {}
-        _expand_content_types = "{content}" in template_str
 
-        # Selected  a set of repos
-        selected_repos = []
         selected_content = content_types or [
             "tutorials",
             "guides",
             "learn",
             "reference",
         ]
-        if not repo_types:  # default case
-            selected_repos = self.repos.all
-        else:
-            selected_repos.extend(self.repos.get_repos(repo_types=repo_types))
 
-        # Dont expand content-types
-        if not _expand_content_types:
-            for repo in selected_repos:
-                lookup_path = self._parse_template_str(template_str, repo.name)
-                _repo_content = self.get_children(lookup_path)
+        selected_repos = self.repos.all
+        if repo_types:
+            selected_repos = self.repos.get_repos(repo_types=repo_types)
+
+        group_nav = []
+        for repo in selected_repos:
+            repo_nav = []
+            # Include index.md if present in staging_docs/{persona}/index.md
+            persona_basepath = self._parse_template_str(
+                template_str, repo.name, "placeholder"
+            ).parent
+            index_path = persona_basepath / "index.md"
+            if index_path.exists():
+                repo_nav.append({"Overview": str(index_path.relative_to(self.tmpdir))})
+
+            for content_type in selected_content:
+                # Get repo files from content-type and persona
+                lookup_path = self._parse_template_str(
+                    template_str, repo.name, content_type
+                )
+                _repo_content = self._add_literate_nav_dir(lookup_path)
+
+                # Prevent rendering content-type section if there are no files
                 if _repo_content:
-                    _nav[repo.title] = (
-                        _repo_content if len(_repo_content) > 1 else _repo_content[0]
-                    )
-        # Expand content-types
-        else:
-            for repo in selected_repos:
-                repo_nav = {}
-                # Include index.md if present in staging_docs/{persona}/index.md
-                persona_basepath = self._parse_template_str(
-                    template_str, repo.name, "placeholder"
-                ).parent
-                index_path = persona_basepath / "index.md"
-                if index_path.exists():
-                    repo_nav["Overview"] = str(index_path.relative_to(self.tmpdir))
+                    content_type_title = Names.get(content_type)
+                    repo_nav.append({content_type_title: _repo_content})  # type: ignore
+            if repo_nav:
+                group_nav.append({repo.title: repo_nav})
+        return group_nav or ["#"]
 
-                for content_type in selected_content:
-                    # Get repo files from content-type and persona
-                    lookup_path = self._parse_template_str(
-                        template_str, repo.name, content_type
-                    )
-                    _repo_content = self.get_children(lookup_path)
+    def changes_grouping(
+        self, changes_path_template: str, repo_types: t.Optional[t.List[str]] = None
+    ):
+        selected_repos = self.repos.all
+        if repo_types:
+            selected_repos = self.repos.get_repos(repo_types=repo_types)
 
-                    # Prevent rendering content-type section if there are no files
-                    if _repo_content:
-                        content_type_name = Names.get(content_type)
-                        repo_nav[content_type_name] = _repo_content  # type: ignore
-                if repo_nav:
-                    _nav[repo.title] = repo_nav
-        return _nav or ["#"]
+        group_nav = [
+            {repo.title: changes_path_template.format(repo=repo.name)}
+            for repo in selected_repos
+        ]
+        return group_nav or ["#"]  # type: ignore
+
+    def _add_literate_nav_dir(self, lookup_path: Path) -> t.Optional[str]:
+        """
+        Take a path and return a path-str or None.
+
+        The path-str is expanded by mkdocs-literate-nav. E.g:
+
+        For "foo/bar/eggs/", it will:
+        1. Try to find "foo/bar/eggs/_SUMMARY.md"
+        2. If cant find, generate recursive nav for "foo/bar/eggs"
+
+        If the @lookup_path is non-existent, non-dir or doesnt contain .md, returns None.
+        """
+        if not lookup_path.exists():
+            return None
+
+        if not lookup_path.is_dir():
+            return None
+
+        if len(list(lookup_path.rglob("*.md"))) == 0:
+            return None
+
+        path_str = str(lookup_path.relative_to(self.tmpdir)) + "/"
+        return path_str
 
     def _parse_template_str(
         self, template_str: str, repo_name: str, content_type: t.Optional[str] = None
@@ -163,53 +159,3 @@ class AgregationUtils:
 
         return self.tmpdir / template_str.format(**kwargs)
 
-    def _pop_quickstart_from(self, pathlist: t.List[str]) -> t.Optional[str]:
-        """Get quickstart.md file from filelist with case and variations tolerance"""
-        for path in pathlist:
-            if not isinstance(path, str):
-                continue
-
-            filename = path.split("/")[-1]
-            if filename.lower() in ("quickstart.md", "quick-start.md"):
-                pathlist.remove(path)
-                return path
-        return None
-
-    def repo_reference_grouping(self):
-        """
-        Create reference section by aggregating some specific files.
-
-        Group according to the pattern:
-        {repo}/
-            Readme.md
-            Rest Api.md
-            Code Api/
-                Module A.md
-                Module B.md
-            Changelog.md
-
-        """
-        template_str = "{repo}/docs/reference"
-        _nav = {}
-        for repo in self.repos.all:
-            lookup_path = self.tmpdir / template_str.format(repo=repo.name)
-            _repo_content = self.get_children(lookup_path)
-            reference_section = [
-                {"REST API": f"{repo.name}/docs/rest_api.md"},
-                {"Readme": f"{repo.name}/README.md"},
-                {"Code API": _repo_content},
-                {"Changelog": f"{repo.name}/CHANGELOG.md"},
-            ]
-            _nav[repo.title] = reference_section
-        return _nav
-
-    def section_file(self, section_and_filename: str):
-        """Get a markdown file from the website section folder."""
-        basepath = "pulp-docs/docs/sections"
-        return f"{basepath}/{section_and_filename}"
-
-    def section_children(self, section_name: str):
-        """Get children markdown files from the website section folder."""
-        basepath = "pulpcore/docs/sections"
-        section = self.get_children(f"{basepath}/{section_name}")
-        return section
