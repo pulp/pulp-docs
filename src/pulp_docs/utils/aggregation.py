@@ -85,17 +85,26 @@ class AgregationUtils:
             if index_path.exists():
                 repo_nav.append({"Overview": str(index_path.relative_to(self.tmpdir))})
 
+            # Add content type for a repo (guides,tutorials,etc)
             for content_type in selected_content:
-                # Get repo files from content-type and persona
                 lookup_path = self._parse_template_str(
                     template_str, repo.name, content_type
                 )
                 _repo_content = self._add_literate_nav_dir(lookup_path)
 
-                # Prevent rendering content-type section if there are no files
-                if _repo_content:
+                if _repo_content:  # No content section if there are no files
                     content_type_title = Names.get(content_type)
                     repo_nav.append({content_type_title: _repo_content})  # type: ignore
+
+            # Add changelog and restapi
+            if "/user/" in template_str:
+                CHANGES_PATH = f"{repo.name}/changes.md"
+                RESTAPI_PATH = f"{repo.name}/restapi.md"
+                if repo.type in ("content", "core"):
+                    repo_nav.append({"REST API": RESTAPI_PATH})
+                repo_nav.append({"Changelog": CHANGES_PATH})
+
+            # Add navigation to Repo, if one exsits
             if repo_nav:
                 group_nav.append({repo.title: repo_nav})
         return group_nav or ["#"]
@@ -158,4 +167,3 @@ class AgregationUtils:
             kwargs["content"] = content_type
 
         return self.tmpdir / template_str.format(**kwargs)
-

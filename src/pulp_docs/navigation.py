@@ -77,13 +77,6 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
         {"Overview": f"{SECTION_HOST}/docs/sections/help/index.md"},
         {"Community": f"{SECTION_HOST}/docs/sections/help/community/"},
         {"More": f"{SECTION_HOST}/docs/sections/help/more/"},
-        {
-            "Changelogs": [
-                {"Core": f.changes_grouping(CHANGES_PATH, repo_types=["core"])},
-                {"Plugins": f.changes_grouping(CHANGES_PATH, repo_types=["content"])},
-                {"Extra": f.changes_grouping(CHANGES_PATH, repo_types=["other"])},
-            ]
-        },
     ]
 
     # Main Section
