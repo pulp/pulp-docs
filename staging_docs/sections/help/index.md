@@ -11,18 +11,18 @@ Don't hesistate to contact us!
 
 ---
 
-## Quick Links
+## Quick Links (WIP)
 
 {% for repo_type in ("core", "content") %}
-Repo | Version | Rest API | Github Page | Changelog
---- | --- | --- | --- | --- 
+Repo | Version | Links | &nbsp; | &nbsp;
+--- | --- | --- | --- | ---
 {% for repo in get_repos(repo_type) -%}
-{{ repo.title }} | `{{ repo.version }}` | <a href="{{ repo.rest_api_url}}" target="_blank">:link:</a> | [:link:]({{ repo.codebase_url }}) | [:link:]({{ repo.changelog_url }})
+{{ repo.title }} | `{{ repo.version }}` | {{ repo.restapi_link }} | {{ repo.codebase_link }} | {{ repo.changes_link }}
 {% endfor %}
 {% endfor %}
 
-Repo | Version | Code (Github) | Changelog
---- | --- | --- | --- 
+Repo | Version | Links | &nbsp;
+--- | --- | --- | ---
 {% for repo in get_repos("other") -%}
-{{ repo.title }} | `{{ repo.version }}` | [:link:]({{ repo.codebase_url }}) | [:link:]({{ repo.changelog_url }})
+{{ repo.title }} | `{{ repo.version }}` | {{ repo.codebase_link }} | {{ repo.changes_link }}
 {% endfor %}

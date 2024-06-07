@@ -6,6 +6,7 @@ Their purpose is to facilitate declaring and downloading the source-code.
 
 from __future__ import annotations
 
+import json
 import logging
 import os
 import shutil
@@ -13,7 +14,6 @@ import subprocess
 import tarfile
 import tempfile
 import typing as t
-from collections import ChainMap, defaultdict
 from dataclasses import dataclass, field
 from io import BytesIO
 from pathlib import Path
@@ -116,13 +116,13 @@ class Repo:
         # from remote
         elif not cached_repo.exists():
             log_header = "Downloading from remote"
+            src_copy_path = DOWNLOAD_CACHE_DIR / self.name
             download_from = download_from_gh_main(
-                DOWNLOAD_CACHE_DIR / self.name,
+                src_copy_path,
                 self.owner,
                 self.name,
                 self.branch_in_use,
             )
-            src_copy_path = DOWNLOAD_CACHE_DIR / self.name
 
         # copy from source/cache to pulp-docs workdir
         log.info(f"{log_header}: source={download_from}, copied_from={src_copy_path}")
@@ -133,6 +133,7 @@ class Repo:
             src_copy_path,
             dest_dir,
             ignore=shutil.ignore_patterns(*ignore_patterns),
+            dirs_exist_ok=True,
         )
 
         self.status.download_source = str(download_from)
