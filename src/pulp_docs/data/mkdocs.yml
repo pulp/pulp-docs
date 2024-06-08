@@ -9,6 +9,7 @@ theme:
   logo: pulp-docs/docs/assets/pulp_logo_icon.svg
   favicon: pulp-docs/docs/assets/favicon.ico
   features:
+    - navigation.indexes
     - content.code.annotate
     - navigation.tabs
     - navigation.sections
@@ -35,12 +36,14 @@ theme:
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode    
-
 hooks:
   - '../mkdocs_hooks.py'
 plugins:
   - search
   - site-urls
+  - blog:
+      blog_dir: pulp-docs/docs/sections/blog
+      blog_toc: false
   - macros:
       module_name: '../mkdocs_macros'
   - tags:

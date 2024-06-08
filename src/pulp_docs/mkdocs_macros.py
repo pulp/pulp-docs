@@ -346,6 +346,8 @@ def define_env(env):
     env.conf["docs_dir"] = docs_dir
     env.conf["nav"] = get_navigation(docs_dir, repos)
 
+
+    # env.conf["plugins"]["material/blog"].config["blog_dir"] = "pulp-docs/docs/sections/blog"
     # Try to watch CWD/staging_docs
     watched_workdir = Path("staging_docs")
     if watched_workdir.exists():
