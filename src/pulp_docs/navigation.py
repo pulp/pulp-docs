@@ -106,6 +106,7 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
         {"Home": "index.md"},
         {"User Manual": manual_nav["user"]},
         {"Developer Manual": manual_nav["dev"]},
+        {"Blog": ["pulp-docs/docs/sections/blog/index.md"]},
         {"Help": help_section},
     ]
     return navigation

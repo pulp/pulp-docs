@@ -28,7 +28,7 @@ class Names:
     CONTENT = "Plugins"
 
     # personas
-    USER = "Content Management"
+    USER = "Usage"
     ADMIN = "Administration"
     DEV = "Developemnt"
 
