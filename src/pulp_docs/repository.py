@@ -65,6 +65,7 @@ class Repo:
     subpackages: t.Optional[t.List] = None
     status: RepoStatus = field(default_factory=lambda: RepoStatus())
     type: t.Optional[str] = None
+    dev_only: bool = False
 
     def __post_init__(self):
         self.branch_in_use = self.branch_in_use or self.branch
@@ -207,6 +208,7 @@ class SubPackage:
     branch_in_use = ""
     branch = ""
     owner = ""
+    dev_only: bool = False
 
     def __post_init__(self):
         self.owner = self.subpackage_of
@@ -216,9 +218,7 @@ class SubPackage:
 class Repos:
     """A collection of Repos"""
 
-    core_repo: Repo
-    content_repos: t.List[Repo] = field(default_factory=list)
-    other_repos: t.List[Repo] = field(default_factory=list)
+    repo_by_types: dict[str, Repo] = field(default_factory=dict)
 
     def update_local_checkouts(self):
         """Update repos to use local checkout, if exists in the parent dir of CWD"""
@@ -237,9 +237,13 @@ class Repos:
         return repo[0]
 
     @property
+    def repo_types(self):
+        return list(self.repo_by_types.keys())
+
+    @property
     def all(self):
         """The set of repositories and subpackages"""
-        repos = [self.core_repo] + self.content_repos + self.other_repos
+        repos = [repo for repo_type in self.repo_by_types.values() for repo in repo_type]
         subpackages = []
         for repo in repos:
             if repo.subpackages:
@@ -285,7 +289,8 @@ class Repos:
         nested_packages: t.Dict[str, t.List[SubPackage]] = {}
         with open(file, "r") as f:
             data = yaml.load(f, Loader=yaml.SafeLoader)
-            for repo_type in ("core", "content", "other"):
+            repo_types = data["meta"]["repo_types"]
+            for repo_type in repo_types:
                 repos[repo_type] = []
                 for repo in data["repos"][repo_type]:
                     # Collect nested packages
@@ -299,22 +304,18 @@ class Repos:
 
         # Update Repo objects that contain subpackages
         for parent_repo_name, subpackages_list in nested_packages.items():
-            flat_repos = repos["core"] + repos["content"] + repos["other"]
+            flat_repos = [repo for type_ in repo_types for repo in repos[type_]]
             for repo in flat_repos:
                 if repo.name == parent_repo_name:
                     repo.subpackages = subpackages_list
 
-        return Repos(
-            core_repo=repos["core"][0],
-            content_repos=repos["content"],
-            other_repos=repos["other"],
-        )
+        return Repos(repos)
 
     @classmethod
     def test_fixtures(cls):
         """Factory of test Repos. Uses fixtures shipped in package data."""
         log.info("[pulp-docs] Loading repolist file from fixtures")
-        DEFAULT_CORE = Repo("Pulp Core", "core", type="core")
+        DEFAULT_CORE = [Repo("Pulp Core", type="core")]
         DEFAULT_CONTENT_REPOS = [
             Repo(
                 "Rpm Packages",
@@ -333,4 +334,8 @@ class Repos:
                 "Docs Tool", "pulp-docs", local_basepath=FIXTURE_WORKDIR, type="other"
             ),
         ]
-        return Repos(core_repo=DEFAULT_CORE, content_repos=DEFAULT_CONTENT_REPOS)
+        repo_types = {
+            "core": DEFAULT_CORE,
+            "content": DEFAULT_CONTENT_REPOS,
+        }
+        return Repos(repo_by_types=repo_types)

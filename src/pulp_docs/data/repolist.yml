@@ -1,12 +1,30 @@
 meta:
   version: 1
   rest_api_template: https://docs.pulpproject.org/{}/restapi.html  
+  repo_types:
+    - core
+    - deployment
+    - content
+    - interfaces
+    - other
 
 repos:
   core:
     - name: pulpcore
       owner: pulp
       title: Pulp Core
+      branch: main
+  interfaces:
+    - name: pulp-openapi-generator
+      owner: pulp
+      title: OpenAPI Generator
+      branch: main
+    - name: pulp-glue
+      title: Pulp Glue
+      subpackage_of: pulp-cli
+    - name: pulp-cli
+      owner: pulp
+      title: Pulp CLI
       branch: main
   content:
     - name: pulp_maven
@@ -42,33 +60,24 @@ repos:
       title: RPM
       branch: main
     # subpackages
-    - name: pulp_certguard
-      title: Certguard
-      subpackage_of: pulpcore
     - name: pulp_file
       title: File
       subpackage_of: pulpcore
-  other:
+  deployment:
     - name: pulp-oci-images
       owner: pulp
       title: Pulp OCI Images
       branch: latest
-    - name: pulp-docs
-      owner: pulp
-      title: Pulp Docs
-      branch: main
     - name: pulp-operator
       owner: pulp
       title: Operator
       branch: main
-    - name: pulp-cli
+  other:
+    - name: pulp-docs
       owner: pulp
-      title: Pulp CLI
+      title: Pulp Docs
       branch: main
-    - name: pulp-openapi-generator
-      owner: pulp
-      title: OpenAPI Generator
-      branch: main
+      dev_only: true
     - name: pulpcore-selinux
       owner: pulp
       title: Selinux
@@ -77,7 +86,8 @@ repos:
       owner: pulp
       title: OCI Env
       branch: main
+      dev_only: true
     # subpackages
-    - name: pulp-glue
-      title: Pulp Glue
-      subpackage_of: pulp-cli
+    - name: pulp_certguard
+      title: Certguard
+      subpackage_of: pulpcore
