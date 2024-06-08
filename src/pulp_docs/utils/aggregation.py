@@ -35,6 +35,7 @@ class AgregationUtils:
         template_str: str,
         repo_types: t.Optional[t.List[str]] = None,
         content_types: t.Optional[t.List[str]] = None,
+        personas: t.Optional[t.List[str]] = None,
     ):
         """
         Get all markdown files that matches @template_str basepath and group by repos.
@@ -63,6 +64,7 @@ class AgregationUtils:
             ```
         """
 
+        # Selected Repository, Persona and Content Type
         selected_content = content_types or [
             "tutorials",
             "guides",
@@ -70,44 +72,76 @@ class AgregationUtils:
             "reference",
         ]
 
-        selected_repos = self.repos.all
-        if repo_types:
-            selected_repos = self.repos.get_repos(repo_types=repo_types)
+        selected_repo_types = repo_types or self.repos.repo_types
+        selected_repos = self.repos.get_repos(repo_types=selected_repo_types)
 
-        group_nav = []
-        for repo in selected_repos:
-            repo_nav = []
-            # Include index.md if present in staging_docs/{persona}/index.md
-            persona_basepath = self._parse_template_str(
-                template_str, repo.name, "placeholder"
-            ).parent
-            index_path = persona_basepath / "index.md"
-            if index_path.exists():
-                repo_nav.append({"Overview": str(index_path.relative_to(self.tmpdir))})
+        selected_personas = personas or ("user", "admin", "dev")
 
-            # Add content type for a repo (guides,tutorials,etc)
-            for content_type in selected_content:
-                lookup_path = self._parse_template_str(
-                    template_str, repo.name, content_type
-                )
-                _repo_content = self._add_literate_nav_dir(lookup_path)
+        # Create navigation
+        main_nav = []
+        for repo_type in selected_repo_types:
+            repo_type_nav = []
+            for repo in self.repos.get_repos([repo_type]):
+                # filter dev_only repos
+                if repo.dev_only and personas and "dev" not in personas:
+                    continue
 
-                if _repo_content:  # No content section if there are no files
-                    content_type_title = Names.get(content_type)
-                    repo_nav.append({content_type_title: _repo_content})  # type: ignore
+                repo_nav = []
+                repo_basepath = self.tmpdir / repo.name
+                repo_docs_basepath = repo_basepath / "docs"
 
-            # Add changelog and restapi
-            if "/user/" in template_str:
-                CHANGES_PATH = f"{repo.name}/changes.md"
-                RESTAPI_PATH = f"{repo.name}/restapi.md"
-                if repo.type in ("content", "core"):
-                    repo_nav.append({"REST API": RESTAPI_PATH})
-                repo_nav.append({"Changelog": CHANGES_PATH})
+                persona_section = []
+                for persona in selected_personas:
+                    persona_nav = []
 
-            # Add navigation to Repo, if one exsits
-            if repo_nav:
-                group_nav.append({repo.title: repo_nav})
-        return group_nav or ["#"]
+                    # Include index.md if present in staging_docs/{persona}/index.md
+                    persona_basepath = repo_docs_basepath / persona
+                    index_path = persona_basepath / "index.md"
+                    if index_path.exists():
+                        persona_nav.append(
+                            {"Overview": str(index_path.relative_to(self.tmpdir))}
+                        )
+
+                    # Add content type for a repo/persona (guides,tutorials,etc)
+                    for content_type in selected_content:
+                        content_basepath = persona_basepath / content_type
+                        content_type_literate_nav_path = self.add_literate_nav_dir(
+                            content_basepath
+                        )
+
+                        if (
+                            content_type_literate_nav_path
+                        ):  # No content section if there are no files
+                            content_type_title = Names.get(content_type)
+                            persona_nav.append({content_type_title: content_type_literate_nav_path})  # type: ignore
+
+                    # Add persona_nav to repo nav
+                    if persona_nav:
+                        persona_title = Names.get(persona)
+                        persona_section.append({persona_title: persona_nav})
+
+                # Add persona section to Repo nav
+                if len(persona_section) == 1 and "dev" in selected_personas:
+                    persona_squashed = [
+                        content_nav for content_nav in persona_section[0][Names.DEV]
+                    ]
+                    persona_section = persona_squashed  # type: ignore
+                repo_nav.extend(persona_section)
+
+                # Add changelog and restapi
+                if "dev" not in selected_personas:
+                    CHANGES_PATH = f"{repo.name}/changes.md"
+                    RESTAPI_PATH = f"{repo.name}/restapi.md"
+                    if repo.type in ("content", "core"):
+                        repo_nav.append({"REST API": RESTAPI_PATH})
+                    repo_nav.append({"Changelog": CHANGES_PATH})
+
+                # Add navigation to Repo, if one exsits
+                if repo_nav:
+                    repo_type_nav.append({repo.title: repo_nav})
+            if repo_type_nav:
+                main_nav.append({repo_type: repo_type_nav})
+        return main_nav or ["#"]
 
     def changes_grouping(
         self, changes_path_template: str, repo_types: t.Optional[t.List[str]] = None
@@ -122,17 +156,12 @@ class AgregationUtils:
         ]
         return group_nav or ["#"]  # type: ignore
 
-    def _add_literate_nav_dir(self, lookup_path: Path) -> t.Optional[str]:
+    def add_literate_nav_dir(self, lookup_path: Path) -> t.Optional[str]:
         """
-        Take a path and return a path-str or None.
+        Return str-path expandable by literate-nav or None.
 
-        The path-str is expanded by mkdocs-literate-nav. E.g:
-
-        For "foo/bar/eggs/", it will:
-        1. Try to find "foo/bar/eggs/_SUMMARY.md"
-        2. If cant find, generate recursive nav for "foo/bar/eggs"
-
-        If the @lookup_path is non-existent, non-dir or doesnt contain .md, returns None.
+        If @lookup_path exists and is a dir, literate-nav can expand it with or without
+        a "_SUMMARY.md" file. Otherwise, we return None, so we can ignore this path.
         """
         if not lookup_path.exists():
             return None

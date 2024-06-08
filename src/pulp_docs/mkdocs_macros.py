@@ -39,6 +39,10 @@ CHECKOUT_WORKDIR = Path().absolute().parent
 log = logging.getLogger("mkdocs")
 
 
+def has_restapi(repo_or_pkg):
+    return repo_or_pkg.type == "content" or repo_or_pkg.name == "pulpcore"
+
+
 def create_clean_tmpdir(use_cache: bool = True):
     tmpdir_basepath = Path(tempfile.gettempdir()).absolute()
     tmpdir = tmpdir_basepath / "pulp-docs-tmp"
@@ -104,7 +108,7 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
             this_src_dir = repo_sources / repo_or_pkg.subpackage_of / repo_or_pkg.name
 
         # restapi
-        if repo_or_pkg.type in ("content", "core"):
+        if has_restapi(repo_or_pkg):
             _download_api_json(api_src_dir, repo_or_pkg.name)
             _generate_rest_api_page(this_src_dir, repo_or_pkg.name, repo_or_pkg.title)
 
@@ -177,10 +181,9 @@ def _place_doc_files(src_dir: Path, docs_dir: Path, repo: Repo, api_src_dir: Pat
         repo.status.has_staging_docs = False
 
     # Setup rest Api
-    if repo.type in ("content", "core"):
+    if has_restapi(repo):
         api_json = api_src_dir / f"{repo.name}/api.json"
         api_md_page = src_dir / "restapi.md"
-        # breakpoint()
         shutil.copy(api_json, docs_dir / "api.json")
         shutil.copy(api_md_page, docs_dir / "restapi.md")
 
@@ -321,13 +324,18 @@ def define_env(env):
     # Workaround for making "pulpcore/cli/common" from pulp-cli be available as:
     # '::: pulpcore.cli.common' (from any markdown)
     # This should be a general solution.
-    shutil.copytree(
-        source_dir / "pulp-cli/pulpcore",
-        source_dir / "pulpcore/pulpcore",
-        dirs_exist_ok=True,
-    )
-    Path(source_dir / "pulpcore/pulpcore/cli/__init__.py").touch(exist_ok=True)
-    Path(source_dir / "pulpcore/pulpcore/cli/common/__init__.py").touch(exist_ok=True)
+    pulpcore_inside_pulp_cli = source_dir / "pulp-cli/pulpcore"
+    pulpcore_dir_exists = Path(source_dir / "pulpcore/pulpcore").exists()
+    if pulpcore_dir_exists and pulpcore_inside_pulp_cli.exists():
+        shutil.copytree(
+            source_dir / "pulp-cli/pulpcore",
+            source_dir / "pulpcore/pulpcore",
+            dirs_exist_ok=True,
+        )
+        Path(source_dir / "pulpcore/pulpcore/cli/__init__.py").touch(exist_ok=True)
+        Path(source_dir / "pulpcore/pulpcore/cli/common/__init__.py").touch(
+            exist_ok=True
+        )
 
     env.conf["plugins"]["mkdocstrings"].config["handlers"]["python"][
         "paths"

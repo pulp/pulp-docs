@@ -28,6 +28,7 @@ Note that you either specify:
 from __future__ import annotations
 
 from pathlib import Path
+from typing import List
 
 from pulp_docs.constants import Names
 from pulp_docs.repository import Repos
@@ -58,19 +59,35 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
     """
     f = AgregationUtils(tmpdir, repos)
     SECTION_HOST = "pulp-docs"
-    CHANGES_PATH = "{repo}/changes.md"
 
     # Manual section for each persona
-    manual_nav = {}
-    for section in ("user", "admin", "dev"):
-        TEMPLATE_STRING = "{repo}/docs/%s/{content}" % section
-        section_nav = [
-            {"Overview": f"{SECTION_HOST}/docs/sections/{section}/index.md"},
-            {"Core": f.repo_grouping(TEMPLATE_STRING, repo_types=["core"])},
-            {"Plugins": f.repo_grouping(TEMPLATE_STRING, repo_types=["content"])},
-            {"Extras": f.repo_grouping(TEMPLATE_STRING, repo_types=["other"])},
-        ]
-        manual_nav[section] = section_nav
+    TEMPLATE_STR = "{repo}/docs/{persona}/{content}"
+    manual_nav = {
+        "user": [
+            {"Overview": f"{SECTION_HOST}/docs/sections/user/index.md"},
+        ],
+        "dev": [
+            {"Overview": f"{SECTION_HOST}/docs/sections/dev/index.md"},
+            # *f.repo_grouping(DEV_TEMPLATE_STR, personas=["dev"]),
+            # {
+            #     "Core": f.repo_grouping(
+            #         DEV_TEMPLATE_STR, repo_types=["core"], personas=["dev"]
+            #     )
+            # },
+            # {
+            #     "Plugins": f.repo_grouping(
+            #         DEV_TEMPLATE_STR, repo_types=["content"], personas=["dev"]
+            #     )
+            # },
+            # {
+            #     "Extras": f.repo_grouping(
+            #         DEV_TEMPLATE_STR, repo_types=["other"], personas=["dev"]
+            #     )
+            # },
+        ],
+    }
+    manual_nav["user"].extend(f.repo_grouping(TEMPLATE_STR, personas=["user", "admin"]))
+    manual_nav["dev"].extend(f.repo_grouping(TEMPLATE_STR, personas=["dev"]))
 
     # Custom help section
     help_section = [
@@ -80,11 +97,58 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
     ]
 
     # Main Section
+    # pulpcore_nav = manual_nav["user"][1]["Core"][0]
+    # pulpcore_nav = create_repo_toc_index(pulpcore_nav)
+    # print(pulpcore_nav)
+    # manual_nav["user"][1]["Core"][0] = pulpcore_nav
+
     navigation = [
         {"Home": "index.md"},
         {"User Manual": manual_nav["user"]},
-        {"Admin Manual": manual_nav["admin"]},
         {"Developer Manual": manual_nav["dev"]},
         {"Help": help_section},
     ]
     return navigation
+
+
+def create_repo_toc_index(repo_nav: List[dict]):
+    """
+    TODO: maybe try to leverage site-map
+
+    Create a toc with the format: {tuple-path: file-path}
+
+    Sample input:
+        {'Pulp Core': [{'User': [{'Tutorials': 'pulpcore/docs/user/tutorials/'},
+                             {'How-to Guides': 'pulpcore/docs/user/guides/'},
+                             {'Learn More': 'pulpcore/docs/user/learn/'}]},
+                   {'Admin': [{'How-to Guides': 'pulpcore/docs/admin/guides/'},
+                              {'Learn More': 'pulpcore/docs/admin/learn/'}]},
+                   {'REST API': 'pulpcore/restapi.md'},
+                   {'Changelog': 'pulpcore/changes.md'}]}
+    """
+
+    def is_nav(item):
+        return isinstance(item, list)
+
+    # {dir-path: page-str}
+    toc = {}
+    path = []
+
+    def recursive_add(nav):
+        for name, item in nav.items():
+            path.append(name)
+            if isinstance(item, list):
+                for entry in item:
+                    recursive_add(entry)
+                    path.pop()
+            elif isinstance(item, dict):
+                item_name, entry = item.items()
+                path.append(item_name)
+                recursive_add(entry)
+                toc[tuple(path)] = None
+                path.pop()
+            else:
+                toc[tuple(path)] = item
+
+    recursive_add(repo_nav)
+    return toc

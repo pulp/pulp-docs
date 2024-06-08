@@ -28,9 +28,9 @@ class Names:
     CONTENT = "Plugins"
 
     # personas
-    USER = "User"
-    ADMIN = "Admin"
-    DEV = "Dev"
+    USER = "Content Management"
+    ADMIN = "Administration"
+    DEV = "Developemnt"
 
     # other
     PULPCORE_TUTORIAL = "Getting Started"
