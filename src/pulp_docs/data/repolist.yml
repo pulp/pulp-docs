@@ -3,9 +3,9 @@ meta:
   rest_api_template: https://docs.pulpproject.org/{}/restapi.html  
   repo_types:
     - core
-    - deployment
     - content
-    - interfaces
+    - deployment
+    - interaction
     - other
 
 repos:
@@ -14,7 +14,7 @@ repos:
       owner: pulp
       title: Pulp Core
       branch: main
-  interfaces:
+  interaction:
     - name: pulp-openapi-generator
       owner: pulp
       title: OpenAPI Generator

@@ -6,9 +6,7 @@ Their purpose is to facilitate declaring and downloading the source-code.
 
 from __future__ import annotations
 
-import json
 import logging
-import os
 import shutil
 import subprocess
 import tarfile
@@ -70,11 +68,9 @@ class Repo:
     def __post_init__(self):
         self.branch_in_use = self.branch_in_use or self.branch
 
-    @property
-    def rest_api_link(self):
-        return RESTAPI_TEMPLATE.format(self.name)
-
-    def download(self, dest_dir: Path, clear_cache: bool = False) -> str:
+    def download(
+        self, dest_dir: Path, clear_cache: bool = False, disabled: t.Sequence[str] = []
+    ) -> str:
         """
         Download repository source from url into the {dest_dir} Path.
 
@@ -130,6 +126,12 @@ class Repo:
 
         # ignore files lisetd in .gitignore and files that starts with "."
         ignore_patterns = get_git_ignored_files(Path(src_copy_path)) + [".*"]
+
+        # skip blog for faster reloads
+        if self.name == "pulp-docs" and "blog" in disabled:
+            # limitation: https://github.com/Miserlou/Zappa/issues/692#issuecomment-283012663
+            ignore_patterns.append("*posts")
+
         shutil.copytree(
             src_copy_path,
             dest_dir,
@@ -243,12 +245,14 @@ class Repos:
     @property
     def all(self):
         """The set of repositories and subpackages"""
-        repos = [repo for repo_type in self.repo_by_types.values() for repo in repo_type]
+        repos = [
+            repo for repo_type in self.repo_by_types.values() for repo in repo_type
+        ]
         subpackages = []
         for repo in repos:
             if repo.subpackages:
                 subpackages.extend(repo.subpackages)
-        return repos + subpackages
+        return sorted(repos + subpackages, key=lambda x: x.title)
 
     def get_repos(self, repo_types: t.Optional[t.List] = None):
         """Get a set of repositories and subpackages by type."""

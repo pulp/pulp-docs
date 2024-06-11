@@ -8,11 +8,10 @@ hide:
 
 <div class="hero-header" markdown>
 
-## This section is for **users**
+## This section is for **users** and **admins**
 
-Common needs are to *create, sync, publish and interact with repositories*.
-
-
+Common **user** needs are to *create, sync, publish and interact with repositories*,
+while **admin** needs are to *configure, deploy and maintain Pulp instances*.
 
 <div class="grid cards" markdown>
 

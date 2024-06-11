@@ -2,10 +2,12 @@
 The main CLI module.
 """
 
+import os
 import typing as t
 from pathlib import Path
 
 import click
+
 from pulp_docs.main import Config, PulpDocs
 
 
@@ -53,6 +55,14 @@ no_reload_help = "Disable the live reloading in the development server."
 )
 @click.option("--no-livereload", "livereload", flag_value=False, help=no_reload_help)
 @click.option("--livereload", "livereload", flag_value=True, default=True, hidden=True)
+@click.option(
+    "-a",
+    "--enable-all",
+    "enable_all",
+    flag_value=True,
+    default=False,
+    help="Enable all mkdocs features (e.g, the blog rendering)",
+)
 @pass_pulpdocs_context
 def serve(
     ctx: PulpDocsContext,
@@ -60,6 +70,7 @@ def serve(
     verbose: bool,
     watch: t.List[Path],
     livereload: bool,
+    enable_all: bool,
 ):
     """Run mkdocs server."""
     config = ctx.config
@@ -69,6 +80,12 @@ def serve(
     config.verbose = verbose
     config.watch = watch
     config.livereload = livereload
+
+    # by default blog should be disabled, because it affects reload time a lot.
+    disabled = os.environ.get("PULPDOCS_DISABLED", "blog")
+    if enable_all is True:
+        disabled = ""
+    config.disabled = disabled
 
     dry_run = True if config.test_mode else False
     pulpdocs.serve(config, dry_run=dry_run)

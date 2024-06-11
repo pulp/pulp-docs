@@ -18,6 +18,10 @@ def cast_bool(value: str) -> bool:
     return False if value.lower() in ("f", "false") else True
 
 
+def cast_list(value: str) -> t.List[str]:
+    return [v.strip() for v in value.split(",") if v]
+
+
 class Config:
     """
     Configuration shared among CLI and mkdocs_macro.py hooks.
@@ -38,12 +42,14 @@ class Config:
 
             if env_mkdocs := os.environ.get("PULPDOCS_MKDOCS_FILE"):
                 self.mkdocs_file = Path(env_mkdocs)
+            self.disabled = []
         else:
             self.verbose = cast_bool(os.environ["PULPDOCS_VERBOSE"])
             self.workdir = Path(os.environ["PULPDOCS_WORKDIR"])
             self.mkdocs_file = Path(os.environ["PULPDOCS_MKDOCS_FILE"])
             self.repolist = Path(os.environ["PULPDOCS_REPOLIST"])
             self.clear_cache = cast_bool(os.environ["PULPDOCS_CLEAR_CACHE"])
+            self.disabled = cast_list(os.environ.get("PULPDOCS_DISABLED", ""))
         self.watch: list[Path] = []
         self.livereload = True
         self.test_mode = cast_bool(os.environ.get("PULPDOCS_TEST_MODE", "f"))
