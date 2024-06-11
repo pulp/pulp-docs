@@ -21,14 +21,15 @@ import shutil
 import tempfile
 import time
 from pathlib import Path
+from textwrap import dedent
 
 import httpx
 import rich
 
 from pulp_docs.cli import Config
-from pulp_docs.constants import RESTAPI_URL_TEMPLATE
 from pulp_docs.navigation import get_navigation
 from pulp_docs.repository import Repo, Repos, SubPackage
+from pulp_docs.utils.general import get_git_ignored_files
 
 # the name of the docs in the source repositories
 SRC_DOCS_DIRNAME = "staging_docs"
@@ -103,7 +104,11 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
         this_docs_dir = repo_docs / repo_or_pkg.name
         if not isinstance(repo_or_pkg, SubPackage):
             this_src_dir = repo_sources / repo_or_pkg.name
-            repo_or_pkg.download(dest_dir=this_src_dir, clear_cache=config.clear_cache)
+            repo_or_pkg.download(
+                dest_dir=this_src_dir,
+                clear_cache=config.clear_cache,
+                disabled=config.disabled,
+            )
         else:
             this_src_dir = repo_sources / repo_or_pkg.subpackage_of / repo_or_pkg.name
 
@@ -175,7 +180,10 @@ def _place_doc_files(src_dir: Path, docs_dir: Path, repo: Repo, api_src_dir: Pat
     log.info(f"Moving doc files:\nfrom '{src_dir}'\nto '{docs_dir}'")
 
     try:
-        shutil.copytree(src_dir / SRC_DOCS_DIRNAME, docs_dir / "docs")
+        shutil.copytree(
+            src_dir / SRC_DOCS_DIRNAME,
+            docs_dir / "docs",
+        )
     except FileNotFoundError:
         Path(docs_dir / "docs").mkdir(parents=True)
         repo.status.has_staging_docs = False
@@ -337,17 +345,30 @@ def define_env(env):
             exist_ok=True
         )
 
-    env.conf["plugins"]["mkdocstrings"].config["handlers"]["python"][
-        "paths"
-    ] = code_sources
+    try:
+        env.conf["plugins"]["mkdocstrings"].config["handlers"]["python"][
+            "paths"
+        ] = code_sources
+    except KeyError:
+        ...
 
     # Configure navigation
     log.info("[pulp-docs] Configuring navigation")
     env.conf["docs_dir"] = docs_dir
     env.conf["nav"] = get_navigation(docs_dir, repos)
 
+    # Disable plugins if in edit_mode
+    mkdocs_features = {
+        # "plugins": "mkdocstrings",
+        # "tags": "material/tags",
+        "blog": "material/blog",
+        # "search": "material/search",
+    }
+    env.conf["mkdocs_features"] = mkdocs_features
+    for feature_id, plugin_name in mkdocs_features.items():
+        if feature_id in config.disabled:
+            env.conf["plugins"][plugin_name].config["enabled"] = False
 
-    # env.conf["plugins"]["material/blog"].config["blog_dir"] = "pulp-docs/docs/sections/blog"
     # Try to watch CWD/staging_docs
     watched_workdir = Path("staging_docs")
     if watched_workdir.exists():
@@ -412,3 +433,13 @@ def on_post_build(env):
     """The mkdocs-marcros 'on_post_build' hook. Used to print summary report for end user."""
     # Log relevant most useful information for end-user
     print_user_repo(repos=env.conf["pulp_repos"], config=env.conf["pulp_config"])
+
+    # Print help about disabling features
+    features_msg = """\
+    Blog rendering is disabled for faster reloads.
+    To enable it, use: -a, --enable-all
+    """
+
+    disabled = env.conf["pulp_config"].disabled
+    log.warning(f"[pulp-docs] Disabled features: {disabled}")
+    print(features_msg)

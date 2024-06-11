@@ -73,13 +73,13 @@ class AgregationUtils:
         ]
 
         selected_repo_types = repo_types or self.repos.repo_types
-        selected_repos = self.repos.get_repos(repo_types=selected_repo_types)
+        selected_repo_types = [(name, name.title()) for name in selected_repo_types]
 
         selected_personas = personas or ("user", "admin", "dev")
 
         # Create navigation
         main_nav = []
-        for repo_type in selected_repo_types:
+        for repo_type, repo_type_title in selected_repo_types:
             repo_type_nav = []
             for repo in self.repos.get_repos([repo_type]):
                 # filter dev_only repos
@@ -140,7 +140,7 @@ class AgregationUtils:
                 if repo_nav:
                     repo_type_nav.append({repo.title: repo_nav})
             if repo_type_nav:
-                main_nav.append({repo_type: repo_type_nav})
+                main_nav.append({repo_type_title: repo_type_nav})
         return main_nav or ["#"]
 
     def changes_grouping(

@@ -65,29 +65,13 @@ def grouped_by_persona(tmpdir: Path, repos: Repos):
     manual_nav = {
         "user": [
             {"Overview": f"{SECTION_HOST}/docs/sections/user/index.md"},
+            *f.repo_grouping(TEMPLATE_STR, personas=["user", "admin"])
         ],
         "dev": [
             {"Overview": f"{SECTION_HOST}/docs/sections/dev/index.md"},
-            # *f.repo_grouping(DEV_TEMPLATE_STR, personas=["dev"]),
-            # {
-            #     "Core": f.repo_grouping(
-            #         DEV_TEMPLATE_STR, repo_types=["core"], personas=["dev"]
-            #     )
-            # },
-            # {
-            #     "Plugins": f.repo_grouping(
-            #         DEV_TEMPLATE_STR, repo_types=["content"], personas=["dev"]
-            #     )
-            # },
-            # {
-            #     "Extras": f.repo_grouping(
-            #         DEV_TEMPLATE_STR, repo_types=["other"], personas=["dev"]
-            #     )
-            # },
+            *f.repo_grouping(TEMPLATE_STR, personas=["dev"])
         ],
     }
-    manual_nav["user"].extend(f.repo_grouping(TEMPLATE_STR, personas=["user", "admin"]))
-    manual_nav["dev"].extend(f.repo_grouping(TEMPLATE_STR, personas=["dev"]))
 
     # Custom help section
     help_section = [
