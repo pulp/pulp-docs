@@ -40,7 +40,7 @@ hide:
 
     Learn why important projects rely on Pulp to manage the lifecyle of huge *Software Content* collections.
 
-    [:octicons-arrow-right-24: Features](site:pulp-docs/docs/sections/help/more/why-pulp/)
+    [:octicons-arrow-right-24: Features](site:help/more/why-pulp/)
 
 -   :octicons-people-16:{ .lg .middle } **Get Involved**
 
@@ -48,6 +48,6 @@ hide:
 
     Join our communication channels and get to know the contributors and users of Pulp's strong ecosystem.
 
-    [:octicons-arrow-right-24: Community](site:pulp-docs/docs/sections/help/community/get-involved/)
+    [:octicons-arrow-right-24: Community](site:help/community/get-involved/)
 
 </div>

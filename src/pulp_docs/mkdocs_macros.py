@@ -28,6 +28,7 @@ import rich
 
 from pulp_docs.cli import Config
 from pulp_docs.navigation import get_navigation
+from pulp_docs.constants import SECTION_REPO
 from pulp_docs.repository import Repo, Repos, SubPackage
 from pulp_docs.utils.general import get_git_ignored_files
 
@@ -165,6 +166,8 @@ def _place_doc_files(src_dir: Path, docs_dir: Path, repo: Repo, api_src_dir: Pat
     """
     Copy only doc-related files from src_dir to doc_dir.
 
+    This effectively make it possible to control the url design.
+
     Examples:
         ```
         # src_dir
@@ -187,6 +190,13 @@ def _place_doc_files(src_dir: Path, docs_dir: Path, repo: Repo, api_src_dir: Pat
     except FileNotFoundError:
         Path(docs_dir / "docs").mkdir(parents=True)
         repo.status.has_staging_docs = False
+
+    # Setup section pages (for better urls)
+    if repo.name == SECTION_REPO:
+        shutil.copytree(
+            docs_dir / "docs" / "sections", docs_dir.parent, dirs_exist_ok=True
+        )
+        shutil.rmtree(docs_dir / "docs" / "sections")
 
     # Setup rest Api
     if has_restapi(repo):
