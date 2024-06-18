@@ -1,3 +1,8 @@
+"""Project constants."""
+
+SECTION_REPO = "pulp-docs"
+"""The repository which contains section pages"""
+
 ADMIN_NAME = "admin"
 USER_NAME = "user"
 RESTAPI_URL_TEMPLATE = "https://docs.pulpproject.org/{}/restapi.html"
