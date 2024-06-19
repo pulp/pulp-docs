@@ -19,7 +19,7 @@ while **admin** needs are to *configure, deploy and maintain Pulp instances*.
 
     ---
     
-    Complete the starter tutorial to learn in pratice the basics of managing content in Pulp.
+    Complete the starter tutorial to learn in practice the basics of managing content in Pulp.
 
     
 -   **Understand the docs**
