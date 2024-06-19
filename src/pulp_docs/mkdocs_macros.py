@@ -198,7 +198,8 @@ def _place_doc_files(src_dir: Path, docs_dir: Path, repo: Repo, api_src_dir: Pat
             if not index_file.exists():
                 index_file.write_text(
                     f"# Welcome to {repo.title}\n\nThis is a generated page. "
-                    "See [pulp-docs tricks](#) to learn how to add a custom intro page."
+                    "See how to add a custom overview page for you plugin "
+                    "[here](site:pulp-docs/docs/dev/guides/create-plugin-overviews/)."
                 )
 
     # Setup section pages (for better urls)

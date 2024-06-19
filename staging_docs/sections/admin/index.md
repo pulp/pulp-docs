@@ -19,7 +19,7 @@ Common needs are to *configure, deploy and maintain Pulp instances*.
 
     ---
 
-    Start developing your service or application by levaraging our powerfull deployment setups.
+    Start developing your service or application by levaraging our powerful deployment setups.
     
 - **Engage**
 

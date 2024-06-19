@@ -27,7 +27,7 @@ Common needs are to *improve docs, fix bugs and add features*.
     
     ---
 
-    Dive-in into Pulp code and architecture to help extend, improve and move the project foward.
+    Dive-in into Pulp code and architecture to help extend, improve and move the project forward.
 
     
 </div>

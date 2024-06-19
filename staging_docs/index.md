@@ -38,7 +38,7 @@ hide:
 
     ---
 
-    Learn why important projects rely on Pulp to manage the lifecyle of huge *Software Content* collections.
+    Learn why important projects rely on Pulp to manage the lifecycle of huge *Software Content* collections.
 
     [:octicons-arrow-right-24: Features](site:help/more/why-pulp/)
 

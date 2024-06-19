@@ -7,7 +7,7 @@ Understaning the docs will help you find what you need more quickly.
 
 For some human help, you should visit the [Get Involved](site:pulp-docs/docs/sections/help/community/00_get-involved/) section.
 There you'll learn about how to can reach out to the Pulp Community.
-Don't hesistate to contact us!
+Don't hesitate to contact us!
 
 ---
 
