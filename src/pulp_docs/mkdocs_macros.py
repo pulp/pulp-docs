@@ -20,6 +20,7 @@ import logging
 import shutil
 import tempfile
 import time
+from contextlib import suppress
 from pathlib import Path
 from textwrap import dedent
 
@@ -27,8 +28,8 @@ import httpx
 import rich
 
 from pulp_docs.cli import Config
-from pulp_docs.navigation import get_navigation
 from pulp_docs.constants import SECTION_REPO
+from pulp_docs.navigation import get_navigation
 from pulp_docs.repository import Repo, Repos, SubPackage
 from pulp_docs.utils.general import get_git_ignored_files
 
@@ -190,6 +191,15 @@ def _place_doc_files(src_dir: Path, docs_dir: Path, repo: Repo, api_src_dir: Pat
     except FileNotFoundError:
         Path(docs_dir / "docs").mkdir(parents=True)
         repo.status.has_staging_docs = False
+
+    # Add index pages to User and Dev sections
+    for index_file in (docs_dir / "index.md", docs_dir / "docs/dev/index.md"):
+        with suppress(FileNotFoundError):
+            if not index_file.exists():
+                index_file.write_text(
+                    f"# Welcome to {repo.title}\n\nThis is a generated page. "
+                    "See [pulp-docs tricks](#) to learn how to add a custom intro page."
+                )
 
     # Setup section pages (for better urls)
     if repo.name == SECTION_REPO:

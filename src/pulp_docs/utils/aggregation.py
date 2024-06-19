@@ -132,9 +132,11 @@ class AgregationUtils:
                 if "dev" not in selected_personas:
                     CHANGES_PATH = f"{repo.name}/changes.md"
                     RESTAPI_PATH = f"{repo.name}/restapi.md"
+                    PLUGIN_INDEX = f"{repo.name}/index.md"
                     if repo.type in ("content", "core"):
                         repo_nav.append({"REST API": RESTAPI_PATH})
                     repo_nav.append({"Changelog": CHANGES_PATH})
+                    repo_nav.append(PLUGIN_INDEX)
 
                 # Add navigation to Repo, if one exsits
                 if repo_nav:
