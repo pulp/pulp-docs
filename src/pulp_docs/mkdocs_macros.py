@@ -146,8 +146,8 @@ def _download_api_json(api_dir: Path, repo_name: str):
         return
 
     log.info(f"Downloading api.json for {repo_name}")
-    api_url_1 = "https://docs.pulpproject.org/{repo_name}/api.json"
-    api_url_2 = "https://docs.pulpproject.org/{repo_name}/_static/api.json"
+    api_url_1 = "https://pulpproject.org/{repo_name}/api.json"
+    api_url_2 = "https://pulpproject.org/{repo_name}/_static/api.json"
     response = httpx.get(api_url_1.format(repo_name=repo_name))
     if response.is_error:
         response = httpx.get(api_url_2.format(repo_name=repo_name))
