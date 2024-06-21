@@ -10,15 +10,22 @@ concurrency:
 jobs:
   build:
     uses: "./.github/workflows/build.yml"
+
   docs:
     needs:
       - "build"
     uses: "./.github/workflows/docs.yml"
+
+  tests:
+    needs: "build"
+    uses: "./.github/workflows/tests.yml"
+
   ready-to-ship:
     # This is a dummy dependent task to have a single entry for the branch protection rules.
     runs-on: "ubuntu-latest"
     needs:
       - "docs"
+      - "tests"
     if: "always()"
     steps:
       - name: "Collect needed jobs results"

@@ -1,4 +1,4 @@
-name: "Docs Test"
+name: "Tests"
 
 on:
   workflow_call:
@@ -15,8 +15,8 @@ jobs:
 
       - name: "Install Test Dependencies"
         run: |
-          pip install -r doc_requirements.txt
+          pip install -r test_requirements.txt
 
-      - name: Build docs
+      - name: "Run test suite"
         run: |
-          make docs
+          pytest -sv

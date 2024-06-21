@@ -1,5 +1,8 @@
 """Project constants."""
 
+BASE_TMPDIR_NAME = "pulpdocs_tmp"
+"""Base temporary directory name for all pulp-docs operations."""
+
 SECTION_REPO = "pulp-docs"
 """The repository which contains section pages"""
 
