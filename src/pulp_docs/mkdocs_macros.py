@@ -93,14 +93,19 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
 
         ```
     """
-    # Download/copy source code to tmpdir
     repo_sources = TMPDIR / "repo_sources"
     repo_docs = TMPDIR / "repo_docs"
     api_src_dir = TMPDIR / "api_json"
     shutil.rmtree(repo_sources, ignore_errors=True)
     shutil.rmtree(repo_docs, ignore_errors=True)
 
-    for repo_or_pkg in repos.all:
+    # assure subpackages are last, because they depend on their repo parent
+    subpackages = [s for s in repos.all if isinstance(s, SubPackage)]
+    normal_repos = [s for s in repos.all if not isinstance(s, SubPackage)]
+    all_repos = normal_repos + subpackages
+
+    # Download/copy source code to tmpdir
+    for repo_or_pkg in all_repos:
         start = time.perf_counter()
         # handle subpcakges nested under repositories
         this_docs_dir = repo_docs / repo_or_pkg.name
