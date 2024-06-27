@@ -1,3 +1,0 @@
-# PulpCon
-
-EDIT ME.
