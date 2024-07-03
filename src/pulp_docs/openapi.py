@@ -65,7 +65,8 @@ class OpenAPIGenerator:
     """
 
     def __init__(self, plugins: list[PulpPlugin], dry_run=False):
-        self.plugins = plugins + [PulpPlugin("pulpcore", "core", False)]
+        self.pulpcore = PulpPlugin("pulpcore", "core", False)
+        self.plugins = plugins + [self.pulpcore]
         self.dry_run = dry_run
 
         # setup working tmpdir
@@ -91,18 +92,11 @@ class OpenAPIGenerator:
 
     def setup_venv(self, plugin: PulpPlugin):
         """
-        Creates virtualenv with plugin + pulpcore.
+        Creates virtualenv with plugin.
         """
-        install_cmd = []
         create_venv_cmd = ("python", "-m", "venv", self.venv_path)
-
-        if plugin.is_subpackage or plugin.name == "pulpcore":
-            if Path(self.venv_path).exists():
-                return
-            install_cmd = ["pip", "install", "pulpcore"]
-        else:
-            url = f"git+{plugin.get_remote_url()}"
-            install_cmd = ["pip", "install", "pulpcore", url]
+        url = plugin.get_remote_url() if not plugin.is_subpackage else self.pulpcore.get_remote_url()
+        install_cmd = ["pip", "install", f"git+{url}"]
 
         if self.dry_run is True:
             print(" ".join(create_venv_cmd))
