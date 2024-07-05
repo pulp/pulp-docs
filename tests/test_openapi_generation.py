@@ -22,5 +22,5 @@ def test_openapi_generation(tmp_path: Path, monkeypatch):
     assert {"core-api.json", "rpm-api.json", "file-api.json"} == set(output_ls)
 
     for label, path in zip(output_labels, output_paths):
-        openapi_data= json.loads(path.read_text())
+        openapi_data = json.loads(path.read_text())
         assert label in openapi_data["info"]["x-pulp-app-versions"].keys()

@@ -3,9 +3,9 @@ Hooks for mkdocs events.
 
 See: https://www.mkdocs.org/user-guide/configuration/#hooks
 """
+
 import re
 from collections import defaultdict
-from typing import Union
 
 from bs4 import BeautifulSoup as bs
 from mkdocs.structure.nav import Page, Section
