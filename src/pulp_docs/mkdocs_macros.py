@@ -198,14 +198,17 @@ def _place_doc_files(src_dir: Path, docs_dir: Path, repo: Repo, api_src_dir: Pat
         repo.status.has_staging_docs = False
 
     # Add index pages to User and Dev sections
-    for index_file in (docs_dir / "index.md", docs_dir / "docs/dev/index.md"):
-        with suppress(FileNotFoundError):
-            if not index_file.exists():
-                index_file.write_text(
-                    f"# Welcome to {repo.title}\n\nThis is a generated page. "
-                    "See how to add a custom overview page for you plugin "
-                    "[here](site:pulp-docs/docs/dev/guides/create-plugin-overviews/)."
-                )
+    main_index = docs_dir / "docs/index.md"
+    dev_index = docs_dir / "docs/dev/index.md"
+    for index_file in (main_index, dev_index):
+        if not index_file.exists() and index_file.parent.exists():
+            index_file.write_text(
+                f"# Welcome to {repo.title}\n\nThis is a generated page. "
+                "See how to add a custom overview page for you plugin "
+                "[here](site:pulp-docs/docs/dev/guides/create-plugin-overviews/)."
+            )
+    # clean index url: pulpcore/docs/ -> pulpcore
+    shutil.move(main_index, main_index.parent.parent)
 
     # Setup section pages (for better urls)
     if repo.name == SECTION_REPO:

@@ -1,6 +1,7 @@
 """
 Module for generating open-api json files for selected Pulp plugins.
 """
+
 import argparse
 import os
 import shutil
@@ -95,7 +96,11 @@ class OpenAPIGenerator:
         Creates virtualenv with plugin.
         """
         create_venv_cmd = ("python", "-m", "venv", self.venv_path)
-        url = plugin.get_remote_url() if not plugin.is_subpackage else self.pulpcore.get_remote_url()
+        url = (
+            plugin.get_remote_url()
+            if not plugin.is_subpackage
+            else self.pulpcore.get_remote_url()
+        )
         install_cmd = ["pip", "install", f"git+{url}"]
 
         if self.dry_run is True:
