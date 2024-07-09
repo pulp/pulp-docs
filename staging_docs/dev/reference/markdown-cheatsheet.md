@@ -69,10 +69,10 @@ The basic syntax is:
 Ordering is enabled by `mkdocs-literate-nav`
 (learn more [here](https://oprypin.github.io/mkdocs-literate-nav/reference.html)).
 
-The basic setup is having a a file in `{repo}/docs/{user}/{persona}/_SUMMARY.md`. 
+The basic setup is having a file in `{repo}/docs/{persona}/{doc_type}/_SUMMARY.md`.
 In this file you should use the following syntax:
 
-```markdown title="pulp_rpm/docs/user/guides/_SUMMARY.md"
+```markdown title="pulp_plugin/docs/user/guides/_SUMMARY.md"
 # Basic
 * [First list item](z-page.md)
 * [Second list item](m-page.md)
@@ -87,7 +87,7 @@ In this file you should use the following syntax:
 # Recursive Globs
 * [I want this first](some-page.md)
 * *.md
-* [This last and recurse this dir](other/)    
+* [This last and recurse this dir](other/)
 ```
 
 ### Codeblocks
@@ -111,6 +111,7 @@ Markdown syntax:
 serializer = mymodelserializer(data=data)
 serializer.is_valid(raise_exception=true)
 instance = serializer.create(serializer.validated_data)
+print(instance)
 ```
 ````
 
@@ -125,11 +126,11 @@ The codeblock can also have a title, which is useful if its a file:
 Markdown syntax:
 
 ````
-```bash title="script.sh"
+```bash title="sample-title-here.sh"
 pulp file repository update --name myrepo --retained-versions 1
 ```
 ````
-    
+
 ### Admonitions
 
 [See mkdocs-material](https://squidfunk.github.io/mkdocs-material/reference/admonitions/#supported-types)

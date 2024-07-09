@@ -1,5 +1,5 @@
 site_name: Pulp Project
-site_url: https://staging-docs.pulpproject.org/
+site_url: https://pulpproject.org/
 repo_url: https://github.com/pulp/pulpcore
 repo_name: pulp/pulpcore
 
@@ -29,13 +29,13 @@ theme:
       primary: custom
       accent: black
       toggle:
-        icon: material/toggle-switch-off-outline 
+        icon: material/toggle-switch-off-outline
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
-      scheme: slate 
+      scheme: slate
       toggle:
         icon: material/toggle-switch
-        name: Switch to light mode    
+        name: Switch to light mode
 hooks:
   - '../mkdocs_hooks.py'
 plugins:
@@ -51,7 +51,7 @@ plugins:
   - literate-nav:
       nav_file: _SUMMARY.md
   - mkdocstrings:
-      handlers: 
+      handlers:
         python:
           options:
             show_source: false
