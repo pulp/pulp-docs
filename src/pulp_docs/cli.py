@@ -99,6 +99,7 @@ def build(ctx: PulpDocsContext):
     pulpdocs = ctx.pulp_docs
 
     config.verbose = True
+    config.disabled = ""
 
     dry_run = True if config.test_mode else False
     pulpdocs.build(config, dry_run=dry_run)
