@@ -42,7 +42,7 @@ plugins:
   - search
   - site-urls
   - blog:
-      blog_dir: pulp-docs/docs/sections/blog
+      blog_dir: blog
       blog_toc: false
   - macros:
       module_name: '../mkdocs_macros'

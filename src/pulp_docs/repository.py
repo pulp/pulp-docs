@@ -125,11 +125,11 @@ class Repo:
         log.info(f"{log_header}: source={download_from}, copied_from={src_copy_path}")
 
         # ignore files lisetd in .gitignore and files that starts with "."
+        # shutil ignore limitation: https://github.com/Miserlou/Zappa/issues/692#issuecomment-283012663
         ignore_patterns = get_git_ignored_files(Path(src_copy_path)) + [".*"]
 
         # skip blog for faster reloads
         if self.name == "pulp-docs" and "blog" in disabled:
-            # limitation: https://github.com/Miserlou/Zappa/issues/692#issuecomment-283012663
             ignore_patterns.append("*posts")
 
         shutil.copytree(
