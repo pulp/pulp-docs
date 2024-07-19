@@ -1,0 +1,40 @@
+name: "Update Data Branch"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 0,3"  # every sunday and wednesday at midnight
+
+jobs:
+  update-data:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout docs-data branch"
+        uses: "actions/checkout@v4"
+        with:
+          ref: docs-data
+
+      - name: "Set up Python"
+        uses: "actions/setup-python@v5"
+        with:
+          python-version: "3.11"
+
+      - name: "List requirements"
+        run: |
+          cat requirements_ubuntu.txt
+          cat requirements_python.txt
+
+      - name: "Install System dependencies"
+        run: |
+          sudo apt -y install $(tr '\n' ' ' < requirements_ubuntu.txt)
+
+      - name: "Install Python dependencies"
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements_python.txt
+
+      - name: "Generate, commit and push updated openapi json files to 'docs-data' branch"
+        run: |
+          git config user.name github-actions
+          git config user.email github-action@github.com
+          ./update-data.sh
