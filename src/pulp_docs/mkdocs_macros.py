@@ -190,12 +190,19 @@ def _place_doc_files(src_dir: Path, docs_dir: Path, repo: Repo, api_src_dir: Pat
 
     try:
         shutil.copytree(
-            src_dir / SRC_DOCS_DIRNAME,
+            src_dir / "staging_docs",
             docs_dir / "docs",
         )
+        repo.status.has_staging_docs = True
     except FileNotFoundError:
-        Path(docs_dir / "docs").mkdir(parents=True)
         repo.status.has_staging_docs = False
+        try:
+            shutil.copytree(
+                src_dir / "docs",
+                docs_dir / "docs",
+            )
+        except FileNotFoundError:
+            Path(docs_dir / "docs").mkdir(parents=True)
 
     # Add index pages to User and Dev sections
     main_index = docs_dir / "docs/index.md"
@@ -398,9 +405,11 @@ def define_env(env):
         if feature_id in config.disabled:
             env.conf["plugins"][plugin_name].config["enabled"] = False
 
-    # Try to watch CWD/staging_docs
-    watched_workdir = Path("staging_docs")
-    if watched_workdir.exists():
+    # Try to watch CWD/staging_docs or CWD/docs
+    watched_workdir = next(
+        (p for p in (Path("staging_docs"), Path("docs")) if p.exists()), None
+    )
+    if watched_workdir:
         env.conf["watch"].append(str(watched_workdir.resolve()))
 
     # Pass relevant data for future processing
@@ -445,16 +454,25 @@ def on_pre_page_macros(env):
     repos: Repos = env.conf["pulp_repos"]  # type: ignore
 
     # Configure the edit_url with correct repository and path
-    src_uri = env.page.file.src_uri.replace("/docs/", f"/{SRC_DOCS_DIRNAME}/")
+    src_uri = env.page.file.src_uri
     if src_uri != "index.md":
         repo, _, path = src_uri.partition("/")
     else:
         repo = "pulpcore"
-        path = f"{SRC_DOCS_DIRNAME}/index.md"
+        path = "docs/index.md"
 
     repo_obj = repos.get(repo)
-    repo_branch = getattr(repo_obj, "branch", "main")
-    edit_url = f"https://github.com/pulp/{repo}/edit/{repo_branch}/{path}"
+    if repo_obj:
+        if repo_obj.status.has_staging_docs:
+            path = ("/" + path).replace("/docs/", "/staging_docs/")[1:]
+        if isinstance(repo_obj, SubPackage):
+            path = repo_obj.name + "/" + path
+            repo = repo_obj.subpackage_of
+            repo_obj = repos.get(repo)
+        repo_branch = getattr(repo_obj, "branch", "main")
+        edit_url = f"https://github.com/pulp/{repo}/edit/{repo_branch}/{path}"
+    else:
+        edit_url = None
     env.page.edit_url = edit_url
 
 
