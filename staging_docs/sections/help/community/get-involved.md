@@ -32,4 +32,3 @@ Introduce yourself, your project, what you’re hoping to achieve with Pulp. We 
 ## Helpful links
 
 - [Youtube channel](https://www.youtube.com/PulpProject): Demos, even recordings and rich discussions!
-- [Twitter](https://twitter.com/pulpproj): Release news
