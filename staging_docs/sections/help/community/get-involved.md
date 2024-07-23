@@ -23,8 +23,8 @@ Introduce yourself, your project, what you’re hoping to achieve with Pulp. We 
 
 - For reporting a **bug** or requesting a **feature**:
     1. First try to search if some similar issue was not already reported.
-    2. If not, submit an issue to the appropriate repository (pulpcore, pulp_rpm, pulp-oci-images, etc)
-- For **security issue**, send an email to [pulp-security@redhat.com](#) with:
+    2. If not, submit an issue to the appropriate repository (pulpcore, pulp\_rpm, pulp-oci-images, etc)
+- For **security issue**, send an email to [pulp-security@redhat.com](mailto:pulp-security@redhat.com) with:
     - Pulp version
     - Vulnerability description
     - Reproduction steps.
