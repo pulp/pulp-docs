@@ -2,10 +2,10 @@
 
 :wave: Welcome to the help section!
 
-If this is the first time navigating trough these docs, we recommend reading the [Documentation Usage](site:pulp-docs/docs/sections/help/more/docs-usage/).
+If this is the first time navigating trough these docs, we recommend reading the [Documentation Usage](site:help/more/docs-usage/).
 Understaning the docs will help you find what you need more quickly.
 
-For some human help, you should visit the [Get Involved](site:pulp-docs/docs/sections/help/community/00_get-involved/) section.
+For some human help, you should visit the [Get Involved](site:help/community/get-involved/) section.
 There you'll learn about how to can reach out to the Pulp Community.
 Don't hesitate to contact us!
 
