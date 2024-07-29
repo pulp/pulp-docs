@@ -118,6 +118,7 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
             )
         else:
             this_src_dir = repo_sources / repo_or_pkg.subpackage_of / repo_or_pkg.name
+            repo_or_pkg.version = f"same as {repo_or_pkg.subpackage_of}"
 
         # restapi
         if has_restapi(repo_or_pkg):
@@ -432,8 +433,10 @@ def define_env(env):
         )
         repos_data = [
             {
-                "title": repo.title,
-                "version": "3.12.1",
+                "title": "[{title}](site:{name}/)".format(
+                    title=repo.title, name=repo.name
+                ),
+                "version": repo.version or "unknonwn",
                 "restapi_link": MD_LINK.format(
                     title="REST API", path=f"{repo.name}/restapi/"
                 ),
@@ -441,7 +444,9 @@ def define_env(env):
                     title="Changelog", path=f"{repo.name}/changes/"
                 ),
                 "codebase_link": GITHUB_LINK.format(
-                    title="Codebase", owner=repo.owner, name=repo.name
+                    title="Repository",
+                    owner=repo.owner or "pulp",
+                    name=getattr(repo, "subpackage_of", repo.name),
                 ),
             }
             for repo in repos_list

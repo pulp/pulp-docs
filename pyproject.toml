@@ -16,6 +16,7 @@ dependencies = [
     "importlib_resources",
     "httpx",
     "rich",
+    "tomli",
 ]
 
 [project.scripts]

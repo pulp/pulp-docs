@@ -17,6 +17,8 @@ from io import BytesIO
 from pathlib import Path
 
 import httpx
+import configparser
+import tomli
 import yaml
 
 from pulp_docs.utils.general import get_git_ignored_files
@@ -64,6 +66,7 @@ class Repo:
     status: RepoStatus = field(default_factory=lambda: RepoStatus())
     type: t.Optional[str] = None
     dev_only: bool = False
+    version: t.Optional[str] = None
 
     def __post_init__(self):
         self.branch_in_use = self.branch_in_use or self.branch
@@ -139,6 +142,22 @@ class Repo:
             dirs_exist_ok=True,
         )
 
+        # get version
+        version_file = src_copy_path / ".bumpversion.cfg"
+        if version_file.exists():
+            config = configparser.ConfigParser()
+            config.read(version_file)
+            self.version = config["bumpversion"]["current_version"]
+        else:
+            version_file = src_copy_path / "pyproject.toml"
+            if version_file.exists():
+                content = tomli.loads(version_file.read_text())
+                self.version = (
+                    content.get("tool", {})
+                    .get("bumpversion", {})
+                    .get("current_version")
+                )
+
         self.status.download_source = str(download_from)
         return self.status.download_source
 
@@ -211,9 +230,7 @@ class SubPackage:
     branch = ""
     owner = ""
     dev_only: bool = False
-
-    def __post_init__(self):
-        self.owner = self.subpackage_of
+    version: t.Optional[str] = None
 
 
 @dataclass
