@@ -11,7 +11,16 @@ Don't hesitate to contact us!
 
 ---
 
-## Quick Links (WIP)
+## Quick Links
+
+!!! note "About versions"
+
+    The `version` column is the latest on main and it's what we publish.
+
+    You might encounter some unreleased content live, but plugins usually release often.
+    Also, we try to include version information on the docs itself.
+
+### Content Plugins
 
 {% for repo_type in ("core", "content") %}
 Repo | Version | Links | &nbsp; | &nbsp;
@@ -20,6 +29,24 @@ Repo | Version | Links | &nbsp; | &nbsp;
 {{ repo.title }} | `{{ repo.version }}` | {{ repo.restapi_link }} | {{ repo.codebase_link }} | {{ repo.changes_link }}
 {% endfor %}
 {% endfor %}
+
+### Deployment
+
+Repo | Version | Links | &nbsp;
+--- | --- | --- | ---
+{% for repo in get_repos("deployment") -%}
+{{ repo.title }} | `{{ repo.version }}` | {{ repo.codebase_link }} | {{ repo.changes_link }}
+{% endfor %}
+
+### Interaction
+
+Repo | Version | Links | &nbsp;
+--- | --- | --- | ---
+{% for repo in get_repos("interaction") -%}
+{{ repo.title }} | `{{ repo.version }}` | {{ repo.codebase_link }} | {{ repo.changes_link }}
+{% endfor %}
+
+### Others
 
 Repo | Version | Links | &nbsp;
 --- | --- | --- | ---
