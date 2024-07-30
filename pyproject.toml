@@ -5,6 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pulp-docs"
 version = "0.0.1"
+requires-python = ">= 3.11"
 dependencies = [
     "mkdocs-material",
     "mkdocstrings",
@@ -13,10 +14,8 @@ dependencies = [
     "mkdocs-site-urls",
     "mkdocs-literate-nav",
     "bs4",
-    "importlib_resources",
     "httpx",
     "rich",
-    "tomli",
 ]
 
 [project.scripts]

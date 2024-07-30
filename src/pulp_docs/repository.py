@@ -18,7 +18,7 @@ from pathlib import Path
 
 import httpx
 import configparser
-import tomli
+import tomllib
 import yaml
 
 from pulp_docs.utils.general import get_git_ignored_files
@@ -151,7 +151,7 @@ class Repo:
         else:
             version_file = src_copy_path / "pyproject.toml"
             if version_file.exists():
-                content = tomli.loads(version_file.read_text())
+                content = tomllib.loads(version_file.read_text())
                 self.version = (
                     content.get("tool", {})
                     .get("bumpversion", {})
