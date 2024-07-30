@@ -46,6 +46,7 @@ plugins:
       blog_toc: false
   - macros:
       module_name: '../mkdocs_macros'
+      render_by_default: false
   - tags:
       tags_file: pulp-docs/docs/tags.md
   - literate-nav:

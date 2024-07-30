@@ -1,3 +1,7 @@
+---
+render_macros: true
+---
+
 # Overview
 
 :wave: Welcome to the help section!
