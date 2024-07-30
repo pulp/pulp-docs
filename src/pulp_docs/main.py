@@ -4,7 +4,7 @@ import sys
 import typing as t
 from pathlib import Path
 
-from importlib_resources import files
+from importlib.resources import files
 
 TMP_DIR = Path("tmp")
 WORKDIR = Path.home() / "workspace" / "multirepo-prototype"
@@ -36,8 +36,8 @@ class Config:
         if from_environ is False:
             self.verbose = False
             self.workdir = Path().absolute()
-            self.mkdocs_file = files("pulp_docs").joinpath("data/mkdocs.yml").absolute()
-            self.repolist = files("pulp_docs").joinpath("data/repolist.yml").absolute()
+            self.mkdocs_file = files("pulp_docs").joinpath("data/mkdocs.yml")
+            self.repolist = files("pulp_docs").joinpath("data/repolist.yml")
             self.clear_cache = False
 
             if env_mkdocs := os.environ.get("PULPDOCS_MKDOCS_FILE"):
