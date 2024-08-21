@@ -119,7 +119,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -576,7 +577,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -920,7 +922,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -1193,7 +1196,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -1405,7 +1409,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -2118,7 +2123,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -2831,7 +2837,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -3544,7 +3551,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -4335,7 +4343,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -4627,7 +4636,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -4938,7 +4948,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -5416,7 +5427,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -6123,7 +6135,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -6811,7 +6824,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -7013,7 +7027,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -8039,7 +8054,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -8908,7 +8924,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -9269,7 +9286,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -9582,7 +9600,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -9966,7 +9985,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -10239,7 +10259,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -10641,7 +10662,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -10778,7 +10800,6 @@
         "/pulp/api/v3/task-groups/": {
             "get": {
                 "operationId": "task_groups_list",
-                "description": "A customized named ModelViewSet that knows how to register itself with the Pulp API router.\n\nThis viewset is discoverable by its name.\n\"Normal\" Django Models and Master/Detail models are supported by the ``register_with`` method.\n\nAttributes:\n    lookup_field (str): The name of the field by which an object should be looked up, in\n        addition to any parent lookups if this ViewSet is nested. Defaults to 'pk'\n    endpoint_name (str): The name of the final path segment that should identify the ViewSet's\n        collection endpoint.\n    nest_prefix (str): Optional prefix under which this ViewSet should be nested. This must\n        correspond to the \"parent_prefix\" of a router with rest_framework_nested.NestedMixin.\n        None indicates this ViewSet should not be nested.\n    parent_lookup_kwargs (dict): Optional mapping of key names that would appear in self.kwargs\n        to django model filter expressions that can be used with the corresponding value from\n        self.kwargs, used only by a nested ViewSet to filter based on the parent object's\n        identity.\n    schema (DefaultSchema): The schema class to use by default in a viewset.",
                 "summary": "List task groups",
                 "parameters": [
                     {
@@ -10850,7 +10871,6 @@
         "{task_group_href}": {
             "get": {
                 "operationId": "task_groups_read",
-                "description": "A customized named ModelViewSet that knows how to register itself with the Pulp API router.\n\nThis viewset is discoverable by its name.\n\"Normal\" Django Models and Master/Detail models are supported by the ``register_with`` method.\n\nAttributes:\n    lookup_field (str): The name of the field by which an object should be looked up, in\n        addition to any parent lookups if this ViewSet is nested. Defaults to 'pk'\n    endpoint_name (str): The name of the final path segment that should identify the ViewSet's\n        collection endpoint.\n    nest_prefix (str): Optional prefix under which this ViewSet should be nested. This must\n        correspond to the \"parent_prefix\" of a router with rest_framework_nested.NestedMixin.\n        None indicates this ViewSet should not be nested.\n    parent_lookup_kwargs (dict): Optional mapping of key names that would appear in self.kwargs\n        to django model filter expressions that can be used with the corresponding value from\n        self.kwargs, used only by a nested ViewSet to filter based on the parent object's\n        identity.\n    schema (DefaultSchema): The schema class to use by default in a viewset.",
                 "summary": "Inspect a task group",
                 "parameters": [
                     {
@@ -10897,6 +10917,74 @@
                 ],
                 "responses": {
                     "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskGroupResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "task_groups_cancel",
+                "description": "This operation cancels a task group.",
+                "summary": "Cancel a task group",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "task_group_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Task-Groups"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PatchedTaskCancel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PatchedTaskCancel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PatchedTaskCancel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskGroupResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
+                    "409": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -11012,7 +11100,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -11643,7 +11732,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -12468,7 +12558,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -13921,7 +14012,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -14377,7 +14469,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -14854,7 +14947,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -15149,11 +15243,21 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
+                    "content_guard": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "An optional content-guard."
+                    },
                     "pulp_last_updated": {
                         "type": "string",
                         "format": "date-time",
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "hidden": {
                         "type": "boolean",
@@ -15165,24 +15269,14 @@
                         "format": "uri",
                         "readOnly": true
                     },
-                    "no_content_change_since": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
-                    },
                     "base_path": {
                         "type": "string",
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
-                    "name": {
+                    "no_content_change_since": {
                         "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
-                    "content_guard": {
-                        "type": "string",
-                        "format": "uri",
-                        "nullable": true,
-                        "description": "An optional content-guard."
+                        "readOnly": true,
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -17720,7 +17814,6 @@
             },
             "PatchedTaskCancel": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "state": {
                         "type": "string",
@@ -18256,7 +18349,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2024-07-19",
+                        "default": "2024-07-22",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {

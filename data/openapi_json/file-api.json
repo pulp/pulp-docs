@@ -184,7 +184,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -879,7 +880,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -1284,7 +1286,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -2153,7 +2156,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -2872,7 +2876,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -3736,7 +3741,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -4827,7 +4833,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
