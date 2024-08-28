@@ -15160,7 +15160,7 @@
             },
             "ApiAppStatusResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "name": {
                         "type": "string",
@@ -15186,7 +15186,7 @@
             },
             "Artifact": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "file": {
                         "type": "string",
@@ -15243,13 +15243,15 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
-                    "name": {
+                    "no_content_change_since": {
                         "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                        "readOnly": true,
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
                     },
-                    "base_path": {
-                        "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -15258,10 +15260,21 @@
                             "nullable": true
                         }
                     },
-                    "pulp_href": {
+                    "pulp_created": {
                         "type": "string",
-                        "format": "uri",
-                        "readOnly": true
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "base_url": {
                         "type": "string",
@@ -15274,27 +15287,14 @@
                         "nullable": true,
                         "description": "An optional content-guard."
                     },
-                    "pulp_last_updated": {
+                    "pulp_href": {
                         "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                        "format": "uri",
+                        "readOnly": true
                     },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
-                    },
-                    "no_content_change_since": {
+                    "base_path": {
                         "type": "string",
-                        "readOnly": true,
-                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
-                    },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     }
                 },
                 "required": [
@@ -15304,7 +15304,7 @@
             },
             "ArtifactResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "pulp_href": {
                         "type": "string",
@@ -15383,7 +15383,7 @@
             },
             "CompositeContentGuard": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "name": {
                         "type": "string",
@@ -15412,7 +15412,7 @@
             },
             "CompositeContentGuardResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "pulp_href": {
                         "type": "string",
@@ -15456,7 +15456,7 @@
             },
             "ContentAppStatusResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "name": {
                         "type": "string",
@@ -15482,7 +15482,7 @@
             },
             "ContentGuardResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "pulp_href": {
                         "type": "string",
@@ -15994,7 +15994,7 @@
             },
             "GroupProgressReportResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "message": {
                         "type": "string",
@@ -16296,7 +16296,7 @@
             },
             "MinimalTaskResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "pulp_href": {
                         "type": "string",
@@ -16355,7 +16355,7 @@
             },
             "MultipleArtifactContentResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "pulp_href": {
                         "type": "string",
@@ -17571,7 +17571,7 @@
             },
             "PatchedCompositeContentGuard": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "name": {
                         "type": "string",
@@ -17773,7 +17773,7 @@
             },
             "PatchedRBACContentGuard": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "name": {
                         "type": "string",
@@ -17960,7 +17960,7 @@
             },
             "ProgressReportResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "message": {
                         "type": "string",
@@ -17999,7 +17999,7 @@
             },
             "PublicationResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "pulp_href": {
                         "type": "string",
@@ -18349,7 +18349,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2024-07-26",
+                        "default": "2024-07-29",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
@@ -18366,7 +18366,7 @@
             },
             "RBACContentGuard": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "name": {
                         "type": "string",
@@ -18386,7 +18386,7 @@
             },
             "RBACContentGuardResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "pulp_href": {
                         "type": "string",
@@ -18624,7 +18624,7 @@
             },
             "RepositoryResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "pulp_href": {
                         "type": "string",
@@ -18689,7 +18689,7 @@
             },
             "RepositoryVersionResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "pulp_href": {
                         "type": "string",
@@ -19001,7 +19001,7 @@
             },
             "TaskGroupResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "pulp_href": {
                         "type": "string",
@@ -19080,7 +19080,7 @@
             },
             "TaskResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "pulp_href": {
                         "type": "string",
@@ -19200,7 +19200,7 @@
             },
             "TaskScheduleResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "pulp_href": {
                         "type": "string",
@@ -19839,7 +19839,7 @@
             },
             "WorkerResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "pulp_href": {
                         "type": "string",
