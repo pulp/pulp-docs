@@ -147,7 +147,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -550,7 +551,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -1282,7 +1284,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -1902,7 +1905,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -2689,7 +2693,8 @@
                         "name": "q",
                         "schema": {
                             "type": "string"
-                        }
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -3444,7 +3449,7 @@
             },
             "RepositoryVersionResponse": {
                 "type": "object",
-                "description": "Base serializer for use with :class:`pulpcore.app.models.Model`\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "pulp_href": {
                         "type": "string",
