@@ -15243,37 +15243,26 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
-                    "pulp_last_updated": {
+                    "base_path": {
                         "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
+                    "content_guard": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "An optional content-guard."
                     },
                     "pulp_href": {
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
                     },
-                    "base_path": {
+                    "pulp_last_updated": {
                         "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
-                    },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
-                    },
-                    "base_url": {
-                        "type": "string",
+                        "format": "date-time",
                         "readOnly": true,
-                        "description": "The URL for accessing the publication as defined by this distribution."
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
                     "name": {
                         "type": "string",
@@ -15285,11 +15274,22 @@
                         "readOnly": true,
                         "description": "Timestamp of creation."
                     },
-                    "content_guard": {
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "base_url": {
                         "type": "string",
-                        "format": "uri",
-                        "nullable": true,
-                        "description": "An optional content-guard."
+                        "readOnly": true,
+                        "description": "The URL for accessing the publication as defined by this distribution."
                     },
                     "no_content_change_since": {
                         "type": "string",
@@ -18349,7 +18349,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2024-08-02",
+                        "default": "2024-08-05",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
