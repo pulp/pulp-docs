@@ -31,7 +31,6 @@ from pulp_docs.cli import Config
 from pulp_docs.constants import SECTION_REPO
 from pulp_docs.navigation import get_navigation
 from pulp_docs.repository import Repo, Repos, SubPackage
-from pulp_docs.utils.general import get_git_ignored_files
 
 # the name of the docs in the source repositories
 SRC_DOCS_DIRNAME = "staging_docs"
@@ -122,7 +121,7 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
 
         # restapi
         if has_restapi(repo_or_pkg):
-            _download_api_json(api_src_dir, repo_or_pkg.name)
+            _download_api_json(api_src_dir, repo_or_pkg.name, repo_or_pkg.app_label)
             _generate_rest_api_page(this_src_dir, repo_or_pkg.name, repo_or_pkg.title)
 
         # install and post-process
@@ -145,20 +144,17 @@ def prepare_repositories(TMPDIR: Path, repos: Repos, config: Config):
     return (repo_docs, repo_sources)
 
 
-def _download_api_json(api_dir: Path, repo_name: str):
+def _download_api_json(api_dir: Path, repo_name: str, app_label: str):
     api_json_path = api_dir / f"{repo_name}/api.json"
     if api_json_path.exists():
         log.info(f"{repo_name} api.json already downloaded.")
         return
 
     log.info(f"Downloading api.json for {repo_name}")
-    api_url_1 = "https://pulpproject.org/{repo_name}/api.json"
-    api_url_2 = "https://pulpproject.org/{repo_name}/_static/api.json"
-    response = httpx.get(api_url_1.format(repo_name=repo_name))
+    api_url = f"https://raw.githubusercontent.com/pulp/pulp-docs/docs-data/data/openapi_json/{app_label}-api.json"
+    response = httpx.get(api_url)
     if response.is_error:
-        response = httpx.get(api_url_2.format(repo_name=repo_name))
-    if response.is_error:
-        raise Exception("Couldnt get rest api page")
+        raise Exception("Couldnt get rest api schema for {app_label}")
 
     # Schema overrides for better display
     json_file_content = response.json()
