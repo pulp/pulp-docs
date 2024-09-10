@@ -67,6 +67,8 @@ class Repo:
     type: t.Optional[str] = None
     dev_only: bool = False
     version: t.Optional[str] = None
+    template_config: t.Optional[dict] = None
+    app_label: t.Optional[str] = None
 
     def __post_init__(self):
         self.branch_in_use = self.branch_in_use or self.branch
@@ -158,6 +160,19 @@ class Repo:
                     .get("current_version")
                 )
 
+        # update app_label for app plugins
+        template_config_file = src_copy_path / "template_config.yml"
+        if template_config_file.exists():
+            self.template_config = yaml.load(
+                template_config_file.read_bytes(), Loader=yaml.SafeLoader
+            )
+            app_label_map = {
+                p["name"]: p["app_label"] for p in self.template_config["plugins"]
+            }
+            subpackages = self.subpackages or []
+            for plugin in (self, *subpackages):
+                plugin.app_label = app_label_map.get(plugin.name, None)
+
         self.status.download_source = str(download_from)
         return self.status.download_source
 
@@ -231,6 +246,7 @@ class SubPackage:
     owner = ""
     dev_only: bool = False
     version: t.Optional[str] = None
+    app_label: t.Optional[str] = None
 
 
 @dataclass
