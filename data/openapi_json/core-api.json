@@ -5263,6 +5263,56 @@
                 }
             }
         },
+        "/pulp/api/v3/domains/migrate/": {
+            "post": {
+                "operationId": "domains_migrate",
+                "description": "Migrate the domain's storage backend to a new one.\n\nLaunches a background task to copy the domain's artifacts over to the supplied storage\nbackend. Then updates the domain's storage settings to the new storage backend. This task\ndoes not delete the stored files of the artifacts from the previous backend.\n\n**IMPORTANT** This task will block all other tasks within the domain until the migration is\ncompleted, essentially putting the domain into a read only state. Content will still be\nserved from the old storage backend until the migration has completed, so don't remove\nthe old backend until then. Note, this endpoint is not allowed on the default domain.\n\nThis feature is in Tech Preview and is subject to future change and thus not guaranteed to\nbe backwards compatible.",
+                "summary": "Migrate storage backend",
+                "tags": [
+                    "Domains"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DomainBackendMigrator"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DomainBackendMigrator"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DomainBackendMigrator"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/exporters/core/filesystem/": {
             "get": {
                 "operationId": "exporters_core_filesystem_list",
@@ -15243,21 +15293,12 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
-                    "base_path": {
-                        "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
-                    },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
-                    },
-                    "content_guard": {
-                        "type": "string",
-                        "format": "uri",
-                        "nullable": true,
-                        "description": "An optional content-guard."
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
                     },
                     "pulp_last_updated": {
                         "type": "string",
@@ -15275,26 +15316,35 @@
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
                     },
-                    "name": {
+                    "content_guard": {
                         "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "An optional content-guard."
                     },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
                     },
                     "pulp_href": {
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
                     },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
                     "no_content_change_since": {
                         "type": "string",
                         "readOnly": true,
                         "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                    },
+                    "base_path": {
+                        "type": "string",
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     }
                 },
                 "required": [
@@ -15741,6 +15791,28 @@
                 },
                 "required": [
                     "name",
+                    "storage_class",
+                    "storage_settings"
+                ]
+            },
+            "DomainBackendMigrator": {
+                "type": "object",
+                "description": "Special serializer for performing a storage backend migration on a Domain.",
+                "properties": {
+                    "storage_class": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/StorageClassEnum"
+                            }
+                        ],
+                        "description": "The new backend storage class to migrate to.\n\n* `pulpcore.app.models.storage.FileSystem` - Use local filesystem as storage\n* `storages.backends.s3boto3.S3Boto3Storage` - Use Amazon S3 as storage\n* `storages.backends.azure_storage.AzureStorage` - Use Azure Blob as storage"
+                    },
+                    "storage_settings": {
+                        "type": "object",
+                        "description": "The settings for the new storage class to migrate to."
+                    }
+                },
+                "required": [
                     "storage_class",
                     "storage_settings"
                 ]
@@ -18349,7 +18421,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2024-08-16",
+                        "default": "2024-08-19",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
