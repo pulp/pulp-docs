@@ -2014,9 +2014,14 @@
                         "in": "query",
                         "name": "content__in",
                         "schema": {
-                            "type": "string"
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
                     },
                     {
                         "name": "limit",
@@ -4644,9 +4649,14 @@
                         "in": "query",
                         "name": "content__in",
                         "schema": {
-                            "type": "string"
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
                     },
                     {
                         "in": "path",

@@ -8805,9 +8805,14 @@
                         "in": "query",
                         "name": "content__in",
                         "schema": {
-                            "type": "string"
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
                     },
                     {
                         "name": "limit",
@@ -9854,9 +9859,14 @@
                         "in": "query",
                         "name": "content__in",
                         "schema": {
-                            "type": "string"
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
                     },
                     {
                         "name": "limit",
@@ -13210,6 +13220,142 @@
                 "summary": "List upstream pulps",
                 "parameters": [
                     {
+                        "in": "query",
+                        "name": "base_url",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where base_url matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "base_url__contains",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where base_url contains value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "base_url__icontains",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where base_url contains value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "base_url__iexact",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where base_url matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "base_url__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Filter results where base_url is in a comma-separated list of values",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "base_url__iregex",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where base_url matches regex value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "base_url__istartswith",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where base_url starts with value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "base_url__regex",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where base_url matches regex value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "base_url__startswith",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where base_url starts with value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "last_replication",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where last_replication matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "last_replication__gt",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where last_replication is greater than value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "last_replication__gte",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where last_replication is greater than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "last_replication__lt",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where last_replication is less than value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "last_replication__lte",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where last_replication is less than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "last_replication__range",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "date-time"
+                            }
+                        },
+                        "description": "Filter results where last_replication is between two comma separated values",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
                         "name": "limit",
                         "required": false,
                         "in": "query",
@@ -13219,6 +13365,83 @@
                         }
                     },
                     {
+                        "in": "query",
+                        "name": "name",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__contains",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name contains value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__icontains",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name contains value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__iexact",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Filter results where name is in a comma-separated list of values",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__iregex",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name matches regex value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__istartswith",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name starts with value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__regex",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name matches regex value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__startswith",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name starts with value"
+                    },
+                    {
                         "name": "offset",
                         "required": false,
                         "in": "query",
@@ -13226,6 +13449,90 @@
                         "schema": {
                             "type": "integer"
                         }
+                    },
+                    {
+                        "in": "query",
+                        "name": "ordering",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "-api_root",
+                                    "-base_url",
+                                    "-ca_cert",
+                                    "-client_cert",
+                                    "-client_key",
+                                    "-domain",
+                                    "-last_replication",
+                                    "-name",
+                                    "-password",
+                                    "-pk",
+                                    "-pulp_created",
+                                    "-pulp_id",
+                                    "-pulp_label_select",
+                                    "-pulp_last_updated",
+                                    "-q_select",
+                                    "-tls_validation",
+                                    "-username",
+                                    "api_root",
+                                    "base_url",
+                                    "ca_cert",
+                                    "client_cert",
+                                    "client_key",
+                                    "domain",
+                                    "last_replication",
+                                    "name",
+                                    "password",
+                                    "pk",
+                                    "pulp_created",
+                                    "pulp_id",
+                                    "pulp_label_select",
+                                    "pulp_last_updated",
+                                    "q_select",
+                                    "tls_validation",
+                                    "username"
+                                ]
+                            }
+                        },
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `base_url` - Base url\n* `-base_url` - Base url (descending)\n* `api_root` - Api root\n* `-api_root` - Api root (descending)\n* `domain` - Domain\n* `-domain` - Domain (descending)\n* `ca_cert` - Ca cert\n* `-ca_cert` - Ca cert (descending)\n* `client_cert` - Client cert\n* `-client_cert` - Client cert (descending)\n* `client_key` - Client key\n* `-client_key` - Client key (descending)\n* `tls_validation` - Tls validation\n* `-tls_validation` - Tls validation (descending)\n* `username` - Username\n* `-username` - Username (descending)\n* `password` - Password\n* `-password` - Password (descending)\n* `pulp_label_select` - Pulp label select\n* `-pulp_label_select` - Pulp label select (descending)\n* `q_select` - Q select\n* `-q_select` - Q select (descending)\n* `last_replication` - Last replication\n* `-last_replication` - Last replication (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_href__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_id__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
                     },
                     {
                         "in": "query",
@@ -15293,19 +15600,48 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
-                    "no_content_change_since": {
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
+                    },
+                    "base_path": {
                         "type": "string",
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
                         "readOnly": true,
-                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
                     },
                     "name": {
                         "type": "string",
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "no_content_change_since": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                    },
+                    "content_guard": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "An optional content-guard."
                     },
                     "base_url": {
                         "type": "string",
@@ -15316,35 +15652,6 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
-                    },
-                    "pulp_last_updated": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
-                    },
-                    "base_path": {
-                        "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
-                    },
-                    "content_guard": {
-                        "type": "string",
-                        "format": "uri",
-                        "nullable": true,
-                        "description": "An optional content-guard."
                     }
                 },
                 "required": [
@@ -18421,7 +18728,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2024-08-23",
+                        "default": "2024-08-26",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
