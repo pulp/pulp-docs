@@ -264,6 +264,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -303,7 +316,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -311,7 +324,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -319,7 +332,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -732,6 +745,19 @@
                             }
                         },
                         "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `base_path` - Base path\n* `-base_path` - Base path (descending)\n* `hidden` - Hidden\n* `-hidden` - Hidden (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
                     },
@@ -1497,7 +1523,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Content Unit referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1556,6 +1582,19 @@
                             }
                         },
                         "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `complete` - Complete\n* `-complete` - Complete (descending)\n* `pass_through` - Pass through\n* `-pass_through` - Pass through (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
                     },
@@ -1659,7 +1698,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository referenced by HREF"
+                        "description": "Repository referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1668,7 +1707,7 @@
                             "type": "string",
                             "format": "uuid"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -2268,6 +2307,19 @@
                             }
                         },
                         "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `url` - Url\n* `-url` - Url (descending)\n* `ca_cert` - Ca cert\n* `-ca_cert` - Ca cert (descending)\n* `client_cert` - Client cert\n* `-client_cert` - Client cert (descending)\n* `client_key` - Client key\n* `-client_key` - Client key (descending)\n* `tls_validation` - Tls validation\n* `-tls_validation` - Tls validation (descending)\n* `username` - Username\n* `-username` - Username (descending)\n* `password` - Password\n* `-password` - Password (descending)\n* `proxy_url` - Proxy url\n* `-proxy_url` - Proxy url (descending)\n* `proxy_username` - Proxy username\n* `-proxy_username` - Proxy username (descending)\n* `proxy_password` - Proxy password\n* `-proxy_password` - Proxy password (descending)\n* `download_concurrency` - Download concurrency\n* `-download_concurrency` - Download concurrency (descending)\n* `max_retries` - Max retries\n* `-max_retries` - Max retries (descending)\n* `policy` - Policy\n* `-policy` - Policy (descending)\n* `total_timeout` - Total timeout\n* `-total_timeout` - Total timeout (descending)\n* `connect_timeout` - Connect timeout\n* `-connect_timeout` - Connect timeout (descending)\n* `sock_connect_timeout` - Sock connect timeout\n* `-sock_connect_timeout` - Sock connect timeout (descending)\n* `sock_read_timeout` - Sock read timeout\n* `-sock_read_timeout` - Sock read timeout (descending)\n* `headers` - Headers\n* `-headers` - Headers (descending)\n* `rate_limit` - Rate limit\n* `-rate_limit` - Rate limit (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
                     },
@@ -3106,7 +3158,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Content Unit referenced by HREF/PRN"
                     },
                     {
                         "name": "limit",
@@ -3242,6 +3294,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -3367,7 +3432,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Content Unit referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -4177,7 +4242,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Content Unit referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -4289,6 +4354,19 @@
                             }
                         },
                         "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `number` - Number\n* `-number` - Number (descending)\n* `complete` - Complete\n* `-complete` - Complete (descending)\n* `info` - Info\n* `-info` - Info (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
                     },
@@ -5744,6 +5822,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -5945,6 +6028,11 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "pulp_created": {
                         "type": "string",
@@ -6159,6 +6247,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -6309,6 +6402,11 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "pulp_created": {
                         "type": "string",
@@ -6538,6 +6636,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -6764,6 +6867,11 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "pulp_created": {
                         "type": "string",

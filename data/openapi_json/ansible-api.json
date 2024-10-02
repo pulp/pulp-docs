@@ -135,6 +135,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -623,6 +636,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -662,7 +688,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -670,7 +696,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -678,7 +704,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -912,6 +938,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -951,7 +990,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -959,7 +998,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -967,7 +1006,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1217,6 +1256,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pubkey_fingerprint",
                         "schema": {
                             "type": "string"
@@ -1277,7 +1329,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1285,7 +1337,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1293,7 +1345,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1594,6 +1646,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -1632,7 +1697,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1640,7 +1705,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1648,7 +1713,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -2073,6 +2138,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -2112,7 +2190,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -2120,7 +2198,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -2128,7 +2206,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -2387,6 +2465,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -2426,7 +2517,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -2434,7 +2525,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -2442,7 +2533,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -2778,6 +2869,19 @@
                             }
                         },
                         "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `base_path` - Base path\n* `-base_path` - Base path (descending)\n* `hidden` - Hidden\n* `-hidden` - Hidden (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
                     },
@@ -3783,6 +3887,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -4766,6 +4883,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -5712,6 +5842,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -6500,7 +6643,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Content Unit referenced by HREF/PRN"
                     },
                     {
                         "name": "limit",
@@ -6636,6 +6779,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -6761,7 +6917,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Content Unit referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -7932,7 +8088,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Content Unit referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -8044,6 +8200,19 @@
                             }
                         },
                         "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `number` - Number\n* `-number` - Number (descending)\n* `complete` - Complete\n* `-complete` - Complete (descending)\n* `info` - Info\n* `-info` - Info (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
                     },
@@ -8913,6 +9082,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -9364,6 +9546,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -9402,7 +9597,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -9410,7 +9605,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -9418,7 +9613,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -9791,6 +9986,19 @@
                             "type": "string"
                         },
                         "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
                     },
                     {
                         "in": "query",
@@ -10205,6 +10413,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -10561,6 +10782,19 @@
                             "type": "string"
                         },
                         "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
                     },
                     {
                         "in": "query",
@@ -10939,6 +11173,19 @@
                             "type": "string"
                         },
                         "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
                     },
                     {
                         "in": "query",
@@ -11409,6 +11656,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -11447,7 +11707,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -11455,7 +11715,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -11463,7 +11723,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -12042,6 +12302,19 @@
                             "type": "string"
                         },
                         "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
                     },
                     {
                         "in": "query",
@@ -12974,6 +13247,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -13393,6 +13679,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -13431,7 +13730,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -13439,7 +13738,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -13447,7 +13746,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -13791,6 +14090,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -14124,6 +14436,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -14422,6 +14747,19 @@
                             }
                         },
                         "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `namespace` - Namespace\n* `-namespace` - Namespace (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
                     },
@@ -14768,6 +15106,19 @@
                             }
                         },
                         "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `namespace` - Namespace\n* `-namespace` - Namespace (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
                     },
@@ -15208,6 +15559,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -15246,7 +15610,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -15254,7 +15618,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -15262,7 +15626,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -15807,6 +16171,19 @@
                             }
                         },
                         "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `company` - Company\n* `-company` - Company (descending)\n* `email` - Email\n* `-email` - Email (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `resources` - Resources\n* `-resources` - Resources (descending)\n* `links` - Links\n* `-links` - Links (descending)\n* `avatar_sha256` - Avatar sha256\n* `-avatar_sha256` - Avatar sha256 (descending)\n* `metadata_sha256` - Metadata sha256\n* `-metadata_sha256` - Metadata sha256 (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
                     },
@@ -18286,90 +18663,12 @@
                         "minLength": 1,
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
-                    "max_retries": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
-                    },
-                    "client_key": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded private key used for authentication."
-                    },
-                    "client_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded client certificate used for authentication."
-                    },
-                    "download_concurrency": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
-                    },
-                    "proxy_password": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "sock_read_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "headers": {
-                        "type": "array",
-                        "items": {
-                            "type": "object"
-                        },
-                        "description": "Headers for aiohttp.Clientsession"
-                    },
                     "username": {
                         "type": "string",
                         "writeOnly": true,
                         "nullable": true,
                         "minLength": 1,
                         "description": "The username to be used for authentication when syncing."
-                    },
-                    "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
-                    },
-                    "tls_validation": {
-                        "type": "boolean",
-                        "description": "If True, TLS peer validation must be performed."
-                    },
-                    "total_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "sock_connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "password": {
                         "type": "string",
@@ -18378,23 +18677,46 @@
                         "minLength": 1,
                         "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
                     },
-                    "rate_limit": {
+                    "client_key": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded private key used for authentication."
+                    },
+                    "proxy_password": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
+                    },
+                    "max_retries": {
                         "type": "integer",
                         "format": "int64",
                         "nullable": true,
-                        "description": "Limits requests per second for each concurrent downloader"
+                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
+                    },
+                    "tls_validation": {
+                        "type": "boolean",
+                        "description": "If True, TLS peer validation must be performed."
+                    },
+                    "client_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded client certificate used for authentication."
                     },
                     "name": {
                         "type": "string",
                         "minLength": 1,
                         "description": "A unique name for this remote."
                     },
-                    "proxy_username": {
+                    "ca_cert": {
                         "type": "string",
-                        "writeOnly": true,
                         "nullable": true,
                         "minLength": 1,
-                        "description": "The username to authenticte to the proxy."
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "connect_timeout": {
                         "type": "number",
@@ -18403,10 +18725,65 @@
                         "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
                     "url": {
                         "type": "string",
                         "minLength": 1,
                         "description": "The URL of an external content source."
+                    },
+                    "sock_connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "total_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "download_concurrency": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
+                    },
+                    "rate_limit": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Limits requests per second for each concurrent downloader"
+                    },
+                    "sock_read_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "proxy_username": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The username to authenticte to the proxy."
+                    },
+                    "headers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Headers for aiohttp.Clientsession"
                     },
                     "metadata_only": {
                         "type": "boolean",
@@ -18669,6 +19046,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -18733,6 +19115,11 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "pulp_created": {
                         "type": "string",
@@ -18988,6 +19375,11 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "pulp_created": {
                         "type": "string",
@@ -19293,6 +19685,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -19554,6 +19951,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -19736,17 +20138,6 @@
                 "type": "object",
                 "description": "A serializer for CollectionVersion Content.",
                 "properties": {
-                    "upload": {
-                        "type": "string",
-                        "format": "uri",
-                        "writeOnly": true,
-                        "description": "An uncommitted upload that may be turned into the content unit."
-                    },
-                    "artifact": {
-                        "type": "string",
-                        "format": "uri",
-                        "description": "Artifact file representing the physical content"
-                    },
                     "file_url": {
                         "type": "string",
                         "writeOnly": true,
@@ -19764,6 +20155,17 @@
                         "format": "binary",
                         "writeOnly": true,
                         "description": "An uploaded file that may be turned into the content unit."
+                    },
+                    "upload": {
+                        "type": "string",
+                        "format": "uri",
+                        "writeOnly": true,
+                        "description": "An uncommitted upload that may be turned into the content unit."
+                    },
+                    "artifact": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "Artifact file representing the physical content"
                     },
                     "expected_name": {
                         "type": "string",
@@ -19850,10 +20252,10 @@
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
-                    "artifact": {
+                    "pulp_href": {
                         "type": "string",
                         "format": "uri",
-                        "description": "Artifact file representing the physical content"
+                        "readOnly": true
                     },
                     "pulp_created": {
                         "type": "string",
@@ -19861,10 +20263,15 @@
                         "readOnly": true,
                         "description": "Timestamp of creation."
                     },
-                    "pulp_href": {
+                    "artifact": {
                         "type": "string",
                         "format": "uri",
-                        "readOnly": true
+                        "description": "Artifact file representing the physical content"
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "sha256": {
                         "type": "string",
@@ -20050,6 +20457,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -20094,90 +20506,12 @@
                         "minLength": 1,
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
-                    "max_retries": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
-                    },
-                    "client_key": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded private key used for authentication."
-                    },
-                    "client_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded client certificate used for authentication."
-                    },
-                    "download_concurrency": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
-                    },
-                    "proxy_password": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "sock_read_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "headers": {
-                        "type": "array",
-                        "items": {
-                            "type": "object"
-                        },
-                        "description": "Headers for aiohttp.Clientsession"
-                    },
                     "username": {
                         "type": "string",
                         "writeOnly": true,
                         "nullable": true,
                         "minLength": 1,
                         "description": "The username to be used for authentication when syncing."
-                    },
-                    "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
-                    },
-                    "tls_validation": {
-                        "type": "boolean",
-                        "description": "If True, TLS peer validation must be performed."
-                    },
-                    "total_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "sock_connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "password": {
                         "type": "string",
@@ -20186,23 +20520,46 @@
                         "minLength": 1,
                         "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
                     },
-                    "rate_limit": {
+                    "client_key": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded private key used for authentication."
+                    },
+                    "proxy_password": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
+                    },
+                    "max_retries": {
                         "type": "integer",
                         "format": "int64",
                         "nullable": true,
-                        "description": "Limits requests per second for each concurrent downloader"
+                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
+                    },
+                    "tls_validation": {
+                        "type": "boolean",
+                        "description": "If True, TLS peer validation must be performed."
+                    },
+                    "client_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded client certificate used for authentication."
                     },
                     "name": {
                         "type": "string",
                         "minLength": 1,
                         "description": "A unique name for this remote."
                     },
-                    "proxy_username": {
+                    "ca_cert": {
                         "type": "string",
-                        "writeOnly": true,
                         "nullable": true,
                         "minLength": 1,
-                        "description": "The username to authenticte to the proxy."
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "connect_timeout": {
                         "type": "number",
@@ -20211,10 +20568,65 @@
                         "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
                     "url": {
                         "type": "string",
                         "minLength": 1,
                         "description": "The URL of an external content source."
+                    },
+                    "sock_connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "total_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "download_concurrency": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
+                    },
+                    "rate_limit": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Limits requests per second for each concurrent downloader"
+                    },
+                    "sock_read_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "proxy_username": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The username to authenticte to the proxy."
+                    },
+                    "headers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Headers for aiohttp.Clientsession"
                     },
                     "metadata_only": {
                         "type": "boolean",
@@ -20246,73 +20658,9 @@
                         "nullable": true,
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
-                    "client_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "A PEM encoded client certificate used for authentication."
-                    },
-                    "download_concurrency": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "sock_read_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "headers": {
-                        "type": "array",
-                        "items": {
-                            "type": "object"
-                        },
-                        "description": "Headers for aiohttp.Clientsession"
-                    },
-                    "pulp_last_updated": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the most recent update of the remote."
-                    },
-                    "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
-                    },
                     "tls_validation": {
                         "type": "boolean",
                         "description": "If True, TLS peer validation must be performed."
-                    },
-                    "total_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "sock_connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "rate_limit": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Limits requests per second for each concurrent downloader"
                     },
                     "pulp_created": {
                         "type": "string",
@@ -20320,21 +20668,10 @@
                         "readOnly": true,
                         "description": "Timestamp of creation."
                     },
-                    "name": {
+                    "prn": {
                         "type": "string",
-                        "description": "A unique name for this remote."
-                    },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
-                    "connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "hidden_fields": {
                         "type": "array",
@@ -20356,9 +20693,89 @@
                         "readOnly": true,
                         "description": "List of hidden (write only) fields"
                     },
+                    "client_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "A PEM encoded client certificate used for authentication."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name for this remote."
+                    },
+                    "ca_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                    },
+                    "connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the most recent update of the remote."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
                     "url": {
                         "type": "string",
                         "description": "The URL of an external content source."
+                    },
+                    "sock_connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "total_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "download_concurrency": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
+                    },
+                    "rate_limit": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Limits requests per second for each concurrent downloader"
+                    },
+                    "sock_read_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "headers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Headers for aiohttp.Clientsession"
                     },
                     "metadata_only": {
                         "type": "boolean",
@@ -20378,16 +20795,16 @@
                 "type": "object",
                 "description": "A serializer for Role versions.",
                 "properties": {
-                    "artifact": {
-                        "type": "string",
-                        "format": "uri",
-                        "description": "Artifact file representing the physical content"
-                    },
                     "repository": {
                         "type": "string",
                         "format": "uri",
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
+                    },
+                    "artifact": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "Artifact file representing the physical content"
                     },
                     "version": {
                         "type": "string",
@@ -20565,6 +20982,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -20710,10 +21132,10 @@
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
-                    "artifact": {
+                    "pulp_href": {
                         "type": "string",
                         "format": "uri",
-                        "description": "Artifact file representing the physical content"
+                        "readOnly": true
                     },
                     "pulp_created": {
                         "type": "string",
@@ -20721,10 +21143,15 @@
                         "readOnly": true,
                         "description": "Timestamp of creation."
                     },
-                    "pulp_href": {
+                    "artifact": {
                         "type": "string",
                         "format": "uri",
-                        "readOnly": true
+                        "description": "Artifact file representing the physical content"
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "version": {
                         "type": "string"

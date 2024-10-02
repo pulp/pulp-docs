@@ -108,6 +108,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -147,7 +160,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -155,7 +168,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -163,7 +176,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -411,6 +424,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -450,7 +476,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -458,7 +484,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -466,7 +492,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -787,6 +813,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -826,7 +865,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -834,7 +873,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -842,7 +881,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1073,6 +1112,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -1112,7 +1164,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1120,7 +1172,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1128,7 +1180,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1419,6 +1471,19 @@
                             }
                         },
                         "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `base_path` - Base path\n* `-base_path` - Base path (descending)\n* `hidden` - Hidden\n* `-hidden` - Hidden (descending)\n* `private` - Private\n* `-private` - Private (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
                     },
@@ -2345,6 +2410,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -3221,6 +3299,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -3859,6 +3950,19 @@
                             }
                         },
                         "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `url` - Url\n* `-url` - Url (descending)\n* `ca_cert` - Ca cert\n* `-ca_cert` - Ca cert (descending)\n* `client_cert` - Client cert\n* `-client_cert` - Client cert (descending)\n* `client_key` - Client key\n* `-client_key` - Client key (descending)\n* `tls_validation` - Tls validation\n* `-tls_validation` - Tls validation (descending)\n* `username` - Username\n* `-username` - Username (descending)\n* `password` - Password\n* `-password` - Password (descending)\n* `proxy_url` - Proxy url\n* `-proxy_url` - Proxy url (descending)\n* `proxy_username` - Proxy username\n* `-proxy_username` - Proxy username (descending)\n* `proxy_password` - Proxy password\n* `-proxy_password` - Proxy password (descending)\n* `download_concurrency` - Download concurrency\n* `-download_concurrency` - Download concurrency (descending)\n* `max_retries` - Max retries\n* `-max_retries` - Max retries (descending)\n* `policy` - Policy\n* `-policy` - Policy (descending)\n* `total_timeout` - Total timeout\n* `-total_timeout` - Total timeout (descending)\n* `connect_timeout` - Connect timeout\n* `-connect_timeout` - Connect timeout (descending)\n* `sock_connect_timeout` - Sock connect timeout\n* `-sock_connect_timeout` - Sock connect timeout (descending)\n* `sock_read_timeout` - Sock read timeout\n* `-sock_read_timeout` - Sock read timeout (descending)\n* `headers` - Headers\n* `-headers` - Headers (descending)\n* `rate_limit` - Rate limit\n* `-rate_limit` - Rate limit (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
                     },
@@ -4810,6 +4914,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -5598,7 +5715,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Content Unit referenced by HREF/PRN"
                     },
                     {
                         "name": "limit",
@@ -5734,6 +5851,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -5859,7 +5989,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Content Unit referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -5969,7 +6099,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Content Unit referenced by HREF/PRN"
                     },
                     {
                         "name": "limit",
@@ -6105,6 +6235,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -6230,7 +6373,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Content Unit referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -7021,7 +7164,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Content Unit referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -7133,6 +7276,19 @@
                             }
                         },
                         "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `number` - Number\n* `-number` - Number (descending)\n* `complete` - Complete\n* `-complete` - Complete (descending)\n* `info` - Info\n* `-info` - Info (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
                     },
@@ -8558,7 +8714,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Content Unit referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -8670,6 +8826,19 @@
                             }
                         },
                         "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `number` - Number\n* `-number` - Number (descending)\n* `complete` - Complete\n* `-complete` - Complete (descending)\n* `info` - Info\n* `-info` - Info (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
                     },
@@ -9575,12 +9744,6 @@
                 "type": "object",
                 "description": "A serializer for ContainerDistribution.",
                 "properties": {
-                    "repository": {
-                        "type": "string",
-                        "format": "uri",
-                        "nullable": true,
-                        "description": "The latest RepositoryVersion for this Repository will be served."
-                    },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
@@ -9588,25 +9751,31 @@
                             "nullable": true
                         }
                     },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
+                    "base_path": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
+                    "repository": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "name": {
                         "type": "string",
                         "minLength": 1,
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
-                    "base_path": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
-                    },
                     "content_guard": {
                         "type": "string",
                         "format": "uri",
                         "description": "An optional content-guard. If none is specified, a default one will be used."
+                    },
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
                     },
                     "repository_version": {
                         "type": "string",
@@ -9630,12 +9799,6 @@
                 "type": "object",
                 "description": "A serializer for a specialized pull-through distribution referencing sub-distributions.",
                 "properties": {
-                    "repository": {
-                        "type": "string",
-                        "format": "uri",
-                        "nullable": true,
-                        "description": "The latest RepositoryVersion for this Repository will be served."
-                    },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
@@ -9643,25 +9806,31 @@
                             "nullable": true
                         }
                     },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
+                    "base_path": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
+                    "repository": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "name": {
                         "type": "string",
                         "minLength": 1,
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
-                    "base_path": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
-                    },
                     "content_guard": {
                         "type": "string",
                         "format": "uri",
                         "description": "An optional content-guard. If none is specified, a default one will be used."
+                    },
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
                     },
                     "remote": {
                         "type": "string",
@@ -9861,22 +10030,17 @@
                             "nullable": true
                         }
                     },
-                    "description": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "An optional description."
-                    },
                     "manifest_signing_service": {
                         "type": "string",
                         "format": "uri",
                         "nullable": true,
                         "description": "A reference to an associated signing service."
                     },
-                    "name": {
+                    "description": {
                         "type": "string",
+                        "nullable": true,
                         "minLength": 1,
-                        "description": "A unique name for this repository."
+                        "description": "An optional description."
                     },
                     "retain_repo_versions": {
                         "type": "integer",
@@ -9884,6 +10048,11 @@
                         "nullable": true,
                         "description": "Retain X versions of the repository. Default is null which retains all versions.",
                         "minimum": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "A unique name for this repository."
                     }
                 }
             },
@@ -10213,6 +10382,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -10386,6 +10560,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -10417,12 +10596,6 @@
                 "type": "object",
                 "description": "A serializer for ContainerDistribution.",
                 "properties": {
-                    "repository": {
-                        "type": "string",
-                        "format": "uri",
-                        "nullable": true,
-                        "description": "The latest RepositoryVersion for this Repository will be served."
-                    },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
@@ -10430,25 +10603,31 @@
                             "nullable": true
                         }
                     },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
+                    "base_path": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
+                    "repository": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "name": {
                         "type": "string",
                         "minLength": 1,
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
-                    "base_path": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
-                    },
                     "content_guard": {
                         "type": "string",
                         "format": "uri",
                         "description": "An optional content-guard. If none is specified, a default one will be used."
+                    },
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
                     },
                     "repository_version": {
                         "type": "string",
@@ -10476,12 +10655,6 @@
                 "type": "object",
                 "description": "A serializer for ContainerDistribution.",
                 "properties": {
-                    "repository": {
-                        "type": "string",
-                        "format": "uri",
-                        "nullable": true,
-                        "description": "The latest RepositoryVersion for this Repository will be served."
-                    },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
@@ -10489,45 +10662,56 @@
                             "nullable": true
                         }
                     },
-                    "pulp_last_updated": {
+                    "prn": {
                         "type": "string",
-                        "format": "date-time",
                         "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
-                    },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "no_content_change_since": {
                         "type": "string",
                         "readOnly": true,
                         "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
                     },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
+                    "base_path": {
+                        "type": "string",
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "repository": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "name": {
                         "type": "string",
                         "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
-                    "base_path": {
-                        "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "content_guard": {
                         "type": "string",
                         "format": "uri",
                         "description": "An optional content-guard. If none is specified, a default one will be used."
                     },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
                         "readOnly": true,
                         "description": "Timestamp of creation."
+                    },
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
                     },
                     "repository_version": {
                         "type": "string",
@@ -10589,6 +10773,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -10613,12 +10802,6 @@
                 "type": "object",
                 "description": "A serializer for a specialized pull-through distribution referencing sub-distributions.",
                 "properties": {
-                    "repository": {
-                        "type": "string",
-                        "format": "uri",
-                        "nullable": true,
-                        "description": "The latest RepositoryVersion for this Repository will be served."
-                    },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
@@ -10626,25 +10809,31 @@
                             "nullable": true
                         }
                     },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
+                    "base_path": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
+                    "repository": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "name": {
                         "type": "string",
                         "minLength": 1,
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
-                    "base_path": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
-                    },
                     "content_guard": {
                         "type": "string",
                         "format": "uri",
                         "description": "An optional content-guard. If none is specified, a default one will be used."
+                    },
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
                     },
                     "remote": {
                         "type": "string",
@@ -10680,12 +10869,6 @@
                 "type": "object",
                 "description": "A serializer for a specialized pull-through distribution referencing sub-distributions.",
                 "properties": {
-                    "repository": {
-                        "type": "string",
-                        "format": "uri",
-                        "nullable": true,
-                        "description": "The latest RepositoryVersion for this Repository will be served."
-                    },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
@@ -10693,45 +10876,56 @@
                             "nullable": true
                         }
                     },
-                    "pulp_last_updated": {
+                    "prn": {
                         "type": "string",
-                        "format": "date-time",
                         "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
-                    },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "no_content_change_since": {
                         "type": "string",
                         "readOnly": true,
                         "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
                     },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
+                    "base_path": {
+                        "type": "string",
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "repository": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "name": {
                         "type": "string",
                         "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
-                    "base_path": {
-                        "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "content_guard": {
                         "type": "string",
                         "format": "uri",
                         "description": "An optional content-guard. If none is specified, a default one will be used."
                     },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
                         "readOnly": true,
                         "description": "Timestamp of creation."
+                    },
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
                     },
                     "remote": {
                         "type": "string",
@@ -10943,6 +11137,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -11106,22 +11305,17 @@
                             "nullable": true
                         }
                     },
-                    "description": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "An optional description."
-                    },
                     "manifest_signing_service": {
                         "type": "string",
                         "format": "uri",
                         "nullable": true,
                         "description": "A reference to an associated signing service."
                     },
-                    "name": {
+                    "description": {
                         "type": "string",
+                        "nullable": true,
                         "minLength": 1,
-                        "description": "A unique name for this repository."
+                        "description": "An optional description."
                     },
                     "retain_repo_versions": {
                         "type": "integer",
@@ -11129,6 +11323,11 @@
                         "nullable": true,
                         "description": "Retain X versions of the repository. Default is null which retains all versions.",
                         "minimum": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "A unique name for this repository."
                     }
                 },
                 "required": [
@@ -11146,15 +11345,10 @@
                             "nullable": true
                         }
                     },
-                    "versions_href": {
+                    "prn": {
                         "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
-                    "description": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "An optional description."
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "manifest_signing_service": {
                         "type": "string",
@@ -11162,18 +11356,30 @@
                         "nullable": true,
                         "description": "A reference to an associated signing service."
                     },
+                    "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "An optional description."
+                    },
+                    "latest_version_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "retain_repo_versions": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
+                    },
                     "pulp_last_updated": {
                         "type": "string",
                         "format": "date-time",
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
-                    "latest_version_href": {
+                    "versions_href": {
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
@@ -11182,12 +11388,10 @@
                         "type": "string",
                         "description": "A unique name for this repository."
                     },
-                    "retain_repo_versions": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
-                        "minimum": 1
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "pulp_created": {
                         "type": "string",
@@ -11387,6 +11591,11 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "pulp_created": {
                         "type": "string",
@@ -11606,6 +11815,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -11676,6 +11890,11 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "pulp_created": {
                         "type": "string",
@@ -11759,6 +11978,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -11820,6 +12044,11 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "pulp_created": {
                         "type": "string",

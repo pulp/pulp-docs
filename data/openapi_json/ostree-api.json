@@ -97,6 +97,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -136,7 +149,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -144,7 +157,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -152,7 +165,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -315,6 +328,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -354,7 +380,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -362,7 +388,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -370,7 +396,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -533,6 +559,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -572,7 +611,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -580,7 +619,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -588,7 +627,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -825,6 +864,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -864,7 +916,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -872,7 +924,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -880,7 +932,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1143,6 +1195,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -1182,7 +1247,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1190,7 +1255,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1198,7 +1263,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1361,6 +1426,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -1400,7 +1478,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1408,7 +1486,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1416,7 +1494,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Repository Version referenced by HREF"
+                        "description": "Repository Version referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -1696,6 +1774,19 @@
                             }
                         },
                         "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `base_path` - Base path\n* `-base_path` - Base path (descending)\n* `hidden` - Hidden\n* `-hidden` - Hidden (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
                     },
@@ -2619,6 +2710,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -3407,7 +3511,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Content Unit referenced by HREF/PRN"
                     },
                     {
                         "name": "limit",
@@ -3543,6 +3647,19 @@
                     },
                     {
                         "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -3668,7 +3785,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Content Unit referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -4598,7 +4715,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "description": "Content Unit referenced by HREF"
+                        "description": "Content Unit referenced by HREF/PRN"
                     },
                     {
                         "in": "query",
@@ -4720,6 +4837,19 @@
                             "type": "string"
                         },
                         "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
                     },
                     {
                         "in": "query",
@@ -5822,6 +5952,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -5937,6 +6072,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -5989,6 +6129,11 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "pulp_created": {
                         "type": "string",
@@ -6055,6 +6200,11 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "pulp_created": {
                         "type": "string",
@@ -6145,6 +6295,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -6220,6 +6375,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -6265,6 +6425,11 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "pulp_created": {
                         "type": "string",
@@ -6489,6 +6654,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -6702,6 +6872,11 @@
                         "format": "uri",
                         "readOnly": true
                     },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -6770,6 +6945,11 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "pulp_created": {
                         "type": "string",

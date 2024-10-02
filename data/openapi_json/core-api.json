@@ -17,7 +17,7 @@
             "url": "https://pulp.plan.io/attachments/download/517478/pulp_logo_word_rectangle.svg"
         },
         "x-pulp-app-versions": {
-            "core": "3.63.0.dev"
+            "core": "3.64.0.dev"
         },
         "x-pulp-domain-enabled": false
     },
@@ -15982,15 +15982,26 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
                     "no_content_change_since": {
                         "type": "string",
                         "readOnly": true,
                         "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
                     },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -15999,30 +16010,16 @@
                             "nullable": true
                         }
                     },
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
+                    },
                     "content_guard": {
                         "type": "string",
                         "format": "uri",
                         "nullable": true,
                         "description": "An optional content-guard."
-                    },
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
-                    "base_path": {
-                        "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
-                    },
-                    "base_url": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The URL for accessing the publication as defined by this distribution."
                     },
                     "name": {
                         "type": "string",
@@ -16034,11 +16031,14 @@
                         "readOnly": true,
                         "description": "Timestamp of creation."
                     },
-                    "pulp_last_updated": {
+                    "base_url": {
                         "type": "string",
-                        "format": "date-time",
                         "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                        "description": "The URL for accessing the publication as defined by this distribution."
+                    },
+                    "base_path": {
+                        "type": "string",
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     }
                 },
                 "required": [
@@ -19208,7 +19208,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2024-08-30",
+                        "default": "2024-09-02",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
