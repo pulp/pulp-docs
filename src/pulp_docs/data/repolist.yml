@@ -26,6 +26,10 @@ repos:
       owner: pulp
       title: Pulp CLI
       branch: main
+    - name: pulp-ui
+      owner: pulp
+      title: Pulp UI
+      branch: main
   content:
     - name: pulp_maven
       owner: pulp
