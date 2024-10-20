@@ -17,7 +17,7 @@
             "url": "https://pulp.plan.io/attachments/download/517478/pulp_logo_word_rectangle.svg"
         },
         "x-pulp-app-versions": {
-            "file": "3.65.0.dev"
+            "file": "3.67.0.dev"
         },
         "x-pulp-domain-enabled": false
     },
@@ -25,7 +25,7 @@
         "/pulp/api/v3/acs/file/file/": {
             "get": {
                 "operationId": "acs_file_file_list",
-                "description": "Alternate Content Source ViewSet for File\n\nACS support is provided as a tech preview in pulp_file.",
+                "description": "Alternate Content Source ViewSet for File",
                 "summary": "List file alternate content sources",
                 "parameters": [
                     {
@@ -249,7 +249,7 @@
             },
             "post": {
                 "operationId": "acs_file_file_create",
-                "description": "Alternate Content Source ViewSet for File\n\nACS support is provided as a tech preview in pulp_file.",
+                "description": "Alternate Content Source ViewSet for File",
                 "summary": "Create a file alternate content source",
                 "tags": [
                     "Acs: File"
@@ -299,7 +299,7 @@
         "{file_file_alternate_content_source_href}": {
             "get": {
                 "operationId": "acs_file_file_read",
-                "description": "Alternate Content Source ViewSet for File\n\nACS support is provided as a tech preview in pulp_file.",
+                "description": "Alternate Content Source ViewSet for File",
                 "summary": "Inspect a file alternate content source",
                 "parameters": [
                     {

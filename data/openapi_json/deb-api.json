@@ -11316,6 +11316,11 @@
                     "distribution": {
                         "type": "string",
                         "description": "Name of the distribution."
+                    },
+                    "plain_component": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Name of the component without any path prefixes."
                     }
                 },
                 "required": [
@@ -11699,6 +11704,11 @@
                     "relative_path": {
                         "type": "string",
                         "description": "Relative path of the Debian Source Control (dsc) file.It is normally advised to let Pulp generate this."
+                    },
+                    "sha256": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "sha256 digest of the dsc file."
                     },
                     "format": {
                         "type": "string",

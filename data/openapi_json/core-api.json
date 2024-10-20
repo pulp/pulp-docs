@@ -17,7 +17,7 @@
             "url": "https://pulp.plan.io/attachments/download/517478/pulp_logo_word_rectangle.svg"
         },
         "x-pulp-app-versions": {
-            "core": "3.65.0.dev"
+            "core": "3.67.0.dev"
         },
         "x-pulp-domain-enabled": false
     },
@@ -25,7 +25,7 @@
         "/pulp/api/v3/access_policies/": {
             "get": {
                 "operationId": "access_policies_list",
-                "description": "ViewSet for AccessPolicy.\n\nNOTE: This API endpoint is in \"tech preview\" and subject to change",
+                "description": "ViewSet for AccessPolicy.",
                 "summary": "List access policys",
                 "parameters": [
                     {
@@ -263,7 +263,7 @@
         "{access_policy_href}": {
             "get": {
                 "operationId": "access_policies_read",
-                "description": "ViewSet for AccessPolicy.\n\nNOTE: This API endpoint is in \"tech preview\" and subject to change",
+                "description": "ViewSet for AccessPolicy.",
                 "summary": "Inspect an access policy",
                 "parameters": [
                     {
@@ -323,7 +323,7 @@
             },
             "put": {
                 "operationId": "access_policies_update",
-                "description": "ViewSet for AccessPolicy.\n\nNOTE: This API endpoint is in \"tech preview\" and subject to change",
+                "description": "ViewSet for AccessPolicy.",
                 "summary": "Update an access policy",
                 "parameters": [
                     {
@@ -381,7 +381,7 @@
             },
             "patch": {
                 "operationId": "access_policies_partial_update",
-                "description": "ViewSet for AccessPolicy.\n\nNOTE: This API endpoint is in \"tech preview\" and subject to change",
+                "description": "ViewSet for AccessPolicy.",
                 "summary": "Update an access policy",
                 "parameters": [
                     {
@@ -933,11 +933,16 @@
                         "schema": {
                             "type": "string",
                             "enum": [
+                                "core.openpgp_publickey",
+                                "core.openpgp_publicsubkey",
+                                "core.openpgp_signature",
+                                "core.openpgp_userattribute",
+                                "core.openpgp_userid",
                                 "core.publishedmetadata",
                                 "file.file"
                             ]
                         },
-                        "description": "Pulp type\n\n* `core.publishedmetadata` - core.publishedmetadata\n* `file.file` - file.file"
+                        "description": "Pulp type\n\n* `core.publishedmetadata` - core.publishedmetadata\n* `core.openpgp_publickey` - core.openpgp_publickey\n* `core.openpgp_publicsubkey` - core.openpgp_publicsubkey\n* `core.openpgp_userid` - core.openpgp_userid\n* `core.openpgp_userattribute` - core.openpgp_userattribute\n* `core.openpgp_signature` - core.openpgp_signature\n* `file.file` - file.file"
                     },
                     {
                         "in": "query",
@@ -947,12 +952,17 @@
                             "items": {
                                 "type": "string",
                                 "enum": [
+                                    "core.openpgp_publickey",
+                                    "core.openpgp_publicsubkey",
+                                    "core.openpgp_signature",
+                                    "core.openpgp_userattribute",
+                                    "core.openpgp_userid",
                                     "core.publishedmetadata",
                                     "file.file"
                                 ]
                             }
                         },
-                        "description": "Multiple values may be separated by commas.\n\n* `core.publishedmetadata` - core.publishedmetadata\n* `file.file` - file.file",
+                        "description": "Multiple values may be separated by commas.\n\n* `core.publishedmetadata` - core.publishedmetadata\n* `core.openpgp_publickey` - core.openpgp_publickey\n* `core.openpgp_publicsubkey` - core.openpgp_publicsubkey\n* `core.openpgp_userid` - core.openpgp_userid\n* `core.openpgp_userattribute` - core.openpgp_userattribute\n* `core.openpgp_signature` - core.openpgp_signature\n* `file.file` - file.file",
                         "explode": false,
                         "style": "form"
                     },
@@ -1028,6 +1038,1409 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/PaginatedMultipleArtifactContentResponseList"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/pulp/api/v3/content/core/openpgp_publickey/": {
+            "get": {
+                "operationId": "content_core_openpgp_publickey_list",
+                "description": "A ViewSet for uploads that do not require to store an uploaded content as an Artifact.",
+                "summary": "List open pgp public keys",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "fingerprint",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where fingerprint matches value"
+                    },
+                    {
+                        "name": "limit",
+                        "required": false,
+                        "in": "query",
+                        "description": "Number of results to return per page.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "required": false,
+                        "in": "query",
+                        "description": "The initial index from which to return the results.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "ordering",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "-created",
+                                    "-fingerprint",
+                                    "-pk",
+                                    "-pulp_created",
+                                    "-pulp_id",
+                                    "-pulp_last_updated",
+                                    "-pulp_type",
+                                    "-raw_data",
+                                    "-timestamp_of_interest",
+                                    "-upstream_id",
+                                    "created",
+                                    "fingerprint",
+                                    "pk",
+                                    "pulp_created",
+                                    "pulp_id",
+                                    "pulp_last_updated",
+                                    "pulp_type",
+                                    "raw_data",
+                                    "timestamp_of_interest",
+                                    "upstream_id"
+                                ]
+                            }
+                        },
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `raw_data` - Raw data\n* `-raw_data` - Raw data (descending)\n* `fingerprint` - Fingerprint\n* `-fingerprint` - Fingerprint (descending)\n* `created` - Created\n* `-created` - Created (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "orphaned_for",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "description": "Minutes Content has been orphaned for. -1 uses ORPHAN_PROTECTION_TIME."
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_href__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_id__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version_added",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version_removed",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Content: Openpgp_Publickey"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedOpenPGPPublicKeyResponseList"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "operationId": "content_core_openpgp_publickey_create",
+                "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
+                "summary": "Create an open pgp public key",
+                "tags": [
+                    "Content: Openpgp_Publickey"
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OpenPGPPublicKey"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OpenPGPPublicKey"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{open_p_g_p_public_key_href}": {
+            "get": {
+                "operationId": "content_core_openpgp_publickey_read",
+                "description": "A ViewSet for uploads that do not require to store an uploaded content as an Artifact.",
+                "summary": "Inspect an open pgp public key",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_public_key_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Content: Openpgp_Publickey"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OpenPGPPublicKeyResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/pulp/api/v3/content/core/openpgp_publicsubkey/": {
+            "get": {
+                "operationId": "content_core_openpgp_publicsubkey_list",
+                "description": "Content viewset that supports only GET by default.",
+                "summary": "List open pgp public subkeys",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "fingerprint",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where fingerprint matches value"
+                    },
+                    {
+                        "name": "limit",
+                        "required": false,
+                        "in": "query",
+                        "description": "Number of results to return per page.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "required": false,
+                        "in": "query",
+                        "description": "The initial index from which to return the results.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "ordering",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "-created",
+                                    "-fingerprint",
+                                    "-pk",
+                                    "-pulp_created",
+                                    "-pulp_id",
+                                    "-pulp_last_updated",
+                                    "-pulp_type",
+                                    "-raw_data",
+                                    "-timestamp_of_interest",
+                                    "-upstream_id",
+                                    "created",
+                                    "fingerprint",
+                                    "pk",
+                                    "pulp_created",
+                                    "pulp_id",
+                                    "pulp_last_updated",
+                                    "pulp_type",
+                                    "raw_data",
+                                    "timestamp_of_interest",
+                                    "upstream_id"
+                                ]
+                            }
+                        },
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `raw_data` - Raw data\n* `-raw_data` - Raw data (descending)\n* `fingerprint` - Fingerprint\n* `-fingerprint` - Fingerprint (descending)\n* `created` - Created\n* `-created` - Created (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "orphaned_for",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "description": "Minutes Content has been orphaned for. -1 uses ORPHAN_PROTECTION_TIME."
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_href__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_id__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version_added",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version_removed",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Content: Openpgp_Publicsubkey"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedOpenPGPPublicSubkeyResponseList"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{open_p_g_p_public_subkey_href}": {
+            "get": {
+                "operationId": "content_core_openpgp_publicsubkey_read",
+                "description": "Content viewset that supports only GET by default.",
+                "summary": "Inspect an open pgp public subkey",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_public_subkey_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Content: Openpgp_Publicsubkey"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OpenPGPPublicSubkeyResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/pulp/api/v3/content/core/openpgp_signature/": {
+            "get": {
+                "operationId": "content_core_openpgp_signature_list",
+                "description": "Content viewset that supports only GET by default.",
+                "summary": "List open pgp signatures",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "issuer",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where issuer matches value"
+                    },
+                    {
+                        "name": "limit",
+                        "required": false,
+                        "in": "query",
+                        "description": "Number of results to return per page.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "required": false,
+                        "in": "query",
+                        "description": "The initial index from which to return the results.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "ordering",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "-created",
+                                    "-expiration_time",
+                                    "-issuer",
+                                    "-key_expiration_time",
+                                    "-pk",
+                                    "-pulp_created",
+                                    "-pulp_id",
+                                    "-pulp_last_updated",
+                                    "-pulp_type",
+                                    "-raw_data",
+                                    "-sha256",
+                                    "-signature_type",
+                                    "-signers_user_id",
+                                    "-timestamp_of_interest",
+                                    "-upstream_id",
+                                    "created",
+                                    "expiration_time",
+                                    "issuer",
+                                    "key_expiration_time",
+                                    "pk",
+                                    "pulp_created",
+                                    "pulp_id",
+                                    "pulp_last_updated",
+                                    "pulp_type",
+                                    "raw_data",
+                                    "sha256",
+                                    "signature_type",
+                                    "signers_user_id",
+                                    "timestamp_of_interest",
+                                    "upstream_id"
+                                ]
+                            }
+                        },
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `raw_data` - Raw data\n* `-raw_data` - Raw data (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `signature_type` - Signature type\n* `-signature_type` - Signature type (descending)\n* `created` - Created\n* `-created` - Created (descending)\n* `expiration_time` - Expiration time\n* `-expiration_time` - Expiration time (descending)\n* `key_expiration_time` - Key expiration time\n* `-key_expiration_time` - Key expiration time (descending)\n* `issuer` - Issuer\n* `-issuer` - Issuer (descending)\n* `signers_user_id` - Signers user id\n* `-signers_user_id` - Signers user id (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "orphaned_for",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "description": "Minutes Content has been orphaned for. -1 uses ORPHAN_PROTECTION_TIME."
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_href__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_id__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version_added",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version_removed",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Content: Openpgp_Signature"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedOpenPGPSignatureResponseList"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{open_p_g_p_signature_href}": {
+            "get": {
+                "operationId": "content_core_openpgp_signature_read",
+                "description": "Content viewset that supports only GET by default.",
+                "summary": "Inspect an open pgp signature",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_signature_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Content: Openpgp_Signature"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OpenPGPSignatureResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/pulp/api/v3/content/core/openpgp_userattribute/": {
+            "get": {
+                "operationId": "content_core_openpgp_userattribute_list",
+                "description": "Content viewset that supports only GET by default.",
+                "summary": "List open pgp user attributes",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "required": false,
+                        "in": "query",
+                        "description": "Number of results to return per page.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "required": false,
+                        "in": "query",
+                        "description": "The initial index from which to return the results.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "ordering",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "-pk",
+                                    "-pulp_created",
+                                    "-pulp_id",
+                                    "-pulp_last_updated",
+                                    "-pulp_type",
+                                    "-raw_data",
+                                    "-sha256",
+                                    "-timestamp_of_interest",
+                                    "-upstream_id",
+                                    "pk",
+                                    "pulp_created",
+                                    "pulp_id",
+                                    "pulp_last_updated",
+                                    "pulp_type",
+                                    "raw_data",
+                                    "sha256",
+                                    "timestamp_of_interest",
+                                    "upstream_id"
+                                ]
+                            }
+                        },
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `raw_data` - Raw data\n* `-raw_data` - Raw data (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "orphaned_for",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "description": "Minutes Content has been orphaned for. -1 uses ORPHAN_PROTECTION_TIME."
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_href__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_id__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version_added",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version_removed",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sha256",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where sha256 matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Content: Openpgp_Userattribute"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedOpenPGPUserAttributeResponseList"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{open_p_g_p_user_attribute_href}": {
+            "get": {
+                "operationId": "content_core_openpgp_userattribute_read",
+                "description": "Content viewset that supports only GET by default.",
+                "summary": "Inspect an open pgp user attribute",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_user_attribute_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Content: Openpgp_Userattribute"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OpenPGPUserAttributeResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/pulp/api/v3/content/core/openpgp_userid/": {
+            "get": {
+                "operationId": "content_core_openpgp_userid_list",
+                "description": "Content viewset that supports only GET by default.",
+                "summary": "List open pgp user ids",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "required": false,
+                        "in": "query",
+                        "description": "Number of results to return per page.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "required": false,
+                        "in": "query",
+                        "description": "The initial index from which to return the results.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "ordering",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "-pk",
+                                    "-pulp_created",
+                                    "-pulp_id",
+                                    "-pulp_last_updated",
+                                    "-pulp_type",
+                                    "-raw_data",
+                                    "-timestamp_of_interest",
+                                    "-upstream_id",
+                                    "-user_id",
+                                    "pk",
+                                    "pulp_created",
+                                    "pulp_id",
+                                    "pulp_last_updated",
+                                    "pulp_type",
+                                    "raw_data",
+                                    "timestamp_of_interest",
+                                    "upstream_id",
+                                    "user_id"
+                                ]
+                            }
+                        },
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `raw_data` - Raw data\n* `-raw_data` - Raw data (descending)\n* `user_id` - User id\n* `-user_id` - User id (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "orphaned_for",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "description": "Minutes Content has been orphaned for. -1 uses ORPHAN_PROTECTION_TIME."
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_href__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_id__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version_added",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version_removed",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "user_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where user_id matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "user_id__contains",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where user_id contains value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "user_id__icontains",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where user_id contains value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "user_id__iexact",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where user_id matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "user_id__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Filter results where user_id is in a comma-separated list of values",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "user_id__iregex",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where user_id matches regex value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "user_id__istartswith",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where user_id starts with value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "user_id__regex",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where user_id matches regex value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "user_id__startswith",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where user_id starts with value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Content: Openpgp_Userid"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedOpenPGPUserIDResponseList"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{open_p_g_p_user_i_d_href}": {
+            "get": {
+                "operationId": "content_core_openpgp_userid_read",
+                "description": "Content viewset that supports only GET by default.",
+                "summary": "Inspect an open pgp user id",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_user_i_d_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Content: Openpgp_Userid"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OpenPGPUserIDResponse"
                                 }
                             }
                         },
@@ -4433,10 +5846,11 @@
                             "type": "string",
                             "enum": [
                                 "core.artifact",
+                                "core.openpgp",
                                 "file.file"
                             ]
                         },
-                        "description": "Pulp type\n\n* `core.artifact` - core.artifact\n* `file.file` - file.file"
+                        "description": "Pulp type\n\n* `core.artifact` - core.artifact\n* `core.openpgp` - core.openpgp\n* `file.file` - file.file"
                     },
                     {
                         "in": "query",
@@ -4447,11 +5861,12 @@
                                 "type": "string",
                                 "enum": [
                                     "core.artifact",
+                                    "core.openpgp",
                                     "file.file"
                                 ]
                             }
                         },
-                        "description": "Multiple values may be separated by commas.\n\n* `core.artifact` - core.artifact\n* `file.file` - file.file",
+                        "description": "Multiple values may be separated by commas.\n\n* `core.artifact` - core.artifact\n* `core.openpgp` - core.openpgp\n* `file.file` - file.file",
                         "explode": false,
                         "style": "form"
                     },
@@ -4902,6 +6317,568 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ArtifactDistributionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/pulp/api/v3/distributions/core/openpgp/": {
+            "get": {
+                "operationId": "distributions_core_openpgp_list",
+                "description": "Provides read and list methods and also provides asynchronous CUD methods to dispatch tasks\nwith reservation that lock all Distributions preventing race conditions during base_path\nchecking.",
+                "summary": "List open pgp distributions",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "required": false,
+                        "in": "query",
+                        "description": "Number of results to return per page.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "required": false,
+                        "in": "query",
+                        "description": "The initial index from which to return the results.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "ordering",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "-base_path",
+                                    "-hidden",
+                                    "-name",
+                                    "-pk",
+                                    "-pulp_created",
+                                    "-pulp_id",
+                                    "-pulp_labels",
+                                    "-pulp_last_updated",
+                                    "-pulp_type",
+                                    "base_path",
+                                    "hidden",
+                                    "name",
+                                    "pk",
+                                    "pulp_created",
+                                    "pulp_id",
+                                    "pulp_labels",
+                                    "pulp_last_updated",
+                                    "pulp_type"
+                                ]
+                            }
+                        },
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `base_path` - Base path\n* `-base_path` - Base path (descending)\n* `hidden` - Hidden\n* `-hidden` - Hidden (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_href__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_id__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "description": "Filter results where repository_version matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "with_content",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter distributions based on the content served by them"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Distributions: Openpgp"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedOpenPGPDistributionResponseList"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "operationId": "distributions_core_openpgp_create",
+                "description": "Trigger an asynchronous create task",
+                "summary": "Create an open pgp distribution",
+                "tags": [
+                    "Distributions: Openpgp"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OpenPGPDistribution"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OpenPGPDistribution"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OpenPGPDistribution"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{open_p_g_p_distribution_href}": {
+            "get": {
+                "operationId": "distributions_core_openpgp_read",
+                "description": "Provides read and list methods and also provides asynchronous CUD methods to dispatch tasks\nwith reservation that lock all Distributions preventing race conditions during base_path\nchecking.",
+                "summary": "Inspect an open pgp distribution",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_distribution_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Distributions: Openpgp"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OpenPGPDistributionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "put": {
+                "operationId": "distributions_core_openpgp_update",
+                "description": "Trigger an asynchronous update task",
+                "summary": "Update an open pgp distribution",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_distribution_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Distributions: Openpgp"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OpenPGPDistribution"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OpenPGPDistribution"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OpenPGPDistribution"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "distributions_core_openpgp_partial_update",
+                "description": "Trigger an asynchronous partial update task",
+                "summary": "Update an open pgp distribution",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_distribution_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Distributions: Openpgp"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PatchedOpenPGPDistribution"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PatchedOpenPGPDistribution"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PatchedOpenPGPDistribution"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "distributions_core_openpgp_delete",
+                "description": "Trigger an asynchronous delete task",
+                "summary": "Delete an open pgp distribution",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_distribution_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Distributions: Openpgp"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{open_p_g_p_distribution_href}set_label/": {
+            "post": {
+                "operationId": "distributions_core_openpgp_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_distribution_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Distributions: Openpgp"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{open_p_g_p_distribution_href}unset_label/": {
+            "post": {
+                "operationId": "distributions_core_openpgp_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_distribution_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Distributions: Openpgp"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
                                 }
                             }
                         },
@@ -9876,10 +11853,11 @@
                         "schema": {
                             "type": "string",
                             "enum": [
+                                "core.openpgp",
                                 "file.file"
                             ]
                         },
-                        "description": "Pulp type\n\n* `file.file` - file.file"
+                        "description": "Pulp type\n\n* `core.openpgp` - core.openpgp\n* `file.file` - file.file"
                     },
                     {
                         "in": "query",
@@ -9889,11 +11867,12 @@
                             "items": {
                                 "type": "string",
                                 "enum": [
+                                    "core.openpgp",
                                     "file.file"
                                 ]
                             }
                         },
-                        "description": "Multiple values may be separated by commas.\n\n* `file.file` - file.file",
+                        "description": "Multiple values may be separated by commas.\n\n* `core.openpgp` - core.openpgp\n* `file.file` - file.file",
                         "explode": false,
                         "style": "form"
                     },
@@ -10031,6 +12010,1030 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/PaginatedRepositoryResponseList"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/pulp/api/v3/repositories/core/openpgp_keyring/": {
+            "get": {
+                "operationId": "repositories_core_openpgp_keyring_list",
+                "description": "A ViewSet for an ordinary repository.",
+                "summary": "List open pgp keyrings",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "latest_with_content",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Content Unit referenced by HREF/PRN"
+                    },
+                    {
+                        "name": "limit",
+                        "required": false,
+                        "in": "query",
+                        "description": "Number of results to return per page.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "name",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__contains",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name contains value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__icontains",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name contains value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__iexact",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Filter results where name is in a comma-separated list of values",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__iregex",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name matches regex value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__istartswith",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name starts with value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__regex",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name matches regex value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__startswith",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name starts with value"
+                    },
+                    {
+                        "name": "offset",
+                        "required": false,
+                        "in": "query",
+                        "description": "The initial index from which to return the results.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "ordering",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "-description",
+                                    "-name",
+                                    "-next_version",
+                                    "-pk",
+                                    "-pulp_created",
+                                    "-pulp_id",
+                                    "-pulp_labels",
+                                    "-pulp_last_updated",
+                                    "-pulp_type",
+                                    "-retain_repo_versions",
+                                    "-user_hidden",
+                                    "description",
+                                    "name",
+                                    "next_version",
+                                    "pk",
+                                    "pulp_created",
+                                    "pulp_id",
+                                    "pulp_labels",
+                                    "pulp_last_updated",
+                                    "pulp_type",
+                                    "retain_repo_versions",
+                                    "user_hidden"
+                                ]
+                            }
+                        },
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `next_version` - Next version\n* `-next_version` - Next version (descending)\n* `retain_repo_versions` - Retain repo versions\n* `-retain_repo_versions` - Retain repo versions (descending)\n* `user_hidden` - User hidden\n* `-user_hidden` - User hidden (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_href__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_id__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
+                    },
+                    {
+                        "in": "query",
+                        "name": "remote",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "description": "Foreign Key referenced by HREF"
+                    },
+                    {
+                        "in": "query",
+                        "name": "retain_repo_versions",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Filter results where retain_repo_versions matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "retain_repo_versions__gt",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Filter results where retain_repo_versions is greater than value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "retain_repo_versions__gte",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Filter results where retain_repo_versions is greater than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "retain_repo_versions__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where retain_repo_versions has a null value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "retain_repo_versions__lt",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Filter results where retain_repo_versions is less than value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "retain_repo_versions__lte",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Filter results where retain_repo_versions is less than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "retain_repo_versions__ne",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Filter results where retain_repo_versions not equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "retain_repo_versions__range",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        },
+                        "description": "Filter results where retain_repo_versions is between two comma separated values",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "with_content",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Content Unit referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Repositories: Openpgp_Keyring"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaginatedOpenPGPKeyringResponseList"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "operationId": "repositories_core_openpgp_keyring_create",
+                "description": "A ViewSet for an ordinary repository.",
+                "summary": "Create an open pgp keyring",
+                "tags": [
+                    "Repositories: Openpgp_Keyring"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OpenPGPKeyring"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OpenPGPKeyring"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OpenPGPKeyring"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OpenPGPKeyringResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{open_p_g_p_keyring_href}": {
+            "get": {
+                "operationId": "repositories_core_openpgp_keyring_read",
+                "description": "A ViewSet for an ordinary repository.",
+                "summary": "Inspect an open pgp keyring",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_keyring_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Repositories: Openpgp_Keyring"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OpenPGPKeyringResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "put": {
+                "operationId": "repositories_core_openpgp_keyring_update",
+                "description": "Trigger an asynchronous update task",
+                "summary": "Update an open pgp keyring",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_keyring_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Repositories: Openpgp_Keyring"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OpenPGPKeyring"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OpenPGPKeyring"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OpenPGPKeyring"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "repositories_core_openpgp_keyring_partial_update",
+                "description": "Trigger an asynchronous partial update task",
+                "summary": "Update an open pgp keyring",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_keyring_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Repositories: Openpgp_Keyring"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PatchedOpenPGPKeyring"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PatchedOpenPGPKeyring"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PatchedOpenPGPKeyring"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "repositories_core_openpgp_keyring_delete",
+                "description": "Trigger an asynchronous delete task",
+                "summary": "Delete an open pgp keyring",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_keyring_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Repositories: Openpgp_Keyring"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{open_p_g_p_keyring_href}add_role/": {
+            "post": {
+                "operationId": "repositories_core_openpgp_keyring_add_role",
+                "description": "Add a role for this object to users/groups.",
+                "summary": "Add a role",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_keyring_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Repositories: Openpgp_Keyring"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NestedRoleResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{open_p_g_p_keyring_href}list_roles/": {
+            "get": {
+                "operationId": "repositories_core_openpgp_keyring_list_roles",
+                "description": "List roles assigned to this object.",
+                "summary": "List roles",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_keyring_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Repositories: Openpgp_Keyring"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ObjectRolesResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{open_p_g_p_keyring_href}modify/": {
+            "post": {
+                "operationId": "repositories_core_openpgp_keyring_modify",
+                "description": "Trigger an asynchronous task to create a new repository version.",
+                "summary": "Modify Repository Content",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_keyring_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Repositories: Openpgp_Keyring"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RepositoryAddRemoveContent"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RepositoryAddRemoveContent"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RepositoryAddRemoveContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{open_p_g_p_keyring_href}my_permissions/": {
+            "get": {
+                "operationId": "repositories_core_openpgp_keyring_my_permissions",
+                "description": "List permissions available to the current user on this object.",
+                "summary": "List user permissions",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_keyring_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Repositories: Openpgp_Keyring"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MyPermissionsResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{open_p_g_p_keyring_href}remove_role/": {
+            "post": {
+                "operationId": "repositories_core_openpgp_keyring_remove_role",
+                "description": "Remove a role for this object from users/groups.",
+                "summary": "Remove a role",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_keyring_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Repositories: Openpgp_Keyring"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NestedRoleResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{open_p_g_p_keyring_href}set_label/": {
+            "post": {
+                "operationId": "repositories_core_openpgp_keyring_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_keyring_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Repositories: Openpgp_Keyring"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{open_p_g_p_keyring_href}unset_label/": {
+            "post": {
+                "operationId": "repositories_core_openpgp_keyring_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "open_p_g_p_keyring_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Repositories: Openpgp_Keyring"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
                                 }
                             }
                         },
@@ -12013,10 +15016,12 @@
                             "items": {
                                 "type": "string",
                                 "enum": [
+                                    "-deferred",
                                     "-enc_args",
                                     "-enc_kwargs",
                                     "-error",
                                     "-finished_at",
+                                    "-immediate",
                                     "-logging_cid",
                                     "-name",
                                     "-pk",
@@ -12028,10 +15033,12 @@
                                     "-state",
                                     "-unblocked_at",
                                     "-versions",
+                                    "deferred",
                                     "enc_args",
                                     "enc_kwargs",
                                     "error",
                                     "finished_at",
+                                    "immediate",
                                     "logging_cid",
                                     "name",
                                     "pk",
@@ -12046,7 +15053,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `state` - State\n* `-state` - State (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `logging_cid` - Logging cid\n* `-logging_cid` - Logging cid (descending)\n* `unblocked_at` - Unblocked at\n* `-unblocked_at` - Unblocked at (descending)\n* `started_at` - Started at\n* `-started_at` - Started at (descending)\n* `finished_at` - Finished at\n* `-finished_at` - Finished at (descending)\n* `error` - Error\n* `-error` - Error (descending)\n* `enc_args` - Enc args\n* `-enc_args` - Enc args (descending)\n* `enc_kwargs` - Enc kwargs\n* `-enc_kwargs` - Enc kwargs (descending)\n* `reserved_resources_record` - Reserved resources record\n* `-reserved_resources_record` - Reserved resources record (descending)\n* `versions` - Versions\n* `-versions` - Versions (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `state` - State\n* `-state` - State (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `logging_cid` - Logging cid\n* `-logging_cid` - Logging cid (descending)\n* `unblocked_at` - Unblocked at\n* `-unblocked_at` - Unblocked at (descending)\n* `started_at` - Started at\n* `-started_at` - Started at (descending)\n* `finished_at` - Finished at\n* `-finished_at` - Finished at (descending)\n* `error` - Error\n* `-error` - Error (descending)\n* `enc_args` - Enc args\n* `-enc_args` - Enc args (descending)\n* `enc_kwargs` - Enc kwargs\n* `-enc_kwargs` - Enc kwargs (descending)\n* `reserved_resources_record` - Reserved resources record\n* `-reserved_resources_record` - Reserved resources record (descending)\n* `versions` - Versions\n* `-versions` - Versions (descending)\n* `immediate` - Immediate\n* `-immediate` - Immediate (descending)\n* `deferred` - Deferred\n* `-deferred` - Deferred (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -15982,11 +18989,22 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
-                    "content_guard": {
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "pulp_last_updated": {
                         "type": "string",
-                        "format": "uri",
-                        "nullable": true,
-                        "description": "An optional content-guard."
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "pulp_created": {
                         "type": "string",
@@ -15999,41 +19017,30 @@
                         "readOnly": true,
                         "description": "The Pulp Resource Name (PRN)."
                     },
+                    "base_url": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The URL for accessing the publication as defined by this distribution."
+                    },
+                    "content_guard": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "An optional content-guard."
+                    },
                     "pulp_href": {
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
                     },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
-                    },
-                    "pulp_last_updated": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
                     "base_path": {
                         "type": "string",
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
-                    "base_url": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The URL for accessing the publication as defined by this distribution."
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
                     },
                     "no_content_change_since": {
                         "type": "string",
@@ -17236,6 +20243,190 @@
                     "permissions"
                 ]
             },
+            "NestedOpenPGPPublicSubkey": {
+                "type": "object",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "properties": {
+                    "fingerprint": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64
+                    },
+                    "created": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "required": [
+                    "created",
+                    "fingerprint"
+                ]
+            },
+            "NestedOpenPGPPublicSubkeyResponse": {
+                "type": "object",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "properties": {
+                    "fingerprint": {
+                        "type": "string",
+                        "maxLength": 64
+                    },
+                    "created": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "signatures": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NestedOpenPGPSignatureResponse"
+                        },
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "created",
+                    "fingerprint"
+                ]
+            },
+            "NestedOpenPGPSignature": {
+                "type": "object",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "properties": {
+                    "issuer": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "maxLength": 16
+                    },
+                    "created": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "expiration_time": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "signers_user_id": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1
+                    },
+                    "key_expiration_time": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "expired": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "created",
+                    "expired"
+                ]
+            },
+            "NestedOpenPGPSignatureResponse": {
+                "type": "object",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "properties": {
+                    "issuer": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 16
+                    },
+                    "created": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "expiration_time": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "signers_user_id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "key_expiration_time": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "expired": {
+                        "type": "boolean"
+                    },
+                    "key_expired": {
+                        "type": "string",
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "created",
+                    "expired"
+                ]
+            },
+            "NestedOpenPGPUserAttribute": {
+                "type": "object",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "properties": {
+                    "sha256": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 128
+                    }
+                },
+                "required": [
+                    "sha256"
+                ]
+            },
+            "NestedOpenPGPUserAttributeResponse": {
+                "type": "object",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "properties": {
+                    "sha256": {
+                        "type": "string",
+                        "maxLength": 128
+                    },
+                    "signatures": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NestedOpenPGPSignatureResponse"
+                        },
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "sha256"
+                ]
+            },
+            "NestedOpenPGPUserID": {
+                "type": "object",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "properties": {
+                    "user_id": {
+                        "type": "string",
+                        "minLength": 1
+                    }
+                },
+                "required": [
+                    "user_id"
+                ]
+            },
+            "NestedOpenPGPUserIDResponse": {
+                "type": "object",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "properties": {
+                    "user_id": {
+                        "type": "string"
+                    },
+                    "signatures": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NestedOpenPGPSignatureResponse"
+                        },
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "user_id"
+                ]
+            },
             "NestedRole": {
                 "type": "object",
                 "description": "Serializer to add/remove object roles to/from users/groups.\n\nThis is used in conjunction with ``pulpcore.app.viewsets.base.RolesMixin`` and requires the\nunderlying object to be passed as ``content_object`` in the context.",
@@ -17305,6 +20496,545 @@
                 },
                 "required": [
                     "roles"
+                ]
+            },
+            "OpenPGPDistribution": {
+                "type": "object",
+                "description": "The Serializer for the Distribution model.\n\nThe serializer deliberately omits the `publication` and `repository_version` field due to\nplugins typically requiring one or the other but not both.\n\nTo include the ``publication`` field, it is recommended plugins define the field::\n\n  publication = DetailRelatedField(\n      required=False,\n      help_text=_(\"Publication to be served\"),\n      view_name_pattern=r\"publications(-.*/.*)?-detail\",\n      queryset=models.Publication.objects.exclude(complete=False),\n      allow_null=True,\n  )\n\nTo include the ``repository_version`` field, it is recommended plugins define the field::\n\n  repository_version = RepositoryVersionRelatedField(\n      required=False, help_text=_(\"RepositoryVersion to be served\"), allow_null=True\n  )\n\nAdditionally, the serializer omits the ``remote`` field, which is used for pull-through caching\nfeature and only by plugins which use publications. Plugins implementing a pull-through caching\nshould define the field in their derived serializer class like this::\n\n  remote = DetailRelatedField(\n      required=False,\n      help_text=_('Remote that can be used to fetch content when using pull-through caching.'),\n      queryset=models.Remote.objects.all(),\n      allow_null=True\n  )",
+                "properties": {
+                    "base_path": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
+                    "content_guard": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "An optional content-guard."
+                    },
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "repository": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "The latest RepositoryVersion for this Repository will be served."
+                    },
+                    "repository_version": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "RepositoryVersion to be served"
+                    }
+                },
+                "required": [
+                    "base_path",
+                    "name"
+                ]
+            },
+            "OpenPGPDistributionResponse": {
+                "type": "object",
+                "description": "The Serializer for the Distribution model.\n\nThe serializer deliberately omits the `publication` and `repository_version` field due to\nplugins typically requiring one or the other but not both.\n\nTo include the ``publication`` field, it is recommended plugins define the field::\n\n  publication = DetailRelatedField(\n      required=False,\n      help_text=_(\"Publication to be served\"),\n      view_name_pattern=r\"publications(-.*/.*)?-detail\",\n      queryset=models.Publication.objects.exclude(complete=False),\n      allow_null=True,\n  )\n\nTo include the ``repository_version`` field, it is recommended plugins define the field::\n\n  repository_version = RepositoryVersionRelatedField(\n      required=False, help_text=_(\"RepositoryVersion to be served\"), allow_null=True\n  )\n\nAdditionally, the serializer omits the ``remote`` field, which is used for pull-through caching\nfeature and only by plugins which use publications. Plugins implementing a pull-through caching\nshould define the field in their derived serializer class like this::\n\n  remote = DetailRelatedField(\n      required=False,\n      help_text=_('Remote that can be used to fetch content when using pull-through caching.'),\n      queryset=models.Remote.objects.all(),\n      allow_null=True\n  )",
+                "properties": {
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "base_path": {
+                        "type": "string",
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
+                    "base_url": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The URL for accessing the publication as defined by this distribution."
+                    },
+                    "content_guard": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "An optional content-guard."
+                    },
+                    "no_content_change_since": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                    },
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "repository": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "The latest RepositoryVersion for this Repository will be served."
+                    },
+                    "repository_version": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "RepositoryVersion to be served"
+                    }
+                },
+                "required": [
+                    "base_path",
+                    "name"
+                ]
+            },
+            "OpenPGPKeyring": {
+                "type": "object",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "properties": {
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "A unique name for this repository."
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "An optional description."
+                    },
+                    "retain_repo_versions": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
+                    },
+                    "remote": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "An optional remote to use by default when syncing."
+                    }
+                },
+                "required": [
+                    "name"
+                ]
+            },
+            "OpenPGPKeyringResponse": {
+                "type": "object",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "properties": {
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "versions_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "latest_version_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name for this repository."
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "An optional description."
+                    },
+                    "retain_repo_versions": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
+                    },
+                    "remote": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "An optional remote to use by default when syncing."
+                    }
+                },
+                "required": [
+                    "name"
+                ]
+            },
+            "OpenPGPPublicKey": {
+                "type": "object",
+                "description": "A serializer for content types with no Artifact.",
+                "properties": {
+                    "repository": {
+                        "type": "string",
+                        "format": "uri",
+                        "writeOnly": true,
+                        "description": "A URI of a repository the new content unit should be associated with."
+                    },
+                    "file": {
+                        "type": "string",
+                        "format": "binary",
+                        "writeOnly": true,
+                        "description": "An uploaded file that may be turned into the content unit."
+                    },
+                    "upload": {
+                        "type": "string",
+                        "format": "uri",
+                        "writeOnly": true,
+                        "description": "An uncommitted upload that may be turned into the content unit."
+                    },
+                    "file_url": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "minLength": 1,
+                        "description": "A url that Pulp can download and turn into the content unit."
+                    }
+                }
+            },
+            "OpenPGPPublicKeyResponse": {
+                "type": "object",
+                "description": "A serializer for content types with no Artifact.",
+                "properties": {
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "fingerprint": {
+                        "type": "string",
+                        "readOnly": true,
+                        "maxLength": 64
+                    },
+                    "created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                    },
+                    "user_ids": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NestedOpenPGPUserIDResponse"
+                        },
+                        "readOnly": true
+                    },
+                    "user_attributes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NestedOpenPGPUserAttributeResponse"
+                        },
+                        "readOnly": true
+                    },
+                    "public_subkeys": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NestedOpenPGPPublicSubkeyResponse"
+                        },
+                        "readOnly": true
+                    }
+                }
+            },
+            "OpenPGPPublicSubkeyResponse": {
+                "type": "object",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "properties": {
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "fingerprint": {
+                        "type": "string",
+                        "maxLength": 64
+                    },
+                    "created": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "signatures": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NestedOpenPGPSignatureResponse"
+                        },
+                        "readOnly": true
+                    },
+                    "public_key": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "created",
+                    "fingerprint"
+                ]
+            },
+            "OpenPGPSignatureResponse": {
+                "type": "object",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "properties": {
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "issuer": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 16
+                    },
+                    "created": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "expiration_time": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "signers_user_id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "key_expiration_time": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "expired": {
+                        "type": "boolean"
+                    },
+                    "key_expired": {
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "signed_content": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "created",
+                    "expired"
+                ]
+            },
+            "OpenPGPUserAttributeResponse": {
+                "type": "object",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "properties": {
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "sha256": {
+                        "type": "string",
+                        "maxLength": 128
+                    },
+                    "signatures": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NestedOpenPGPSignatureResponse"
+                        },
+                        "readOnly": true
+                    },
+                    "public_key": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "sha256"
+                ]
+            },
+            "OpenPGPUserIDResponse": {
+                "type": "object",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "properties": {
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "user_id": {
+                        "type": "string"
+                    },
+                    "signatures": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NestedOpenPGPSignatureResponse"
+                        },
+                        "readOnly": true
+                    },
+                    "public_key": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "user_id"
                 ]
             },
             "OrphansCleanup": {
@@ -17815,6 +21545,223 @@
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/MultipleArtifactContentResponse"
+                        }
+                    }
+                }
+            },
+            "PaginatedOpenPGPDistributionResponseList": {
+                "type": "object",
+                "required": [
+                    "count",
+                    "results"
+                ],
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "next": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=400&limit=100"
+                    },
+                    "previous": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=200&limit=100"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/OpenPGPDistributionResponse"
+                        }
+                    }
+                }
+            },
+            "PaginatedOpenPGPKeyringResponseList": {
+                "type": "object",
+                "required": [
+                    "count",
+                    "results"
+                ],
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "next": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=400&limit=100"
+                    },
+                    "previous": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=200&limit=100"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/OpenPGPKeyringResponse"
+                        }
+                    }
+                }
+            },
+            "PaginatedOpenPGPPublicKeyResponseList": {
+                "type": "object",
+                "required": [
+                    "count",
+                    "results"
+                ],
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "next": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=400&limit=100"
+                    },
+                    "previous": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=200&limit=100"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/OpenPGPPublicKeyResponse"
+                        }
+                    }
+                }
+            },
+            "PaginatedOpenPGPPublicSubkeyResponseList": {
+                "type": "object",
+                "required": [
+                    "count",
+                    "results"
+                ],
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "next": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=400&limit=100"
+                    },
+                    "previous": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=200&limit=100"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/OpenPGPPublicSubkeyResponse"
+                        }
+                    }
+                }
+            },
+            "PaginatedOpenPGPSignatureResponseList": {
+                "type": "object",
+                "required": [
+                    "count",
+                    "results"
+                ],
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "next": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=400&limit=100"
+                    },
+                    "previous": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=200&limit=100"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/OpenPGPSignatureResponse"
+                        }
+                    }
+                }
+            },
+            "PaginatedOpenPGPUserAttributeResponseList": {
+                "type": "object",
+                "required": [
+                    "count",
+                    "results"
+                ],
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "next": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=400&limit=100"
+                    },
+                    "previous": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=200&limit=100"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/OpenPGPUserAttributeResponse"
+                        }
+                    }
+                }
+            },
+            "PaginatedOpenPGPUserIDResponseList": {
+                "type": "object",
+                "required": [
+                    "count",
+                    "results"
+                ],
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "next": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=400&limit=100"
+                    },
+                    "previous": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=200&limit=100"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/OpenPGPUserIDResponse"
                         }
                     }
                 }
@@ -18562,6 +22509,89 @@
                     }
                 }
             },
+            "PatchedOpenPGPDistribution": {
+                "type": "object",
+                "description": "The Serializer for the Distribution model.\n\nThe serializer deliberately omits the `publication` and `repository_version` field due to\nplugins typically requiring one or the other but not both.\n\nTo include the ``publication`` field, it is recommended plugins define the field::\n\n  publication = DetailRelatedField(\n      required=False,\n      help_text=_(\"Publication to be served\"),\n      view_name_pattern=r\"publications(-.*/.*)?-detail\",\n      queryset=models.Publication.objects.exclude(complete=False),\n      allow_null=True,\n  )\n\nTo include the ``repository_version`` field, it is recommended plugins define the field::\n\n  repository_version = RepositoryVersionRelatedField(\n      required=False, help_text=_(\"RepositoryVersion to be served\"), allow_null=True\n  )\n\nAdditionally, the serializer omits the ``remote`` field, which is used for pull-through caching\nfeature and only by plugins which use publications. Plugins implementing a pull-through caching\nshould define the field in their derived serializer class like this::\n\n  remote = DetailRelatedField(\n      required=False,\n      help_text=_('Remote that can be used to fetch content when using pull-through caching.'),\n      queryset=models.Remote.objects.all(),\n      allow_null=True\n  )",
+                "properties": {
+                    "base_path": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
+                    "content_guard": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "An optional content-guard."
+                    },
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "repository": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "The latest RepositoryVersion for this Repository will be served."
+                    },
+                    "repository_version": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "RepositoryVersion to be served"
+                    }
+                }
+            },
+            "PatchedOpenPGPKeyring": {
+                "type": "object",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "properties": {
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "A unique name for this repository."
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "An optional description."
+                    },
+                    "retain_repo_versions": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
+                    },
+                    "remote": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "An optional remote to use by default when syncing."
+                    }
+                }
+            },
             "PatchedPulpExporter": {
                 "type": "object",
                 "description": "Serializer for pulp exporters.",
@@ -19208,7 +23238,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2024-09-09",
+                        "default": "2024-09-20",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
@@ -19491,6 +23521,33 @@
                     }
                 }
             },
+            "RepositoryAddRemoveContent": {
+                "type": "object",
+                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
+                "properties": {
+                    "add_content_units": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "description": "A list of content units to add to a new repository version. This content is added after remove_content_units are removed."
+                    },
+                    "remove_content_units": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "description": "A list of content units to remove from the latest repository version. You may also specify '*' as an entry to remove all content. This content is removed before add_content_units are added."
+                    },
+                    "base_version": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "A repository version whose content will be used as the initial set of content for the new repository version"
+                    }
+                }
+            },
             "RepositoryResponse": {
                 "type": "object",
                 "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
@@ -19692,6 +23749,43 @@
                 "required": [
                     "name",
                     "permissions"
+                ]
+            },
+            "SetLabel": {
+                "type": "object",
+                "description": "Serializer for synchronously setting a label.",
+                "properties": {
+                    "key": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "^[-a-zA-Z0-9_]+$"
+                    },
+                    "value": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "required": [
+                    "key",
+                    "value"
+                ]
+            },
+            "SetLabelResponse": {
+                "type": "object",
+                "description": "Serializer for synchronously setting a label.",
+                "properties": {
+                    "key": {
+                        "type": "string",
+                        "pattern": "^[-a-zA-Z0-9_]+$"
+                    },
+                    "value": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "required": [
+                    "key",
+                    "value"
                 ]
             },
             "SigningServiceResponse": {
@@ -20154,6 +24248,37 @@
                     "dispatch_interval",
                     "name",
                     "task_name"
+                ]
+            },
+            "UnsetLabel": {
+                "type": "object",
+                "description": "Serializer for synchronously setting a label.",
+                "properties": {
+                    "key": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "^[-a-zA-Z0-9_]+$"
+                    }
+                },
+                "required": [
+                    "key"
+                ]
+            },
+            "UnsetLabelResponse": {
+                "type": "object",
+                "description": "Serializer for synchronously setting a label.",
+                "properties": {
+                    "key": {
+                        "type": "string",
+                        "pattern": "^[-a-zA-Z0-9_]+$"
+                    },
+                    "value": {
+                        "type": "string",
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "key"
                 ]
             },
             "Upload": {
