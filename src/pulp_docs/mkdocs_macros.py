@@ -449,6 +449,23 @@ def define_env(env):
         ]
         return repos_data
 
+    @env.macro
+    def rss_items():
+        # that's Himdel's rss feed: https://github.com/himdel
+        response = httpx.get("https://himdel.eu/feed/pulp-changes.json")
+        if response.is_error:
+            return {
+                "items": [
+                    {
+                        "url": "#",
+                        "title": "Couldnt fetch the feed. Please, open an issue in https://github.com/pulp/pulp-docs/.",
+                    }
+                ]
+            }
+
+        rss_feed = json.loads(response.content)
+        return rss_feed["items"][:20]
+
 
 def on_pre_page_macros(env):
     """The mkdocs-macros hook just before an inidvidual page render."""

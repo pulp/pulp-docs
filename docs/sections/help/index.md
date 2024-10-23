@@ -11,6 +11,7 @@ Understaning the docs will help you find what you need more quickly.
 
 For some human help, you should visit the [Get Involved](site:help/community/get-involved/) section.
 There you'll learn about how to can reach out to the Pulp Community.
+
 Don't hesitate to contact us!
 
 ---
@@ -56,4 +57,12 @@ Repo | Version | Links | &nbsp;
 --- | --- | --- | ---
 {% for repo in get_repos("other") -%}
 {{ repo.title }} | `{{ repo.version }}` | {{ repo.codebase_link }} | {{ repo.changes_link }}
+{% endfor %}
+
+## Changes RSS Feed
+
+Check our recent releases with this [RSS changelog feed](https://himdel.eu/feed/pulp-changes.json).
+
+{% for item in rss_items() %}
+- [{{ item.title }}]({{ item.url }})
 {% endfor %}
