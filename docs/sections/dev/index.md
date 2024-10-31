@@ -20,7 +20,11 @@ Common needs are to *improve docs, fix bugs and add features*.
 
     ---
     
-    Learn the basic for contributing to Pulp: opening PRs, code style, releases cycles and versioning.
+    Learn the basics for contributing to Pulp: opening PRs, code style, releases cycles and versioning.
+
+    [Contributing Code](site:pulpcore/docs/dev/tutorials/quickstart/)
+
+    [Contributing Documentation](site:pulpcore/docs/dev/tutorials/quickstart-docs)
 
     
 -   **Deep Dive**
@@ -28,6 +32,8 @@ Common needs are to *improve docs, fix bugs and add features*.
     ---
 
     Dive-in into Pulp code and architecture to help extend, improve and move the project forward.
+ 
+    [Architecture](site:pulpcore/docs/admin/learn/architecture/)
 
     
 </div>

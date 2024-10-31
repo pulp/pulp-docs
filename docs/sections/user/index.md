@@ -19,15 +19,14 @@ while **admin** needs are to *configure, deploy and maintain Pulp instances*.
 
     ---
     
-    Complete the starter tutorial to learn in practice the basics of managing content in Pulp.
-
+    Complete the [start tutorial](site:pulpcore/docs/user/tutorials/) to learn in practice the basics of managing content in Pulp.
     
 -   **Understand the docs**
     
     ---
 
     Pulp has a rich ecosystem of plugins.
-    Understanding the docs can help you find information more efficiently.
+    [Understanding the docs](site:help/more/docs-usage) can help you find information more efficiently.
 
 </div>
 </div>
