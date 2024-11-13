@@ -18989,9 +18989,18 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
-                    "base_path": {
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "pulp_last_updated": {
                         "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
                     "base_url": {
                         "type": "string",
@@ -19004,48 +19013,39 @@
                         "nullable": true,
                         "description": "An optional content-guard."
                     },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
-                    },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
                     "name": {
                         "type": "string",
                         "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "no_content_change_since": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
                     },
                     "hidden": {
                         "type": "boolean",
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
                     },
-                    "pulp_last_updated": {
+                    "pulp_created": {
                         "type": "string",
                         "format": "date-time",
                         "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                        "description": "Timestamp of creation."
+                    },
+                    "base_path": {
+                        "type": "string",
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "prn": {
                         "type": "string",
                         "readOnly": true,
                         "description": "The Pulp Resource Name (PRN)."
                     },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "no_content_change_since": {
+                    "pulp_href": {
                         "type": "string",
-                        "readOnly": true,
-                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                        "format": "uri",
+                        "readOnly": true
                     }
                 },
                 "required": [
@@ -23243,7 +23243,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2024-10-11",
+                        "default": "2024-10-14",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
