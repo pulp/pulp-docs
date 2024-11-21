@@ -1,3 +1,7 @@
+---
+render_macros: true
+---
+
 # Rest API
 
 The REST API reference for Pulp Plugins is generated using [ReDoc](https://redocly.com/redoc/) and are published in standalone pages:
