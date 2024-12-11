@@ -18989,35 +18989,29 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
-                    "base_url": {
+                    "prn": {
                         "type": "string",
                         "readOnly": true,
-                        "description": "The URL for accessing the publication as defined by this distribution."
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "base_path": {
+                        "type": "string",
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "hidden": {
                         "type": "boolean",
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
                     },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
                     "name": {
                         "type": "string",
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
-                    "base_path": {
+                    "content_guard": {
                         "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "An optional content-guard."
                     },
                     "pulp_created": {
                         "type": "string",
@@ -19025,16 +19019,10 @@
                         "readOnly": true,
                         "description": "Timestamp of creation."
                     },
-                    "no_content_change_since": {
+                    "base_url": {
                         "type": "string",
                         "readOnly": true,
-                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
-                    },
-                    "content_guard": {
-                        "type": "string",
-                        "format": "uri",
-                        "nullable": true,
-                        "description": "An optional content-guard."
+                        "description": "The URL for accessing the publication as defined by this distribution."
                     },
                     "pulp_last_updated": {
                         "type": "string",
@@ -19046,6 +19034,18 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
+                    },
+                    "no_content_change_since": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
                     }
                 },
                 "required": [
@@ -23243,7 +23243,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2024-11-08",
+                        "default": "2024-11-11",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
@@ -24135,9 +24135,6 @@
                     },
                     "error": {
                         "type": "object",
-                        "additionalProperties": {
-                            "type": "object"
-                        },
                         "readOnly": true,
                         "description": "A JSON Object of a fatal error encountered during the execution of this task."
                     },
