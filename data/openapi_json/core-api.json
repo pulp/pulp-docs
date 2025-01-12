@@ -17,7 +17,7 @@
             "url": "https://pulp.plan.io/attachments/download/517478/pulp_logo_word_rectangle.svg"
         },
         "x-pulp-app-versions": {
-            "core": "3.69.0.dev"
+            "core": "3.70.0.dev"
         },
         "x-pulp-domain-enabled": false
     },
@@ -10893,6 +10893,79 @@
                 }
             }
         },
+        "/pulp/api/v3/login/": {
+            "get": {
+                "operationId": "login_read",
+                "tags": [
+                    "Login"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoginResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "operationId": "login",
+                "tags": [
+                    "Login"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoginResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "logout",
+                "tags": [
+                    "Login"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No response body"
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/orphans/": {
             "delete": {
                 "operationId": "orphans_delete",
@@ -11085,6 +11158,14 @@
                             "format": "date-time"
                         },
                         "description": "Filter results where pulp_created is greater than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_created__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_created has a null value"
                     },
                     {
                         "in": "query",
@@ -11490,6 +11571,14 @@
                     },
                     {
                         "in": "query",
+                        "name": "pulp_last_updated__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_last_updated has a null value"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_last_updated__lt",
                         "schema": {
                             "type": "string",
@@ -11594,7 +11683,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PaginatedRemoteResponseList"
+                                    "$ref": "#/components/schemas/PaginatedGenericRemoteResponseList"
                                 }
                             }
                         },
@@ -13260,6 +13349,14 @@
                     },
                     {
                         "in": "query",
+                        "name": "pulp_created__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_created has a null value"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_created__lt",
                         "schema": {
                             "type": "string",
@@ -14907,6 +15004,14 @@
                     },
                     {
                         "in": "query",
+                        "name": "finished_at__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where finished_at has a null value"
+                    },
+                    {
+                        "in": "query",
                         "name": "finished_at__lt",
                         "schema": {
                             "type": "string",
@@ -15183,6 +15288,14 @@
                     },
                     {
                         "in": "query",
+                        "name": "started_at__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where started_at has a null value"
+                    },
+                    {
+                        "in": "query",
                         "name": "started_at__lt",
                         "schema": {
                             "type": "string",
@@ -15259,6 +15372,73 @@
                             "format": "uuid"
                         },
                         "description": "Filter results where task_group matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "unblocked_at",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where unblocked_at matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "unblocked_at__gt",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where unblocked_at is greater than value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "unblocked_at__gte",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where unblocked_at is greater than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "unblocked_at__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where unblocked_at has a null value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "unblocked_at__lt",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where unblocked_at is less than value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "unblocked_at__lte",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where unblocked_at is less than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "unblocked_at__range",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "date-time"
+                            }
+                        },
+                        "description": "Filter results where unblocked_at is between two comma separated values",
+                        "explode": false,
+                        "style": "form"
                     },
                     {
                         "in": "query",
@@ -16654,6 +16834,14 @@
                             "format": "date-time"
                         },
                         "description": "Filter results where last_replication is greater than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "last_replication__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where last_replication has a null value"
                     },
                     {
                         "in": "query",
@@ -18475,6 +18663,14 @@
                     },
                     {
                         "in": "query",
+                        "name": "last_heartbeat__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where last_heartbeat has a null value"
+                    },
+                    {
+                        "in": "query",
                         "name": "last_heartbeat__lt",
                         "schema": {
                             "type": "string",
@@ -18989,19 +19185,26 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
-                    "name": {
+                    "pulp_created": {
                         "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
                     },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "no_content_change_since": {
                         "type": "string",
                         "readOnly": true,
                         "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                    },
+                    "base_url": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The URL for accessing the publication as defined by this distribution."
                     },
                     "pulp_last_updated": {
                         "type": "string",
@@ -19009,25 +19212,16 @@
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
-                    },
-                    "pulp_href": {
+                    "content_guard": {
                         "type": "string",
                         "format": "uri",
-                        "readOnly": true
+                        "nullable": true,
+                        "description": "An optional content-guard."
                     },
-                    "base_path": {
-                        "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
-                    },
-                    "base_url": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The URL for accessing the publication as defined by this distribution."
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -19036,16 +19230,18 @@
                             "nullable": true
                         }
                     },
-                    "prn": {
+                    "name": {
                         "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
-                    "content_guard": {
+                    "base_path": {
+                        "type": "string",
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
+                    "pulp_href": {
                         "type": "string",
                         "format": "uri",
-                        "nullable": true,
-                        "description": "An optional content-guard."
+                        "readOnly": true
                     }
                 },
                 "required": [
@@ -19791,6 +19987,155 @@
                     "path"
                 ]
             },
+            "GenericRemoteResponse": {
+                "type": "object",
+                "description": "Every remote defined by a plugin should have a Remote serializer that inherits from this\nclass. Please import from `pulpcore.plugin.serializers` rather than from this module directly.",
+                "properties": {
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the most recent update of the remote."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name for this remote."
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "The URL of an external content source."
+                    },
+                    "ca_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                    },
+                    "client_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "A PEM encoded client certificate used for authentication."
+                    },
+                    "tls_validation": {
+                        "type": "boolean",
+                        "description": "If True, TLS peer validation must be performed."
+                    },
+                    "proxy_url": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "The proxy URL. Format: scheme://host:port"
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "download_concurrency": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
+                    },
+                    "max_retries": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
+                    },
+                    "policy": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/PolicyEnum"
+                            }
+                        ],
+                        "default": "immediate",
+                        "description": "The policy to use when downloading content.\n\n* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
+                    },
+                    "total_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "sock_connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "sock_read_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "headers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Headers for aiohttp.Clientsession"
+                    },
+                    "rate_limit": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Limits requests per second for each concurrent downloader"
+                    },
+                    "hidden_fields": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "is_set": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "required": [
+                                "is_set",
+                                "name"
+                            ]
+                        },
+                        "readOnly": true,
+                        "description": "List of hidden (write only) fields"
+                    }
+                },
+                "required": [
+                    "name",
+                    "url"
+                ]
+            },
             "Group": {
                 "type": "object",
                 "description": "Serializer for Group.",
@@ -20122,6 +20467,24 @@
                     "params",
                     "task"
                 ]
+            },
+            "LoginResponse": {
+                "type": "object",
+                "properties": {
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "username": {
+                        "type": "string",
+                        "readOnly": true
+                    }
+                }
             },
             "MethodEnum": {
                 "enum": [
@@ -21365,6 +21728,37 @@
                     }
                 }
             },
+            "PaginatedGenericRemoteResponseList": {
+                "type": "object",
+                "required": [
+                    "count",
+                    "results"
+                ],
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "next": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=400&limit=100"
+                    },
+                    "previous": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=200&limit=100"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/GenericRemoteResponse"
+                        }
+                    }
+                }
+            },
             "PaginatedGroupResponseList": {
                 "type": "object",
                 "required": [
@@ -21919,37 +22313,6 @@
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/RBACContentGuardResponse"
-                        }
-                    }
-                }
-            },
-            "PaginatedRemoteResponseList": {
-                "type": "object",
-                "required": [
-                    "count",
-                    "results"
-                ],
-                "properties": {
-                    "count": {
-                        "type": "integer",
-                        "example": 123
-                    },
-                    "next": {
-                        "type": "string",
-                        "nullable": true,
-                        "format": "uri",
-                        "example": "http://api.example.org/accounts/?offset=400&limit=100"
-                    },
-                    "previous": {
-                        "type": "string",
-                        "nullable": true,
-                        "format": "uri",
-                        "example": "http://api.example.org/accounts/?offset=200&limit=100"
-                    },
-                    "results": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/RemoteResponse"
                         }
                     }
                 }
@@ -22809,10 +23172,11 @@
             "PolicyEnum": {
                 "enum": [
                     "immediate",
-                    "When syncing, download all metadata and content now."
+                    "on_demand",
+                    "streamed"
                 ],
                 "type": "string",
-                "description": "* `immediate` - immediate\n* `When syncing, download all metadata and content now.` - When syncing, download all metadata and content now."
+                "description": "* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
             },
             "ProfileArtifactResponse": {
                 "type": "object",
@@ -23243,7 +23607,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2024-11-18",
+                        "default": "2024-12-13",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
@@ -23365,155 +23729,6 @@
                 },
                 "required": [
                     "connected"
-                ]
-            },
-            "RemoteResponse": {
-                "type": "object",
-                "description": "Every remote defined by a plugin should have a Remote serializer that inherits from this\nclass. Please import from `pulpcore.plugin.serializers` rather than from this module directly.",
-                "properties": {
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
-                    },
-                    "pulp_last_updated": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the most recent update of the remote."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name for this remote."
-                    },
-                    "url": {
-                        "type": "string",
-                        "description": "The URL of an external content source."
-                    },
-                    "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
-                    },
-                    "client_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "A PEM encoded client certificate used for authentication."
-                    },
-                    "tls_validation": {
-                        "type": "boolean",
-                        "description": "If True, TLS peer validation must be performed."
-                    },
-                    "proxy_url": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "The proxy URL. Format: scheme://host:port"
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "download_concurrency": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
-                    },
-                    "max_retries": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
-                    },
-                    "policy": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/PolicyEnum"
-                            }
-                        ],
-                        "default": "immediate",
-                        "description": "The policy to use when downloading content.\n\n* `immediate` - immediate\n* `When syncing, download all metadata and content now.` - When syncing, download all metadata and content now."
-                    },
-                    "total_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "sock_connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "sock_read_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "headers": {
-                        "type": "array",
-                        "items": {
-                            "type": "object"
-                        },
-                        "description": "Headers for aiohttp.Clientsession"
-                    },
-                    "rate_limit": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Limits requests per second for each concurrent downloader"
-                    },
-                    "hidden_fields": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "is_set": {
-                                    "type": "boolean"
-                                }
-                            },
-                            "required": [
-                                "is_set",
-                                "name"
-                            ]
-                        },
-                        "readOnly": true,
-                        "description": "List of hidden (write only) fields"
-                    }
-                },
-                "required": [
-                    "name",
-                    "url"
                 ]
             },
             "Repair": {

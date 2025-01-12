@@ -5568,6 +5568,250 @@
                 }
             }
         },
+        "{deb_apt_distribution_href}add_role/": {
+            "post": {
+                "operationId": "distributions_deb_apt_add_role",
+                "description": "Add a role for this object to users/groups.",
+                "summary": "Add a role",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_apt_distribution_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Distributions: Apt"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NestedRoleResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_distribution_href}list_roles/": {
+            "get": {
+                "operationId": "distributions_deb_apt_list_roles",
+                "description": "List roles assigned to this object.",
+                "summary": "List roles",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_apt_distribution_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Distributions: Apt"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ObjectRolesResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_distribution_href}my_permissions/": {
+            "get": {
+                "operationId": "distributions_deb_apt_my_permissions",
+                "description": "List permissions available to the current user on this object.",
+                "summary": "List user permissions",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_apt_distribution_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Distributions: Apt"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MyPermissionsResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_distribution_href}remove_role/": {
+            "post": {
+                "operationId": "distributions_deb_apt_remove_role",
+                "description": "Remove a role for this object from users/groups.",
+                "summary": "Remove a role",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_apt_distribution_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Distributions: Apt"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NestedRoleResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "{deb_apt_distribution_href}set_label/": {
             "post": {
                 "operationId": "distributions_deb_apt_set_label",
@@ -6075,6 +6319,250 @@
                 }
             }
         },
+        "{deb_apt_publication_href}add_role/": {
+            "post": {
+                "operationId": "publications_deb_apt_add_role",
+                "description": "Add a role for this object to users/groups.",
+                "summary": "Add a role",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_apt_publication_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Publications: Apt"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NestedRoleResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_publication_href}list_roles/": {
+            "get": {
+                "operationId": "publications_deb_apt_list_roles",
+                "description": "List roles assigned to this object.",
+                "summary": "List roles",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_apt_publication_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Publications: Apt"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ObjectRolesResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_publication_href}my_permissions/": {
+            "get": {
+                "operationId": "publications_deb_apt_my_permissions",
+                "description": "List permissions available to the current user on this object.",
+                "summary": "List user permissions",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_apt_publication_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Publications: Apt"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MyPermissionsResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_publication_href}remove_role/": {
+            "post": {
+                "operationId": "publications_deb_apt_remove_role",
+                "description": "Remove a role for this object from users/groups.",
+                "summary": "Remove a role",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_apt_publication_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Publications: Apt"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NestedRoleResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/publications/deb/verbatim/": {
             "get": {
                 "operationId": "publications_deb_verbatim_list",
@@ -6458,6 +6946,250 @@
                 "responses": {
                     "204": {
                         "description": "No response body"
+                    }
+                }
+            }
+        },
+        "{deb_verbatim_publication_href}add_role/": {
+            "post": {
+                "operationId": "publications_deb_verbatim_add_role",
+                "description": "Add a role for this object to users/groups.",
+                "summary": "Add a role",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_verbatim_publication_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Publications: Verbatim"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NestedRoleResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_verbatim_publication_href}list_roles/": {
+            "get": {
+                "operationId": "publications_deb_verbatim_list_roles",
+                "description": "List roles assigned to this object.",
+                "summary": "List roles",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_verbatim_publication_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Publications: Verbatim"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ObjectRolesResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_verbatim_publication_href}my_permissions/": {
+            "get": {
+                "operationId": "publications_deb_verbatim_my_permissions",
+                "description": "List permissions available to the current user on this object.",
+                "summary": "List user permissions",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_verbatim_publication_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Publications: Verbatim"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MyPermissionsResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_verbatim_publication_href}remove_role/": {
+            "post": {
+                "operationId": "publications_deb_verbatim_remove_role",
+                "description": "Remove a role for this object from users/groups.",
+                "summary": "Remove a role",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_verbatim_publication_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Publications: Verbatim"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NestedRoleResponse"
+                                }
+                            }
+                        },
+                        "description": ""
                     }
                 }
             }
@@ -7049,6 +7781,250 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_remote_href}add_role/": {
+            "post": {
+                "operationId": "remotes_deb_apt_add_role",
+                "description": "Add a role for this object to users/groups.",
+                "summary": "Add a role",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_apt_remote_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Remotes: Apt"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NestedRoleResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_remote_href}list_roles/": {
+            "get": {
+                "operationId": "remotes_deb_apt_list_roles",
+                "description": "List roles assigned to this object.",
+                "summary": "List roles",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_apt_remote_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Remotes: Apt"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ObjectRolesResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_remote_href}my_permissions/": {
+            "get": {
+                "operationId": "remotes_deb_apt_my_permissions",
+                "description": "List permissions available to the current user on this object.",
+                "summary": "List user permissions",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_apt_remote_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Remotes: Apt"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MyPermissionsResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_remote_href}remove_role/": {
+            "post": {
+                "operationId": "remotes_deb_apt_remove_role",
+                "description": "Remove a role for this object from users/groups.",
+                "summary": "Remove a role",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_apt_remote_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Remotes: Apt"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NestedRoleResponse"
                                 }
                             }
                         },
@@ -7777,6 +8753,128 @@
                 }
             }
         },
+        "{deb_apt_repository_href}add_role/": {
+            "post": {
+                "operationId": "repositories_deb_apt_add_role",
+                "description": "Add a role for this object to users/groups.",
+                "summary": "Add a role",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_apt_repository_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Repositories: Apt"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NestedRoleResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_repository_href}list_roles/": {
+            "get": {
+                "operationId": "repositories_deb_apt_list_roles",
+                "description": "List roles assigned to this object.",
+                "summary": "List roles",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_apt_repository_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Repositories: Apt"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ObjectRolesResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "{deb_apt_repository_href}modify/": {
             "post": {
                 "operationId": "repositories_deb_apt_modify",
@@ -7829,6 +8927,128 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_repository_href}my_permissions/": {
+            "get": {
+                "operationId": "repositories_deb_apt_my_permissions",
+                "description": "List permissions available to the current user on this object.",
+                "summary": "List user permissions",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_apt_repository_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Repositories: Apt"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MyPermissionsResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_repository_href}remove_role/": {
+            "post": {
+                "operationId": "repositories_deb_apt_remove_role",
+                "description": "Remove a role for this object from users/groups.",
+                "summary": "Remove a role",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_apt_repository_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Repositories: Apt"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NestedRoleResponse"
                                 }
                             }
                         },
@@ -8539,6 +9759,91 @@
                 },
                 "required": [
                     "config"
+                ]
+            },
+            "MyPermissionsResponse": {
+                "type": "object",
+                "properties": {
+                    "permissions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "permissions"
+                ]
+            },
+            "NestedRole": {
+                "type": "object",
+                "description": "Serializer to add/remove object roles to/from users/groups.\n\nThis is used in conjunction with ``pulpcore.app.viewsets.base.RolesMixin`` and requires the\nunderlying object to be passed as ``content_object`` in the context.",
+                "properties": {
+                    "users": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "minLength": 1,
+                            "description": "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+                        },
+                        "default": []
+                    },
+                    "groups": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "default": []
+                    },
+                    "role": {
+                        "type": "string",
+                        "minLength": 1
+                    }
+                },
+                "required": [
+                    "role"
+                ]
+            },
+            "NestedRoleResponse": {
+                "type": "object",
+                "description": "Serializer to add/remove object roles to/from users/groups.\n\nThis is used in conjunction with ``pulpcore.app.viewsets.base.RolesMixin`` and requires the\nunderlying object to be passed as ``content_object`` in the context.",
+                "properties": {
+                    "users": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+                        },
+                        "default": []
+                    },
+                    "groups": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "default": []
+                    },
+                    "role": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "role"
+                ]
+            },
+            "ObjectRolesResponse": {
+                "type": "object",
+                "properties": {
+                    "roles": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NestedRoleResponse"
+                        }
+                    }
+                },
+                "required": [
+                    "roles"
                 ]
             },
             "PaginatedRepositoryVersionResponseList": {
