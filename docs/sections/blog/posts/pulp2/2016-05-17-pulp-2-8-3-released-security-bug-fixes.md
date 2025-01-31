@@ -7,7 +7,7 @@ author: Sean Myers
 layout: post
 guid: http://www.pulpproject.org/?p=1273
 permalink: /2016/05/17/pulp-2-8-3-released-security-bug-fixes/
-tags: release
+tags: [release]
 categories:
   - Uncategorized
 ---
