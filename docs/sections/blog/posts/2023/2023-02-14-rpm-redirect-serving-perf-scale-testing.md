@@ -3,7 +3,7 @@ date: 2023-02-14T20:55:50+00:00
 title: RPM Content Service Performance and Scale Testing
 author: Brian Bouterse
 tags:
-    - pulp_rpm, performance
+  - pulp_rpm, performance
 ---
 <!-- more -->
 ## Goals

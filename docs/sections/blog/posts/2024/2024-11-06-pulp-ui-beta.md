@@ -3,7 +3,7 @@ date: 2024-11-11T08:55:50+00:00
 title: Pulp UI Beta out now in Pulp images
 author: Gerrod Ubben
 tags:
-    - announcement  
+  - announcement
 ---
 
 Pulp-UI (beta) is now available in the latest `pulp/pulp` image. This was a huge effort over the 

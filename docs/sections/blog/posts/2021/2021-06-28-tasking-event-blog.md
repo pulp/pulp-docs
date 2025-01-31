@@ -2,7 +2,7 @@
 date: 2021-06-28T20:55:50+00:00
 title: New Tasking System Event
 author: Melanie Corr
-tags: event
+tags: [event]
 ---
 <!-- more -->
 ## Pulp Community YouTube Live Event
