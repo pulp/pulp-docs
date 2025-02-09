@@ -17,8 +17,8 @@
             "url": "https://pulp.plan.io/attachments/download/517478/pulp_logo_word_rectangle.svg"
         },
         "x-pulp-app-versions": {
-            "python": "3.13.0.dev",
-            "core": "3.69.1"
+            "python": "3.14.0.dev",
+            "core": "3.70.0"
         },
         "x-pulp-domain-enabled": false
     },
@@ -1628,6 +1628,14 @@
                     },
                     {
                         "in": "query",
+                        "name": "pulp_created__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_created has a null value"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_created__lt",
                         "schema": {
                             "type": "string",
@@ -2385,6 +2393,14 @@
                             "format": "date-time"
                         },
                         "description": "Filter results where pulp_last_updated is greater than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_last_updated__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_last_updated has a null value"
                     },
                     {
                         "in": "query",
@@ -4400,6 +4416,14 @@
                     },
                     {
                         "in": "query",
+                        "name": "pulp_created__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_created has a null value"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_created__lt",
                         "schema": {
                             "type": "string",
@@ -5175,16 +5199,12 @@
                         "description": "Cache value from last PyPI sync"
                     },
                     "info": {
-                        "type": "object",
                         "description": "Core metadata of the package"
                     },
                     "releases": {
-                        "type": "object",
                         "description": "List of all the releases of the package"
                     },
-                    "urls": {
-                        "type": "object"
-                    }
+                    "urls": {}
                 },
                 "required": [
                     "info",
@@ -6213,7 +6233,6 @@
                         "description": "A browsable URL for the project and a label for it, separated by a comma."
                     },
                     "project_urls": {
-                        "type": "object",
                         "description": "A dictionary of labels and URLs for the project."
                     },
                     "platform": {
@@ -6225,23 +6244,18 @@
                         "description": "Field to specify the OS and CPU for which the binary package was compiled. "
                     },
                     "requires_dist": {
-                        "type": "object",
                         "description": "A JSON list containing names of some other distutils project required by this distribution."
                     },
                     "provides_dist": {
-                        "type": "object",
                         "description": "A JSON list containing names of a Distutils project which is contained within this distribution."
                     },
                     "obsoletes_dist": {
-                        "type": "object",
                         "description": "A JSON list containing names of a distutils project's distribution which this distribution renders obsolete, meaning that the two projects should not be installed at the same time."
                     },
                     "requires_external": {
-                        "type": "object",
                         "description": "A JSON list containing some dependency in the system that the distribution is to be used."
                     },
                     "classifiers": {
-                        "type": "object",
                         "description": "A JSON list containing classification values for a Python package."
                     }
                 },
@@ -6363,7 +6377,6 @@
                         "description": "A browsable URL for the project and a label for it, separated by a comma."
                     },
                     "project_urls": {
-                        "type": "object",
                         "description": "A dictionary of labels and URLs for the project."
                     },
                     "platform": {
@@ -6375,23 +6388,18 @@
                         "description": "Field to specify the OS and CPU for which the binary package was compiled. "
                     },
                     "requires_dist": {
-                        "type": "object",
                         "description": "A JSON list containing names of some other distutils project required by this distribution."
                     },
                     "provides_dist": {
-                        "type": "object",
                         "description": "A JSON list containing names of a Distutils project which is contained within this distribution."
                     },
                     "obsoletes_dist": {
-                        "type": "object",
                         "description": "A JSON list containing names of a distutils project's distribution which this distribution renders obsolete, meaning that the two projects should not be installed at the same time."
                     },
                     "requires_external": {
-                        "type": "object",
                         "description": "A JSON list containing some dependency in the system that the distribution is to be used."
                     },
                     "classifiers": {
-                        "type": "object",
                         "description": "A JSON list containing classification values for a Python package."
                     }
                 }

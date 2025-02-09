@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "rpm": "3.28.0.dev",
-            "core": "3.69.1"
+            "core": "3.69.2"
         },
         "x-pulp-domain-enabled": false
     },
@@ -9645,7 +9645,7 @@
                 "properties": {
                     "config": {
                         "type": "object",
-                        "description": "A JSON document describing sources, destinations, and content to be copied"
+                        "description": "Content to be copied into the given destinations from the given sources.\n\nIts a list of dictionaries with the following available fields:\n\n```json\n[\n  {\n    \"source_repo_version\": <RepositoryVersion [pulp_href|prn]>,\n    \"dest_repo\": <RpmRepository [pulp_href|prn]>,\n    \"dest_base_version\": <int>,\n    \"content\": [<Content [pulp_href|prn]>, ...]\n  },\n  ...\n]\n```\n\nIf domains are enabled, the refered pulp objects must be part of the current domain.\n\nFor usage examples, refer to the advanced copy guide:\n<https://pulpproject.org/pulp_rpm/docs/user/guides/modify/#advanced-copy-workflow>\n"
                     },
                     "dependency_solving": {
                         "type": "boolean",
@@ -11179,6 +11179,11 @@
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "header_version": {
                         "type": "string",

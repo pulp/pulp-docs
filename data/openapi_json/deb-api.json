@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "deb": "3.6.0.dev",
-            "core": "3.69.1"
+            "core": "3.69.2"
         },
         "x-pulp-domain-enabled": false
     },

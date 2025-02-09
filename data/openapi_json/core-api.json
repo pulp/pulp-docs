@@ -17,7 +17,7 @@
             "url": "https://pulp.plan.io/attachments/download/517478/pulp_logo_word_rectangle.svg"
         },
         "x-pulp-app-versions": {
-            "core": "3.70.0.dev"
+            "core": "3.71.0.dev"
         },
         "x-pulp-domain-enabled": false
     },
@@ -15186,6 +15186,73 @@
                     },
                     {
                         "in": "query",
+                        "name": "pulp_created",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where pulp_created matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_created__gt",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where pulp_created is greater than value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_created__gte",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where pulp_created is greater than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_created__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_created has a null value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_created__lt",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where pulp_created is less than value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_created__lte",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where pulp_created is less than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_created__range",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "date-time"
+                            }
+                        },
+                        "description": "Filter results where pulp_created is between two comma separated values",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_href__in",
                         "schema": {
                             "type": "array",
@@ -16990,7 +17057,6 @@
                                     "-pk",
                                     "-pulp_created",
                                     "-pulp_id",
-                                    "-pulp_label_select",
                                     "-pulp_last_updated",
                                     "-q_select",
                                     "-tls_validation",
@@ -17007,7 +17073,6 @@
                                     "pk",
                                     "pulp_created",
                                     "pulp_id",
-                                    "pulp_label_select",
                                     "pulp_last_updated",
                                     "q_select",
                                     "tls_validation",
@@ -17015,7 +17080,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `base_url` - Base url\n* `-base_url` - Base url (descending)\n* `api_root` - Api root\n* `-api_root` - Api root (descending)\n* `domain` - Domain\n* `-domain` - Domain (descending)\n* `ca_cert` - Ca cert\n* `-ca_cert` - Ca cert (descending)\n* `client_cert` - Client cert\n* `-client_cert` - Client cert (descending)\n* `client_key` - Client key\n* `-client_key` - Client key (descending)\n* `tls_validation` - Tls validation\n* `-tls_validation` - Tls validation (descending)\n* `username` - Username\n* `-username` - Username (descending)\n* `password` - Password\n* `-password` - Password (descending)\n* `pulp_label_select` - Pulp label select\n* `-pulp_label_select` - Pulp label select (descending)\n* `q_select` - Q select\n* `-q_select` - Q select (descending)\n* `last_replication` - Last replication\n* `-last_replication` - Last replication (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `base_url` - Base url\n* `-base_url` - Base url (descending)\n* `api_root` - Api root\n* `-api_root` - Api root (descending)\n* `domain` - Domain\n* `-domain` - Domain (descending)\n* `ca_cert` - Ca cert\n* `-ca_cert` - Ca cert (descending)\n* `client_cert` - Client cert\n* `-client_cert` - Client cert (descending)\n* `client_key` - Client key\n* `-client_key` - Client key (descending)\n* `tls_validation` - Tls validation\n* `-tls_validation` - Tls validation (descending)\n* `username` - Username\n* `-username` - Username (descending)\n* `password` - Password\n* `-password` - Password (descending)\n* `q_select` - Q select\n* `-q_select` - Q select (descending)\n* `last_replication` - Last replication\n* `-last_replication` - Last replication (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -19185,11 +19250,6 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
@@ -19200,11 +19260,6 @@
                         "type": "string",
                         "readOnly": true,
                         "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
-                    },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
                     },
                     "content_guard": {
                         "type": "string",
@@ -19217,19 +19272,30 @@
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
                     },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
                     "pulp_last_updated": {
                         "type": "string",
                         "format": "date-time",
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
                     "base_path": {
                         "type": "string",
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
+                    "base_url": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The URL for accessing the publication as defined by this distribution."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -19238,10 +19304,9 @@
                             "nullable": true
                         }
                     },
-                    "base_url": {
+                    "name": {
                         "type": "string",
-                        "readOnly": true,
-                        "description": "The URL for accessing the publication as defined by this distribution."
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
                     }
                 },
                 "required": [
@@ -19543,6 +19608,7 @@
                 "properties": {
                     "content_origin": {
                         "type": "string",
+                        "nullable": true,
                         "description": "The CONTENT_ORIGIN setting for this Pulp instance"
                     },
                     "content_path_prefix": {
@@ -19551,7 +19617,6 @@
                     }
                 },
                 "required": [
-                    "content_origin",
                     "content_path_prefix"
                 ]
             },
@@ -23607,7 +23672,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2024-12-30",
+                        "default": "2025-01-10",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
