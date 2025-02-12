@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "rpm": "3.28.0.dev",
-            "core": "3.69.2"
+            "core": "3.70.0"
         },
         "x-pulp-domain-enabled": false
     },
@@ -5343,6 +5343,14 @@
                     },
                     {
                         "in": "query",
+                        "name": "pulp_created__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_created has a null value"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_created__lt",
                         "schema": {
                             "type": "string",
@@ -6100,6 +6108,14 @@
                             "format": "date-time"
                         },
                         "description": "Filter results where pulp_last_updated is greater than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_last_updated__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_last_updated has a null value"
                     },
                     {
                         "in": "query",
@@ -7059,6 +7075,14 @@
                             "format": "date-time"
                         },
                         "description": "Filter results where pulp_last_updated is greater than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_last_updated__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_last_updated has a null value"
                     },
                     {
                         "in": "query",
@@ -9029,6 +9053,14 @@
                     },
                     {
                         "in": "query",
+                        "name": "pulp_created__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_created has a null value"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_created__lt",
                         "schema": {
                             "type": "string",
@@ -9644,7 +9676,6 @@
                 "description": "A serializer for Content Copy API.",
                 "properties": {
                     "config": {
-                        "type": "object",
                         "description": "Content to be copied into the given destinations from the given sources.\n\nIts a list of dictionaries with the following available fields:\n\n```json\n[\n  {\n    \"source_repo_version\": <RepositoryVersion [pulp_href|prn]>,\n    \"dest_repo\": <RpmRepository [pulp_href|prn]>,\n    \"dest_base_version\": <int>,\n    \"content\": [<Content [pulp_href|prn]>, ...]\n  },\n  ...\n]\n```\n\nIf domains are enabled, the refered pulp objects must be part of the current domain.\n\nFor usage examples, refer to the advanced copy guide:\n<https://pulpproject.org/pulp_rpm/docs/user/guides/modify/#advanced-copy-workflow>\n"
                     },
                     "dependency_solving": {
@@ -10683,7 +10714,6 @@
                         "minimum": 0
                     },
                     "repo_config": {
-                        "type": "object",
                         "description": "A JSON document describing config.repo file"
                     },
                     "compression_type": {
@@ -11337,12 +11367,10 @@
                         "description": "Modulemd architecture."
                     },
                     "artifacts": {
-                        "type": "object",
                         "nullable": true,
                         "description": "Modulemd artifacts."
                     },
                     "dependencies": {
-                        "type": "object",
                         "nullable": true,
                         "description": "Modulemd dependencies."
                     },
@@ -11362,7 +11390,6 @@
                         "description": "Modulemd snippet"
                     },
                     "profiles": {
-                        "type": "object",
                         "nullable": true,
                         "description": "Modulemd profiles."
                     },
@@ -11406,7 +11433,6 @@
                         "description": "Modulemd default stream."
                     },
                     "profiles": {
-                        "type": "object",
                         "description": "Default profiles for modulemd streams."
                     },
                     "snippet": {
@@ -11458,7 +11484,6 @@
                         "description": "Modulemd default stream."
                     },
                     "profiles": {
-                        "type": "object",
                         "description": "Default profiles for modulemd streams."
                     }
                 },
@@ -11679,12 +11704,10 @@
                         "description": "Modulemd architecture."
                     },
                     "artifacts": {
-                        "type": "object",
                         "nullable": true,
                         "description": "Modulemd artifacts."
                     },
                     "dependencies": {
-                        "type": "object",
                         "nullable": true,
                         "description": "Modulemd dependencies."
                     },
@@ -11698,7 +11721,6 @@
                         "description": "Modulemd artifacts' packages."
                     },
                     "profiles": {
-                        "type": "object",
                         "nullable": true,
                         "description": "Modulemd profiles."
                     },
@@ -11805,17 +11827,14 @@
                         "description": "Category display order."
                     },
                     "group_ids": {
-                        "type": "object",
                         "nullable": true,
                         "description": "Category group list."
                     },
                     "desc_by_lang": {
-                        "type": "object",
                         "nullable": true,
                         "description": "Category description by language."
                     },
                     "name_by_lang": {
-                        "type": "object",
                         "nullable": true,
                         "description": "Category name by language."
                     },
@@ -11880,22 +11899,18 @@
                         "description": "Environment display order."
                     },
                     "group_ids": {
-                        "type": "object",
                         "nullable": true,
                         "description": "Environment group list."
                     },
                     "option_ids": {
-                        "type": "object",
                         "nullable": true,
                         "description": "Environment option ids"
                     },
                     "desc_by_lang": {
-                        "type": "object",
                         "nullable": true,
                         "description": "Environment description by language."
                     },
                     "name_by_lang": {
-                        "type": "object",
                         "nullable": true,
                         "description": "Environment name by language."
                     },
@@ -11969,7 +11984,6 @@
                         "description": "PackageGroup description."
                     },
                     "packages": {
-                        "type": "object",
                         "nullable": true,
                         "description": "PackageGroup package list."
                     },
@@ -11978,12 +11992,10 @@
                         "description": "PackageGroup biarch only."
                     },
                     "desc_by_lang": {
-                        "type": "object",
                         "nullable": true,
                         "description": "PackageGroup description by language."
                     },
                     "name_by_lang": {
-                        "type": "object",
                         "nullable": true,
                         "description": "PackageGroup name by language."
                     },
@@ -12030,7 +12042,6 @@
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
                     "matches": {
-                        "type": "object",
                         "nullable": true,
                         "description": "Langpacks matches."
                     },
@@ -12157,61 +12168,51 @@
                         "description": "URL with more information about the packaged software"
                     },
                     "changelogs": {
-                        "type": "object",
                         "readOnly": true,
                         "default": "[]",
                         "description": "Changelogs that package contains"
                     },
                     "files": {
-                        "type": "object",
                         "readOnly": true,
                         "default": "[]",
                         "description": "Files that package contains"
                     },
                     "requires": {
-                        "type": "object",
                         "readOnly": true,
                         "default": "[]",
                         "description": "Capabilities the package requires"
                     },
                     "provides": {
-                        "type": "object",
                         "readOnly": true,
                         "default": "[]",
                         "description": "Capabilities the package provides"
                     },
                     "conflicts": {
-                        "type": "object",
                         "readOnly": true,
                         "default": "[]",
                         "description": "Capabilities the package conflicts"
                     },
                     "obsoletes": {
-                        "type": "object",
                         "readOnly": true,
                         "default": "[]",
                         "description": "Capabilities the package obsoletes"
                     },
                     "suggests": {
-                        "type": "object",
                         "readOnly": true,
                         "default": "[]",
                         "description": "Capabilities the package suggests"
                     },
                     "enhances": {
-                        "type": "object",
                         "readOnly": true,
                         "default": "[]",
                         "description": "Capabilities the package enhances"
                     },
                     "recommends": {
-                        "type": "object",
                         "readOnly": true,
                         "default": "[]",
                         "description": "Capabilities the package recommends"
                     },
                     "supplements": {
-                        "type": "object",
                         "readOnly": true,
                         "default": "[]",
                         "description": "Capabilities the package supplements"
@@ -12672,7 +12673,6 @@
                         "minimum": 0
                     },
                     "repo_config": {
-                        "type": "object",
                         "description": "A JSON document describing config.repo file"
                     },
                     "compression_type": {
@@ -12767,7 +12767,6 @@
                         "description": "REMOVED: An option specifying whether Pulp should generate SQLite metadata. Not operation since pulp_rpm 3.25.0 release"
                     },
                     "repo_config": {
-                        "type": "object",
                         "description": "A JSON document describing config.repo file"
                     },
                     "compression_type": {
@@ -13195,7 +13194,6 @@
                         "minimum": 0
                     },
                     "repo_config": {
-                        "type": "object",
                         "description": "A JSON document describing config.repo file"
                     },
                     "compression_type": {
@@ -13356,7 +13354,6 @@
                         "description": "REMOVED: An option specifying whether Pulp should generate SQLite metadata. Not operation since pulp_rpm 3.25.0 release"
                     },
                     "repo_config": {
-                        "type": "object",
                         "description": "A JSON document describing config.repo file"
                     },
                     "compression_type": {
@@ -13695,7 +13692,6 @@
                         "description": "Collection short name."
                     },
                     "module": {
-                        "type": "object",
                         "nullable": true,
                         "description": "Collection modular NSVCA."
                     }
@@ -13721,7 +13717,6 @@
                         "description": "Collection short name."
                     },
                     "module": {
-                        "type": "object",
                         "nullable": true,
                         "description": "Collection modular NSVCA."
                     },
