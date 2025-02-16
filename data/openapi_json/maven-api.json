@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "maven": "0.9.0.dev",
-            "core": "3.70.0"
+            "core": "3.70.1"
         },
         "x-pulp-domain-enabled": false
     },

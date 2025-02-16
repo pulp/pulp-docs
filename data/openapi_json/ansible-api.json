@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "ansible": "0.24.0.dev",
-            "core": "3.69.2"
+            "core": "3.70.1"
         },
         "x-pulp-domain-enabled": false
     },
@@ -3958,6 +3958,14 @@
                     },
                     {
                         "in": "query",
+                        "name": "pulp_last_updated__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_last_updated has a null value"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_last_updated__lt",
                         "schema": {
                             "type": "string",
@@ -4954,6 +4962,14 @@
                     },
                     {
                         "in": "query",
+                        "name": "pulp_last_updated__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_last_updated has a null value"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_last_updated__lt",
                         "schema": {
                             "type": "string",
@@ -5910,6 +5926,14 @@
                             "format": "date-time"
                         },
                         "description": "Filter results where pulp_last_updated is greater than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_last_updated__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_last_updated has a null value"
                     },
                     {
                         "in": "query",
@@ -8241,6 +8265,14 @@
                     },
                     {
                         "in": "query",
+                        "name": "pulp_created__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_created has a null value"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_created__lt",
                         "schema": {
                             "type": "string",
@@ -8795,10 +8827,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -8807,6 +8836,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -8978,10 +9010,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -8993,6 +9022,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -9160,10 +9192,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -9172,6 +9201,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -9241,10 +9273,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -9253,6 +9282,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             },
@@ -9318,9 +9350,6 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -9330,6 +9359,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             },
@@ -9375,9 +9407,6 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -9387,6 +9416,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -9658,10 +9690,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -9670,6 +9699,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -9747,10 +9779,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -9759,6 +9788,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             },
@@ -9812,9 +9844,6 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -9824,6 +9853,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -9901,10 +9933,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -9913,6 +9942,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -10062,10 +10094,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -10077,6 +10106,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -10486,10 +10518,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -10498,6 +10527,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -10559,10 +10591,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -10571,6 +10600,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -10929,7 +10961,7 @@
                     }
                 ],
                 "responses": {
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -11762,7 +11794,7 @@
                     }
                 ],
                 "responses": {
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -13000,10 +13032,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -13012,6 +13041,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -13141,10 +13173,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -13156,6 +13185,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -13315,10 +13347,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -13327,6 +13356,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -13388,10 +13420,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -13400,6 +13429,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             },
@@ -13457,9 +13489,6 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -13469,6 +13498,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             },
@@ -13506,9 +13538,6 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -13518,6 +13547,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -13781,10 +13813,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -13793,6 +13822,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -13862,10 +13894,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -13874,6 +13903,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             },
@@ -13919,9 +13951,6 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -13931,6 +13960,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -14000,10 +14032,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -14012,6 +14041,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -14153,10 +14185,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -14168,6 +14197,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -14499,10 +14531,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -14511,6 +14540,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -14564,10 +14596,7 @@
                 ],
                 "deprecated": true,
                 "responses": {
-                    "302": {
-                        "description": "No response body"
-                    },
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -14576,6 +14605,9 @@
                             }
                         },
                         "description": ""
+                    },
+                    "302": {
+                        "description": "No response body"
                     }
                 }
             }
@@ -14878,7 +14910,7 @@
                     }
                 ],
                 "responses": {
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -15655,7 +15687,7 @@
                     }
                 ],
                 "responses": {
-                    "202": {
+                    "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -17129,7 +17161,8 @@
                         "readOnly": true
                     },
                     "download_count": {
-                        "type": "string",
+                        "type": "integer",
+                        "description": "Get the download count of the collection",
                         "readOnly": true
                     }
                 },
@@ -17178,7 +17211,8 @@
                         "description": "Timestamp of creation."
                     },
                     "contents": {
-                        "type": "object",
+                        "type": "array",
+                        "items": {},
                         "readOnly": true,
                         "description": "A JSON field with data about the contents."
                     },
@@ -18564,7 +18598,7 @@
                             }
                         ],
                         "default": "immediate",
-                        "description": "The policy to use when downloading content.\n\n* `immediate` - immediate\n* `When syncing, download all metadata and content now.` - When syncing, download all metadata and content now."
+                        "description": "The policy to use when downloading content.\n\n* `immediate` - When syncing, download all metadata and content now."
                     },
                     "total_timeout": {
                         "type": "number",
@@ -18630,12 +18664,10 @@
                     },
                     "sync_dependencies": {
                         "type": "boolean",
-                        "default": true,
                         "description": "Sync dependencies for collections specified via requirements file"
                     },
                     "signed_only": {
                         "type": "boolean",
-                        "default": false,
                         "description": "Sync only collections that have a signature"
                     }
                 }
@@ -18644,43 +18676,12 @@
                 "type": "object",
                 "description": "A serializer for Git Collection Remotes.",
                 "properties": {
-                    "proxy_username": {
+                    "client_key": {
                         "type": "string",
                         "writeOnly": true,
                         "nullable": true,
                         "minLength": 1,
-                        "description": "The username to authenticte to the proxy."
-                    },
-                    "rate_limit": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Limits requests per second for each concurrent downloader"
-                    },
-                    "username": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The username to be used for authentication when syncing."
-                    },
-                    "url": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "The URL of an external content source."
-                    },
-                    "max_retries": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
-                    },
-                    "headers": {
-                        "type": "array",
-                        "items": {
-                            "type": "object"
-                        },
-                        "description": "Headers for aiohttp.Clientsession"
+                        "description": "A PEM encoded private key used for authentication."
                     },
                     "total_timeout": {
                         "type": "number",
@@ -18689,39 +18690,12 @@
                         "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "download_concurrency": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
-                    },
-                    "proxy_url": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The proxy URL. Format: scheme://host:port"
-                    },
                     "connect_timeout": {
                         "type": "number",
                         "format": "double",
                         "minimum": 0.0,
                         "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "sock_read_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
                         "type": "number",
@@ -18730,33 +18704,11 @@
                         "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
-                    "name": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name for this remote."
-                    },
-                    "client_cert": {
+                    "proxy_url": {
                         "type": "string",
                         "nullable": true,
                         "minLength": 1,
-                        "description": "A PEM encoded client certificate used for authentication."
-                    },
-                    "client_key": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded private key used for authentication."
-                    },
-                    "tls_validation": {
-                        "type": "boolean",
-                        "description": "If True, TLS peer validation must be performed."
-                    },
-                    "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                        "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "proxy_password": {
                         "type": "string",
@@ -18765,12 +18717,92 @@
                         "minLength": 1,
                         "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
                     },
+                    "tls_validation": {
+                        "type": "boolean",
+                        "description": "If True, TLS peer validation must be performed."
+                    },
+                    "sock_read_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "headers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Headers for aiohttp.Clientsession"
+                    },
+                    "max_retries": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
+                    },
                     "password": {
                         "type": "string",
                         "writeOnly": true,
                         "nullable": true,
                         "minLength": 1,
                         "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
+                    },
+                    "username": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The username to be used for authentication when syncing."
+                    },
+                    "ca_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                    },
+                    "url": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The URL of an external content source."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "proxy_username": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The username to authenticte to the proxy."
+                    },
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "A unique name for this remote."
+                    },
+                    "download_concurrency": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
+                    },
+                    "client_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded client certificate used for authentication."
+                    },
+                    "rate_limit": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Limits requests per second for each concurrent downloader"
                     },
                     "metadata_only": {
                         "type": "boolean",
@@ -18881,7 +18913,7 @@
                             }
                         ],
                         "default": "immediate",
-                        "description": "The policy to use when downloading content.\n\n* `immediate` - immediate\n* `When syncing, download all metadata and content now.` - When syncing, download all metadata and content now."
+                        "description": "The policy to use when downloading content.\n\n* `immediate` - When syncing, download all metadata and content now."
                     },
                     "total_timeout": {
                         "type": "number",
@@ -18928,11 +18960,10 @@
             },
             "PolicyEnum": {
                 "enum": [
-                    "immediate",
-                    "When syncing, download all metadata and content now."
+                    "immediate"
                 ],
                 "type": "string",
-                "description": "* `immediate` - immediate\n* `When syncing, download all metadata and content now.` - When syncing, download all metadata and content now."
+                "description": "* `immediate` - When syncing, download all metadata and content now."
             },
             "Repair": {
                 "type": "object",
@@ -19740,7 +19771,6 @@
                         "description": "Gpg public key to verify collection signatures against"
                     },
                     "last_sync_task": {
-                        "type": "string",
                         "readOnly": true
                     },
                     "private": {
@@ -19849,7 +19879,7 @@
                             }
                         ],
                         "default": "immediate",
-                        "description": "The policy to use when downloading content.\n\n* `immediate` - immediate\n* `When syncing, download all metadata and content now.` - When syncing, download all metadata and content now."
+                        "description": "The policy to use when downloading content.\n\n* `immediate` - When syncing, download all metadata and content now."
                     },
                     "total_timeout": {
                         "type": "number",
@@ -19915,12 +19945,10 @@
                     },
                     "sync_dependencies": {
                         "type": "boolean",
-                        "default": true,
                         "description": "Sync dependencies for collections specified via requirements file"
                     },
                     "signed_only": {
                         "type": "boolean",
-                        "default": false,
                         "description": "Sync only collections that have a signature"
                     }
                 },
@@ -20009,7 +20037,7 @@
                             }
                         ],
                         "default": "immediate",
-                        "description": "The policy to use when downloading content.\n\n* `immediate` - immediate\n* `When syncing, download all metadata and content now.` - When syncing, download all metadata and content now."
+                        "description": "The policy to use when downloading content.\n\n* `immediate` - When syncing, download all metadata and content now."
                     },
                     "total_timeout": {
                         "type": "number",
@@ -20085,12 +20113,10 @@
                     },
                     "sync_dependencies": {
                         "type": "boolean",
-                        "default": true,
                         "description": "Sync dependencies for collections specified via requirements file"
                     },
                     "signed_only": {
                         "type": "boolean",
-                        "default": false,
                         "description": "Sync only collections that have a signature"
                     },
                     "last_sync_task": {
@@ -20125,6 +20151,12 @@
                 "type": "object",
                 "description": "A serializer for CollectionVersion Content.",
                 "properties": {
+                    "file": {
+                        "type": "string",
+                        "format": "binary",
+                        "writeOnly": true,
+                        "description": "An uploaded file that may be turned into the content unit."
+                    },
                     "file_url": {
                         "type": "string",
                         "writeOnly": true,
@@ -20137,22 +20169,16 @@
                         "writeOnly": true,
                         "description": "An uncommitted upload that may be turned into the content unit."
                     },
-                    "repository": {
-                        "type": "string",
-                        "format": "uri",
-                        "writeOnly": true,
-                        "description": "A URI of a repository the new content unit should be associated with."
-                    },
                     "artifact": {
                         "type": "string",
                         "format": "uri",
                         "description": "Artifact file representing the physical content"
                     },
-                    "file": {
+                    "repository": {
                         "type": "string",
-                        "format": "binary",
+                        "format": "uri",
                         "writeOnly": true,
-                        "description": "An uploaded file that may be turned into the content unit."
+                        "description": "A URI of a repository the new content unit should be associated with."
                     },
                     "expected_name": {
                         "type": "string",
@@ -20233,11 +20259,15 @@
                 "type": "object",
                 "description": "A serializer for CollectionVersion Content.",
                 "properties": {
-                    "pulp_last_updated": {
+                    "prn": {
                         "type": "string",
-                        "format": "date-time",
                         "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "pulp_created": {
                         "type": "string",
@@ -20245,20 +20275,16 @@
                         "readOnly": true,
                         "description": "Timestamp of creation."
                     },
-                    "prn": {
+                    "pulp_last_updated": {
                         "type": "string",
+                        "format": "date-time",
                         "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
                     "artifact": {
                         "type": "string",
                         "format": "uri",
                         "description": "Artifact file representing the physical content"
-                    },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
                     },
                     "sha256": {
                         "type": "string",
@@ -20306,7 +20332,8 @@
                         "description": "A list of the CollectionVersion content's authors."
                     },
                     "contents": {
-                        "type": "object",
+                        "type": "array",
+                        "items": {},
                         "readOnly": true,
                         "description": "A JSON field with data about the contents."
                     },
@@ -20492,43 +20519,12 @@
                 "type": "object",
                 "description": "A serializer for Git Collection Remotes.",
                 "properties": {
-                    "proxy_username": {
+                    "client_key": {
                         "type": "string",
                         "writeOnly": true,
                         "nullable": true,
                         "minLength": 1,
-                        "description": "The username to authenticte to the proxy."
-                    },
-                    "rate_limit": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Limits requests per second for each concurrent downloader"
-                    },
-                    "username": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The username to be used for authentication when syncing."
-                    },
-                    "url": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "The URL of an external content source."
-                    },
-                    "max_retries": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
-                    },
-                    "headers": {
-                        "type": "array",
-                        "items": {
-                            "type": "object"
-                        },
-                        "description": "Headers for aiohttp.Clientsession"
+                        "description": "A PEM encoded private key used for authentication."
                     },
                     "total_timeout": {
                         "type": "number",
@@ -20537,39 +20533,12 @@
                         "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "download_concurrency": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
-                    },
-                    "proxy_url": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The proxy URL. Format: scheme://host:port"
-                    },
                     "connect_timeout": {
                         "type": "number",
                         "format": "double",
                         "minimum": 0.0,
                         "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "sock_read_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
                         "type": "number",
@@ -20578,33 +20547,11 @@
                         "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
-                    "name": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name for this remote."
-                    },
-                    "client_cert": {
+                    "proxy_url": {
                         "type": "string",
                         "nullable": true,
                         "minLength": 1,
-                        "description": "A PEM encoded client certificate used for authentication."
-                    },
-                    "client_key": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded private key used for authentication."
-                    },
-                    "tls_validation": {
-                        "type": "boolean",
-                        "description": "If True, TLS peer validation must be performed."
-                    },
-                    "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                        "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "proxy_password": {
                         "type": "string",
@@ -20613,12 +20560,92 @@
                         "minLength": 1,
                         "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
                     },
+                    "tls_validation": {
+                        "type": "boolean",
+                        "description": "If True, TLS peer validation must be performed."
+                    },
+                    "sock_read_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "headers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Headers for aiohttp.Clientsession"
+                    },
+                    "max_retries": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
+                    },
                     "password": {
                         "type": "string",
                         "writeOnly": true,
                         "nullable": true,
                         "minLength": 1,
                         "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
+                    },
+                    "username": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The username to be used for authentication when syncing."
+                    },
+                    "ca_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                    },
+                    "url": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The URL of an external content source."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "proxy_username": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The username to authenticte to the proxy."
+                    },
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "A unique name for this remote."
+                    },
+                    "download_concurrency": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
+                    },
+                    "client_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded client certificate used for authentication."
+                    },
+                    "rate_limit": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Limits requests per second for each concurrent downloader"
                     },
                     "metadata_only": {
                         "type": "boolean",
@@ -20639,76 +20666,12 @@
                 "type": "object",
                 "description": "A serializer for Git Collection Remotes.",
                 "properties": {
-                    "pulp_last_updated": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the most recent update of the remote."
-                    },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
-                    },
-                    "rate_limit": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Limits requests per second for each concurrent downloader"
-                    },
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
-                    "url": {
-                        "type": "string",
-                        "description": "The URL of an external content source."
-                    },
-                    "max_retries": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
-                    },
-                    "headers": {
-                        "type": "array",
-                        "items": {
-                            "type": "object"
-                        },
-                        "description": "Headers for aiohttp.Clientsession"
-                    },
                     "total_timeout": {
                         "type": "number",
                         "format": "double",
                         "minimum": 0.0,
                         "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "download_concurrency": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
-                    },
-                    "proxy_url": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "connect_timeout": {
                         "type": "number",
@@ -20717,12 +20680,10 @@
                         "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
-                    "sock_read_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "sock_connect_timeout": {
                         "type": "number",
@@ -20731,14 +20692,60 @@
                         "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name for this remote."
-                    },
-                    "client_cert": {
+                    "proxy_url": {
                         "type": "string",
                         "nullable": true,
-                        "description": "A PEM encoded client certificate used for authentication."
+                        "description": "The proxy URL. Format: scheme://host:port"
+                    },
+                    "tls_validation": {
+                        "type": "boolean",
+                        "description": "If True, TLS peer validation must be performed."
+                    },
+                    "sock_read_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "headers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Headers for aiohttp.Clientsession"
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the most recent update of the remote."
+                    },
+                    "max_retries": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "ca_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "The URL of an external content source."
                     },
                     "hidden_fields": {
                         "type": "array",
@@ -20760,14 +20767,34 @@
                         "readOnly": true,
                         "description": "List of hidden (write only) fields"
                     },
-                    "tls_validation": {
-                        "type": "boolean",
-                        "description": "If True, TLS peer validation must be performed."
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
                     },
-                    "ca_cert": {
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name for this remote."
+                    },
+                    "download_concurrency": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
+                    },
+                    "client_cert": {
                         "type": "string",
                         "nullable": true,
-                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                        "description": "A PEM encoded client certificate used for authentication."
+                    },
+                    "rate_limit": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Limits requests per second for each concurrent downloader"
                     },
                     "metadata_only": {
                         "type": "boolean",
@@ -20787,16 +20814,16 @@
                 "type": "object",
                 "description": "A serializer for Role versions.",
                 "properties": {
+                    "artifact": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "Artifact file representing the physical content"
+                    },
                     "repository": {
                         "type": "string",
                         "format": "uri",
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
-                    },
-                    "artifact": {
-                        "type": "string",
-                        "format": "uri",
-                        "description": "Artifact file representing the physical content"
                     },
                     "version": {
                         "type": "string",
@@ -20916,7 +20943,7 @@
                             }
                         ],
                         "default": "immediate",
-                        "description": "The policy to use when downloading content.\n\n* `immediate` - immediate\n* `When syncing, download all metadata and content now.` - When syncing, download all metadata and content now."
+                        "description": "The policy to use when downloading content.\n\n* `immediate` - When syncing, download all metadata and content now."
                     },
                     "total_timeout": {
                         "type": "number",
@@ -21045,7 +21072,7 @@
                             }
                         ],
                         "default": "immediate",
-                        "description": "The policy to use when downloading content.\n\n* `immediate` - immediate\n* `When syncing, download all metadata and content now.` - When syncing, download all metadata and content now."
+                        "description": "The policy to use when downloading content.\n\n* `immediate` - When syncing, download all metadata and content now."
                     },
                     "total_timeout": {
                         "type": "number",
@@ -21118,11 +21145,15 @@
                 "type": "object",
                 "description": "A serializer for Role versions.",
                 "properties": {
-                    "pulp_last_updated": {
+                    "prn": {
                         "type": "string",
-                        "format": "date-time",
                         "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "pulp_created": {
                         "type": "string",
@@ -21130,20 +21161,16 @@
                         "readOnly": true,
                         "description": "Timestamp of creation."
                     },
-                    "prn": {
+                    "pulp_last_updated": {
                         "type": "string",
+                        "format": "date-time",
                         "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
                     "artifact": {
                         "type": "string",
                         "format": "uri",
                         "description": "Artifact file representing the physical content"
-                    },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
                     },
                     "version": {
                         "type": "string"
