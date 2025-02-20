@@ -63,6 +63,10 @@ repos:
       owner: pulp
       title: RPM
       branch: main
+    - name: pulp_npm
+      owner: pulp
+      title: NPM
+      branch: main
     # subpackages
     - name: pulp_file
       title: File
