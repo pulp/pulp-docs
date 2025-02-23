@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "deb": "3.6.0.dev",
-            "core": "3.69.2"
+            "core": "3.71.0"
         },
         "x-pulp-domain-enabled": false
     },
@@ -6048,6 +6048,14 @@
                     },
                     {
                         "in": "query",
+                        "name": "pulp_created__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_created has a null value"
+                    },
+                    {
+                        "in": "query",
                         "name": "pulp_created__lt",
                         "schema": {
                             "type": "string",
@@ -6676,6 +6684,14 @@
                             "format": "date-time"
                         },
                         "description": "Filter results where pulp_created is greater than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_created__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_created has a null value"
                     },
                     {
                         "in": "query",
@@ -7436,6 +7452,14 @@
                             "format": "date-time"
                         },
                         "description": "Filter results where pulp_last_updated is greater than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_last_updated__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_last_updated has a null value"
                     },
                     {
                         "in": "query",
@@ -9411,6 +9435,14 @@
                             "format": "date-time"
                         },
                         "description": "Filter results where pulp_created is greater than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_created__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_created has a null value"
                     },
                     {
                         "in": "query",

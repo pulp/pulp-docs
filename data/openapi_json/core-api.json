@@ -17,7 +17,7 @@
             "url": "https://pulp.plan.io/attachments/download/517478/pulp_logo_word_rectangle.svg"
         },
         "x-pulp-app-versions": {
-            "core": "3.71.0.dev"
+            "core": "3.72.0.dev"
         },
         "x-pulp-domain-enabled": false
     },
@@ -7002,6 +7002,7 @@
                                     "-pk",
                                     "-pulp_created",
                                     "-pulp_id",
+                                    "-pulp_labels",
                                     "-pulp_last_updated",
                                     "-redirect_to_object_storage",
                                     "-storage_class",
@@ -7012,6 +7013,7 @@
                                     "pk",
                                     "pulp_created",
                                     "pulp_id",
+                                    "pulp_labels",
                                     "pulp_last_updated",
                                     "redirect_to_object_storage",
                                     "storage_class",
@@ -7019,7 +7021,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `storage_class` - Storage class\n* `-storage_class` - Storage class (descending)\n* `storage_settings` - Storage settings\n* `-storage_settings` - Storage settings (descending)\n* `redirect_to_object_storage` - Redirect to object storage\n* `-redirect_to_object_storage` - Redirect to object storage (descending)\n* `hide_guarded_distributions` - Hide guarded distributions\n* `-hide_guarded_distributions` - Hide guarded distributions (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `storage_class` - Storage class\n* `-storage_class` - Storage class (descending)\n* `storage_settings` - Storage settings\n* `-storage_settings` - Storage settings (descending)\n* `redirect_to_object_storage` - Redirect to object storage\n* `-redirect_to_object_storage` - Redirect to object storage (descending)\n* `hide_guarded_distributions` - Hide guarded distributions\n* `-hide_guarded_distributions` - Hide guarded distributions (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -7062,6 +7064,14 @@
                         "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
                     },
                     {
                         "in": "query",
@@ -7375,6 +7385,126 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{domain_href}set_label/": {
+            "post": {
+                "operationId": "domains_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "domain_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Domains"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{domain_href}unset_label/": {
+            "post": {
+                "operationId": "domains_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "domain_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Domains"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
                                 }
                             }
                         },
@@ -19250,11 +19380,10 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
-                    "pulp_created": {
+                    "base_url": {
                         "type": "string",
-                        "format": "date-time",
                         "readOnly": true,
-                        "description": "Timestamp of creation."
+                        "description": "The URL for accessing the publication as defined by this distribution."
                     },
                     "content_guard": {
                         "type": "string",
@@ -19262,21 +19391,25 @@
                         "nullable": true,
                         "description": "An optional content-guard."
                     },
-                    "pulp_href": {
+                    "name": {
                         "type": "string",
-                        "format": "uri",
-                        "readOnly": true
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "no_content_change_since": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
                     },
                     "hidden": {
                         "type": "boolean",
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
                     },
-                    "pulp_last_updated": {
+                    "pulp_created": {
                         "type": "string",
                         "format": "date-time",
                         "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                        "description": "Timestamp of creation."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -19289,24 +19422,21 @@
                         "type": "string",
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
-                    "no_content_change_since": {
+                    "pulp_href": {
                         "type": "string",
-                        "readOnly": true,
-                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
-                    },
-                    "base_url": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The URL for accessing the publication as defined by this distribution."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "prn": {
                         "type": "string",
                         "readOnly": true,
                         "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     }
                 },
                 "required": [
@@ -19753,6 +19883,13 @@
                         "minLength": 1,
                         "description": "An optional description."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
                     "storage_class": {
                         "allOf": [
                             {
@@ -19840,6 +19977,13 @@
                         "type": "string",
                         "nullable": true,
                         "description": "An optional description."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
                     },
                     "storage_class": {
                         "allOf": [
@@ -22845,6 +22989,13 @@
                         "minLength": 1,
                         "description": "An optional description."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
                     "storage_class": {
                         "allOf": [
                             {
@@ -23672,7 +23823,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2025-01-20",
+                        "default": "2025-01-24",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
