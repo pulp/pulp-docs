@@ -1,5 +1,5 @@
 {
-    "openapi": "3.0.3",
+    "openapi": "3.1.1",
     "info": {
         "title": "Pulp 3 API",
         "version": "v3",
@@ -17,8 +17,8 @@
             "url": "https://pulp.plan.io/attachments/download/517478/pulp_logo_word_rectangle.svg"
         },
         "x-pulp-app-versions": {
-            "file": "3.72.0.dev",
-            "core": "3.72.0.dev"
+            "file": "3.73.0.dev",
+            "core": "3.73.0.dev"
         },
         "x-pulp-domain-enabled": false
     },
@@ -833,6 +833,7 @@
                                     "-pk",
                                     "-pulp_created",
                                     "-pulp_id",
+                                    "-pulp_labels",
                                     "-pulp_last_updated",
                                     "-pulp_type",
                                     "-relative_path",
@@ -842,6 +843,7 @@
                                     "pk",
                                     "pulp_created",
                                     "pulp_id",
+                                    "pulp_labels",
                                     "pulp_last_updated",
                                     "pulp_type",
                                     "relative_path",
@@ -850,7 +852,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `digest` - Digest\n* `-digest` - Digest (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `digest` - Digest\n* `-digest` - Digest (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -901,6 +903,14 @@
                         "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
                     },
                     {
                         "in": "query",
@@ -1094,6 +1104,126 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/file.FileContentResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{file_file_content_href}set_label/": {
+            "post": {
+                "operationId": "content_file_files_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "file_file_content_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Files"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{file_file_content_href}unset_label/": {
+            "post": {
+                "operationId": "content_file_files_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "file_file_content_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Files"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
                                 }
                             }
                         },
@@ -5527,9 +5657,11 @@
                         "description": "Name of Alternate Content Source."
                     },
                     "last_refreshed": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "date-time",
-                        "nullable": true,
                         "description": "Date of last refresh of AlternateContentSource."
                     },
                     "paths": {
@@ -5557,9 +5689,11 @@
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "content_guard": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "An optional content-guard."
                     },
                     "hidden": {
@@ -5570,8 +5704,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "name": {
@@ -5580,15 +5716,19 @@
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "publication": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "Publication to be served"
                     }
                 }
@@ -5608,21 +5748,27 @@
                         "description": "The URL of an external content source."
                     },
                     "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "client_key": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded private key used for authentication."
                     },
@@ -5631,57 +5777,72 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "proxy_url": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "proxy_username": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to authenticte to the proxy."
                     },
                     "proxy_password": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "username": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to be used for authentication when syncing."
                     },
                     "password": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "download_concurrency": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
                     },
                     "max_retries": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "policy": {
@@ -5694,31 +5855,39 @@
                         "description": "The policy to use when downloading content. The possible values include: 'immediate', 'on_demand', and 'streamed'. 'immediate' is the default.\n\n* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
                     },
                     "total_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "connect_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_read_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
@@ -5729,9 +5898,11 @@
                         "description": "Headers for aiohttp.Clientsession"
                     },
                     "rate_limit": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     }
                 }
@@ -5743,8 +5914,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "name": {
@@ -5753,22 +5926,27 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
-                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
-                        "minimum": 1
+                        "description": "Retain X versions of the repository. Default is null which retains all versions."
                     },
                     "remote": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     },
                     "autopublish": {
@@ -5777,8 +5955,10 @@
                         "description": "Whether to automatically create publications for new repository versions, and update any distributions pointing to this repository."
                     },
                     "manifest": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "default": "PULP_MANIFEST",
                         "description": "Filename to use for manifest file containing metadata for all the files."
@@ -5909,8 +6089,10 @@
                         "pattern": "^[-a-zA-Z0-9_]+$"
                     },
                     "value": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 },
                 "required": [
@@ -5927,8 +6109,10 @@
                         "pattern": "^[-a-zA-Z0-9_]+$"
                     },
                     "value": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 },
                 "required": [
@@ -5991,9 +6175,11 @@
                         "description": "Name of Alternate Content Source."
                     },
                     "last_refreshed": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "date-time",
-                        "nullable": true,
                         "description": "Date of last refresh of AlternateContentSource."
                     },
                     "paths": {
@@ -6046,9 +6232,11 @@
                         "description": "Name of Alternate Content Source."
                     },
                     "last_refreshed": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "date-time",
-                        "nullable": true,
                         "description": "Date of last refresh of AlternateContentSource."
                     },
                     "paths": {
@@ -6078,6 +6266,16 @@
                         "format": "uri",
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
                     "artifact": {
                         "type": "string",
@@ -6138,6 +6336,16 @@
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
                     "artifact": {
                         "type": "string",
                         "format": "uri",
@@ -6192,9 +6400,11 @@
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "content_guard": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "An optional content-guard."
                     },
                     "hidden": {
@@ -6205,8 +6415,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "name": {
@@ -6215,15 +6427,19 @@
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "publication": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "Publication to be served"
                     }
                 },
@@ -6268,9 +6484,11 @@
                         "description": "The URL for accessing the publication as defined by this distribution."
                     },
                     "content_guard": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "An optional content-guard."
                     },
                     "no_content_change_since": {
@@ -6286,8 +6504,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "name": {
@@ -6295,15 +6515,19 @@
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "publication": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "Publication to be served"
                     }
                 },
@@ -6326,8 +6550,10 @@
                         "description": "A URI of the repository to be published."
                     },
                     "manifest": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "default": "PULP_MANIFEST",
                         "description": "Filename to use for manifest file containing metadata for all the files."
@@ -6379,8 +6605,10 @@
                         "description": "This publication is currently hosted as defined by these distributions."
                     },
                     "manifest": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "default": "PULP_MANIFEST",
                         "description": "Filename to use for manifest file containing metadata for all the files."
                     }
@@ -6401,21 +6629,27 @@
                         "description": "The URL of an external content source."
                     },
                     "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "client_key": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded private key used for authentication."
                     },
@@ -6424,57 +6658,72 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "proxy_url": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "proxy_username": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to authenticte to the proxy."
                     },
                     "proxy_password": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "username": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to be used for authentication when syncing."
                     },
                     "password": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "download_concurrency": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
                     },
                     "max_retries": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "policy": {
@@ -6487,31 +6736,39 @@
                         "description": "The policy to use when downloading content. The possible values include: 'immediate', 'on_demand', and 'streamed'. 'immediate' is the default.\n\n* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
                     },
                     "total_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "connect_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_read_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
@@ -6522,9 +6779,11 @@
                         "description": "Headers for aiohttp.Clientsession"
                     },
                     "rate_limit": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     }
                 },
@@ -6568,13 +6827,17 @@
                         "description": "The URL of an external content source."
                     },
                     "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "tls_validation": {
@@ -6582,28 +6845,35 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "proxy_url": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "download_concurrency": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
                     },
                     "max_retries": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "policy": {
@@ -6616,31 +6886,39 @@
                         "description": "The policy to use when downloading content. The possible values include: 'immediate', 'on_demand', and 'streamed'. 'immediate' is the default.\n\n* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
                     },
                     "total_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "connect_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_read_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
@@ -6651,9 +6929,11 @@
                         "description": "Headers for aiohttp.Clientsession"
                     },
                     "rate_limit": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     },
                     "hidden_fields": {
@@ -6689,8 +6969,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "name": {
@@ -6699,22 +6981,27 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
-                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
-                        "minimum": 1
+                        "description": "Retain X versions of the repository. Default is null which retains all versions."
                     },
                     "remote": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     },
                     "autopublish": {
@@ -6723,8 +7010,10 @@
                         "description": "Whether to automatically create publications for new repository versions, and update any distributions pointing to this repository."
                     },
                     "manifest": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "default": "PULP_MANIFEST",
                         "description": "Filename to use for manifest file containing metadata for all the files."
@@ -6768,8 +7057,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "latest_version_href": {
@@ -6782,21 +7073,26 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
-                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
-                        "minimum": 1
+                        "description": "Retain X versions of the repository. Default is null which retains all versions."
                     },
                     "remote": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     },
                     "autopublish": {
@@ -6805,8 +7101,10 @@
                         "description": "Whether to automatically create publications for new repository versions, and update any distributions pointing to this repository."
                     },
                     "manifest": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "default": "PULP_MANIFEST",
                         "description": "Filename to use for manifest file containing metadata for all the files."
                     }
