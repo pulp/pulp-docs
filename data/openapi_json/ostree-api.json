@@ -1,5 +1,5 @@
 {
-    "openapi": "3.1.1",
+    "openapi": "3.0.3",
     "info": {
         "title": "Pulp 3 API",
         "version": "v3",
@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "ostree": "2.5.0.dev",
-            "core": "3.72.0"
+            "core": "3.72.1"
         },
         "x-pulp-domain-enabled": false
     },
@@ -5652,11 +5652,9 @@
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "content_guard": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional content-guard."
                     },
                     "hidden": {
@@ -5667,10 +5665,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "name": {
@@ -5679,19 +5675,15 @@
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "repository_version": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "RepositoryVersion to be served"
                     }
                 }
@@ -5711,27 +5703,21 @@
                         "description": "The URL of an external content source."
                     },
                     "ca_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "client_key": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded private key used for authentication."
                     },
@@ -5740,72 +5726,57 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "proxy_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "proxy_username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to authenticte to the proxy."
                     },
                     "proxy_password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to be used for authentication when syncing."
                     },
                     "password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "download_concurrency": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
                     },
                     "max_retries": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "policy": {
@@ -5818,39 +5789,31 @@
                         "description": "\n        immediate - All OSTree objects are downloaded and saved during synchronization.\n        on_demand - Only commits, dirtrees, and refs are downloaded. Other OSTree objects are\n                    not downloaded until they are requested for the first time by a client.\n        \n\n* `immediate` - immediate\n* `on_demand` - on_demand"
                     },
                     "total_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_read_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
@@ -5861,11 +5824,9 @@
                         "description": "Headers for aiohttp.Clientsession"
                     },
                     "rate_limit": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     },
                     "depth": {
@@ -5876,27 +5837,23 @@
                         "minimum": 0
                     },
                     "include_refs": {
-                        "type": [
-                            "array",
-                            "null"
-                        ],
+                        "type": "array",
                         "items": {
                             "type": "string",
                             "minLength": 1,
                             "maxLength": 255
                         },
+                        "nullable": true,
                         "description": "\n            A list of refs to include during a sync.\n            The wildcards *, ? are recognized.\n            'include_refs' is evaluated before 'exclude_refs'.\n            "
                     },
                     "exclude_refs": {
-                        "type": [
-                            "array",
-                            "null"
-                        ],
+                        "type": "array",
                         "items": {
                             "type": "string",
                             "minLength": 1,
                             "maxLength": 255
                         },
+                        "nullable": true,
                         "description": "\n            A list of tags to exclude during a sync.\n            The wildcards *, ? are recognized.\n            'exclude_refs' is evaluated after 'include_refs'.\n            "
                     }
                 }
@@ -5908,10 +5865,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "name": {
@@ -5920,27 +5875,22 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                        "nullable": true,
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
                     },
                     "remote": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     },
                     "compute_delta": {
@@ -6072,10 +6022,8 @@
                         "pattern": "^[-a-zA-Z0-9_]+$"
                     },
                     "value": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "required": [
@@ -6092,10 +6040,8 @@
                         "pattern": "^[-a-zA-Z0-9_]+$"
                     },
                     "value": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "required": [
@@ -6170,11 +6116,9 @@
                         "description": "Path where the artifact is located relative to distributions base_path"
                     },
                     "parent_commit": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "uri"
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true
                     },
                     "checksum": {
                         "type": "string"
@@ -6319,11 +6263,9 @@
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "content_guard": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional content-guard."
                     },
                     "hidden": {
@@ -6334,10 +6276,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "name": {
@@ -6346,19 +6286,15 @@
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "repository_version": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "RepositoryVersion to be served"
                     }
                 },
@@ -6403,11 +6339,9 @@
                         "description": "The URL for accessing the publication as defined by this distribution."
                     },
                     "content_guard": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional content-guard."
                     },
                     "no_content_change_since": {
@@ -6423,10 +6357,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "name": {
@@ -6434,19 +6366,15 @@
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "repository_version": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "RepositoryVersion to be served"
                     }
                 },
@@ -6575,27 +6503,21 @@
                         "description": "The URL of an external content source."
                     },
                     "ca_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "client_key": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded private key used for authentication."
                     },
@@ -6604,72 +6526,57 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "proxy_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "proxy_username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to authenticte to the proxy."
                     },
                     "proxy_password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to be used for authentication when syncing."
                     },
                     "password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "download_concurrency": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
                     },
                     "max_retries": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "policy": {
@@ -6682,39 +6589,31 @@
                         "description": "\n        immediate - All OSTree objects are downloaded and saved during synchronization.\n        on_demand - Only commits, dirtrees, and refs are downloaded. Other OSTree objects are\n                    not downloaded until they are requested for the first time by a client.\n        \n\n* `immediate` - immediate\n* `on_demand` - on_demand"
                     },
                     "total_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_read_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
@@ -6725,11 +6624,9 @@
                         "description": "Headers for aiohttp.Clientsession"
                     },
                     "rate_limit": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     },
                     "depth": {
@@ -6740,27 +6637,23 @@
                         "minimum": 0
                     },
                     "include_refs": {
-                        "type": [
-                            "array",
-                            "null"
-                        ],
+                        "type": "array",
                         "items": {
                             "type": "string",
                             "minLength": 1,
                             "maxLength": 255
                         },
+                        "nullable": true,
                         "description": "\n            A list of refs to include during a sync.\n            The wildcards *, ? are recognized.\n            'include_refs' is evaluated before 'exclude_refs'.\n            "
                     },
                     "exclude_refs": {
-                        "type": [
-                            "array",
-                            "null"
-                        ],
+                        "type": "array",
                         "items": {
                             "type": "string",
                             "minLength": 1,
                             "maxLength": 255
                         },
+                        "nullable": true,
                         "description": "\n            A list of tags to exclude during a sync.\n            The wildcards *, ? are recognized.\n            'exclude_refs' is evaluated after 'include_refs'.\n            "
                     }
                 },
@@ -6804,17 +6697,13 @@
                         "description": "The URL of an external content source."
                     },
                     "ca_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "tls_validation": {
@@ -6822,35 +6711,28 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "proxy_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "download_concurrency": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
                     },
                     "max_retries": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "policy": {
@@ -6863,39 +6745,31 @@
                         "description": "\n        immediate - All OSTree objects are downloaded and saved during synchronization.\n        on_demand - Only commits, dirtrees, and refs are downloaded. Other OSTree objects are\n                    not downloaded until they are requested for the first time by a client.\n        \n\n* `immediate` - immediate\n* `on_demand` - on_demand"
                     },
                     "total_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_read_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
@@ -6906,11 +6780,9 @@
                         "description": "Headers for aiohttp.Clientsession"
                     },
                     "rate_limit": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     },
                     "hidden_fields": {
@@ -6941,25 +6813,21 @@
                         "minimum": 0
                     },
                     "include_refs": {
-                        "type": [
-                            "array",
-                            "null"
-                        ],
+                        "type": "array",
                         "items": {
                             "type": "string",
                             "maxLength": 255
                         },
+                        "nullable": true,
                         "description": "\n            A list of refs to include during a sync.\n            The wildcards *, ? are recognized.\n            'include_refs' is evaluated before 'exclude_refs'.\n            "
                     },
                     "exclude_refs": {
-                        "type": [
-                            "array",
-                            "null"
-                        ],
+                        "type": "array",
                         "items": {
                             "type": "string",
                             "maxLength": 255
                         },
+                        "nullable": true,
                         "description": "\n            A list of tags to exclude during a sync.\n            The wildcards *, ? are recognized.\n            'exclude_refs' is evaluated after 'include_refs'.\n            "
                     }
                 },
@@ -6975,10 +6843,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "name": {
@@ -6987,27 +6853,22 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                        "nullable": true,
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
                     },
                     "remote": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     },
                     "compute_delta": {
@@ -7053,10 +6914,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "latest_version_href": {
@@ -7069,26 +6928,21 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                        "nullable": true,
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
                     },
                     "remote": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     },
                     "compute_delta": {

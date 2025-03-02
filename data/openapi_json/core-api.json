@@ -1,5 +1,5 @@
 {
-    "openapi": "3.1.1",
+    "openapi": "3.0.3",
     "info": {
         "title": "Pulp 3 API",
         "version": "v3",
@@ -17363,6 +17363,7 @@
                                     "-name",
                                     "-password",
                                     "-pk",
+                                    "-policy",
                                     "-pulp_created",
                                     "-pulp_id",
                                     "-pulp_last_updated",
@@ -17379,6 +17380,7 @@
                                     "name",
                                     "password",
                                     "pk",
+                                    "policy",
                                     "pulp_created",
                                     "pulp_id",
                                     "pulp_last_updated",
@@ -17388,7 +17390,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `base_url` - Base url\n* `-base_url` - Base url (descending)\n* `api_root` - Api root\n* `-api_root` - Api root (descending)\n* `domain` - Domain\n* `-domain` - Domain (descending)\n* `ca_cert` - Ca cert\n* `-ca_cert` - Ca cert (descending)\n* `client_cert` - Client cert\n* `-client_cert` - Client cert (descending)\n* `client_key` - Client key\n* `-client_key` - Client key (descending)\n* `tls_validation` - Tls validation\n* `-tls_validation` - Tls validation (descending)\n* `username` - Username\n* `-username` - Username (descending)\n* `password` - Password\n* `-password` - Password (descending)\n* `q_select` - Q select\n* `-q_select` - Q select (descending)\n* `last_replication` - Last replication\n* `-last_replication` - Last replication (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `base_url` - Base url\n* `-base_url` - Base url (descending)\n* `api_root` - Api root\n* `-api_root` - Api root (descending)\n* `domain` - Domain\n* `-domain` - Domain (descending)\n* `ca_cert` - Ca cert\n* `-ca_cert` - Ca cert (descending)\n* `client_cert` - Client cert\n* `-client_cert` - Client cert (descending)\n* `client_key` - Client key\n* `-client_key` - Client key (descending)\n* `tls_validation` - Tls validation\n* `-tls_validation` - Tls validation (descending)\n* `username` - Username\n* `-username` - Username (descending)\n* `password` - Password\n* `-password` - Password (descending)\n* `q_select` - Q select\n* `-q_select` - Q select (descending)\n* `policy` - Policy\n* `-policy` - Policy (descending)\n* `last_replication` - Last replication\n* `-last_replication` - Last replication (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -19491,10 +19493,8 @@
                     "versions": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         },
                         "readOnly": true,
                         "description": "Versions of the components installed."
@@ -19516,50 +19516,38 @@
                         "description": "The size of the file in bytes."
                     },
                     "md5": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The MD5 checksum of the file if available."
                     },
                     "sha1": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The SHA-1 checksum of the file if available."
                     },
                     "sha224": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The SHA-224 checksum of the file if available."
                     },
                     "sha256": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The SHA-256 checksum of the file if available."
                     },
                     "sha384": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The SHA-384 checksum of the file if available."
                     },
                     "sha512": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The SHA-512 checksum of the file if available."
                     }
@@ -19572,67 +19560,63 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
-                    "base_path": {
-                        "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
-                        }
-                    },
-                    "no_content_change_since": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
-                    },
-                    "content_guard": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "uri",
-                        "description": "An optional content-guard."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
-                    },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
-                    },
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
                     "pulp_last_updated": {
                         "type": "string",
                         "format": "date-time",
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "no_content_change_since": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                    },
                     "base_url": {
                         "type": "string",
                         "readOnly": true,
                         "description": "The URL for accessing the publication as defined by this distribution."
+                    },
+                    "base_path": {
+                        "type": "string",
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "content_guard": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "An optional content-guard."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
                     }
                 },
                 "required": [
@@ -19676,45 +19660,33 @@
                         "description": "The size of the file in bytes."
                     },
                     "md5": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "The MD5 checksum of the file if available."
                     },
                     "sha1": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "The SHA-1 checksum of the file if available."
                     },
                     "sha224": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "The SHA-224 checksum of the file if available."
                     },
                     "sha256": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "The SHA-256 checksum of the file if available."
                     },
                     "sha384": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "The SHA-384 checksum of the file if available."
                     },
                     "sha512": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "The SHA-512 checksum of the file if available."
                     }
                 },
@@ -19746,21 +19718,17 @@
                         "description": "The unique name."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     },
                     "guards": {
                         "type": "array",
                         "items": {
-                            "type": [
-                                "string",
-                                "null"
-                            ],
-                            "format": "uri"
+                            "type": "string",
+                            "format": "uri",
+                            "nullable": true
                         },
                         "description": "List of ContentGuards to ask for access-permission."
                     }
@@ -19800,20 +19768,16 @@
                         "description": "The unique name."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "An optional description."
                     },
                     "guards": {
                         "type": "array",
                         "items": {
-                            "type": [
-                                "string",
-                                "null"
-                            ],
-                            "format": "uri"
+                            "type": "string",
+                            "format": "uri",
+                            "nullable": true
                         },
                         "description": "List of ContentGuards to ask for access-permission."
                     }
@@ -19840,10 +19804,8 @@
                     "versions": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         },
                         "readOnly": true,
                         "description": "Versions of the components installed."
@@ -19881,10 +19843,8 @@
                         "description": "The unique name."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "An optional description."
                     }
                 },
@@ -19902,10 +19862,8 @@
                         "description": "The unique name."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     }
@@ -19945,10 +19903,8 @@
                         "description": "The unique name."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "An optional description."
                     }
                 },
@@ -19961,10 +19917,8 @@
                 "description": "Serializer for information about content-app-settings for the pulp instance",
                 "properties": {
                     "content_origin": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "The CONTENT_ORIGIN setting for this Pulp instance"
                     },
                     "content_path_prefix": {
@@ -20054,11 +20008,9 @@
                         "description": "The URL for accessing the publication as defined by this distribution."
                     },
                     "content_guard": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional content-guard."
                     },
                     "no_content_change_since": {
@@ -20074,10 +20026,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "name": {
@@ -20085,11 +20035,9 @@
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     }
                 },
@@ -20110,20 +20058,16 @@
                         "pattern": "^[-a-zA-Z0-9_]+$"
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "storage_class": {
@@ -20210,19 +20154,15 @@
                         "pattern": "^[-a-zA-Z0-9_]+$"
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "An optional description."
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "storage_class": {
@@ -20285,11 +20225,9 @@
                 "description": "Serializer for FilesystemExports.",
                 "properties": {
                     "task": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "A URI of the task that ran the Export."
                     },
                     "publication": {
@@ -20339,11 +20277,9 @@
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
                     "task": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "A URI of the task that ran the Export."
                     },
                     "exported_resources": {
@@ -20475,17 +20411,13 @@
                         "description": "The URL of an external content source."
                     },
                     "ca_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "tls_validation": {
@@ -20493,80 +20425,65 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "proxy_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "download_concurrency": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
                     },
                     "max_retries": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "policy": {
                         "allOf": [
                             {
-                                "$ref": "#/components/schemas/PolicyEnum"
+                                "$ref": "#/components/schemas/GenericRemoteResponsePolicyEnum"
                             }
                         ],
                         "default": "immediate",
                         "description": "The policy to use when downloading content.\n\n* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
                     },
                     "total_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_read_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
@@ -20577,11 +20494,9 @@
                         "description": "Headers for aiohttp.Clientsession"
                     },
                     "rate_limit": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     },
                     "hidden_fields": {
@@ -20609,6 +20524,15 @@
                     "name",
                     "url"
                 ]
+            },
+            "GenericRemoteResponsePolicyEnum": {
+                "enum": [
+                    "immediate",
+                    "on_demand",
+                    "streamed"
+                ],
+                "type": "string",
+                "description": "* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
             },
             "Group": {
                 "type": "object",
@@ -20652,11 +20576,9 @@
                         "description": "The count of items already processed. Defaults to 0."
                     },
                     "suffix": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "readOnly": true,
+                        "nullable": true,
                         "description": "The suffix to be shown with the group progress report."
                     }
                 }
@@ -20698,19 +20620,15 @@
                         "minLength": 1
                     },
                     "content_object": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "pulp_href of the object for which role permissions should be asserted. If set to 'null', permissions will act on the model-level."
                     },
                     "domain": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "Domain this role should be applied on, mutually exclusive with content_object."
                     }
                 },
@@ -20749,10 +20667,8 @@
                         "type": "string"
                     },
                     "content_object": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "pulp_href of the object for which role permissions should be asserted. If set to 'null', permissions will act on the model-level."
                     },
                     "description": {
@@ -20767,11 +20683,9 @@
                         "readOnly": true
                     },
                     "domain": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "Domain this role should be applied on, mutually exclusive with content_object."
                     }
                 },
@@ -20828,10 +20742,8 @@
                         "description": "The unique name."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     },
@@ -20846,10 +20758,8 @@
                         "description": "The value that will authorize the request."
                     },
                     "jq_filter": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A JQ syntax compatible filter. If jq_filter is not set, then the value willonly be Base64 decoded and checked as an explicit string match."
                     }
@@ -20891,10 +20801,8 @@
                         "description": "The unique name."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "An optional description."
                     },
                     "header_name": {
@@ -20906,10 +20814,8 @@
                         "description": "The value that will authorize the request."
                     },
                     "jq_filter": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "A JQ syntax compatible filter. If jq_filter is not set, then the value willonly be Base64 decoded and checked as an explicit string match."
                     }
                 },
@@ -21080,10 +20986,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -21159,34 +21063,27 @@
                 "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "issuer": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "minLength": 1
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "maxLength": 16
                     },
                     "created": {
                         "type": "string",
                         "format": "date-time"
                     },
                     "expiration_time": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     },
                     "signers_user_id": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1
                     },
                     "key_expiration_time": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     },
                     "expired": {
                         "type": "boolean"
@@ -21202,32 +21099,25 @@
                 "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "issuer": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 16
                     },
                     "created": {
                         "type": "string",
                         "format": "date-time"
                     },
                     "expiration_time": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     },
                     "signers_user_id": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     },
                     "key_expiration_time": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     },
                     "expired": {
                         "type": "boolean"
@@ -21389,11 +21279,9 @@
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "content_guard": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional content-guard."
                     },
                     "hidden": {
@@ -21404,10 +21292,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "name": {
@@ -21416,19 +21302,15 @@
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "repository_version": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "RepositoryVersion to be served"
                     }
                 },
@@ -21473,11 +21355,9 @@
                         "description": "The URL for accessing the publication as defined by this distribution."
                     },
                     "content_guard": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional content-guard."
                     },
                     "no_content_change_since": {
@@ -21493,10 +21373,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "name": {
@@ -21504,19 +21382,15 @@
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "repository_version": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "RepositoryVersion to be served"
                     }
                 },
@@ -21532,10 +21406,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "name": {
@@ -21544,27 +21416,22 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                        "nullable": true,
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
                     },
                     "remote": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     }
                 },
@@ -21606,10 +21473,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "latest_version_href": {
@@ -21622,26 +21487,21 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                        "nullable": true,
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
                     },
                     "remote": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     }
                 },
@@ -21662,10 +21522,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -21718,10 +21576,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -21787,10 +21643,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -21849,40 +21703,31 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
                     "issuer": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 16
                     },
                     "created": {
                         "type": "string",
                         "format": "date-time"
                     },
                     "expiration_time": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     },
                     "signers_user_id": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     },
                     "key_expiration_time": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     },
                     "expired": {
                         "type": "boolean"
@@ -21931,10 +21776,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -21988,10 +21831,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -22024,11 +21865,9 @@
                         "description": "Will delete specified content and associated Artifacts if they are orphans."
                     },
                     "orphan_protection_time": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "The time in minutes for how long Pulp will hold orphan Content and Artifacts before they become candidates for deletion by this orphan cleanup task. This should ideally be longer than your longest running task otherwise any content created during that task could be cleaned up before the task finishes. If not specified, a default value is taken from the setting ORPHAN_PROTECTION_TIME."
                     }
                 }
@@ -23345,21 +23184,17 @@
                         "description": "The unique name."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     },
                     "guards": {
                         "type": "array",
                         "items": {
-                            "type": [
-                                "string",
-                                "null"
-                            ],
-                            "format": "uri"
+                            "type": "string",
+                            "format": "uri",
+                            "nullable": true
                         },
                         "description": "List of ContentGuards to ask for access-permission."
                     }
@@ -23375,10 +23210,8 @@
                         "description": "The unique name."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     }
@@ -23396,20 +23229,16 @@
                         "pattern": "^[-a-zA-Z0-9_]+$"
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "storage_class": {
@@ -23483,10 +23312,8 @@
                         "description": "The unique name."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     },
@@ -23501,10 +23328,8 @@
                         "description": "The value that will authorize the request."
                     },
                     "jq_filter": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A JQ syntax compatible filter. If jq_filter is not set, then the value willonly be Base64 decoded and checked as an explicit string match."
                     }
@@ -23520,11 +23345,9 @@
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "content_guard": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional content-guard."
                     },
                     "hidden": {
@@ -23535,10 +23358,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "name": {
@@ -23547,19 +23368,15 @@
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "repository_version": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "RepositoryVersion to be served"
                     }
                 }
@@ -23571,10 +23388,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "name": {
@@ -23583,27 +23398,22 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                        "nullable": true,
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
                     },
                     "remote": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     }
                 }
@@ -23630,11 +23440,9 @@
                         }
                     },
                     "last_export": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "Last attempted export for this PulpExporter"
                     }
                 }
@@ -23668,10 +23476,8 @@
                         "description": "The unique name."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     }
@@ -23687,10 +23493,8 @@
                         "description": "The name of this role."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     },
@@ -23733,35 +23537,27 @@
                         "description": "The API root. Defaults to '/pulp/'."
                     },
                     "domain": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The domain of the Pulp server if enabled."
                     },
                     "ca_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "client_key": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded private key used for authentication."
                     },
@@ -23770,29 +23566,31 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to be used for authentication when syncing."
                     },
                     "password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "q_select": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "Filter distributions on the upstream Pulp using complex filtering. E.g. pulp_label_select=\"foo\" OR pulp_label_select=\"key=val\""
+                    },
+                    "policy": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Policy357Enum"
+                            }
+                        ],
+                        "description": "Policy for how replicate will manage the local objects within the domain.\n\n* `all` - Replicate manages ALL local objects within the domain.\n* `labeled` - Replicate will only manage the objects created from a previous replication, unlabled local objects will be untouched.\n* `nodelete` - Replicate will not delete any local object whether they were created by replication or not."
                     }
                 }
             },
@@ -23807,11 +23605,9 @@
                         "maxLength": 150
                     },
                     "password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "Users password. Set to ``null`` to disable password authentication."
                     },
@@ -23842,14 +23638,14 @@
                     }
                 }
             },
-            "PolicyEnum": {
+            "Policy357Enum": {
                 "enum": [
-                    "immediate",
-                    "on_demand",
-                    "streamed"
+                    "all",
+                    "labeled",
+                    "nodelete"
                 ],
                 "type": "string",
-                "description": "* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
+                "description": "* `all` - Replicate manages ALL local objects within the domain.\n* `labeled` - Replicate will only manage the objects created from a previous replication, unlabled local objects will be untouched.\n* `nodelete` - Replicate will not delete any local object whether they were created by replication or not."
             },
             "ProfileArtifactResponse": {
                 "type": "object",
@@ -23898,11 +23694,9 @@
                         "description": "The count of items already processed. Defaults to 0."
                     },
                     "suffix": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "readOnly": true,
+                        "nullable": true,
                         "description": "The suffix to be shown with the progress report."
                     }
                 }
@@ -23949,11 +23743,9 @@
                 "description": "Serializer for PulpExports.",
                 "properties": {
                     "task": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "A URI of the task that ran the Export."
                     },
                     "full": {
@@ -24023,11 +23815,9 @@
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
                     "task": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "A URI of the task that ran the Export."
                     },
                     "exported_resources": {
@@ -24078,11 +23868,9 @@
                         }
                     },
                     "last_export": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "Last attempted export for this PulpExporter"
                     }
                 },
@@ -24134,11 +23922,9 @@
                         }
                     },
                     "last_export": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "Last attempted export for this PulpExporter"
                     }
                 },
@@ -24290,7 +24076,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2025-01-27",
+                        "default": "2025-01-31",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
@@ -24315,10 +24101,8 @@
                         "description": "The unique name."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     }
@@ -24358,10 +24142,8 @@
                         "description": "The unique name."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "An optional description."
                     },
                     "users": {
@@ -24489,10 +24271,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "latest_version_href": {
@@ -24505,26 +24285,21 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                        "nullable": true,
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
                     },
                     "remote": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     }
                 },
@@ -24594,10 +24369,8 @@
                         "description": "The name of this role."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     },
@@ -24645,10 +24418,8 @@
                         "description": "The name of this role."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "An optional description."
                     },
                     "permissions": {
@@ -24679,10 +24450,8 @@
                         "pattern": "^[-a-zA-Z0-9_]+$"
                     },
                     "value": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "required": [
@@ -24699,10 +24468,8 @@
                         "pattern": "^[-a-zA-Z0-9_]+$"
                     },
                     "value": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "required": [
@@ -24863,28 +24630,25 @@
                 "description": "Serializer for information about the storage system",
                 "properties": {
                     "total": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Total number of bytes"
+                        "nullable": true,
+                        "description": "Total number of bytes",
+                        "minimum": 0
                     },
                     "used": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Number of bytes in use"
+                        "nullable": true,
+                        "description": "Number of bytes in use",
+                        "minimum": 0
                     },
                     "free": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Number of free bytes"
+                        "nullable": true,
+                        "description": "Number of free bytes",
+                        "minimum": 0
                     }
                 },
                 "required": [
@@ -25150,19 +24914,15 @@
                         "description": "The name of the task to be scheduled."
                     },
                     "dispatch_interval": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "Periodicity of the schedule."
                     },
                     "next_dispatch": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "date-time",
                         "readOnly": true,
+                        "nullable": true,
                         "description": "Timestamp of the next time the task will be dispatched."
                     },
                     "last_task": {
@@ -25234,11 +24994,9 @@
                         "description": "A chunk of the uploaded file."
                     },
                     "sha256": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The SHA-256 checksum of the chunk if available."
                     }
@@ -25388,35 +25146,27 @@
                         "description": "The API root. Defaults to '/pulp/'."
                     },
                     "domain": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The domain of the Pulp server if enabled."
                     },
                     "ca_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "client_key": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded private key used for authentication."
                     },
@@ -25425,29 +25175,31 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to be used for authentication when syncing."
                     },
                     "password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "q_select": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "Filter distributions on the upstream Pulp using complex filtering. E.g. pulp_label_select=\"foo\" OR pulp_label_select=\"key=val\""
+                    },
+                    "policy": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Policy357Enum"
+                            }
+                        ],
+                        "description": "Policy for how replicate will manage the local objects within the domain.\n\n* `all` - Replicate manages ALL local objects within the domain.\n* `labeled` - Replicate will only manage the objects created from a previous replication, unlabled local objects will be untouched.\n* `nodelete` - Replicate will not delete any local object whether they were created by replication or not."
                     }
                 },
                 "required": [
@@ -25495,24 +25247,18 @@
                         "description": "The API root. Defaults to '/pulp/'."
                     },
                     "domain": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "The domain of the Pulp server if enabled."
                     },
                     "ca_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "tls_validation": {
@@ -25540,10 +25286,8 @@
                         "description": "List of hidden (write only) fields"
                     },
                     "q_select": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "Filter distributions on the upstream Pulp using complex filtering. E.g. pulp_label_select=\"foo\" OR pulp_label_select=\"key=val\""
                     },
                     "last_replication": {
@@ -25551,6 +25295,14 @@
                         "format": "date-time",
                         "readOnly": true,
                         "description": "Timestamp of the last replication that occurred. Equals to 'null' if no replication task has been executed."
+                    },
+                    "policy": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Policy357Enum"
+                            }
+                        ],
+                        "description": "Policy for how replicate will manage the local objects within the domain.\n\n* `all` - Replicate manages ALL local objects within the domain.\n* `labeled` - Replicate will only manage the objects created from a previous replication, unlabled local objects will be untouched.\n* `nodelete` - Replicate will not delete any local object whether they were created by replication or not."
                     }
                 },
                 "required": [
@@ -25570,11 +25322,9 @@
                         "maxLength": 150
                     },
                     "password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "Users password. Set to ``null`` to disable password authentication."
                     },
@@ -25741,19 +25491,15 @@
                         "minLength": 1
                     },
                     "content_object": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "pulp_href of the object for which role permissions should be asserted. If set to 'null', permissions will act on either domain or model-level."
                     },
                     "domain": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "Domain this role should be applied on, mutually exclusive with content_object."
                     }
                 },
@@ -25792,10 +25538,8 @@
                         "type": "string"
                     },
                     "content_object": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "pulp_href of the object for which role permissions should be asserted. If set to 'null', permissions will act on either domain or model-level."
                     },
                     "description": {
@@ -25810,11 +25554,9 @@
                         "readOnly": true
                     },
                     "domain": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "Domain this role should be applied on, mutually exclusive with content_object."
                     }
                 },
@@ -25896,10 +25638,8 @@
                     "versions": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         },
                         "readOnly": true,
                         "description": "Versions of the components installed."
