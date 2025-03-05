@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "deb": "3.6.0.dev",
-            "core": "3.72.1"
+            "core": "3.73.0"
         },
         "x-pulp-domain-enabled": false
     },
@@ -58,6 +58,7 @@
                                     "-pk",
                                     "-pulp_created",
                                     "-pulp_id",
+                                    "-pulp_labels",
                                     "-pulp_last_updated",
                                     "-pulp_type",
                                     "-relative_path",
@@ -67,6 +68,7 @@
                                     "pk",
                                     "pulp_created",
                                     "pulp_id",
+                                    "pulp_labels",
                                     "pulp_last_updated",
                                     "pulp_type",
                                     "relative_path",
@@ -76,7 +78,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -127,6 +129,14 @@
                         "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
                     },
                     {
                         "in": "query",
@@ -329,6 +339,126 @@
                 }
             }
         },
+        "{deb_generic_content_href}set_label/": {
+            "post": {
+                "operationId": "content_deb_generic_contents_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_generic_content_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Generic_Contents"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_generic_content_href}unset_label/": {
+            "post": {
+                "operationId": "content_deb_generic_contents_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_generic_content_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Generic_Contents"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/content/deb/installer_file_indices/": {
             "get": {
                 "operationId": "content_deb_installer_file_indices_list",
@@ -382,6 +512,7 @@
                                     "-pk",
                                     "-pulp_created",
                                     "-pulp_id",
+                                    "-pulp_labels",
                                     "-pulp_last_updated",
                                     "-pulp_type",
                                     "-relative_path",
@@ -393,6 +524,7 @@
                                     "pk",
                                     "pulp_created",
                                     "pulp_id",
+                                    "pulp_labels",
                                     "pulp_last_updated",
                                     "pulp_type",
                                     "relative_path",
@@ -402,7 +534,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `component` - Component\n* `-component` - Component (descending)\n* `architecture` - Architecture\n* `-architecture` - Architecture (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `component` - Component\n* `-component` - Component (descending)\n* `architecture` - Architecture\n* `-architecture` - Architecture (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -453,6 +585,14 @@
                         "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
                     },
                     {
                         "in": "query",
@@ -660,6 +800,126 @@
                 }
             }
         },
+        "{deb_installer_file_index_href}set_label/": {
+            "post": {
+                "operationId": "content_deb_installer_file_indices_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_installer_file_index_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Installer_File_Indices"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_installer_file_index_href}unset_label/": {
+            "post": {
+                "operationId": "content_deb_installer_file_indices_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_installer_file_index_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Installer_File_Indices"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/content/deb/installer_packages/": {
             "get": {
                 "operationId": "content_deb_installer_packages_list",
@@ -799,6 +1059,7 @@
                                     "-provides",
                                     "-pulp_created",
                                     "-pulp_id",
+                                    "-pulp_labels",
                                     "-pulp_last_updated",
                                     "-pulp_type",
                                     "-recommends",
@@ -838,6 +1099,7 @@
                                     "provides",
                                     "pulp_created",
                                     "pulp_id",
+                                    "pulp_labels",
                                     "pulp_last_updated",
                                     "pulp_type",
                                     "recommends",
@@ -854,7 +1116,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `package` - Package\n* `-package` - Package (descending)\n* `source` - Source\n* `-source` - Source (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `architecture` - Architecture\n* `-architecture` - Architecture (descending)\n* `section` - Section\n* `-section` - Section (descending)\n* `priority` - Priority\n* `-priority` - Priority (descending)\n* `origin` - Origin\n* `-origin` - Origin (descending)\n* `tag` - Tag\n* `-tag` - Tag (descending)\n* `bugs` - Bugs\n* `-bugs` - Bugs (descending)\n* `essential` - Essential\n* `-essential` - Essential (descending)\n* `build_essential` - Build essential\n* `-build_essential` - Build essential (descending)\n* `installed_size` - Installed size\n* `-installed_size` - Installed size (descending)\n* `maintainer` - Maintainer\n* `-maintainer` - Maintainer (descending)\n* `original_maintainer` - Original maintainer\n* `-original_maintainer` - Original maintainer (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `description_md5` - Description md5\n* `-description_md5` - Description md5 (descending)\n* `homepage` - Homepage\n* `-homepage` - Homepage (descending)\n* `built_using` - Built using\n* `-built_using` - Built using (descending)\n* `auto_built_package` - Auto built package\n* `-auto_built_package` - Auto built package (descending)\n* `multi_arch` - Multi arch\n* `-multi_arch` - Multi arch (descending)\n* `breaks` - Breaks\n* `-breaks` - Breaks (descending)\n* `conflicts` - Conflicts\n* `-conflicts` - Conflicts (descending)\n* `depends` - Depends\n* `-depends` - Depends (descending)\n* `recommends` - Recommends\n* `-recommends` - Recommends (descending)\n* `suggests` - Suggests\n* `-suggests` - Suggests (descending)\n* `enhances` - Enhances\n* `-enhances` - Enhances (descending)\n* `pre_depends` - Pre depends\n* `-pre_depends` - Pre depends (descending)\n* `provides` - Provides\n* `-provides` - Provides (descending)\n* `replaces` - Replaces\n* `-replaces` - Replaces (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `custom_fields` - Custom fields\n* `-custom_fields` - Custom fields (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `package` - Package\n* `-package` - Package (descending)\n* `source` - Source\n* `-source` - Source (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `architecture` - Architecture\n* `-architecture` - Architecture (descending)\n* `section` - Section\n* `-section` - Section (descending)\n* `priority` - Priority\n* `-priority` - Priority (descending)\n* `origin` - Origin\n* `-origin` - Origin (descending)\n* `tag` - Tag\n* `-tag` - Tag (descending)\n* `bugs` - Bugs\n* `-bugs` - Bugs (descending)\n* `essential` - Essential\n* `-essential` - Essential (descending)\n* `build_essential` - Build essential\n* `-build_essential` - Build essential (descending)\n* `installed_size` - Installed size\n* `-installed_size` - Installed size (descending)\n* `maintainer` - Maintainer\n* `-maintainer` - Maintainer (descending)\n* `original_maintainer` - Original maintainer\n* `-original_maintainer` - Original maintainer (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `description_md5` - Description md5\n* `-description_md5` - Description md5 (descending)\n* `homepage` - Homepage\n* `-homepage` - Homepage (descending)\n* `built_using` - Built using\n* `-built_using` - Built using (descending)\n* `auto_built_package` - Auto built package\n* `-auto_built_package` - Auto built package (descending)\n* `multi_arch` - Multi arch\n* `-multi_arch` - Multi arch (descending)\n* `breaks` - Breaks\n* `-breaks` - Breaks (descending)\n* `conflicts` - Conflicts\n* `-conflicts` - Conflicts (descending)\n* `depends` - Depends\n* `-depends` - Depends (descending)\n* `recommends` - Recommends\n* `-recommends` - Recommends (descending)\n* `suggests` - Suggests\n* `-suggests` - Suggests (descending)\n* `enhances` - Enhances\n* `-enhances` - Enhances (descending)\n* `pre_depends` - Pre depends\n* `-pre_depends` - Pre depends (descending)\n* `provides` - Provides\n* `-provides` - Provides (descending)\n* `replaces` - Replaces\n* `-replaces` - Replaces (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `custom_fields` - Custom fields\n* `-custom_fields` - Custom fields (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -937,6 +1199,14 @@
                         "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
                     },
                     {
                         "in": "query",
@@ -1163,6 +1433,126 @@
                 }
             }
         },
+        "{deb_installer_package_href}set_label/": {
+            "post": {
+                "operationId": "content_deb_installer_packages_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_installer_package_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Installer_Packages"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_installer_package_href}unset_label/": {
+            "post": {
+                "operationId": "content_deb_installer_packages_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_installer_package_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Installer_Packages"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/content/deb/package_indices/": {
             "get": {
                 "operationId": "content_deb_package_indices_list",
@@ -1217,6 +1607,7 @@
                                     "-pk",
                                     "-pulp_created",
                                     "-pulp_id",
+                                    "-pulp_labels",
                                     "-pulp_last_updated",
                                     "-pulp_type",
                                     "-relative_path",
@@ -1229,6 +1620,7 @@
                                     "pk",
                                     "pulp_created",
                                     "pulp_id",
+                                    "pulp_labels",
                                     "pulp_last_updated",
                                     "pulp_type",
                                     "relative_path",
@@ -1238,7 +1630,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `component` - Component\n* `-component` - Component (descending)\n* `architecture` - Architecture\n* `-architecture` - Architecture (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `artifact_set_sha256` - Artifact set sha256\n* `-artifact_set_sha256` - Artifact set sha256 (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `component` - Component\n* `-component` - Component (descending)\n* `architecture` - Architecture\n* `-architecture` - Architecture (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `artifact_set_sha256` - Artifact set sha256\n* `-artifact_set_sha256` - Artifact set sha256 (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -1289,6 +1681,14 @@
                         "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
                     },
                     {
                         "in": "query",
@@ -1496,6 +1896,126 @@
                 }
             }
         },
+        "{deb_package_index_href}set_label/": {
+            "post": {
+                "operationId": "content_deb_package_indices_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_package_index_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Package_Indices"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_package_index_href}unset_label/": {
+            "post": {
+                "operationId": "content_deb_package_indices_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_package_index_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Package_Indices"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/content/deb/package_release_components/": {
             "get": {
                 "operationId": "content_deb_package_release_components_list",
@@ -1531,6 +2051,7 @@
                                     "-pk",
                                     "-pulp_created",
                                     "-pulp_id",
+                                    "-pulp_labels",
                                     "-pulp_last_updated",
                                     "-pulp_type",
                                     "-timestamp_of_interest",
@@ -1538,6 +2059,7 @@
                                     "pk",
                                     "pulp_created",
                                     "pulp_id",
+                                    "pulp_labels",
                                     "pulp_last_updated",
                                     "pulp_type",
                                     "timestamp_of_interest",
@@ -1545,7 +2067,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -1605,6 +2127,14 @@
                         "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
                     },
                     {
                         "in": "query",
@@ -1805,6 +2335,126 @@
                 }
             }
         },
+        "{deb_package_release_component_href}set_label/": {
+            "post": {
+                "operationId": "content_deb_package_release_components_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_package_release_component_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Package_Release_Components"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_package_release_component_href}unset_label/": {
+            "post": {
+                "operationId": "content_deb_package_release_components_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_package_release_component_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Package_Release_Components"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/content/deb/packages/": {
             "get": {
                 "operationId": "content_deb_packages_list",
@@ -1944,6 +2594,7 @@
                                     "-provides",
                                     "-pulp_created",
                                     "-pulp_id",
+                                    "-pulp_labels",
                                     "-pulp_last_updated",
                                     "-pulp_type",
                                     "-recommends",
@@ -1983,6 +2634,7 @@
                                     "provides",
                                     "pulp_created",
                                     "pulp_id",
+                                    "pulp_labels",
                                     "pulp_last_updated",
                                     "pulp_type",
                                     "recommends",
@@ -1999,7 +2651,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `package` - Package\n* `-package` - Package (descending)\n* `source` - Source\n* `-source` - Source (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `architecture` - Architecture\n* `-architecture` - Architecture (descending)\n* `section` - Section\n* `-section` - Section (descending)\n* `priority` - Priority\n* `-priority` - Priority (descending)\n* `origin` - Origin\n* `-origin` - Origin (descending)\n* `tag` - Tag\n* `-tag` - Tag (descending)\n* `bugs` - Bugs\n* `-bugs` - Bugs (descending)\n* `essential` - Essential\n* `-essential` - Essential (descending)\n* `build_essential` - Build essential\n* `-build_essential` - Build essential (descending)\n* `installed_size` - Installed size\n* `-installed_size` - Installed size (descending)\n* `maintainer` - Maintainer\n* `-maintainer` - Maintainer (descending)\n* `original_maintainer` - Original maintainer\n* `-original_maintainer` - Original maintainer (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `description_md5` - Description md5\n* `-description_md5` - Description md5 (descending)\n* `homepage` - Homepage\n* `-homepage` - Homepage (descending)\n* `built_using` - Built using\n* `-built_using` - Built using (descending)\n* `auto_built_package` - Auto built package\n* `-auto_built_package` - Auto built package (descending)\n* `multi_arch` - Multi arch\n* `-multi_arch` - Multi arch (descending)\n* `breaks` - Breaks\n* `-breaks` - Breaks (descending)\n* `conflicts` - Conflicts\n* `-conflicts` - Conflicts (descending)\n* `depends` - Depends\n* `-depends` - Depends (descending)\n* `recommends` - Recommends\n* `-recommends` - Recommends (descending)\n* `suggests` - Suggests\n* `-suggests` - Suggests (descending)\n* `enhances` - Enhances\n* `-enhances` - Enhances (descending)\n* `pre_depends` - Pre depends\n* `-pre_depends` - Pre depends (descending)\n* `provides` - Provides\n* `-provides` - Provides (descending)\n* `replaces` - Replaces\n* `-replaces` - Replaces (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `custom_fields` - Custom fields\n* `-custom_fields` - Custom fields (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `package` - Package\n* `-package` - Package (descending)\n* `source` - Source\n* `-source` - Source (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `architecture` - Architecture\n* `-architecture` - Architecture (descending)\n* `section` - Section\n* `-section` - Section (descending)\n* `priority` - Priority\n* `-priority` - Priority (descending)\n* `origin` - Origin\n* `-origin` - Origin (descending)\n* `tag` - Tag\n* `-tag` - Tag (descending)\n* `bugs` - Bugs\n* `-bugs` - Bugs (descending)\n* `essential` - Essential\n* `-essential` - Essential (descending)\n* `build_essential` - Build essential\n* `-build_essential` - Build essential (descending)\n* `installed_size` - Installed size\n* `-installed_size` - Installed size (descending)\n* `maintainer` - Maintainer\n* `-maintainer` - Maintainer (descending)\n* `original_maintainer` - Original maintainer\n* `-original_maintainer` - Original maintainer (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `description_md5` - Description md5\n* `-description_md5` - Description md5 (descending)\n* `homepage` - Homepage\n* `-homepage` - Homepage (descending)\n* `built_using` - Built using\n* `-built_using` - Built using (descending)\n* `auto_built_package` - Auto built package\n* `-auto_built_package` - Auto built package (descending)\n* `multi_arch` - Multi arch\n* `-multi_arch` - Multi arch (descending)\n* `breaks` - Breaks\n* `-breaks` - Breaks (descending)\n* `conflicts` - Conflicts\n* `-conflicts` - Conflicts (descending)\n* `depends` - Depends\n* `-depends` - Depends (descending)\n* `recommends` - Recommends\n* `-recommends` - Recommends (descending)\n* `suggests` - Suggests\n* `-suggests` - Suggests (descending)\n* `enhances` - Enhances\n* `-enhances` - Enhances (descending)\n* `pre_depends` - Pre depends\n* `-pre_depends` - Pre depends (descending)\n* `provides` - Provides\n* `-provides` - Provides (descending)\n* `replaces` - Replaces\n* `-replaces` - Replaces (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `custom_fields` - Custom fields\n* `-custom_fields` - Custom fields (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -2151,6 +2803,14 @@
                         "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
                     },
                     {
                         "in": "query",
@@ -2401,6 +3061,126 @@
                 }
             }
         },
+        "{deb_package_href}set_label/": {
+            "post": {
+                "operationId": "content_deb_packages_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_package_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Packages"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_package_href}unset_label/": {
+            "post": {
+                "operationId": "content_deb_packages_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_package_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Packages"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/content/deb/release_architectures/": {
             "get": {
                 "operationId": "content_deb_release_architectures_list",
@@ -2454,6 +3234,7 @@
                                     "-pk",
                                     "-pulp_created",
                                     "-pulp_id",
+                                    "-pulp_labels",
                                     "-pulp_last_updated",
                                     "-pulp_type",
                                     "-timestamp_of_interest",
@@ -2463,6 +3244,7 @@
                                     "pk",
                                     "pulp_created",
                                     "pulp_id",
+                                    "pulp_labels",
                                     "pulp_last_updated",
                                     "pulp_type",
                                     "timestamp_of_interest",
@@ -2470,7 +3252,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `distribution` - Distribution\n* `-distribution` - Distribution (descending)\n* `architecture` - Architecture\n* `-architecture` - Architecture (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `distribution` - Distribution\n* `-distribution` - Distribution (descending)\n* `architecture` - Architecture\n* `-architecture` - Architecture (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -2521,6 +3303,14 @@
                         "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
                     },
                     {
                         "in": "query",
@@ -2712,6 +3502,126 @@
                 }
             }
         },
+        "{deb_release_architecture_href}set_label/": {
+            "post": {
+                "operationId": "content_deb_release_architectures_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_release_architecture_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Release_Architectures"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_release_architecture_href}unset_label/": {
+            "post": {
+                "operationId": "content_deb_release_architectures_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_release_architecture_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Release_Architectures"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/content/deb/release_components/": {
             "get": {
                 "operationId": "content_deb_release_components_list",
@@ -2765,6 +3675,7 @@
                                     "-pk",
                                     "-pulp_created",
                                     "-pulp_id",
+                                    "-pulp_labels",
                                     "-pulp_last_updated",
                                     "-pulp_type",
                                     "-timestamp_of_interest",
@@ -2774,6 +3685,7 @@
                                     "pk",
                                     "pulp_created",
                                     "pulp_id",
+                                    "pulp_labels",
                                     "pulp_last_updated",
                                     "pulp_type",
                                     "timestamp_of_interest",
@@ -2781,7 +3693,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `distribution` - Distribution\n* `-distribution` - Distribution (descending)\n* `component` - Component\n* `-component` - Component (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `distribution` - Distribution\n* `-distribution` - Distribution (descending)\n* `component` - Component\n* `-component` - Component (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -2840,6 +3752,14 @@
                         "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
                     },
                     {
                         "in": "query",
@@ -3031,6 +3951,126 @@
                 }
             }
         },
+        "{deb_release_component_href}set_label/": {
+            "post": {
+                "operationId": "content_deb_release_components_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_release_component_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Release_Components"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_release_component_href}unset_label/": {
+            "post": {
+                "operationId": "content_deb_release_components_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_release_component_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Release_Components"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/content/deb/release_files/": {
             "get": {
                 "operationId": "content_deb_release_files_list",
@@ -3079,6 +4119,7 @@
                                     "-pk",
                                     "-pulp_created",
                                     "-pulp_id",
+                                    "-pulp_labels",
                                     "-pulp_last_updated",
                                     "-pulp_type",
                                     "-relative_path",
@@ -3094,6 +4135,7 @@
                                     "pk",
                                     "pulp_created",
                                     "pulp_id",
+                                    "pulp_labels",
                                     "pulp_last_updated",
                                     "pulp_type",
                                     "relative_path",
@@ -3104,7 +4146,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `codename` - Codename\n* `-codename` - Codename (descending)\n* `suite` - Suite\n* `-suite` - Suite (descending)\n* `distribution` - Distribution\n* `-distribution` - Distribution (descending)\n* `components` - Components\n* `-components` - Components (descending)\n* `architectures` - Architectures\n* `-architectures` - Architectures (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `artifact_set_sha256` - Artifact set sha256\n* `-artifact_set_sha256` - Artifact set sha256 (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `codename` - Codename\n* `-codename` - Codename (descending)\n* `suite` - Suite\n* `-suite` - Suite (descending)\n* `distribution` - Distribution\n* `-distribution` - Distribution (descending)\n* `components` - Components\n* `-components` - Components (descending)\n* `architectures` - Architectures\n* `-architectures` - Architectures (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `artifact_set_sha256` - Artifact set sha256\n* `-artifact_set_sha256` - Artifact set sha256 (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -3155,6 +4197,14 @@
                         "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
                     },
                     {
                         "in": "query",
@@ -3370,6 +4420,126 @@
                 }
             }
         },
+        "{deb_release_file_href}set_label/": {
+            "post": {
+                "operationId": "content_deb_release_files_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_release_file_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Release_Files"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_release_file_href}unset_label/": {
+            "post": {
+                "operationId": "content_deb_release_files_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_release_file_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Release_Files"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/content/deb/releases/": {
             "get": {
                 "operationId": "content_deb_releases_list",
@@ -3434,6 +4604,7 @@
                                     "-pk",
                                     "-pulp_created",
                                     "-pulp_id",
+                                    "-pulp_labels",
                                     "-pulp_last_updated",
                                     "-pulp_type",
                                     "-suite",
@@ -3448,6 +4619,7 @@
                                     "pk",
                                     "pulp_created",
                                     "pulp_id",
+                                    "pulp_labels",
                                     "pulp_last_updated",
                                     "pulp_type",
                                     "suite",
@@ -3457,7 +4629,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `codename` - Codename\n* `-codename` - Codename (descending)\n* `suite` - Suite\n* `-suite` - Suite (descending)\n* `distribution` - Distribution\n* `-distribution` - Distribution (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `origin` - Origin\n* `-origin` - Origin (descending)\n* `label` - Label\n* `-label` - Label (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `codename` - Codename\n* `-codename` - Codename (descending)\n* `suite` - Suite\n* `-suite` - Suite (descending)\n* `distribution` - Distribution\n* `-distribution` - Distribution (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `origin` - Origin\n* `-origin` - Origin (descending)\n* `label` - Label\n* `-label` - Label (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -3524,6 +4696,14 @@
                         "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
                     },
                     {
                         "in": "query",
@@ -3731,6 +4911,126 @@
                 }
             }
         },
+        "{deb_release_href}set_label/": {
+            "post": {
+                "operationId": "content_deb_releases_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_release_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Releases"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_release_href}unset_label/": {
+            "post": {
+                "operationId": "content_deb_releases_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_release_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Releases"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/content/deb/source_indices/": {
             "get": {
                 "operationId": "content_deb_source_indices_list",
@@ -3775,6 +5075,7 @@
                                     "-pk",
                                     "-pulp_created",
                                     "-pulp_id",
+                                    "-pulp_labels",
                                     "-pulp_last_updated",
                                     "-pulp_type",
                                     "-relative_path",
@@ -3785,6 +5086,7 @@
                                     "pk",
                                     "pulp_created",
                                     "pulp_id",
+                                    "pulp_labels",
                                     "pulp_last_updated",
                                     "pulp_type",
                                     "relative_path",
@@ -3794,7 +5096,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `component` - Component\n* `-component` - Component (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `component` - Component\n* `-component` - Component (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -3845,6 +5147,14 @@
                         "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
                     },
                     {
                         "in": "query",
@@ -4052,6 +5362,126 @@
                 }
             }
         },
+        "{deb_source_index_href}set_label/": {
+            "post": {
+                "operationId": "content_deb_source_indices_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_source_index_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Source_Indices"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_source_index_href}unset_label/": {
+            "post": {
+                "operationId": "content_deb_source_indices_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_source_index_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Source_Indices"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/content/deb/source_packages/": {
             "get": {
                 "operationId": "content_deb_source_packages_list",
@@ -4196,6 +5626,7 @@
                                     "-pk",
                                     "-pulp_created",
                                     "-pulp_id",
+                                    "-pulp_labels",
                                     "-pulp_last_updated",
                                     "-pulp_type",
                                     "-relative_path",
@@ -4231,6 +5662,7 @@
                                     "pk",
                                     "pulp_created",
                                     "pulp_id",
+                                    "pulp_labels",
                                     "pulp_last_updated",
                                     "pulp_type",
                                     "relative_path",
@@ -4253,7 +5685,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `format` - Format\n* `-format` - Format (descending)\n* `source` - Source\n* `-source` - Source (descending)\n* `binary` - Binary\n* `-binary` - Binary (descending)\n* `architecture` - Architecture\n* `-architecture` - Architecture (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `maintainer` - Maintainer\n* `-maintainer` - Maintainer (descending)\n* `uploaders` - Uploaders\n* `-uploaders` - Uploaders (descending)\n* `homepage` - Homepage\n* `-homepage` - Homepage (descending)\n* `vcs_browser` - Vcs browser\n* `-vcs_browser` - Vcs browser (descending)\n* `vcs_arch` - Vcs arch\n* `-vcs_arch` - Vcs arch (descending)\n* `vcs_bzr` - Vcs bzr\n* `-vcs_bzr` - Vcs bzr (descending)\n* `vcs_cvs` - Vcs cvs\n* `-vcs_cvs` - Vcs cvs (descending)\n* `vcs_darcs` - Vcs darcs\n* `-vcs_darcs` - Vcs darcs (descending)\n* `vcs_git` - Vcs git\n* `-vcs_git` - Vcs git (descending)\n* `vcs_hg` - Vcs hg\n* `-vcs_hg` - Vcs hg (descending)\n* `vcs_mtn` - Vcs mtn\n* `-vcs_mtn` - Vcs mtn (descending)\n* `vcs_snv` - Vcs snv\n* `-vcs_snv` - Vcs snv (descending)\n* `testsuite` - Testsuite\n* `-testsuite` - Testsuite (descending)\n* `dgit` - Dgit\n* `-dgit` - Dgit (descending)\n* `standards_version` - Standards version\n* `-standards_version` - Standards version (descending)\n* `build_depends` - Build depends\n* `-build_depends` - Build depends (descending)\n* `build_depends_indep` - Build depends indep\n* `-build_depends_indep` - Build depends indep (descending)\n* `build_depends_arch` - Build depends arch\n* `-build_depends_arch` - Build depends arch (descending)\n* `build_conflicts` - Build conflicts\n* `-build_conflicts` - Build conflicts (descending)\n* `build_conflicts_indep` - Build conflicts indep\n* `-build_conflicts_indep` - Build conflicts indep (descending)\n* `build_conflicts_arch` - Build conflicts arch\n* `-build_conflicts_arch` - Build conflicts arch (descending)\n* `package_list` - Package list\n* `-package_list` - Package list (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `format` - Format\n* `-format` - Format (descending)\n* `source` - Source\n* `-source` - Source (descending)\n* `binary` - Binary\n* `-binary` - Binary (descending)\n* `architecture` - Architecture\n* `-architecture` - Architecture (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `maintainer` - Maintainer\n* `-maintainer` - Maintainer (descending)\n* `uploaders` - Uploaders\n* `-uploaders` - Uploaders (descending)\n* `homepage` - Homepage\n* `-homepage` - Homepage (descending)\n* `vcs_browser` - Vcs browser\n* `-vcs_browser` - Vcs browser (descending)\n* `vcs_arch` - Vcs arch\n* `-vcs_arch` - Vcs arch (descending)\n* `vcs_bzr` - Vcs bzr\n* `-vcs_bzr` - Vcs bzr (descending)\n* `vcs_cvs` - Vcs cvs\n* `-vcs_cvs` - Vcs cvs (descending)\n* `vcs_darcs` - Vcs darcs\n* `-vcs_darcs` - Vcs darcs (descending)\n* `vcs_git` - Vcs git\n* `-vcs_git` - Vcs git (descending)\n* `vcs_hg` - Vcs hg\n* `-vcs_hg` - Vcs hg (descending)\n* `vcs_mtn` - Vcs mtn\n* `-vcs_mtn` - Vcs mtn (descending)\n* `vcs_snv` - Vcs snv\n* `-vcs_snv` - Vcs snv (descending)\n* `testsuite` - Testsuite\n* `-testsuite` - Testsuite (descending)\n* `dgit` - Dgit\n* `-dgit` - Dgit (descending)\n* `standards_version` - Standards version\n* `-standards_version` - Standards version (descending)\n* `build_depends` - Build depends\n* `-build_depends` - Build depends (descending)\n* `build_depends_indep` - Build depends indep\n* `-build_depends_indep` - Build depends indep (descending)\n* `build_depends_arch` - Build depends arch\n* `-build_depends_arch` - Build depends arch (descending)\n* `build_conflicts` - Build conflicts\n* `-build_conflicts` - Build conflicts (descending)\n* `build_conflicts_indep` - Build conflicts indep\n* `-build_conflicts_indep` - Build conflicts indep (descending)\n* `build_conflicts_arch` - Build conflicts arch\n* `-build_conflicts_arch` - Build conflicts arch (descending)\n* `package_list` - Package list\n* `-package_list` - Package list (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -4312,6 +5744,14 @@
                         "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
                     },
                     {
                         "in": "query",
@@ -4639,6 +6079,126 @@
                 }
             }
         },
+        "{deb_source_package_href}set_label/": {
+            "post": {
+                "operationId": "content_deb_source_packages_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_source_package_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Source_Packages"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_source_package_href}unset_label/": {
+            "post": {
+                "operationId": "content_deb_source_packages_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_source_package_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Source_Packages"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/content/deb/source_release_components/": {
             "get": {
                 "operationId": "content_deb_source_release_components_list",
@@ -4674,6 +6234,7 @@
                                     "-pk",
                                     "-pulp_created",
                                     "-pulp_id",
+                                    "-pulp_labels",
                                     "-pulp_last_updated",
                                     "-pulp_type",
                                     "-timestamp_of_interest",
@@ -4681,6 +6242,7 @@
                                     "pk",
                                     "pulp_created",
                                     "pulp_id",
+                                    "pulp_labels",
                                     "pulp_last_updated",
                                     "pulp_type",
                                     "timestamp_of_interest",
@@ -4688,7 +6250,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -4739,6 +6301,14 @@
                         "description": "Multiple values may be separated by commas.",
                         "explode": false,
                         "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
                     },
                     {
                         "in": "query",
@@ -4940,6 +6510,126 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/deb.SourcePackageReleaseComponentResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_source_package_release_component_href}set_label/": {
+            "post": {
+                "operationId": "content_deb_source_release_components_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_source_package_release_component_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Source_Release_Components"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_source_package_release_component_href}unset_label/": {
+            "post": {
+                "operationId": "content_deb_source_release_components_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deb_source_package_release_component_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Source_Release_Components"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
                                 }
                             }
                         },
@@ -11665,6 +13355,14 @@
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
                     "artifact": {
                         "type": "string",
                         "format": "uri",
@@ -11724,6 +13422,14 @@
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
                     "artifact": {
                         "type": "string",
                         "format": "uri",
@@ -11778,6 +13484,14 @@
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
                     "artifacts": {
                         "type": "object",
                         "description": "A dict mapping relative paths inside the Content to the correspondingArtifact URLs. E.g.: {'relative/path': '/artifacts/1/'"
@@ -11830,6 +13544,14 @@
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
                     "artifacts": {
                         "type": "object",
                         "description": "A dict mapping relative paths inside the Content to the correspondingArtifact URLs. E.g.: {'relative/path': '/artifacts/1/'"
@@ -11862,6 +13584,14 @@
                         "format": "uri",
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
                     "artifact": {
                         "type": "string",
@@ -11918,6 +13648,14 @@
                         "format": "date-time",
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
                     "artifact": {
                         "type": "string",
@@ -12086,6 +13824,14 @@
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
                     "artifact": {
                         "type": "string",
                         "format": "uri",
@@ -12135,6 +13881,14 @@
                         "format": "uri",
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
                     "artifacts": {
                         "type": "object",
@@ -12186,6 +13940,14 @@
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
                     "artifacts": {
                         "type": "object",
                         "description": "A dict mapping relative paths inside the Content to the correspondingArtifact URLs. E.g.: {'relative/path': '/artifacts/1/'"
@@ -12216,6 +13978,14 @@
                         "format": "uri",
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
                     "package": {
                         "type": "string",
@@ -12259,6 +14029,14 @@
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
                     "package": {
                         "type": "string",
                         "format": "uri",
@@ -12300,6 +14078,14 @@
                         "format": "date-time",
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
                     "artifact": {
                         "type": "string",
@@ -12476,6 +14262,14 @@
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
                     "codename": {
                         "type": "string",
                         "minLength": 1
@@ -12539,6 +14333,14 @@
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
                     "architecture": {
                         "type": "string",
                         "minLength": 1,
@@ -12581,6 +14383,14 @@
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
                     "architecture": {
                         "type": "string",
                         "description": "Name of the architecture."
@@ -12604,6 +14414,14 @@
                         "format": "uri",
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
                     "component": {
                         "type": "string",
@@ -12647,6 +14465,14 @@
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
                     "component": {
                         "type": "string",
                         "description": "Name of the component."
@@ -12675,6 +14501,14 @@
                         "format": "uri",
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
                     "artifacts": {
                         "type": "object",
@@ -12732,6 +14566,14 @@
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
                     "artifacts": {
                         "type": "object",
                         "description": "A dict mapping relative paths inside the Content to the correspondingArtifact URLs. E.g.: {'relative/path': '/artifacts/1/'"
@@ -12783,6 +14625,14 @@
                         "format": "date-time",
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
                     "codename": {
                         "type": "string"
@@ -12838,6 +14688,14 @@
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
                     "artifacts": {
                         "type": "object",
                         "description": "A dict mapping relative paths inside the Content to the correspondingArtifact URLs. E.g.: {'relative/path': '/artifacts/1/'"
@@ -12890,6 +14748,14 @@
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
                     "artifacts": {
                         "type": "object",
                         "description": "A dict mapping relative paths inside the Content to the correspondingArtifact URLs. E.g.: {'relative/path': '/artifacts/1/'"
@@ -12924,6 +14790,14 @@
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
                     "artifact": {
                         "type": "string",
                         "format": "uri",
@@ -12949,6 +14823,14 @@
                         "format": "uri",
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
                     "source_package": {
                         "type": "string",
@@ -12992,6 +14874,14 @@
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
                     "source_package": {
                         "type": "string",
                         "format": "uri",
@@ -13033,6 +14923,14 @@
                         "format": "date-time",
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
                     "artifacts": {
                         "type": "object",
