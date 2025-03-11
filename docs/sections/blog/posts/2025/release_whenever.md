@@ -1,11 +1,17 @@
 ---
-date: 2025-01-03T00:00:00Z
-title: Whenever, Whatever-based Release Cycle
-author: Matthias Dellweg
+date: 2025-01-03
+title: "Whenever, Whatever-based Release Cycle"
+authors:
+  - "mdellweg"
 tags:
-  - CI/CD
-  - security
-  - automation
+  - "CI/CD"
+  - "security"
+  - "automation"
+links:
+  - "[discourse] LTS strategy": "https://discourse.pulpproject.org/t/need-to-reduce-the-number-of-release-branches-aka-we-need-an-lts-strategy/449"
+  - "[discourse] CalVer": "https://discourse.pulpproject.org/t/switching-pulpcore-to-calendar-versioning-scheme/771"
+  - "[discourse] 3.25 upcoming": "https://discourse.pulpproject.org/t/pulpcore-3-25-is-on-the-horizon-and-upcoming-changes-in-release-cadence/840"
+  - "[discourse] Release Improvements": "https://discourse.pulpproject.org/t/discussion-pulp-release-process-improvements/860"
 ---
 
 "Release fast, release often!" is not a metaphor, it is a mantra.
