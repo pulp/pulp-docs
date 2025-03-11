@@ -44,6 +44,8 @@ plugins:
   - blog:
       blog_dir: blog
       blog_toc: false
+      # The following path is weird but needed to account for the copying around all the files.
+      authors_file: ../../../../docs/sections/blog/.authors.yml
   - macros:
       module_name: '../mkdocs_macros'
       render_by_default: false

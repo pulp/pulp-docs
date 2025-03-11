@@ -7,7 +7,7 @@ name = "pulp-docs"
 version = "0.0.1"
 requires-python = ">= 3.11"
 dependencies = [
-    "mkdocs-material",
+    "mkdocs-material>=9.6.0",
     "mkdocstrings",
     "mkdocstrings-python>=1.14.1,<1.15",
     "mkdocs-macros-plugin",
@@ -35,4 +35,3 @@ pythonpath = "src"
 addopts = [
     "--import-mode=importlib",
 ]
-
