@@ -25,39 +25,16 @@ Don't hesitate to contact us!
     You might encounter some unreleased content live, but plugins usually release often.
     Also, we try to include version information on the docs itself.
 
-### Content Plugins
+{%- for title, kind in [("Core", "Core"), ("Content Plugins", "Content"), ("Deployment", "Deployment"), ("Interaction", "Interaction"), ("Others", "Other")] %}
 
-{% for repo_type in ("core", "content") %}
+### {{ title }}
+
 Repo | Version | Links | &nbsp; | &nbsp;
 --- | --- | --- | --- | ---
-{% for repo in get_repos(repo_type) -%}
-{{ repo.title }} | `{{ repo.version }}` | {{ repo.restapi_link }} | {{ repo.codebase_link }} | {{ repo.changes_link }}
-{% endfor %}
-{% endfor %}
-
-### Deployment
-
-Repo | Version | Links | &nbsp;
---- | --- | --- | ---
-{% for repo in get_repos("deployment") -%}
-{{ repo.title }} | `{{ repo.version }}` | {{ repo.codebase_link }} | {{ repo.changes_link }}
-{% endfor %}
-
-### Interaction
-
-Repo | Version | Links | &nbsp;
---- | --- | --- | ---
-{% for repo in get_repos("interaction") -%}
-{{ repo.title }} | `{{ repo.version }}` | {{ repo.codebase_link }} | {{ repo.changes_link }}
-{% endfor %}
-
-### Others
-
-Repo | Version | Links | &nbsp;
---- | --- | --- | ---
-{% for repo in get_repos("other") -%}
-{{ repo.title }} | `{{ repo.version }}` | {{ repo.codebase_link }} | {{ repo.changes_link }}
-{% endfor %}
+{%- for repo in repositories if repo.kind == kind %}
+{{ repo.title }} | `{{ repo.version }}` | {{ repo.links | join(" | ") }}
+{%- endfor %}
+{%- endfor %}
 
 ## Changes RSS Feed
 
