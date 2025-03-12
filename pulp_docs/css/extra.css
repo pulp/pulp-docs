@@ -34,6 +34,10 @@
     left: -999px
 }
 
+.pulp-sitemap ul {
+  line-height: 1.1;
+}
+
 :root {
   --md-primary-fg-color:        #347dbe;
   --md-primary-fg-color--light: #ECB7B7;
