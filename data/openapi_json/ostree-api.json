@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "ostree": "2.5.0.dev",
-            "core": "3.73.1"
+            "core": "3.73.2"
         },
         "x-pulp-domain-enabled": false
     },
@@ -288,6 +288,126 @@
                 }
             }
         },
+        "{ostree_ostree_commit_href}set_label/": {
+            "post": {
+                "operationId": "content_ostree_commits_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "ostree_ostree_commit_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Commits"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{ostree_ostree_commit_href}unset_label/": {
+            "post": {
+                "operationId": "content_ostree_commits_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "ostree_ostree_commit_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Commits"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/content/ostree/configs/": {
             "get": {
                 "operationId": "content_ostree_configs_list",
@@ -519,6 +639,126 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ostree.OstreeConfigResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{ostree_ostree_config_href}set_label/": {
+            "post": {
+                "operationId": "content_ostree_configs_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "ostree_ostree_config_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Configs"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{ostree_ostree_config_href}unset_label/": {
+            "post": {
+                "operationId": "content_ostree_configs_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "ostree_ostree_config_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Configs"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
                                 }
                             }
                         },
@@ -1201,6 +1441,126 @@
                 }
             }
         },
+        "{ostree_ostree_object_href}set_label/": {
+            "post": {
+                "operationId": "content_ostree_objects_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "ostree_ostree_object_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Objects"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{ostree_ostree_object_href}unset_label/": {
+            "post": {
+                "operationId": "content_ostree_objects_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "ostree_ostree_object_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Objects"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/content/ostree/refs/": {
             "get": {
                 "operationId": "content_ostree_refs_list",
@@ -1542,6 +1902,126 @@
                 }
             }
         },
+        "{ostree_ostree_ref_href}set_label/": {
+            "post": {
+                "operationId": "content_ostree_refs_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "ostree_ostree_ref_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Refs"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{ostree_ostree_ref_href}unset_label/": {
+            "post": {
+                "operationId": "content_ostree_refs_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "ostree_ostree_ref_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Refs"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/content/ostree/summaries/": {
             "get": {
                 "operationId": "content_ostree_summaries_list",
@@ -1773,6 +2253,126 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ostree.OstreeSummaryResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{ostree_ostree_summary_href}set_label/": {
+            "post": {
+                "operationId": "content_ostree_summaries_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "ostree_ostree_summary_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Summaries"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{ostree_ostree_summary_href}unset_label/": {
+            "post": {
+                "operationId": "content_ostree_summaries_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "ostree_ostree_summary_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Summaries"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
                                 }
                             }
                         },
@@ -6225,7 +6825,7 @@
             },
             "UnsetLabel": {
                 "type": "object",
-                "description": "Serializer for synchronously setting a label.",
+                "description": "Serializer for synchronously UNsetting a label.",
                 "properties": {
                     "key": {
                         "type": "string",
@@ -6239,7 +6839,7 @@
             },
             "UnsetLabelResponse": {
                 "type": "object",
-                "description": "Serializer for synchronously setting a label.",
+                "description": "Serializer for synchronously UNsetting a label.",
                 "properties": {
                     "key": {
                         "type": "string",

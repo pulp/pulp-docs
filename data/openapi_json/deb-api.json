@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "deb": "3.6.0.dev",
-            "core": "3.73.1"
+            "core": "3.73.2"
         },
         "x-pulp-domain-enabled": false
     },
@@ -12578,7 +12578,7 @@
             },
             "UnsetLabel": {
                 "type": "object",
-                "description": "Serializer for synchronously setting a label.",
+                "description": "Serializer for synchronously UNsetting a label.",
                 "properties": {
                     "key": {
                         "type": "string",
@@ -12592,7 +12592,7 @@
             },
             "UnsetLabelResponse": {
                 "type": "object",
-                "description": "Serializer for synchronously setting a label.",
+                "description": "Serializer for synchronously UNsetting a label.",
                 "properties": {
                     "key": {
                         "type": "string",

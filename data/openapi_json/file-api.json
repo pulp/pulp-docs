@@ -6105,7 +6105,7 @@
             },
             "UnsetLabel": {
                 "type": "object",
-                "description": "Serializer for synchronously setting a label.",
+                "description": "Serializer for synchronously UNsetting a label.",
                 "properties": {
                     "key": {
                         "type": "string",
@@ -6119,7 +6119,7 @@
             },
             "UnsetLabelResponse": {
                 "type": "object",
-                "description": "Serializer for synchronously setting a label.",
+                "description": "Serializer for synchronously UNsetting a label.",
                 "properties": {
                     "key": {
                         "type": "string",
