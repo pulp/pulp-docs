@@ -68,10 +68,12 @@ Now that we've seen the results, let's go through the system that produced them.
 ### Physical hardware All on AWS in EU-West-2
 
 1 Load generator - m4.2xlarge instance:
+
 * 8 64-bit CPUs, Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz
 * 32GB Ram
 
 1 Pulp test machine - m4.2xlarge instance:
+
 * 8 64-bit CPUs, Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz
 * 32GB Ram
 
@@ -184,7 +186,7 @@ increases in req/sec with additional increases in locust users.
 
 ## Data Collected
 
-See [this spreadsheet](../../../../files/pulp_rpm_redirection_perf_and_scale_blog_post/Sheet1.html)
+See [this spreadsheet](resources/sheet.html)
 for the raw data collected.
 
 A few comments on the data:
