@@ -17,8 +17,8 @@
             "url": "https://pulp.plan.io/attachments/download/517478/pulp_logo_word_rectangle.svg"
         },
         "x-pulp-app-versions": {
-            "gem": "0.7.0.dev",
-            "core": "3.73.2"
+            "gem": "0.8.0.dev",
+            "core": "3.74.0"
         },
         "x-pulp-domain-enabled": false
     },
@@ -531,6 +531,14 @@
                         "style": "form"
                     },
                     {
+                        "in": "query",
+                        "name": "checkpoint",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where checkpoint matches value"
+                    },
+                    {
                         "name": "limit",
                         "required": false,
                         "in": "query",
@@ -634,6 +642,7 @@
                                 "type": "string",
                                 "enum": [
                                     "-base_path",
+                                    "-checkpoint",
                                     "-hidden",
                                     "-name",
                                     "-pk",
@@ -643,6 +652,7 @@
                                     "-pulp_last_updated",
                                     "-pulp_type",
                                     "base_path",
+                                    "checkpoint",
                                     "hidden",
                                     "name",
                                     "pk",
@@ -654,7 +664,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `base_path` - Base path\n* `-base_path` - Base path (descending)\n* `hidden` - Hidden\n* `-hidden` - Hidden (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `base_path` - Base path\n* `-base_path` - Base path (descending)\n* `hidden` - Hidden\n* `-hidden` - Hidden (descending)\n* `checkpoint` - Checkpoint\n* `-checkpoint` - Checkpoint (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -1429,6 +1439,14 @@
                 "parameters": [
                     {
                         "in": "query",
+                        "name": "checkpoint",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where checkpoint matches value"
+                    },
+                    {
+                        "in": "query",
                         "name": "content",
                         "schema": {
                             "type": "string"
@@ -1474,6 +1492,7 @@
                             "items": {
                                 "type": "string",
                                 "enum": [
+                                    "-checkpoint",
                                     "-complete",
                                     "-pass_through",
                                     "-pk",
@@ -1481,6 +1500,7 @@
                                     "-pulp_id",
                                     "-pulp_last_updated",
                                     "-pulp_type",
+                                    "checkpoint",
                                     "complete",
                                     "pass_through",
                                     "pk",
@@ -1491,7 +1511,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `complete` - Complete\n* `-complete` - Complete (descending)\n* `pass_through` - Pass through\n* `-pass_through` - Pass through (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `complete` - Complete\n* `-complete` - Complete (descending)\n* `pass_through` - Pass through\n* `-pass_through` - Pass through (descending)\n* `checkpoint` - Checkpoint\n* `-checkpoint` - Checkpoint (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
