@@ -3,18 +3,18 @@ site_url: https://pulpproject.org/
 repo_url: https://github.com/pulp/pulpcore
 repo_name: pulp/pulpcore
 
-docs_dir: docs
+docs_dir: pulp_docs
 theme:
   name: material
-  logo: pulp-docs/docs/assets/pulp_logo_icon.svg
-  favicon: pulp-docs/docs/assets/favicon.ico
+  logo: assets/pulp_logo_icon.svg
+  favicon: assets/favicon.ico
   features:
     - navigation.indexes
     - content.code.annotate
     - navigation.tabs
     - navigation.sections
     - navigation.path
-    - navigation.footer
+    # - navigation.footer
     - navigation.top
     - toc.follow
     - search.suggest
@@ -36,21 +36,58 @@ theme:
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode
-hooks:
-  - '../mkdocs_hooks.py'
+# Blog's Navigation needs to be excempt from literate nav...
+nav:
+  - Home: "index.md"
+  - "User Manual":
+    - "user/index.md"
+  - "Developer Manual":
+    - "dev/index.md"
+  - Blog:
+    - "blog/index.md"
+  - Help: "help/"
 plugins:
+  - PulpDocs:
+      repositories:
+        - title: "Pulpcore"
+          path: "pulpcore"
+          kind: "Core"
+          rest_api: "core"
+        - title: "Ansible"
+          path: "pulp_ansible"
+          kind: "Content"
+          rest_api: "ansible"
+        - title: "Debian"
+          path: "pulp_deb"
+          kind: "Content"
+          rest_api: "deb"
+        - title: "File"
+          path: "pulpcore/pulp_file"
+          kind: "Content"
+          rest_api: "file"
+        #TODO Fix cli code paths for docstrings
+        - title: "Pulp CLI"
+          path: "pulp-cli"
+          kind: "Interaction"
+        - title: "Pulp Glue"
+          path: "pulp-cli/pulp-glue"
+          kind: "Interaction"
+        - title: "Pulp Docs"
+          path: "pulp-docs"
+          kind: "Other"
+        - title: "Certguard"
+          path: "pulpcore/pulp_certguard"
+          kind: "Other"
+          # rest_api: "certguard"
   - search
   - site-urls
   - blog:
       blog_dir: blog
       blog_toc: false
-      # The following path is weird but needed to account for the copying around all the files.
-      authors_file: ../../../../docs/sections/blog/.authors.yml
   - macros:
-      module_name: '../mkdocs_macros'
       render_by_default: false
   - tags:
-      tags_file: pulp-docs/docs/tags.md
+      tags_file: pulp-docs/pulp_docs/tags.md
   - literate-nav:
       nav_file: _SUMMARY.md
   - mkdocstrings:
@@ -66,23 +103,26 @@ plugins:
             show_root_heading: true
             show_root_toc_entry: true
             show_if_no_docstring: false
-            show_signature_annotations: false
+            show_signature_annotations: true
             separate_signature: false
             members_order: "source"
             merge_init_into_class: true
+          paths: []
 extra:
   social:
-    - icon: fontawesome/brands/github-alt
-      link: https://github.com/pulp
-    - icon: fontawesome/brands/discourse
-      link: https://discourse.pulpproject.org/
+    - icon: "fontawesome/brands/github-alt"
+      link: "https://github.com/pulp"
+    - icon: "fontawesome/brands/discourse"
+      link: "https://discourse.pulpproject.org/"
+    - icon: "fontawesome/solid/comments"
+      link: "https://matrix.to/#/!HWvLQmBGVPfJfTQBAu:matrix.org"
   analytics:
     provider: google
     property: G-8M0N5XEY4W
 
 extra_css:
-  - pulp-docs/docs/css/extra.css
-  - pulp-docs/docs/css/mkdocstrings.css
+  - css/extra.css
+  - css/mkdocstrings.css
 
 markdown_extensions:
   # Python Markdown
