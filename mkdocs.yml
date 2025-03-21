@@ -1,9 +1,10 @@
-site_name: Pulp Project
-site_url: https://pulpproject.org/
-repo_url: https://github.com/pulp/pulpcore
-repo_name: pulp/pulpcore
+site_name: "Pulp Project"
+site_url: "https://pulpproject.org/"
+repo_url: "https://github.com/pulp/pulp-docs"
+repo_name: "pulp/pulp-docs"
+edit_uri_template: "https://github.com/pulp/pulp-docs/edit/main/pulp_docs/{path}"
 
-docs_dir: pulp_docs
+docs_dir: "pulp_docs"
 theme:
   name: material
   logo: assets/pulp_logo_icon.svg
@@ -49,36 +50,100 @@ nav:
 plugins:
   - PulpDocs:
       repositories:
+        # TODO add all repositories...
         - title: "Pulpcore"
           path: "pulpcore"
+          git_url: "https://github.com/pulp/pulpcore"
           kind: "Core"
           rest_api: "core"
+
         - title: "Ansible"
           path: "pulp_ansible"
+          git_url: "https://github.com/pulp/pulp_ansible"
           kind: "Content"
           rest_api: "ansible"
+        - title: "Container"
+          path: "pulp_container"
+          git_url: "https://github.com/pulp/pulp_container"
+          kind: "Content"
+          rest_api: "container"
         - title: "Debian"
           path: "pulp_deb"
+          git_url: "https://github.com/pulp/pulp_deb"
           kind: "Content"
           rest_api: "deb"
         - title: "File"
           path: "pulpcore/pulp_file"
+          git_url: "https://github.com/pulp/pulpcore"
           kind: "Content"
           rest_api: "file"
+        - title: "Gem"
+          path: "pulp_gem"
+          git_url: "https://github.com/pulp/pulp_gem"
+          kind: "Content"
+          rest_api: "gem"
+        - title: "Maven"
+          path: "pulp_maven"
+          git_url: "https://github.com/pulp/pulp_python"
+          kind: "Content"
+          rest_api: "python"
+        - title: "NPM"
+          path: "pulp_npm"
+          git_url: "https://github.com/pulp/pulp_npm"
+          kind: "Content"
+          rest_api: "npm"
+        - title: "RPM"
+          path: "pulp_rpm"
+          git_url: "https://github.com/pulp/pulp_rpm"
+          kind: "Content"
+          rest_api: "rpm"
+        - title: "OSTree"
+          path: "pulp_ostree"
+          git_url: "https://github.com/pulp/pulp_ostree"
+          kind: "Content"
+          rest_api: "ostree"
+        - title: "Python"
+          path: "pulp_python"
+          git_url: "https://github.com/pulp/pulp_python"
+          kind: "Content"
+          rest_api: "python"
+
         #TODO Fix cli code paths for docstrings
         - title: "Pulp CLI"
           path: "pulp-cli"
+          git_url: "https://github.com/pulp/pulp-cli"
           kind: "Interaction"
         - title: "Pulp Glue"
           path: "pulp-cli/pulp-glue"
+          git_url: "https://github.com/pulp/pulp-cli"
           kind: "Interaction"
+        - title: "Pulp UI"
+          path: "pulp-ui"
+          git_url: "https://github.com/pulp/pulp-ui"
+          kind: "Interaction"
+        - title: "OpenAPI Generator"
+          path: "pulp-openapi-generator"
+          git_url: "https://github.com/pulp/pulp-openapi-generator"
+          kind: "Interaction"
+
         - title: "Pulp Docs"
           path: "pulp-docs"
+          git_url: "https://github.com/pulp/pulp-docs"
           kind: "Other"
         - title: "Certguard"
           path: "pulpcore/pulp_certguard"
+          git_url: "https://github.com/pulp/pulpcore"
           kind: "Other"
           # rest_api: "certguard"
+
+        - title: "Pulp OCI Images"
+          path: "pulp-oci-images"
+          git_url: "https://github.com/pulp/pulp-oci-images"
+          kind: "Deployment"
+        - title: "Operator"
+          path: "pulp-operator"
+          git_url: "https://github.com/pulp/pulp-operator"
+          kind: "Deployment"
   - search
   - site-urls
   - blog:
