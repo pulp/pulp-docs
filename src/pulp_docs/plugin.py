@@ -50,6 +50,7 @@ class RepositoryOption(Config):
     title = config_options.Type(str)
     path = config_options.Type(str)
     kind = config_options.Type(str)
+    git_url = config_options.Type(str, default="")
     rest_api = config_options.Type(str, default="")
 
 
@@ -192,15 +193,23 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
     def on_files(self, files: Files, /, *, config: MkDocsConfig) -> Files | None:
         log.info(f"Loading Pulp repositories: {self.config.repositories}")
 
-        repo = Repo(".")
+        pulp_docs_git_repository = Repo(".")
         user_nav: dict[str, t.Any] = {}
         dev_nav: dict[str, t.Any] = {}
         for repository in self.config.repositories:
             log.info(f"Fetching docs from '{repository.title}'")
 
             repository_dir = self.repositories_dir / repository.path
+            git_repository_dir = self.repositories_dir / Path(repository.path).parts[0]
+            git_repository = Repo(git_repository_dir)
             repository_parent_dir = repository_dir.parent
-            repository_docs_dir = repository_dir / "docs"
+            repository_docs_dir = repository_dir / "staging_docs"
+            if repository_docs_dir.exists():
+                log.warn(
+                    f"Found deprecated 'staging_docs' directory in {repository.path}."
+                )
+            else:
+                repository_docs_dir = repository_dir / "docs"
             repository_slug = Path(repository_dir.name)
             assert repository_docs_dir.exists()
 
@@ -233,12 +242,13 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                 {"Reference": []},
             ]
 
+            # TODO Find and do something about the _SUMMARY.md files.
             for dirpath, dirnames, filenames in repository_docs_dir.walk(
                 follow_symlinks=True
             ):
                 for filename in filenames:
                     abs_src_path = dirpath / filename
-                    pulp_meta = {}
+                    pulp_meta: dict[str, t.Any] = {}
                     if abs_src_path == repository_docs_dir / "index.md":
                         src_uri = repository_slug / "index.md"
                         user_index_found = True
@@ -257,7 +267,12 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                             elif src_uri.parts[2] == "dev":
                                 dev_index_found = dev_index_found or False
                     log.debug(f"Adding {abs_src_path} as {src_uri}.")
-                    # TODO add edit_url
+                    if repository.git_url:
+                        branch = git_repository.active_branch.name
+                        git_relpath = abs_src_path.relative_to(git_repository_dir)
+                        pulp_meta["edit_url"] = (
+                            f"{repository.git_url}/edit/{branch}/{git_relpath}"
+                        )
                     new_file = File.generated(
                         config, src_uri, abs_src_path=abs_src_path
                     )
@@ -297,7 +312,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                     )
                 )
                 repository_user_nav.append(str(src_uri))
-                api_json = repo.git.show(
+                api_json = pulp_docs_git_repository.git.show(
                     f"docs-data:data/openapi_json/{repository.rest_api}-api.json"
                 )
                 src_uri = (repository_dir / "api.json").relative_to(
@@ -346,7 +361,6 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
 
         return context
 
-    @event_priority(-100)
     def on_page_markdown(
         self,
         markdown: str,
@@ -359,7 +373,23 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
             markdown += "\n\n---\n\n## Site Map\n\nPULP_SITEMAP"
         return markdown
 
-    def on_post_page(self, output: str, page: Page, config: MkDocsConfig) -> str | None:
+    def on_pre_page(
+        self,
+        page: Page,
+        config: MkDocsConfig,
+        files: Files,
+    ) -> Page | None:
+        pulp_meta = getattr(page.file, "pulp_meta", {})
+        if edit_url := pulp_meta.get("edit_url"):
+            page.edit_url = edit_url
+        return page
+
+    def on_post_page(
+        self,
+        output: str,
+        page: Page,
+        config: MkDocsConfig,
+    ) -> str | None:
         # TODO reimplement this as a template
         if basepath := page.meta.get("restapi_json_file"):
             redoc_tag = REDOC_TAG_TEMPLATE % basepath
@@ -378,4 +408,5 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
             # Remove footer (looks weird)
             footer = bs_page.find_all(class_="md-footer")[0]
             footer.decompose()
-            return str(bs_page)
+            output = str(bs_page)
+        return output
