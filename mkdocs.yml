@@ -7,6 +7,7 @@ edit_uri_template: "https://github.com/pulp/pulp-docs/edit/main/pulp_docs/{path}
 docs_dir: "pulp_docs"
 theme:
   name: material
+  custom_dir: "custom"
   logo: assets/pulp_logo_icon.svg
   favicon: assets/favicon.ico
   features:
