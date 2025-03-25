@@ -1,13 +1,11 @@
 import typing as t
 from pathlib import Path
 import json
-import re
 import tomllib
 import yaml
 
 import httpx
 from git import Repo
-from bs4 import BeautifulSoup as bs
 from mkdocs.config import Config, config_options
 from mkdocs.config.defaults import MkDocsConfig
 from mkdocs.plugins import event_priority, get_plugin_logger, BasePlugin
@@ -18,30 +16,10 @@ from mkdocs.utils.templates import TemplateContext
 
 log = get_plugin_logger(__name__)
 
-SECTION_PATTERN = re.compile(r"([a-z-_]+)/()|(/docs/dev)index.md")
-
 REST_API_MD = """\
 ---
-restapi_json_file: "../api.json"
+template: "rest_api.html"
 ---
-"""
-
-REDOC_HEADER = """
-<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-  }
-</style>
-"""
-
-REDOC_TAG_TEMPLATE = """
-<redoc spec-url='%s'></redoc>
-"""
-
-REDOC_SCRIPT = """
-<script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
 """
 
 
@@ -383,30 +361,3 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         if edit_url := pulp_meta.get("edit_url"):
             page.edit_url = edit_url
         return page
-
-    def on_post_page(
-        self,
-        output: str,
-        page: Page,
-        config: MkDocsConfig,
-    ) -> str | None:
-        # TODO reimplement this as a template
-        if basepath := page.meta.get("restapi_json_file"):
-            redoc_tag = REDOC_TAG_TEMPLATE % basepath
-            bs_page = bs(output, "html.parser")
-
-            # Append <head>scripts
-            bs_page.html.head.append(bs(REDOC_HEADER, "html.parser"))
-
-            # Replace main content-container with <redoc> tag
-            main_container = bs_page.find_all("div", class_="md-main__inner")[0]
-            main_container.replace_with(bs(redoc_tag, "html.parser"))
-
-            # Append <script> tag at the end of body
-            bs_page.html.body.append(bs(REDOC_SCRIPT, "html.parser"))
-
-            # Remove footer (looks weird)
-            footer = bs_page.find_all(class_="md-footer")[0]
-            footer.decompose()
-            output = str(bs_page)
-        return output
