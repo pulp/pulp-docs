@@ -10,7 +10,7 @@ from mkdocs.config import Config, config_options
 from mkdocs.config.defaults import MkDocsConfig
 from mkdocs.plugins import event_priority, get_plugin_logger, BasePlugin
 from mkdocs.structure.files import File, Files
-from mkdocs.structure.nav import Navigation, Section
+from mkdocs.structure.nav import Navigation, Section, Link
 from mkdocs.structure.pages import Page
 from mkdocs.utils.templates import TemplateContext
 
@@ -36,24 +36,6 @@ class PulpDocsPluginConfig(Config):
     repositories = config_options.ListOfItems(RepositoryOption, default=[])
 
 
-def _add_to_taxonomy_nav(
-    src_uri: Path,
-    taxonomy_nav: list[t.Any],
-) -> bool:
-    if src_uri.parts[3] == "tutorials":
-        taxonomy_nav[0]["Tutorials"].append(str(src_uri))
-    elif src_uri.parts[3] == "guides":
-        taxonomy_nav[1]["How-to Guides"].append(str(src_uri))
-    elif src_uri.parts[3] == "learn":
-        taxonomy_nav[2]["Learn More"].append(str(src_uri))
-    elif src_uri.parts[3] == "reference":
-        taxonomy_nav[3]["Reference"].append(str(src_uri))
-    else:
-        log.info(f"Could not navigate {src_uri}.")
-        return False
-    return True
-
-
 class RepositoryNav:
     def __init__(self, config: MkDocsConfig, repository_slug: Path):
         self._nav_file_name: str = config.plugins["literate-nav"].config.nav_file
@@ -70,10 +52,32 @@ class RepositoryNav:
 
         self._extra_uris: list[Path] = []
 
+    def _add_to_taxonomy_nav(
+        self,
+        src_uri: Path,
+        taxonomy_nav: list[t.Any],
+        obj: t.Any = None,
+    ) -> None:
+        obj = obj or str(src_uri)
+        if src_uri.parts[3] == "tutorials":
+            k1, k2 = 0, "Tutorials"
+        elif src_uri.parts[3] == "guides":
+            k1, k2 = 1, "How-to Guides"
+        elif src_uri.parts[3] == "learn":
+            k1, k2 = 2, "Learn More"
+        elif src_uri.parts[3] == "reference":
+            k1, k2 = 3, "Reference"
+        else:
+            log.info(f"Could not navigate {src_uri}.")
+            return
+        if len(src_uri.parts) == 5 and src_uri.name == self._nav_file_name:
+            taxonomy_nav[k1][k2] = str(src_uri.parent) + "/"
+        if isinstance(taxonomy_nav[k1][k2], list):
+            taxonomy_nav[k1][k2].append(obj)
+
     def add(self, src_uri: Path) -> None:
-        # TODO Find and do something about the _SUMMARY.md files.
         assert src_uri.parts[0] == str(self._repository_slug)
-        if src_uri.suffix == ".md" and not src_uri.name == self._nav_file_name:
+        if src_uri.suffix == ".md":
             if src_uri == self._user_index_uri:
                 self._user_index_found = True
             elif src_uri == self._dev_index_uri:
@@ -98,8 +102,7 @@ class RepositoryNav:
                 {"Reference": []},
             ]
             for src_uri in self._user_uris:
-                # TODO filter for literate nav
-                _add_to_taxonomy_nav(src_uri, user_nav)
+                self._add_to_taxonomy_nav(src_uri, user_nav)
             result.append({"Usage": user_nav})
 
             admin_nav: list[t.Any] = [
@@ -109,8 +112,7 @@ class RepositoryNav:
                 {"Reference": []},
             ]
             for src_uri in self._admin_uris:
-                # TODO filter for literate nav
-                _add_to_taxonomy_nav(src_uri, admin_nav)
+                self._add_to_taxonomy_nav(src_uri, admin_nav)
             result.append({"Administration": admin_nav})
             result.extend(str(uri) for uri in self._extra_uris)
 
@@ -127,8 +129,7 @@ class RepositoryNav:
                 {"Reference": []},
             ]
             for src_uri in self._dev_uris:
-                # TODO filter for literate nav
-                _add_to_taxonomy_nav(src_uri, result[1:])
+                self._add_to_taxonomy_nav(src_uri, result[1:])
         return result
 
     def missing_indices(self) -> t.Iterator[Path]:
@@ -161,6 +162,8 @@ def _render_sitemap_item(nav_item: Page | Section) -> str:
             return f"<li>{title}<ul>{children}</ul></li>"
         else:
             return ""
+    elif isinstance(nav_item, Link):
+        return ""
     else:
         raise NotImplementedError(f"Unknown nav item {nav_item}")
 
@@ -204,7 +207,6 @@ def repository_data(
 
 
 def rss_items() -> list:
-    return []
     # that's Himdel's rss feed: https://github.com/himdel
     # TODO move this fetching to js.
     response = httpx.get("https://himdel.eu/feed/pulp-changes.json")
