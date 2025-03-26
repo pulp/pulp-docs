@@ -11898,6 +11898,9 @@
                         "type": "boolean",
                         "default": false,
                         "description": "An option specifying whether Pulp should generate *.repo files."
+                    },
+                    "checkpoint": {
+                        "type": "boolean"
                     }
                 }
             },
@@ -14084,6 +14087,9 @@
                         "type": "boolean",
                         "default": false,
                         "description": "An option specifying whether Pulp should generate *.repo files."
+                    },
+                    "checkpoint": {
+                        "type": "boolean"
                     }
                 },
                 "required": [
@@ -14169,6 +14175,9 @@
                         "type": "boolean",
                         "default": false,
                         "description": "An option specifying whether Pulp should generate *.repo files."
+                    },
+                    "checkpoint": {
+                        "type": "boolean"
                     }
                 },
                 "required": [
@@ -14188,6 +14197,9 @@
                         "type": "string",
                         "format": "uri",
                         "description": "A URI of the repository to be published."
+                    },
+                    "checkpoint": {
+                        "type": "boolean"
                     },
                     "checksum_type": {
                         "allOf": [
@@ -14285,6 +14297,9 @@
                         "type": "string",
                         "format": "uri",
                         "description": "A URI of the repository to be published."
+                    },
+                    "checkpoint": {
+                        "type": "boolean"
                     },
                     "checksum_type": {
                         "allOf": [
