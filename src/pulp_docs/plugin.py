@@ -54,21 +54,92 @@ def _add_to_taxonomy_nav(
     return True
 
 
-def _add_to_repository_nav(
-    src_uri: Path,
-    repository_user_nav: list[t.Any],
-    repository_dev_nav: list[t.Any],
-) -> bool:
-    if src_uri.suffix == ".md" and not src_uri.stem == "_SUMMARY":
-        if src_uri.parts[2] == "user":
-            return _add_to_taxonomy_nav(src_uri, repository_user_nav[0]["Usage"])
-        elif src_uri.parts[2] == "admin":
-            return _add_to_taxonomy_nav(
-                src_uri, repository_user_nav[1]["Administration"]
-            )
-        elif src_uri.parts[2] == "dev":
-            return _add_to_taxonomy_nav(src_uri, repository_dev_nav)
-    return False
+class RepositoryNav:
+    def __init__(self, config: MkDocsConfig, repository_slug: Path):
+        self._nav_file_name: str = config.plugins["literate-nav"].config.nav_file
+        self._repository_slug = repository_slug
+
+        self._user_index_uri: Path = repository_slug / "index.md"
+        self._user_index_found: bool = False
+        self._user_uris: list[Path] = []
+        self._admin_uris: list[Path] = []
+
+        self._dev_index_uri: Path = repository_slug / "docs" / "dev" / "index.md"
+        self._dev_index_found: bool = False
+        self._dev_uris: list[Path] = []
+
+        self._extra_uris: list[Path] = []
+
+    def add(self, src_uri: Path) -> None:
+        # TODO Find and do something about the _SUMMARY.md files.
+        assert src_uri.parts[0] == str(self._repository_slug)
+        if src_uri.suffix == ".md" and not src_uri.name == self._nav_file_name:
+            if src_uri == self._user_index_uri:
+                self._user_index_found = True
+            elif src_uri == self._dev_index_uri:
+                self._dev_index_found = True
+            elif len(src_uri.parts) == 2:
+                self._extra_uris.append(src_uri)
+            elif src_uri.parts[2] == "user":
+                self._user_uris.append(src_uri)
+            elif src_uri.parts[2] == "admin":
+                self._admin_uris.append(src_uri)
+            elif src_uri.parts[2] == "dev":
+                self._dev_uris.append(src_uri)
+
+    def user_nav(self) -> list[t.Any]:
+        result: list[t.Any] = []
+        if len(self._user_uris) + len(self._admin_uris) > 0 or self._user_index_found:
+            result.append(str(self._user_index_uri))
+            user_nav: list[t.Any] = [
+                {"Tutorials": []},
+                {"How-to Guides": []},
+                {"Learn More": []},
+                {"Reference": []},
+            ]
+            for src_uri in self._user_uris:
+                # TODO filter for literate nav
+                _add_to_taxonomy_nav(src_uri, user_nav)
+            result.append({"Usage": user_nav})
+
+            admin_nav: list[t.Any] = [
+                {"Tutorials": []},
+                {"How-to Guides": []},
+                {"Learn More": []},
+                {"Reference": []},
+            ]
+            for src_uri in self._admin_uris:
+                # TODO filter for literate nav
+                _add_to_taxonomy_nav(src_uri, admin_nav)
+            result.append({"Administration": admin_nav})
+            result.extend(str(uri) for uri in self._extra_uris)
+
+        return result
+
+    def dev_nav(self) -> list[t.Any]:
+        result: list[t.Any] = []
+        if len(self._dev_uris) > 0 or self._dev_index_found:
+            result = [
+                str(self._dev_index_uri),
+                {"Tutorials": []},
+                {"How-to Guides": []},
+                {"Learn More": []},
+                {"Reference": []},
+            ]
+            for src_uri in self._dev_uris:
+                # TODO filter for literate nav
+                _add_to_taxonomy_nav(src_uri, result[1:])
+        return result
+
+    def missing_indices(self) -> t.Iterator[Path]:
+        if (
+            not self._user_index_found
+            and len(self._user_uris) + len(self._admin_uris) > 0
+        ):
+            yield self._user_index_uri
+
+        if not self._dev_index_found and len(self._dev_uris) > 0:
+            yield self._dev_index_uri
 
 
 def _render_sitemap(section: Section) -> str:
@@ -179,7 +250,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
 
             repository_dir = self.repositories_dir / repository.path
             git_repository_dir = self.repositories_dir / Path(repository.path).parts[0]
-            git_repository = Repo(git_repository_dir)
+            git_branch = Repo(git_repository_dir).active_branch.name
             repository_parent_dir = repository_dir.parent
             repository_docs_dir = repository_dir / "staging_docs"
             if repository_docs_dir.exists():
@@ -191,36 +262,8 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
             repository_slug = Path(repository_dir.name)
             assert repository_docs_dir.exists()
 
-            # Tri-state bool: None indicates we don't even want one.
-            user_index_found: bool | None = None
-            dev_index_found: bool | None = None
+            repository_nav = RepositoryNav(config, repository_slug)
 
-            repository_user_nav: list[t.Any] = [
-                {
-                    "Usage": [
-                        {"Tutorials": []},
-                        {"How-to Guides": []},
-                        {"Learn More": []},
-                        {"Reference": []},
-                    ]
-                },
-                {
-                    "Administration": [
-                        {"Tutorials": []},
-                        {"How-to Guides": []},
-                        {"Learn More": []},
-                        {"Reference": []},
-                    ]
-                },
-            ]
-            repository_dev_nav: list[t.Any] = [
-                {"Tutorials": []},
-                {"How-to Guides": []},
-                {"Learn More": []},
-                {"Reference": []},
-            ]
-
-            # TODO Find and do something about the _SUMMARY.md files.
             for dirpath, dirnames, filenames in repository_docs_dir.walk(
                 follow_symlinks=True
             ):
@@ -229,59 +272,38 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                     pulp_meta: dict[str, t.Any] = {}
                     if abs_src_path == repository_docs_dir / "index.md":
                         src_uri = repository_slug / "index.md"
-                        user_index_found = True
                         pulp_meta["index"] = True
                     elif abs_src_path == repository_docs_dir / "dev" / "index.md":
                         src_uri = repository_slug / "docs" / "dev" / "index.md"
-                        dev_index_found = True
                         pulp_meta["index"] = True
                     else:
                         src_uri = abs_src_path.relative_to(repository_parent_dir)
-                        if _add_to_repository_nav(
-                            src_uri, repository_user_nav, repository_dev_nav
-                        ):
-                            if src_uri.parts[2] in ["user", "admin"]:
-                                user_index_found = user_index_found or False
-                            elif src_uri.parts[2] == "dev":
-                                dev_index_found = dev_index_found or False
                     log.debug(f"Adding {abs_src_path} as {src_uri}.")
                     if repository.git_url:
-                        branch = git_repository.active_branch.name
                         git_relpath = abs_src_path.relative_to(git_repository_dir)
                         pulp_meta["edit_url"] = (
-                            f"{repository.git_url}/edit/{branch}/{git_relpath}"
+                            f"{repository.git_url}/edit/{git_branch}/{git_relpath}"
                         )
                     new_file = File.generated(
                         config, src_uri, abs_src_path=abs_src_path
                     )
                     new_file.pulp_meta = pulp_meta
                     files.append(new_file)
+                    repository_nav.add(src_uri)
 
-            for src_uri, index_found, nav_list in [
-                (repository_slug / "index.md", user_index_found, repository_user_nav),
-                (
-                    repository_slug / "docs" / "dev" / "index.md",
-                    dev_index_found,
-                    repository_dev_nav,
-                ),
-            ]:
-                if index_found is False:  # None means no index needed.
-                    new_file = File.generated(
-                        config,
-                        src_uri,
-                        content=f"# Welcome to {repository.title}\n\nThis is a generated page. "
-                        "See how to add a custom overview page for your plugin "
-                        "[here](site:pulp-docs/docs/dev/guides/create-plugin-overviews/).",
-                    )
-                    new_file.pulp_meta = {"index": True}
-                    files.append(new_file)
-                if index_found is not None:
-                    nav_list.insert(0, str(src_uri))
+            for src_uri in repository_nav.missing_indices():
+                new_file = File.generated(
+                    config,
+                    src_uri,
+                    content=f"# Welcome to {repository.title}\n\nThis is a generated page. "
+                    "See how to add a custom overview page for your plugin "
+                    "[here](site:pulp-docs/docs/dev/guides/create-plugin-overviews/).",
+                )
+                new_file.pulp_meta = {"index": True}
+                files.append(new_file)
 
             if repository.rest_api:
-                src_uri = (repository_dir / "restapi.md").relative_to(
-                    repository_parent_dir
-                )
+                src_uri = repository_slug / "restapi.md"
                 files.append(
                     File.generated(
                         config,
@@ -289,7 +311,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                         content=REST_API_MD,
                     )
                 )
-                repository_user_nav.append(str(src_uri))
+                repository_nav.add(src_uri)
                 api_json = pulp_docs_git_repository.git.show(
                     f"docs-data:data/openapi_json/{repository.rest_api}-api.json"
                 )
@@ -297,19 +319,20 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                     repository_parent_dir
                 )
                 files.append(File.generated(config, src_uri, content=api_json))
+
             repository_changes = repository_dir / "CHANGES.md"
             if repository_changes.exists():
                 src_uri = repository_slug / "changes.md"
                 files.append(
                     File.generated(config, src_uri, abs_src_path=repository_changes)
                 )
-                repository_user_nav.append(str(src_uri))
+                repository_nav.add(src_uri)
 
             user_nav.setdefault(repository.kind, []).append(
-                {repository.title: repository_user_nav}
+                {repository.title: repository_nav.user_nav()}
             )
             dev_nav.setdefault(repository.kind, []).append(
-                {repository.title: repository_dev_nav}
+                {repository.title: repository_nav.dev_nav()}
             )
 
         config.nav[1]["User Manual"].extend(
@@ -337,6 +360,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
             toc = '<div class="pulp-sitemap">' + _render_sitemap(page.parent) + "</div>"
             page.content = page.content.replace("PULP_SITEMAP", toc)
 
+        # TODO adjust the repository link to the current plugin.
         return context
 
     def on_page_markdown(
