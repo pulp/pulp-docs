@@ -5,7 +5,7 @@ import tomllib
 import yaml
 
 import httpx
-from git import Repo
+from git import Repo, GitCommandError
 from mkdocs.config import Config, config_options
 from mkdocs.config.defaults import MkDocsConfig
 from mkdocs.plugins import event_priority, get_plugin_logger, BasePlugin
@@ -252,7 +252,10 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
 
             repository_dir = self.repositories_dir / repository.path
             git_repository_dir = self.repositories_dir / Path(repository.path).parts[0]
-            git_branch = Repo(git_repository_dir).active_branch.name
+            try:
+                git_branch = Repo(git_repository_dir).active_branch.name
+            except TypeError:
+                git_branch = None
             repository_parent_dir = repository_dir.parent
             repository_docs_dir = repository_dir / "staging_docs"
             if repository_docs_dir.exists():
@@ -281,7 +284,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                     else:
                         src_uri = abs_src_path.relative_to(repository_parent_dir)
                     log.debug(f"Adding {abs_src_path} as {src_uri}.")
-                    if repository.git_url:
+                    if repository.git_url and git_branch:
                         git_relpath = abs_src_path.relative_to(git_repository_dir)
                         pulp_meta["edit_url"] = (
                             f"{repository.git_url}/edit/{git_branch}/{git_relpath}"
@@ -314,9 +317,16 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                     )
                 )
                 repository_nav.add(src_uri)
-                api_json = pulp_docs_git_repository.git.show(
-                    f"docs-data:data/openapi_json/{repository.rest_api}-api.json"
-                )
+                try:
+                    api_json = pulp_docs_git_repository.git.show(
+                        f"docs-data:data/openapi_json/{repository.rest_api}-api.json"
+                    )
+                except GitCommandError:
+                    # Try again on the first remote.
+                    remote = pulp_docs_git_repository.remotes[0]
+                    api_json = pulp_docs_git_repository.git.show(
+                        f"{remote}/docs-data:data/openapi_json/{repository.rest_api}-api.json"
+                    )
                 src_uri = (repository_dir / "api.json").relative_to(
                     repository_parent_dir
                 )
