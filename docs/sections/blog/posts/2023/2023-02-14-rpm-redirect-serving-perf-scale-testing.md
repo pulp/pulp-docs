@@ -5,7 +5,7 @@ author: Brian Bouterse
 tags:
   - pulp_rpm, performance
 ---
-<!-- more -->
+
 ## Goals
 
 1. Help pulp_rpm users plan the number of pulp-content apps to serve a given traffic rate for their 
@@ -20,6 +20,7 @@ To achieve these goals in this blog post, I'll be doing two things:
 
 * Identify rate limiting components in various test scenarios.
 
+<!-- more -->
 
 ## Conclusions
 
