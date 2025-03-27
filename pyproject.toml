@@ -16,6 +16,7 @@ dependencies = [
     "mkdocs-literate-nav~=0.6.1",
     "httpx",
     "rich",
+    "GitPython~=3.1.44",
 ]
 
 [project.scripts]
