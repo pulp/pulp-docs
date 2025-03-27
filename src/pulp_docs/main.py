@@ -92,7 +92,7 @@ class PulpDocs:
         env = os.environ.copy()
         env.update(config.get_environ_dict())
         options = (
-            ("--config-file", config.mkdocs_file),
+            ("--config-file", str(config.mkdocs_file)),
             ("--site-dir", str(Path("site").absolute())),
         )
 
