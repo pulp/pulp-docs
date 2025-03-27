@@ -16,6 +16,8 @@ Inspired by the success stories of [Ubuntu Snapshots on Azure](https://ubuntu.co
 [increased security and resiliency of Canonical workloads on Azure](https://techcommunity.microsoft.com/blog/linuxandopensourceblog/increased-security-and-resiliency-of-canonical-workloads-on-azure---now-in-previ/3970623), we
 embarked on a journey to develop a feature that could address these challenges.
 
+<!-- more -->
+
 ## The Problem
 
 Imagine working on a project where you need to ensure that your deployment environment is consistent
