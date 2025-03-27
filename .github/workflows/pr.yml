@@ -8,16 +8,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    uses: "./.github/workflows/build.yml"
-
   docs:
-    needs:
-      - "build"
     uses: "./.github/workflows/docs.yml"
 
   tests:
-    needs: "build"
     uses: "./.github/workflows/tests.yml"
 
   ready-to-ship:
