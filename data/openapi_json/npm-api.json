@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "npm": "0.4.0.dev",
-            "core": "3.75.0"
+            "core": "3.75.1"
         },
         "x-pulp-domain-enabled": false
     },
