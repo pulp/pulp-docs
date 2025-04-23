@@ -1,6 +1,6 @@
 site_name: "Pulp Project"
 site_url: "https://pulpproject.org/"
-repo_url: "https://github.com/pulp/pulp-docs"
+repo_url: "https://github.com/pulp/pulpcore"
 repo_name: "pulp/pulp-docs"
 edit_uri_template: "https://github.com/pulp/pulp-docs/edit/main/pulp_docs/{path}"
 
