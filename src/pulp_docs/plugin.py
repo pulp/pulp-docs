@@ -8,11 +8,14 @@ import httpx
 from git import Repo, GitCommandError
 from mkdocs.config import Config, config_options
 from mkdocs.config.defaults import MkDocsConfig
+from mkdocs.exceptions import PluginError
 from mkdocs.plugins import event_priority, get_plugin_logger, BasePlugin
 from mkdocs.structure.files import File, Files
 from mkdocs.structure.nav import Navigation, Section, Link
 from mkdocs.structure.pages import Page
 from mkdocs.utils.templates import TemplateContext
+
+from pulp_docs.context import ctx_draft
 
 log = get_plugin_logger(__name__)
 
@@ -225,15 +228,29 @@ def rss_items() -> list:
 class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
     def on_config(self, config: MkDocsConfig) -> MkDocsConfig | None:
         # Two directories up from docs is where we expect all the other repositories.
-        self.repositories_dir = Path(config.docs_dir).parent.parent
+        self.draft = ctx_draft.get()
+
+        self.pulp_docs_dir = Path(config.docs_dir).parent
+        self.repositories_dir = self.pulp_docs_dir.parent
 
         mkdocstrings_config = config.plugins["mkdocstrings"].config
         repositories_var = []
+        new_repositories = []
         for repository in self.config.repositories:
             repository_dir = self.repositories_dir / repository.path
-            repositories_var.append(repository_data(repository, repository_dir))
-            config.watch.append(str(repository_dir / "docs"))
-            mkdocstrings_config.handlers["python"]["paths"].append(str(repository_dir))
+            if repository_dir.exists():
+                repositories_var.append(repository_data(repository, repository_dir))
+                config.watch.append(str(repository_dir / "docs"))
+                mkdocstrings_config.handlers["python"]["paths"].append(
+                    str(repository_dir)
+                )
+                new_repositories.append(repository)
+            else:
+                if self.draft:
+                    log.warn(f"Skip missing repository '{repository.title}'.")
+                else:
+                    raise PluginError(f"Repository '{repository.title}' missing.")
+        self.config.repositories = new_repositories
 
         macros_plugin = config.plugins["macros"]
         macros_plugin.register_macros({"rss_items": rss_items})
@@ -244,13 +261,13 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
     def on_files(self, files: Files, /, *, config: MkDocsConfig) -> Files | None:
         log.info(f"Loading Pulp repositories: {self.config.repositories}")
 
-        pulp_docs_git_repository = Repo(".")
+        pulp_docs_git_repository = Repo(self.pulp_docs_dir)
         user_nav: dict[str, t.Any] = {}
         dev_nav: dict[str, t.Any] = {}
         for repository in self.config.repositories:
-            log.info(f"Fetching docs from '{repository.title}'")
-
             repository_dir = self.repositories_dir / repository.path
+
+            log.info(f"Fetching docs from '{repository.title}'.")
             git_repository_dir = self.repositories_dir / Path(repository.path).parts[0]
             try:
                 git_branch = Repo(git_repository_dir).active_branch.name
