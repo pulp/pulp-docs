@@ -5,7 +5,7 @@ from pathlib import Path
 
 from mkdocs.__main__ import cli as mkdocs_cli
 from mkdocs.config import load_config
-from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft
+from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft, ctx_path
 
 
 def blog_callback(ctx: click.Context, param: click.Parameter, value: bool) -> bool:
@@ -23,6 +23,12 @@ def docstrings_callback(
 def draft_callback(ctx: click.Context, param: click.Parameter, value: bool) -> bool:
     ctx_draft.set(value)
     return value
+
+
+def find_path_callback(ctx: click.Context, param: click.Parameter, value: bool) -> bool:
+    result = [item.strip() for item in value.split(":") if item.strip()]
+    ctx_path.set(result)
+    return result
 
 
 blog_option = click.option(
@@ -45,6 +51,15 @@ draft_option = click.option(
     expose_value=False,
     callback=draft_callback,
     help="Don't fail if repositories are missing.",
+)
+
+path_option = click.option(
+    "--path",
+    envvar="PULPDOCS_PATH",
+    expose_value=False,
+    default="",
+    callback=find_path_callback,
+    help="A colon separated list of repository paths. Accepts glob patterns.",
 )
 
 
@@ -105,3 +120,7 @@ for command_name in ["build", "serve"]:
     draft_option(sub_command)
     blog_option(sub_command)
     docstrings_option(sub_command)
+    path_option(sub_command)
+    serve_options = sub_command.params
+    config_file_opt = next(filter(lambda opt: opt.name == "config_file", serve_options))
+    config_file_opt.envvar = "PULPDOCS_DIR"
