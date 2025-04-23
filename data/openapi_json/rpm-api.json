@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "rpm": "3.30.0.dev",
-            "core": "3.75.2"
+            "core": "3.76.0"
         },
         "x-pulp-domain-enabled": false
     },
