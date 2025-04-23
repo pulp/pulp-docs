@@ -1,5 +1,5 @@
 build:
-	pyproject-build -n
+	python -m build
 
 docs:
 	pulp-docs build
