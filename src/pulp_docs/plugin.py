@@ -15,7 +15,7 @@ from mkdocs.structure.nav import Navigation, Section, Link
 from mkdocs.structure.pages import Page
 from mkdocs.utils.templates import TemplateContext
 
-from pulp_docs.context import ctx_blog, ctx_draft
+from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft
 
 log = get_plugin_logger(__name__)
 
@@ -229,6 +229,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
     def on_config(self, config: MkDocsConfig) -> MkDocsConfig | None:
         # Two directories up from docs is where we expect all the other repositories.
         self.blog = ctx_blog.get()
+        self.docstrings = ctx_docstrings.get()
         self.draft = ctx_draft.get()
 
         self.pulp_docs_dir = Path(config.docs_dir).parent
@@ -259,6 +260,9 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
 
         blog_plugin = config.plugins["material/blog"]
         blog_plugin.config["enabled"] = self.blog
+
+        mkdocstrings_plugin = config.plugins["mkdocstrings"]
+        mkdocstrings_plugin.config["enabled"] = self.docstrings
 
         return config
 
