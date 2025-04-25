@@ -15,7 +15,7 @@ from mkdocs.structure.nav import Navigation, Section, Link
 from mkdocs.structure.pages import Page
 from mkdocs.utils.templates import TemplateContext
 
-from pulp_docs.context import ctx_draft
+from pulp_docs.context import ctx_blog, ctx_draft
 
 log = get_plugin_logger(__name__)
 
@@ -228,6 +228,7 @@ def rss_items() -> list:
 class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
     def on_config(self, config: MkDocsConfig) -> MkDocsConfig | None:
         # Two directories up from docs is where we expect all the other repositories.
+        self.blog = ctx_blog.get()
         self.draft = ctx_draft.get()
 
         self.pulp_docs_dir = Path(config.docs_dir).parent
@@ -247,7 +248,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                 new_repositories.append(repository)
             else:
                 if self.draft:
-                    log.warn(f"Skip missing repository '{repository.title}'.")
+                    log.warning(f"Skip missing repository '{repository.title}'.")
                 else:
                     raise PluginError(f"Repository '{repository.title}' missing.")
         self.config.repositories = new_repositories
@@ -255,6 +256,9 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         macros_plugin = config.plugins["macros"]
         macros_plugin.register_macros({"rss_items": rss_items})
         macros_plugin.register_variables({"repositories": repositories_var})
+
+        blog_plugin = config.plugins["material/blog"]
+        blog_plugin.config["enabled"] = self.blog
 
         return config
 
@@ -276,7 +280,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
             repository_parent_dir = repository_dir.parent
             repository_docs_dir = repository_dir / "staging_docs"
             if repository_docs_dir.exists():
-                log.warn(
+                log.warning(
                     f"Found deprecated 'staging_docs' directory in {repository.path}."
                 )
             else:
