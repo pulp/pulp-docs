@@ -1,6 +1,10 @@
+import asyncio
 import click
+import git
+from pathlib import Path
 
 from mkdocs.__main__ import cli as mkdocs_cli
+from mkdocs.config import load_config
 from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft
 
 
@@ -43,7 +47,58 @@ draft_option = click.option(
     help="Don't fail if repositories are missing.",
 )
 
+
+async def clone_repositories(repositories: list[str], dest_dir: Path) -> None:
+    """Clone multiple repositories concurrently."""
+
+    async def clone_repository(repo_url: str) -> None:
+        repo_name = repo_url.split("/")[-1]
+        repo_path = dest_dir / repo_name
+        if repo_path.exists():
+            click.echo(
+                f"Repository {repo_name} already exists at {repo_path}, skipping."
+            )
+            return
+        click.echo(f"Cloning {repo_url} to {repo_path}...")
+        loop = asyncio.get_running_loop()
+        await loop.run_in_executor(
+            None, lambda: git.Repo.clone_from(repo_url, repo_path, depth=1)
+        )
+        click.echo(f"Successfully cloned {repo_name}")
+
+    tasks = [clone_repository(repo) for repo in repositories]
+    await asyncio.gather(*tasks)
+
+
+@click.command()
+@click.option(
+    "--dest",
+    required=True,
+    type=click.Path(file_okay=False),
+    help="Destination directory for cloned repositories",
+)
+@click.option(
+    "-f",
+    "--config-file",
+    type=click.Path(exists=True, dir_okay=False),
+    default="mkdocs.yml",
+    envvar="PULPDOCS_DIR",
+    help="Path to mkdocs.yml config file",
+)
+def fetch(dest, config_file):
+    """Fetch repositories to destination dir."""
+    dest_path = Path(dest)
+    config = load_config(config_file)
+    components = config.plugins["PulpDocs"].config.components
+    repositories_list = list({r.git_url for r in components})
+
+    if not dest_path.exists():
+        dest_path.mkdir(parents=True)
+    asyncio.run(clone_repositories(repositories_list, dest_path))
+
+
 main = mkdocs_cli
+main.add_command(fetch)
 
 for command_name in ["build", "serve"]:
     sub_command = main.commands.get(command_name)
