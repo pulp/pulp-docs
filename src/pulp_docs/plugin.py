@@ -27,7 +27,7 @@ template: "rest_api.html"
 
 
 @config_options.SubConfig
-class RepositoryOption(Config):
+class ComponentOption(Config):
     title = config_options.Type(str)
     path = config_options.Type(str)
     kind = config_options.Type(str)
@@ -36,20 +36,20 @@ class RepositoryOption(Config):
 
 
 class PulpDocsPluginConfig(Config):
-    repositories = config_options.ListOfItems(RepositoryOption, default=[])
+    components = config_options.ListOfItems(ComponentOption, default=[])
 
 
-class RepositoryNav:
-    def __init__(self, config: MkDocsConfig, repository_slug: Path):
+class ComponentNav:
+    def __init__(self, config: MkDocsConfig, component_slug: Path):
         self._nav_file_name: str = config.plugins["literate-nav"].config.nav_file
-        self._repository_slug = repository_slug
+        self._component_slug = component_slug
 
-        self._user_index_uri: Path = repository_slug / "index.md"
+        self._user_index_uri: Path = component_slug / "index.md"
         self._user_index_found: bool = False
         self._user_uris: list[Path] = []
         self._admin_uris: list[Path] = []
 
-        self._dev_index_uri: Path = repository_slug / "docs" / "dev" / "index.md"
+        self._dev_index_uri: Path = component_slug / "docs" / "dev" / "index.md"
         self._dev_index_found: bool = False
         self._dev_uris: list[Path] = []
 
@@ -79,7 +79,7 @@ class RepositoryNav:
             taxonomy_nav[k1][k2].append(obj)
 
     def add(self, src_uri: Path) -> None:
-        assert src_uri.parts[0] == str(self._repository_slug)
+        assert src_uri.parts[0] == str(self._component_slug)
         if src_uri.suffix == ".md":
             if src_uri == self._user_index_uri:
                 self._user_index_found = True
@@ -174,36 +174,36 @@ def _render_sitemap_item(nav_item: Page | Section) -> str:
 # jinja2 macros and helpers
 
 
-def repository_data(
-    repository: RepositoryOption,
-    repository_dir: Path,
+def component_data(
+    component: ComponentOption,
+    component_dir: Path,
 ) -> dict[str, str | list[str]]:
     """Generate data for rendering md templates."""
-    path = repository_dir.name
+    path = component_dir.name
 
     version = "unknown"
     try:
-        pyproject = repository_dir / "pyproject.toml"
+        pyproject = component_dir / "pyproject.toml"
         version = tomllib.loads(pyproject.read_text())["project"]["version"]
     except Exception:
         pass
     github_org = "pulp"
     try:
-        template_config = repository_dir / "template_config.yml"
+        template_config = component_dir / "template_config.yml"
         github_org = yaml.safe_load(template_config.read_text())["github_org"]
     except Exception:
         pass
 
     links = []
-    if repository.rest_api:
+    if component.rest_api:
         links.append(f"[REST API](site:{path}/restapi/)")
     links.append(f"[Repository](https://github.com/{github_org}/{path})")
-    if (repository_dir / "CHANGES.md").exists():
+    if (component_dir / "CHANGES.md").exists():
         links.append(f"[Changelog](site:{path}/changes/)")
 
     return {
-        "title": f"[{repository.title}](site:{path}/)",
-        "kind": repository.kind,
+        "title": f"[{component.title}](site:{path}/)",
+        "kind": component.kind,
         "version": version,
         "links": links,
     }
@@ -236,27 +236,27 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         self.repositories_dir = self.pulp_docs_dir.parent
 
         mkdocstrings_config = config.plugins["mkdocstrings"].config
-        repositories_var = []
-        new_repositories = []
-        for repository in self.config.repositories:
-            repository_dir = self.repositories_dir / repository.path
-            if repository_dir.exists():
-                repositories_var.append(repository_data(repository, repository_dir))
-                config.watch.append(str(repository_dir / "docs"))
+        components_var = []
+        new_components = []
+        for component in self.config.components:
+            component_dir = self.repositories_dir / component.path
+            if component_dir.exists():
+                components_var.append(component_data(component, component_dir))
+                config.watch.append(str(component_dir / "docs"))
                 mkdocstrings_config.handlers["python"]["paths"].append(
-                    str(repository_dir)
+                    str(component_dir)
                 )
-                new_repositories.append(repository)
+                new_components.append(component)
             else:
                 if self.draft:
-                    log.warning(f"Skip missing repository '{repository.title}'.")
+                    log.warning(f"Skip missing component '{component.title}'.")
                 else:
-                    raise PluginError(f"Repository '{repository.title}' missing.")
-        self.config.repositories = new_repositories
+                    raise PluginError(f"Component '{component.title}' missing.")
+        self.config.components = new_components
 
         macros_plugin = config.plugins["macros"]
         macros_plugin.register_macros({"rss_items": rss_items})
-        macros_plugin.register_variables({"repositories": repositories_var})
+        macros_plugin.register_variables({"components": components_var})
 
         blog_plugin = config.plugins["material/blog"]
         blog_plugin.config["enabled"] = self.blog
@@ -267,73 +267,73 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         return config
 
     def on_files(self, files: Files, /, *, config: MkDocsConfig) -> Files | None:
-        log.info(f"Loading Pulp repositories: {self.config.repositories}")
+        log.info(f"Loading Pulp components: {self.config.components}")
 
-        pulp_docs_git_repository = Repo(self.pulp_docs_dir)
+        pulp_docs_git = Repo(self.pulp_docs_dir)
         user_nav: dict[str, t.Any] = {}
         dev_nav: dict[str, t.Any] = {}
-        for repository in self.config.repositories:
-            repository_dir = self.repositories_dir / repository.path
+        for component in self.config.components:
+            component_dir = self.repositories_dir / component.path
 
-            log.info(f"Fetching docs from '{repository.title}'.")
-            git_repository_dir = self.repositories_dir / Path(repository.path).parts[0]
+            log.info(f"Fetching docs from '{component.title}'.")
+            git_repository_dir = self.repositories_dir / Path(component.path).parts[0]
             try:
                 git_branch = Repo(git_repository_dir).active_branch.name
             except TypeError:
                 git_branch = None
-            repository_parent_dir = repository_dir.parent
-            repository_docs_dir = repository_dir / "staging_docs"
-            if repository_docs_dir.exists():
+            component_parent_dir = component_dir.parent
+            component_docs_dir = component_dir / "staging_docs"
+            if component_docs_dir.exists():
                 log.warning(
-                    f"Found deprecated 'staging_docs' directory in {repository.path}."
+                    f"Found deprecated 'staging_docs' directory in {component.path}."
                 )
             else:
-                repository_docs_dir = repository_dir / "docs"
-            repository_slug = Path(repository_dir.name)
-            assert repository_docs_dir.exists()
+                component_docs_dir = component_dir / "docs"
+            component_slug = Path(component_dir.name)
+            assert component_docs_dir.exists()
 
-            repository_nav = RepositoryNav(config, repository_slug)
+            component_nav = ComponentNav(config, component_slug)
 
-            for dirpath, dirnames, filenames in repository_docs_dir.walk(
+            for dirpath, dirnames, filenames in component_docs_dir.walk(
                 follow_symlinks=True
             ):
                 for filename in filenames:
                     abs_src_path = dirpath / filename
                     pulp_meta: dict[str, t.Any] = {}
-                    if abs_src_path == repository_docs_dir / "index.md":
-                        src_uri = repository_slug / "index.md"
+                    if abs_src_path == component_docs_dir / "index.md":
+                        src_uri = component_slug / "index.md"
                         pulp_meta["index"] = True
-                    elif abs_src_path == repository_docs_dir / "dev" / "index.md":
-                        src_uri = repository_slug / "docs" / "dev" / "index.md"
+                    elif abs_src_path == component_docs_dir / "dev" / "index.md":
+                        src_uri = component_slug / "docs" / "dev" / "index.md"
                         pulp_meta["index"] = True
                     else:
-                        src_uri = abs_src_path.relative_to(repository_parent_dir)
+                        src_uri = abs_src_path.relative_to(component_parent_dir)
                     log.debug(f"Adding {abs_src_path} as {src_uri}.")
-                    if repository.git_url and git_branch:
+                    if component.git_url and git_branch:
                         git_relpath = abs_src_path.relative_to(git_repository_dir)
                         pulp_meta["edit_url"] = (
-                            f"{repository.git_url}/edit/{git_branch}/{git_relpath}"
+                            f"{component.git_url}/edit/{git_branch}/{git_relpath}"
                         )
                     new_file = File.generated(
                         config, src_uri, abs_src_path=abs_src_path
                     )
                     new_file.pulp_meta = pulp_meta
                     files.append(new_file)
-                    repository_nav.add(src_uri)
+                    component_nav.add(src_uri)
 
-            for src_uri in repository_nav.missing_indices():
+            for src_uri in component_nav.missing_indices():
                 new_file = File.generated(
                     config,
                     src_uri,
-                    content=f"# Welcome to {repository.title}\n\nThis is a generated page. "
+                    content=f"# Welcome to {component.title}\n\nThis is a generated page. "
                     "See how to add a custom overview page for your plugin "
                     "[here](site:pulp-docs/docs/dev/guides/create-plugin-overviews/).",
                 )
                 new_file.pulp_meta = {"index": True}
                 files.append(new_file)
 
-            if repository.rest_api:
-                src_uri = repository_slug / "restapi.md"
+            if component.rest_api:
+                src_uri = component_slug / "restapi.md"
                 files.append(
                     File.generated(
                         config,
@@ -341,35 +341,33 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                         content=REST_API_MD,
                     )
                 )
-                repository_nav.add(src_uri)
+                component_nav.add(src_uri)
                 try:
-                    api_json = pulp_docs_git_repository.git.show(
-                        f"docs-data:data/openapi_json/{repository.rest_api}-api.json"
+                    api_json = pulp_docs_git.git.show(
+                        f"docs-data:data/openapi_json/{component.rest_api}-api.json"
                     )
                 except GitCommandError:
                     # Try again on the first remote.
-                    remote = pulp_docs_git_repository.remotes[0]
-                    api_json = pulp_docs_git_repository.git.show(
-                        f"{remote}/docs-data:data/openapi_json/{repository.rest_api}-api.json"
+                    remote = pulp_docs_git.remotes[0]
+                    api_json = pulp_docs_git.git.show(
+                        f"{remote}/docs-data:data/openapi_json/{component.rest_api}-api.json"
                     )
-                src_uri = (repository_dir / "api.json").relative_to(
-                    repository_parent_dir
-                )
+                src_uri = (component_dir / "api.json").relative_to(component_parent_dir)
                 files.append(File.generated(config, src_uri, content=api_json))
 
-            repository_changes = repository_dir / "CHANGES.md"
-            if repository_changes.exists():
-                src_uri = repository_slug / "changes.md"
+            component_changes = component_dir / "CHANGES.md"
+            if component_changes.exists():
+                src_uri = component_slug / "changes.md"
                 files.append(
-                    File.generated(config, src_uri, abs_src_path=repository_changes)
+                    File.generated(config, src_uri, abs_src_path=component_changes)
                 )
-                repository_nav.add(src_uri)
+                component_nav.add(src_uri)
 
-            user_nav.setdefault(repository.kind, []).append(
-                {repository.title: repository_nav.user_nav()}
+            user_nav.setdefault(component.kind, []).append(
+                {component.title: component_nav.user_nav()}
             )
-            dev_nav.setdefault(repository.kind, []).append(
-                {repository.title: repository_nav.dev_nav()}
+            dev_nav.setdefault(component.kind, []).append(
+                {component.title: component_nav.dev_nav()}
             )
 
         config.nav[1]["User Manual"].extend(
