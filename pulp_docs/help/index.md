@@ -29,10 +29,10 @@ Don't hesitate to contact us!
 
 ### {{ title }}
 
-Repo | Version | Links | &nbsp; | &nbsp;
+Component | Version | Links | &nbsp; | &nbsp;
 --- | --- | --- | --- | ---
-{%- for repo in repositories if repo.kind == kind %}
-{{ repo.title }} | `{{ repo.version }}` | {{ repo.links | join(" | ") }}
+{%- for component in components if component.kind == kind %}
+{{ component.title }} | `{{ component.version }}` | {{ component.links | join(" | ") }}
 {%- endfor %}
 {%- endfor %}
 

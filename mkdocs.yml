@@ -1,7 +1,7 @@
 site_name: "Pulp Project"
 site_url: "https://pulpproject.org/"
 repo_url: "https://github.com/pulp/pulpcore"
-repo_name: "pulp/pulp-docs"
+repo_name: "pulp/pulpcore"
 edit_uri_template: "https://github.com/pulp/pulp-docs/edit/main/pulp_docs/{path}"
 
 docs_dir: "../pulp-docs/pulp_docs"
@@ -50,7 +50,7 @@ nav:
   - Help: "help/"
 plugins:
   - PulpDocs:
-      repositories:
+      components:
         - title: "Pulpcore"
           path: "pulpcore"
           git_url: "https://github.com/pulp/pulpcore"
@@ -151,8 +151,7 @@ plugins:
       blog_toc: false
   - macros:
       render_by_default: false
-  - tags:
-      tags_file: pulp-docs/pulp_docs/tags.md
+  - tags
   - literate-nav:
       nav_file: _SUMMARY.md
   - mkdocstrings:
