@@ -53,14 +53,13 @@ class Component:
     def build(cls, find_path: list[str], component_opt: ComponentOption):
         body = dict(component_opt)
         repository_name = component_opt.path.split("/")[0]
-        expanded_path = []
-        for dir in find_path:
-            expanded_path.extend(glob.glob(dir))
-        for dir in expanded_path:
-            dir = Path(dir)
-            component_dir = dir.parent / component_opt.path
-            found_dir = repository_name == dir.name and component_dir.exists()
-            if found_dir:
+        for dir_spec in find_path:
+            repo_filter, _, basedir = dir_spec.rpartition("@")
+            if repo_filter and repo_filter != repository_name:
+                continue
+            basedir = Path(basedir)
+            component_dir = basedir / component_opt.path
+            if component_dir.exists():
                 version = "unknown"
                 try:
                     pyproject = component_dir / "pyproject.toml"
@@ -68,7 +67,7 @@ class Component:
                 except Exception:
                     pass
                 body["version"] = version
-                body["repository_dir"] = dir
+                body["repository_dir"] = basedir / repository_name
                 body["component_dir"] = component_dir
                 return cls(**body)
         return None
@@ -284,15 +283,13 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         self.draft = ctx_draft.get()
 
         self.pulp_docs_dir = Path(config.docs_dir).parent
-        # Two directories up from docs is where we expect all the other repositories by default.
-        self.find_path = ctx_path.get() or [f"{self.pulp_docs_dir.parent}/*"]
+        self.find_path = ctx_path.get() or [str(self.pulp_docs_dir.parent)]
 
         loaded_components = load_components(self.find_path, self.config, self.draft)
         self.config.components = loaded_components
+        loaded_component_dirnames = [str(c.component_dir) for c in loaded_components]
+        log.info(f"Using components={loaded_component_dirnames}")
 
-        log.info(
-            f"Using components={[str(c.component_dir) for c in loaded_components]}"
-        )
         mkdocstrings_config = config.plugins["mkdocstrings"].config
         components_var = []
         for component in self.config.components:

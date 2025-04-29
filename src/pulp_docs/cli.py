@@ -59,7 +59,7 @@ path_option = click.option(
     expose_value=False,
     default="",
     callback=find_path_callback,
-    help="A colon separated list of repository paths. Accepts glob patterns.",
+    help="A colon separated list of lookup paths in the form: [repo1@]path1 [:[repo2@]path2 [...]].",
 )
 
 
