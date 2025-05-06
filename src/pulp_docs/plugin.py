@@ -3,19 +3,21 @@ from pathlib import Path
 import json
 import tomllib
 import yaml
+import glob
 
 import httpx
+from dataclasses import dataclass
 from git import Repo, GitCommandError
 from mkdocs.config import Config, config_options
 from mkdocs.config.defaults import MkDocsConfig
 from mkdocs.exceptions import PluginError
-from mkdocs.plugins import event_priority, get_plugin_logger, BasePlugin
+from mkdocs.plugins import get_plugin_logger, BasePlugin
 from mkdocs.structure.files import File, Files
 from mkdocs.structure.nav import Navigation, Section, Link
 from mkdocs.structure.pages import Page
 from mkdocs.utils.templates import TemplateContext
 
-from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft
+from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft, ctx_path
 
 log = get_plugin_logger(__name__)
 
@@ -33,6 +35,42 @@ class ComponentOption(Config):
     kind = config_options.Type(str)
     git_url = config_options.Type(str, default="")
     rest_api = config_options.Type(str, default="")
+
+
+@dataclass(frozen=True)
+class Component:
+    title: str
+    path: str
+    kind: str
+    git_url: str
+    rest_api: str
+
+    version: str
+    repository_dir: Path
+    component_dir: Path
+
+    @classmethod
+    def build(cls, find_path: list[str], component_opt: ComponentOption):
+        body = dict(component_opt)
+        repository_name = component_opt.path.split("/")[0]
+        for dir_spec in find_path:
+            repo_filter, _, basedir = dir_spec.rpartition("@")
+            if repo_filter and repo_filter != repository_name:
+                continue
+            basedir = Path(basedir)
+            component_dir = basedir / component_opt.path
+            if component_dir.exists():
+                version = "unknown"
+                try:
+                    pyproject = component_dir / "pyproject.toml"
+                    version = tomllib.loads(pyproject.read_text())["project"]["version"]
+                except Exception:
+                    pass
+                body["version"] = version
+                body["repository_dir"] = basedir / repository_name
+                body["component_dir"] = component_dir
+                return cls(**body)
+        return None
 
 
 class PulpDocsPluginConfig(Config):
@@ -175,18 +213,12 @@ def _render_sitemap_item(nav_item: Page | Section) -> str:
 
 
 def component_data(
-    component: ComponentOption,
-    component_dir: Path,
+    component: Component,
 ) -> dict[str, str | list[str]]:
     """Generate data for rendering md templates."""
+    component_dir = component.component_dir
     path = component_dir.name
 
-    version = "unknown"
-    try:
-        pyproject = component_dir / "pyproject.toml"
-        version = tomllib.loads(pyproject.read_text())["project"]["version"]
-    except Exception:
-        pass
     github_org = "pulp"
     try:
         template_config = component_dir / "template_config.yml"
@@ -204,7 +236,7 @@ def component_data(
     return {
         "title": f"[{component.title}](site:{path}/)",
         "kind": component.kind,
-        "version": version,
+        "version": component.version,
         "links": links,
     }
 
@@ -225,34 +257,47 @@ def rss_items() -> list:
     return rss_feed["items"][:20]
 
 
+def load_components(find_path: list[str], config: MkDocsConfig, draft: bool):
+    loaded_components = []
+    for component_opt in config.components:
+        component = Component.build(find_path, component_opt)
+        if component:
+            loaded_components.append(component)
+    all_components = {o.path for o in config.components}
+    not_loaded_components = all_components.difference(
+        {o.path for o in loaded_components}
+    )
+    if not_loaded_components:
+        not_loaded_components = sorted(not_loaded_components)
+        if draft:
+            log.warning(f"Skip missing components {not_loaded_components}.")
+        else:
+            raise PluginError(f"Components missing: {not_loaded_components}.")
+    return loaded_components
+
+
 class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
     def on_config(self, config: MkDocsConfig) -> MkDocsConfig | None:
-        # Two directories up from docs is where we expect all the other repositories.
         self.blog = ctx_blog.get()
         self.docstrings = ctx_docstrings.get()
         self.draft = ctx_draft.get()
 
         self.pulp_docs_dir = Path(config.docs_dir).parent
-        self.repositories_dir = self.pulp_docs_dir.parent
+        self.find_path = ctx_path.get() or [str(self.pulp_docs_dir.parent)]
+
+        loaded_components = load_components(self.find_path, self.config, self.draft)
+        self.config.components = loaded_components
+        loaded_component_dirnames = [str(c.component_dir) for c in loaded_components]
+        log.info(f"Using components={loaded_component_dirnames}")
 
         mkdocstrings_config = config.plugins["mkdocstrings"].config
         components_var = []
-        new_components = []
         for component in self.config.components:
-            component_dir = self.repositories_dir / component.path
-            if component_dir.exists():
-                components_var.append(component_data(component, component_dir))
-                config.watch.append(str(component_dir / "docs"))
-                mkdocstrings_config.handlers["python"]["paths"].append(
-                    str(component_dir)
-                )
-                new_components.append(component)
-            else:
-                if self.draft:
-                    log.warning(f"Skip missing component '{component.title}'.")
-                else:
-                    raise PluginError(f"Component '{component.title}' missing.")
-        self.config.components = new_components
+            components_var.append(component_data(component))
+            config.watch.append(str(component.component_dir / "docs"))
+            mkdocstrings_config.handlers["python"]["paths"].append(
+                str(component.component_dir)
+            )
 
         macros_plugin = config.plugins["macros"]
         macros_plugin.register_macros({"rss_items": rss_items})
@@ -273,10 +318,10 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         user_nav: dict[str, t.Any] = {}
         dev_nav: dict[str, t.Any] = {}
         for component in self.config.components:
-            component_dir = self.repositories_dir / component.path
+            component_dir = component.component_dir
 
             log.info(f"Fetching docs from '{component.title}'.")
-            git_repository_dir = self.repositories_dir / Path(component.path).parts[0]
+            git_repository_dir = component.repository_dir
             try:
                 git_branch = Repo(git_repository_dir).active_branch.name
             except TypeError:
