@@ -17,81 +17,6 @@ jobs:
           path: "pulp-docs"
           fetch-depth: 0
 
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulpcore"
-          path: "pulpcore"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_ansible"
-          path: "pulp_ansible"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_container"
-          path: "pulp_container"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_deb"
-          path: "pulp_deb"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_gem"
-          path: "pulp_gem"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_maven"
-          path: "pulp_maven"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_npm"
-          path: "pulp_npm"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_ostree"
-          path: "pulp_ostree"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_python"
-          path: "pulp_python"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_rpm"
-          path: "pulp_rpm"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp-cli"
-          path: "pulp-cli"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp-ui"
-          path: "pulp-ui"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp-openapi-generator"
-          path: "pulp-openapi-generator"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp-oci-images"
-          path: "pulp-oci-images"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp-operator"
-          path: "pulp-operator"
-
       - name: "Set up Python"
         uses: "actions/setup-python@v5"
         with:
@@ -103,5 +28,5 @@ jobs:
 
       - name: "Build docs"
         run: |
-          mkdocs build
+          make docs
 ...
