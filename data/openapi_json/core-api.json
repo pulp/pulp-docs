@@ -20072,35 +20072,16 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
-                    "base_url": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The URL for accessing the publication as defined by this distribution."
-                    },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
                         "readOnly": true,
                         "description": "Timestamp of creation."
                     },
-                    "no_content_change_since": {
+                    "prn": {
                         "type": "string",
                         "readOnly": true,
-                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "base_path": {
                         "type": "string",
@@ -20111,11 +20092,32 @@
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
                     "content_guard": {
                         "type": "string",
                         "format": "uri",
                         "nullable": true,
                         "description": "An optional content-guard."
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "base_url": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The URL for accessing the publication as defined by this distribution."
                     },
                     "pulp_last_updated": {
                         "type": "string",
@@ -20123,12 +20125,10 @@
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
+                    "no_content_change_since": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
                     }
                 },
                 "required": [
@@ -21137,6 +21137,12 @@
                         "minLength": 1,
                         "description": "pulp_href of the object for which role permissions should be asserted. If set to 'null', permissions will act on the model-level."
                     },
+                    "content_object_prn": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "prn of the object for which role permissions should be asserted. If set to 'null', permissions will act on either domain or model-level."
+                    },
                     "domain": {
                         "type": "string",
                         "format": "uri",
@@ -21145,7 +21151,6 @@
                     }
                 },
                 "required": [
-                    "content_object",
                     "role"
                 ]
             },
@@ -21183,6 +21188,11 @@
                         "nullable": true,
                         "description": "pulp_href of the object for which role permissions should be asserted. If set to 'null', permissions will act on the model-level."
                     },
+                    "content_object_prn": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "prn of the object for which role permissions should be asserted. If set to 'null', permissions will act on either domain or model-level."
+                    },
                     "description": {
                         "type": "string",
                         "readOnly": true
@@ -21202,7 +21212,6 @@
                     }
                 },
                 "required": [
-                    "content_object",
                     "role"
                 ]
             },
@@ -24590,7 +24599,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2025-04-07",
+                        "default": "2025-04-11",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
@@ -26010,6 +26019,12 @@
                         "minLength": 1,
                         "description": "pulp_href of the object for which role permissions should be asserted. If set to 'null', permissions will act on either domain or model-level."
                     },
+                    "content_object_prn": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "prn of the object for which role permissions should be asserted. If set to 'null', permissions will act on either domain or model-level."
+                    },
                     "domain": {
                         "type": "string",
                         "format": "uri",
@@ -26018,7 +26033,6 @@
                     }
                 },
                 "required": [
-                    "content_object",
                     "role"
                 ]
             },
@@ -26056,6 +26070,11 @@
                         "nullable": true,
                         "description": "pulp_href of the object for which role permissions should be asserted. If set to 'null', permissions will act on either domain or model-level."
                     },
+                    "content_object_prn": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "prn of the object for which role permissions should be asserted. If set to 'null', permissions will act on either domain or model-level."
+                    },
                     "description": {
                         "type": "string",
                         "readOnly": true
@@ -26075,7 +26094,6 @@
                     }
                 },
                 "required": [
-                    "content_object",
                     "role"
                 ]
             },

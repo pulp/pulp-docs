@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "python": "3.15.0.dev",
-            "core": "3.77.0"
+            "core": "3.77.1"
         },
         "x-pulp-domain-enabled": false
     },
@@ -4209,6 +4209,46 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/NestedRoleResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{python_python_repository_href}repair_metadata/": {
+            "post": {
+                "operationId": "repositories_python_python_repair_metadata",
+                "description": "Trigger an asynchronous task to repair Python metadata. This task will repair metadata\nof all packages for the specified `Repository`, without creating a new `RepositoryVersion`.",
+                "summary": "Repair metadata",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "python_python_repository_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Repositories: Python"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AsyncOperationResponse"
                                 }
                             }
                         },
