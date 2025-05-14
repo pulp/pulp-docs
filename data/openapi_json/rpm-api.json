@@ -17,8 +17,8 @@
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "rpm": "3.30.0.dev",
-            "core": "3.77.1"
+            "rpm": "3.31.0.dev",
+            "core": "3.78.0"
         },
         "x-pulp-domain-enabled": false
     },
@@ -12126,42 +12126,8 @@
                         "nullable": true,
                         "description": "The preferred checksum type during repo publish.\n\n* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512"
                     },
-                    "metadata_checksum_type": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/PackageChecksumTypeEnum"
-                            }
-                        ],
-                        "nullable": true,
-                        "description": "DEPRECATED: use CHECKSUM_TYPE instead.\n\n* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512"
-                    },
-                    "package_checksum_type": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/PackageChecksumTypeEnum"
-                            }
-                        ],
-                        "nullable": true,
-                        "description": "DEPRECATED: use CHECKSUM_TYPE instead.\n\n* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512"
-                    },
-                    "gpgcheck": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "DEPRECATED: An option specifying whether a client should perform a GPG signature check on packages.",
-                        "maximum": 1,
-                        "minimum": 0
-                    },
-                    "repo_gpgcheck": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "DEPRECATED: An option specifying whether a client should perform a GPG signature check on the repodata.",
-                        "maximum": 1,
-                        "minimum": 0
-                    },
                     "repo_config": {
-                        "description": "A JSON document describing config.repo file"
+                        "description": "A JSON document describing the config.repo file Pulp should generate for this repo"
                     },
                     "compression_type": {
                         "allOf": [
@@ -13772,12 +13738,14 @@
                     "location_base": {
                         "type": "string",
                         "readOnly": true,
-                        "description": "Base location of this package"
+                        "description": "DEPRECATED: Base location of this package. This field will be removed in a future release of pulp_rpm.",
+                        "deprecated": true
                     },
                     "location_href": {
                         "type": "string",
                         "readOnly": true,
-                        "description": "Relative location of package to the repodata"
+                        "description": "DEPRECATED: Relative location of package to the repodata. This field will be removed in a future release of pulp_rpm.",
+                        "deprecated": true
                     },
                     "rpm_buildhost": {
                         "type": "string",
@@ -14209,40 +14177,8 @@
                         ],
                         "description": "The preferred checksum type used during repo publishes.\n\n* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512"
                     },
-                    "metadata_checksum_type": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/PackageChecksumTypeEnum"
-                            }
-                        ],
-                        "description": "DEPRECATED: The checksum type for metadata.\n\n* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512"
-                    },
-                    "package_checksum_type": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/PackageChecksumTypeEnum"
-                            }
-                        ],
-                        "description": "DEPRECATED: The checksum type for packages.\n\n* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512"
-                    },
-                    "gpgcheck": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "DEPRECATED: An option specifying whether a client should perform a GPG signature check on packages.",
-                        "maximum": 1,
-                        "minimum": 0
-                    },
-                    "repo_gpgcheck": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "DEPRECATED: An option specifying whether a client should perform a GPG signature check on the repodata.",
-                        "maximum": 1,
-                        "minimum": 0
-                    },
                     "repo_config": {
-                        "description": "A JSON document describing config.repo file"
+                        "description": "A JSON document describing the config.repo file Pulp should generate for this repo"
                     },
                     "compression_type": {
                         "allOf": [
@@ -14315,7 +14251,9 @@
                                 "$ref": "#/components/schemas/PackageChecksumTypeEnum"
                             }
                         ],
-                        "description": "DEPRECATED: The checksum type for metadata.\n\n* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512"
+                        "readOnly": true,
+                        "description": "REMOVED: The checksum type for metadata. Not operational since pulp_rpm 3.30.0 release. Use 'checksum_type' instead.\n\n* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512",
+                        "deprecated": true
                     },
                     "package_checksum_type": {
                         "allOf": [
@@ -14323,32 +14261,37 @@
                                 "$ref": "#/components/schemas/PackageChecksumTypeEnum"
                             }
                         ],
-                        "description": "DEPRECATED: The checksum type for packages.\n\n* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512"
+                        "readOnly": true,
+                        "description": "REMOVED: The checksum type for packages. Not operational since pulp_rpm 3.30.0 release. Use 'checksum_type' instead.\n\n* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512",
+                        "deprecated": true
                     },
                     "gpgcheck": {
                         "type": "integer",
                         "format": "int64",
-                        "nullable": true,
-                        "description": "DEPRECATED: An option specifying whether a client should perform a GPG signature check on packages.",
+                        "readOnly": true,
+                        "description": "REMOVED: An option specifying whether a client should perform a GPG signature check on packages. Not operational since pulp_rpm 3.30.0 release. Set these values using 'repo_config' instead.",
                         "maximum": 1,
-                        "minimum": 0
+                        "minimum": 0,
+                        "deprecated": true
                     },
                     "repo_gpgcheck": {
                         "type": "integer",
                         "format": "int64",
-                        "nullable": true,
-                        "description": "DEPRECATED: An option specifying whether a client should perform a GPG signature check on the repodata.",
+                        "readOnly": true,
+                        "description": "REMOVED: An option specifying whether a client should perform a GPG signature check on the repodata. Not operational since pulp_rpm 3.30.0 release. Set these values using 'repo_config' instead.",
                         "maximum": 1,
-                        "minimum": 0
+                        "minimum": 0,
+                        "deprecated": true
                     },
                     "sqlite_metadata": {
                         "type": "boolean",
                         "readOnly": true,
                         "default": false,
-                        "description": "REMOVED: An option specifying whether Pulp should generate SQLite metadata. Not operation since pulp_rpm 3.25.0 release"
+                        "description": "REMOVED: An option specifying whether Pulp should generate SQLite metadata. Not operational since pulp_rpm 3.25.0 release",
+                        "deprecated": true
                     },
                     "repo_config": {
-                        "description": "A JSON document describing config.repo file"
+                        "description": "A JSON document describing the config.repo file Pulp should generate for this repo"
                     },
                     "compression_type": {
                         "allOf": [
@@ -14749,42 +14692,8 @@
                         "nullable": true,
                         "description": "The preferred checksum type during repo publish.\n\n* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512"
                     },
-                    "metadata_checksum_type": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/PackageChecksumTypeEnum"
-                            }
-                        ],
-                        "nullable": true,
-                        "description": "DEPRECATED: use CHECKSUM_TYPE instead.\n\n* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512"
-                    },
-                    "package_checksum_type": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/PackageChecksumTypeEnum"
-                            }
-                        ],
-                        "nullable": true,
-                        "description": "DEPRECATED: use CHECKSUM_TYPE instead.\n\n* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512"
-                    },
-                    "gpgcheck": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "DEPRECATED: An option specifying whether a client should perform a GPG signature check on packages.",
-                        "maximum": 1,
-                        "minimum": 0
-                    },
-                    "repo_gpgcheck": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "DEPRECATED: An option specifying whether a client should perform a GPG signature check on the repodata.",
-                        "maximum": 1,
-                        "minimum": 0
-                    },
                     "repo_config": {
-                        "description": "A JSON document describing config.repo file"
+                        "description": "A JSON document describing the config.repo file Pulp should generate for this repo"
                     },
                     "compression_type": {
                         "allOf": [
@@ -14918,8 +14827,9 @@
                                 "$ref": "#/components/schemas/PackageChecksumTypeEnum"
                             }
                         ],
-                        "nullable": true,
-                        "description": "DEPRECATED: use CHECKSUM_TYPE instead.\n\n* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512"
+                        "readOnly": true,
+                        "description": "REMOVED: The checksum type to use for metadata. Not operational since pulp_rpm 3.30.0 release. Use 'checksum_type' instead.\n\n* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512",
+                        "deprecated": true
                     },
                     "package_checksum_type": {
                         "allOf": [
@@ -14927,33 +14837,38 @@
                                 "$ref": "#/components/schemas/PackageChecksumTypeEnum"
                             }
                         ],
+                        "readOnly": true,
                         "nullable": true,
-                        "description": "DEPRECATED: use CHECKSUM_TYPE instead.\n\n* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512"
+                        "description": "REMOVED: The checksum type for packages. Not operational since pulp_rpm 3.30.0 release. Use 'checksum_type' instead.\n\n* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512",
+                        "deprecated": true
                     },
                     "gpgcheck": {
                         "type": "integer",
                         "format": "int64",
-                        "nullable": true,
-                        "description": "DEPRECATED: An option specifying whether a client should perform a GPG signature check on packages.",
+                        "readOnly": true,
+                        "description": "REMOVED: An option specifying whether a client should perform a GPG signature check on packages. Not operational since pulp_rpm 3.30.0 release. Set these values using 'repo_config' instead.",
                         "maximum": 1,
-                        "minimum": 0
+                        "minimum": 0,
+                        "deprecated": true
                     },
                     "repo_gpgcheck": {
                         "type": "integer",
                         "format": "int64",
-                        "nullable": true,
-                        "description": "DEPRECATED: An option specifying whether a client should perform a GPG signature check on the repodata.",
+                        "readOnly": true,
+                        "description": "REMOVED: An option specifying whether a client should perform a GPG signature check on the repodata. Not operational since pulp_rpm 3.30.0 release. Set these values using 'repo_config' instead.",
                         "maximum": 1,
-                        "minimum": 0
+                        "minimum": 0,
+                        "deprecated": true
                     },
                     "sqlite_metadata": {
                         "type": "boolean",
                         "readOnly": true,
                         "default": false,
-                        "description": "REMOVED: An option specifying whether Pulp should generate SQLite metadata. Not operation since pulp_rpm 3.25.0 release"
+                        "description": "REMOVED: An option specifying whether Pulp should generate SQLite metadata. Not operation since pulp_rpm 3.25.0 release",
+                        "deprecated": true
                     },
                     "repo_config": {
-                        "description": "A JSON document describing config.repo file"
+                        "description": "A JSON document describing the config.repo file Pulp should generate for this repo"
                     },
                     "compression_type": {
                         "allOf": [
