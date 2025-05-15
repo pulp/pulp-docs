@@ -1,0 +1,65 @@
+name: 'Docs CI'
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Instructions to run locally
+        shell: bash
+        run: |
+          cat <<EOL
+          To run this locally, make sure:
+          1. You have pulp-docs and your plugin checkout in the same dir.
+          2. You have the latest pulp-docs availabe in your python environment
+
+          Then run:
+
+          cd pulp-docs
+          pulp-docs fetch --dest /tmp/pulp-docs-tmp
+          pulp-docs build --path pulp-docs@..:${{ github.event.repository.name }}@..:/tmp/pulp-docs-tmp
+
+          EOL
+
+      # The caller repository and context is used
+      - name: Checkout CI repository
+        if: ${{ github.event.repository.name != 'pulp-docs' }}
+        uses: actions/checkout@v4
+        with:
+          path: ${{ github.event.repository.name }}
+
+      - name: Checkout pulp-docs repository
+        uses: actions/checkout@v4
+        with:
+          repository: "pulp/pulp-docs"
+          path: pulp-docs
+          # ref: "rewrite-as-mkdocs-plugin"
+          # TODO: revert. using this because pulpcore-selinux is not included in rewrite-as-mkdocs-plugin
+          ref: "experiment-reusable-ci-workflow"
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: "Install pulp-docs"
+        working-directory: "pulp-docs"
+        run: |
+          pip install --upgrade pip
+          pip install -r doc_requirements.txt
+
+      - name: "Build Docs"
+        working-directory: "pulp-docs"
+        run: |
+          pulp-docs fetch --dest /tmp/pulp-docs-tmp
+          pulp-docs build --path pulp-docs@..:${{ github.event.repository.name }}@..:/tmp/pulp-docs-tmp
+
+      - name: "Sanity Check"
+        working-directory: "pulp-docs"
+        shell: bash
+        run: |
+          echo "Checking that the namespace for the component under CI exists in the built docs."
+          ls "site/${{ github.event.repository.name }}/docs"
