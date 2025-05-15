@@ -19,7 +19,9 @@ jobs:
         with:
           repository: "pulp/pulp-docs"
           path: pulp-docs
-          ref: "rewrite-as-mkdocs-plugin"
+          # ref: "rewrite-as-mkdocs-plugin"
+          # TODO: revert. using this because pulpcore-selinux is not included in rewrite-as-mkdocs-plugin
+          ref: "experiment-reusable-ci-workflow"
           fetch-depth: 0
 
       - uses: actions/setup-python@v5
