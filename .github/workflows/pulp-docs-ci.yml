@@ -27,18 +27,20 @@ jobs:
           python-version: "3.12"
 
       - name: "Install pulp-docs"
+        working-directory: "pulp-docs"
         run: |
-          cd pulp-docs
           pip install --upgrade pip
           pip install -r doc_requirements.txt
 
       - name: "Build Docs"
+        working-directory: "pulp-docs"
         run: |
-          echo $PWD
-          cd pulp-docs
           pulp-docs fetch --dest /tmp/pulp-docs-tmp
           pulp-docs build --path pulp-docs@..:${{ github.event.repository.name }}@..:/tmp/pulp-docs-tmp
 
       - name: "Sanity Check"
+        working-directory: "pulp-docs"
         shell: bash
-        run: ls "${{ github.event.repository.name }}/index.html"
+        run: |
+          echo "Checking that the namespace for the component under CI exists in the built docs."
+          ls "site/${{ github.event.repository.name }}/docs"
