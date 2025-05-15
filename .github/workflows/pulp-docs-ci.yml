@@ -1,0 +1,40 @@
+name: 'Docs CI'
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      # The caller repository and context is used
+      - name: Checkout CI repository
+        if: ${{ github.event.repository.name != 'pulp-docs' }}
+        uses: actions/checkout@v4
+        with:
+          path: ${{ github.event.repository.name }}
+
+      - name: Checkout pulp-docs repository
+        uses: actions/checkout@v4
+        with:
+          repository: "pulp/pulp-docs"
+          path: pulp-docs
+          ref: "rewrite-as-mkdocs-plugin"
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: "Install pulp-docs"
+        run: |
+          cd pulp-docs
+          pip install --upgrade pip
+          pip install -r doc_requirements.txt
+
+      - name: "Build Docs"
+        run: |
+          echo $PWD
+          cd pulp-docs
+          pulp-docs fetch --dest /tmp/pulp-docs-tmp
+          pulp-docs build --path pulp-docs@..:${{ github.event.repository.name }}@..:/tmp/pulp-docs-tmp

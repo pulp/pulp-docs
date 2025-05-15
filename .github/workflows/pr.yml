@@ -9,20 +9,7 @@ concurrency:
 
 jobs:
   docs:
-    runs-on: "ubuntu-latest"
-    steps:
-      - uses: "actions/checkout@v4"
-        with:
-          path: "pulp-docs"
-          fetch-depth: 0
-
-      - run: |
-          echo "$PWD"
-          ls
-
-      - uses: "./pulp-docs/.github/actions/pulp-docs-ci"
-        with:
-          repository_name: "pulp-docs"
+    uses: ./.github/workflows/pulp-docs-ci.yml
 
   # tests:
     # uses: "./.github/workflows/tests.yml"
