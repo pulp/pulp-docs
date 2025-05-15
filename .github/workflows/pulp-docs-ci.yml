@@ -38,3 +38,7 @@ jobs:
           cd pulp-docs
           pulp-docs fetch --dest /tmp/pulp-docs-tmp
           pulp-docs build --path pulp-docs@..:${{ github.event.repository.name }}@..:/tmp/pulp-docs-tmp
+
+      - name: "Sanity Check"
+        shell: bash
+        run: ls "${{ github.event.repository.name }}/index.html"
