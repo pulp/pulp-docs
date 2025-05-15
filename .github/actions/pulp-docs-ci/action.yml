@@ -1,0 +1,48 @@
+name: 'Pulp Docs CI'
+description: 'Pulp Docs CI for repository members'
+
+inputs:
+  repository_name:
+    description: 'The name of the repository CI owner'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Verify repository checkout
+      shell: bash
+      run: |
+        echo "$PWD"
+        echo ${{ inputs.repository_name }}
+        if [ ! -d "${{ inputs.repository_name }}/.git" ]; then
+          echo "::error::The repository must be checked out before running this action."
+          echo "::error::Please add the 'actions/checkout' step with path={repository_name}."
+          exit 1
+        fi
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Checkout pulp-docs repository
+      uses: actions/checkout@v4
+      with:
+        repository: "pulp/pulp-docs"
+        path: pulp-docs
+        ref: "rewrite-as-mkdocs-plugin"
+
+    - name: "Install pulp-docs"
+      shell: bash
+      run: |
+        cd pulp-docs
+        pip install --upgrade pip
+        pip install -r doc_requirements.txt
+
+    - name: "Build Docs"
+      shell: bash
+      run: |
+        echo $PWD
+        cd pulp-docs
+        pulp-docs fetch --dest /tmp/pulp-docs-tmp
+        pulp-docs build --path pulp-docs@..:${{ inputs.repository_name }}@..:/tmp/pulp-docs-tmp
+
