@@ -1,4 +1,5 @@
 name: 'Docs CI'
+
 on:
   workflow_call:
 
