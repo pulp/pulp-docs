@@ -8,6 +8,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - name: Instructions to run locally
+        shell: bash
+        run: |
+          cat <<EOL
+          To run this locally, make sure:
+          1. You have pulp-docs and your plugin checkout in the same dir.
+          2. You have the latest pulp-docs availabe in your python environment
+
+          Then run:
+
+          cd pulp-docs
+          pulp-docs fetch --dest /tmp/pulp-docs-tmp
+          pulp-docs build --path pulp-docs@..:${{ github.event.repository.name }}@..:/tmp/pulp-docs-tmp
+
+          EOL
+
       # The caller repository and context is used
       - name: Checkout CI repository
         if: ${{ github.event.repository.name != 'pulp-docs' }}
