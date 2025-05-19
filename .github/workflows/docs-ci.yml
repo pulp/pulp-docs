@@ -55,8 +55,10 @@ jobs:
       - name: "Build Docs"
         working-directory: "pulp-docs"
         run: |
-          pulp-docs fetch --dest /tmp/pulp-docs-tmp
-          pulp-docs build --path pulp-docs@..:${{ github.event.repository.name }}@..:/tmp/pulp-docs-tmp
+          PATH="pulp-docs@..:${{ github.event.repository.name }}@.."
+          TMPDIR="/tmp/pulp-docs-tmp"
+          pulp-docs fetch --path "$PATH" --dest "$TMPDIR"
+          pulp-docs build --path "$PATH:$TMPDIR"
 
       - name: "Sanity Check"
         working-directory: "pulp-docs"
