@@ -9,7 +9,7 @@ concurrency:
 
 jobs:
   docs:
-    uses: ./.github/workflows/docs-ci.yml
+    uses: "./.github/workflows/docs-ci.yml"
 
   tests:
     uses: "./.github/workflows/tests.yml"
