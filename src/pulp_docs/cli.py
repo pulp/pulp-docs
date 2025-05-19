@@ -101,14 +101,19 @@ async def clone_repositories(repositories: set[str], dest_dir: Path) -> None:
     envvar="PULPDOCS_DIR",
     help="Path to mkdocs.yml config file",
 )
-@path_option
-def fetch(dest, config_file, find_path):
+@click.option(
+    "--path-exclude",
+    default="",
+    callback=find_path_callback,
+    help="A colon separated list of lookup paths to exclude in the form [repo1@]path1 [:[repo2@]path2 [...]].",
+)
+def fetch(dest, config_file, path_exclude):
     """Fetch repositories to destination dir."""
     dest_path = Path(dest)
-    config = load_config(config_file)
-    all_components = config.plugins["PulpDocs"].config.components
+    pulpdocs_plugin = load_config(config_file).plugins["PulpDocs"]
+    all_components = pulpdocs_plugin.config.components
     all_repositories_set = {r.git_url for r in all_components if r.git_url}
-    found_components = load_components(find_path, config_file, draft=True)
+    found_components = load_components(path_exclude, pulpdocs_plugin.config, draft=True)
     found_repositories_set = {r.git_url for r in found_components}
     final_repositories_set = all_repositories_set - found_repositories_set
 

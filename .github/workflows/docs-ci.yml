@@ -8,21 +8,64 @@ jobs:
   build:
     runs-on: "ubuntu-latest"
     steps:
+      # The git reference for the workflow isn't acessible directly. That's a workaround:
+      # https://github.com/actions/toolkit/issues/1264#issuecomment-2496121368
+      - name: "Get called workflow reference"
+        run: |
+          JWT=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL")
+          PAYLOAD=$(echo "$JWT" | cut -d '.' -f 2 | base64 -d 2>/dev/null || true)
+
+          WORKFLOW_FULL_REF=$(
+            echo "$PAYLOAD" \
+              | grep -o '"job_workflow_ref":"[^"]*"' \
+              | cut -d':' -f2 \
+              | cut -d'@' -f2 \
+              | tr -d '"'
+          )
+
+          echo "WORKFLOW_FULL_REF=$WORKFLOW_FULL_REF"
+
+          case $WORKFLOW_FULL_REF in
+            refs/heads/*)
+              WORKFLOW_REF=${WORKFLOW_FULL_REF#refs/heads/}
+              ;;
+            refs/tags/*)
+              WORKFLOW_REF=${WORKFLOW_FULL_REF#refs/tags/}
+              ;;
+            refs/pull/*/merge)
+              # exception: we got triggered by a pull request, the ref is the base branch
+              WORKFLOW_REF=$GITHUB_HEAD_REF
+              ;;
+          esac
+
+          echo "::notice ::WORKFLOW_FULL_REF=$WORKFLOW_FULL_REF"
+          echo "::notice ::WORKFLOW_REF=$WORKFLOW_REF"
+
+          echo "WORKFLOW_REF=$WORKFLOW_REF" | tee -a $GITHUB_ENV
+
+      - name: "Checkout pulp-docs repository"
+        uses: "actions/checkout@v4"
+        with:
+          repository: "pulp/pulp-docs"
+          path: "pulp-docs"
+          ref: "${{ env.WORKFLOW_REF }}"
+          fetch-depth: 0
+
+      - name: "Get pulp-docs commit"
+        working-directory: "pulp-docs"
+        run: |
+          set -e
+          echo "CHECKOUT_SHA=$(git rev-parse HEAD)" | tee -a $GITHUB_ENV
 
       - name: "Instructions to run locally"
-        shell: "bash"
         run: |
           cat <<EOL
-          To run this locally, make sure:
-          1. You have pulp-docs and your plugin checkout in the same dir.
-          2. You have the latest pulp-docs availabe in your python environment
-
-          Then run:
+          Assuming you have pulp-docs and your plugin checkout in the same dir, run:
 
           cd pulp-docs
+          git checkout ${{ env.CHECKOUT_SHA }}
           pulp-docs fetch --dest /tmp/pulp-docs-tmp
           pulp-docs build --path pulp-docs@..:${{ github.event.repository.name }}@..:/tmp/pulp-docs-tmp
-
           EOL
 
       # The caller repository and context is used
@@ -31,16 +74,6 @@ jobs:
         uses: "actions/checkout@v4"
         with:
           path: "${{ github.event.repository.name }}"
-
-      - name: "Checkout pulp-docs repository"
-        uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp-docs"
-          path: "pulp-docs"
-          # ref: "rewrite-as-mkdocs-plugin"
-          # TODO: revert. using this because pulpcore-selinux is not included in rewrite-as-mkdocs-plugin
-          ref: "experiment-reusable-ci-workflow"
-          fetch-depth: 0
 
       - uses: "actions/setup-python@v5"
         with:
@@ -54,15 +87,15 @@ jobs:
 
       - name: "Build Docs"
         working-directory: "pulp-docs"
+        env:
+          DOCS_PATH: "pulp-docs@..:${{ github.event.repository.name }}@.."
+          DOCS_TMPDIR: "/tmp/pulp-docs-tmp"
         run: |
-          PATH="pulp-docs@..:${{ github.event.repository.name }}@.."
-          TMPDIR="/tmp/pulp-docs-tmp"
-          pulp-docs fetch --path "$PATH" --dest "$TMPDIR"
-          pulp-docs build --path "$PATH:$TMPDIR"
+          pulp-docs fetch --path-exclude "$DOCS_PATH" --dest "$DOCS_TMPDIR"
+          pulp-docs build --path "$DOCS_PATH:$DOCS_TMPDIR"
 
       - name: "Sanity Check"
         working-directory: "pulp-docs"
-        shell: "bash"
         run: |
           echo "Checking that the namespace for the component under CI exists in the built docs."
           ls "site/${{ github.event.repository.name }}/docs"
