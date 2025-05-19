@@ -1,15 +1,16 @@
-name: 'Docs CI'
+---
+name: "Docs CI"
 
 on:
   workflow_call:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: "ubuntu-latest"
     steps:
 
-      - name: Instructions to run locally
-        shell: bash
+      - name: "Instructions to run locally"
+        shell: "bash"
         run: |
           cat <<EOL
           To run this locally, make sure:
@@ -25,23 +26,23 @@ jobs:
           EOL
 
       # The caller repository and context is used
-      - name: Checkout CI repository
-        if: ${{ github.event.repository.name != 'pulp-docs' }}
-        uses: actions/checkout@v4
+      - name: "Checkout CI repository"
+        if: "${{ github.event.repository.name != 'pulp-docs' }}"
+        uses: "actions/checkout@v4"
         with:
-          path: ${{ github.event.repository.name }}
+          path: "${{ github.event.repository.name }}"
 
-      - name: Checkout pulp-docs repository
-        uses: actions/checkout@v4
+      - name: "Checkout pulp-docs repository"
+        uses: "actions/checkout@v4"
         with:
           repository: "pulp/pulp-docs"
-          path: pulp-docs
+          path: "pulp-docs"
           # ref: "rewrite-as-mkdocs-plugin"
           # TODO: revert. using this because pulpcore-selinux is not included in rewrite-as-mkdocs-plugin
           ref: "experiment-reusable-ci-workflow"
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - uses: "actions/setup-python@v5"
         with:
           python-version: "3.12"
 
@@ -59,7 +60,8 @@ jobs:
 
       - name: "Sanity Check"
         working-directory: "pulp-docs"
-        shell: bash
+        shell: "bash"
         run: |
           echo "Checking that the namespace for the component under CI exists in the built docs."
           ls "site/${{ github.event.repository.name }}/docs"
+...
