@@ -3,52 +3,24 @@ name: "Docs CI"
 
 on:
   workflow_call:
+    # The git reference for the workflow isn't acessible directly.
+    # We trust that the caller will provide the matching one
+    inputs:
+      pulpdocs_ref:
+        description: "Git reference of this workflow file. Must match the one used for the workflow call"
+        type: string
+        required: true
 
 jobs:
   build:
     runs-on: "ubuntu-latest"
     steps:
-      # The git reference for the workflow isn't acessible directly. That's a workaround:
-      # https://github.com/actions/toolkit/issues/1264#issuecomment-2496121368
-      - name: "Get called workflow reference"
-        run: |
-          JWT=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL")
-          PAYLOAD=$(echo "$JWT" | cut -d '.' -f 2 | base64 -d 2>/dev/null || true)
-
-          WORKFLOW_FULL_REF=$(
-            echo "$PAYLOAD" \
-              | grep -o '"job_workflow_ref":"[^"]*"' \
-              | cut -d':' -f2 \
-              | cut -d'@' -f2 \
-              | tr -d '"'
-          )
-
-          echo "WORKFLOW_FULL_REF=$WORKFLOW_FULL_REF"
-
-          case $WORKFLOW_FULL_REF in
-            refs/heads/*)
-              WORKFLOW_REF=${WORKFLOW_FULL_REF#refs/heads/}
-              ;;
-            refs/tags/*)
-              WORKFLOW_REF=${WORKFLOW_FULL_REF#refs/tags/}
-              ;;
-            refs/pull/*/merge)
-              # exception: we got triggered by a pull request, the ref is the base branch
-              WORKFLOW_REF=$GITHUB_HEAD_REF
-              ;;
-          esac
-
-          echo "::notice ::WORKFLOW_FULL_REF=$WORKFLOW_FULL_REF"
-          echo "::notice ::WORKFLOW_REF=$WORKFLOW_REF"
-
-          echo "WORKFLOW_REF=$WORKFLOW_REF" | tee -a $GITHUB_ENV
-
       - name: "Checkout pulp-docs repository"
         uses: "actions/checkout@v4"
         with:
           repository: "pulp/pulp-docs"
           path: "pulp-docs"
-          ref: "${{ env.WORKFLOW_REF }}"
+          ref: "${{ inputs.pulpdocs_ref }}"
           fetch-depth: 0
 
       - name: "Get pulp-docs commit"
