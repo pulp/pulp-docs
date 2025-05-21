@@ -12,7 +12,7 @@ jobs:
   docs:
     uses: "./.github/workflows/docs-ci.yml"
     with:
-      pulpdocs_ref: ${{ github.ref }}
+      pulpdocs_ref: "${{ github.ref }}"
 
   tests:
     needs: "docs"
