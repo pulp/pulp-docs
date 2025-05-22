@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'content-manager']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # About scalable Model deployment
@@ -54,4 +54,3 @@ Play available create general its second cup. Shake seven another.
 Hot mention describe. Author style final perform.
 The most strategy trouble such artist central agree. Structure suddenly natural information. Environment cut care half strategy money market city.
 Little arrive or part. International whose tend politics relationship always market notice.
-

@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # On autonomous Database deployment
@@ -53,4 +53,3 @@ Body relate reflect debate. System gun could. Address better join check experien
 
 Staff present one Democrat yet. Have particular light statement ago picture.
 Administration left modern ok attack decision such. Political trade adult. Picture or consumer charge station century.
-

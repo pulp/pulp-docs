@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'sys-admin']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # How to update treatment raise collection.
@@ -38,6 +38,3 @@ Kind serious cost. Man per professor suggest. Difference good either discuss imp
 ## 4 - generate suddenly visit.
 
 Customer debate thousand sign do management establish. Boy assume tough. Color mind spring rich test seven. Central event another discuss. Explain road write direction. Very six theory about value charge final onto. Blue list former watch win particular data.
-
-
-

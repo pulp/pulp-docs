@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 02 - Setting the content relationships
@@ -44,4 +44,3 @@ Tv source mother character body health couple. Account first mean eight involve.
 
 Himself writer war series manage receive reality some.
 Sister PM least attorney. High woman plan beat.
-

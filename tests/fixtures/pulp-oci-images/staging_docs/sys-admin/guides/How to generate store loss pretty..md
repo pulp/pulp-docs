@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'sys-admin']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # How to generate store loss pretty.
@@ -32,6 +32,3 @@ Father interview million. If discover how same. Upon her else rate positive. Adm
 ## 3 - delete shake woman write bit.
 
 Party foot surface nothing. Apply morning apply drop star movie policy. Stage full discussion range yes important trip commercial. Similar second someone yourself. Eight expect west right mean tax ever get. Father however sister key he wife five major.
-
-
-

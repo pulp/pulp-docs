@@ -17,7 +17,7 @@ Then, [Specifics](#) covers more custom handlings leveraged by Pulp's plugin eco
 For straighfoward material on getting things done, visit the [Guides](/docs/guides/index.md) section.
 
 [Architecture and Concepts](#) should be read as early as possible.
-Eventually, it's highly recommended that the user reads the entire *Fundamentals* section as he starts doing more serious work. 
+Eventually, it's highly recommended that the user reads the entire *Fundamentals* section as he starts doing more serious work.
 
 Pulp Project use cases can be complex and may include a variety of different topics for different users.
 On the *Intermediate* section, we talk about those topics and how Pulp fits in.

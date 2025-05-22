@@ -63,4 +63,3 @@ repos:
 $ export PULPDOCS_MKDOCS_FILE="path/to/my/repolist.yml"
 $ pulp-docs serve
 ```
-

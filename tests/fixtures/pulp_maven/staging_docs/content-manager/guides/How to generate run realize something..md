@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'content-manager']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # How to generate run realize something.
@@ -26,6 +26,3 @@ Anything skill likely pull support hope entire. Who someone need people. Here mo
 ## 2 - update pull leave.
 
 Site respond agency yet lawyer four character. Daughter space stock finish feel major. Thank head wall treat professor under article lot. Newspaper health instead pressure hope. Work idea top peace yard heart. Wrong down himself whole worker. Phone Mrs require charge in win out. Market center ask region. So soldier our several often instead try.
-
-
-

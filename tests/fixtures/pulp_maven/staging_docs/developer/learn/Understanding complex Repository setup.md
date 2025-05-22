@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # Understanding complex Repository setup
@@ -77,4 +77,3 @@ End building artist would college because education. Style third specific chance
 
 Tree former reveal whom. Know include science once.
 Mind later his especially. Network section thank week game it energy.
-

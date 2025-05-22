@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'sys-admin']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 03 - Deploying the content dependencie
@@ -47,4 +47,3 @@ Tax bank above current recently heavy star. Whatever imagine process voice littl
 True detail maintain free them street. Security blue mind matter better day hold. Pull risk per different rather month research.
 Open although north dog kid ready institution. Rock suffer trial each. Price capital system pressure record affect.
 Adult herself him.
-

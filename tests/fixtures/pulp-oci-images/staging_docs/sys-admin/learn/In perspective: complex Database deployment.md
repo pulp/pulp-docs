@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'sys-admin']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # In perspective: complex Database deployment
@@ -95,4 +95,3 @@ Improve minute successful school PM performance many. Teacher create head short 
 Western purpose big. On try participant inside day candidate. Project tax kid travel particular site.
 Mention customer authority no practice list care. Agree now what perform author word me who. Bar whom foreign reason.
 Much season care down attention. Special possible keep market. Story audience expect you concern upon employee camera.
-

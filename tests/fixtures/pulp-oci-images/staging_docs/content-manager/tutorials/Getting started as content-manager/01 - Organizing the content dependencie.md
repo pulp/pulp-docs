@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'content-manager']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 01 - Organizing the content dependencie
@@ -92,4 +92,3 @@ Deal move wall. Such fast thought social. Weight get similar in officer energy. 
 
 Statement suddenly cup discussion time. Hear big check black business with. Campaign effort which.
 Give set such place matter should really act. Too card coach arm dream whom prevent. Who offer month because mention bill.
-

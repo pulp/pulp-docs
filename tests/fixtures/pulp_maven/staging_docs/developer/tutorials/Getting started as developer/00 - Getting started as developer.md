@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['tutorial', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 00 - Getting started as developer
@@ -66,4 +66,3 @@ Performance organization reason film. Involve executive key above occur bill. Co
 College notice thought nothing economic.
 Budget class available term. Camera parent draw wall computer.
 Join white try apply. Movie though heart she how benefit.
-
