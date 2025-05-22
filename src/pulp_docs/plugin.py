@@ -1,19 +1,18 @@
-import typing as t
-from pathlib import Path
 import json
 import tomllib
-import yaml
-import glob
+import typing as t
+from dataclasses import dataclass
+from pathlib import Path
 
 import httpx
-from dataclasses import dataclass
-from git import Repo, GitCommandError
+import yaml
+from git import GitCommandError, Repo
 from mkdocs.config import Config, config_options
 from mkdocs.config.defaults import MkDocsConfig
 from mkdocs.exceptions import PluginError
-from mkdocs.plugins import get_plugin_logger, BasePlugin
+from mkdocs.plugins import BasePlugin, get_plugin_logger
 from mkdocs.structure.files import File, Files
-from mkdocs.structure.nav import Navigation, Section, Link
+from mkdocs.structure.nav import Link, Navigation, Section
 from mkdocs.structure.pages import Page
 from mkdocs.utils.templates import TemplateContext
 
@@ -174,10 +173,7 @@ class ComponentNav:
         return result
 
     def missing_indices(self) -> t.Iterator[Path]:
-        if (
-            not self._user_index_found
-            and len(self._user_uris) + len(self._admin_uris) > 0
-        ):
+        if not self._user_index_found and len(self._user_uris) + len(self._admin_uris) > 0:
             yield self._user_index_uri
 
         if not self._dev_index_found and len(self._dev_uris) > 0:
@@ -264,9 +260,7 @@ def load_components(find_path: list[str], config: PulpDocsPluginConfig, draft: b
         if component:
             loaded_components.append(component)
     all_components = {o.path for o in config.components}
-    not_loaded_components = all_components.difference(
-        {o.path for o in loaded_components}
-    )
+    not_loaded_components = all_components.difference({o.path for o in loaded_components})
     if not_loaded_components:
         not_loaded_components = sorted(not_loaded_components)
         if draft:
@@ -295,9 +289,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         for component in self.config.components:
             components_var.append(component_data(component))
             config.watch.append(str(component.component_dir / "docs"))
-            mkdocstrings_config.handlers["python"]["paths"].append(
-                str(component.component_dir)
-            )
+            mkdocstrings_config.handlers["python"]["paths"].append(str(component.component_dir))
 
         macros_plugin = config.plugins["macros"]
         macros_plugin.register_macros({"rss_items": rss_items})
@@ -329,9 +321,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
             component_parent_dir = component_dir.parent
             component_docs_dir = component_dir / "staging_docs"
             if component_docs_dir.exists():
-                log.warning(
-                    f"Found deprecated 'staging_docs' directory in {component.path}."
-                )
+                log.warning(f"Found deprecated 'staging_docs' directory in {component.path}.")
             else:
                 component_docs_dir = component_dir / "docs"
             component_slug = Path(component_dir.name)
@@ -339,9 +329,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
 
             component_nav = ComponentNav(config, component_slug)
 
-            for dirpath, dirnames, filenames in component_docs_dir.walk(
-                follow_symlinks=True
-            ):
+            for dirpath, dirnames, filenames in component_docs_dir.walk(follow_symlinks=True):
                 for filename in filenames:
                     abs_src_path = dirpath / filename
                     pulp_meta: dict[str, t.Any] = {}
@@ -359,9 +347,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                         pulp_meta["edit_url"] = (
                             f"{component.git_url}/edit/{git_branch}/{git_relpath}"
                         )
-                    new_file = File.generated(
-                        config, src_uri, abs_src_path=abs_src_path
-                    )
+                    new_file = File.generated(config, src_uri, abs_src_path=abs_src_path)
                     new_file.pulp_meta = pulp_meta
                     files.append(new_file)
                     component_nav.add(src_uri)
@@ -403,9 +389,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
             component_changes = component_dir / "CHANGES.md"
             if component_changes.exists():
                 src_uri = component_slug / "changes.md"
-                files.append(
-                    File.generated(config, src_uri, abs_src_path=component_changes)
-                )
+                files.append(File.generated(config, src_uri, abs_src_path=component_changes))
                 component_nav.add(src_uri)
 
             user_nav.setdefault(component.kind, []).append(
@@ -415,12 +399,8 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                 {component.title: component_nav.dev_nav()}
             )
 
-        config.nav[1]["User Manual"].extend(
-            [{key: value} for key, value in user_nav.items()]
-        )
-        config.nav[2]["Developer Manual"].extend(
-            [{key: value} for key, value in dev_nav.items()]
-        )
+        config.nav[1]["User Manual"].extend([{key: value} for key, value in user_nav.items()])
+        config.nav[2]["Developer Manual"].extend([{key: value} for key, value in dev_nav.items()])
         return files
 
     def on_page_context(

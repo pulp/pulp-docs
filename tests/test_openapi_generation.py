@@ -1,5 +1,5 @@
-from pathlib import Path
 import json
+from pathlib import Path
 
 from pulp_docs.openapi import main as openapi_main
 

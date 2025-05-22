@@ -1,10 +1,11 @@
 import asyncio
-import click
-import git
 from pathlib import Path
 
+import click
+import git
 from mkdocs.__main__ import cli as mkdocs_cli
 from mkdocs.config import load_config
+
 from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft, ctx_path
 from pulp_docs.plugin import load_components
 
@@ -14,9 +15,7 @@ def blog_callback(ctx: click.Context, param: click.Parameter, value: bool) -> bo
     return value
 
 
-def docstrings_callback(
-    ctx: click.Context, param: click.Parameter, value: bool
-) -> bool:
+def docstrings_callback(ctx: click.Context, param: click.Parameter, value: bool) -> bool:
     ctx_docstrings.set(value)
     return value
 
@@ -60,7 +59,7 @@ path_option = click.option(
     expose_value=False,
     default="",
     callback=find_path_callback,
-    help="A colon separated list of lookup paths in the form: [repo1@]path1 [:[repo2@]path2 [...]].",
+    help="A colon separated list of lookup paths in the form:[repo1@]path1 [:[repo2@]path2 [...]].",
 )
 
 
@@ -71,15 +70,11 @@ async def clone_repositories(repositories: set[str], dest_dir: Path) -> None:
         repo_name = repo_url.split("/")[-1]
         repo_path = dest_dir / repo_name
         if repo_path.exists():
-            click.echo(
-                f"Repository {repo_name} already exists at {repo_path}, skipping."
-            )
+            click.echo(f"Repository {repo_name} already exists at {repo_path}, skipping.")
             return
         click.echo(f"Cloning {repo_url} to {repo_path}...")
         loop = asyncio.get_running_loop()
-        await loop.run_in_executor(
-            None, lambda: git.Repo.clone_from(repo_url, repo_path, depth=1)
-        )
+        await loop.run_in_executor(None, lambda: git.Repo.clone_from(repo_url, repo_path, depth=1))
         click.echo(f"Successfully cloned {repo_name}")
 
     tasks = [clone_repository(repo) for repo in repositories]
