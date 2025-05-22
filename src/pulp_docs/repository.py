@@ -32,7 +32,7 @@ DOWNLOAD_CACHE_DIR = Path(tempfile.gettempdir()) / "repo_downloads"
 # @dataclass # raising errors in py311/312
 class RepoStatus:
     """
-    Usefull status information about a downloaded repository.
+    Useful status information about a downloaded repository.
     """
 
     def __init__(self, **kwargs):
@@ -183,7 +183,7 @@ def download_from_gh_main(dest_dir: Path, owner: str, name: str, branch: str):
     try:
         subprocess.run(cmd, check=True)
     except subprocess.CalledProcessError as e:
-        log.error(f"An error ocurred while trying to download '{name}' source-code:\n{e}")
+        log.error(f"An error occurred while trying to download '{name}' source-code:\n{e}")
         raise
 
     log.info("Done.")
