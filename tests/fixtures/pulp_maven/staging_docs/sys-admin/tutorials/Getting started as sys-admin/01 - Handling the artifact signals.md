@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'sys-admin']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 01 - Handling the artifact signals
@@ -42,4 +42,3 @@ Go four reduce carry.
 
 Friend purpose hand. Wear blue number fund. Difference believe road baby and more site.
 Add knowledge no language student. Street exactly born produce make issue. Chair affect teacher in.
-

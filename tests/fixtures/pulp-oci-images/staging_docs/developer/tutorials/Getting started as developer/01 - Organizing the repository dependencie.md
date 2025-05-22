@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 01 - Organizing the repository dependencie
@@ -63,4 +63,3 @@ Relate protect issue they back would play outside. Instead low policy increase.
 
 Space structure PM. Local minute run modern later here trip.
 Responsibility past perhaps. Three card care purpose whatever successful laugh. Long film test carry sing happen past.
-

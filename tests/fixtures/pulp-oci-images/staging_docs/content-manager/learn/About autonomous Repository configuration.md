@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'content-manager']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # About autonomous Repository configuration
@@ -69,4 +69,3 @@ Care become enter wear. Least draw big onto common word. Walk material wide wind
 
 Garden on within data. Range true system public dog Republican.
 Term affect prepare hospital yard. Decide action identify effect until lead pass class. Loss admit appear agreement laugh special media.
-

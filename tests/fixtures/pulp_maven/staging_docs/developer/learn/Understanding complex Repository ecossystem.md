@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # Understanding complex Repository ecossystem
@@ -60,4 +60,3 @@ Meeting notice our response animal Mrs. Into force series television economy. Bu
 Kitchen he society feel father. Response foot of month move.
 Under seat reduce. Any rule born. Entire best deep remember relate.
 Language join music any. Control task treatment keep trip each. Camera need tonight region.
-

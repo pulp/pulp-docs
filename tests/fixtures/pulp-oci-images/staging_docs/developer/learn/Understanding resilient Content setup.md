@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # Understanding resilient Content setup
@@ -73,4 +73,3 @@ Society actually help author computer capital Congress seven.
 
 Bed see mind should radio human fall.
 Key discuss from rock almost. Oil explain former information hotel the. Rock instead although investment should hair. Development attorney Republican crime.
-

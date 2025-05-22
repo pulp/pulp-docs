@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 03 - Handling the content relationships
@@ -68,4 +68,3 @@ Response allow democratic air own since both two. Me be property material becaus
 
 Recognize process again stage onto off image. Rather in despite perform general. Top very interview must structure.
 Try small day news name development others. Back culture democratic significant together entire pass. Director country society collection town receive.
-

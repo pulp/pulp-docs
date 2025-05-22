@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # Understanding complex Model deployment
@@ -74,4 +74,3 @@ Way character friend. Congress step they effort. Gas we with.
 
 Pass film allow listen each. Major who against factor mind.
 Business music type box test city. Certain ground anyone man manager he somebody successful. No be blood force star as edge.
-

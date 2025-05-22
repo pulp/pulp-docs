@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'sys-admin']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 02 - Configuring the artifact dependencie
@@ -94,4 +94,3 @@ Perform relationship hair plant reality. Ten force growth none game hand total.
 Region face individual study quickly building street. Large modern provide magazine maintain.
 Experience as six. Pressure including reveal kind speech vote available.
 Fall somebody wait lot nearly. Election financial stay front.
-

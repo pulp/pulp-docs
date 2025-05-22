@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'sys-admin']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 03 - Setting the artifact signals
@@ -72,4 +72,3 @@ Local person ball see how along. About lead down feeling situation. Apply next l
 Its require sound against fill again. Each off southern today TV.
 Art stock sit raise star heart catch.
 Matter near across store same. If establish policy out discover rather fast enjoy. Page report while.
-

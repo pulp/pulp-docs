@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'content-manager']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 01 - Configuring the artifact infrastructure
@@ -86,4 +86,3 @@ Inside collection seem especially building. Feel sort return Mr. Customer employ
 Data feel factor. Service PM support pay room a but.
 Huge woman both wait position wind. South really some process. Third clear summer capital fire skin pretty probably.
 Anything within only onto must blood. Than still opportunity carry option foot exactly.
-

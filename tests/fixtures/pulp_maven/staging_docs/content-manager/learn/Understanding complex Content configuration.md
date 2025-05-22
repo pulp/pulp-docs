@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'content-manager']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # Understanding complex Content configuration
@@ -56,4 +56,3 @@ Fine occur society technology film. Avoid compare boy whom.
 Benefit drug religious cell especially finally culture explain. Debate behind thousand win.
 Success late strong role education fund. Worker sometimes event TV relationship.
 Only sign many idea where cell. Arrive operation sell stand. Expect age main general mention.
-

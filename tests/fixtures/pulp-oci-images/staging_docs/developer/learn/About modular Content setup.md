@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # About modular Content setup
@@ -66,4 +66,3 @@ Enter anything arrive television education summer. Source Mr above kid bill proc
 Size upon away. Visit tell specific end herself. Partner activity five why.
 Sure upon military science free.
 Win senior along mother election discussion join. Lose be food senior.
-

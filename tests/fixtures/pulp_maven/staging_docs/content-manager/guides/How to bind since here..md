@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'content-manager']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # How to bind since here.
@@ -38,6 +38,3 @@ Seat maintain firm avoid man character whether. Win everyone present. Over ahead
 ## 4 - create blue watch manager.
 
 Like western goal who. Entire matter military race. Ground time list hand chance now fly. Myself after film enough pretty. Baby affect various including able through policy. Various model short carry major another drug. Summer recognize pass resource. Direction open nearly. Rather range public case.
-
-
-

@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'content-manager']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # In perspective: flexible Repository setup
@@ -47,4 +47,3 @@ Letter local garden visit. Eye study away family. Bad yes security else authorit
 
 Author ago college owner hard. Be long conference beat medical. Where wear third carry tell.
 Page opportunity director region focus activity hour. Attorney guy factor attack to improve.
-

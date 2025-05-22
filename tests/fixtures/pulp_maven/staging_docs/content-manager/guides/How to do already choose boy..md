@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'content-manager']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # How to do already choose boy.
@@ -38,6 +38,3 @@ Safe agent show herself professor. Kitchen establish will but. True doctor serve
 ## 4 - delete evening skill.
 
 Court yes soon those. Ago music value learn teach new. By as half. Hot oil least reach war threat somebody. Leave let company apply popular source wish whether. Size include store attention action center. Together agent fill bring political could financial. Thank language yes series fund.
-
-
-
