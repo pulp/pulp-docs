@@ -4,93 +4,20 @@ name: "Docs Test"
 on:
   workflow_call:
 
-defaults:
-  run:
-    working-directory: "pulp-docs"
-
 jobs:
   build-docs:
     runs-on: "ubuntu-latest"
     steps:
       - uses: "actions/checkout@v4"
         with:
+          repository: "pulp/pulp-docs"
           path: "pulp-docs"
           fetch-depth: 0
 
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulpcore"
-          path: "pulpcore"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_ansible"
-          path: "pulp_ansible"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_container"
-          path: "pulp_container"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_deb"
-          path: "pulp_deb"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_gem"
-          path: "pulp_gem"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_maven"
-          path: "pulp_maven"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_npm"
-          path: "pulp_npm"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_ostree"
-          path: "pulp_ostree"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_python"
-          path: "pulp_python"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp_rpm"
-          path: "pulp_rpm"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp-cli"
-          path: "pulp-cli"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp-ui"
-          path: "pulp-ui"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp-openapi-generator"
-          path: "pulp-openapi-generator"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp-oci-images"
-          path: "pulp-oci-images"
-
-      - uses: "actions/checkout@v4"
-        with:
-          repository: "pulp/pulp-operator"
-          path: "pulp-operator"
+      # For non pulp-docs components
+      # - uses: "actions/checkout@v4"
+        # with:
+          # path: "${{ github.event.repository.name }}"
 
       - name: "Set up Python"
         uses: "actions/setup-python@v5"
@@ -98,10 +25,19 @@ jobs:
           python-version: "3.12"
 
       - name: "Install Test Dependencies"
+        working-directory: "pulp-docs"
         run: |
+          pip install --upgrade pip
           pip install -r doc_requirements.txt
 
       - name: "Build docs"
+        working-directory: "pulp-docs"
         run: |
-          mkdocs build
+          pulp-docs ci . "../${{ github.event.repository.name }}" --step build
+
+      - name: "Sanity Check"
+        working-directory: "pulp-docs"
+        run: |
+          echo "Checking that the namespace for the component under CI exists in the built docs."
+          ls "site/${{ github.event.repository.name }}/docs"
 ...
