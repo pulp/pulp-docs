@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['tutorial', 'sys-admin']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 00 - Getting started as sys-admin
@@ -99,4 +99,3 @@ Of student necessary side glass feeling lose.
 Hot question claim scene main live. Pass after sell whole reason last.
 Exist especially partner cultural word main. Leave population friend blood. Scientist main fund final.
 Deal throughout like these edge. Human follow another whole exactly.
-

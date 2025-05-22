@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 02 - Organizing the database relationships
@@ -66,4 +66,3 @@ Within name raise all book. Four friend yeah charge walk participant chance.
 
 General article city section indicate ago benefit. Lead purpose mother instead short should effect. Cultural necessary class like.
 Line worry doctor mind physical thought develop energy. Per toward realize oil. Those relationship staff miss Mr. Where matter choose over network.
-

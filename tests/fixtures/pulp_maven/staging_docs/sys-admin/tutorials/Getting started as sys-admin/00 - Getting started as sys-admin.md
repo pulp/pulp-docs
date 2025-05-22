@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['tutorial', 'sys-admin']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 00 - Getting started as sys-admin
@@ -76,4 +76,3 @@ Kind include continue. Entire mouth land single trade rest friend.
 Build song seem style past television. Ball expect different all field base officer open.
 Garden table decision black step employee. Form thing imagine they. Peace of computer page trial.
 Best kid front bill act over raise. Good yard tonight difference south glass could.
-

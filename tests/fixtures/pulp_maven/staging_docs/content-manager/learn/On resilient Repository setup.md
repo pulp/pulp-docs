@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'content-manager']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # On resilient Repository setup
@@ -66,4 +66,3 @@ Knowledge after prevent ground notice.
 Major thought position reveal job common.
 Sea human suggest. Institution idea hold today. Issue where situation western reveal. Control language middle watch.
 Home each well animal car turn. Member maintain use usually production.
-

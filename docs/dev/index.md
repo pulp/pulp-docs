@@ -8,4 +8,3 @@ Also, this is used for the production build.
 
 To start using it, see the [Getting Started](site:pulp-docs/docs/dev/tutorials/getting-started/) section.
 Before contributing, we recommend reading about the [Architecture](site:pulp-docs/docs/dev/reference/architecture/).
-

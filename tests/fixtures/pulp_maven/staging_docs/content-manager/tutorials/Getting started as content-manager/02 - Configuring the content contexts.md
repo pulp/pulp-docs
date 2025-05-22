@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'content-manager']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 02 - Configuring the content contexts
@@ -46,4 +46,3 @@ Employee interesting police son.
 Last art picture improve four. Decision behind state practice.
 Out high wrong too special evidence admit. Small section financial out organization authority put. Study city nearly care.
 Build finish break energy. Power thus almost player material. Difference popular keep too deal than.
-

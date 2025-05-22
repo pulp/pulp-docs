@@ -30,5 +30,3 @@ Things to keep in mind:
 - **Audience:** Target newcomers. Experienced users will probably use the ToC or the search.
 - **Format:** Synopsis + Roadmap. Tell what your plugin is, what it does and a simple roadmap for starting.
 - **Size:** Keep it brief. This should an easy win for the user before he starts this journey.
-
-

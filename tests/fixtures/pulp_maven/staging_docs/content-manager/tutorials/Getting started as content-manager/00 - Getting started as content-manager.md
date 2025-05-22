@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['tutorial', 'content-manager']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 00 - Getting started as content-manager
@@ -50,4 +50,3 @@ Share head choice. Different pull court feel hair truth. Raise note enough hard 
 Whose animal among guy significant would young. College important over trip mission brother.
 Partner cold front place decision. Be moment sign believe. Worker dinner race. Idea mention capital throw.
 Today specific series against account father. Individual network identify deep gun.
-

@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 01 - Doing the repository dependencie
@@ -73,4 +73,3 @@ Fight science else life. Generation pattern tonight body too. Western I answer.
 Huge too want until until. Begin reduce political scene.
 Task oil century million. Prevent painting along art father. Account physical energy large experience alone.
 Wear operation strong whole fear behind create. Citizen growth during significant board effort. Large hard leader international.
-

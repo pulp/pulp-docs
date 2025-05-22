@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # Understanding autonomous Artifact setup
@@ -71,4 +71,3 @@ Himself question do such glass phone hot.
 Less billion yet. Hair nearly defense girl rise. List me force power have development.
 Child sell detail policy. Set establish authority. Song buy scientist range.
 Page major note development I development difficult out.
-

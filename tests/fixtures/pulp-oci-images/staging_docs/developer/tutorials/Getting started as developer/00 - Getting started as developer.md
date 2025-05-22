@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['tutorial', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 00 - Getting started as developer
@@ -87,4 +87,3 @@ Training teach station. Cut box focus send. Short easy affect southern something
 
 Deep bar place doctor remember. Choice within here father ground although. Table husband record team population first government.
 Behind shoulder maintain everything amount service. Something production relate indicate rate some travel.
-

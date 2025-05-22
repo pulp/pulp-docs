@@ -1,6 +1,6 @@
 meta:
   version: 1
-  rest_api_template: https://docs.pulpproject.org/{}/restapi.html  
+  rest_api_template: https://docs.pulpproject.org/{}/restapi.html
   repo_types:
     - core
     - content
