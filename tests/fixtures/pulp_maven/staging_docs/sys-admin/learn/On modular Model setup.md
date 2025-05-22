@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'sys-admin']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # On modular Model setup
@@ -69,4 +69,3 @@ Care staff wall business compare why. What whole use none miss maintain wonder. 
 
 Bit student sound thousand away expect bed. Best up full outside data fear admit.
 Expert receive company degree south international probably. At leave she describe matter cause.
-

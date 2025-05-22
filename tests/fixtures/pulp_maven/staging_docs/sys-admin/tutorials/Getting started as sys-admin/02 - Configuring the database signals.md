@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'sys-admin']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 02 - Configuring the database signals
@@ -71,4 +71,3 @@ Quality position cup wonder although. Wear even could TV side.
 
 Report tell about court white. Raise thing use series appear community according class.
 I perhaps discover couple in. Late something summer half position. Business about agreement note.
-

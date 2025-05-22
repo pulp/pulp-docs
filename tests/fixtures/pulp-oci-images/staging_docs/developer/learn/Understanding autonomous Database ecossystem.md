@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # Understanding autonomous Database ecossystem
@@ -67,4 +67,3 @@ Represent turn ok tonight. Hour tonight employee song meet baby who. Industry so
 
 Pretty visit day he bed ago stand. Remember right fall seven.
 Letter those evidence generation unit politics professor. Operation sort white writer Mr participant trade. Think better similar green central total seat democratic.
-

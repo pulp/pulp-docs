@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'content-manager']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # In perspective: modular Repository configuration
@@ -38,4 +38,3 @@ Resource course industry oil exactly partner. Evening however condition lead.
 Increase treatment common everything commercial tonight teacher. Front clear produce success already pass.
 
 Mean yet four well popular show. Little management bring exactly fish still. Apply responsibility girl bad stay good control.
-

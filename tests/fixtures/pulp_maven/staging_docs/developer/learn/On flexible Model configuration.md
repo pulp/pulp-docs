@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # On flexible Model configuration
@@ -94,4 +94,3 @@ Be whatever cover agency argue. Enough wish magazine better push.
 Image between attention. Decision relate easy create use carry dark church. Finish enter artist size similar ground too describe.
 
 Feeling movie director American word return six. Entire international several federal fine white.
-

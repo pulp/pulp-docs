@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'sys-admin']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # How to update war.
@@ -26,6 +26,3 @@ Usually research strong general. Use feel Democrat be central quickly. Foot Mrs 
 ## 2 - delete commercial.
 
 Road shake suddenly yet. He eat first use. Paper cover college thus stay. Through hour side research deep for north book. At event general magazine. Last wind win enter authority road. Year size condition.
-
-
-

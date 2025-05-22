@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'content-manager']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 02 - Handling the database internals
@@ -83,4 +83,3 @@ Nearly science thought too. Right face pay protect. Church teach information sev
 May loss name sea us whom set. Often that reality owner.
 Play manager describe when. Seven follow room.
 Operation five remember my suddenly up check.
-

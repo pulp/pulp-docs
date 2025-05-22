@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'sys-admin']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 04 - Setting the database dependencie
@@ -76,4 +76,3 @@ Subject production leader race. Read raise should keep develop project prevent.
 
 Pattern full while best western who. Carry summer kind travel. Performance however group sort develop beautiful.
 Same apply summer long. Culture inside notice common because wind measure him. Throw somebody class than executive.
-

@@ -7,18 +7,15 @@ import os
 import shutil
 import subprocess
 import tempfile
+from importlib.resources import files
 from pathlib import Path
 from typing import NamedTuple, Optional
-
-from importlib.resources import files
 
 from pulp_docs.constants import BASE_TMPDIR_NAME
 from pulp_docs.repository import Repos
 
 
-def main(
-    output_dir: Path, plugins_filter: Optional[list[str]] = None, dry_run: bool = False
-):
+def main(output_dir: Path, plugins_filter: Optional[list[str]] = None, dry_run: bool = False):
     """Creates openapi json files for all or selected plugins in output dir."""
     repolist = str(files("pulp_docs").joinpath("data/repolist.yml"))
     repos = Repos.from_yaml(repolist).get_repos(["content"])
@@ -57,7 +54,7 @@ class PulpPlugin(NamedTuple):
 
 class OpenAPIGenerator:
     """
-    Responsible for seting up a python environment with the required
+    Responsible for setting up a python environment with the required
     Pulp packages to generate openapi schemas for all registered plugins.
 
     Args:
@@ -97,9 +94,7 @@ class OpenAPIGenerator:
         """
         create_venv_cmd = ("python", "-m", "venv", self.venv_path)
         url = (
-            plugin.get_remote_url()
-            if not plugin.is_subpackage
-            else self.pulpcore.get_remote_url()
+            plugin.get_remote_url() if not plugin.is_subpackage else self.pulpcore.get_remote_url()
         )
         # setuptools provides distutils for python >=3.12.
         install_cmd = ["pip", "install", f"git+{url}", "setuptools"]
@@ -115,7 +110,7 @@ class OpenAPIGenerator:
     def run_python(self, *cmd: str) -> str:
         """Run a binary command from within the tmp venv.
 
-        Basicaly: $tmp-venv/bin/{first-arg} {remaining-args}
+        Basically: $tmp-venv/bin/{first-arg} {remaining-args}
         """
         cmd_bin = os.path.join(self.venv_path, f"bin/{cmd[0]}")
         final_cmd = [cmd_bin] + list(cmd[1:])
@@ -146,7 +141,7 @@ def parse_args():
         "-l",
         "--plugin-list",
         type=str,
-        help="List of plugins that should be used. Use all if ommited.",
+        help="List of plugins that should be used. Use all if omitted.",
     )
     args = parser.parse_args()
 
