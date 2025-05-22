@@ -1,8 +1,8 @@
+import re
+import tomllib
 from pathlib import Path
 
-import tomllib
 import yaml
-import re
 
 
 def parse_doctree_file(doctree_file: Path, target: Path, project_name: str = "foobar"):
@@ -27,7 +27,7 @@ def parse_doctree_file(doctree_file: Path, target: Path, project_name: str = "fo
     See `test_doctree_writer` for samples.
 
     Params:
-        doctree_file: The file with a supported extenstion format. E.g: `.toml` `.yml` and `.doctree`
+        doctree_file: The input file to be parsed. Supports `.toml` `.yml` and `.doctree`
         target: The directory where the project should be writter to.
     """
 
@@ -35,9 +35,7 @@ def parse_doctree_file(doctree_file: Path, target: Path, project_name: str = "fo
         _data = file.read_text()
         section_match = r"\n*\[\[\s*[\w-]+\s*\]\]\n"
         item_match = r"----+\n"
-        section_split = [
-            section for section in re.split(section_match, _data) if section
-        ]
+        section_split = [section for section in re.split(section_match, _data) if section]
         item_split = [
             item
             for section in section_split

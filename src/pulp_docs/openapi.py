@@ -7,18 +7,15 @@ import os
 import shutil
 import subprocess
 import tempfile
+from importlib.resources import files
 from pathlib import Path
 from typing import NamedTuple, Optional
-
-from importlib.resources import files
 
 from pulp_docs.constants import BASE_TMPDIR_NAME
 from pulp_docs.repository import Repos
 
 
-def main(
-    output_dir: Path, plugins_filter: Optional[list[str]] = None, dry_run: bool = False
-):
+def main(output_dir: Path, plugins_filter: Optional[list[str]] = None, dry_run: bool = False):
     """Creates openapi json files for all or selected plugins in output dir."""
     repolist = str(files("pulp_docs").joinpath("data/repolist.yml"))
     repos = Repos.from_yaml(repolist).get_repos(["content"])
@@ -97,9 +94,7 @@ class OpenAPIGenerator:
         """
         create_venv_cmd = ("python", "-m", "venv", self.venv_path)
         url = (
-            plugin.get_remote_url()
-            if not plugin.is_subpackage
-            else self.pulpcore.get_remote_url()
+            plugin.get_remote_url() if not plugin.is_subpackage else self.pulpcore.get_remote_url()
         )
         # setuptools provides distutils for python >=3.12.
         install_cmd = ["pip", "install", f"git+{url}", "setuptools"]
