@@ -38,7 +38,7 @@ theme:
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode
-# Blog's Navigation needs to be excempt from literate nav...
+# Blog's Navigation needs to be exempt from literate nav...
 nav:
   - Home: "index.md"
   - "User Manual":
