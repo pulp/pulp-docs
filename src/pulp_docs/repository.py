@@ -6,19 +6,19 @@ Their purpose is to facilitate declaring and downloading the source-code.
 
 from __future__ import annotations
 
+import configparser
 import logging
 import shutil
 import subprocess
 import tarfile
 import tempfile
+import tomllib
 import typing as t
 from dataclasses import dataclass, field
 from io import BytesIO
 from pathlib import Path
 
 import httpx
-import configparser
-import tomllib
 import yaml
 
 from pulp_docs.utils.general import get_git_ignored_files
@@ -154,11 +154,7 @@ class Repo:
             version_file = src_copy_path / "pyproject.toml"
             if version_file.exists():
                 content = tomllib.loads(version_file.read_text())
-                self.version = (
-                    content.get("tool", {})
-                    .get("bumpversion", {})
-                    .get("current_version")
-                )
+                self.version = content.get("tool", {}).get("bumpversion", {}).get("current_version")
 
         # update app_label for app plugins
         template_config_file = src_copy_path / "template_config.yml"
@@ -166,9 +162,7 @@ class Repo:
             self.template_config = yaml.load(
                 template_config_file.read_bytes(), Loader=yaml.SafeLoader
             )
-            app_label_map = {
-                p["name"]: p["app_label"] for p in self.template_config["plugins"]
-            }
+            app_label_map = {p["name"]: p["app_label"] for p in self.template_config["plugins"]}
             subpackages = self.subpackages or []
             for plugin in (self, *subpackages):
                 plugin.app_label = app_label_map.get(plugin.name, None)
@@ -189,9 +183,7 @@ def download_from_gh_main(dest_dir: Path, owner: str, name: str, branch: str):
     try:
         subprocess.run(cmd, check=True)
     except subprocess.CalledProcessError as e:
-        log.error(
-            f"An error ocurred while trying to download '{name}' source-code:\n{e}"
-        )
+        log.error(f"An error ocurred while trying to download '{name}' source-code:\n{e}")
         raise
 
     log.info("Done.")
@@ -206,8 +198,8 @@ def download_from_gh_latest(dest_dir: Path, owner: str, name: str):
 
     Returns the download url.
     """
-    latest_release_link_url = (
-        "https://api.github.com/repos/{}/{}/releases/latest".format(owner, name)
+    latest_release_link_url = "https://api.github.com/repos/{}/{}/releases/latest".format(
+        owner, name
     )
 
     print("Fetching latest release with:", latest_release_link_url)
@@ -278,9 +270,7 @@ class Repos:
     @property
     def all(self):
         """The set of repositories and subpackages"""
-        repos = [
-            repo for repo_type in self.repo_by_types.values() for repo in repo_type
-        ]
+        repos = [repo for repo_type in self.repo_by_types.values() for repo in repo_type]
         subpackages = []
         for repo in repos:
             if repo.subpackages:
@@ -367,9 +357,7 @@ class Repos:
                 type="content",
             ),
             Repo("Maven", "new_repo3", local_basepath=FIXTURE_WORKDIR, type="content"),
-            Repo(
-                "Docs Tool", "pulp-docs", local_basepath=FIXTURE_WORKDIR, type="other"
-            ),
+            Repo("Docs Tool", "pulp-docs", local_basepath=FIXTURE_WORKDIR, type="other"),
         ]
         repo_types = {
             "core": DEFAULT_CORE,
