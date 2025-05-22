@@ -1,0 +1,42 @@
+---
+
+yaml-files:
+  - '*.yaml'
+  - '*.yml'
+  - '.yamllint'
+
+rules:  # defaults are commented out
+  # anchors: enable
+  # braces: enable
+  # brackets: enable
+  # colons: enable
+  # commas: enable
+  # comments:
+  #   level: warning
+  # comments-indentation:
+  #   level: warning
+  document-end: enable
+  document-start: enable
+    # level: warning
+  # empty-lines: enable
+  # empty-values: disable
+  # float-values: disable
+  # hyphens: enable
+  # indentation: enable
+  # key-duplicates: enable
+  # key-ordering: disable
+  # line-length: enable
+  # new-line-at-end-of-file: enable
+  # new-lines: enable
+  # octal-values: disable
+  # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.quoted_strings
+  quoted-strings:
+    quote-type: double
+    required: true
+    allow-quoted-quotes: true
+    check-keys: false
+
+  # trailing-spaces: enable
+  # truthy:
+  #   level: warning
+...
