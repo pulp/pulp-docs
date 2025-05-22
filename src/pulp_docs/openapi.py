@@ -54,7 +54,7 @@ class PulpPlugin(NamedTuple):
 
 class OpenAPIGenerator:
     """
-    Responsible for seting up a python environment with the required
+    Responsible for setting up a python environment with the required
     Pulp packages to generate openapi schemas for all registered plugins.
 
     Args:
@@ -110,7 +110,7 @@ class OpenAPIGenerator:
     def run_python(self, *cmd: str) -> str:
         """Run a binary command from within the tmp venv.
 
-        Basicaly: $tmp-venv/bin/{first-arg} {remaining-args}
+        Basically: $tmp-venv/bin/{first-arg} {remaining-args}
         """
         cmd_bin = os.path.join(self.venv_path, f"bin/{cmd[0]}")
         final_cmd = [cmd_bin] + list(cmd[1:])
@@ -141,7 +141,7 @@ def parse_args():
         "-l",
         "--plugin-list",
         type=str,
-        help="List of plugins that should be used. Use all if ommited.",
+        help="List of plugins that should be used. Use all if omitted.",
     )
     args = parser.parse_args()
 

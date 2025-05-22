@@ -43,13 +43,13 @@ pipx install git+https://github.com/pulp/pulp-docs --include-deps
 pulp-docs serve
 ```
 
-For development, use your prefered method!
+For development, use your preferred method!
 
 ## How to override `repolist.yml`
 
-If you want to share work you are doing in muliple forks, you can share a custom `repolist.yml` which points to your forks.
+If you want to share work you are doing in multiple forks, you can share a custom `repolist.yml` which points to your forks.
 
-Then, anyone can test them locally by overriting your `repolist.yml` like so:
+Then, anyone can test them locally by overwriting your `repolist.yml` like so:
 
 ```bash
 $ cat "path/to/my/repolist.yml"

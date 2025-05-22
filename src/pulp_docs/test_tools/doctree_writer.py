@@ -18,9 +18,9 @@ def parse_doctree_file(doctree_file: Path, target: Path, project_name: str = "fo
 
     ```pseudo-format
     {
-        projet-name-1: [{path: content}, ...,  {path: content}],
+        project-name-1: [{path: content}, ...,  {path: content}],
         ...
-        projet-name-N: [{path: content}, ..., {path: content}],
+        project-name-N: [{path: content}, ..., {path: content}],
     }
     ```
 
@@ -28,7 +28,7 @@ def parse_doctree_file(doctree_file: Path, target: Path, project_name: str = "fo
 
     Params:
         doctree_file: The input file to be parsed. Supports `.toml` `.yml` and `.doctree`
-        target: The directory where the project should be writter to.
+        target: The directory where the project should be written to.
     """
 
     def custom_parser(file: Path):
