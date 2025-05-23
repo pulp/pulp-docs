@@ -3,8 +3,6 @@ name: "Docs CI"
 
 on:
   workflow_call:
-    # The git reference for the workflow isn't acessible directly.
-    # We trust that the caller will provide the matching one
     inputs:
       pulpdocs_ref:
         description: "Git reference of this workflow file. Must match the one used for the workflow call"
@@ -23,29 +21,26 @@ jobs:
           ref: "${{ inputs.pulpdocs_ref }}"
           fetch-depth: 0
 
-      - name: "Get pulp-docs commit"
-        working-directory: "pulp-docs"
-        run: |
-          set -e
-          echo "CHECKOUT_SHA=$(git rev-parse HEAD)" | tee -a $GITHUB_ENV
-
-      - name: "Instructions to run locally"
-        run: |
-          cat <<EOL
-          Assuming you have pulp-docs and your plugin checkout in the same dir, run:
-
-          cd pulp-docs
-          git checkout ${{ env.CHECKOUT_SHA }}
-          pulp-docs fetch --dest /tmp/pulp-docs-tmp
-          pulp-docs build --path pulp-docs@..:${{ github.event.repository.name }}@..:/tmp/pulp-docs-tmp
-          EOL
-
-      # The caller repository and context is used
-      - name: "Checkout CI repository"
+      - name: "Checkout component repository"
         if: "${{ github.event.repository.name != 'pulp-docs' }}"
         uses: "actions/checkout@v4"
         with:
           path: "${{ github.event.repository.name }}"
+
+      - name: "Instructions to run locally"
+        run: |
+          cat <<EOL
+          Ensure you have "pulp-docs" and "${{ github.event.repository.name }}" in your CWD with correct revisions:
+
+          git -C pulp-docs checkout "${{ inputs.pulpdocs_ref }}"
+          git -C ${{ github.event.repository.name }} checkout "${{ github.head_ref }}"
+
+          Then run:
+
+          cd pulp-docs
+          pulp-docs fetch --dest /tmp/pulp-docs-tmp
+          pulp-docs build --path pulp-docs@..:${{ github.event.repository.name }}@..:/tmp/pulp-docs-tmp
+          EOL
 
       - uses: "actions/setup-python@v5"
         with:
