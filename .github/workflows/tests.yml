@@ -1,3 +1,4 @@
+---
 name: "Tests"
 
 on:
@@ -20,3 +21,4 @@ jobs:
       - name: "Run test suite"
         run: |
           pytest -sv
+...
