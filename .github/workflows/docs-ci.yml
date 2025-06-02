@@ -14,6 +14,7 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: "Checkout pulp-docs repository"
+        if: "${{ github.event.repository.name != 'pulp-docs' }}"
         uses: "actions/checkout@v4"
         with:
           repository: "pulp/pulp-docs"
@@ -22,10 +23,10 @@ jobs:
           fetch-depth: 0
 
       - name: "Checkout component repository"
-        if: "${{ github.event.repository.name != 'pulp-docs' }}"
         uses: "actions/checkout@v4"
         with:
           path: "${{ github.event.repository.name }}"
+          fetch-depth: 0
 
       - name: "Instructions to run locally"
         run: |
@@ -65,5 +66,5 @@ jobs:
         working-directory: "pulp-docs"
         run: |
           echo "Checking that the namespace for the component under CI exists in the built docs."
-          ls "site/${{ github.event.repository.name }}/docs"
+          ls "site/${{ github.event.repository.name }}"
 ...
