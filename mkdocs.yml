@@ -135,6 +135,10 @@ plugins:
           git_url: "https://github.com/pulp/pulpcore"
           kind: "Other"
           # rest_api: "certguard"
+        - title: "Selinux"
+          path: "pulpcore-selinux"
+          git_url: "https://github.com/pulp/pulpcore-selinux"
+          kind: "Other"
 
         - title: "Pulp OCI Images"
           path: "pulp-oci-images"
