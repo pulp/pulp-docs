@@ -257,7 +257,7 @@ def rss_items() -> list:
     return rss_feed["items"][:20]
 
 
-def load_components(find_path: list[str], config: MkDocsConfig, draft: bool):
+def load_components(find_path: list[str], config: PulpDocsPluginConfig, draft: bool):
     loaded_components = []
     for component_opt in config.components:
         component = Component.build(find_path, component_opt)

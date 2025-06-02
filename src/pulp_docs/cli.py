@@ -6,6 +6,7 @@ from pathlib import Path
 from mkdocs.__main__ import cli as mkdocs_cli
 from mkdocs.config import load_config
 from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft, ctx_path
+from pulp_docs.plugin import load_components
 
 
 def blog_callback(ctx: click.Context, param: click.Parameter, value: bool) -> bool:
@@ -63,7 +64,7 @@ path_option = click.option(
 )
 
 
-async def clone_repositories(repositories: list[str], dest_dir: Path) -> None:
+async def clone_repositories(repositories: set[str], dest_dir: Path) -> None:
     """Clone multiple repositories concurrently."""
 
     async def clone_repository(repo_url: str) -> None:
@@ -100,16 +101,25 @@ async def clone_repositories(repositories: list[str], dest_dir: Path) -> None:
     envvar="PULPDOCS_DIR",
     help="Path to mkdocs.yml config file",
 )
-def fetch(dest, config_file):
+@click.option(
+    "--path-exclude",
+    default="",
+    callback=find_path_callback,
+    help="A colon separated list of lookup paths to exclude in the form [repo1@]path1 [:[repo2@]path2 [...]].",
+)
+def fetch(dest, config_file, path_exclude):
     """Fetch repositories to destination dir."""
     dest_path = Path(dest)
-    config = load_config(config_file)
-    components = config.plugins["PulpDocs"].config.components
-    repositories_list = list({r.git_url for r in components})
+    pulpdocs_plugin = load_config(config_file).plugins["PulpDocs"]
+    all_components = pulpdocs_plugin.config.components
+    all_repositories_set = {r.git_url for r in all_components if r.git_url}
+    found_components = load_components(path_exclude, pulpdocs_plugin.config, draft=True)
+    found_repositories_set = {r.git_url for r in found_components}
+    final_repositories_set = all_repositories_set - found_repositories_set
 
     if not dest_path.exists():
         dest_path.mkdir(parents=True)
-    asyncio.run(clone_repositories(repositories_list, dest_path))
+    asyncio.run(clone_repositories(final_repositories_set, dest_path))
 
 
 main = mkdocs_cli
