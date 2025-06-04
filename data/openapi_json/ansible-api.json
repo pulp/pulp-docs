@@ -17,8 +17,8 @@
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "ansible": "0.26.0.dev",
-            "core": "3.79.0"
+            "ansible": "0.27.0.dev",
+            "core": "3.80.0"
         },
         "x-pulp-domain-enabled": false
     },
@@ -1976,6 +1976,7 @@
                                     "-requires_ansible",
                                     "-search_vector",
                                     "-sha256",
+                                    "-tags",
                                     "-timestamp_of_interest",
                                     "-upstream_id",
                                     "-version",
@@ -2006,6 +2007,7 @@
                                     "requires_ansible",
                                     "search_vector",
                                     "sha256",
+                                    "tags",
                                     "timestamp_of_interest",
                                     "upstream_id",
                                     "version",
@@ -2016,7 +2018,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `authors` - Authors\n* `-authors` - Authors (descending)\n* `contents` - Contents\n* `-contents` - Contents (descending)\n* `dependencies` - Dependencies\n* `-dependencies` - Dependencies (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `docs_blob` - Docs blob\n* `-docs_blob` - Docs blob (descending)\n* `manifest` - Manifest\n* `-manifest` - Manifest (descending)\n* `files` - Files\n* `-files` - Files (descending)\n* `documentation` - Documentation\n* `-documentation` - Documentation (descending)\n* `homepage` - Homepage\n* `-homepage` - Homepage (descending)\n* `issues` - Issues\n* `-issues` - Issues (descending)\n* `license` - License\n* `-license` - License (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `namespace` - Namespace\n* `-namespace` - Namespace (descending)\n* `repository` - Repository\n* `-repository` - Repository (descending)\n* `requires_ansible` - Requires ansible\n* `-requires_ansible` - Requires ansible (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `version_major` - Version major\n* `-version_major` - Version major (descending)\n* `version_minor` - Version minor\n* `-version_minor` - Version minor (descending)\n* `version_patch` - Version patch\n* `-version_patch` - Version patch (descending)\n* `version_prerelease` - Version prerelease\n* `-version_prerelease` - Version prerelease (descending)\n* `search_vector` - Search vector\n* `-search_vector` - Search vector (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `authors` - Authors\n* `-authors` - Authors (descending)\n* `contents` - Contents\n* `-contents` - Contents (descending)\n* `dependencies` - Dependencies\n* `-dependencies` - Dependencies (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `docs_blob` - Docs blob\n* `-docs_blob` - Docs blob (descending)\n* `manifest` - Manifest\n* `-manifest` - Manifest (descending)\n* `files` - Files\n* `-files` - Files (descending)\n* `documentation` - Documentation\n* `-documentation` - Documentation (descending)\n* `homepage` - Homepage\n* `-homepage` - Homepage (descending)\n* `issues` - Issues\n* `-issues` - Issues (descending)\n* `license` - License\n* `-license` - License (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `namespace` - Namespace\n* `-namespace` - Namespace (descending)\n* `repository` - Repository\n* `-repository` - Repository (descending)\n* `requires_ansible` - Requires ansible\n* `-requires_ansible` - Requires ansible (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `version_major` - Version major\n* `-version_major` - Version major (descending)\n* `version_minor` - Version minor\n* `-version_minor` - Version minor (descending)\n* `version_patch` - Version patch\n* `-version_patch` - Version patch (descending)\n* `version_prerelease` - Version prerelease\n* `-version_prerelease` - Version prerelease (descending)\n* `tags` - Tags\n* `-tags` - Tags (descending)\n* `search_vector` - Search vector\n* `-search_vector` - Search vector (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -4421,7 +4423,7 @@
             "get": {
                 "operationId": "pulp_ansible_tags_list",
                 "description": "ViewSet for Tag models.",
-                "summary": "List tags",
+                "summary": "List collection versions",
                 "parameters": [
                     {
                         "name": "limit",
@@ -10293,6 +10295,7 @@
                                     "-requires_ansible",
                                     "-search_vector",
                                     "-sha256",
+                                    "-tags",
                                     "-timestamp_of_interest",
                                     "-upstream_id",
                                     "-version",
@@ -10323,6 +10326,7 @@
                                     "requires_ansible",
                                     "search_vector",
                                     "sha256",
+                                    "tags",
                                     "timestamp_of_interest",
                                     "upstream_id",
                                     "version",
@@ -10333,7 +10337,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `authors` - Authors\n* `-authors` - Authors (descending)\n* `contents` - Contents\n* `-contents` - Contents (descending)\n* `dependencies` - Dependencies\n* `-dependencies` - Dependencies (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `docs_blob` - Docs blob\n* `-docs_blob` - Docs blob (descending)\n* `manifest` - Manifest\n* `-manifest` - Manifest (descending)\n* `files` - Files\n* `-files` - Files (descending)\n* `documentation` - Documentation\n* `-documentation` - Documentation (descending)\n* `homepage` - Homepage\n* `-homepage` - Homepage (descending)\n* `issues` - Issues\n* `-issues` - Issues (descending)\n* `license` - License\n* `-license` - License (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `namespace` - Namespace\n* `-namespace` - Namespace (descending)\n* `repository` - Repository\n* `-repository` - Repository (descending)\n* `requires_ansible` - Requires ansible\n* `-requires_ansible` - Requires ansible (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `version_major` - Version major\n* `-version_major` - Version major (descending)\n* `version_minor` - Version minor\n* `-version_minor` - Version minor (descending)\n* `version_patch` - Version patch\n* `-version_patch` - Version patch (descending)\n* `version_prerelease` - Version prerelease\n* `-version_prerelease` - Version prerelease (descending)\n* `search_vector` - Search vector\n* `-search_vector` - Search vector (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `authors` - Authors\n* `-authors` - Authors (descending)\n* `contents` - Contents\n* `-contents` - Contents (descending)\n* `dependencies` - Dependencies\n* `-dependencies` - Dependencies (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `docs_blob` - Docs blob\n* `-docs_blob` - Docs blob (descending)\n* `manifest` - Manifest\n* `-manifest` - Manifest (descending)\n* `files` - Files\n* `-files` - Files (descending)\n* `documentation` - Documentation\n* `-documentation` - Documentation (descending)\n* `homepage` - Homepage\n* `-homepage` - Homepage (descending)\n* `issues` - Issues\n* `-issues` - Issues (descending)\n* `license` - License\n* `-license` - License (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `namespace` - Namespace\n* `-namespace` - Namespace (descending)\n* `repository` - Repository\n* `-repository` - Repository (descending)\n* `requires_ansible` - Requires ansible\n* `-requires_ansible` - Requires ansible (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `version_major` - Version major\n* `-version_major` - Version major (descending)\n* `version_minor` - Version minor\n* `-version_minor` - Version minor (descending)\n* `version_patch` - Version patch\n* `-version_patch` - Version patch (descending)\n* `version_prerelease` - Version prerelease\n* `-version_prerelease` - Version prerelease (descending)\n* `tags` - Tags\n* `-tags` - Tags (descending)\n* `search_vector` - Search vector\n* `-search_vector` - Search vector (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -12408,6 +12412,7 @@
                                     "-requires_ansible",
                                     "-search_vector",
                                     "-sha256",
+                                    "-tags",
                                     "-timestamp_of_interest",
                                     "-upstream_id",
                                     "-version",
@@ -12438,6 +12443,7 @@
                                     "requires_ansible",
                                     "search_vector",
                                     "sha256",
+                                    "tags",
                                     "timestamp_of_interest",
                                     "upstream_id",
                                     "version",
@@ -12448,7 +12454,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `authors` - Authors\n* `-authors` - Authors (descending)\n* `contents` - Contents\n* `-contents` - Contents (descending)\n* `dependencies` - Dependencies\n* `-dependencies` - Dependencies (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `docs_blob` - Docs blob\n* `-docs_blob` - Docs blob (descending)\n* `manifest` - Manifest\n* `-manifest` - Manifest (descending)\n* `files` - Files\n* `-files` - Files (descending)\n* `documentation` - Documentation\n* `-documentation` - Documentation (descending)\n* `homepage` - Homepage\n* `-homepage` - Homepage (descending)\n* `issues` - Issues\n* `-issues` - Issues (descending)\n* `license` - License\n* `-license` - License (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `namespace` - Namespace\n* `-namespace` - Namespace (descending)\n* `repository` - Repository\n* `-repository` - Repository (descending)\n* `requires_ansible` - Requires ansible\n* `-requires_ansible` - Requires ansible (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `version_major` - Version major\n* `-version_major` - Version major (descending)\n* `version_minor` - Version minor\n* `-version_minor` - Version minor (descending)\n* `version_patch` - Version patch\n* `-version_patch` - Version patch (descending)\n* `version_prerelease` - Version prerelease\n* `-version_prerelease` - Version prerelease (descending)\n* `search_vector` - Search vector\n* `-search_vector` - Search vector (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `authors` - Authors\n* `-authors` - Authors (descending)\n* `contents` - Contents\n* `-contents` - Contents (descending)\n* `dependencies` - Dependencies\n* `-dependencies` - Dependencies (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `docs_blob` - Docs blob\n* `-docs_blob` - Docs blob (descending)\n* `manifest` - Manifest\n* `-manifest` - Manifest (descending)\n* `files` - Files\n* `-files` - Files (descending)\n* `documentation` - Documentation\n* `-documentation` - Documentation (descending)\n* `homepage` - Homepage\n* `-homepage` - Homepage (descending)\n* `issues` - Issues\n* `-issues` - Issues (descending)\n* `license` - License\n* `-license` - License (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `namespace` - Namespace\n* `-namespace` - Namespace (descending)\n* `repository` - Repository\n* `-repository` - Repository (descending)\n* `requires_ansible` - Requires ansible\n* `-requires_ansible` - Requires ansible (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `version_major` - Version major\n* `-version_major` - Version major (descending)\n* `version_minor` - Version minor\n* `-version_minor` - Version minor (descending)\n* `version_patch` - Version patch\n* `-version_patch` - Version patch (descending)\n* `version_prerelease` - Version prerelease\n* `-version_prerelease` - Version prerelease (descending)\n* `tags` - Tags\n* `-tags` - Tags (descending)\n* `search_vector` - Search vector\n* `-search_vector` - Search vector (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -14444,6 +14450,7 @@
                                     "-requires_ansible",
                                     "-search_vector",
                                     "-sha256",
+                                    "-tags",
                                     "-timestamp_of_interest",
                                     "-upstream_id",
                                     "-version",
@@ -14474,6 +14481,7 @@
                                     "requires_ansible",
                                     "search_vector",
                                     "sha256",
+                                    "tags",
                                     "timestamp_of_interest",
                                     "upstream_id",
                                     "version",
@@ -14484,7 +14492,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `authors` - Authors\n* `-authors` - Authors (descending)\n* `contents` - Contents\n* `-contents` - Contents (descending)\n* `dependencies` - Dependencies\n* `-dependencies` - Dependencies (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `docs_blob` - Docs blob\n* `-docs_blob` - Docs blob (descending)\n* `manifest` - Manifest\n* `-manifest` - Manifest (descending)\n* `files` - Files\n* `-files` - Files (descending)\n* `documentation` - Documentation\n* `-documentation` - Documentation (descending)\n* `homepage` - Homepage\n* `-homepage` - Homepage (descending)\n* `issues` - Issues\n* `-issues` - Issues (descending)\n* `license` - License\n* `-license` - License (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `namespace` - Namespace\n* `-namespace` - Namespace (descending)\n* `repository` - Repository\n* `-repository` - Repository (descending)\n* `requires_ansible` - Requires ansible\n* `-requires_ansible` - Requires ansible (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `version_major` - Version major\n* `-version_major` - Version major (descending)\n* `version_minor` - Version minor\n* `-version_minor` - Version minor (descending)\n* `version_patch` - Version patch\n* `-version_patch` - Version patch (descending)\n* `version_prerelease` - Version prerelease\n* `-version_prerelease` - Version prerelease (descending)\n* `search_vector` - Search vector\n* `-search_vector` - Search vector (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `authors` - Authors\n* `-authors` - Authors (descending)\n* `contents` - Contents\n* `-contents` - Contents (descending)\n* `dependencies` - Dependencies\n* `-dependencies` - Dependencies (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `docs_blob` - Docs blob\n* `-docs_blob` - Docs blob (descending)\n* `manifest` - Manifest\n* `-manifest` - Manifest (descending)\n* `files` - Files\n* `-files` - Files (descending)\n* `documentation` - Documentation\n* `-documentation` - Documentation (descending)\n* `homepage` - Homepage\n* `-homepage` - Homepage (descending)\n* `issues` - Issues\n* `-issues` - Issues (descending)\n* `license` - License\n* `-license` - License (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `namespace` - Namespace\n* `-namespace` - Namespace (descending)\n* `repository` - Repository\n* `-repository` - Repository (descending)\n* `requires_ansible` - Requires ansible\n* `-requires_ansible` - Requires ansible (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `version_major` - Version major\n* `-version_major` - Version major (descending)\n* `version_minor` - Version minor\n* `-version_minor` - Version minor (descending)\n* `version_patch` - Version patch\n* `-version_patch` - Version patch (descending)\n* `version_prerelease` - Version prerelease\n* `-version_prerelease` - Version prerelease (descending)\n* `tags` - Tags\n* `-tags` - Tags (descending)\n* `search_vector` - Search vector\n* `-search_vector` - Search vector (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -16329,6 +16337,7 @@
                                     "-requires_ansible",
                                     "-search_vector",
                                     "-sha256",
+                                    "-tags",
                                     "-timestamp_of_interest",
                                     "-upstream_id",
                                     "-version",
@@ -16359,6 +16368,7 @@
                                     "requires_ansible",
                                     "search_vector",
                                     "sha256",
+                                    "tags",
                                     "timestamp_of_interest",
                                     "upstream_id",
                                     "version",
@@ -16369,7 +16379,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `authors` - Authors\n* `-authors` - Authors (descending)\n* `contents` - Contents\n* `-contents` - Contents (descending)\n* `dependencies` - Dependencies\n* `-dependencies` - Dependencies (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `docs_blob` - Docs blob\n* `-docs_blob` - Docs blob (descending)\n* `manifest` - Manifest\n* `-manifest` - Manifest (descending)\n* `files` - Files\n* `-files` - Files (descending)\n* `documentation` - Documentation\n* `-documentation` - Documentation (descending)\n* `homepage` - Homepage\n* `-homepage` - Homepage (descending)\n* `issues` - Issues\n* `-issues` - Issues (descending)\n* `license` - License\n* `-license` - License (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `namespace` - Namespace\n* `-namespace` - Namespace (descending)\n* `repository` - Repository\n* `-repository` - Repository (descending)\n* `requires_ansible` - Requires ansible\n* `-requires_ansible` - Requires ansible (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `version_major` - Version major\n* `-version_major` - Version major (descending)\n* `version_minor` - Version minor\n* `-version_minor` - Version minor (descending)\n* `version_patch` - Version patch\n* `-version_patch` - Version patch (descending)\n* `version_prerelease` - Version prerelease\n* `-version_prerelease` - Version prerelease (descending)\n* `search_vector` - Search vector\n* `-search_vector` - Search vector (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `authors` - Authors\n* `-authors` - Authors (descending)\n* `contents` - Contents\n* `-contents` - Contents (descending)\n* `dependencies` - Dependencies\n* `-dependencies` - Dependencies (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `docs_blob` - Docs blob\n* `-docs_blob` - Docs blob (descending)\n* `manifest` - Manifest\n* `-manifest` - Manifest (descending)\n* `files` - Files\n* `-files` - Files (descending)\n* `documentation` - Documentation\n* `-documentation` - Documentation (descending)\n* `homepage` - Homepage\n* `-homepage` - Homepage (descending)\n* `issues` - Issues\n* `-issues` - Issues (descending)\n* `license` - License\n* `-license` - License (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `namespace` - Namespace\n* `-namespace` - Namespace (descending)\n* `repository` - Repository\n* `-repository` - Repository (descending)\n* `requires_ansible` - Requires ansible\n* `-requires_ansible` - Requires ansible (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `version_major` - Version major\n* `-version_major` - Version major (descending)\n* `version_minor` - Version minor\n* `-version_minor` - Version minor (descending)\n* `version_patch` - Version patch\n* `-version_patch` - Version patch (descending)\n* `version_prerelease` - Version prerelease\n* `-version_prerelease` - Version prerelease (descending)\n* `tags` - Tags\n* `-tags` - Tags (descending)\n* `search_vector` - Search vector\n* `-search_vector` - Search vector (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -17864,13 +17874,11 @@
                     "tags": {
                         "type": "array",
                         "items": {
-                            "type": "string"
+                            "type": "string",
+                            "maxLength": 64
                         }
                     }
-                },
-                "required": [
-                    "tags"
-                ]
+                }
             },
             "CollectionNamespaceResponse": {
                 "type": "object",
@@ -18055,7 +18063,13 @@
                     "tags": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/ansible.TagResponse"
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                }
+                            },
+                            "readOnly": true
                         },
                         "readOnly": true
                     }
@@ -19502,93 +19516,12 @@
                 "type": "object",
                 "description": "A serializer for Git Collection Remotes.",
                 "properties": {
-                    "sock_read_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "client_key": {
+                    "username": {
                         "type": "string",
                         "writeOnly": true,
                         "nullable": true,
                         "minLength": 1,
-                        "description": "A PEM encoded private key used for authentication."
-                    },
-                    "tls_validation": {
-                        "type": "boolean",
-                        "description": "If True, TLS peer validation must be performed."
-                    },
-                    "connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "password": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
-                    },
-                    "total_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "proxy_url": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The proxy URL. Format: scheme://host:port"
-                    },
-                    "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
-                    },
-                    "url": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "The URL of an external content source."
-                    },
-                    "sock_connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "name": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name for this remote."
-                    },
-                    "max_retries": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
-                    },
-                    "headers": {
-                        "type": "array",
-                        "items": {
-                            "type": "object"
-                        },
-                        "description": "Headers for aiohttp.Clientsession"
-                    },
-                    "proxy_password": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
+                        "description": "The username to be used for authentication when syncing."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -19597,25 +19530,26 @@
                             "nullable": true
                         }
                     },
-                    "username": {
+                    "sock_read_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "headers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Headers for aiohttp.Clientsession"
+                    },
+                    "client_key": {
                         "type": "string",
                         "writeOnly": true,
                         "nullable": true,
                         "minLength": 1,
-                        "description": "The username to be used for authentication when syncing."
-                    },
-                    "client_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded client certificate used for authentication."
-                    },
-                    "download_concurrency": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
+                        "description": "A PEM encoded private key used for authentication."
                     },
                     "proxy_username": {
                         "type": "string",
@@ -19624,11 +19558,91 @@
                         "minLength": 1,
                         "description": "The username to authenticte to the proxy."
                     },
+                    "tls_validation": {
+                        "type": "boolean",
+                        "description": "If True, TLS peer validation must be performed."
+                    },
+                    "download_concurrency": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
+                    },
+                    "url": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The URL of an external content source."
+                    },
+                    "ca_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                    },
+                    "password": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
+                    },
+                    "client_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded client certificate used for authentication."
+                    },
+                    "sock_connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "max_retries": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
+                    },
+                    "total_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "A unique name for this remote."
+                    },
                     "rate_limit": {
                         "type": "integer",
                         "format": "int64",
                         "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
+                    },
+                    "proxy_url": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The proxy URL. Format: scheme://host:port"
+                    },
+                    "proxy_password": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "metadata_only": {
                         "type": "boolean",
@@ -20042,11 +20056,12 @@
             },
             "TagResponse": {
                 "type": "object",
-                "description": "A serializer for the Tag model.",
+                "description": "A serializer for the Tags on  CollectionVersions.",
                 "properties": {
                     "name": {
                         "type": "string",
-                        "readOnly": true
+                        "readOnly": true,
+                        "description": "The name of the Tag."
                     },
                     "count": {
                         "type": "integer",
@@ -21001,16 +21016,11 @@
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
-                    "file": {
+                    "file_url": {
                         "type": "string",
-                        "format": "binary",
                         "writeOnly": true,
-                        "description": "An uploaded file that may be turned into the content unit."
-                    },
-                    "artifact": {
-                        "type": "string",
-                        "format": "uri",
-                        "description": "Artifact file representing the physical content"
+                        "minLength": 1,
+                        "description": "A url that Pulp can download and turn into the content unit."
                     },
                     "upload": {
                         "type": "string",
@@ -21018,11 +21028,16 @@
                         "writeOnly": true,
                         "description": "An uncommitted upload that may be turned into the content unit."
                     },
-                    "file_url": {
+                    "artifact": {
                         "type": "string",
+                        "format": "uri",
+                        "description": "Artifact file representing the physical content"
+                    },
+                    "file": {
+                        "type": "string",
+                        "format": "binary",
                         "writeOnly": true,
-                        "minLength": 1,
-                        "description": "A url that Pulp can download and turn into the content unit."
+                        "description": "An uploaded file that may be turned into the content unit."
                     },
                     "repository": {
                         "type": "string",
@@ -21109,11 +21124,6 @@
                 "type": "object",
                 "description": "A serializer for CollectionVersion Content.",
                 "properties": {
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
@@ -21128,21 +21138,26 @@
                         "readOnly": true,
                         "description": "Timestamp of creation."
                     },
-                    "pulp_last_updated": {
+                    "pulp_href": {
                         "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "artifact": {
                         "type": "string",
                         "format": "uri",
                         "description": "Artifact file representing the physical content"
                     },
-                    "pulp_href": {
+                    "pulp_last_updated": {
                         "type": "string",
-                        "format": "uri",
-                        "readOnly": true
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "sha256": {
                         "type": "string",
@@ -21268,7 +21283,13 @@
                     "tags": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/ansible.TagResponse"
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                }
+                            },
+                            "readOnly": true
                         },
                         "readOnly": true
                     },
@@ -21393,93 +21414,12 @@
                 "type": "object",
                 "description": "A serializer for Git Collection Remotes.",
                 "properties": {
-                    "sock_read_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "client_key": {
+                    "username": {
                         "type": "string",
                         "writeOnly": true,
                         "nullable": true,
                         "minLength": 1,
-                        "description": "A PEM encoded private key used for authentication."
-                    },
-                    "tls_validation": {
-                        "type": "boolean",
-                        "description": "If True, TLS peer validation must be performed."
-                    },
-                    "connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "password": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
-                    },
-                    "total_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "proxy_url": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The proxy URL. Format: scheme://host:port"
-                    },
-                    "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
-                    },
-                    "url": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "The URL of an external content source."
-                    },
-                    "sock_connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "name": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name for this remote."
-                    },
-                    "max_retries": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
-                    },
-                    "headers": {
-                        "type": "array",
-                        "items": {
-                            "type": "object"
-                        },
-                        "description": "Headers for aiohttp.Clientsession"
-                    },
-                    "proxy_password": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
+                        "description": "The username to be used for authentication when syncing."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -21488,25 +21428,26 @@
                             "nullable": true
                         }
                     },
-                    "username": {
+                    "sock_read_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "headers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Headers for aiohttp.Clientsession"
+                    },
+                    "client_key": {
                         "type": "string",
                         "writeOnly": true,
                         "nullable": true,
                         "minLength": 1,
-                        "description": "The username to be used for authentication when syncing."
-                    },
-                    "client_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded client certificate used for authentication."
-                    },
-                    "download_concurrency": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
+                        "description": "A PEM encoded private key used for authentication."
                     },
                     "proxy_username": {
                         "type": "string",
@@ -21515,11 +21456,91 @@
                         "minLength": 1,
                         "description": "The username to authenticte to the proxy."
                     },
+                    "tls_validation": {
+                        "type": "boolean",
+                        "description": "If True, TLS peer validation must be performed."
+                    },
+                    "download_concurrency": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
+                    },
+                    "url": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The URL of an external content source."
+                    },
+                    "ca_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                    },
+                    "password": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
+                    },
+                    "client_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded client certificate used for authentication."
+                    },
+                    "sock_connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "max_retries": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
+                    },
+                    "total_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "A unique name for this remote."
+                    },
                     "rate_limit": {
                         "type": "integer",
                         "format": "int64",
                         "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
+                    },
+                    "proxy_url": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The proxy URL. Format: scheme://host:port"
+                    },
+                    "proxy_password": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "metadata_only": {
                         "type": "boolean",
@@ -21540,116 +21561,6 @@
                 "type": "object",
                 "description": "A serializer for Git Collection Remotes.",
                 "properties": {
-                    "sock_read_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "tls_validation": {
-                        "type": "boolean",
-                        "description": "If True, TLS peer validation must be performed."
-                    },
-                    "connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
-                    },
-                    "pulp_last_updated": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the most recent update of the remote."
-                    },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
-                    "total_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "proxy_url": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "The proxy URL. Format: scheme://host:port"
-                    },
-                    "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
-                    },
-                    "url": {
-                        "type": "string",
-                        "description": "The URL of an external content source."
-                    },
-                    "sock_connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name for this remote."
-                    },
-                    "max_retries": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
-                    },
-                    "headers": {
-                        "type": "array",
-                        "items": {
-                            "type": "object"
-                        },
-                        "description": "Headers for aiohttp.Clientsession"
-                    },
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "client_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "A PEM encoded client certificate used for authentication."
-                    },
-                    "download_concurrency": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
-                    },
-                    "rate_limit": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Limits requests per second for each concurrent downloader"
-                    },
                     "hidden_fields": {
                         "type": "array",
                         "items": {
@@ -21669,6 +21580,116 @@
                         },
                         "readOnly": true,
                         "description": "List of hidden (write only) fields"
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "sock_read_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "headers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Headers for aiohttp.Clientsession"
+                    },
+                    "tls_validation": {
+                        "type": "boolean",
+                        "description": "If True, TLS peer validation must be performed."
+                    },
+                    "download_concurrency": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "The URL of an external content source."
+                    },
+                    "ca_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                    },
+                    "client_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "A PEM encoded client certificate used for authentication."
+                    },
+                    "sock_connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "max_retries": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "total_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name for this remote."
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "rate_limit": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Limits requests per second for each concurrent downloader"
+                    },
+                    "proxy_url": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "The proxy URL. Format: scheme://host:port"
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the most recent update of the remote."
                     },
                     "metadata_only": {
                         "type": "boolean",
@@ -22027,11 +22048,6 @@
                 "type": "object",
                 "description": "A serializer for Role versions.",
                 "properties": {
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
@@ -22046,21 +22062,26 @@
                         "readOnly": true,
                         "description": "Timestamp of creation."
                     },
-                    "pulp_last_updated": {
+                    "pulp_href": {
                         "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "artifact": {
                         "type": "string",
                         "format": "uri",
                         "description": "Artifact file representing the physical content"
                     },
-                    "pulp_href": {
+                    "pulp_last_updated": {
                         "type": "string",
-                        "format": "uri",
-                        "readOnly": true
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "version": {
                         "type": "string"
@@ -22078,17 +22099,6 @@
                     "namespace",
                     "version"
                 ]
-            },
-            "ansible.TagResponse": {
-                "type": "object",
-                "description": "A serializer for nesting in the CollectionVersion model.",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The name of the Tag."
-                    }
-                }
             }
         },
         "securitySchemes": {
