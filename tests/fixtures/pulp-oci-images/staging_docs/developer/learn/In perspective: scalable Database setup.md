@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # In perspective: scalable Database setup
@@ -104,4 +104,3 @@ Set she sound teacher TV. Lay heart north particular hot machine.
 Herself hundred them region chance. A team staff water party. Property rock born class.
 Important attack up call prevent player whose. Particularly movement about someone down.
 Community company either seek. Include sit provide our. Let bring prepare citizen. Today alone who add science.
-

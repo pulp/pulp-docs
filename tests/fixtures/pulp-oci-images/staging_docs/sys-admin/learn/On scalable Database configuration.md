@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'sys-admin']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # On scalable Database configuration
@@ -72,4 +72,3 @@ Adult run provide book ten. Mention he meeting court later.
 Clearly middle particularly offer media. Cost remain perhaps. Less however idea window mention simply.
 Artist behind control main religious wear. Whole off contain move event television. Site season then her person.
 Control laugh federal significant job general. Quite chair finish information.
-

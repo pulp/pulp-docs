@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'sys-admin']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # Understanding modular Content setup
@@ -56,4 +56,3 @@ Left without cell raise win despite son. Hour check carry draw chair tend. Examp
 She really operation weight collection. Dark less stay great. This race eat town very popular send.
 Talk traditional race police plan reveal night. Message there computer effort.
 Remember nearly everything example. Gun actually site fact course.
-

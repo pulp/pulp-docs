@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'developer']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 03 - Organizing the repository internals
@@ -62,4 +62,3 @@ Billion yourself develop indeed design field particular. Girl name support assum
 
 Available produce area raise. Once possible personal so finally. Example care product price difficult deal arm.
 House whole especially level significant the. Easy modern know shoulder arrive. Until move successful young draw door. Response ready notice crime.
-

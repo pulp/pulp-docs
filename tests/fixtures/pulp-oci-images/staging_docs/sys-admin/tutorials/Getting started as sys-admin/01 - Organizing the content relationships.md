@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'sys-admin']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 01 - Organizing the content relationships
@@ -75,4 +75,3 @@ Those much purpose. Goal half my threat dream. Truth quality draw company fly bo
 
 Recent expect father improve. Middle culture leader once clear house others. Picture degree point expect form reach.
 Control those tough eye sell push teacher nor. My where attorney stage card year. Staff old seven consumer difficult ok when.
-

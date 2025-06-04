@@ -1,7 +1,7 @@
+import textwrap
 from pathlib import Path
 
 import pytest
-import textwrap
 
 from pulp_docs.test_tools.doctree_writer import parse_doctree_file
 

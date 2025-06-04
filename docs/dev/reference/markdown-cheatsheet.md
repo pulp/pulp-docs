@@ -166,4 +166,3 @@ With subtitle:
 [See mkdocs-material](https://squidfunk.github.io/mkdocs-material/reference/admonitions/#supported-types)
 
 Use them wisely.
-

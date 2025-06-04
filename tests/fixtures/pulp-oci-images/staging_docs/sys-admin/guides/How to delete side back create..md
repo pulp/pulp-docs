@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['guide', 'sys-admin']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # How to delete side back create.
@@ -32,6 +32,3 @@ Camera explain effect east amount. Seat section before task site. Hair everybody
 ## 3 - delete change western rate.
 
 Training rather mother risk character treatment. Outside score avoid play white would sister. Raise newspaper cup wonder girl two. Mr magazine military design hotel meet far room. Which serious save your itself. Throw source wrong more feel maybe.
-
-
-

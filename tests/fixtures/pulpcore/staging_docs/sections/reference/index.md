@@ -10,4 +10,3 @@ Here you'll find:
     - **Content-types**: plugins that add support for content types
     - **Tooling**: tools that integrates with Pulp for various purposes
     - **Resources**: repositories that provide integrated resources to pulp
-

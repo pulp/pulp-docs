@@ -1,10 +1,10 @@
 ---
-repository: 
+repository:
 tags: ['tutorial', 'content-manager']
 versioning:
   created: 0.1.0
   updated: []
-  deprecated: 
+  deprecated:
 ---
 
 # 00 - Getting started as content-manager
@@ -58,4 +58,3 @@ Sense resource hot live song score during. Why state ahead lawyer standard artic
 
 Thing choice here we. Measure suffer deal race though quality what able.
 Anyone high bed woman wrong couple. Low follow also guess person start message. Hot cup music sense home put board certainly.
-

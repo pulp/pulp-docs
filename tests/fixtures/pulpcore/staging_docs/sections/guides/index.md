@@ -5,7 +5,7 @@
 Here you'll find:
 
 - **Content Types**: content-specific tasks.
-- **General**: common tasks not tied to a specific Content Plugin 
+- **General**: common tasks not tied to a specific Content Plugin
 
 ## How to use these guides
 
