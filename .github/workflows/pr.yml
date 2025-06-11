@@ -1,3 +1,4 @@
+---
 name: "pulp-docs CI"
 
 on:
@@ -8,16 +9,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    uses: "./.github/workflows/build.yml"
-
   docs:
-    needs:
-      - "build"
-    uses: "./.github/workflows/docs.yml"
+    uses: "./.github/workflows/docs-ci.yml"
+    with:
+      pulpdocs_ref: "${{ github.head_ref }}"
 
   tests:
-    needs: "build"
     uses: "./.github/workflows/tests.yml"
 
   ready-to-ship:
@@ -33,3 +30,4 @@ jobs:
           echo '${{toJson(needs)}}' | jq -r 'to_entries[]|select(.value.result!="success")|.key + ": " + .value.result'
           echo '${{toJson(needs)}}' | jq -e 'to_entries|map(select(.value.result!="success"))|length == 0'
           echo "CI says: Looks good!"
+...

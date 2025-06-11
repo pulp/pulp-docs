@@ -1,114 +1,136 @@
-"""
-The main CLI module.
-"""
-
-import os
-import typing as t
+import asyncio
+import click
+import git
 from pathlib import Path
 
-import click
-
-from pulp_docs.main import Config, PulpDocs
-
-
-class PulpDocsContext:
-    def __init__(self):
-        self.config = Config()
-        self.pulp_docs = PulpDocs()
+from mkdocs.__main__ import cli as mkdocs_cli
+from mkdocs.config import load_config
+from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft, ctx_path
+from pulp_docs.plugin import load_components
 
 
-pass_pulpdocs_context = click.make_pass_decorator(PulpDocsContext, ensure=True)
+def blog_callback(ctx: click.Context, param: click.Parameter, value: bool) -> bool:
+    ctx_blog.set(value)
+    return value
 
 
-@click.group()
-@click.option("--verbose", "-v", is_flag=True)
-@pass_pulpdocs_context
-def main(ctx: PulpDocsContext, verbose: bool):
-    """
-    This is pulp-docs, a cli tool to help run and build multirepo documentation within Pulp project.
-    """
-    ctx.config.verbose = verbose
+def docstrings_callback(
+    ctx: click.Context, param: click.Parameter, value: bool
+) -> bool:
+    ctx_docstrings.set(value)
+    return value
 
 
-# mkdocs help wrapper
-watch_help = (
-    "A directory or file to watch for live reloading. Can be supplied multiple times."
+def draft_callback(ctx: click.Context, param: click.Parameter, value: bool) -> bool:
+    ctx_draft.set(value)
+    return value
+
+
+def find_path_callback(ctx: click.Context, param: click.Parameter, value: bool) -> bool:
+    result = [item.strip() for item in value.split(":") if item.strip()]
+    ctx_path.set(result)
+    return result
+
+
+blog_option = click.option(
+    "--blog/--no-blog",
+    default=True,
+    expose_value=False,
+    callback=blog_callback,
+    help="Build blog.",
 )
-no_reload_help = "Disable the live reloading in the development server."
+docstrings_option = click.option(
+    "--docstrings/--no-docstrings",
+    default=True,
+    expose_value=False,
+    callback=docstrings_callback,
+    help="Enable mkdocstrings plugin.",
+)
+
+draft_option = click.option(
+    "--draft/--no-draft",
+    expose_value=False,
+    callback=draft_callback,
+    help="Don't fail if repositories are missing.",
+)
+
+path_option = click.option(
+    "--path",
+    envvar="PULPDOCS_PATH",
+    expose_value=False,
+    default="",
+    callback=find_path_callback,
+    help="A colon separated list of lookup paths in the form: [repo1@]path1 [:[repo2@]path2 [...]].",
+)
 
 
-@main.command()
+async def clone_repositories(repositories: set[str], dest_dir: Path) -> None:
+    """Clone multiple repositories concurrently."""
+
+    async def clone_repository(repo_url: str) -> None:
+        repo_name = repo_url.split("/")[-1]
+        repo_path = dest_dir / repo_name
+        if repo_path.exists():
+            click.echo(
+                f"Repository {repo_name} already exists at {repo_path}, skipping."
+            )
+            return
+        click.echo(f"Cloning {repo_url} to {repo_path}...")
+        loop = asyncio.get_running_loop()
+        await loop.run_in_executor(
+            None, lambda: git.Repo.clone_from(repo_url, repo_path, depth=1)
+        )
+        click.echo(f"Successfully cloned {repo_name}")
+
+    tasks = [clone_repository(repo) for repo in repositories]
+    await asyncio.gather(*tasks)
+
+
+@click.command()
 @click.option(
-    "--clear-cache",
-    default=False,
-    is_flag=True,
-    help="Whether to clear the cache before serving (default=False).",
+    "--dest",
+    required=True,
+    type=click.Path(file_okay=False),
+    help="Destination directory for cloned repositories",
 )
-@click.option("--verbose", "-v", is_flag=True)
 @click.option(
-    "-w",
-    "--watch",
-    help=watch_help,
-    type=click.Path(exists=True),
-    multiple=True,
-    default=[],
+    "-f",
+    "--config-file",
+    type=click.Path(exists=True, dir_okay=False),
+    default="mkdocs.yml",
+    envvar="PULPDOCS_DIR",
+    help="Path to mkdocs.yml config file",
 )
-@click.option("--no-livereload", "livereload", flag_value=False, help=no_reload_help)
-@click.option("--livereload", "livereload", flag_value=True, default=True, hidden=True)
 @click.option(
-    "-a",
-    "--enable-all",
-    "enable_all",
-    flag_value=True,
-    default=False,
-    help="Enable all mkdocs features (e.g, the blog rendering)",
+    "--path-exclude",
+    default="",
+    callback=find_path_callback,
+    help="A colon separated list of lookup paths to exclude in the form [repo1@]path1 [:[repo2@]path2 [...]].",
 )
-@pass_pulpdocs_context
-def serve(
-    ctx: PulpDocsContext,
-    clear_cache: bool,
-    verbose: bool,
-    watch: t.List[Path],
-    livereload: bool,
-    enable_all: bool,
-):
-    """Run mkdocs server."""
-    config = ctx.config
-    pulpdocs = ctx.pulp_docs
+def fetch(dest, config_file, path_exclude):
+    """Fetch repositories to destination dir."""
+    dest_path = Path(dest)
+    pulpdocs_plugin = load_config(config_file).plugins["PulpDocs"]
+    all_components = pulpdocs_plugin.config.components
+    all_repositories_set = {r.git_url for r in all_components if r.git_url}
+    found_components = load_components(path_exclude, pulpdocs_plugin.config, draft=True)
+    found_repositories_set = {r.git_url for r in found_components}
+    final_repositories_set = all_repositories_set - found_repositories_set
 
-    config.clear_cache = clear_cache
-    config.verbose = verbose
-    config.watch = watch
-    config.livereload = livereload
-
-    # by default blog should be disabled, because it affects reload time a lot.
-    disabled = os.environ.get("PULPDOCS_DISABLED", "blog")
-    if enable_all is True:
-        disabled = ""
-    config.disabled = disabled
-
-    dry_run = True if config.test_mode else False
-    pulpdocs.serve(config, dry_run=dry_run)
+    if not dest_path.exists():
+        dest_path.mkdir(parents=True)
+    asyncio.run(clone_repositories(final_repositories_set, dest_path))
 
 
-@main.command()
-@pass_pulpdocs_context
-def build(ctx: PulpDocsContext):
-    """Build mkdocs site."""
-    config = ctx.config
-    pulpdocs = ctx.pulp_docs
+main = mkdocs_cli
+main.add_command(fetch)
 
-    config.verbose = True
-    config.disabled = ""
-
-    dry_run = True if config.test_mode else False
-    pulpdocs.build(config, dry_run=dry_run)
-
-
-@main.command()
-@pass_pulpdocs_context
-def status(ctx: PulpDocsContext):
-    """Print relevant information about repositories that will be used."""
-    config = ctx.config
-    pulpdocs = ctx.pulp_docs
-    pulpdocs.status(config)
+for command_name in ["build", "serve"]:
+    sub_command = main.commands.get(command_name)
+    draft_option(sub_command)
+    blog_option(sub_command)
+    docstrings_option(sub_command)
+    path_option(sub_command)
+    serve_options = sub_command.params
+    config_file_opt = next(filter(lambda opt: opt.name == "config_file", serve_options))
+    config_file_opt.envvar = "PULPDOCS_DIR"

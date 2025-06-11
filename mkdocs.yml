@@ -1,0 +1,230 @@
+site_name: "Pulp Project"
+site_url: "https://pulpproject.org/"
+repo_url: "https://github.com/pulp/pulpcore"
+repo_name: "pulp/pulpcore"
+edit_uri_template: "https://github.com/pulp/pulp-docs/edit/main/pulp_docs/{path}"
+
+docs_dir: "../pulp-docs/pulp_docs"
+theme:
+  name: material
+  custom_dir: "../pulp-docs/custom"
+  logo: assets/pulp_logo_icon.svg
+  favicon: assets/favicon.ico
+  features:
+    - navigation.indexes
+    - content.code.annotate
+    - navigation.tabs
+    - navigation.sections
+    - navigation.path
+    # - navigation.footer
+    - navigation.top
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.annotation
+    - content.code.copy
+    - content.action.edit
+  language: en
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: black
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+# Blog's Navigation needs to be excempt from literate nav...
+nav:
+  - Home: "index.md"
+  - "User Manual":
+    - "user/index.md"
+  - "Developer Manual":
+    - "dev/index.md"
+  - Blog:
+    - "blog/index.md"
+  - Help: "help/"
+plugins:
+  - PulpDocs:
+      components:
+        - title: "Pulpcore"
+          path: "pulpcore"
+          git_url: "https://github.com/pulp/pulpcore"
+          kind: "Core"
+          rest_api: "core"
+
+        - title: "Ansible"
+          path: "pulp_ansible"
+          git_url: "https://github.com/pulp/pulp_ansible"
+          kind: "Content"
+          rest_api: "ansible"
+        - title: "Container"
+          path: "pulp_container"
+          git_url: "https://github.com/pulp/pulp_container"
+          kind: "Content"
+          rest_api: "container"
+        - title: "Debian"
+          path: "pulp_deb"
+          git_url: "https://github.com/pulp/pulp_deb"
+          kind: "Content"
+          rest_api: "deb"
+        - title: "File"
+          path: "pulpcore/pulp_file"
+          git_url: "https://github.com/pulp/pulpcore"
+          kind: "Content"
+          rest_api: "file"
+        - title: "Gem"
+          path: "pulp_gem"
+          git_url: "https://github.com/pulp/pulp_gem"
+          kind: "Content"
+          rest_api: "gem"
+        - title: "Maven"
+          path: "pulp_maven"
+          git_url: "https://github.com/pulp/pulp_maven"
+          kind: "Content"
+          rest_api: "maven"
+        - title: "NPM"
+          path: "pulp_npm"
+          git_url: "https://github.com/pulp/pulp_npm"
+          kind: "Content"
+          rest_api: "npm"
+        - title: "OSTree"
+          path: "pulp_ostree"
+          git_url: "https://github.com/pulp/pulp_ostree"
+          kind: "Content"
+          rest_api: "ostree"
+        - title: "Python"
+          path: "pulp_python"
+          git_url: "https://github.com/pulp/pulp_python"
+          kind: "Content"
+          rest_api: "python"
+        - title: "RPM"
+          path: "pulp_rpm"
+          git_url: "https://github.com/pulp/pulp_rpm"
+          kind: "Content"
+          rest_api: "rpm"
+
+        #TODO Fix cli code paths for docstrings
+        - title: "Pulp CLI"
+          path: "pulp-cli"
+          git_url: "https://github.com/pulp/pulp-cli"
+          kind: "Interaction"
+        - title: "Pulp Glue"
+          path: "pulp-cli/pulp-glue"
+          git_url: "https://github.com/pulp/pulp-cli"
+          kind: "Interaction"
+        - title: "Pulp UI"
+          path: "pulp-ui"
+          git_url: "https://github.com/pulp/pulp-ui"
+          kind: "Interaction"
+        - title: "OpenAPI Generator"
+          path: "pulp-openapi-generator"
+          git_url: "https://github.com/pulp/pulp-openapi-generator"
+          kind: "Interaction"
+
+        - title: "Pulp Docs"
+          path: "pulp-docs"
+          git_url: "https://github.com/pulp/pulp-docs"
+          kind: "Other"
+        - title: "Certguard"
+          path: "pulpcore/pulp_certguard"
+          git_url: "https://github.com/pulp/pulpcore"
+          kind: "Other"
+          # rest_api: "certguard"
+        - title: "Selinux"
+          path: "pulpcore-selinux"
+          git_url: "https://github.com/pulp/pulpcore-selinux"
+          kind: "Other"
+
+        - title: "Pulp OCI Images"
+          path: "pulp-oci-images"
+          git_url: "https://github.com/pulp/pulp-oci-images"
+          kind: "Deployment"
+        - title: "Operator"
+          path: "pulp-operator"
+          git_url: "https://github.com/pulp/pulp-operator"
+          kind: "Deployment"
+  - search
+  - site-urls
+  - blog:
+      blog_dir: blog
+      blog_toc: false
+  - macros:
+      render_by_default: false
+  - tags
+  - literate-nav:
+      nav_file: _SUMMARY.md
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: false
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            docstring_section_style: list # table, list, spacy
+            filters: ["!^_"]
+            heading_level: 2
+            show_root_heading: true
+            show_root_toc_entry: true
+            show_if_no_docstring: false
+            show_signature_annotations: true
+            separate_signature: false
+            members_order: "source"
+            merge_init_into_class: true
+          paths: []
+extra:
+  social:
+    - icon: "fontawesome/brands/github-alt"
+      link: "https://github.com/pulp"
+    - icon: "fontawesome/brands/discourse"
+      link: "https://discourse.pulpproject.org/"
+    - icon: "fontawesome/solid/comments"
+      link: "https://matrix.to/#/!HWvLQmBGVPfJfTQBAu:matrix.org"
+  analytics:
+    provider: google
+    property: G-8M0N5XEY4W
+
+extra_css:
+  - css/extra.css
+  - css/mkdocstrings.css
+
+markdown_extensions:
+  # Python Markdown
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+copyright: |
+  &copy; 2024 <a href="https://github.com/pulp"  target="_blank" rel="noopener">Pulp Project</a>
