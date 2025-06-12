@@ -1,3 +1,4 @@
+---
 name: "Update Data Branch"
 
 on:
@@ -9,17 +10,17 @@ jobs:
   update-data:
     runs-on: "ubuntu-latest"
     permissions:
-      contents: write
+      contents: "write"
     steps:
       - name: "Checkout docs-data branch"
         uses: "actions/checkout@v4"
         with:
-          ref: docs-data
+          ref: "docs-data"
 
       - name: "Set up Python"
         uses: "actions/setup-python@v5"
         with:
-          python-version: "3.11"
+          python-version: "3.12"
 
       - name: "List requirements"
         run: |
@@ -40,3 +41,4 @@ jobs:
           git config user.name github-actions
           git config user.email github-action@github.com
           ./update-data.sh
+...

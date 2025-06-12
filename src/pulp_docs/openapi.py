@@ -101,7 +101,8 @@ class OpenAPIGenerator:
             if not plugin.is_subpackage
             else self.pulpcore.get_remote_url()
         )
-        install_cmd = ["pip", "install", f"git+{url}"]
+        # setuptools provides distutils for python >=3.12.
+        install_cmd = ["pip", "install", f"git+{url}", "setuptools"]
 
         if self.dry_run is True:
             print(" ".join(create_venv_cmd))

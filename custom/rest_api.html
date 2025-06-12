@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{ super() }}
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+<style>
+  article.md-content__inner {margin: 0; padding: 0;}
+  article.md-content__inner::before {height: 0;}
+  div.md-main__inner {margin: 0;}
+  div.md-grid {max-width: none;}
+</style>
+{% endblock %}
+
+{% block site_nav %}
+{% endblock %}
+
+{% block content %}
+<redoc spec-url="../api.json"></redoc>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

@@ -2,6 +2,6 @@ build:
 	python -m build
 
 docs:
-	pulp-docs build
+	mkdocs build
 
-.PHONY: build docs
+.PHONY: docs build
