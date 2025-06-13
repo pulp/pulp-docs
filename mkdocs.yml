@@ -139,6 +139,10 @@ plugins:
           path: "pulpcore-selinux"
           git_url: "https://github.com/pulp/pulpcore-selinux"
           kind: "Other"
+        - title: "OCI Env"
+          path: "oci_env"
+          git_url: "https://github.com/pulp/oci_env"
+          kind: "Other"
 
         - title: "Pulp OCI Images"
           path: "pulp-oci-images"
