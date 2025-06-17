@@ -12,6 +12,8 @@ tags:
 
 I wanted to try adding AI to a CLI tool to see how easy it would be. The idea was simple: instead of looking up command syntax, just ask the terminal in plain English.
 
+<!-- more -->
+
 ## Building It
 
 Here's the basic implementation using OpenAI's API, which than got ported to pulp-cli:
