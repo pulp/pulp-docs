@@ -103,4 +103,4 @@ You can add this to any CLI tool by:
 2. Setting up the OpenAI API integration
 3. Handling API keys and error cases
 
-The full implementation is available in the [Pulp CLI Console extension](https://github.com/pulp/pulp-cli-console) - check out `https://github.com/pulp/pulp-cli-console/blob/pulp-cli-ai-experiment/pulpcore/cli/console/chat.py`.
+The full implementation is available in the [Pulp CLI Console extension](https://github.com/pulp/pulp-cli-console) - check out <https://github.com/pulp/pulp-cli-console/blob/pulp-cli-ai-experiment/pulpcore/cli/console/chat.py>.
