@@ -1,7 +1,8 @@
 ---
 date: 2025-05-22T00:00:00Z
 title: Writing Docs with AI - An Experiment in Workflow
-author: Brian Bouterse
+authors: 
+  - bmbouter
 tags:
   - documentation
   - AI

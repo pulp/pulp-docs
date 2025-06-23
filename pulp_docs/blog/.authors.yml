@@ -8,4 +8,16 @@ authors:
     name: "Dennis Kliban"
     description: "developer"
     avatar: "https://discourse.pulpproject.org/user_avatar/discourse.pulpproject.org/dkliban/120/58_2.png"
+  hyagi:
+    name: "Humberto Yagi"
+    description: "developer"
+    avatar: "https://avatars.githubusercontent.com/u/45576767?v=4"
+  ytrahnov:
+    name: "Yasen Trahnov"
+    description: "developer"
+    avatar: "https://avatars.githubusercontent.com/u/23035883?v=4"
+  bmbouter:
+    name: "Brian Bouterse"
+    description: "developer"
+    avatar: "https://discourse.pulpproject.org/user_avatar/discourse.pulpproject.org/bmbouter/120/36_2.png"
 ...

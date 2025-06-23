@@ -13,6 +13,8 @@ As a developer contributing to the `pulp-service` GitHub repository, I can confi
 
 Here's how `sourcery-ai` has impacted my productivity:
 
+<!-- more -->
+
 ### Automated Code Reviews and Structured Feedback
 
 `sourcery-ai` provides an initial layer of code review for every pull request I open, offering a concise "Summary by Sourcery" and a detailed "Reviewer's Guide". This has been a game-changer, as it significantly reduces the initial workload for human reviewers, allowing us to focus on more complex logic and architectural decisions rather than basic code quality checks. The bot categorizes its findings into "General issues," "Security," "Testing," and "Documentation". Often, it reports that security, testing, and documentation aspects "all looks good," which provides quick assurance in these areas.

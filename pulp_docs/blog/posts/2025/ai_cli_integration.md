@@ -1,7 +1,8 @@
 ---
 date: 2025-06-17T00:00:00Z
 title: AI CLI Integration - An experiment
-author: Yasen Trahnov
+authors: 
+  - ytrahnov
 tags:
   - documentation
   - AI
