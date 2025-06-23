@@ -1,7 +1,8 @@
 ---
 date: 2025-06-18T00:00:00Z
 title: My Journey Learning to Build a Chatbot for Pulp
-author: Humberto Yagi
+authors:
+  - hyagi
 tags:
   - community
   - AI
@@ -9,6 +10,8 @@ tags:
 
 
 In this blog post, I want to share my adventures trying to learn how to write a chatbot to help with Pulp.
+
+<!-- more -->
 
 ---
 
