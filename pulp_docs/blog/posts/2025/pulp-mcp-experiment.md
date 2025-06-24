@@ -57,9 +57,36 @@ The big idea was simple: create an MCP server where you could type into a chat, 
 
 Here's the simplified flow:
 
-You type a message (e.g., "list all my repositories") -> My **FastMCP Server** (hears you, figures out you want to use a "Pulp API" tool) -> **Llama Stack** (sends your request to Ollama) -> **Ollama** (our LLM brain processes your request and figures out the Pulp API call) -> **Llama Stack** (sends the Pulp API call back) -> **FastMCP Server** (makes the *actual* Pulp API call!) -> Pulp responds -> FastMCP Server gets the result.
+You type a message (e.g., "list all my repositories") -> **Llama Stack** (sends your request to Ollama) -> **Ollama** (our LLM brain processes your request and figures out the Pulp API call) -> **Llama Stack** (sends the Pulp API call back) -> **FastMCP Server** (makes the *actual* Pulp API call!) -> Pulp responds -> FastMCP Server gets the result.
 
-**[PLACEHOLDER FOR LLM GENERATED HUMAN TEXT FROM API RESPONSE HERE]**
+```
+ '====================================================================================================\n'
+ 'Processing user query: Can you list all domains again?\n'
+ '====================================================================================================')
+INFO:httpx:HTTP Request: POST http://localhost:8321/v1/agents/f83b1eb7-13df-47a9-89ed-f5e271b02c93/session/f64f5501-ea81-408b-a299-2cd0c5b0bd58/turn "HTTP/1.1 200 OK"
+inference> [get_pulp_domains(session_id="")]
+tool_execution> Tool:get_pulp_domains Args:{'session_id': ''}
+tool_execution> Tool:get_pulp_domains Response:[TextContentItem(text='{\n  "success": true,\n  "result": {\n    "count": 2,\n    "next": null,\n    "previous": null,\n    "results": [\n      {\n        "pulp_href": "/pulp/default/api/v3/domains/019794aa-fc21-7e6b-a325-f4d535e4fafd/",\n        "prn": "prn:core.domain:019794aa-fc21-7e6b-a325-f4d535e4fafd",\n        "pulp_created": "2025-06-21T22:45:23.105767Z",\n        "pulp_last_updated": "2025-06-21T22:45:23.105775Z",\n        "name": "pulp-mcp-test",\n        "description": null,\n        "pulp_labels": {},\n        "storage_class": "pulpcore.app.models.storage.FileSystem",\n        "storage_settings": {\n          "hidden_fields": [],\n          "location": "/var/lib/pulp/media/",\n          "base_url": "",\n          "file_permissions_mode": 420,\n          "directory_permissions_mode": null\n        },\n        "redirect_to_object_storage": true,\n        "hide_guarded_distributions": false\n      },\n      {\n        "pulp_href": "/pulp/default/api/v3/domains/a1d64603-a91f-40f1-b3b2-9f2fb3bbb835/",\n        "prn": "prn:core.domain:a1d64603-a91f-40f1-b3b2-9f2fb3bbb835",\n        "pulp_created": "2025-06-20T14:17:27.991915Z",\n        "pulp_last_updated": "2025-06-20T14:17:27.991922Z",\n        "name": "default",\n        "description": null,\n        "pulp_labels": {},\n        "storage_class": "pulpcore.app.models.storage.FileSystem",\n        "storage_settings": {\n          "hidden_fields": [],\n          "location": "/var/lib/pulp/media",\n          "base_url": "/",\n          "file_permissions_mode": 420,\n          "directory_permissions_mode": null\n        },\n        "redirect_to_object_storage": true,\n        "hide_guarded_distributions": false\n      }\n    ]\n  }\n}', type='text')]
+
+inference> There are two domains in Pulp. The first domain is named 'pulp-mcp-test' and the second one is named 'default'.
+
+```
+or
+
+```
+ '====================================================================================================\n'
+ 'Processing user query: Can you create a new rpm repository named '
+ "'pulp-mcp-test-rpm-repo' for the domain we just created?\n"
+ '====================================================================================================')
+INFO:httpx:HTTP Request: POST http://localhost:8321/v1/agents/f83b1eb7-13df-47a9-89ed-f5e271b02c93/session/f64f5501-ea81-408b-a299-2cd0c5b0bd58/turn "HTTP/1.1 200 OK"
+inference> [create_rpm_repository(domain="pulp-mcp-test", name="pulp-mcp-test-rpm-repo", remote="", session_id="")]
+tool_execution> Tool:create_rpm_repository Args:{'domain': 'pulp-mcp-test', 'name': 'pulp-mcp-test-rpm-repo', 'remote': '', 'session_id': ''}
+tool_execution> Tool:create_rpm_repository Response:[TextContentItem(text='{\n  "success": false,\n  "result": "Something is not right. Check it out: b\'{\\"name\\":[\\"This field must be unique.\\"]}\'"\n}', type='text')]
+
+inference> The name 'pulp-mcp-test-rpm-repo' for the RPM repository cannot be created because it is not unique. The error message indicates that there might be another repository with this name in Pulp.
+
+Please choose a different name for the repository.
+```
 
 -> Llama Stack (sends the result back to the LLM to format a nice response) -> Ollama (LLM generates a friendly answer) -> Llama Stack (sends it back to you in chat)!
 
@@ -71,7 +98,82 @@ Pretty neat, right? It's like having a little AI assistant dedicated to your Pul
 
 Setting up the communication between the LLM and the Pulp API was a crucial step. This involved defining how the AI agent would actually *use* the Pulp-specific tools I created. This script configures the agent, instructing it on how to interact with the `pulp::mcp` tools and manage the conversation flow.
 
-**[PLACEHOLDER FOR AGENT CONFIGURATION SCRIPT HERE]**
+```python
+import uuid
+
+from llama_stack_client import LlamaStackClient
+from llama_stack_client.lib.agents.agent import Agent
+
+from llama_stack_client.lib.agents.event_logger import EventLogger
+
+
+base_url = "http://localhost:8321"
+client = LlamaStackClient(base_url=base_url)
+model = "llama3.2:3b-instruct-fp16"
+
+instructions = """
+You are a helpful assistant.
+For anything related to pulp, check for functions from mcp::pulp tool.
+You can interact with a pulp instance when using tools from mcp::pulp.
+mcp::pulp doesn't need an session_id parameter.
+You must not generate example code or scripts.
+Don't generate usage examples. Use the tools available.
+Don't simulate the output, perform all operations with tools available.
+"""
+
+# Register pulp tools
+client.toolgroups.register(
+    toolgroup_id="mcp::pulp",
+    provider_id="model-context-protocol",
+    mcp_endpoint={"uri": "http://localhost:8080/sse"}
+)
+
+agent = Agent(
+    client,
+    model=model,
+    instructions=instructions,
+    tools=["mcp::pulp"],
+    enable_session_persistence=True,
+    tool_config={
+        "tool_choice": "required",
+        "tool_prompt_format": "python_list"
+    },
+)
+
+user_prompts = [
+    # "Can you check the localhost pulp instance status?",
+    "Can you retrieve all domains in Pulp?",
+    "Can you create a new domain called pulp-mcp-test?",
+    "Can you list all domains again?",
+    "Can you list all rpm repositories for the domain we just created?",
+    "Can you create a new rpm repository named 'pulp-mcp-test-rpm-repo' for the domain we just created?"
+]
+
+# Generate a new Unique Identifier for the session 
+new_uuid = uuid.uuid4()
+session_id = agent.create_session(f"mcp-session-{new_uuid}")
+
+for prompt in user_prompts:
+
+    print(f"\n{'='*100}\nProcessing user query: {prompt}\n{'='*100}")
+
+    response = agent.create_turn(
+        messages=[
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        ],
+        session_id=session_id
+    )
+    for log in EventLogger().log(response):
+        log.print()
+
+session_response = client.agents.session.retrieve(
+    session_id=session_id,
+    agent_id=agent.agent_id,
+)
+```
 
 ---
 
@@ -87,7 +189,95 @@ So, why the lukewarm results? Mostly, it boils down to a few key areas:
     * However, for some reason, the `llama3.2:3b-instruct-fp16` model just **couldn't consistently recognize or properly call these automatically generated tools**. Instead of trying to use `create_repository` or `list_repositories`, it would keep generating examples of how to *ask* for things, or just ramble, completely missing the available tool.
     * This meant a pivot was needed. I ended up having to **manually write my own MCP tools** in Python. These custom tools would then internally make the appropriate calls to the Pulp API and carefully format the responses before sending them back to the LLM. It was a bit more work, but it ensured the LLM had well-defined, consumable functions it could actually invoke.
 
-    **[PLACEHOLDER FOR MCP SERVER CODE HERE]**
+    ```python
+    import base64
+
+    import httpx
+
+    from typing import TypedDict
+
+    from fastmcp import FastMCP
+    from fastmcp.server.openapi import RouteMap,MCPType
+
+
+    auth = httpx.BasicAuth(username="admin", password="password")
+    client = httpx.Client(base_url="http://localhost:5001", auth=auth)
+
+    class Response(TypedDict):
+        success: bool
+        result: str
+
+    mcp = FastMCP(name="Pulp MCP Server")
+
+    @mcp.tool
+    def get_pulp_status(session_id:str|None = None) -> Response:
+        """Return the status of the pulp instance."""
+        request = client.get("/pulp/api/v3/status/")
+        try:
+            request.raise_for_status()
+            return {"success": True, "result": request.json()}
+        except httpx.HTTPError as exc:
+            return {"success": False, "result": str(exc)}
+
+    @mcp.tool
+    def get_pulp_domains(session_id:str|None = None) -> Response:
+        """Return all pulp domains."""
+        request = client.get("/pulp/default/api/v3/domains/")
+        try:
+            request.raise_for_status()
+            return {"success": True, "result": request.json()}
+        except httpx.HTTPError as exc:
+            return {"success": False, "result": str(exc)}
+        
+    @mcp.tool
+    def create_pulp_domain(name: str, labels:dict[str, str], session_id:str|None = None, description:str|None = None) -> Response:
+        """Creates a new pulp domain."""
+        domain = {}
+        domain["name"] = name
+
+        if description:
+            domain["description"] = description
+
+        if labels:
+            domain["labels"] = labels
+
+        domain["storage_class"] = "pulpcore.app.models.storage.FileSystem"
+
+        domain["storage_settings"] = '{"media_root": "/var/lib/pulp/media/"}'
+
+        request = client.post("/pulp/default/api/v3/domains/", json=domain)
+
+        try:
+            request.raise_for_status()
+            return {"success": True, "result": request.json()}
+        except httpx.HTTPError as exc:
+            return {"success": False, "result": str(exc)}
+
+    @mcp.tool
+    def get_rpm_repositories(domain:str|None = None, session_id:str|None = None) -> Response:
+        """Return all RPM repositories for a given domain."""
+        request = client.get(f"/pulp/{domain}/api/v3/repositories/rpm/rpm/")
+        try:
+            request.raise_for_status()
+            return {"success": True, "result": request.json()}
+        except httpx.HTTPError as exc:
+            return {"success": False, "result": str(exc)}
+
+
+    @mcp.tool
+    def create_rpm_repository(domain:str, name:str, remote:str|None, session_id:str|None = None, description:str|None = None) -> Response:
+        """Create a new RPM Repository."""
+        repository = {"name": name, "description":description}
+        if not remote:
+            repository["remote"] = None
+
+        request = client.post(f"/pulp/{domain}/api/v3/repositories/rpm/rpm/", json=repository)
+
+        if request.status_code == 201:
+            return {"success": True, "result": request.json()}
+        else:
+            return {"success": False, "result": f"Something is not right. Check it out: {str(request.read())}"}
+    ```
 
 * **Context Window Limitations (the `3b` model's Achilles' Heel):** This was the *real* pain point for the `llama3.2:3b-instruct-fp16` model. It's not that my hardware couldn't *run* it, but this smaller model has a more limited **context window**. The context window is essentially the LLM's short-term memory – how much conversation (input *and* output tokens) it can "remember" at any given time.
     * When I'd feed it user requests, and then it needed to process potentially verbose responses directly from the Pulp API (think long JSON outputs or detailed error messages), that rapidly chewed up its context window.
