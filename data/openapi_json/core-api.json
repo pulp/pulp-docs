@@ -17,7 +17,7 @@
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "core": "3.81.0.dev"
+            "core": "3.82.0.dev"
         },
         "x-pulp-domain-enabled": false
     },
@@ -28,6 +28,17 @@
                 "description": "ViewSet for AccessPolicy.",
                 "summary": "List access policys",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "customized",
@@ -267,6 +278,17 @@
                 "summary": "Inspect an access policy",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "access_policy_href",
                         "schema": {
@@ -327,6 +349,17 @@
                 "summary": "Update an access policy",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "access_policy_href",
                         "schema": {
@@ -384,6 +417,17 @@
                 "description": "ViewSet for AccessPolicy.",
                 "summary": "Update an access policy",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "access_policy_href",
@@ -444,6 +488,17 @@
                 "description": "Reset the access policy to its uncustomized default value.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "access_policy_href",
                         "schema": {
@@ -483,6 +538,17 @@
                 "description": "A customized named ModelViewSet that knows how to register itself with the Pulp API router.\n\nThis viewset is discoverable by its name.\n\"Normal\" Django Models and Master/Detail models are supported by the ``register_with`` method.\n\nAttributes:\n    lookup_field (str): The name of the field by which an object should be looked up, in\n        addition to any parent lookups if this ViewSet is nested. Defaults to 'pk'\n    endpoint_name (str): The name of the final path segment that should identify the ViewSet's\n        collection endpoint.\n    nest_prefix (str): Optional prefix under which this ViewSet should be nested. This must\n        correspond to the \"parent_prefix\" of a router with rest_framework_nested.NestedMixin.\n        None indicates this ViewSet should not be nested.\n    parent_lookup_kwargs (dict): Optional mapping of key names that would appear in self.kwargs\n        to django model filter expressions that can be used with the corresponding value from\n        self.kwargs, used only by a nested ViewSet to filter based on the parent object's\n        identity.\n    schema (DefaultSchema): The schema class to use by default in a viewset.",
                 "summary": "List artifacts",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -705,6 +771,19 @@
                 "operationId": "artifacts_create",
                 "description": "A customized named ModelViewSet that knows how to register itself with the Pulp API router.\n\nThis viewset is discoverable by its name.\n\"Normal\" Django Models and Master/Detail models are supported by the ``register_with`` method.\n\nAttributes:\n    lookup_field (str): The name of the field by which an object should be looked up, in\n        addition to any parent lookups if this ViewSet is nested. Defaults to 'pk'\n    endpoint_name (str): The name of the final path segment that should identify the ViewSet's\n        collection endpoint.\n    nest_prefix (str): Optional prefix under which this ViewSet should be nested. This must\n        correspond to the \"parent_prefix\" of a router with rest_framework_nested.NestedMixin.\n        None indicates this ViewSet should not be nested.\n    parent_lookup_kwargs (dict): Optional mapping of key names that would appear in self.kwargs\n        to django model filter expressions that can be used with the corresponding value from\n        self.kwargs, used only by a nested ViewSet to filter based on the parent object's\n        identity.\n    schema (DefaultSchema): The schema class to use by default in a viewset.",
                 "summary": "Create an artifact",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Artifacts"
                 ],
@@ -751,6 +830,17 @@
                 "description": "A customized named ModelViewSet that knows how to register itself with the Pulp API router.\n\nThis viewset is discoverable by its name.\n\"Normal\" Django Models and Master/Detail models are supported by the ``register_with`` method.\n\nAttributes:\n    lookup_field (str): The name of the field by which an object should be looked up, in\n        addition to any parent lookups if this ViewSet is nested. Defaults to 'pk'\n    endpoint_name (str): The name of the final path segment that should identify the ViewSet's\n        collection endpoint.\n    nest_prefix (str): Optional prefix under which this ViewSet should be nested. This must\n        correspond to the \"parent_prefix\" of a router with rest_framework_nested.NestedMixin.\n        None indicates this ViewSet should not be nested.\n    parent_lookup_kwargs (dict): Optional mapping of key names that would appear in self.kwargs\n        to django model filter expressions that can be used with the corresponding value from\n        self.kwargs, used only by a nested ViewSet to filter based on the parent object's\n        identity.\n    schema (DefaultSchema): The schema class to use by default in a viewset.",
                 "summary": "Inspect an artifact",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "artifact_href",
@@ -812,6 +902,17 @@
                 "summary": "Delete an artifact",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "artifact_href",
                         "schema": {
@@ -844,6 +945,17 @@
                 "description": "Endpoint to list all content.",
                 "summary": "List content",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -1061,6 +1173,17 @@
                 "summary": "List open pgp public keys",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "query",
                         "name": "fingerprint",
                         "schema": {
@@ -1262,6 +1385,19 @@
                 "operationId": "content_core_openpgp_publickey_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create an open pgp public key",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Openpgp_Publickey"
                 ],
@@ -1308,6 +1444,17 @@
                 "description": "A ViewSet for uploads that do not require to store an uploaded content as an Artifact.",
                 "summary": "Inspect an open pgp public key",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "open_p_g_p_public_key_href",
@@ -1371,6 +1518,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_public_key_href",
                         "schema": {
@@ -1431,6 +1589,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_public_key_href",
                         "schema": {
@@ -1490,6 +1659,17 @@
                 "description": "Content viewset that supports only GET by default.",
                 "summary": "List open pgp public subkeys",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "fingerprint",
@@ -1696,6 +1876,17 @@
                 "summary": "Inspect an open pgp public subkey",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_public_subkey_href",
                         "schema": {
@@ -1758,6 +1949,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_public_subkey_href",
                         "schema": {
@@ -1818,6 +2020,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_public_subkey_href",
                         "schema": {
@@ -1877,6 +2090,17 @@
                 "description": "Content viewset that supports only GET by default.",
                 "summary": "List open pgp signatures",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "issuer",
@@ -2093,6 +2317,17 @@
                 "summary": "Inspect an open pgp signature",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_signature_href",
                         "schema": {
@@ -2155,6 +2390,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_signature_href",
                         "schema": {
@@ -2215,6 +2461,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_signature_href",
                         "schema": {
@@ -2274,6 +2531,17 @@
                 "description": "Content viewset that supports only GET by default.",
                 "summary": "List open pgp user attributes",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -2478,6 +2746,17 @@
                 "summary": "Inspect an open pgp user attribute",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_user_attribute_href",
                         "schema": {
@@ -2540,6 +2819,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_user_attribute_href",
                         "schema": {
@@ -2600,6 +2890,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_user_attribute_href",
                         "schema": {
@@ -2659,6 +2960,17 @@
                 "description": "Content viewset that supports only GET by default.",
                 "summary": "List open pgp user ids",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -2932,6 +3244,17 @@
                 "summary": "Inspect an open pgp user id",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_user_i_d_href",
                         "schema": {
@@ -2994,6 +3317,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_user_i_d_href",
                         "schema": {
@@ -3054,6 +3388,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_user_i_d_href",
                         "schema": {
@@ -3113,6 +3458,17 @@
                 "description": "Endpoint to list all contentguards.",
                 "summary": "List content guards",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -3377,6 +3733,17 @@
                 "summary": "List composite content guards",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "name": "limit",
                         "required": false,
                         "in": "query",
@@ -3599,6 +3966,19 @@
                 "operationId": "contentguards_core_composite_create",
                 "description": "Content guard that queries a list-of content-guards for access permissions.",
                 "summary": "Create a composite content guard",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Contentguards: Composite"
                 ],
@@ -3650,6 +4030,17 @@
                 "description": "Content guard that queries a list-of content-guards for access permissions.",
                 "summary": "Inspect a composite content guard",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "composite_content_guard_href",
@@ -3711,6 +4102,17 @@
                 "summary": "Update a composite content guard",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "composite_content_guard_href",
                         "schema": {
@@ -3768,6 +4170,17 @@
                 "description": "Content guard that queries a list-of content-guards for access permissions.",
                 "summary": "Update a composite content guard",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "composite_content_guard_href",
@@ -3827,6 +4240,17 @@
                 "summary": "Delete a composite content guard",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "composite_content_guard_href",
                         "schema": {
@@ -3859,6 +4283,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "composite_content_guard_href",
@@ -3919,6 +4354,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "composite_content_guard_href",
@@ -3982,6 +4428,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "composite_content_guard_href",
                         "schema": {
@@ -4044,6 +4501,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "composite_content_guard_href",
                         "schema": {
@@ -4103,6 +4571,17 @@
                 "description": "Content guard to protect preauthenticated redirects to the content app.",
                 "summary": "List content redirect content guards",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -4326,6 +4805,19 @@
                 "operationId": "contentguards_core_content_redirect_create",
                 "description": "Content guard to protect preauthenticated redirects to the content app.",
                 "summary": "Create a content redirect content guard",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Contentguards: Content_Redirect"
                 ],
@@ -4377,6 +4869,17 @@
                 "description": "Content guard to protect preauthenticated redirects to the content app.",
                 "summary": "Inspect a content redirect content guard",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "content_redirect_content_guard_href",
@@ -4438,6 +4941,17 @@
                 "summary": "Update a content redirect content guard",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "content_redirect_content_guard_href",
                         "schema": {
@@ -4495,6 +5009,17 @@
                 "description": "Content guard to protect preauthenticated redirects to the content app.",
                 "summary": "Update a content redirect content guard",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "content_redirect_content_guard_href",
@@ -4554,6 +5079,17 @@
                 "summary": "Delete a content redirect content guard",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "content_redirect_content_guard_href",
                         "schema": {
@@ -4586,6 +5122,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "content_redirect_content_guard_href",
@@ -4646,6 +5193,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "content_redirect_content_guard_href",
@@ -4709,6 +5267,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "content_redirect_content_guard_href",
                         "schema": {
@@ -4771,6 +5340,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "content_redirect_content_guard_href",
                         "schema": {
@@ -4830,6 +5410,17 @@
                 "description": "Content guard to protect the content app using a specific header.",
                 "summary": "List header content guards",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -5053,6 +5644,19 @@
                 "operationId": "contentguards_core_header_create",
                 "description": "Content guard to protect the content app using a specific header.",
                 "summary": "Create a header content guard",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Contentguards: Header"
                 ],
@@ -5104,6 +5708,17 @@
                 "description": "Content guard to protect the content app using a specific header.",
                 "summary": "Inspect a header content guard",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "header_content_guard_href",
@@ -5165,6 +5780,17 @@
                 "summary": "Update a header content guard",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "header_content_guard_href",
                         "schema": {
@@ -5222,6 +5848,17 @@
                 "description": "Content guard to protect the content app using a specific header.",
                 "summary": "Update a header content guard",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "header_content_guard_href",
@@ -5281,6 +5918,17 @@
                 "summary": "Delete a header content guard",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "header_content_guard_href",
                         "schema": {
@@ -5313,6 +5961,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "header_content_guard_href",
@@ -5373,6 +6032,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "header_content_guard_href",
@@ -5436,6 +6106,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "header_content_guard_href",
                         "schema": {
@@ -5498,6 +6179,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "header_content_guard_href",
                         "schema": {
@@ -5557,6 +6249,17 @@
                 "description": "Viewset for creating contentguards that use RBAC to protect content.\nHas add and remove actions for managing permission for users and groups to download content\nprotected by this guard.",
                 "summary": "List rbac content guards",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -5780,6 +6483,19 @@
                 "operationId": "contentguards_core_rbac_create",
                 "description": "Viewset for creating contentguards that use RBAC to protect content.\nHas add and remove actions for managing permission for users and groups to download content\nprotected by this guard.",
                 "summary": "Create a rbac content guard",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Contentguards: Rbac"
                 ],
@@ -5831,6 +6547,17 @@
                 "description": "Viewset for creating contentguards that use RBAC to protect content.\nHas add and remove actions for managing permission for users and groups to download content\nprotected by this guard.",
                 "summary": "Inspect a rbac content guard",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "r_b_a_c_content_guard_href",
@@ -5892,6 +6619,17 @@
                 "summary": "Update a rbac content guard",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "r_b_a_c_content_guard_href",
                         "schema": {
@@ -5949,6 +6687,17 @@
                 "description": "Viewset for creating contentguards that use RBAC to protect content.\nHas add and remove actions for managing permission for users and groups to download content\nprotected by this guard.",
                 "summary": "Update a rbac content guard",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "r_b_a_c_content_guard_href",
@@ -6008,6 +6757,17 @@
                 "summary": "Delete a rbac content guard",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "r_b_a_c_content_guard_href",
                         "schema": {
@@ -6040,6 +6800,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "r_b_a_c_content_guard_href",
@@ -6100,6 +6871,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "r_b_a_c_content_guard_href",
@@ -6163,6 +6945,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "r_b_a_c_content_guard_href",
                         "schema": {
@@ -6225,6 +7018,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "r_b_a_c_content_guard_href",
                         "schema": {
@@ -6284,6 +7088,17 @@
                 "description": "Provides base viewset for Distributions.",
                 "summary": "List distributions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "base_path",
@@ -6632,6 +7447,17 @@
                 "summary": "List artifact distributions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "query",
                         "name": "base_path",
                         "schema": {
@@ -6948,6 +7774,17 @@
                 "summary": "Inspect an artifact distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "artifact_distribution_href",
                         "schema": {
@@ -7009,6 +7846,17 @@
                 "description": "Provides read and list methods and also provides asynchronous CUD methods to dispatch tasks\nwith reservation that lock all Distributions preventing race conditions during base_path\nchecking.",
                 "summary": "List open pgp distributions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -7186,6 +8034,19 @@
                 "operationId": "distributions_core_openpgp_create",
                 "description": "Trigger an asynchronous create task",
                 "summary": "Create an open pgp distribution",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Distributions: Openpgp"
                 ],
@@ -7237,6 +8098,17 @@
                 "description": "Provides read and list methods and also provides asynchronous CUD methods to dispatch tasks\nwith reservation that lock all Distributions preventing race conditions during base_path\nchecking.",
                 "summary": "Inspect an open pgp distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "open_p_g_p_distribution_href",
@@ -7298,6 +8170,17 @@
                 "summary": "Update an open pgp distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_distribution_href",
                         "schema": {
@@ -7355,6 +8238,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update an open pgp distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "open_p_g_p_distribution_href",
@@ -7414,6 +8308,17 @@
                 "summary": "Delete an open pgp distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_distribution_href",
                         "schema": {
@@ -7453,6 +8358,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "open_p_g_p_distribution_href",
@@ -7514,6 +8430,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_distribution_href",
                         "schema": {
@@ -7573,6 +8500,17 @@
                 "description": "ViewSet for Domain.\n\nNOTE: This API endpoint is in \"tech preview\" and subject to change",
                 "summary": "List domains",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -7812,6 +8750,19 @@
                 "operationId": "domains_create",
                 "description": "ViewSet for Domain.\n\nNOTE: This API endpoint is in \"tech preview\" and subject to change",
                 "summary": "Create a domain",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Domains"
                 ],
@@ -7863,6 +8814,17 @@
                 "description": "ViewSet for Domain.\n\nNOTE: This API endpoint is in \"tech preview\" and subject to change",
                 "summary": "Inspect a domain",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "domain_href",
@@ -7924,6 +8886,17 @@
                 "summary": "Update a domain",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "domain_href",
                         "schema": {
@@ -7981,6 +8954,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a domain",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "domain_href",
@@ -8040,6 +9024,17 @@
                 "summary": "Delete a domain",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "domain_href",
                         "schema": {
@@ -8079,6 +9074,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "domain_href",
@@ -8140,6 +9146,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "domain_href",
                         "schema": {
@@ -8198,6 +9215,19 @@
                 "operationId": "domains_migrate",
                 "description": "Migrate the domain's storage backend to a new one.\n\nLaunches a background task to copy the domain's artifacts over to the supplied storage\nbackend. Then updates the domain's storage settings to the new storage backend. This task\ndoes not delete the stored files of the artifacts from the previous backend.\n\n**IMPORTANT** This task will block all other tasks within the domain until the migration is\ncompleted, essentially putting the domain into a read only state. Content will still be\nserved from the old storage backend until the migration has completed, so don't remove\nthe old backend until then. Note, this endpoint is not allowed on the default domain.\n\nThis feature is in Tech Preview and is subject to future change and thus not guaranteed to\nbe backwards compatible.",
                 "summary": "Migrate storage backend",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Domains"
                 ],
@@ -8249,6 +9279,17 @@
                 "description": "Endpoint for managing FilesystemExporters.",
                 "summary": "List filesystem exporters",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -8474,6 +9515,19 @@
                 "operationId": "exporters_core_filesystem_create",
                 "description": "Endpoint for managing FilesystemExporters.",
                 "summary": "Create a filesystem exporter",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Exporters: Filesystem"
                 ],
@@ -8525,6 +9579,17 @@
                 "description": "Endpoint for managing FilesystemExports.",
                 "summary": "List filesystem exports",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "filesystem_exporter_href",
@@ -8604,6 +9669,17 @@
                 "summary": "Create a filesystem export",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "filesystem_exporter_href",
                         "schema": {
@@ -8663,6 +9739,17 @@
                 "description": "Endpoint for managing FilesystemExports.",
                 "summary": "Inspect a filesystem export",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "filesystem_filesystem_export_href",
@@ -8724,6 +9811,17 @@
                 "summary": "Delete a filesystem export",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "filesystem_filesystem_export_href",
                         "schema": {
@@ -8756,6 +9854,17 @@
                 "description": "Endpoint for managing FilesystemExporters.",
                 "summary": "Inspect a filesystem exporter",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "filesystem_exporter_href",
@@ -8817,6 +9926,17 @@
                 "summary": "Update a filesystem exporter",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "filesystem_exporter_href",
                         "schema": {
@@ -8874,6 +9994,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a filesystem exporter",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "filesystem_exporter_href",
@@ -8933,6 +10064,17 @@
                 "summary": "Delete a filesystem exporter",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "filesystem_exporter_href",
                         "schema": {
@@ -8972,6 +10114,17 @@
                 "description": "ViewSet for viewing PulpExporters.",
                 "summary": "List pulp exporters",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -9195,6 +10348,19 @@
                 "operationId": "exporters_core_pulp_create",
                 "description": "ViewSet for viewing PulpExporters.",
                 "summary": "Create a pulp exporter",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Exporters: Pulp"
                 ],
@@ -9246,6 +10412,17 @@
                 "description": "ViewSet for viewing exports from a PulpExporter.",
                 "summary": "List pulp exports",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -9325,6 +10502,17 @@
                 "summary": "Create a pulp export",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "pulp_exporter_href",
                         "schema": {
@@ -9384,6 +10572,17 @@
                 "description": "ViewSet for viewing exports from a PulpExporter.",
                 "summary": "Inspect a pulp export",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "pulp_pulp_export_href",
@@ -9445,6 +10644,17 @@
                 "summary": "Delete a pulp export",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "pulp_pulp_export_href",
                         "schema": {
@@ -9477,6 +10687,17 @@
                 "description": "ViewSet for viewing PulpExporters.",
                 "summary": "Inspect a pulp exporter",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "pulp_exporter_href",
@@ -9538,6 +10759,17 @@
                 "summary": "Update a pulp exporter",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "pulp_exporter_href",
                         "schema": {
@@ -9595,6 +10827,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a pulp exporter",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "pulp_exporter_href",
@@ -9654,6 +10897,17 @@
                 "summary": "Delete a pulp exporter",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "pulp_exporter_href",
                         "schema": {
@@ -9693,6 +10947,17 @@
                 "description": "ViewSet for Group.",
                 "summary": "List groups",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "id",
@@ -9897,6 +11162,19 @@
                 "operationId": "groups_create",
                 "description": "ViewSet for Group.",
                 "summary": "Create a group",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Groups"
                 ],
@@ -9948,6 +11226,17 @@
                 "description": "ViewSet for GroupRole.",
                 "summary": "List group roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "content_object",
@@ -10156,6 +11445,17 @@
                 "summary": "Create a group role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "group_href",
                         "schema": {
@@ -10215,6 +11515,17 @@
                 "description": "ViewSet for GroupRole.",
                 "summary": "Inspect a group role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "groups_group_role_href",
@@ -10276,6 +11587,17 @@
                 "summary": "Delete a group role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "groups_group_role_href",
                         "schema": {
@@ -10308,6 +11630,17 @@
                 "description": "List group users.",
                 "summary": "List users",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "group_href",
@@ -10387,6 +11720,17 @@
                 "summary": "Create an user",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "group_href",
                         "schema": {
@@ -10447,6 +11791,17 @@
                 "summary": "Delete an user",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "groups_user_href",
                         "schema": {
@@ -10479,6 +11834,17 @@
                 "description": "ViewSet for Group.",
                 "summary": "Inspect a group",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "group_href",
@@ -10540,6 +11906,17 @@
                 "summary": "Update a group",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "group_href",
                         "schema": {
@@ -10597,6 +11974,17 @@
                 "description": "ViewSet for Group.",
                 "summary": "Update a group",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "group_href",
@@ -10656,6 +12044,17 @@
                 "summary": "Delete a group",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "group_href",
                         "schema": {
@@ -10688,6 +12087,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "group_href",
@@ -10748,6 +12158,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "group_href",
@@ -10811,6 +12232,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "group_href",
                         "schema": {
@@ -10873,6 +12305,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "group_href",
                         "schema": {
@@ -10932,6 +12375,17 @@
                 "description": "ViewSet for PulpImporters.",
                 "summary": "List pulp importers",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -11153,6 +12607,19 @@
                 "operationId": "importers_core_pulp_create",
                 "description": "ViewSet for PulpImporters.",
                 "summary": "Create a pulp importer",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Importers: Pulp"
                 ],
@@ -11204,6 +12671,17 @@
                 "description": "ViewSet for PulpImports.",
                 "summary": "List pulp imports",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -11283,6 +12761,17 @@
                 "summary": "Create a pulp import",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "pulp_importer_href",
                         "schema": {
@@ -11342,6 +12831,17 @@
                 "description": "ViewSet for PulpImports.",
                 "summary": "Inspect a pulp import",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "pulp_pulp_import_href",
@@ -11403,6 +12903,17 @@
                 "summary": "Delete a pulp import",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "pulp_pulp_import_href",
                         "schema": {
@@ -11435,6 +12946,17 @@
                 "description": "ViewSet for PulpImporters.",
                 "summary": "Inspect a pulp importer",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "pulp_importer_href",
@@ -11496,6 +13018,17 @@
                 "summary": "Update a pulp importer",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "pulp_importer_href",
                         "schema": {
@@ -11553,6 +13086,17 @@
                 "description": "ViewSet for PulpImporters.",
                 "summary": "Update a pulp importer",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "pulp_importer_href",
@@ -11612,6 +13156,17 @@
                 "summary": "Delete a pulp importer",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "pulp_importer_href",
                         "schema": {
@@ -11643,6 +13198,19 @@
                 "operationId": "pulp_import_check_post",
                 "description": "Evaluates validity of proposed PulpImport parameters 'toc', 'path', and 'repo_mapping'.\n\n* Checks that toc, path are in ALLOWED_IMPORT_PATHS\n* if ALLOWED:\n  * Checks that toc, path exist and are readable\n  * If toc specified, checks that containing dir is writeable\n* Checks that repo_mapping is valid JSON",
                 "summary": "Validate the parameters to be used for a PulpImport call",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Importers: Pulp Import-Check"
                 ],
@@ -11693,6 +13261,41 @@
                 "operationId": "livez_read",
                 "description": "Returns 200 OK when API is alive.",
                 "summary": "Inspect liveness of Pulp's REST API.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
                 "tags": [
                     "Livez"
                 ],
@@ -11706,6 +13309,41 @@
         "/pulp/api/v3/login/": {
             "get": {
                 "operationId": "login_read",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
                 "tags": [
                     "Login"
                 ],
@@ -11732,6 +13370,19 @@
             },
             "post": {
                 "operationId": "login",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Login"
                 ],
@@ -11758,6 +13409,19 @@
             },
             "delete": {
                 "operationId": "logout",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Login"
                 ],
@@ -11781,6 +13445,19 @@
                 "operationId": "orphans_delete",
                 "description": "DEPRECATED! Trigger an asynchronous task that deletes all orphaned content and artifacts. Use the `POST /pulp/api/v3/orphans/cleanup/` call instead.",
                 "summary": "Delete orphans",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Orphans"
                 ],
@@ -11810,6 +13487,19 @@
             "post": {
                 "operationId": "orphans_cleanup_cleanup",
                 "description": "Trigger an asynchronous orphan cleanup operation.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Orphans: Cleanup"
                 ],
@@ -11861,6 +13551,17 @@
                 "description": "A base class for any publication viewset.",
                 "summary": "List publications",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "checkpoint",
@@ -12152,6 +13853,17 @@
                 "description": "A customized named ModelViewSet that knows how to register itself with the Pulp API router.\n\nThis viewset is discoverable by its name.\n\"Normal\" Django Models and Master/Detail models are supported by the ``register_with`` method.\n\nAttributes:\n    lookup_field (str): The name of the field by which an object should be looked up, in\n        addition to any parent lookups if this ViewSet is nested. Defaults to 'pk'\n    endpoint_name (str): The name of the final path segment that should identify the ViewSet's\n        collection endpoint.\n    nest_prefix (str): Optional prefix under which this ViewSet should be nested. This must\n        correspond to the \"parent_prefix\" of a router with rest_framework_nested.NestedMixin.\n        None indicates this ViewSet should not be nested.\n    parent_lookup_kwargs (dict): Optional mapping of key names that would appear in self.kwargs\n        to django model filter expressions that can be used with the corresponding value from\n        self.kwargs, used only by a nested ViewSet to filter based on the parent object's\n        identity.\n    schema (DefaultSchema): The schema class to use by default in a viewset.",
                 "summary": "List remotes",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -12517,6 +14229,19 @@
                 "operationId": "repair_post",
                 "description": "Trigger an asynchronous task that checks for missing or corrupted artifacts, and attempts to redownload them.",
                 "summary": "Repair Artifact Storage",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Repair"
                 ],
@@ -12568,6 +14293,17 @@
                 "description": "Endpoint to list all repositories.",
                 "summary": "List repositories",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "latest_with_content",
@@ -12934,6 +14670,17 @@
                 "summary": "List open pgp keyrings",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "query",
                         "name": "latest_with_content",
                         "schema": {
@@ -13266,6 +15013,19 @@
                 "operationId": "repositories_core_openpgp_keyring_create",
                 "description": "A ViewSet for an ordinary repository.",
                 "summary": "Create an open pgp keyring",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Repositories: Openpgp_Keyring"
                 ],
@@ -13317,6 +15077,17 @@
                 "description": "A ViewSet for an ordinary repository.",
                 "summary": "Inspect an open pgp keyring",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "open_p_g_p_keyring_href",
@@ -13378,6 +15149,17 @@
                 "summary": "Update an open pgp keyring",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_keyring_href",
                         "schema": {
@@ -13435,6 +15217,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update an open pgp keyring",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "open_p_g_p_keyring_href",
@@ -13494,6 +15287,17 @@
                 "summary": "Delete an open pgp keyring",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_keyring_href",
                         "schema": {
@@ -13533,6 +15337,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "open_p_g_p_keyring_href",
@@ -13593,6 +15408,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "open_p_g_p_keyring_href",
@@ -13656,6 +15482,17 @@
                 "summary": "Modify Repository Content",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_keyring_href",
                         "schema": {
@@ -13715,6 +15552,17 @@
                 "description": "List permissions available to the current user on this object.",
                 "summary": "List user permissions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "open_p_g_p_keyring_href",
@@ -13778,6 +15626,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_keyring_href",
                         "schema": {
@@ -13837,6 +15696,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "open_p_g_p_keyring_href",
@@ -13898,6 +15768,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "open_p_g_p_keyring_href",
                         "schema": {
@@ -13955,6 +15836,19 @@
             "post": {
                 "operationId": "repositories_reclaim_space_reclaim",
                 "description": "Trigger an asynchronous space reclaim operation.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Repositories: Reclaim_Space"
                 ],
@@ -14006,6 +15900,17 @@
                 "description": "A mixin to hold the shared get_queryset logic used by RepositoryVersionViewSets.",
                 "summary": "List repository versions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "content",
@@ -14282,6 +16187,17 @@
                 "description": "ViewSet for Role.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "contains_permission",
@@ -14566,6 +16482,19 @@
                 "operationId": "roles_create",
                 "description": "ViewSet for Role.",
                 "summary": "Create a role",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Roles"
                 ],
@@ -14617,6 +16546,17 @@
                 "description": "ViewSet for Role.",
                 "summary": "Inspect a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "role_href",
@@ -14678,6 +16618,17 @@
                 "summary": "Update a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "role_href",
                         "schema": {
@@ -14735,6 +16686,17 @@
                 "description": "ViewSet for Role.",
                 "summary": "Update a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "role_href",
@@ -14794,6 +16756,17 @@
                 "summary": "Delete a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "role_href",
                         "schema": {
@@ -14826,6 +16799,17 @@
                 "description": "A ViewSet that supports browsing of existing signing services.",
                 "summary": "List signing services",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -14986,6 +16970,17 @@
                 "summary": "Inspect a signing service",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "signing_service_href",
                         "schema": {
@@ -15046,6 +17041,41 @@
                 "operationId": "status_read",
                 "description": "Returns status and app information about Pulp.\n\nInformation includes:\n * version of pulpcore and loaded pulp plugins\n * known workers\n * known content apps\n * database connection status\n * redis connection status\n * disk usage information",
                 "summary": "Inspect status of Pulp",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
                 "tags": [
                     "Status"
                 ],
@@ -15068,6 +17098,17 @@
                 "operationId": "task_groups_list",
                 "summary": "List task groups",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -15140,6 +17181,17 @@
                 "summary": "Inspect a task group",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "task_group_href",
                         "schema": {
@@ -15199,6 +17251,17 @@
                 "description": "This operation cancels a task group.",
                 "summary": "Cancel a task group",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "task_group_href",
@@ -15269,6 +17332,17 @@
                 "description": "ViewSet to monitor task schedules.",
                 "summary": "List task schedules",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -15453,6 +17527,17 @@
                 "summary": "Inspect a task schedule",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "task_schedule_href",
                         "schema": {
@@ -15515,6 +17600,17 @@
                 "summary": "Add a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "task_schedule_href",
                         "schema": {
@@ -15574,6 +17670,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "task_schedule_href",
@@ -15637,6 +17744,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "task_schedule_href",
                         "schema": {
@@ -15699,6 +17817,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "task_schedule_href",
                         "schema": {
@@ -15758,6 +17887,17 @@
                 "description": "A customized named ModelViewSet that knows how to register itself with the Pulp API router.\n\nThis viewset is discoverable by its name.\n\"Normal\" Django Models and Master/Detail models are supported by the ``register_with`` method.\n\nAttributes:\n    lookup_field (str): The name of the field by which an object should be looked up, in\n        addition to any parent lookups if this ViewSet is nested. Defaults to 'pk'\n    endpoint_name (str): The name of the final path segment that should identify the ViewSet's\n        collection endpoint.\n    nest_prefix (str): Optional prefix under which this ViewSet should be nested. This must\n        correspond to the \"parent_prefix\" of a router with rest_framework_nested.NestedMixin.\n        None indicates this ViewSet should not be nested.\n    parent_lookup_kwargs (dict): Optional mapping of key names that would appear in self.kwargs\n        to django model filter expressions that can be used with the corresponding value from\n        self.kwargs, used only by a nested ViewSet to filter based on the parent object's\n        identity.\n    schema (DefaultSchema): The schema class to use by default in a viewset.",
                 "summary": "List tasks",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "child_tasks",
@@ -15950,6 +18090,7 @@
                                     "-logging_cid",
                                     "-name",
                                     "-pk",
+                                    "-profile_options",
                                     "-pulp_created",
                                     "-pulp_id",
                                     "-pulp_last_updated",
@@ -15967,6 +18108,7 @@
                                     "logging_cid",
                                     "name",
                                     "pk",
+                                    "profile_options",
                                     "pulp_created",
                                     "pulp_id",
                                     "pulp_last_updated",
@@ -15978,7 +18120,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `state` - State\n* `-state` - State (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `logging_cid` - Logging cid\n* `-logging_cid` - Logging cid (descending)\n* `unblocked_at` - Unblocked at\n* `-unblocked_at` - Unblocked at (descending)\n* `started_at` - Started at\n* `-started_at` - Started at (descending)\n* `finished_at` - Finished at\n* `-finished_at` - Finished at (descending)\n* `error` - Error\n* `-error` - Error (descending)\n* `enc_args` - Enc args\n* `-enc_args` - Enc args (descending)\n* `enc_kwargs` - Enc kwargs\n* `-enc_kwargs` - Enc kwargs (descending)\n* `reserved_resources_record` - Reserved resources record\n* `-reserved_resources_record` - Reserved resources record (descending)\n* `versions` - Versions\n* `-versions` - Versions (descending)\n* `immediate` - Immediate\n* `-immediate` - Immediate (descending)\n* `deferred` - Deferred\n* `-deferred` - Deferred (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `state` - State\n* `-state` - State (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `logging_cid` - Logging cid\n* `-logging_cid` - Logging cid (descending)\n* `unblocked_at` - Unblocked at\n* `-unblocked_at` - Unblocked at (descending)\n* `started_at` - Started at\n* `-started_at` - Started at (descending)\n* `finished_at` - Finished at\n* `-finished_at` - Finished at (descending)\n* `error` - Error\n* `-error` - Error (descending)\n* `enc_args` - Enc args\n* `-enc_args` - Enc args (descending)\n* `enc_kwargs` - Enc kwargs\n* `-enc_kwargs` - Enc kwargs (descending)\n* `reserved_resources_record` - Reserved resources record\n* `-reserved_resources_record` - Reserved resources record (descending)\n* `versions` - Versions\n* `-versions` - Versions (descending)\n* `profile_options` - Profile options\n* `-profile_options` - Profile options (descending)\n* `immediate` - Immediate\n* `-immediate` - Immediate (descending)\n* `deferred` - Deferred\n* `-deferred` - Deferred (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -16413,6 +18555,17 @@
                 "summary": "Inspect a task",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "task_href",
                         "schema": {
@@ -16472,6 +18625,17 @@
                 "description": "This operation cancels a task.",
                 "summary": "Cancel a task",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "task_href",
@@ -16541,6 +18705,17 @@
                 "summary": "Delete a task",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "task_href",
                         "schema": {
@@ -16573,6 +18748,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "task_href",
@@ -16633,6 +18819,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "task_href",
@@ -16696,6 +18893,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "task_href",
                         "schema": {
@@ -16757,6 +18965,17 @@
                 "description": "Return pre-signed URLs used for downloading raw profile artifacts.",
                 "summary": "Fetch downloadable links for profile artifacts",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "task_href",
@@ -16820,6 +19039,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "task_href",
                         "schema": {
@@ -16878,6 +19108,19 @@
                 "operationId": "tasks_purge",
                 "description": "Trigger an asynchronous task that deletes completed tasks that finished prior to a specified timestamp.",
                 "summary": "Purge Completed Tasks",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Tasks"
                 ],
@@ -16929,6 +19172,17 @@
                 "description": "View for chunked uploads.",
                 "summary": "List uploads",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -17108,6 +19362,19 @@
                 "operationId": "uploads_create",
                 "description": "View for chunked uploads.",
                 "summary": "Create an upload",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Uploads"
                 ],
@@ -17159,6 +19426,17 @@
                 "description": "View for chunked uploads.",
                 "summary": "Inspect an upload",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "upload_href",
@@ -17229,6 +19507,17 @@
                         "required": true
                     },
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "upload_href",
                         "schema": {
@@ -17282,6 +19571,17 @@
                 "summary": "Delete an upload",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "upload_href",
                         "schema": {
@@ -17314,6 +19614,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "upload_href",
@@ -17375,6 +19686,17 @@
                 "summary": "Finish an Upload",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "upload_href",
                         "schema": {
@@ -17434,6 +19756,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "upload_href",
@@ -17497,6 +19830,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "upload_href",
                         "schema": {
@@ -17559,6 +19903,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "upload_href",
                         "schema": {
@@ -17618,6 +19973,17 @@
                 "description": "API for configuring an upstream Pulp to replicate. This API is provided as a tech preview.",
                 "summary": "List upstream pulps",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "base_url",
@@ -18005,6 +20371,19 @@
                 "operationId": "upstream_pulps_create",
                 "description": "API for configuring an upstream Pulp to replicate. This API is provided as a tech preview.",
                 "summary": "Create an upstream pulp",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Upstream-Pulps"
                 ],
@@ -18056,6 +20435,17 @@
                 "description": "API for configuring an upstream Pulp to replicate. This API is provided as a tech preview.",
                 "summary": "Inspect an upstream pulp",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "upstream_pulp_href",
@@ -18117,6 +20507,17 @@
                 "summary": "Update an upstream pulp",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "upstream_pulp_href",
                         "schema": {
@@ -18174,6 +20575,17 @@
                 "description": "API for configuring an upstream Pulp to replicate. This API is provided as a tech preview.",
                 "summary": "Update an upstream pulp",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "upstream_pulp_href",
@@ -18233,6 +20645,17 @@
                 "summary": "Delete an upstream pulp",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "upstream_pulp_href",
                         "schema": {
@@ -18265,6 +20688,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "upstream_pulp_href",
@@ -18325,6 +20759,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "upstream_pulp_href",
@@ -18388,6 +20833,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "upstream_pulp_href",
                         "schema": {
@@ -18450,6 +20906,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "upstream_pulp_href",
                         "schema": {
@@ -18510,6 +20977,17 @@
                 "summary": "Replicate",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "upstream_pulp_href",
                         "schema": {
@@ -18549,6 +21027,17 @@
                 "description": "ViewSet for User.",
                 "summary": "List users",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "email",
@@ -18901,6 +21390,19 @@
                 "operationId": "users_create",
                 "description": "ViewSet for User.",
                 "summary": "Create an user",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Users"
                 ],
@@ -18952,6 +21454,17 @@
                 "description": "ViewSet for User.",
                 "summary": "Inspect an user",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "auth_user_href",
@@ -19013,6 +21526,17 @@
                 "summary": "Update an user",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "auth_user_href",
                         "schema": {
@@ -19070,6 +21594,17 @@
                 "description": "ViewSet for User.",
                 "summary": "Update an user",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "auth_user_href",
@@ -19129,6 +21664,17 @@
                 "summary": "Delete an user",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "auth_user_href",
                         "schema": {
@@ -19161,6 +21707,17 @@
                 "description": "ViewSet for UserRole.",
                 "summary": "List user roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "auth_user_href",
@@ -19369,6 +21926,17 @@
                 "summary": "Create an user role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "auth_user_href",
                         "schema": {
@@ -19428,6 +21996,17 @@
                 "description": "ViewSet for UserRole.",
                 "summary": "Inspect an user role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "auth_users_user_role_href",
@@ -19489,6 +22068,17 @@
                 "summary": "Delete an user role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "auth_users_user_role_href",
                         "schema": {
@@ -19521,6 +22111,17 @@
                 "description": "A customized named ModelViewSet that knows how to register itself with the Pulp API router.\n\nThis viewset is discoverable by its name.\n\"Normal\" Django Models and Master/Detail models are supported by the ``register_with`` method.\n\nAttributes:\n    lookup_field (str): The name of the field by which an object should be looked up, in\n        addition to any parent lookups if this ViewSet is nested. Defaults to 'pk'\n    endpoint_name (str): The name of the final path segment that should identify the ViewSet's\n        collection endpoint.\n    nest_prefix (str): Optional prefix under which this ViewSet should be nested. This must\n        correspond to the \"parent_prefix\" of a router with rest_framework_nested.NestedMixin.\n        None indicates this ViewSet should not be nested.\n    parent_lookup_kwargs (dict): Optional mapping of key names that would appear in self.kwargs\n        to django model filter expressions that can be used with the corresponding value from\n        self.kwargs, used only by a nested ViewSet to filter based on the parent object's\n        identity.\n    schema (DefaultSchema): The schema class to use by default in a viewset.",
                 "summary": "List workers",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "last_heartbeat",
@@ -19829,6 +22430,17 @@
                 "summary": "Inspect a worker",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "worker_href",
                         "schema": {
@@ -20081,43 +22693,26 @@
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
                     },
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
-                    },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
-                    "no_content_change_since": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
-                    },
                     "pulp_last_updated": {
                         "type": "string",
                         "format": "date-time",
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
-                    "name": {
+                    "prn": {
                         "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
+                    "no_content_change_since": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                    },
+                    "base_url": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The URL for accessing the publication as defined by this distribution."
                     },
                     "content_guard": {
                         "type": "string",
@@ -20125,10 +22720,27 @@
                         "nullable": true,
                         "description": "An optional content-guard."
                     },
-                    "base_url": {
+                    "name": {
                         "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
                         "readOnly": true,
-                        "description": "The URL for accessing the publication as defined by this distribution."
+                        "description": "Timestamp of creation."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
                     }
                 },
                 "required": [
@@ -24599,7 +27211,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2025-05-26",
+                        "default": "2025-05-30",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
