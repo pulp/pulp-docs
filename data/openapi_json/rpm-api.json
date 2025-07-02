@@ -5350,6 +5350,51 @@
                 }
             }
         },
+        "/pulp/api/v3/content/rpm/packages/upload/": {
+            "post": {
+                "operationId": "content_rpm_packages_upload",
+                "description": "Synchronously upload an RPM package.",
+                "summary": "Upload an RPM package synchronously.",
+                "tags": [
+                    "Content: Packages"
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PackageUpload"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PackageUpload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/rpm.PackageResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/content/rpm/repo_metadata_files/": {
             "get": {
                 "operationId": "content_rpm_repo_metadata_files_list",
@@ -11261,6 +11306,43 @@
                 ],
                 "type": "string",
                 "description": "* `unknown` - unknown\n* `md5` - md5\n* `sha1` - sha1\n* `sha224` - sha224\n* `sha256` - sha256\n* `sha384` - sha384\n* `sha512` - sha512"
+            },
+            "PackageUpload": {
+                "type": "object",
+                "description": "Serializer for requests to synchronously upload RPM packages.",
+                "properties": {
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "artifact": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "Artifact file representing the physical content"
+                    },
+                    "file": {
+                        "type": "string",
+                        "format": "binary",
+                        "writeOnly": true,
+                        "description": "An uploaded file that may be turned into the content unit."
+                    },
+                    "upload": {
+                        "type": "string",
+                        "format": "uri",
+                        "writeOnly": true,
+                        "description": "An uncommitted upload that may be turned into the content unit."
+                    },
+                    "file_url": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "minLength": 1,
+                        "description": "A url that Pulp can download and turn into the content unit."
+                    }
+                }
             },
             "PaginatedRepositoryVersionResponseList": {
                 "type": "object",
