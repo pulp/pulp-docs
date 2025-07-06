@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "gem": "0.8.0.dev",
-            "core": "3.81.0"
+            "core": "3.82.1"
         },
         "x-pulp-domain-enabled": false
     },
@@ -29,6 +29,17 @@
                 "description": "A ViewSet for GemContent.",
                 "summary": "List gem contents",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "checksum",
@@ -265,6 +276,19 @@
                 "operationId": "content_gem_gem_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create a gem content",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Gem"
                 ],
@@ -311,6 +335,17 @@
                 "description": "A ViewSet for GemContent.",
                 "summary": "Inspect a gem content",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_content_href",
@@ -374,6 +409,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_content_href",
                         "schema": {
@@ -434,6 +480,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_content_href",
                         "schema": {
@@ -493,6 +550,17 @@
                 "description": "ViewSet for GemDistributions.",
                 "summary": "List gem distributions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "base_path",
@@ -806,6 +874,19 @@
                 "operationId": "distributions_gem_gem_create",
                 "description": "Trigger an asynchronous create task",
                 "summary": "Create a gem distribution",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Distributions: Gem"
                 ],
@@ -857,6 +938,17 @@
                 "description": "ViewSet for GemDistributions.",
                 "summary": "Inspect a gem distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_distribution_href",
@@ -918,6 +1010,17 @@
                 "summary": "Update a gem distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_distribution_href",
                         "schema": {
@@ -975,6 +1078,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a gem distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_distribution_href",
@@ -1034,6 +1148,17 @@
                 "summary": "Delete a gem distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_distribution_href",
                         "schema": {
@@ -1073,6 +1198,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_distribution_href",
@@ -1133,6 +1269,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_distribution_href",
@@ -1196,6 +1343,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_distribution_href",
                         "schema": {
@@ -1258,6 +1416,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_distribution_href",
                         "schema": {
@@ -1317,6 +1486,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_distribution_href",
@@ -1378,6 +1558,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_distribution_href",
                         "schema": {
@@ -1437,6 +1628,17 @@
                 "description": "A ViewSet for GemPublication.",
                 "summary": "List gem publications",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "checkpoint",
@@ -1698,6 +1900,19 @@
                 "operationId": "publications_gem_gem_create",
                 "description": "Trigger an asynchronous task to publish gem content",
                 "summary": "Create a gem publication",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Publications: Gem"
                 ],
@@ -1749,6 +1964,17 @@
                 "description": "A ViewSet for GemPublication.",
                 "summary": "Inspect a gem publication",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_publication_href",
@@ -1810,6 +2036,17 @@
                 "summary": "Delete a gem publication",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_publication_href",
                         "schema": {
@@ -1842,6 +2079,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_publication_href",
@@ -1902,6 +2150,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_publication_href",
@@ -1965,6 +2224,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_publication_href",
                         "schema": {
@@ -2027,6 +2297,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_publication_href",
                         "schema": {
@@ -2086,6 +2367,17 @@
                 "description": "A ViewSet for GemRemote.",
                 "summary": "List gem remotes",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -2422,6 +2714,19 @@
                 "operationId": "remotes_gem_gem_create",
                 "description": "A ViewSet for GemRemote.",
                 "summary": "Create a gem remote",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Remotes: Gem"
                 ],
@@ -2473,6 +2778,17 @@
                 "description": "A ViewSet for GemRemote.",
                 "summary": "Inspect a gem remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_remote_href",
@@ -2534,6 +2850,17 @@
                 "summary": "Update a gem remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_remote_href",
                         "schema": {
@@ -2591,6 +2918,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a gem remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_remote_href",
@@ -2650,6 +2988,17 @@
                 "summary": "Delete a gem remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_remote_href",
                         "schema": {
@@ -2689,6 +3038,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_remote_href",
@@ -2749,6 +3109,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_remote_href",
@@ -2812,6 +3183,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_remote_href",
                         "schema": {
@@ -2874,6 +3256,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_remote_href",
                         "schema": {
@@ -2933,6 +3326,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_remote_href",
@@ -2994,6 +3398,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_remote_href",
                         "schema": {
@@ -3053,6 +3468,17 @@
                 "description": "A ViewSet for GemRepository.",
                 "summary": "List gem repositorys",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "latest_with_content",
@@ -3386,6 +3812,19 @@
                 "operationId": "repositories_gem_gem_create",
                 "description": "A ViewSet for GemRepository.",
                 "summary": "Create a gem repository",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Repositories: Gem"
                 ],
@@ -3437,6 +3876,17 @@
                 "description": "A ViewSet for GemRepository.",
                 "summary": "Inspect a gem repository",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_repository_href",
@@ -3498,6 +3948,17 @@
                 "summary": "Update a gem repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_repository_href",
                         "schema": {
@@ -3555,6 +4016,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a gem repository",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_repository_href",
@@ -3614,6 +4086,17 @@
                 "summary": "Delete a gem repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_repository_href",
                         "schema": {
@@ -3653,6 +4136,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_repository_href",
@@ -3713,6 +4207,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_repository_href",
@@ -3776,6 +4281,17 @@
                 "summary": "Modify Repository Content",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_repository_href",
                         "schema": {
@@ -3835,6 +4351,17 @@
                 "description": "List permissions available to the current user on this object.",
                 "summary": "List user permissions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_repository_href",
@@ -3898,6 +4425,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_repository_href",
                         "schema": {
@@ -3957,6 +4495,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_repository_href",
@@ -4018,6 +4567,17 @@
                 "summary": "Sync from a remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_repository_href",
                         "schema": {
@@ -4078,6 +4638,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_repository_href",
                         "schema": {
@@ -4137,6 +4708,17 @@
                 "description": "A ViewSet for a GemRepositoryVersion represents a single Gem repository version.",
                 "summary": "List repository versions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "content",
@@ -4422,6 +5004,17 @@
                 "summary": "Inspect a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_repository_version_href",
                         "schema": {
@@ -4482,6 +5075,17 @@
                 "summary": "Delete a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "gem_gem_repository_version_href",
                         "schema": {
@@ -4520,6 +5124,17 @@
                 "operationId": "repositories_gem_gem_versions_repair",
                 "description": "Trigger an asynchronous task to repair a repository version.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "gem_gem_repository_version_href",

@@ -17,8 +17,8 @@
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "rpm": "3.31.0.dev",
-            "core": "3.81.0"
+            "rpm": "3.32.0.dev",
+            "core": "3.82.1"
         },
         "x-pulp-domain-enabled": false
     },
@@ -29,6 +29,17 @@
                 "description": "ViewSet for ACS.",
                 "summary": "List rpm alternate content sources",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -252,6 +263,19 @@
                 "operationId": "acs_rpm_rpm_create",
                 "description": "ViewSet for ACS.",
                 "summary": "Create a rpm alternate content source",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Acs: Rpm"
                 ],
@@ -303,6 +327,17 @@
                 "description": "ViewSet for ACS.",
                 "summary": "Inspect a rpm alternate content source",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_alternate_content_source_href",
@@ -364,6 +399,17 @@
                 "summary": "Update a rpm alternate content source",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_alternate_content_source_href",
                         "schema": {
@@ -421,6 +467,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a rpm alternate content source",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_alternate_content_source_href",
@@ -480,6 +537,17 @@
                 "summary": "Delete a rpm alternate content source",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_alternate_content_source_href",
                         "schema": {
@@ -519,6 +587,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_alternate_content_source_href",
@@ -579,6 +658,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_alternate_content_source_href",
@@ -642,6 +732,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_alternate_content_source_href",
                         "schema": {
@@ -703,6 +804,17 @@
                 "description": "Trigger an asynchronous task to create Alternate Content Source content.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_alternate_content_source_href",
                         "schema": {
@@ -742,6 +854,17 @@
                 "description": "Remove a role for this object from users/groups.",
                 "summary": "Remove a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_alternate_content_source_href",
@@ -802,6 +925,17 @@
                 "description": "A ViewSet for UpdateRecord.\n\nDefine endpoint name which will appear in the API endpoint for this content type.\nFor example::\n    http://pulp.example.com/pulp/api/v3/content/rpm/advisories/\n\nAlso specify queryset and serializer for UpdateRecord.",
                 "summary": "List update records",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "id",
@@ -1132,6 +1266,19 @@
                 "operationId": "content_rpm_advisories_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create an update record",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Advisories"
                 ],
@@ -1178,6 +1325,17 @@
                 "description": "A ViewSet for UpdateRecord.\n\nDefine endpoint name which will appear in the API endpoint for this content type.\nFor example::\n    http://pulp.example.com/pulp/api/v3/content/rpm/advisories/\n\nAlso specify queryset and serializer for UpdateRecord.",
                 "summary": "Inspect an update record",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_update_record_href",
@@ -1241,6 +1399,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_update_record_href",
                         "schema": {
@@ -1301,6 +1470,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_update_record_href",
                         "schema": {
@@ -1360,6 +1540,17 @@
                 "description": "Distribution Tree Viewset.",
                 "summary": "List distribution trees",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -1538,6 +1729,17 @@
                 "summary": "Inspect a distribution tree",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_distribution_tree_href",
                         "schema": {
@@ -1600,6 +1802,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_distribution_tree_href",
                         "schema": {
@@ -1660,6 +1873,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_distribution_tree_href",
                         "schema": {
@@ -1719,6 +1943,17 @@
                 "description": "ViewSet for Modulemd.",
                 "summary": "List modulemd defaultss",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -1966,6 +2201,19 @@
                 "operationId": "content_rpm_modulemd_defaults_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create a modulemd defaults",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Modulemd_Defaults"
                 ],
@@ -2017,6 +2265,17 @@
                 "description": "ViewSet for Modulemd.",
                 "summary": "Inspect a modulemd defaults",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_modulemd_defaults_href",
@@ -2080,6 +2339,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_modulemd_defaults_href",
                         "schema": {
@@ -2140,6 +2410,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_modulemd_defaults_href",
                         "schema": {
@@ -2199,6 +2480,17 @@
                 "description": "ViewSet for Modulemd.",
                 "summary": "List modulemd obsoletes",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -2373,6 +2665,19 @@
                 "operationId": "content_rpm_modulemd_obsoletes_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create a modulemd obsolete",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Modulemd_Obsoletes"
                 ],
@@ -2424,6 +2729,17 @@
                 "description": "ViewSet for Modulemd.",
                 "summary": "Inspect a modulemd obsolete",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_modulemd_obsolete_href",
@@ -2487,6 +2803,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_modulemd_obsolete_href",
                         "schema": {
@@ -2547,6 +2874,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_modulemd_obsolete_href",
                         "schema": {
@@ -2606,6 +2944,17 @@
                 "description": "ViewSet for Modulemd.",
                 "summary": "List modulemds",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "arch",
@@ -2930,6 +3279,19 @@
                 "operationId": "content_rpm_modulemds_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create a modulemd",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Modulemds"
                 ],
@@ -2981,6 +3343,17 @@
                 "description": "ViewSet for Modulemd.",
                 "summary": "Inspect a modulemd",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_modulemd_href",
@@ -3044,6 +3417,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_modulemd_href",
                         "schema": {
@@ -3104,6 +3488,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_modulemd_href",
                         "schema": {
@@ -3163,6 +3558,17 @@
                 "description": "PackageCategory ViewSet.",
                 "summary": "List package categorys",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -3341,6 +3747,17 @@
                 "summary": "Inspect a package category",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_package_category_href",
                         "schema": {
@@ -3403,6 +3820,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_package_category_href",
                         "schema": {
@@ -3463,6 +3891,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_package_category_href",
                         "schema": {
@@ -3522,6 +3961,17 @@
                 "description": "PackageEnvironment ViewSet.",
                 "summary": "List package environments",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -3700,6 +4150,17 @@
                 "summary": "Inspect a package environment",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_package_environment_href",
                         "schema": {
@@ -3762,6 +4223,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_package_environment_href",
                         "schema": {
@@ -3822,6 +4294,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_package_environment_href",
                         "schema": {
@@ -3881,6 +4364,17 @@
                 "description": "PackageGroup ViewSet.",
                 "summary": "List package groups",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -4059,6 +4553,17 @@
                 "summary": "Inspect a package group",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_package_group_href",
                         "schema": {
@@ -4121,6 +4626,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_package_group_href",
                         "schema": {
@@ -4181,6 +4697,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_package_group_href",
                         "schema": {
@@ -4240,6 +4767,17 @@
                 "description": "PackageLangpacks ViewSet.",
                 "summary": "List package langpackss",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -4418,6 +4956,17 @@
                 "summary": "Inspect a package langpacks",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_package_langpacks_href",
                         "schema": {
@@ -4480,6 +5029,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_package_langpacks_href",
                         "schema": {
@@ -4540,6 +5100,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_package_langpacks_href",
                         "schema": {
@@ -4599,6 +5170,17 @@
                 "description": "A ViewSet for Package.\n\nDefine endpoint name which will appear in the API endpoint for this content type.\nFor example::\n    http://pulp.example.com/pulp/api/v3/content/rpm/packages/\n\nAlso specify queryset and serializer for Package.",
                 "summary": "List packages",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "arch",
@@ -5128,6 +5710,19 @@
                 "operationId": "content_rpm_packages_create",
                 "description": "Trigger an asynchronous task to create an RPM package,optionally create new repository version.",
                 "summary": "Create a package",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Packages"
                 ],
@@ -5174,6 +5769,17 @@
                 "description": "A ViewSet for Package.\n\nDefine endpoint name which will appear in the API endpoint for this content type.\nFor example::\n    http://pulp.example.com/pulp/api/v3/content/rpm/packages/\n\nAlso specify queryset and serializer for Package.",
                 "summary": "Inspect a package",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_package_href",
@@ -5237,6 +5843,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_package_href",
                         "schema": {
@@ -5297,6 +5914,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_package_href",
                         "schema": {
@@ -5355,6 +5983,19 @@
                 "operationId": "content_rpm_packages_upload",
                 "description": "Synchronously upload an RPM package.",
                 "summary": "Upload an RPM package synchronously.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Packages"
                 ],
@@ -5401,6 +6042,17 @@
                 "description": "RepoMetadataFile Viewset.",
                 "summary": "List repo metadata files",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -5579,6 +6231,17 @@
                 "summary": "Inspect a repo metadata file",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_repo_metadata_file_href",
                         "schema": {
@@ -5641,6 +6304,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_repo_metadata_file_href",
                         "schema": {
@@ -5701,6 +6375,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_repo_metadata_file_href",
                         "schema": {
@@ -5760,6 +6445,17 @@
                 "description": "ViewSet for RPM Distributions.",
                 "summary": "List rpm distributions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "base_path",
@@ -6073,6 +6769,19 @@
                 "operationId": "distributions_rpm_rpm_create",
                 "description": "Trigger an asynchronous create task",
                 "summary": "Create a rpm distribution",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Distributions: Rpm"
                 ],
@@ -6124,6 +6833,17 @@
                 "description": "ViewSet for RPM Distributions.",
                 "summary": "Inspect a rpm distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_distribution_href",
@@ -6185,6 +6905,17 @@
                 "summary": "Update a rpm distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_distribution_href",
                         "schema": {
@@ -6242,6 +6973,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a rpm distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_distribution_href",
@@ -6301,6 +7043,17 @@
                 "summary": "Delete a rpm distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_distribution_href",
                         "schema": {
@@ -6340,6 +7093,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_distribution_href",
@@ -6400,6 +7164,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_distribution_href",
@@ -6463,6 +7238,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_distribution_href",
                         "schema": {
@@ -6525,6 +7311,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_distribution_href",
                         "schema": {
@@ -6584,6 +7381,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_distribution_href",
@@ -6645,6 +7453,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_distribution_href",
                         "schema": {
@@ -6704,6 +7523,17 @@
                 "description": "ViewSet for Rpm Publications.",
                 "summary": "List rpm publications",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "checkpoint",
@@ -6965,6 +7795,19 @@
                 "operationId": "publications_rpm_rpm_create",
                 "description": "Trigger an asynchronous task to create a new RPM content publication.",
                 "summary": "Create a rpm publication",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Publications: Rpm"
                 ],
@@ -7016,6 +7859,17 @@
                 "description": "ViewSet for Rpm Publications.",
                 "summary": "Inspect a rpm publication",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_publication_href",
@@ -7077,6 +7931,17 @@
                 "summary": "Delete a rpm publication",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_publication_href",
                         "schema": {
@@ -7109,6 +7974,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_publication_href",
@@ -7169,6 +8045,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_publication_href",
@@ -7232,6 +8119,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_publication_href",
                         "schema": {
@@ -7294,6 +8192,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_publication_href",
                         "schema": {
@@ -7353,6 +8262,17 @@
                 "description": "A ViewSet for RpmRemote.",
                 "summary": "List rpm remotes",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -7689,6 +8609,19 @@
                 "operationId": "remotes_rpm_rpm_create",
                 "description": "A ViewSet for RpmRemote.",
                 "summary": "Create a rpm remote",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Remotes: Rpm"
                 ],
@@ -7740,6 +8673,17 @@
                 "description": "A ViewSet for RpmRemote.",
                 "summary": "Inspect a rpm remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_remote_href",
@@ -7801,6 +8745,17 @@
                 "summary": "Update a rpm remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_remote_href",
                         "schema": {
@@ -7858,6 +8813,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a rpm remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_remote_href",
@@ -7917,6 +8883,17 @@
                 "summary": "Delete a rpm remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_remote_href",
                         "schema": {
@@ -7956,6 +8933,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_remote_href",
@@ -8016,6 +9004,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_remote_href",
@@ -8079,6 +9078,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_remote_href",
                         "schema": {
@@ -8141,6 +9151,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_remote_href",
                         "schema": {
@@ -8200,6 +9221,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_remote_href",
@@ -8261,6 +9293,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_remote_href",
                         "schema": {
@@ -8320,6 +9363,17 @@
                 "description": "A ViewSet for UlnRemote.",
                 "summary": "List uln remotes",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -8656,6 +9710,19 @@
                 "operationId": "remotes_rpm_uln_create",
                 "description": "A ViewSet for UlnRemote.",
                 "summary": "Create an uln remote",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Remotes: Uln"
                 ],
@@ -8707,6 +9774,17 @@
                 "description": "A ViewSet for UlnRemote.",
                 "summary": "Inspect an uln remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_uln_remote_href",
@@ -8768,6 +9846,17 @@
                 "summary": "Update an uln remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_uln_remote_href",
                         "schema": {
@@ -8825,6 +9914,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update an uln remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_uln_remote_href",
@@ -8884,6 +9984,17 @@
                 "summary": "Delete an uln remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_uln_remote_href",
                         "schema": {
@@ -8923,6 +10034,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_uln_remote_href",
@@ -8983,6 +10105,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_uln_remote_href",
@@ -9046,6 +10179,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_uln_remote_href",
                         "schema": {
@@ -9108,6 +10252,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_uln_remote_href",
                         "schema": {
@@ -9167,6 +10322,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_uln_remote_href",
@@ -9228,6 +10394,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_uln_remote_href",
                         "schema": {
@@ -9287,6 +10464,17 @@
                 "description": "A ViewSet for RpmRepository.",
                 "summary": "List rpm repositorys",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "latest_with_content",
@@ -9620,6 +10808,19 @@
                 "operationId": "repositories_rpm_rpm_create",
                 "description": "A ViewSet for RpmRepository.",
                 "summary": "Create a rpm repository",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Repositories: Rpm"
                 ],
@@ -9671,6 +10872,17 @@
                 "description": "A ViewSet for RpmRepository.",
                 "summary": "Inspect a rpm repository",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_repository_href",
@@ -9732,6 +10944,17 @@
                 "summary": "Update a rpm repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_repository_href",
                         "schema": {
@@ -9789,6 +11012,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a rpm repository",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_repository_href",
@@ -9848,6 +11082,17 @@
                 "summary": "Delete a rpm repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_repository_href",
                         "schema": {
@@ -9887,6 +11132,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_repository_href",
@@ -9947,6 +11203,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_repository_href",
@@ -10010,6 +11277,17 @@
                 "summary": "Modify Repository Content",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_repository_href",
                         "schema": {
@@ -10069,6 +11347,17 @@
                 "description": "List permissions available to the current user on this object.",
                 "summary": "List user permissions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_repository_href",
@@ -10132,6 +11421,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_repository_href",
                         "schema": {
@@ -10191,6 +11491,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_repository_href",
@@ -10252,6 +11563,17 @@
                 "summary": "Sync from remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_repository_href",
                         "schema": {
@@ -10312,6 +11634,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_repository_href",
                         "schema": {
@@ -10371,6 +11704,17 @@
                 "description": "RpmRepositoryVersion represents a single rpm repository version.",
                 "summary": "List repository versions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "content",
@@ -10656,6 +12000,17 @@
                 "summary": "Inspect a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_repository_version_href",
                         "schema": {
@@ -10716,6 +12071,17 @@
                 "summary": "Delete a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "rpm_rpm_repository_version_href",
                         "schema": {
@@ -10754,6 +12120,17 @@
                 "operationId": "repositories_rpm_rpm_versions_repair",
                 "description": "Trigger an asynchronous task to repair a repository version.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "rpm_rpm_repository_version_href",
@@ -10813,6 +12190,19 @@
                 "operationId": "rpm_comps_upload",
                 "description": "Trigger an asynchronous task to upload a comps.xml file.",
                 "summary": "Upload comps.xml",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Rpm: Comps"
                 ],
@@ -10858,6 +12248,19 @@
                 "operationId": "copy_content",
                 "description": "Trigger an asynchronous task to copy RPM contentfrom one repository into another, creating a newrepository version.",
                 "summary": "Copy content",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Rpm: Copy"
                 ],
@@ -10907,6 +12310,19 @@
             "post": {
                 "operationId": "rpm_prune_prune_packages",
                 "description": "Trigger an asynchronous old-Package-prune operation.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Rpm: Prune"
                 ],

@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "python": "3.17.0.dev",
-            "core": "3.81.0"
+            "core": "3.82.1"
         },
         "x-pulp-domain-enabled": false
     },
@@ -29,6 +29,17 @@
                 "description": "\nPythonPackageContent represents each individually installable Python package. In the Python\necosystem, this is called a Python Distribution, sometimes (ambiguously) refered to as a\npackage. In Pulp Python, we refer to it as PythonPackageContent. Each\nPythonPackageContent corresponds to a single filename, for example\n`pulpcore-3.0.0rc1-py3-none-any.whl` or `pulpcore-3.0.0rc1.tar.gz`.",
                 "summary": "List python package contents",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "author",
@@ -486,6 +497,19 @@
                 "operationId": "content_python_packages_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create a python package content",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Packages"
                 ],
@@ -532,6 +556,17 @@
                 "description": "\nPythonPackageContent represents each individually installable Python package. In the Python\necosystem, this is called a Python Distribution, sometimes (ambiguously) refered to as a\npackage. In Pulp Python, we refer to it as PythonPackageContent. Each\nPythonPackageContent corresponds to a single filename, for example\n`pulpcore-3.0.0rc1-py3-none-any.whl` or `pulpcore-3.0.0rc1.tar.gz`.",
                 "summary": "Inspect a python package content",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_package_content_href",
@@ -595,6 +630,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_package_content_href",
                         "schema": {
@@ -655,6 +701,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_package_content_href",
                         "schema": {
@@ -714,6 +771,17 @@
                 "description": "\nPulp Python Distributions are used to distribute Python content from\nPython Repositories or\nPython Publications.  Pulp Python\nDistributions should not be confused with \"Python Distribution\" as defined by the Python\ncommunity. In Pulp usage, Python content is referred to as Python Package Content.",
                 "summary": "List python distributions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "base_path",
@@ -1027,6 +1095,19 @@
                 "operationId": "distributions_python_pypi_create",
                 "description": "Trigger an asynchronous create task",
                 "summary": "Create a python distribution",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Distributions: Pypi"
                 ],
@@ -1078,6 +1159,17 @@
                 "description": "\nPulp Python Distributions are used to distribute Python content from\nPython Repositories or\nPython Publications.  Pulp Python\nDistributions should not be confused with \"Python Distribution\" as defined by the Python\ncommunity. In Pulp usage, Python content is referred to as Python Package Content.",
                 "summary": "Inspect a python distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_distribution_href",
@@ -1139,6 +1231,17 @@
                 "summary": "Update a python distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_distribution_href",
                         "schema": {
@@ -1196,6 +1299,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a python distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_distribution_href",
@@ -1255,6 +1369,17 @@
                 "summary": "Delete a python distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_distribution_href",
                         "schema": {
@@ -1294,6 +1419,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_distribution_href",
@@ -1354,6 +1490,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_distribution_href",
@@ -1417,6 +1564,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_distribution_href",
                         "schema": {
@@ -1479,6 +1637,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_distribution_href",
                         "schema": {
@@ -1538,6 +1707,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_distribution_href",
@@ -1599,6 +1779,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_distribution_href",
                         "schema": {
@@ -1658,6 +1849,17 @@
                 "description": "\nPython Publications refer to the Python Package content in a repository version, and include\nmetadata about that content.",
                 "summary": "List python publications",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "checkpoint",
@@ -1919,6 +2121,19 @@
                 "operationId": "publications_python_pypi_create",
                 "description": "\nDispatches a publish task, which generates metadata that will be used by pip.",
                 "summary": "Create a python publication",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Publications: Pypi"
                 ],
@@ -1970,6 +2185,17 @@
                 "description": "\nPython Publications refer to the Python Package content in a repository version, and include\nmetadata about that content.",
                 "summary": "Inspect a python publication",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_publication_href",
@@ -2031,6 +2257,17 @@
                 "summary": "Delete a python publication",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_publication_href",
                         "schema": {
@@ -2063,6 +2300,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_publication_href",
@@ -2123,6 +2371,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_publication_href",
@@ -2186,6 +2445,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_publication_href",
                         "schema": {
@@ -2248,6 +2518,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_publication_href",
                         "schema": {
@@ -2307,6 +2588,17 @@
                 "description": "\nPython Remotes are representations of an external repository of Python content, eg.\nPyPI.  Fields include upstream repository config. Python Remotes are also used to `sync` from\nupstream repositories, and contains sync settings.",
                 "summary": "List python remotes",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -2643,6 +2935,19 @@
                 "operationId": "remotes_python_python_create",
                 "description": "\nPython Remotes are representations of an external repository of Python content, eg.\nPyPI.  Fields include upstream repository config. Python Remotes are also used to `sync` from\nupstream repositories, and contains sync settings.",
                 "summary": "Create a python remote",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Remotes: Python"
                 ],
@@ -2694,6 +2999,17 @@
                 "description": "\nPython Remotes are representations of an external repository of Python content, eg.\nPyPI.  Fields include upstream repository config. Python Remotes are also used to `sync` from\nupstream repositories, and contains sync settings.",
                 "summary": "Inspect a python remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_remote_href",
@@ -2755,6 +3071,17 @@
                 "summary": "Update a python remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_remote_href",
                         "schema": {
@@ -2812,6 +3139,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a python remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_remote_href",
@@ -2871,6 +3209,17 @@
                 "summary": "Delete a python remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_remote_href",
                         "schema": {
@@ -2910,6 +3259,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_remote_href",
@@ -2970,6 +3330,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_remote_href",
@@ -3033,6 +3404,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_remote_href",
                         "schema": {
@@ -3095,6 +3477,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_remote_href",
                         "schema": {
@@ -3154,6 +3547,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_remote_href",
@@ -3215,6 +3619,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_remote_href",
                         "schema": {
@@ -3273,6 +3688,19 @@
                 "operationId": "remotes_python_python_from_bandersnatch",
                 "description": "\nTakes the fields specified in the Bandersnatch config and creates a Python Remote from it.",
                 "summary": "Create from Bandersnatch",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Remotes: Python"
                 ],
@@ -3319,6 +3747,17 @@
                 "description": "PythonRepository represents a single Python repository, to which content can be\nsynced, added, or removed.",
                 "summary": "List python repositorys",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "latest_with_content",
@@ -3652,6 +4091,19 @@
                 "operationId": "repositories_python_python_create",
                 "description": "PythonRepository represents a single Python repository, to which content can be\nsynced, added, or removed.",
                 "summary": "Create a python repository",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Repositories: Python"
                 ],
@@ -3703,6 +4155,17 @@
                 "description": "PythonRepository represents a single Python repository, to which content can be\nsynced, added, or removed.",
                 "summary": "Inspect a python repository",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_repository_href",
@@ -3764,6 +4227,17 @@
                 "summary": "Update a python repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_repository_href",
                         "schema": {
@@ -3821,6 +4295,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a python repository",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_repository_href",
@@ -3880,6 +4365,17 @@
                 "summary": "Delete a python repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_repository_href",
                         "schema": {
@@ -3919,6 +4415,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_repository_href",
@@ -3979,6 +4486,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_repository_href",
@@ -4042,6 +4560,17 @@
                 "summary": "Modify Repository Content",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_repository_href",
                         "schema": {
@@ -4101,6 +4630,17 @@
                 "description": "List permissions available to the current user on this object.",
                 "summary": "List user permissions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_repository_href",
@@ -4164,6 +4704,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_repository_href",
                         "schema": {
@@ -4224,6 +4775,17 @@
                 "summary": "Repair metadata",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_repository_href",
                         "schema": {
@@ -4263,6 +4825,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_repository_href",
@@ -4324,6 +4897,17 @@
                 "summary": "Sync from remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_repository_href",
                         "schema": {
@@ -4384,6 +4968,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_repository_href",
                         "schema": {
@@ -4443,6 +5038,17 @@
                 "description": "PythonRepositoryVersion represents a single Python repository version.",
                 "summary": "List repository versions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "content",
@@ -4728,6 +5334,17 @@
                 "summary": "Inspect a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_repository_version_href",
                         "schema": {
@@ -4788,6 +5405,17 @@
                 "summary": "Delete a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "python_python_repository_version_href",
                         "schema": {
@@ -4826,6 +5454,17 @@
                 "operationId": "repositories_python_python_versions_repair",
                 "description": "Trigger an asynchronous task to repair a repository version.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "python_python_repository_version_href",
@@ -4886,6 +5525,17 @@
                 "description": "Gets package summary stats of index.",
                 "summary": "Get index summary",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "path",
@@ -4949,6 +5599,17 @@
                 "summary": "Upload a package",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "path",
                         "schema": {
@@ -5003,6 +5664,17 @@
                 "description": "Retrieves the package's core-metadata specified by\nhttps://packaging.python.org/specifications/core-metadata/.\n`meta` must be a path in form of `{package}/json/` or `{package}/{version}/json/`",
                 "summary": "Get package metadata",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "meta",
@@ -5074,6 +5746,17 @@
                 "summary": "Get index simple page",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "path",
                         "schema": {
@@ -5126,6 +5809,17 @@
                 "description": "Upload package to the index.\nThis endpoint has the same functionality as the upload endpoint at the `/legacy` url of the\nindex. This is provided for convenience for users who want a single index url for all their\nPython tools. (pip, twine, poetry, pipenv, ...)",
                 "summary": "Upload a package",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "path",
@@ -5181,6 +5875,17 @@
                 "description": "Retrieves the simple api html page for a package.",
                 "summary": "Get package simple page",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "package",

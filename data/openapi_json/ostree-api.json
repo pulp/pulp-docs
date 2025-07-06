@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "ostree": "2.5.0.dev",
-            "core": "3.81.0"
+            "core": "3.82.1"
         },
         "x-pulp-domain-enabled": false
     },
@@ -29,6 +29,17 @@
                 "description": "A ViewSet class for OSTree commits.",
                 "summary": "List ostree commits",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "checksum",
@@ -233,6 +244,17 @@
                 "summary": "Inspect an ostree commit",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_commit_href",
                         "schema": {
@@ -295,6 +317,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_commit_href",
                         "schema": {
@@ -355,6 +388,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_commit_href",
                         "schema": {
@@ -414,6 +458,17 @@
                 "description": "A ViewSet class for OSTree repository configurations.",
                 "summary": "List ostree configs",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -592,6 +647,17 @@
                 "summary": "Inspect an ostree config",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_config_href",
                         "schema": {
@@ -654,6 +720,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_config_href",
                         "schema": {
@@ -714,6 +791,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_config_href",
                         "schema": {
@@ -773,6 +861,17 @@
                 "description": "A ViewSet class for uncategorized content units (e.g., static deltas).",
                 "summary": "List ostree contents",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -947,6 +1046,19 @@
                 "operationId": "content_ostree_content_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create an ostree content",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Content"
                 ],
@@ -998,6 +1110,17 @@
                 "description": "A ViewSet class for uncategorized content units (e.g., static deltas).",
                 "summary": "Inspect an ostree content",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_content_href",
@@ -1061,6 +1184,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_content_href",
                         "schema": {
@@ -1121,6 +1255,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_content_href",
                         "schema": {
@@ -1180,6 +1325,17 @@
                 "description": "A ViewSet class for OSTree objects (e.g., dirtree, dirmeta, file).",
                 "summary": "List ostree objects",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "checksum",
@@ -1386,6 +1542,17 @@
                 "summary": "Inspect an ostree object",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_object_href",
                         "schema": {
@@ -1448,6 +1615,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_object_href",
                         "schema": {
@@ -1508,6 +1686,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_object_href",
                         "schema": {
@@ -1567,6 +1756,17 @@
                 "description": "A ViewSet class for OSTree head commits.",
                 "summary": "List ostree refs",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "checksum",
@@ -1847,6 +2047,17 @@
                 "summary": "Inspect an ostree ref",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_ref_href",
                         "schema": {
@@ -1909,6 +2120,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_ref_href",
                         "schema": {
@@ -1969,6 +2191,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_ref_href",
                         "schema": {
@@ -2028,6 +2261,17 @@
                 "description": "A ViewSet class for OSTree repository summary files.",
                 "summary": "List ostree summarys",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -2206,6 +2450,17 @@
                 "summary": "Inspect an ostree summary",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_summary_href",
                         "schema": {
@@ -2268,6 +2523,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_summary_href",
                         "schema": {
@@ -2328,6 +2594,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_summary_href",
                         "schema": {
@@ -2387,6 +2664,17 @@
                 "description": "A ViewSet class for OSTree distributions.",
                 "summary": "List ostree distributions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "base_path",
@@ -2700,6 +2988,19 @@
                 "operationId": "distributions_ostree_ostree_create",
                 "description": "Trigger an asynchronous create task",
                 "summary": "Create an ostree distribution",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Distributions: Ostree"
                 ],
@@ -2751,6 +3052,17 @@
                 "description": "A ViewSet class for OSTree distributions.",
                 "summary": "Inspect an ostree distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_distribution_href",
@@ -2812,6 +3124,17 @@
                 "summary": "Update an ostree distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_distribution_href",
                         "schema": {
@@ -2869,6 +3192,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update an ostree distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_distribution_href",
@@ -2928,6 +3262,17 @@
                 "summary": "Delete an ostree distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_distribution_href",
                         "schema": {
@@ -2967,6 +3312,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_distribution_href",
@@ -3027,6 +3383,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_distribution_href",
@@ -3090,6 +3457,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_distribution_href",
                         "schema": {
@@ -3152,6 +3530,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_distribution_href",
                         "schema": {
@@ -3211,6 +3600,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_distribution_href",
@@ -3272,6 +3672,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_distribution_href",
                         "schema": {
@@ -3331,6 +3742,17 @@
                 "description": "A ViewSet class for OSTree remote repositories.",
                 "summary": "List ostree remotes",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -3667,6 +4089,19 @@
                 "operationId": "remotes_ostree_ostree_create",
                 "description": "A ViewSet class for OSTree remote repositories.",
                 "summary": "Create an ostree remote",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Remotes: Ostree"
                 ],
@@ -3718,6 +4153,17 @@
                 "description": "A ViewSet class for OSTree remote repositories.",
                 "summary": "Inspect an ostree remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_remote_href",
@@ -3779,6 +4225,17 @@
                 "summary": "Update an ostree remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_remote_href",
                         "schema": {
@@ -3836,6 +4293,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update an ostree remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_remote_href",
@@ -3895,6 +4363,17 @@
                 "summary": "Delete an ostree remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_remote_href",
                         "schema": {
@@ -3934,6 +4413,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_remote_href",
@@ -3994,6 +4484,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_remote_href",
@@ -4057,6 +4558,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_remote_href",
                         "schema": {
@@ -4119,6 +4631,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_remote_href",
                         "schema": {
@@ -4178,6 +4701,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_remote_href",
@@ -4239,6 +4773,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_remote_href",
                         "schema": {
@@ -4298,6 +4843,17 @@
                 "description": "A ViewSet class for OSTree repositories.",
                 "summary": "List ostree repositorys",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "latest_with_content",
@@ -4631,6 +5187,19 @@
                 "operationId": "repositories_ostree_ostree_create",
                 "description": "A ViewSet class for OSTree repositories.",
                 "summary": "Create an ostree repository",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Repositories: Ostree"
                 ],
@@ -4682,6 +5251,17 @@
                 "description": "A ViewSet class for OSTree repositories.",
                 "summary": "Inspect an ostree repository",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_repository_href",
@@ -4743,6 +5323,17 @@
                 "summary": "Update an ostree repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_repository_href",
                         "schema": {
@@ -4800,6 +5391,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update an ostree repository",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_repository_href",
@@ -4859,6 +5461,17 @@
                 "summary": "Delete an ostree repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_repository_href",
                         "schema": {
@@ -4898,6 +5511,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_repository_href",
@@ -4959,6 +5583,17 @@
                 "summary": "Import refs and commits to a repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_repository_href",
                         "schema": {
@@ -5019,6 +5654,17 @@
                 "summary": "Append child commits to a repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_repository_href",
                         "schema": {
@@ -5078,6 +5724,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_repository_href",
@@ -5141,6 +5798,17 @@
                 "summary": "Modify repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_repository_href",
                         "schema": {
@@ -5200,6 +5868,17 @@
                 "description": "List permissions available to the current user on this object.",
                 "summary": "List user permissions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_repository_href",
@@ -5263,6 +5942,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_repository_href",
                         "schema": {
@@ -5322,6 +6012,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_repository_href",
@@ -5383,6 +6084,17 @@
                 "summary": "Sync from remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_repository_href",
                         "schema": {
@@ -5443,6 +6155,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_repository_href",
                         "schema": {
@@ -5502,6 +6225,17 @@
                 "description": "A ViewSet class that represents a single OSTree repository version.",
                 "summary": "List repository versions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "content",
@@ -5787,6 +6521,17 @@
                 "summary": "Inspect a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_repository_version_href",
                         "schema": {
@@ -5847,6 +6592,17 @@
                 "summary": "Delete a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ostree_ostree_repository_version_href",
                         "schema": {
@@ -5885,6 +6641,17 @@
                 "operationId": "repositories_ostree_ostree_versions_repair",
                 "description": "Trigger an asynchronous task to repair a repository version.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ostree_ostree_repository_version_href",

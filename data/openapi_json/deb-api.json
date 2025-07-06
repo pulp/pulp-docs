@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "deb": "3.6.0.dev",
-            "core": "3.81.0"
+            "core": "3.82.1"
         },
         "x-pulp-domain-enabled": false
     },
@@ -29,6 +29,17 @@
                 "description": "GenericContent is a catch all category for storing files not covered by any other type.\n\nAssociated artifacts: Exactly one arbitrary file that does not match any other type.\n\nThis is needed to store arbitrary files for use with the verbatim publisher. If you are not\nusing the verbatim publisher, you may ignore this type.",
                 "summary": "List generic contents",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -237,6 +248,19 @@
                 "operationId": "content_deb_generic_contents_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create a generic content",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Generic_Contents"
                 ],
@@ -283,6 +307,17 @@
                 "description": "GenericContent is a catch all category for storing files not covered by any other type.\n\nAssociated artifacts: Exactly one arbitrary file that does not match any other type.\n\nThis is needed to store arbitrary files for use with the verbatim publisher. If you are not\nusing the verbatim publisher, you may ignore this type.",
                 "summary": "Inspect a generic content",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_generic_content_href",
@@ -346,6 +381,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_generic_content_href",
                         "schema": {
@@ -406,6 +452,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_generic_content_href",
                         "schema": {
@@ -465,6 +522,17 @@
                 "description": "An InstallerFileIndex represents the indices for a set of installer files.\n\nAssociated artifacts: Exactly one 'SHA256SUMS' and/or 'MD5SUMS' file.\n\nEach InstallerFileIndes is associated with a single component-architecture combination within\na single Release. Note that installer files are currently used exclusively for verbatim\npublications. The APT publisher (both simple and structured mode) does not make use of installer\ncontent.",
                 "summary": "List InstallerFileIndices",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "architecture",
@@ -693,6 +761,19 @@
                 "operationId": "content_deb_installer_file_indices_create",
                 "description": "An InstallerFileIndex represents the indices for a set of installer files.\n\nAssociated artifacts: Exactly one 'SHA256SUMS' and/or 'MD5SUMS' file.\n\nEach InstallerFileIndes is associated with a single component-architecture combination within\na single Release. Note that installer files are currently used exclusively for verbatim\npublications. The APT publisher (both simple and structured mode) does not make use of installer\ncontent.",
                 "summary": "Create an installer file index",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Installer_File_Indices"
                 ],
@@ -744,6 +825,17 @@
                 "description": "An InstallerFileIndex represents the indices for a set of installer files.\n\nAssociated artifacts: Exactly one 'SHA256SUMS' and/or 'MD5SUMS' file.\n\nEach InstallerFileIndes is associated with a single component-architecture combination within\na single Release. Note that installer files are currently used exclusively for verbatim\npublications. The APT publisher (both simple and structured mode) does not make use of installer\ncontent.",
                 "summary": "Inspect an installer file index",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_installer_file_index_href",
@@ -807,6 +899,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_installer_file_index_href",
                         "schema": {
@@ -867,6 +970,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_installer_file_index_href",
                         "schema": {
@@ -926,6 +1040,17 @@
                 "description": "An InstallerPackage represents a '.udeb' installer package.\n\nAssociated artifacts: Exactly one '.udeb' installer package file.\n\nNote that installer packages are currently used exclusively for verbatim publications. The APT\npublisher (both simple and structured mode) will not include these packages.",
                 "summary": "List installer packages",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "architecture",
@@ -1331,6 +1456,19 @@
                 "operationId": "content_deb_installer_packages_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create an installer package",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Installer_Packages"
                 ],
@@ -1377,6 +1515,17 @@
                 "description": "An InstallerPackage represents a '.udeb' installer package.\n\nAssociated artifacts: Exactly one '.udeb' installer package file.\n\nNote that installer packages are currently used exclusively for verbatim publications. The APT\npublisher (both simple and structured mode) will not include these packages.",
                 "summary": "Inspect an installer package",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_installer_package_href",
@@ -1440,6 +1589,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_installer_package_href",
                         "schema": {
@@ -1500,6 +1660,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_installer_package_href",
                         "schema": {
@@ -1559,6 +1730,17 @@
                 "description": "A PackageIndex represents the package indices of a single component-architecture combination.\n\nAssociated artifacts: Exactly one 'Packages' file. May optionally include one or more of\n'Packages.gz', 'Packages.xz', 'Release'. If included, the 'Release' file is a legacy\nper-component-and-architecture Release file.\n\nNote: The verbatim publisher will republish all associated artifacts, while the APT publisher\n(both simple and structured mode) will generate any 'Packages' files it needs when creating the\npublication. It does not make use of PackageIndex content.",
                 "summary": "List PackageIndices",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "architecture",
@@ -1789,6 +1971,19 @@
                 "operationId": "content_deb_package_indices_create",
                 "description": "A PackageIndex represents the package indices of a single component-architecture combination.\n\nAssociated artifacts: Exactly one 'Packages' file. May optionally include one or more of\n'Packages.gz', 'Packages.xz', 'Release'. If included, the 'Release' file is a legacy\nper-component-and-architecture Release file.\n\nNote: The verbatim publisher will republish all associated artifacts, while the APT publisher\n(both simple and structured mode) will generate any 'Packages' files it needs when creating the\npublication. It does not make use of PackageIndex content.",
                 "summary": "Create a package index",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Package_Indices"
                 ],
@@ -1840,6 +2035,17 @@
                 "description": "A PackageIndex represents the package indices of a single component-architecture combination.\n\nAssociated artifacts: Exactly one 'Packages' file. May optionally include one or more of\n'Packages.gz', 'Packages.xz', 'Release'. If included, the 'Release' file is a legacy\nper-component-and-architecture Release file.\n\nNote: The verbatim publisher will republish all associated artifacts, while the APT publisher\n(both simple and structured mode) will generate any 'Packages' files it needs when creating the\npublication. It does not make use of PackageIndex content.",
                 "summary": "Inspect a package index",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_package_index_href",
@@ -1903,6 +2109,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_package_index_href",
                         "schema": {
@@ -1963,6 +2180,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_package_index_href",
                         "schema": {
@@ -2022,6 +2250,17 @@
                 "description": "A PackageReleaseComponent associates a Package with a ReleaseComponent.\n\nAssociated artifacts: None; contains only metadata.\n\nThis simply stores the information which packages are part of which components.",
                 "summary": "List package release components",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -2228,6 +2467,19 @@
                 "operationId": "content_deb_package_release_components_create",
                 "description": "A PackageReleaseComponent associates a Package with a ReleaseComponent.\n\nAssociated artifacts: None; contains only metadata.\n\nThis simply stores the information which packages are part of which components.",
                 "summary": "Create a package release component",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Package_Release_Components"
                 ],
@@ -2279,6 +2531,17 @@
                 "description": "A PackageReleaseComponent associates a Package with a ReleaseComponent.\n\nAssociated artifacts: None; contains only metadata.\n\nThis simply stores the information which packages are part of which components.",
                 "summary": "Inspect a package release component",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_package_release_component_href",
@@ -2342,6 +2605,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_package_release_component_href",
                         "schema": {
@@ -2402,6 +2676,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_package_release_component_href",
                         "schema": {
@@ -2461,6 +2746,17 @@
                 "description": "A Package represents a '.deb' binary package.\n\nAssociated artifacts: Exactly one '.deb' package file.",
                 "summary": "List packages",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "architecture",
@@ -2959,6 +3255,19 @@
                 "operationId": "content_deb_packages_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create a package",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Packages"
                 ],
@@ -3005,6 +3314,17 @@
                 "description": "A Package represents a '.deb' binary package.\n\nAssociated artifacts: Exactly one '.deb' package file.",
                 "summary": "Inspect a package",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_package_href",
@@ -3068,6 +3388,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_package_href",
                         "schema": {
@@ -3128,6 +3459,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_package_href",
                         "schema": {
@@ -3187,6 +3529,17 @@
                 "description": "A ReleaseArchitecture represents a single dpkg architecture string.\n\nAssociated artifacts: None; contains only metadata.\n\nEvery ReleaseArchitecture is always associated with exactly one Release. This indicates that\nthe release/distribution in question supports this architecture.",
                 "summary": "List release architectures",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "architecture",
@@ -3395,6 +3748,19 @@
                 "operationId": "content_deb_release_architectures_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create a release architecture",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Release_Architectures"
                 ],
@@ -3446,6 +3812,17 @@
                 "description": "A ReleaseArchitecture represents a single dpkg architecture string.\n\nAssociated artifacts: None; contains only metadata.\n\nEvery ReleaseArchitecture is always associated with exactly one Release. This indicates that\nthe release/distribution in question supports this architecture.",
                 "summary": "Inspect a release architecture",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_release_architecture_href",
@@ -3509,6 +3886,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_release_architecture_href",
                         "schema": {
@@ -3569,6 +3957,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_release_architecture_href",
                         "schema": {
@@ -3628,6 +4027,17 @@
                 "description": "A ReleaseComponent represents a single APT repository component.\n\nAssociated artifacts: None; contains only metadata.",
                 "summary": "List release components",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "component",
@@ -3844,6 +4254,19 @@
                 "operationId": "content_deb_release_components_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create a release component",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Release_Components"
                 ],
@@ -3895,6 +4318,17 @@
                 "description": "A ReleaseComponent represents a single APT repository component.\n\nAssociated artifacts: None; contains only metadata.",
                 "summary": "Inspect a release component",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_release_component_href",
@@ -3958,6 +4392,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_release_component_href",
                         "schema": {
@@ -4018,6 +4463,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_release_component_href",
                         "schema": {
@@ -4077,6 +4533,17 @@
                 "description": "A ReleaseFile represents the Release file(s) from a single APT distribution.\n\nAssociated artifacts: At least one of 'Release' and 'InRelease' file. If the 'Release' file is\npresent, then there may also be a 'Release.gpg' detached signature file for it.\n\nNote: The verbatim publisher will republish all associated artifacts, while the APT publisher\n(both simple and structured mode) will generate any 'Release' files it needs when creating the\npublication. It does not make use of ReleaseFile content.",
                 "summary": "List release files",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "codename",
@@ -4313,6 +4780,19 @@
                 "operationId": "content_deb_release_files_create",
                 "description": "A ReleaseFile represents the Release file(s) from a single APT distribution.\n\nAssociated artifacts: At least one of 'Release' and 'InRelease' file. If the 'Release' file is\npresent, then there may also be a 'Release.gpg' detached signature file for it.\n\nNote: The verbatim publisher will republish all associated artifacts, while the APT publisher\n(both simple and structured mode) will generate any 'Release' files it needs when creating the\npublication. It does not make use of ReleaseFile content.",
                 "summary": "Create a release file",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Release_Files"
                 ],
@@ -4364,6 +4844,17 @@
                 "description": "A ReleaseFile represents the Release file(s) from a single APT distribution.\n\nAssociated artifacts: At least one of 'Release' and 'InRelease' file. If the 'Release' file is\npresent, then there may also be a 'Release.gpg' detached signature file for it.\n\nNote: The verbatim publisher will republish all associated artifacts, while the APT publisher\n(both simple and structured mode) will generate any 'Release' files it needs when creating the\npublication. It does not make use of ReleaseFile content.",
                 "summary": "Inspect a release file",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_release_file_href",
@@ -4427,6 +4918,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_release_file_href",
                         "schema": {
@@ -4487,6 +4989,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_release_file_href",
                         "schema": {
@@ -4546,6 +5059,17 @@
                 "description": "The Release contains release file fields, that are not relevant to the APT repo structure.\n\nAssociated artifacts: None; contains only metadata.\n\nBy non-structure relevant release file fields, we mean anything other than the Components and\nArchitectures fields. These are handled by their own models and are not part of this model.\n\nNote that the distribution field is part of this model, but is not added to any published\nrelease files. The \"distribution\" is defined as the path between 'dists/' and some 'Release'\nfile. As such, it encodes the path to the relevant release file within the APT repository.\nIt is often (but not always) equal to the \"codename\" or the \"suite\".",
                 "summary": "List releases",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "codename",
@@ -4804,6 +5328,19 @@
                 "operationId": "content_deb_releases_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create a release",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Releases"
                 ],
@@ -4855,6 +5392,17 @@
                 "description": "The Release contains release file fields, that are not relevant to the APT repo structure.\n\nAssociated artifacts: None; contains only metadata.\n\nBy non-structure relevant release file fields, we mean anything other than the Components and\nArchitectures fields. These are handled by their own models and are not part of this model.\n\nNote that the distribution field is part of this model, but is not added to any published\nrelease files. The \"distribution\" is defined as the path between 'dists/' and some 'Release'\nfile. As such, it encodes the path to the relevant release file within the APT repository.\nIt is often (but not always) equal to the \"codename\" or the \"suite\".",
                 "summary": "Inspect a release",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_release_href",
@@ -4918,6 +5466,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_release_href",
                         "schema": {
@@ -4978,6 +5537,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_release_href",
                         "schema": {
@@ -5037,6 +5607,17 @@
                 "description": "A SourceIndex represents the source indices of a single component.\n\nAssociated artifacts: Exactly one 'Sources' file. May optionally include one or more of\n'Sources.gz', 'Sources.xz', 'Release'. If included, the 'Release' file is a legacy\nper-component-and-architecture Release file (with architecture always being 'source').\n\nNote: The verbatim publisher will republish all associated artifacts, while the APT publisher\n(both simple and structured mode) will generate any 'Sources' files it needs when creating the\npublication. It does not make use of SourceIndex content.",
                 "summary": "List SourceIndices",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "component",
@@ -5255,6 +5836,19 @@
                 "operationId": "content_deb_source_indices_create",
                 "description": "A SourceIndex represents the source indices of a single component.\n\nAssociated artifacts: Exactly one 'Sources' file. May optionally include one or more of\n'Sources.gz', 'Sources.xz', 'Release'. If included, the 'Release' file is a legacy\nper-component-and-architecture Release file (with architecture always being 'source').\n\nNote: The verbatim publisher will republish all associated artifacts, while the APT publisher\n(both simple and structured mode) will generate any 'Sources' files it needs when creating the\npublication. It does not make use of SourceIndex content.",
                 "summary": "Create a source index",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Source_Indices"
                 ],
@@ -5306,6 +5900,17 @@
                 "description": "A SourceIndex represents the source indices of a single component.\n\nAssociated artifacts: Exactly one 'Sources' file. May optionally include one or more of\n'Sources.gz', 'Sources.xz', 'Release'. If included, the 'Release' file is a legacy\nper-component-and-architecture Release file (with architecture always being 'source').\n\nNote: The verbatim publisher will republish all associated artifacts, while the APT publisher\n(both simple and structured mode) will generate any 'Sources' files it needs when creating the\npublication. It does not make use of SourceIndex content.",
                 "summary": "Inspect a source index",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_source_index_href",
@@ -5369,6 +5974,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_source_index_href",
                         "schema": {
@@ -5429,6 +6045,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_source_index_href",
                         "schema": {
@@ -5488,6 +6115,17 @@
                 "description": "A Debian Source Package file represents a '.dsc' file along with its associated\nartifacts such as orig.tar.gz, debian.tar.gz...\n\nAssociated artifacts: Exactly one '.dsc' file.",
                 "summary": "List source packages",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "architecture",
@@ -5972,6 +6610,19 @@
                 "operationId": "content_deb_source_packages_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create a source package",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Source_Packages"
                 ],
@@ -6023,6 +6674,17 @@
                 "description": "A Debian Source Package file represents a '.dsc' file along with its associated\nartifacts such as orig.tar.gz, debian.tar.gz...\n\nAssociated artifacts: Exactly one '.dsc' file.",
                 "summary": "Inspect a source package",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_source_package_href",
@@ -6086,6 +6748,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_source_package_href",
                         "schema": {
@@ -6146,6 +6819,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_source_package_href",
                         "schema": {
@@ -6205,6 +6889,17 @@
                 "description": "A SourcePackageReleaseComponent associates a SourcePackage with a ReleaseComponent.\n\nAssociated artifacts: None; contains only metadata.\n\nThis simply stores the information on which source packages are part of which components.",
                 "summary": "List source package release components",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -6411,6 +7106,19 @@
                 "operationId": "content_deb_source_release_components_create",
                 "description": "A SourcePackageReleaseComponent associates a SourcePackage with a ReleaseComponent.\n\nAssociated artifacts: None; contains only metadata.\n\nThis simply stores the information on which source packages are part of which components.",
                 "summary": "Create a source package release component",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Source_Release_Components"
                 ],
@@ -6462,6 +7170,17 @@
                 "description": "A SourcePackageReleaseComponent associates a SourcePackage with a ReleaseComponent.\n\nAssociated artifacts: None; contains only metadata.\n\nThis simply stores the information on which source packages are part of which components.",
                 "summary": "Inspect a source package release component",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_source_package_release_component_href",
@@ -6525,6 +7244,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_source_package_release_component_href",
                         "schema": {
@@ -6585,6 +7315,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_source_package_release_component_href",
                         "schema": {
@@ -6643,6 +7384,19 @@
                 "operationId": "copy_content",
                 "description": "Trigger an asynchronous task to copy APT contentfrom one repository into another, creating a newrepository version.",
                 "summary": "Copy content",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Deb: Copy"
                 ],
@@ -6694,6 +7448,17 @@
                 "description": "An AptDistribution is just an AptPublication made available via the content app.\n\nCreating an AptDistribution is a comparatively quick action. This way Pulp users may take as\nmuch time as is needed to prepare a VerbatimPublication or AptPublication, and then control the\nexact moment when that publication is made available.",
                 "summary": "List apt distributions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "base_path",
@@ -7007,6 +7772,19 @@
                 "operationId": "distributions_deb_apt_create",
                 "description": "Trigger an asynchronous create task",
                 "summary": "Create an apt distribution",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Distributions: Apt"
                 ],
@@ -7058,6 +7836,17 @@
                 "description": "An AptDistribution is just an AptPublication made available via the content app.\n\nCreating an AptDistribution is a comparatively quick action. This way Pulp users may take as\nmuch time as is needed to prepare a VerbatimPublication or AptPublication, and then control the\nexact moment when that publication is made available.",
                 "summary": "Inspect an apt distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_distribution_href",
@@ -7119,6 +7908,17 @@
                 "summary": "Update an apt distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_distribution_href",
                         "schema": {
@@ -7176,6 +7976,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update an apt distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_distribution_href",
@@ -7235,6 +8046,17 @@
                 "summary": "Delete an apt distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_distribution_href",
                         "schema": {
@@ -7274,6 +8096,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_distribution_href",
@@ -7334,6 +8167,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_distribution_href",
@@ -7397,6 +8241,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_distribution_href",
                         "schema": {
@@ -7459,6 +8314,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_distribution_href",
                         "schema": {
@@ -7518,6 +8384,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_distribution_href",
@@ -7579,6 +8456,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_distribution_href",
                         "schema": {
@@ -7638,6 +8526,17 @@
                 "description": "An AptPublication is the ready to serve Pulp-internal representation of an AptRepositoryVersion.\n\nWhen creating an APT publication, users must use simple or structured mode (or both). If the\npublication should include '.deb' packages that were manually uploaded to the relevant\nAptRepository, users must use 'simple=true'. Conversely, 'structured=true' is only useful for\npublishing content obtained via synchronization. Once a Pulp publication has been created, it\ncan be served by creating a Pulp distribution (in a near atomic action).",
                 "summary": "List apt publications",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "checkpoint",
@@ -7899,6 +8798,19 @@
                 "operationId": "publications_deb_apt_create",
                 "description": "Trigger an asynchronous task to publish content",
                 "summary": "Create an apt publication",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Publications: Apt"
                 ],
@@ -7950,6 +8862,17 @@
                 "description": "An AptPublication is the ready to serve Pulp-internal representation of an AptRepositoryVersion.\n\nWhen creating an APT publication, users must use simple or structured mode (or both). If the\npublication should include '.deb' packages that were manually uploaded to the relevant\nAptRepository, users must use 'simple=true'. Conversely, 'structured=true' is only useful for\npublishing content obtained via synchronization. Once a Pulp publication has been created, it\ncan be served by creating a Pulp distribution (in a near atomic action).",
                 "summary": "Inspect an apt publication",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_publication_href",
@@ -8011,6 +8934,17 @@
                 "summary": "Delete an apt publication",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_publication_href",
                         "schema": {
@@ -8043,6 +8977,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_publication_href",
@@ -8103,6 +9048,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_publication_href",
@@ -8166,6 +9122,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_publication_href",
                         "schema": {
@@ -8228,6 +9195,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_publication_href",
                         "schema": {
@@ -8287,6 +9265,17 @@
                 "description": "An VerbatimPublication is the Pulp-internal representation of a \"mirrored\" AptRepositoryVersion.\n\nIn other words, the verbatim publisher will recreate the synced subset of some a APT\nrepository using the exact same metadata files and signatures as used by the upstream original.\nOnce a Pulp publication has been created, it can be served by creating a Pulp distribution (in\na near atomic action).",
                 "summary": "List verbatim publications",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "checkpoint",
@@ -8548,6 +9537,19 @@
                 "operationId": "publications_deb_verbatim_create",
                 "description": "Trigger an asynchronous task to publish content",
                 "summary": "Create a verbatim publication",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Publications: Verbatim"
                 ],
@@ -8599,6 +9601,17 @@
                 "description": "An VerbatimPublication is the Pulp-internal representation of a \"mirrored\" AptRepositoryVersion.\n\nIn other words, the verbatim publisher will recreate the synced subset of some a APT\nrepository using the exact same metadata files and signatures as used by the upstream original.\nOnce a Pulp publication has been created, it can be served by creating a Pulp distribution (in\na near atomic action).",
                 "summary": "Inspect a verbatim publication",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_verbatim_publication_href",
@@ -8660,6 +9673,17 @@
                 "summary": "Delete a verbatim publication",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_verbatim_publication_href",
                         "schema": {
@@ -8692,6 +9716,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_verbatim_publication_href",
@@ -8752,6 +9787,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_verbatim_publication_href",
@@ -8815,6 +9861,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_verbatim_publication_href",
                         "schema": {
@@ -8877,6 +9934,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_verbatim_publication_href",
                         "schema": {
@@ -8936,6 +10004,17 @@
                 "description": "An AptRemote represents an external APT repository content source.\n\nIt contains the location of the upstream APT repository, as well as the user options that are\napplied when using the remote to synchronize the upstream repository to Pulp.",
                 "summary": "List apt remotes",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -9272,6 +10351,19 @@
                 "operationId": "remotes_deb_apt_create",
                 "description": "An AptRemote represents an external APT repository content source.\n\nIt contains the location of the upstream APT repository, as well as the user options that are\napplied when using the remote to synchronize the upstream repository to Pulp.",
                 "summary": "Create an apt remote",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Remotes: Apt"
                 ],
@@ -9323,6 +10415,17 @@
                 "description": "An AptRemote represents an external APT repository content source.\n\nIt contains the location of the upstream APT repository, as well as the user options that are\napplied when using the remote to synchronize the upstream repository to Pulp.",
                 "summary": "Inspect an apt remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_remote_href",
@@ -9384,6 +10487,17 @@
                 "summary": "Update an apt remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_remote_href",
                         "schema": {
@@ -9441,6 +10555,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update an apt remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_remote_href",
@@ -9500,6 +10625,17 @@
                 "summary": "Delete an apt remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_remote_href",
                         "schema": {
@@ -9539,6 +10675,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_remote_href",
@@ -9599,6 +10746,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_remote_href",
@@ -9662,6 +10820,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_remote_href",
                         "schema": {
@@ -9724,6 +10893,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_remote_href",
                         "schema": {
@@ -9783,6 +10963,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_remote_href",
@@ -9844,6 +11035,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_remote_href",
                         "schema": {
@@ -9903,6 +11105,17 @@
                 "description": "An AptRepository is the locally stored, Pulp-internal representation of a APT repository.\n\nIt may be filled with content via synchronization or content upload to create an\nAptRepositoryVersion.",
                 "summary": "List apt repositorys",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "latest_with_content",
@@ -10236,6 +11449,19 @@
                 "operationId": "repositories_deb_apt_create",
                 "description": "An AptRepository is the locally stored, Pulp-internal representation of a APT repository.\n\nIt may be filled with content via synchronization or content upload to create an\nAptRepositoryVersion.",
                 "summary": "Create an apt repository",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Repositories: Apt"
                 ],
@@ -10287,6 +11513,17 @@
                 "description": "An AptRepository is the locally stored, Pulp-internal representation of a APT repository.\n\nIt may be filled with content via synchronization or content upload to create an\nAptRepositoryVersion.",
                 "summary": "Inspect an apt repository",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_repository_href",
@@ -10348,6 +11585,17 @@
                 "summary": "Update an apt repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_repository_href",
                         "schema": {
@@ -10405,6 +11653,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update an apt repository",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_repository_href",
@@ -10464,6 +11723,17 @@
                 "summary": "Delete an apt repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_repository_href",
                         "schema": {
@@ -10503,6 +11773,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_repository_href",
@@ -10563,6 +11844,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_repository_href",
@@ -10626,6 +11918,17 @@
                 "summary": "Modify Repository Content",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_repository_href",
                         "schema": {
@@ -10685,6 +11988,17 @@
                 "description": "List permissions available to the current user on this object.",
                 "summary": "List user permissions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_repository_href",
@@ -10748,6 +12062,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_repository_href",
                         "schema": {
@@ -10807,6 +12132,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_repository_href",
@@ -10868,6 +12204,17 @@
                 "summary": "Sync from remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_repository_href",
                         "schema": {
@@ -10928,6 +12275,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_repository_href",
                         "schema": {
@@ -10987,6 +12345,17 @@
                 "description": "An AptRepositoryVersion represents a single APT repository version as stored by Pulp.\n\nIt may be used as the basis for the creation of Pulp distributions in order to actually serve\nthe content contained within the repository version.",
                 "summary": "List repository versions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "content",
@@ -11272,6 +12641,17 @@
                 "summary": "Inspect a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_repository_version_href",
                         "schema": {
@@ -11332,6 +12712,17 @@
                 "summary": "Delete a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "deb_apt_repository_version_href",
                         "schema": {
@@ -11370,6 +12761,17 @@
                 "operationId": "repositories_deb_apt_versions_repair",
                 "description": "Trigger an asynchronous task to repair a repository version.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "deb_apt_repository_version_href",

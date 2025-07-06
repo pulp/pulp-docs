@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "ansible": "0.27.0.dev",
-            "core": "3.81.0"
+            "core": "3.82.1"
         },
         "x-pulp-domain-enabled": false
     },
@@ -28,6 +28,19 @@
                 "operationId": "upload_collection",
                 "description": "Create an artifact and trigger an asynchronous task to create Collection content from it.",
                 "summary": "Upload a collection",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Ansible: Collections"
                 ],
@@ -75,6 +88,17 @@
                 "description": "Viewset for Ansible Collections.",
                 "summary": "List collections",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -237,6 +261,17 @@
                 "summary": "Inspect a collection",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_collection_href",
                         "schema": {
@@ -299,6 +334,17 @@
                 "summary": "Add a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_collection_href",
                         "schema": {
@@ -358,6 +404,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_collection_href",
@@ -421,6 +478,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_collection_href",
                         "schema": {
@@ -483,6 +551,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_collection_href",
                         "schema": {
@@ -541,6 +620,19 @@
                 "operationId": "copy_content",
                 "description": "Trigger an asynchronous task to copy ansible content from one repository into another, creating a new repository version.",
                 "summary": "Copy content",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Ansible: Copy"
                 ],
@@ -592,6 +684,17 @@
                 "description": "ViewSet for AnsibleCollectionDeprecated.",
                 "summary": "List ansible collection deprecateds",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -766,6 +869,19 @@
                 "operationId": "content_ansible_collection_deprecations_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create an ansible collection deprecated",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Collection_Deprecations"
                 ],
@@ -817,6 +933,17 @@
                 "description": "ViewSet for AnsibleCollectionDeprecated.",
                 "summary": "Inspect an ansible collection deprecated",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_collection_deprecated_href",
@@ -880,6 +1007,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_collection_deprecated_href",
                         "schema": {
@@ -940,6 +1078,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_collection_deprecated_href",
                         "schema": {
@@ -999,6 +1148,17 @@
                 "description": "ViewSet for looking at mark objects for CollectionVersion content.",
                 "summary": "List collection version marks",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -1219,6 +1379,19 @@
                 "operationId": "content_ansible_collection_marks_create",
                 "description": "ViewSet for looking at mark objects for CollectionVersion content.",
                 "summary": "Create a collection version mark",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Collection_Marks"
                 ],
@@ -1270,6 +1443,17 @@
                 "description": "ViewSet for looking at mark objects for CollectionVersion content.",
                 "summary": "Inspect a collection version mark",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_collection_version_mark_href",
@@ -1333,6 +1517,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_collection_version_mark_href",
                         "schema": {
@@ -1393,6 +1588,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_collection_version_mark_href",
                         "schema": {
@@ -1452,6 +1658,17 @@
                 "description": "ViewSet for looking at signature objects for CollectionVersion content.",
                 "summary": "List collection version signatures",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -1685,6 +1902,19 @@
                 "operationId": "content_ansible_collection_signatures_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create a collection version signature",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Collection_Signatures"
                 ],
@@ -1731,6 +1961,17 @@
                 "description": "ViewSet for looking at signature objects for CollectionVersion content.",
                 "summary": "Inspect a collection version signature",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_collection_version_signature_href",
@@ -1794,6 +2035,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_collection_version_signature_href",
                         "schema": {
@@ -1854,6 +2106,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_collection_version_signature_href",
                         "schema": {
@@ -1913,6 +2176,17 @@
                 "description": "ViewSet for Ansible Collection.",
                 "summary": "List collection versions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -2176,6 +2450,19 @@
                 "operationId": "content_ansible_collection_versions_create",
                 "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
                 "summary": "Create a collection version",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Collection_Versions"
                 ],
@@ -2222,6 +2509,17 @@
                 "description": "ViewSet for Ansible Collection.",
                 "summary": "Inspect a collection version",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_collection_version_href",
@@ -2285,6 +2583,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_collection_version_href",
                         "schema": {
@@ -2345,6 +2654,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_collection_version_href",
                         "schema": {
@@ -2404,6 +2724,17 @@
                 "description": "ViewSet for AnsibleNamespace.",
                 "summary": "List ansible namespace metadatas",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "company",
@@ -2787,6 +3118,17 @@
                 "summary": "Inspect an ansible namespace metadata",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_namespace_metadata_href",
                         "schema": {
@@ -2847,6 +3189,17 @@
                 "operationId": "content_ansible_namespaces_avatar",
                 "description": "Get the logo for the this namespace.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_namespace_metadata_href",
@@ -2911,6 +3264,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_namespace_metadata_href",
                         "schema": {
@@ -2971,6 +3335,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_namespace_metadata_href",
                         "schema": {
@@ -3030,6 +3405,17 @@
                 "description": "ViewSet for Role.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -3248,6 +3634,19 @@
                 "operationId": "content_ansible_roles_create",
                 "description": "ViewSet for Role.",
                 "summary": "Create a role",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Roles"
                 ],
@@ -3299,6 +3698,17 @@
                 "description": "ViewSet for Role.",
                 "summary": "Inspect a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_role_href",
@@ -3362,6 +3772,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_role_href",
                         "schema": {
@@ -3422,6 +3843,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_role_href",
                         "schema": {
@@ -3481,6 +3913,17 @@
                 "description": "ViewSet for Ansible Distributions.",
                 "summary": "List ansible distributions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "base_path",
@@ -3794,6 +4237,19 @@
                 "operationId": "distributions_ansible_ansible_create",
                 "description": "Trigger an asynchronous create task",
                 "summary": "Create an ansible distribution",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Distributions: Ansible"
                 ],
@@ -3845,6 +4301,17 @@
                 "description": "ViewSet for Ansible Distributions.",
                 "summary": "Inspect an ansible distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_distribution_href",
@@ -3906,6 +4373,17 @@
                 "summary": "Update an ansible distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_distribution_href",
                         "schema": {
@@ -3963,6 +4441,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update an ansible distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_distribution_href",
@@ -4022,6 +4511,17 @@
                 "summary": "Delete an ansible distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_distribution_href",
                         "schema": {
@@ -4061,6 +4561,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_distribution_href",
@@ -4121,6 +4632,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_distribution_href",
@@ -4184,6 +4706,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_distribution_href",
                         "schema": {
@@ -4246,6 +4779,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_distribution_href",
                         "schema": {
@@ -4305,6 +4849,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_distribution_href",
@@ -4366,6 +4921,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_distribution_href",
                         "schema": {
@@ -4425,6 +4991,17 @@
                 "description": "ViewSet for Tag models.",
                 "summary": "List collection versions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -4497,6 +5074,17 @@
                 "description": "ViewSet for Collection Remotes.",
                 "summary": "List collection remotes",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -4880,6 +5468,19 @@
                 "operationId": "remotes_ansible_collection_create",
                 "description": "ViewSet for Collection Remotes.",
                 "summary": "Create a collection remote",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Remotes: Collection"
                 ],
@@ -4931,6 +5532,17 @@
                 "description": "ViewSet for Collection Remotes.",
                 "summary": "Inspect a collection remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_collection_remote_href",
@@ -4992,6 +5604,17 @@
                 "summary": "Update a collection remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_collection_remote_href",
                         "schema": {
@@ -5049,6 +5672,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a collection remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_collection_remote_href",
@@ -5108,6 +5742,17 @@
                 "summary": "Delete a collection remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_collection_remote_href",
                         "schema": {
@@ -5147,6 +5792,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_collection_remote_href",
@@ -5207,6 +5863,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_collection_remote_href",
@@ -5270,6 +5937,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_collection_remote_href",
                         "schema": {
@@ -5332,6 +6010,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_collection_remote_href",
                         "schema": {
@@ -5391,6 +6080,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_collection_remote_href",
@@ -5452,6 +6152,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_collection_remote_href",
                         "schema": {
@@ -5511,6 +6222,17 @@
                 "description": "ViewSet for Ansible Remotes.\n\nThis is a tech preview feature. The functionality may change in the future.",
                 "summary": "List git remotes",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -5847,6 +6569,19 @@
                 "operationId": "remotes_ansible_git_create",
                 "description": "ViewSet for Ansible Remotes.\n\nThis is a tech preview feature. The functionality may change in the future.",
                 "summary": "Create a git remote",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Remotes: Git"
                 ],
@@ -5898,6 +6633,17 @@
                 "description": "ViewSet for Ansible Remotes.\n\nThis is a tech preview feature. The functionality may change in the future.",
                 "summary": "Inspect a git remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_git_remote_href",
@@ -5959,6 +6705,17 @@
                 "summary": "Update a git remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_git_remote_href",
                         "schema": {
@@ -6016,6 +6773,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a git remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_git_remote_href",
@@ -6075,6 +6843,17 @@
                 "summary": "Delete a git remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_git_remote_href",
                         "schema": {
@@ -6114,6 +6893,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_git_remote_href",
@@ -6174,6 +6964,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_git_remote_href",
@@ -6237,6 +7038,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_git_remote_href",
                         "schema": {
@@ -6299,6 +7111,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_git_remote_href",
                         "schema": {
@@ -6358,6 +7181,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_git_remote_href",
@@ -6419,6 +7253,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_git_remote_href",
                         "schema": {
@@ -6478,6 +7323,17 @@
                 "description": "ViewSet for Role Remotes.",
                 "summary": "List role remotes",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -6814,6 +7670,19 @@
                 "operationId": "remotes_ansible_role_create",
                 "description": "ViewSet for Role Remotes.",
                 "summary": "Create a role remote",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Remotes: Role"
                 ],
@@ -6865,6 +7734,17 @@
                 "description": "ViewSet for Role Remotes.",
                 "summary": "Inspect a role remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_role_remote_href",
@@ -6926,6 +7806,17 @@
                 "summary": "Update a role remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_role_remote_href",
                         "schema": {
@@ -6983,6 +7874,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a role remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_role_remote_href",
@@ -7042,6 +7944,17 @@
                 "summary": "Delete a role remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_role_remote_href",
                         "schema": {
@@ -7081,6 +7994,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_role_remote_href",
@@ -7141,6 +8065,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_role_remote_href",
@@ -7204,6 +8139,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_role_remote_href",
                         "schema": {
@@ -7266,6 +8212,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_role_remote_href",
                         "schema": {
@@ -7325,6 +8282,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_role_remote_href",
@@ -7386,6 +8354,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_role_remote_href",
                         "schema": {
@@ -7445,6 +8424,17 @@
                 "description": "ViewSet for Ansible Repositories.",
                 "summary": "List ansible repositorys",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "latest_with_content",
@@ -7778,6 +8768,19 @@
                 "operationId": "repositories_ansible_ansible_create",
                 "description": "ViewSet for Ansible Repositories.",
                 "summary": "Create an ansible repository",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Repositories: Ansible"
                 ],
@@ -7829,6 +8832,17 @@
                 "description": "ViewSet for Ansible Repositories.",
                 "summary": "Inspect an ansible repository",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
@@ -7890,6 +8904,17 @@
                 "summary": "Update an ansible repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
                         "schema": {
@@ -7947,6 +8972,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update an ansible repository",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
@@ -8006,6 +9042,17 @@
                 "summary": "Delete an ansible repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
                         "schema": {
@@ -8045,6 +9092,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
@@ -8105,6 +9163,17 @@
                 "description": "Trigger an asynchronous task to copy collection versions.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
                         "schema": {
@@ -8164,6 +9233,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
@@ -8226,6 +9306,17 @@
                 "description": "Trigger an asynchronous task to mark Ansible content.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
                         "schema": {
@@ -8286,6 +9377,17 @@
                 "summary": "Modify Repository Content",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
                         "schema": {
@@ -8344,6 +9446,17 @@
                 "operationId": "repositories_ansible_ansible_move_collection_version",
                 "description": "Trigger an asynchronous task to move collection versions.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
@@ -8404,6 +9517,17 @@
                 "description": "List permissions available to the current user on this object.",
                 "summary": "List user permissions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
@@ -8466,6 +9590,17 @@
                 "description": "Trigger an asynchronous task to rebuild Ansible content meta.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
                         "schema": {
@@ -8525,6 +9660,17 @@
                 "description": "Remove a role for this object from users/groups.",
                 "summary": "Remove a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
@@ -8586,6 +9732,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
                         "schema": {
@@ -8644,6 +9801,17 @@
                 "operationId": "repositories_ansible_ansible_sign",
                 "description": "Trigger an asynchronous task to sign Ansible content.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
@@ -8704,6 +9872,17 @@
                 "description": "Trigger an asynchronous task to sync Ansible content.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
                         "schema": {
@@ -8762,6 +9941,17 @@
                 "operationId": "repositories_ansible_ansible_unmark",
                 "description": "Trigger an asynchronous task to unmark Ansible content.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
@@ -8823,6 +10013,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
                         "schema": {
@@ -8882,6 +10083,17 @@
                 "description": "AnsibleRepositoryVersion represents a single file repository version.",
                 "summary": "List repository versions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_repository_href",
@@ -9167,6 +10379,17 @@
                 "summary": "Inspect a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_repository_version_href",
                         "schema": {
@@ -9227,6 +10450,17 @@
                 "summary": "Delete a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_repository_version_href",
                         "schema": {
@@ -9265,6 +10499,17 @@
                 "operationId": "repositories_ansible_ansible_versions_rebuild_metadata",
                 "description": "Trigger an asynchronous task to rebuild Ansible content meta.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_ansible_repository_version_href",
@@ -9325,6 +10570,17 @@
                 "description": "Trigger an asynchronous task to repair a repository version.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_ansible_repository_version_href",
                         "schema": {
@@ -9384,6 +10640,17 @@
                 "description": "Return a response to the \"GET\" action.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "path",
                         "schema": {
@@ -9429,6 +10696,17 @@
                 "operationId": "api_v1_roles_get",
                 "description": "APIView for Roles.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_role_href",
@@ -9501,6 +10779,17 @@
                 "description": "APIView for Role Versions.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_role_href",
                         "schema": {
@@ -9572,6 +10861,17 @@
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "path",
                         "schema": {
@@ -9638,6 +10938,17 @@
                 "summary": "Upload a collection",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "path",
                         "schema": {
@@ -9692,6 +11003,17 @@
                 "operationId": "pulp_ansible_galaxy_api_v3_artifacts_collections_get",
                 "description": "Download collection.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "filename",
@@ -9754,6 +11076,17 @@
                 "operationId": "pulp_ansible_galaxy_api_v3_collection_versions_all_list",
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "path",
@@ -9822,6 +11155,17 @@
                 "operationId": "pulp_ansible_galaxy_api_v3_collections_list",
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "deprecated",
@@ -10002,6 +11346,17 @@
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "name",
                         "schema": {
@@ -10081,6 +11436,17 @@
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "name",
                         "schema": {
@@ -10158,6 +11524,17 @@
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "name",
                         "schema": {
@@ -10216,6 +11593,17 @@
                 "operationId": "pulp_ansible_galaxy_api_v3_collections_versions_list",
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -10510,6 +11898,17 @@
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "name",
                         "schema": {
@@ -10597,6 +11996,17 @@
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "name",
                         "schema": {
@@ -10663,6 +12073,17 @@
                 "operationId": "pulp_ansible_galaxy_api_v3_collections_versions_docs_blob_read",
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "name",
@@ -10752,6 +12173,17 @@
                 "operationId": "pulp_ansible_galaxy_api_v3_collections_all_list",
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "deprecated",
@@ -10918,6 +12350,17 @@
                 "summary": "Inspect a collection import",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_collection_import_href",
                         "schema": {
@@ -10986,6 +12429,17 @@
                 "operationId": "pulp_ansible_galaxy_api_v3_namespaces_list",
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "company",
@@ -11340,6 +12794,17 @@
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "name",
                         "schema": {
@@ -11413,6 +12878,17 @@
                 "description": "Return configurations for the ansible-galaxy client.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "path",
                         "schema": {
@@ -11473,6 +12949,17 @@
                 "operationId": "pulp_ansible_galaxy_api_v3_plugin_ansible_content_collections_read",
                 "description": "ViewSet for Repository Metadata.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "distro_base_path",
@@ -11542,6 +13029,17 @@
                 "operationId": "pulp_ansible_galaxy_api_v3_plugin_ansible_content_collections_all_collections_list",
                 "description": "Unpaginated ViewSet for Collections.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "deprecated",
@@ -11711,6 +13209,17 @@
                 "description": "Returns paginated CollectionVersions list.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -11784,6 +13293,17 @@
                 "summary": "Upload a collection",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -11845,6 +13365,17 @@
                 "operationId": "pulp_ansible_galaxy_api_v3_plugin_ansible_content_collections_artifacts_download",
                 "description": "Collection download endpoint.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "distro_base_path",
@@ -11915,6 +13446,17 @@
                 "operationId": "pulp_ansible_galaxy_api_v3_plugin_ansible_content_collections_index_list",
                 "description": "ViewSet for Collections.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "deprecated",
@@ -12099,6 +13641,17 @@
                 "description": "ViewSet for Collections.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -12182,6 +13735,17 @@
                 "description": "Trigger an asynchronous update task",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -12263,6 +13827,17 @@
                 "description": "Trigger an asynchronous delete task",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -12325,6 +13900,17 @@
                 "operationId": "pulp_ansible_galaxy_api_v3_plugin_ansible_content_collections_index_versions_list",
                 "description": "Returns paginated CollectionVersions list.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "distro_base_path",
@@ -12623,6 +14209,17 @@
                 "description": "Returns a CollectionVersion object.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -12714,6 +14311,17 @@
                 "description": "Trigger an asynchronous delete task",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -12784,6 +14392,17 @@
                 "operationId": "pulp_ansible_galaxy_api_v3_plugin_ansible_content_collections_index_versions_docs_blob_read",
                 "description": "Returns a CollectionVersion object.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "distro_base_path",
@@ -12877,6 +14496,17 @@
                 "operationId": "pulp_ansible_galaxy_api_v3_plugin_ansible_content_namespaces_list",
                 "description": "Provides the authentication and permission classes from settings.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "company",
@@ -13233,6 +14863,17 @@
                 "description": "Provides the authentication and permission classes from settings.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -13294,6 +14935,17 @@
                 "operationId": "pulp_ansible_galaxy_api_v3_plugin_ansible_content_namespaces_read",
                 "description": "Provides the authentication and permission classes from settings.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "distro_base_path",
@@ -13370,6 +15022,17 @@
                 "description": "Provides the authentication and permission classes from settings.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -13438,6 +15101,17 @@
                 "description": "Try to remove the Namespace if no Collections under Namespace are present.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -13493,6 +15167,17 @@
                 "description": "A viewset for cross-repo searches.",
                 "summary": "List cross repository collection version indexs",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "ansible_cross_repository_collection_version_index_href",
@@ -13760,6 +15445,17 @@
                 "description": "A viewset for cross-repo searches.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "ansible_cross_repository_collection_version_index_href",
                         "schema": {
@@ -13817,6 +15513,41 @@
             "get": {
                 "operationId": "pulp_ansible_galaxy_default_api_get",
                 "description": "Return a response to the \"GET\" action.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
                 "tags": [
                     "Pulp_Ansible: Default Api"
                 ],
@@ -13831,6 +15562,41 @@
             "get": {
                 "operationId": "pulp_ansible_galaxy_default_api_v3_read",
                 "description": "Legacy v3 endpoint.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
                 "tags": [
                     "Pulp_Ansible: Default Api V3"
                 ],
@@ -13865,6 +15631,19 @@
                 "operationId": "pulp_ansible_galaxy_default_api_v3_artifacts_collections_create",
                 "description": "Create an artifact and trigger an asynchronous task to create Collection content from it.",
                 "summary": "Upload a collection",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Pulp_Ansible: Artifacts Collections V3"
                 ],
@@ -13911,6 +15690,17 @@
                 "operationId": "pulp_ansible_galaxy_default_api_v3_artifacts_collections_get",
                 "description": "Download collection.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "filename",
@@ -13972,6 +15762,41 @@
             "get": {
                 "operationId": "pulp_ansible_galaxy_default_api_v3_collection_versions_all_list",
                 "description": "Legacy v3 endpoint.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
                 "tags": [
                     "Pulp_Ansible: Default Api V3 Collection_Versions All"
                 ],
@@ -14009,6 +15834,17 @@
                 "operationId": "pulp_ansible_galaxy_default_api_v3_collections_list",
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "deprecated",
@@ -14181,6 +16017,17 @@
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "name",
                         "schema": {
@@ -14252,6 +16099,17 @@
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "name",
                         "schema": {
@@ -14321,6 +16179,17 @@
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "name",
                         "schema": {
@@ -14371,6 +16240,17 @@
                 "operationId": "pulp_ansible_galaxy_default_api_v3_collections_versions_list",
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -14657,6 +16537,17 @@
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "name",
                         "schema": {
@@ -14736,6 +16627,17 @@
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "name",
                         "schema": {
@@ -14794,6 +16696,17 @@
                 "operationId": "pulp_ansible_galaxy_default_api_v3_collections_versions_docs_blob_read",
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "name",
@@ -14875,6 +16788,17 @@
                 "operationId": "pulp_ansible_galaxy_default_api_v3_collections_all_list",
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "deprecated",
@@ -15031,6 +16955,17 @@
                 "operationId": "pulp_ansible_galaxy_default_api_v3_namespaces_list",
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "company",
@@ -15377,6 +17312,17 @@
                 "description": "Legacy v3 endpoint.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "name",
                         "schema": {
@@ -15440,6 +17386,41 @@
             "get": {
                 "operationId": "pulp_ansible_galaxy_default_api_v3_plugin_ansible_client_configuration_read",
                 "description": "Return configurations for the ansible-galaxy client.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
                 "tags": [
                     "Pulp_Ansible: Default Api V3 Plugin Ansible Client-Configuration"
                 ],
@@ -15470,6 +17451,17 @@
                 "operationId": "pulp_ansible_galaxy_default_api_v3_plugin_ansible_content_collections_read",
                 "description": "ViewSet for Repository Metadata.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "distro_base_path",
@@ -15531,6 +17523,17 @@
                 "operationId": "pulp_ansible_galaxy_default_api_v3_plugin_ansible_content_collections_all_collections_list",
                 "description": "Unpaginated ViewSet for Collections.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "deprecated",
@@ -15692,6 +17695,17 @@
                 "description": "Returns paginated CollectionVersions list.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -15757,6 +17771,17 @@
                 "summary": "Upload a collection",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -15810,6 +17835,17 @@
                 "operationId": "pulp_ansible_galaxy_default_api_v3_plugin_ansible_content_collections_artifacts_download",
                 "description": "Collection download endpoint.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "distro_base_path",
@@ -15872,6 +17908,17 @@
                 "operationId": "pulp_ansible_galaxy_default_api_v3_plugin_ansible_content_collections_index_list",
                 "description": "ViewSet for Collections.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "deprecated",
@@ -16048,6 +18095,17 @@
                 "description": "ViewSet for Collections.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -16123,6 +18181,17 @@
                 "description": "Trigger an asynchronous update task",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -16196,6 +18265,17 @@
                 "description": "Trigger an asynchronous delete task",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -16250,6 +18330,17 @@
                 "operationId": "pulp_ansible_galaxy_default_api_v3_plugin_ansible_content_collections_index_versions_list",
                 "description": "Returns paginated CollectionVersions list.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "distro_base_path",
@@ -16540,6 +18631,17 @@
                 "description": "Returns a CollectionVersion object.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -16623,6 +18725,17 @@
                 "description": "Trigger an asynchronous delete task",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -16685,6 +18798,17 @@
                 "operationId": "pulp_ansible_galaxy_default_api_v3_plugin_ansible_content_collections_index_versions_docs_blob_read",
                 "description": "Returns a CollectionVersion object.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "distro_base_path",
@@ -16770,6 +18894,17 @@
                 "operationId": "pulp_ansible_galaxy_default_api_v3_plugin_ansible_content_namespaces_list",
                 "description": "Provides the authentication and permission classes from settings.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "company",
@@ -17118,6 +19253,17 @@
                 "description": "Provides the authentication and permission classes from settings.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -17171,6 +19317,17 @@
                 "operationId": "pulp_ansible_galaxy_default_api_v3_plugin_ansible_content_namespaces_read",
                 "description": "Provides the authentication and permission classes from settings.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "distro_base_path",
@@ -17239,6 +19396,17 @@
                 "description": "Provides the authentication and permission classes from settings.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -17299,6 +19467,17 @@
                 "description": "Try to remove the Namespace if no Collections under Namespace are present.",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "distro_base_path",
                         "schema": {
@@ -17346,6 +19525,17 @@
                 "description": "A viewset for cross-repo searches.",
                 "summary": "List cross repository collection version indexs",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "dependency",
@@ -17603,6 +19793,19 @@
             "post": {
                 "operationId": "pulp_ansible_galaxy_default_api_v3_plugin_ansible_search_collection_versions_rebuild",
                 "description": "A viewset for cross-repo searches.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Pulp_Ansible: Default Api V3 Plugin Ansible Search Collection-Versions"
                 ],
@@ -19516,115 +21719,16 @@
                 "type": "object",
                 "description": "A serializer for Git Collection Remotes.",
                 "properties": {
-                    "name": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name for this remote."
+                    "headers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Headers for aiohttp.Clientsession"
                     },
-                    "max_retries": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
-                    },
-                    "proxy_username": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The username to authenticte to the proxy."
-                    },
-                    "proxy_password": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
-                    },
-                    "sock_connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "client_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded client certificate used for authentication."
-                    },
-                    "proxy_url": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The proxy URL. Format: scheme://host:port"
-                    },
-                    "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
-                    },
-                    "connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "client_key": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded private key used for authentication."
-                    },
-                    "rate_limit": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Limits requests per second for each concurrent downloader"
-                    },
-                    "download_concurrency": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
-                    },
-                    "url": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "The URL of an external content source."
-                    },
-                    "password": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "total_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "username": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The username to be used for authentication when syncing."
+                    "tls_validation": {
+                        "type": "boolean",
+                        "description": "If True, TLS peer validation must be performed."
                     },
                     "sock_read_timeout": {
                         "type": "number",
@@ -19633,16 +21737,115 @@
                         "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
-                    "tls_validation": {
-                        "type": "boolean",
-                        "description": "If True, TLS peer validation must be performed."
+                    "proxy_username": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The username to authenticte to the proxy."
                     },
-                    "headers": {
-                        "type": "array",
-                        "items": {
-                            "type": "object"
-                        },
-                        "description": "Headers for aiohttp.Clientsession"
+                    "password": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
+                    },
+                    "download_concurrency": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
+                    },
+                    "username": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The username to be used for authentication when syncing."
+                    },
+                    "client_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded client certificate used for authentication."
+                    },
+                    "rate_limit": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Limits requests per second for each concurrent downloader"
+                    },
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "A unique name for this remote."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "ca_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                    },
+                    "max_retries": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
+                    },
+                    "total_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "proxy_password": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
+                    },
+                    "url": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The URL of an external content source."
+                    },
+                    "connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "proxy_url": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The proxy URL. Format: scheme://host:port"
+                    },
+                    "client_key": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded private key used for authentication."
+                    },
+                    "sock_connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "metadata_only": {
                         "type": "boolean",
@@ -21008,12 +23211,6 @@
                 "type": "object",
                 "description": "A serializer for CollectionVersion Content.",
                 "properties": {
-                    "file_url": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "minLength": 1,
-                        "description": "A url that Pulp can download and turn into the content unit."
-                    },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
@@ -21022,22 +23219,28 @@
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
-                    "artifact": {
-                        "type": "string",
-                        "format": "uri",
-                        "description": "Artifact file representing the physical content"
-                    },
                     "file": {
                         "type": "string",
                         "format": "binary",
                         "writeOnly": true,
                         "description": "An uploaded file that may be turned into the content unit."
                     },
+                    "file_url": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "minLength": 1,
+                        "description": "A url that Pulp can download and turn into the content unit."
+                    },
                     "repository": {
                         "type": "string",
                         "format": "uri",
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
+                    },
+                    "artifact": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "Artifact file representing the physical content"
                     },
                     "upload": {
                         "type": "string",
@@ -21124,17 +23327,6 @@
                 "type": "object",
                 "description": "A serializer for CollectionVersion Content.",
                 "properties": {
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
-                    },
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
                     "pulp_href": {
                         "type": "string",
                         "format": "uri",
@@ -21147,6 +23339,17 @@
                             "nullable": true
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "artifact": {
                         "type": "string",
@@ -21414,115 +23617,16 @@
                 "type": "object",
                 "description": "A serializer for Git Collection Remotes.",
                 "properties": {
-                    "name": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name for this remote."
+                    "headers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Headers for aiohttp.Clientsession"
                     },
-                    "max_retries": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
-                    },
-                    "proxy_username": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The username to authenticte to the proxy."
-                    },
-                    "proxy_password": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
-                    },
-                    "sock_connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "client_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded client certificate used for authentication."
-                    },
-                    "proxy_url": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The proxy URL. Format: scheme://host:port"
-                    },
-                    "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
-                    },
-                    "connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "client_key": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "A PEM encoded private key used for authentication."
-                    },
-                    "rate_limit": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Limits requests per second for each concurrent downloader"
-                    },
-                    "download_concurrency": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
-                    },
-                    "url": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "The URL of an external content source."
-                    },
-                    "password": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "total_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "username": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "nullable": true,
-                        "minLength": 1,
-                        "description": "The username to be used for authentication when syncing."
+                    "tls_validation": {
+                        "type": "boolean",
+                        "description": "If True, TLS peer validation must be performed."
                     },
                     "sock_read_timeout": {
                         "type": "number",
@@ -21531,16 +23635,115 @@
                         "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
-                    "tls_validation": {
-                        "type": "boolean",
-                        "description": "If True, TLS peer validation must be performed."
+                    "proxy_username": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The username to authenticte to the proxy."
                     },
-                    "headers": {
-                        "type": "array",
-                        "items": {
-                            "type": "object"
-                        },
-                        "description": "Headers for aiohttp.Clientsession"
+                    "password": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
+                    },
+                    "download_concurrency": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
+                    },
+                    "username": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The username to be used for authentication when syncing."
+                    },
+                    "client_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded client certificate used for authentication."
+                    },
+                    "rate_limit": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Limits requests per second for each concurrent downloader"
+                    },
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "A unique name for this remote."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    "ca_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                    },
+                    "max_retries": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
+                    },
+                    "total_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "proxy_password": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
+                    },
+                    "url": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The URL of an external content source."
+                    },
+                    "connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "proxy_url": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The proxy URL. Format: scheme://host:port"
+                    },
+                    "client_key": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded private key used for authentication."
+                    },
+                    "sock_connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "metadata_only": {
                         "type": "boolean",
@@ -21561,9 +23764,16 @@
                 "type": "object",
                 "description": "A serializer for Git Collection Remotes.",
                 "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name for this remote."
+                    "headers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Headers for aiohttp.Clientsession"
+                    },
+                    "tls_validation": {
+                        "type": "boolean",
+                        "description": "If True, TLS peer validation must be performed."
                     },
                     "pulp_created": {
                         "type": "string",
@@ -21571,21 +23781,12 @@
                         "readOnly": true,
                         "description": "Timestamp of creation."
                     },
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
-                    "max_retries": {
-                        "type": "integer",
-                        "format": "int64",
+                    "sock_read_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
                         "nullable": true,
-                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
+                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "hidden_fields": {
                         "type": "array",
@@ -21607,46 +23808,10 @@
                         "readOnly": true,
                         "description": "List of hidden (write only) fields"
                     },
-                    "sock_connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "client_cert": {
+                    "prn": {
                         "type": "string",
-                        "nullable": true,
-                        "description": "A PEM encoded client certificate used for authentication."
-                    },
-                    "pulp_last_updated": {
-                        "type": "string",
-                        "format": "date-time",
                         "readOnly": true,
-                        "description": "Timestamp of the most recent update of the remote."
-                    },
-                    "proxy_url": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "The proxy URL. Format: scheme://host:port"
-                    },
-                    "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
-                    },
-                    "connect_timeout": {
-                        "type": "number",
-                        "format": "double",
-                        "minimum": 0.0,
-                        "nullable": true,
-                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "rate_limit": {
-                        "type": "integer",
-                        "format": "int64",
-                        "nullable": true,
-                        "description": "Limits requests per second for each concurrent downloader"
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "download_concurrency": {
                         "type": "integer",
@@ -21655,9 +23820,25 @@
                         "description": "Total number of simultaneous connections. If not set then the default value will be used.",
                         "minimum": 1
                     },
-                    "url": {
+                    "client_cert": {
                         "type": "string",
-                        "description": "The URL of an external content source."
+                        "nullable": true,
+                        "description": "A PEM encoded client certificate used for authentication."
+                    },
+                    "rate_limit": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Limits requests per second for each concurrent downloader"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name for this remote."
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -21666,6 +23847,17 @@
                             "nullable": true
                         }
                     },
+                    "ca_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                    },
+                    "max_retries": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
+                    },
                     "total_timeout": {
                         "type": "number",
                         "format": "double",
@@ -21673,23 +23865,34 @@
                         "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
-                    "sock_read_timeout": {
+                    "url": {
+                        "type": "string",
+                        "description": "The URL of an external content source."
+                    },
+                    "connect_timeout": {
                         "type": "number",
                         "format": "double",
                         "minimum": 0.0,
                         "nullable": true,
-                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
-                    "tls_validation": {
-                        "type": "boolean",
-                        "description": "If True, TLS peer validation must be performed."
+                    "proxy_url": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "The proxy URL. Format: scheme://host:port"
                     },
-                    "headers": {
-                        "type": "array",
-                        "items": {
-                            "type": "object"
-                        },
-                        "description": "Headers for aiohttp.Clientsession"
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the most recent update of the remote."
+                    },
+                    "sock_connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "metadata_only": {
                         "type": "boolean",
@@ -21717,16 +23920,16 @@
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
-                    "artifact": {
-                        "type": "string",
-                        "format": "uri",
-                        "description": "Artifact file representing the physical content"
-                    },
                     "repository": {
                         "type": "string",
                         "format": "uri",
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
+                    },
+                    "artifact": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "Artifact file representing the physical content"
                     },
                     "version": {
                         "type": "string",
@@ -22048,17 +24251,6 @@
                 "type": "object",
                 "description": "A serializer for Role versions.",
                 "properties": {
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
-                    },
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
                     "pulp_href": {
                         "type": "string",
                         "format": "uri",
@@ -22071,6 +24263,17 @@
                             "nullable": true
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "artifact": {
                         "type": "string",

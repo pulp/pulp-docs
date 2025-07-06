@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "container": "2.26.0.dev",
-            "core": "3.81.0"
+            "core": "3.82.1"
         },
         "x-pulp-domain-enabled": false
     },
@@ -29,6 +29,17 @@
                 "description": "ViewSet for Blobs.",
                 "summary": "List blobs",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "digest",
@@ -244,6 +255,17 @@
                 "summary": "Inspect a blob",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_blob_href",
                         "schema": {
@@ -306,6 +328,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_blob_href",
                         "schema": {
@@ -366,6 +399,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_blob_href",
                         "schema": {
@@ -425,6 +469,17 @@
                 "description": "ViewSet for Manifest.",
                 "summary": "List manifests",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "digest",
@@ -698,6 +753,17 @@
                 "summary": "Inspect a manifest",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_manifest_href",
                         "schema": {
@@ -760,6 +826,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_manifest_href",
                         "schema": {
@@ -820,6 +897,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_manifest_href",
                         "schema": {
@@ -879,6 +967,17 @@
                 "description": "ViewSet for image signatures.",
                 "summary": "List manifest signatures",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "digest",
@@ -1217,6 +1316,17 @@
                 "summary": "Inspect a manifest signature",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_manifest_signature_href",
                         "schema": {
@@ -1279,6 +1389,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_manifest_signature_href",
                         "schema": {
@@ -1339,6 +1460,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_manifest_signature_href",
                         "schema": {
@@ -1398,6 +1530,17 @@
                 "description": "ViewSet for Tag.",
                 "summary": "List tags",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "digest",
@@ -1646,6 +1789,17 @@
                 "summary": "Inspect a tag",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_tag_href",
                         "schema": {
@@ -1708,6 +1862,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_tag_href",
                         "schema": {
@@ -1768,6 +1933,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_tag_href",
                         "schema": {
@@ -1827,6 +2003,17 @@
                 "description": "The Container Distribution will serve the latest version of a Repository if\n``repository`` is specified. The Container Distribution will serve a specific\nrepository version if ``repository_version``. Note that **either**\n``repository`` or ``repository_version`` can be set on a Container\nDistribution, but not both.",
                 "summary": "List container distributions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "base_path",
@@ -2151,6 +2338,19 @@
                 "operationId": "distributions_container_container_create",
                 "description": "Trigger an asynchronous create task",
                 "summary": "Create a container distribution",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Distributions: Container"
                 ],
@@ -2202,6 +2402,17 @@
                 "description": "The Container Distribution will serve the latest version of a Repository if\n``repository`` is specified. The Container Distribution will serve a specific\nrepository version if ``repository_version``. Note that **either**\n``repository`` or ``repository_version`` can be set on a Container\nDistribution, but not both.",
                 "summary": "Inspect a container distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_distribution_href",
@@ -2263,6 +2474,17 @@
                 "summary": "Update a container distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_distribution_href",
                         "schema": {
@@ -2320,6 +2542,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a container distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_distribution_href",
@@ -2379,6 +2612,17 @@
                 "summary": "Delete a container distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_distribution_href",
                         "schema": {
@@ -2418,6 +2662,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_distribution_href",
@@ -2478,6 +2733,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_distribution_href",
@@ -2541,6 +2807,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_distribution_href",
                         "schema": {
@@ -2603,6 +2880,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_distribution_href",
                         "schema": {
@@ -2662,6 +2950,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_distribution_href",
@@ -2723,6 +3022,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_distribution_href",
                         "schema": {
@@ -2782,6 +3092,17 @@
                 "description": "A special pull-through Container Distribution that will reference distributions serving content.",
                 "summary": "List container pull through distributions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "base_path",
@@ -3095,6 +3416,19 @@
                 "operationId": "distributions_container_pull_through_create",
                 "description": "Trigger an asynchronous create task",
                 "summary": "Create a container pull through distribution",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Distributions: Pull-Through"
                 ],
@@ -3146,6 +3480,17 @@
                 "description": "A special pull-through Container Distribution that will reference distributions serving content.",
                 "summary": "Inspect a container pull through distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_pull_through_distribution_href",
@@ -3207,6 +3552,17 @@
                 "summary": "Update a container pull through distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_pull_through_distribution_href",
                         "schema": {
@@ -3264,6 +3620,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a container pull through distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_pull_through_distribution_href",
@@ -3323,6 +3690,17 @@
                 "summary": "Delete a container pull through distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_pull_through_distribution_href",
                         "schema": {
@@ -3362,6 +3740,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_pull_through_distribution_href",
@@ -3422,6 +3811,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_pull_through_distribution_href",
@@ -3485,6 +3885,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_pull_through_distribution_href",
                         "schema": {
@@ -3547,6 +3958,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_pull_through_distribution_href",
                         "schema": {
@@ -3606,6 +4028,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_pull_through_distribution_href",
@@ -3667,6 +4100,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_pull_through_distribution_href",
                         "schema": {
@@ -3726,6 +4170,17 @@
                 "description": "ViewSet for ContainerNamespaces.",
                 "summary": "List container namespaces",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -3945,6 +4400,19 @@
                 "operationId": "pulp_container_namespaces_create",
                 "description": "ViewSet for ContainerNamespaces.",
                 "summary": "Create a container namespace",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Pulp_Container: Namespaces"
                 ],
@@ -3996,6 +4464,17 @@
                 "description": "ViewSet for ContainerNamespaces.",
                 "summary": "Inspect a container namespace",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_namespace_href",
@@ -4057,6 +4536,17 @@
                 "summary": "Delete a container namespace",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_namespace_href",
                         "schema": {
@@ -4096,6 +4586,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_namespace_href",
@@ -4156,6 +4657,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_namespace_href",
@@ -4219,6 +4731,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_namespace_href",
                         "schema": {
@@ -4281,6 +4804,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_namespace_href",
                         "schema": {
@@ -4340,6 +4874,17 @@
                 "description": "Container remotes represent an external repository that implements the Container\nRegistry API. Container remotes support deferred downloading by configuring\nthe ``policy`` field.  ``on_demand`` and ``streamed`` policies can provide\nsignificant disk space savings.",
                 "summary": "List container remotes",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -4676,6 +5221,19 @@
                 "operationId": "remotes_container_container_create",
                 "description": "Container remotes represent an external repository that implements the Container\nRegistry API. Container remotes support deferred downloading by configuring\nthe ``policy`` field.  ``on_demand`` and ``streamed`` policies can provide\nsignificant disk space savings.",
                 "summary": "Create a container remote",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Remotes: Container"
                 ],
@@ -4727,6 +5285,17 @@
                 "description": "Container remotes represent an external repository that implements the Container\nRegistry API. Container remotes support deferred downloading by configuring\nthe ``policy`` field.  ``on_demand`` and ``streamed`` policies can provide\nsignificant disk space savings.",
                 "summary": "Inspect a container remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_remote_href",
@@ -4788,6 +5357,17 @@
                 "summary": "Update a container remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_remote_href",
                         "schema": {
@@ -4845,6 +5425,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a container remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_remote_href",
@@ -4904,6 +5495,17 @@
                 "summary": "Delete a container remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_remote_href",
                         "schema": {
@@ -4943,6 +5545,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_remote_href",
@@ -5003,6 +5616,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_remote_href",
@@ -5066,6 +5690,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_remote_href",
                         "schema": {
@@ -5128,6 +5763,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_remote_href",
                         "schema": {
@@ -5187,6 +5833,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_remote_href",
@@ -5248,6 +5905,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_remote_href",
                         "schema": {
@@ -5307,6 +5975,17 @@
                 "description": "A Container Remote referencing a remote registry used as a source for the pull-through caching.",
                 "summary": "List container pull through remotes",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -5643,6 +6322,19 @@
                 "operationId": "remotes_container_pull_through_create",
                 "description": "A Container Remote referencing a remote registry used as a source for the pull-through caching.",
                 "summary": "Create a container pull through remote",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Remotes: Pull-Through"
                 ],
@@ -5694,6 +6386,17 @@
                 "description": "A Container Remote referencing a remote registry used as a source for the pull-through caching.",
                 "summary": "Inspect a container pull through remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_pull_through_remote_href",
@@ -5755,6 +6458,17 @@
                 "summary": "Update a container pull through remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_pull_through_remote_href",
                         "schema": {
@@ -5812,6 +6526,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a container pull through remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_pull_through_remote_href",
@@ -5871,6 +6596,17 @@
                 "summary": "Delete a container pull through remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_pull_through_remote_href",
                         "schema": {
@@ -5910,6 +6646,17 @@
                 "description": "Add a role for this object to users/groups.",
                 "summary": "Add a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_pull_through_remote_href",
@@ -5970,6 +6717,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_pull_through_remote_href",
@@ -6033,6 +6791,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_pull_through_remote_href",
                         "schema": {
@@ -6095,6 +6864,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_pull_through_remote_href",
                         "schema": {
@@ -6154,6 +6934,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_pull_through_remote_href",
@@ -6215,6 +7006,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_pull_through_remote_href",
                         "schema": {
@@ -6274,6 +7076,17 @@
                 "description": "ViewSet for container repo.",
                 "summary": "List container repositorys",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "latest_with_content",
@@ -6607,6 +7420,19 @@
                 "operationId": "repositories_container_container_create",
                 "description": "ViewSet for container repo.",
                 "summary": "Create a container repository",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Repositories: Container"
                 ],
@@ -6658,6 +7484,17 @@
                 "description": "ViewSet for a container push repository.\n\nPOST and DELETE are disallowed because a push repository is tightly coupled with a\nContainerDistribution which handles it automatically.\nCreated - during push operation, removed - with ContainerDistribution removal.",
                 "summary": "List container push repositorys",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "latest_with_content",
@@ -6995,6 +7832,17 @@
                 "summary": "Inspect a container push repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_push_repository_href",
                         "schema": {
@@ -7055,6 +7903,17 @@
                 "summary": "Update a container push repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_push_repository_href",
                         "schema": {
@@ -7112,6 +7971,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a container push repository",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_push_repository_href",
@@ -7173,6 +8043,17 @@
                 "summary": "Add a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_push_repository_href",
                         "schema": {
@@ -7232,6 +8113,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_push_repository_href",
@@ -7295,6 +8187,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_push_repository_href",
                         "schema": {
@@ -7357,6 +8260,17 @@
                 "summary": "Delete an image from a repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_push_repository_href",
                         "schema": {
@@ -7417,6 +8331,17 @@
                 "summary": "Remove a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_push_repository_href",
                         "schema": {
@@ -7475,6 +8400,17 @@
                 "operationId": "repositories_container_container_push_remove_signatures",
                 "description": "Create a task which deletes signatures by the passed key_id.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_push_repository_href",
@@ -7536,6 +8472,17 @@
                 "summary": "Sign images in the repo",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_push_repository_href",
                         "schema": {
@@ -7595,6 +8542,17 @@
                 "description": "Trigger an asynchronous task to tag an image in the repository",
                 "summary": "Create a Tag",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_push_repository_href",
@@ -7656,6 +8614,17 @@
                 "summary": "Delete a tag",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_push_repository_href",
                         "schema": {
@@ -7715,6 +8684,17 @@
                 "description": "ContainerPushRepositoryVersion represents a single container push repository version.\n\nRepository versions of a push repository are not allowed to be deleted. Versioning of such\nrepositories, as well as creation/removal, happens automatically without explicit user actions.\nUsers could make a repository not functional by accident if allowed to delete repository\nversions.",
                 "summary": "List repository versions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_push_repository_href",
@@ -8000,6 +8980,17 @@
                 "summary": "Inspect a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_push_repository_version_href",
                         "schema": {
@@ -8060,6 +9051,17 @@
                 "summary": "Delete a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_push_repository_version_href",
                         "schema": {
@@ -8098,6 +9100,17 @@
                 "operationId": "repositories_container_container_push_versions_repair",
                 "description": "Trigger an asynchronous task to repair a repository version.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_push_repository_version_href",
@@ -8159,6 +9172,17 @@
                 "summary": "Inspect a container repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_repository_href",
                         "schema": {
@@ -8219,6 +9243,17 @@
                 "summary": "Update a container repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_repository_href",
                         "schema": {
@@ -8276,6 +9311,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a container repository",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_repository_href",
@@ -8335,6 +9381,17 @@
                 "summary": "Delete a container repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_repository_href",
                         "schema": {
@@ -8374,6 +9431,17 @@
                 "description": "Trigger an asynchronous task to recursively add container content.",
                 "summary": "Add content",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_repository_href",
@@ -8435,6 +9503,17 @@
                 "summary": "Add a role",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_repository_href",
                         "schema": {
@@ -8495,6 +9574,17 @@
                 "summary": "Build an Image",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_repository_href",
                         "schema": {
@@ -8549,6 +9639,17 @@
                 "description": "Trigger an asynchronous task to copy manifests",
                 "summary": "Copy manifests",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_repository_href",
@@ -8610,6 +9711,17 @@
                 "summary": "Copy tags",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_repository_href",
                         "schema": {
@@ -8669,6 +9781,17 @@
                 "description": "List roles assigned to this object.",
                 "summary": "List roles",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_repository_href",
@@ -8732,6 +9855,17 @@
                 "summary": "List user permissions",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_repository_href",
                         "schema": {
@@ -8794,6 +9928,17 @@
                 "summary": "Remove content",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_repository_href",
                         "schema": {
@@ -8853,6 +9998,17 @@
                 "description": "Remove a role for this object from users/groups.",
                 "summary": "Remove a role",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_repository_href",
@@ -8914,6 +10070,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_repository_href",
                         "schema": {
@@ -8973,6 +10140,17 @@
                 "description": "Trigger an asynchronous task to sign content.",
                 "summary": "Sign images in the repo",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_repository_href",
@@ -9034,6 +10212,17 @@
                 "summary": "Sync from a remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_repository_href",
                         "schema": {
@@ -9093,6 +10282,17 @@
                 "description": "Trigger an asynchronous task to tag an image in the repository",
                 "summary": "Create a Tag",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_repository_href",
@@ -9154,6 +10354,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_repository_href",
                         "schema": {
@@ -9214,6 +10425,17 @@
                 "summary": "Delete a tag",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_repository_href",
                         "schema": {
@@ -9273,6 +10495,17 @@
                 "description": "ContainerRepositoryVersion represents a single container repository version.",
                 "summary": "List repository versions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_repository_href",
@@ -9558,6 +10791,17 @@
                 "summary": "Inspect a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_repository_version_href",
                         "schema": {
@@ -9618,6 +10862,17 @@
                 "summary": "Delete a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "container_container_repository_version_href",
                         "schema": {
@@ -9656,6 +10911,17 @@
                 "operationId": "repositories_container_container_versions_repair",
                 "description": "Trigger an asynchronous task to repair a repository version.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "container_container_repository_version_href",
@@ -9714,6 +10980,41 @@
             "get": {
                 "operationId": "token_get",
                 "description": "Handles GET requests for the /token/ endpoint.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
                 "tags": [
                     "Token"
                 ],
@@ -10327,10 +11628,17 @@
                 "type": "object",
                 "description": "A serializer for ContainerDistribution.",
                 "properties": {
-                    "content_guard": {
+                    "name": {
                         "type": "string",
-                        "format": "uri",
-                        "description": "An optional content-guard. If none is specified, a default one will be used."
+                        "minLength": 1,
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
                     },
                     "repository": {
                         "type": "string",
@@ -10343,22 +11651,15 @@
                         "minLength": 1,
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "name": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
                     "hidden": {
                         "type": "boolean",
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
+                    },
+                    "content_guard": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "An optional content-guard. If none is specified, a default one will be used."
                     },
                     "repository_version": {
                         "type": "string",
@@ -10382,10 +11683,17 @@
                 "type": "object",
                 "description": "A serializer for a specialized pull-through distribution referencing sub-distributions.",
                 "properties": {
-                    "content_guard": {
+                    "name": {
                         "type": "string",
-                        "format": "uri",
-                        "description": "An optional content-guard. If none is specified, a default one will be used."
+                        "minLength": 1,
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
                     },
                     "repository": {
                         "type": "string",
@@ -10398,22 +11706,15 @@
                         "minLength": 1,
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "name": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
                     "hidden": {
                         "type": "boolean",
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
+                    },
+                    "content_guard": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "An optional content-guard. If none is specified, a default one will be used."
                     },
                     "remote": {
                         "type": "string",
@@ -10606,6 +11907,12 @@
                 "type": "object",
                 "description": "Serializer for Container Push Repositories.",
                 "properties": {
+                    "manifest_signing_service": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "A reference to an associated signing service."
+                    },
                     "retain_repo_versions": {
                         "type": "integer",
                         "format": "int64",
@@ -10613,11 +11920,10 @@
                         "description": "Retain X versions of the repository. Default is null which retains all versions.",
                         "minimum": 1
                     },
-                    "description": {
+                    "name": {
                         "type": "string",
-                        "nullable": true,
                         "minLength": 1,
-                        "description": "An optional description."
+                        "description": "A unique name for this repository."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -10626,16 +11932,11 @@
                             "nullable": true
                         }
                     },
-                    "name": {
+                    "description": {
                         "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name for this repository."
-                    },
-                    "manifest_signing_service": {
-                        "type": "string",
-                        "format": "uri",
                         "nullable": true,
-                        "description": "A reference to an associated signing service."
+                        "minLength": 1,
+                        "description": "An optional description."
                     }
                 }
             },
@@ -11188,10 +12489,17 @@
                 "type": "object",
                 "description": "A serializer for ContainerDistribution.",
                 "properties": {
-                    "content_guard": {
+                    "name": {
                         "type": "string",
-                        "format": "uri",
-                        "description": "An optional content-guard. If none is specified, a default one will be used."
+                        "minLength": 1,
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
                     },
                     "repository": {
                         "type": "string",
@@ -11204,22 +12512,15 @@
                         "minLength": 1,
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "name": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
                     "hidden": {
                         "type": "boolean",
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
+                    },
+                    "content_guard": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "An optional content-guard. If none is specified, a default one will be used."
                     },
                     "repository_version": {
                         "type": "string",
@@ -11247,10 +12548,27 @@
                 "type": "object",
                 "description": "A serializer for ContainerDistribution.",
                 "properties": {
-                    "content_guard": {
+                    "no_content_change_since": {
                         "type": "string",
-                        "format": "uri",
-                        "description": "An optional content-guard. If none is specified, a default one will be used."
+                        "readOnly": true,
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
                     },
                     "repository": {
                         "type": "string",
@@ -11262,10 +12580,20 @@
                         "type": "string",
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
-                    "no_content_change_since": {
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
+                    },
+                    "prn": {
                         "type": "string",
                         "readOnly": true,
-                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "pulp_last_updated": {
                         "type": "string",
@@ -11273,37 +12601,10 @@
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "pulp_href": {
+                    "content_guard": {
                         "type": "string",
                         "format": "uri",
-                        "readOnly": true
-                    },
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
-                    },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
+                        "description": "An optional content-guard. If none is specified, a default one will be used."
                     },
                     "repository_version": {
                         "type": "string",
@@ -11394,10 +12695,17 @@
                 "type": "object",
                 "description": "A serializer for a specialized pull-through distribution referencing sub-distributions.",
                 "properties": {
-                    "content_guard": {
+                    "name": {
                         "type": "string",
-                        "format": "uri",
-                        "description": "An optional content-guard. If none is specified, a default one will be used."
+                        "minLength": 1,
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
                     },
                     "repository": {
                         "type": "string",
@@ -11410,22 +12718,15 @@
                         "minLength": 1,
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "name": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
                     "hidden": {
                         "type": "boolean",
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
+                    },
+                    "content_guard": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "An optional content-guard. If none is specified, a default one will be used."
                     },
                     "remote": {
                         "type": "string",
@@ -11461,10 +12762,27 @@
                 "type": "object",
                 "description": "A serializer for a specialized pull-through distribution referencing sub-distributions.",
                 "properties": {
-                    "content_guard": {
+                    "no_content_change_since": {
                         "type": "string",
-                        "format": "uri",
-                        "description": "An optional content-guard. If none is specified, a default one will be used."
+                        "readOnly": true,
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
                     },
                     "repository": {
                         "type": "string",
@@ -11476,10 +12794,20 @@
                         "type": "string",
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
-                    "no_content_change_since": {
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
+                    },
+                    "prn": {
                         "type": "string",
                         "readOnly": true,
-                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "pulp_last_updated": {
                         "type": "string",
@@ -11487,37 +12815,10 @@
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    },
-                    "pulp_href": {
+                    "content_guard": {
                         "type": "string",
                         "format": "uri",
-                        "readOnly": true
-                    },
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
-                    },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
+                        "description": "An optional content-guard. If none is specified, a default one will be used."
                     },
                     "remote": {
                         "type": "string",
@@ -11890,6 +13191,12 @@
                 "type": "object",
                 "description": "Serializer for Container Push Repositories.",
                 "properties": {
+                    "manifest_signing_service": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "A reference to an associated signing service."
+                    },
                     "retain_repo_versions": {
                         "type": "integer",
                         "format": "int64",
@@ -11897,11 +13204,10 @@
                         "description": "Retain X versions of the repository. Default is null which retains all versions.",
                         "minimum": 1
                     },
-                    "description": {
+                    "name": {
                         "type": "string",
-                        "nullable": true,
                         "minLength": 1,
-                        "description": "An optional description."
+                        "description": "A unique name for this repository."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -11910,16 +13216,11 @@
                             "nullable": true
                         }
                     },
-                    "name": {
+                    "description": {
                         "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name for this repository."
-                    },
-                    "manifest_signing_service": {
-                        "type": "string",
-                        "format": "uri",
                         "nullable": true,
-                        "description": "A reference to an associated signing service."
+                        "minLength": 1,
+                        "description": "An optional description."
                     }
                 },
                 "required": [
@@ -11930,6 +13231,17 @@
                 "type": "object",
                 "description": "Serializer for Container Push Repositories.",
                 "properties": {
+                    "versions_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "manifest_signing_service": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "A reference to an associated signing service."
+                    },
                     "retain_repo_versions": {
                         "type": "integer",
                         "format": "int64",
@@ -11937,21 +13249,15 @@
                         "description": "Retain X versions of the repository. Default is null which retains all versions.",
                         "minimum": 1
                     },
-                    "latest_version_href": {
+                    "name": {
                         "type": "string",
-                        "format": "uri",
-                        "readOnly": true
+                        "description": "A unique name for this repository."
                     },
-                    "pulp_last_updated": {
+                    "pulp_created": {
                         "type": "string",
                         "format": "date-time",
                         "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
-                    },
-                    "description": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "An optional description."
+                        "description": "Timestamp of creation."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -11960,7 +13266,7 @@
                             "nullable": true
                         }
                     },
-                    "pulp_href": {
+                    "latest_version_href": {
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
@@ -11970,26 +13276,21 @@
                         "readOnly": true,
                         "description": "The Pulp Resource Name (PRN)."
                     },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name for this repository."
-                    },
-                    "manifest_signing_service": {
-                        "type": "string",
-                        "format": "uri",
-                        "nullable": true,
-                        "description": "A reference to an associated signing service."
-                    },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
-                    },
-                    "versions_href": {
+                    "pulp_href": {
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "An optional description."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     }
                 },
                 "required": [

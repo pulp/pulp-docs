@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "npm": "0.4.0.dev",
-            "core": "3.81.0"
+            "core": "3.82.1"
         },
         "x-pulp-domain-enabled": false
     },
@@ -29,6 +29,17 @@
                 "description": "A ViewSet for Package.\n\nDefine endpoint name which will appear in the API endpoint for this content type.\nFor example::\n    http://pulp.example.com/pulp/api/v3/content/npm/units/\n\nAlso specify queryset and serializer for Package.",
                 "summary": "List packages",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -242,6 +253,19 @@
                 "operationId": "content_npm_packages_create",
                 "description": "Perform bookkeeping when saving Content.\n\n\"Artifacts\" need to be popped off and saved independently, as they are not actually part\nof the Content model.",
                 "summary": "Create a package",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Content: Packages"
                 ],
@@ -288,6 +312,17 @@
                 "description": "A ViewSet for Package.\n\nDefine endpoint name which will appear in the API endpoint for this content type.\nFor example::\n    http://pulp.example.com/pulp/api/v3/content/npm/units/\n\nAlso specify queryset and serializer for Package.",
                 "summary": "Inspect a package",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "npm_package_href",
@@ -351,6 +386,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "npm_package_href",
                         "schema": {
@@ -411,6 +457,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "npm_package_href",
                         "schema": {
@@ -470,6 +527,17 @@
                 "description": "ViewSet for NPM Distributions.",
                 "summary": "List npm distributions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "base_path",
@@ -783,6 +851,19 @@
                 "operationId": "distributions_npm_npm_create",
                 "description": "Trigger an asynchronous create task",
                 "summary": "Create a npm distribution",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Distributions: Npm"
                 ],
@@ -834,6 +915,17 @@
                 "description": "ViewSet for NPM Distributions.",
                 "summary": "Inspect a npm distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "npm_npm_distribution_href",
@@ -895,6 +987,17 @@
                 "summary": "Update a npm distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "npm_npm_distribution_href",
                         "schema": {
@@ -952,6 +1055,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a npm distribution",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "npm_npm_distribution_href",
@@ -1011,6 +1125,17 @@
                 "summary": "Delete a npm distribution",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "npm_npm_distribution_href",
                         "schema": {
@@ -1050,6 +1175,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "npm_npm_distribution_href",
@@ -1111,6 +1247,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "npm_npm_distribution_href",
                         "schema": {
@@ -1170,6 +1317,17 @@
                 "description": "A ViewSet for NpmRemote.\n\nSimilar to the PackageViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
                 "summary": "List npm remotes",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "name": "limit",
                         "required": false,
@@ -1506,6 +1664,19 @@
                 "operationId": "remotes_npm_npm_create",
                 "description": "A ViewSet for NpmRemote.\n\nSimilar to the PackageViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
                 "summary": "Create a npm remote",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Remotes: Npm"
                 ],
@@ -1557,6 +1728,17 @@
                 "description": "A ViewSet for NpmRemote.\n\nSimilar to the PackageViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
                 "summary": "Inspect a npm remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "npm_npm_remote_href",
@@ -1618,6 +1800,17 @@
                 "summary": "Update a npm remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "npm_npm_remote_href",
                         "schema": {
@@ -1675,6 +1868,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a npm remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "npm_npm_remote_href",
@@ -1734,6 +1938,17 @@
                 "summary": "Delete a npm remote",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "npm_npm_remote_href",
                         "schema": {
@@ -1773,6 +1988,17 @@
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "npm_npm_remote_href",
@@ -1834,6 +2060,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "npm_npm_remote_href",
                         "schema": {
@@ -1893,6 +2130,17 @@
                 "description": "A ViewSet for NpmRepository.\n\nSimilar to the PackageViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
                 "summary": "List npm repositorys",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "latest_with_content",
@@ -2226,6 +2474,19 @@
                 "operationId": "repositories_npm_npm_create",
                 "description": "A ViewSet for NpmRepository.\n\nSimilar to the PackageViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
                 "summary": "Create a npm repository",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
                 "tags": [
                     "Repositories: Npm"
                 ],
@@ -2277,6 +2538,17 @@
                 "description": "A ViewSet for NpmRepository.\n\nSimilar to the PackageViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
                 "summary": "Inspect a npm repository",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "npm_npm_repository_href",
@@ -2338,6 +2610,17 @@
                 "summary": "Update a npm repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "npm_npm_repository_href",
                         "schema": {
@@ -2395,6 +2678,17 @@
                 "description": "Trigger an asynchronous partial update task",
                 "summary": "Update a npm repository",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "npm_npm_repository_href",
@@ -2454,6 +2748,17 @@
                 "summary": "Delete a npm repository",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "npm_npm_repository_href",
                         "schema": {
@@ -2493,6 +2798,17 @@
                 "description": "Trigger an asynchronous task to create a new repository version.",
                 "summary": "Modify Repository Content",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "npm_npm_repository_href",
@@ -2554,6 +2870,17 @@
                 "summary": "Set a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "npm_npm_repository_href",
                         "schema": {
@@ -2613,6 +2940,17 @@
                 "description": "Trigger an asynchronous task to sync content.",
                 "summary": "Sync from remote",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "npm_npm_repository_href",
@@ -2674,6 +3012,17 @@
                 "summary": "Unset a label",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "npm_npm_repository_href",
                         "schema": {
@@ -2733,6 +3082,17 @@
                 "description": "A ViewSet for a NpmRepositoryVersion represents a single Npm repository version.",
                 "summary": "List repository versions",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "query",
                         "name": "content",
@@ -3018,6 +3378,17 @@
                 "summary": "Inspect a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "npm_npm_repository_version_href",
                         "schema": {
@@ -3078,6 +3449,17 @@
                 "summary": "Delete a repository version",
                 "parameters": [
                     {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
                         "in": "path",
                         "name": "npm_npm_repository_version_href",
                         "schema": {
@@ -3116,6 +3498,17 @@
                 "operationId": "repositories_npm_npm_versions_repair",
                 "description": "Trigger an asynchronous task to repair a repository version.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
                     {
                         "in": "path",
                         "name": "npm_npm_repository_version_href",
