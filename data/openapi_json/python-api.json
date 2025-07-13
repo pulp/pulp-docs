@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "python": "3.17.0.dev",
-            "core": "3.82.1"
+            "core": "3.83.0"
         },
         "x-pulp-domain-enabled": false
     },
@@ -164,10 +164,13 @@
                                     "-description",
                                     "-description_content_type",
                                     "-download_url",
+                                    "-dynamic",
                                     "-filename",
                                     "-home_page",
                                     "-keywords",
                                     "-license",
+                                    "-license_expression",
+                                    "-license_file",
                                     "-maintainer",
                                     "-maintainer_email",
                                     "-metadata_version",
@@ -179,6 +182,7 @@
                                     "-project_url",
                                     "-project_urls",
                                     "-provides_dist",
+                                    "-provides_extras",
                                     "-pulp_created",
                                     "-pulp_id",
                                     "-pulp_labels",
@@ -200,10 +204,13 @@
                                     "description",
                                     "description_content_type",
                                     "download_url",
+                                    "dynamic",
                                     "filename",
                                     "home_page",
                                     "keywords",
                                     "license",
+                                    "license_expression",
+                                    "license_file",
                                     "maintainer",
                                     "maintainer_email",
                                     "metadata_version",
@@ -215,6 +222,7 @@
                                     "project_url",
                                     "project_urls",
                                     "provides_dist",
+                                    "provides_extras",
                                     "pulp_created",
                                     "pulp_id",
                                     "pulp_labels",
@@ -233,7 +241,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `filename` - Filename\n* `-filename` - Filename (descending)\n* `packagetype` - Packagetype\n* `-packagetype` - Packagetype (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `python_version` - Python version\n* `-python_version` - Python version (descending)\n* `metadata_version` - Metadata version\n* `-metadata_version` - Metadata version (descending)\n* `summary` - Summary\n* `-summary` - Summary (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `keywords` - Keywords\n* `-keywords` - Keywords (descending)\n* `home_page` - Home page\n* `-home_page` - Home page (descending)\n* `download_url` - Download url\n* `-download_url` - Download url (descending)\n* `author` - Author\n* `-author` - Author (descending)\n* `author_email` - Author email\n* `-author_email` - Author email (descending)\n* `maintainer` - Maintainer\n* `-maintainer` - Maintainer (descending)\n* `maintainer_email` - Maintainer email\n* `-maintainer_email` - Maintainer email (descending)\n* `license` - License\n* `-license` - License (descending)\n* `requires_python` - Requires python\n* `-requires_python` - Requires python (descending)\n* `project_url` - Project url\n* `-project_url` - Project url (descending)\n* `platform` - Platform\n* `-platform` - Platform (descending)\n* `supported_platform` - Supported platform\n* `-supported_platform` - Supported platform (descending)\n* `requires_dist` - Requires dist\n* `-requires_dist` - Requires dist (descending)\n* `provides_dist` - Provides dist\n* `-provides_dist` - Provides dist (descending)\n* `obsoletes_dist` - Obsoletes dist\n* `-obsoletes_dist` - Obsoletes dist (descending)\n* `requires_external` - Requires external\n* `-requires_external` - Requires external (descending)\n* `classifiers` - Classifiers\n* `-classifiers` - Classifiers (descending)\n* `project_urls` - Project urls\n* `-project_urls` - Project urls (descending)\n* `description_content_type` - Description content type\n* `-description_content_type` - Description content type (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `author` - Author\n* `-author` - Author (descending)\n* `author_email` - Author email\n* `-author_email` - Author email (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `home_page` - Home page\n* `-home_page` - Home page (descending)\n* `keywords` - Keywords\n* `-keywords` - Keywords (descending)\n* `license` - License\n* `-license` - License (descending)\n* `metadata_version` - Metadata version\n* `-metadata_version` - Metadata version (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `platform` - Platform\n* `-platform` - Platform (descending)\n* `summary` - Summary\n* `-summary` - Summary (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `classifiers` - Classifiers\n* `-classifiers` - Classifiers (descending)\n* `download_url` - Download url\n* `-download_url` - Download url (descending)\n* `supported_platform` - Supported platform\n* `-supported_platform` - Supported platform (descending)\n* `maintainer` - Maintainer\n* `-maintainer` - Maintainer (descending)\n* `maintainer_email` - Maintainer email\n* `-maintainer_email` - Maintainer email (descending)\n* `obsoletes_dist` - Obsoletes dist\n* `-obsoletes_dist` - Obsoletes dist (descending)\n* `project_url` - Project url\n* `-project_url` - Project url (descending)\n* `project_urls` - Project urls\n* `-project_urls` - Project urls (descending)\n* `provides_dist` - Provides dist\n* `-provides_dist` - Provides dist (descending)\n* `requires_external` - Requires external\n* `-requires_external` - Requires external (descending)\n* `requires_dist` - Requires dist\n* `-requires_dist` - Requires dist (descending)\n* `requires_python` - Requires python\n* `-requires_python` - Requires python (descending)\n* `description_content_type` - Description content type\n* `-description_content_type` - Description content type (descending)\n* `provides_extras` - Provides extras\n* `-provides_extras` - Provides extras (descending)\n* `dynamic` - Dynamic\n* `-dynamic` - Dynamic (descending)\n* `license_expression` - License expression\n* `-license_expression` - License expression (descending)\n* `license_file` - License file\n* `-license_file` - License file (descending)\n* `filename` - Filename\n* `-filename` - Filename (descending)\n* `packagetype` - Packagetype\n* `-packagetype` - Packagetype (descending)\n* `python_version` - Python version\n* `-python_version` - Python version (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -5150,6 +5158,7 @@
                                 "type": "string",
                                 "enum": [
                                     "-complete",
+                                    "-content_ids",
                                     "-info",
                                     "-number",
                                     "-pk",
@@ -5157,6 +5166,7 @@
                                     "-pulp_id",
                                     "-pulp_last_updated",
                                     "complete",
+                                    "content_ids",
                                     "info",
                                     "number",
                                     "pk",
@@ -5166,7 +5176,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `number` - Number\n* `-number` - Number (descending)\n* `complete` - Complete\n* `-complete` - Complete (descending)\n* `info` - Info\n* `-info` - Info (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `number` - Number\n* `-number` - Number (descending)\n* `complete` - Complete\n* `-complete` - Complete (descending)\n* `info` - Info\n* `-info` - Info (descending)\n* `content_ids` - Content ids\n* `-content_ids` - Content ids (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -7077,36 +7087,6 @@
                         "minLength": 1,
                         "description": "A url that Pulp can download and turn into the content unit."
                     },
-                    "sha256": {
-                        "type": "string",
-                        "minLength": 1,
-                        "default": "",
-                        "description": "The SHA256 digest of this package."
-                    },
-                    "summary": {
-                        "type": "string",
-                        "description": "A one-line summary of what the package does."
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": "A longer description of the package that can run to several paragraphs."
-                    },
-                    "description_content_type": {
-                        "type": "string",
-                        "description": "A string stating the markup syntax (if any) used in the distribution’s description, so that tools can intelligently render the description."
-                    },
-                    "keywords": {
-                        "type": "string",
-                        "description": "Additional keywords to be used to assist searching for the package in a larger catalog."
-                    },
-                    "home_page": {
-                        "type": "string",
-                        "description": "The URL for the package's home page."
-                    },
-                    "download_url": {
-                        "type": "string",
-                        "description": "Legacy field denoting the URL from which this package can be downloaded."
-                    },
                     "author": {
                         "type": "string",
                         "description": "Text containing the author's name. Contact information can also be added, separated with newlines."
@@ -7114,6 +7094,41 @@
                     "author_email": {
                         "type": "string",
                         "description": "The author's e-mail address. "
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "A longer description of the package that can run to several paragraphs."
+                    },
+                    "home_page": {
+                        "type": "string",
+                        "description": "The URL for the package's home page."
+                    },
+                    "keywords": {
+                        "type": "string",
+                        "description": "Additional keywords to be used to assist searching for the package in a larger catalog."
+                    },
+                    "license": {
+                        "type": "string",
+                        "description": "Text indicating the license covering the distribution"
+                    },
+                    "platform": {
+                        "type": "string",
+                        "description": "A comma-separated list of platform specifications, summarizing the operating systems supported by the package."
+                    },
+                    "summary": {
+                        "type": "string",
+                        "description": "A one-line summary of what the package does."
+                    },
+                    "classifiers": {
+                        "description": "A JSON list containing classification values for a Python package."
+                    },
+                    "download_url": {
+                        "type": "string",
+                        "description": "Legacy field denoting the URL from which this package can be downloaded."
+                    },
+                    "supported_platform": {
+                        "type": "string",
+                        "description": "Field to specify the OS and CPU for which the binary package was compiled. "
                     },
                     "maintainer": {
                         "type": "string",
@@ -7123,13 +7138,8 @@
                         "type": "string",
                         "description": "The maintainer's e-mail address."
                     },
-                    "license": {
-                        "type": "string",
-                        "description": "Text indicating the license covering the distribution"
-                    },
-                    "requires_python": {
-                        "type": "string",
-                        "description": "The Python version(s) that the distribution is guaranteed to be compatible with."
+                    "obsoletes_dist": {
+                        "description": "A JSON list containing names of a distutils project's distribution which this distribution renders obsolete, meaning that the two projects should not be installed at the same time."
                     },
                     "project_url": {
                         "type": "string",
@@ -7138,28 +7148,41 @@
                     "project_urls": {
                         "description": "A dictionary of labels and URLs for the project."
                     },
-                    "platform": {
-                        "type": "string",
-                        "description": "A comma-separated list of platform specifications, summarizing the operating systems supported by the package."
-                    },
-                    "supported_platform": {
-                        "type": "string",
-                        "description": "Field to specify the OS and CPU for which the binary package was compiled. "
-                    },
-                    "requires_dist": {
-                        "description": "A JSON list containing names of some other distutils project required by this distribution."
-                    },
                     "provides_dist": {
                         "description": "A JSON list containing names of a Distutils project which is contained within this distribution."
-                    },
-                    "obsoletes_dist": {
-                        "description": "A JSON list containing names of a distutils project's distribution which this distribution renders obsolete, meaning that the two projects should not be installed at the same time."
                     },
                     "requires_external": {
                         "description": "A JSON list containing some dependency in the system that the distribution is to be used."
                     },
-                    "classifiers": {
-                        "description": "A JSON list containing classification values for a Python package."
+                    "requires_dist": {
+                        "description": "A JSON list containing names of some other distutils project required by this distribution."
+                    },
+                    "requires_python": {
+                        "type": "string",
+                        "description": "The Python version(s) that the distribution is guaranteed to be compatible with."
+                    },
+                    "description_content_type": {
+                        "type": "string",
+                        "description": "A string stating the markup syntax (if any) used in the distribution’s description, so that tools can intelligently render the description."
+                    },
+                    "provides_extras": {
+                        "description": "A JSON list containing names of optional features provided by the package."
+                    },
+                    "dynamic": {
+                        "description": "A JSON list containing names of other core metadata fields which are permitted to vary between sdist and bdist packages. Fields NOT marked dynamic MUST be the same between bdist and sdist."
+                    },
+                    "license_expression": {
+                        "type": "string",
+                        "description": "Text string that is a valid SPDX license expression."
+                    },
+                    "license_file": {
+                        "description": "A JSON list containing names of the paths to license-related files."
+                    },
+                    "sha256": {
+                        "type": "string",
+                        "minLength": 1,
+                        "default": "",
+                        "description": "The SHA256 digest of this package."
                     }
                 },
                 "required": [
@@ -7205,6 +7228,112 @@
                         "format": "uri",
                         "description": "Artifact file representing the physical content"
                     },
+                    "author": {
+                        "type": "string",
+                        "description": "Text containing the author's name. Contact information can also be added, separated with newlines."
+                    },
+                    "author_email": {
+                        "type": "string",
+                        "description": "The author's e-mail address. "
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "A longer description of the package that can run to several paragraphs."
+                    },
+                    "home_page": {
+                        "type": "string",
+                        "description": "The URL for the package's home page."
+                    },
+                    "keywords": {
+                        "type": "string",
+                        "description": "Additional keywords to be used to assist searching for the package in a larger catalog."
+                    },
+                    "license": {
+                        "type": "string",
+                        "description": "Text indicating the license covering the distribution"
+                    },
+                    "metadata_version": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Version of the file format"
+                    },
+                    "name": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The name of the python project."
+                    },
+                    "platform": {
+                        "type": "string",
+                        "description": "A comma-separated list of platform specifications, summarizing the operating systems supported by the package."
+                    },
+                    "summary": {
+                        "type": "string",
+                        "description": "A one-line summary of what the package does."
+                    },
+                    "version": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The packages version number."
+                    },
+                    "classifiers": {
+                        "description": "A JSON list containing classification values for a Python package."
+                    },
+                    "download_url": {
+                        "type": "string",
+                        "description": "Legacy field denoting the URL from which this package can be downloaded."
+                    },
+                    "supported_platform": {
+                        "type": "string",
+                        "description": "Field to specify the OS and CPU for which the binary package was compiled. "
+                    },
+                    "maintainer": {
+                        "type": "string",
+                        "description": "The maintainer's name at a minimum; additional contact information may be provided."
+                    },
+                    "maintainer_email": {
+                        "type": "string",
+                        "description": "The maintainer's e-mail address."
+                    },
+                    "obsoletes_dist": {
+                        "description": "A JSON list containing names of a distutils project's distribution which this distribution renders obsolete, meaning that the two projects should not be installed at the same time."
+                    },
+                    "project_url": {
+                        "type": "string",
+                        "description": "A browsable URL for the project and a label for it, separated by a comma."
+                    },
+                    "project_urls": {
+                        "description": "A dictionary of labels and URLs for the project."
+                    },
+                    "provides_dist": {
+                        "description": "A JSON list containing names of a Distutils project which is contained within this distribution."
+                    },
+                    "requires_external": {
+                        "description": "A JSON list containing some dependency in the system that the distribution is to be used."
+                    },
+                    "requires_dist": {
+                        "description": "A JSON list containing names of some other distutils project required by this distribution."
+                    },
+                    "requires_python": {
+                        "type": "string",
+                        "description": "The Python version(s) that the distribution is guaranteed to be compatible with."
+                    },
+                    "description_content_type": {
+                        "type": "string",
+                        "description": "A string stating the markup syntax (if any) used in the distribution’s description, so that tools can intelligently render the description."
+                    },
+                    "provides_extras": {
+                        "description": "A JSON list containing names of optional features provided by the package."
+                    },
+                    "dynamic": {
+                        "description": "A JSON list containing names of other core metadata fields which are permitted to vary between sdist and bdist packages. Fields NOT marked dynamic MUST be the same between bdist and sdist."
+                    },
+                    "license_expression": {
+                        "type": "string",
+                        "description": "Text string that is a valid SPDX license expression."
+                    },
+                    "license_file": {
+                        "description": "A JSON list containing names of the paths to license-related files."
+                    },
                     "filename": {
                         "type": "string",
                         "readOnly": true,
@@ -7215,103 +7344,15 @@
                         "readOnly": true,
                         "description": "The type of the distribution package (e.g. sdist, bdist_wheel, bdist_egg, etc)"
                     },
-                    "name": {
+                    "python_version": {
                         "type": "string",
                         "readOnly": true,
-                        "description": "The name of the python project."
-                    },
-                    "version": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The packages version number."
+                        "description": "The tag that indicates which Python implementation or version the package requires."
                     },
                     "sha256": {
                         "type": "string",
                         "default": "",
                         "description": "The SHA256 digest of this package."
-                    },
-                    "metadata_version": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "Version of the file format"
-                    },
-                    "summary": {
-                        "type": "string",
-                        "description": "A one-line summary of what the package does."
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": "A longer description of the package that can run to several paragraphs."
-                    },
-                    "description_content_type": {
-                        "type": "string",
-                        "description": "A string stating the markup syntax (if any) used in the distribution’s description, so that tools can intelligently render the description."
-                    },
-                    "keywords": {
-                        "type": "string",
-                        "description": "Additional keywords to be used to assist searching for the package in a larger catalog."
-                    },
-                    "home_page": {
-                        "type": "string",
-                        "description": "The URL for the package's home page."
-                    },
-                    "download_url": {
-                        "type": "string",
-                        "description": "Legacy field denoting the URL from which this package can be downloaded."
-                    },
-                    "author": {
-                        "type": "string",
-                        "description": "Text containing the author's name. Contact information can also be added, separated with newlines."
-                    },
-                    "author_email": {
-                        "type": "string",
-                        "description": "The author's e-mail address. "
-                    },
-                    "maintainer": {
-                        "type": "string",
-                        "description": "The maintainer's name at a minimum; additional contact information may be provided."
-                    },
-                    "maintainer_email": {
-                        "type": "string",
-                        "description": "The maintainer's e-mail address."
-                    },
-                    "license": {
-                        "type": "string",
-                        "description": "Text indicating the license covering the distribution"
-                    },
-                    "requires_python": {
-                        "type": "string",
-                        "description": "The Python version(s) that the distribution is guaranteed to be compatible with."
-                    },
-                    "project_url": {
-                        "type": "string",
-                        "description": "A browsable URL for the project and a label for it, separated by a comma."
-                    },
-                    "project_urls": {
-                        "description": "A dictionary of labels and URLs for the project."
-                    },
-                    "platform": {
-                        "type": "string",
-                        "description": "A comma-separated list of platform specifications, summarizing the operating systems supported by the package."
-                    },
-                    "supported_platform": {
-                        "type": "string",
-                        "description": "Field to specify the OS and CPU for which the binary package was compiled. "
-                    },
-                    "requires_dist": {
-                        "description": "A JSON list containing names of some other distutils project required by this distribution."
-                    },
-                    "provides_dist": {
-                        "description": "A JSON list containing names of a Distutils project which is contained within this distribution."
-                    },
-                    "obsoletes_dist": {
-                        "description": "A JSON list containing names of a distutils project's distribution which this distribution renders obsolete, meaning that the two projects should not be installed at the same time."
-                    },
-                    "requires_external": {
-                        "description": "A JSON list containing some dependency in the system that the distribution is to be used."
-                    },
-                    "classifiers": {
-                        "description": "A JSON list containing classification values for a Python package."
                     }
                 }
             },

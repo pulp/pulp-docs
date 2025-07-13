@@ -16012,6 +16012,7 @@
                                 "type": "string",
                                 "enum": [
                                     "-complete",
+                                    "-content_ids",
                                     "-info",
                                     "-number",
                                     "-pk",
@@ -16019,6 +16020,7 @@
                                     "-pulp_id",
                                     "-pulp_last_updated",
                                     "complete",
+                                    "content_ids",
                                     "info",
                                     "number",
                                     "pk",
@@ -16028,7 +16030,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `number` - Number\n* `-number` - Number (descending)\n* `complete` - Complete\n* `-complete` - Complete (descending)\n* `info` - Info\n* `-info` - Info (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `number` - Number\n* `-number` - Number (descending)\n* `complete` - Complete\n* `-complete` - Complete (descending)\n* `info` - Info\n* `-info` - Info (descending)\n* `content_ids` - Content ids\n* `-content_ids` - Content ids (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -22684,36 +22686,44 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
-                    "pulp_last_updated": {
+                    "no_content_change_since": {
                         "type": "string",
-                        "format": "date-time",
                         "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "content_guard": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "An optional content-guard."
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "base_path": {
+                        "type": "string",
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "base_url": {
                         "type": "string",
                         "readOnly": true,
                         "description": "The URL for accessing the publication as defined by this distribution."
                     },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
                     "hidden": {
                         "type": "boolean",
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
                     },
-                    "pulp_href": {
+                    "prn": {
                         "type": "string",
-                        "format": "uri",
-                        "readOnly": true
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -22722,25 +22732,17 @@
                             "nullable": true
                         }
                     },
-                    "base_path": {
+                    "pulp_last_updated": {
                         "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
-                    },
-                    "no_content_change_since": {
-                        "type": "string",
+                        "format": "date-time",
                         "readOnly": true,
-                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
-                    "prn": {
+                    "pulp_created": {
                         "type": "string",
+                        "format": "date-time",
                         "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
-                    "content_guard": {
-                        "type": "string",
-                        "format": "uri",
-                        "nullable": true,
-                        "description": "An optional content-guard."
+                        "description": "Timestamp of creation."
                     }
                 },
                 "required": [
@@ -27211,7 +27213,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2025-06-06",
+                        "default": "2025-06-13",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {

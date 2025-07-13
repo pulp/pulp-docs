@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "maven": "0.11.0.dev",
-            "core": "3.82.1"
+            "core": "3.83.0"
         },
         "x-pulp-domain-enabled": false
     },
@@ -3151,6 +3151,7 @@
                                 "type": "string",
                                 "enum": [
                                     "-complete",
+                                    "-content_ids",
                                     "-info",
                                     "-number",
                                     "-pk",
@@ -3158,6 +3159,7 @@
                                     "-pulp_id",
                                     "-pulp_last_updated",
                                     "complete",
+                                    "content_ids",
                                     "info",
                                     "number",
                                     "pk",
@@ -3167,7 +3169,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `number` - Number\n* `-number` - Number (descending)\n* `complete` - Complete\n* `-complete` - Complete (descending)\n* `info` - Info\n* `-info` - Info (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `number` - Number\n* `-number` - Number (descending)\n* `complete` - Complete\n* `-complete` - Complete (descending)\n* `info` - Info\n* `-info` - Info (descending)\n* `content_ids` - Content ids\n* `-content_ids` - Content ids (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
