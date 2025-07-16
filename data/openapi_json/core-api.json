@@ -17,7 +17,7 @@
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "core": "3.83.0.dev"
+            "core": "3.84.0.dev"
         },
         "x-pulp-domain-enabled": false
     },
@@ -22686,14 +22686,15 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
+                    "base_url": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The URL for accessing the publication as defined by this distribution."
+                    },
                     "no_content_change_since": {
                         "type": "string",
                         "readOnly": true,
                         "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "content_guard": {
                         "type": "string",
@@ -22701,19 +22702,22 @@
                         "nullable": true,
                         "description": "An optional content-guard."
                     },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
                     },
-                    "base_path": {
+                    "pulp_created": {
                         "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
-                    },
-                    "base_url": {
-                        "type": "string",
+                        "format": "date-time",
                         "readOnly": true,
-                        "description": "The URL for accessing the publication as defined by this distribution."
+                        "description": "Timestamp of creation."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "hidden": {
                         "type": "boolean",
@@ -22725,12 +22729,9 @@
                         "readOnly": true,
                         "description": "The Pulp Resource Name (PRN)."
                     },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
-                        }
+                    "base_path": {
+                        "type": "string",
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "pulp_last_updated": {
                         "type": "string",
@@ -22738,11 +22739,10 @@
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
-                    "pulp_created": {
+                    "pulp_href": {
                         "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
+                        "format": "uri",
+                        "readOnly": true
                     }
                 },
                 "required": [
@@ -27213,7 +27213,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2025-06-13",
+                        "default": "2025-06-16",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
