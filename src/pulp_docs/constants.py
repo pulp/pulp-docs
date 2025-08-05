@@ -38,7 +38,7 @@ class Names:
     # personas
     USER = "Usage"
     ADMIN = "Administration"
-    DEV = "Developments"
+    DEV = "Development"
 
     # other
     PULPCORE_TUTORIAL = "Getting Started"
