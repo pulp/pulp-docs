@@ -100,7 +100,10 @@ async def clone_repositories(repositories: set[str], dest_dir: Path) -> None:
     "--path-exclude",
     default="",
     callback=find_path_callback,
-    help="A colon separated list of lookup paths to exclude in the form [repo1@]path1 [:[repo2@]path2 [...]].",
+    help=(
+        "A colon separated list of lookup paths to exclude in the form "
+        "[repo1@]path1 [:[repo2@]path2 [...]]."
+    ),
 )
 def fetch(dest, config_file, path_exclude):
     """Fetch repositories to destination dir."""

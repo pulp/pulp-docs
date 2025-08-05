@@ -20,4 +20,4 @@ jobs:
           pip install pre-commit
 
       - name: Run code quality checks
-        run: make code-quality
+        run: make lint
