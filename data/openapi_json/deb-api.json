@@ -17,7 +17,7 @@
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "deb": "3.6.0.dev",
+            "deb": "3.7.0.dev",
             "core": "3.84.0"
         },
         "x-pulp-domain-enabled": false
