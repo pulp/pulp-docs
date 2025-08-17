@@ -17,8 +17,8 @@
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "file": "3.85.0.dev",
-            "core": "3.85.0.dev"
+            "file": "3.86.0.dev",
+            "core": "3.86.0.dev"
         },
         "x-pulp-domain-enabled": false
     },
@@ -6839,6 +6839,10 @@
                         ],
                         "readOnly": true,
                         "description": "Various count summaries of the content in the version and the HREF to view them."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "readOnly": true
                     }
                 }
             },
@@ -7108,6 +7112,11 @@
                             ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "artifact": {
                         "type": "string",
