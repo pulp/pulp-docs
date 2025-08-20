@@ -11634,15 +11634,15 @@
                 "type": "object",
                 "description": "A serializer for ContainerDistribution.",
                 "properties": {
+                    "base_path": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
                     "hidden": {
                         "type": "boolean",
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
-                    },
-                    "content_guard": {
-                        "type": "string",
-                        "format": "uri",
-                        "description": "An optional content-guard. If none is specified, a default one will be used."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -11653,10 +11653,10 @@
                             ]
                         }
                     },
-                    "base_path": {
+                    "name": {
                         "type": "string",
                         "minLength": 1,
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
                         "type": [
@@ -11666,10 +11666,10 @@
                         "format": "uri",
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
-                    "name": {
+                    "content_guard": {
                         "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                        "format": "uri",
+                        "description": "An optional content-guard. If none is specified, a default one will be used."
                     },
                     "repository_version": {
                         "type": [
@@ -11697,15 +11697,15 @@
                 "type": "object",
                 "description": "A serializer for a specialized pull-through distribution referencing sub-distributions.",
                 "properties": {
+                    "base_path": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
                     "hidden": {
                         "type": "boolean",
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
-                    },
-                    "content_guard": {
-                        "type": "string",
-                        "format": "uri",
-                        "description": "An optional content-guard. If none is specified, a default one will be used."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -11716,10 +11716,10 @@
                             ]
                         }
                     },
-                    "base_path": {
+                    "name": {
                         "type": "string",
                         "minLength": 1,
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
                         "type": [
@@ -11729,10 +11729,10 @@
                         "format": "uri",
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
-                    "name": {
+                    "content_guard": {
                         "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                        "format": "uri",
+                        "description": "An optional content-guard. If none is specified, a default one will be used."
                     },
                     "remote": {
                         "type": "string",
@@ -11971,13 +11971,10 @@
                             ]
                         }
                     },
-                    "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                    "name": {
+                        "type": "string",
                         "minLength": 1,
-                        "description": "An optional description."
+                        "description": "A unique name for this repository."
                     },
                     "retain_repo_versions": {
                         "type": [
@@ -11987,6 +11984,14 @@
                         "format": "int64",
                         "description": "Retain X versions of the repository. Default is null which retains all versions."
                     },
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "minLength": 1,
+                        "description": "An optional description."
+                    },
                     "manifest_signing_service": {
                         "type": [
                             "string",
@@ -11994,11 +11999,6 @@
                         ],
                         "format": "uri",
                         "description": "A reference to an associated signing service."
-                    },
-                    "name": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name for this repository."
                     }
                 }
             },
@@ -12614,15 +12614,15 @@
                 "type": "object",
                 "description": "A serializer for ContainerDistribution.",
                 "properties": {
+                    "base_path": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
                     "hidden": {
                         "type": "boolean",
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
-                    },
-                    "content_guard": {
-                        "type": "string",
-                        "format": "uri",
-                        "description": "An optional content-guard. If none is specified, a default one will be used."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -12633,10 +12633,10 @@
                             ]
                         }
                     },
-                    "base_path": {
+                    "name": {
                         "type": "string",
                         "minLength": 1,
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
                         "type": [
@@ -12646,10 +12646,10 @@
                         "format": "uri",
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
-                    "name": {
+                    "content_guard": {
                         "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                        "format": "uri",
+                        "description": "An optional content-guard. If none is specified, a default one will be used."
                     },
                     "repository_version": {
                         "type": [
@@ -12681,26 +12681,14 @@
                 "type": "object",
                 "description": "A serializer for ContainerDistribution.",
                 "properties": {
-                    "pulp_last_updated": {
+                    "base_path": {
                         "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "hidden": {
                         "type": "boolean",
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
-                    },
-                    "content_guard": {
-                        "type": "string",
-                        "format": "uri",
-                        "description": "An optional content-guard. If none is specified, a default one will be used."
-                    },
-                    "no_content_change_since": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -12710,6 +12698,29 @@
                                 "null"
                             ]
                         }
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "repository": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uri",
+                        "description": "The latest RepositoryVersion for this Repository will be served."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
                     "pulp_created": {
                         "type": "string",
@@ -12722,26 +12733,15 @@
                         "readOnly": true,
                         "description": "The Pulp Resource Name (PRN)."
                     },
-                    "base_path": {
-                        "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
-                    },
-                    "repository": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "uri",
-                        "description": "The latest RepositoryVersion for this Repository will be served."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
-                    "pulp_href": {
+                    "content_guard": {
                         "type": "string",
                         "format": "uri",
-                        "readOnly": true
+                        "description": "An optional content-guard. If none is specified, a default one will be used."
+                    },
+                    "no_content_change_since": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
                     },
                     "repository_version": {
                         "type": [
@@ -12836,15 +12836,15 @@
                 "type": "object",
                 "description": "A serializer for a specialized pull-through distribution referencing sub-distributions.",
                 "properties": {
+                    "base_path": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
                     "hidden": {
                         "type": "boolean",
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
-                    },
-                    "content_guard": {
-                        "type": "string",
-                        "format": "uri",
-                        "description": "An optional content-guard. If none is specified, a default one will be used."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -12855,10 +12855,10 @@
                             ]
                         }
                     },
-                    "base_path": {
+                    "name": {
                         "type": "string",
                         "minLength": 1,
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
                         "type": [
@@ -12868,10 +12868,10 @@
                         "format": "uri",
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
-                    "name": {
+                    "content_guard": {
                         "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                        "format": "uri",
+                        "description": "An optional content-guard. If none is specified, a default one will be used."
                     },
                     "remote": {
                         "type": "string",
@@ -12909,26 +12909,14 @@
                 "type": "object",
                 "description": "A serializer for a specialized pull-through distribution referencing sub-distributions.",
                 "properties": {
-                    "pulp_last_updated": {
+                    "base_path": {
                         "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "hidden": {
                         "type": "boolean",
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
-                    },
-                    "content_guard": {
-                        "type": "string",
-                        "format": "uri",
-                        "description": "An optional content-guard. If none is specified, a default one will be used."
-                    },
-                    "no_content_change_since": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -12938,6 +12926,29 @@
                                 "null"
                             ]
                         }
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "repository": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uri",
+                        "description": "The latest RepositoryVersion for this Repository will be served."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
                     "pulp_created": {
                         "type": "string",
@@ -12950,26 +12961,15 @@
                         "readOnly": true,
                         "description": "The Pulp Resource Name (PRN)."
                     },
-                    "base_path": {
-                        "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
-                    },
-                    "repository": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "uri",
-                        "description": "The latest RepositoryVersion for this Repository will be served."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
-                    "pulp_href": {
+                    "content_guard": {
                         "type": "string",
                         "format": "uri",
-                        "readOnly": true
+                        "description": "An optional content-guard. If none is specified, a default one will be used."
+                    },
+                    "no_content_change_since": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
                     },
                     "remote": {
                         "type": "string",
@@ -13413,13 +13413,10 @@
                             ]
                         }
                     },
-                    "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                    "name": {
+                        "type": "string",
                         "minLength": 1,
-                        "description": "An optional description."
+                        "description": "A unique name for this repository."
                     },
                     "retain_repo_versions": {
                         "type": [
@@ -13429,6 +13426,14 @@
                         "format": "int64",
                         "description": "Retain X versions of the repository. Default is null which retains all versions."
                     },
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "minLength": 1,
+                        "description": "An optional description."
+                    },
                     "manifest_signing_service": {
                         "type": [
                             "string",
@@ -13436,11 +13441,6 @@
                         ],
                         "format": "uri",
                         "description": "A reference to an associated signing service."
-                    },
-                    "name": {
-                        "type": "string",
-                        "minLength": 1,
-                        "description": "A unique name for this repository."
                     }
                 },
                 "required": [
@@ -13451,12 +13451,6 @@
                 "type": "object",
                 "description": "Serializer for Container Push Repositories.",
                 "properties": {
-                    "pulp_last_updated": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
-                    },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
@@ -13465,6 +13459,34 @@
                                 "null"
                             ]
                         }
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name for this repository."
+                    },
+                    "retain_repo_versions": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64",
+                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "latest_version_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "pulp_created": {
                         "type": "string",
@@ -13477,16 +13499,6 @@
                         "readOnly": true,
                         "description": "The Pulp Resource Name (PRN)."
                     },
-                    "latest_version_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
-                    "versions_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
                     "description": {
                         "type": [
                             "string",
@@ -13494,13 +13506,10 @@
                         ],
                         "description": "An optional description."
                     },
-                    "retain_repo_versions": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
-                        "format": "int64",
-                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                    "versions_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "manifest_signing_service": {
                         "type": [
@@ -13509,15 +13518,6 @@
                         ],
                         "format": "uri",
                         "description": "A reference to an associated signing service."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name for this repository."
-                    },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
                     }
                 },
                 "required": [

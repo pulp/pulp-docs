@@ -1,5 +1,5 @@
 {
-    "openapi": "3.0.3",
+    "openapi": "3.1.1",
     "info": {
         "title": "Pulp 3 API",
         "version": "v3",
@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "deb": "3.7.0.dev",
-            "core": "3.84.0"
+            "core": "3.85.1"
         },
         "x-pulp-domain-enabled": false
     },
@@ -1071,8 +1071,10 @@
                         "in": "query",
                         "name": "build_essential",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true,
+                            "type": [
+                                "boolean",
+                                "null"
+                            ],
                             "enum": [
                                 false,
                                 true
@@ -1092,8 +1094,10 @@
                         "in": "query",
                         "name": "essential",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true,
+                            "type": [
+                                "boolean",
+                                "null"
+                            ],
                             "enum": [
                                 false,
                                 true
@@ -1130,8 +1134,10 @@
                         "in": "query",
                         "name": "multi_arch",
                         "schema": {
-                            "type": "string",
-                            "nullable": true,
+                            "type": [
+                                "string",
+                                "null"
+                            ],
                             "enum": [
                                 "allowed",
                                 "foreign",
@@ -2777,8 +2783,10 @@
                         "in": "query",
                         "name": "build_essential",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true,
+                            "type": [
+                                "boolean",
+                                "null"
+                            ],
                             "enum": [
                                 false,
                                 true
@@ -2798,8 +2806,10 @@
                         "in": "query",
                         "name": "essential",
                         "schema": {
-                            "type": "boolean",
-                            "nullable": true,
+                            "type": [
+                                "boolean",
+                                "null"
+                            ],
                             "enum": [
                                 false,
                                 true
@@ -2836,8 +2846,10 @@
                         "in": "query",
                         "name": "multi_arch",
                         "schema": {
-                            "type": "string",
-                            "nullable": true,
+                            "type": [
+                                "string",
+                                "null"
+                            ],
                             "enum": [
                                 "allowed",
                                 "foreign",
@@ -13601,9 +13613,11 @@
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "content_guard": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "An optional content-guard."
                     },
                     "hidden": {
@@ -13614,8 +13628,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "name": {
@@ -13624,15 +13640,19 @@
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "publication": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "Publication to be served"
                     },
                     "checkpoint": {
@@ -13655,21 +13675,27 @@
                         "description": "The URL of an external content source."
                     },
                     "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "client_key": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded private key used for authentication."
                     },
@@ -13678,57 +13704,72 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "proxy_url": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "proxy_username": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to authenticte to the proxy."
                     },
                     "proxy_password": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "username": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to be used for authentication when syncing."
                     },
                     "password": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "download_concurrency": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
                     },
                     "max_retries": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "policy": {
@@ -13741,31 +13782,39 @@
                         "description": "The policy to use when downloading content. The possible values include: 'immediate', 'on_demand', and 'streamed'. 'immediate' is the default.\n\n* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
                     },
                     "total_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "connect_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_read_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
@@ -13776,9 +13825,11 @@
                         "description": "Headers for aiohttp.Clientsession"
                     },
                     "rate_limit": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     },
                     "distributions": {
@@ -13787,14 +13838,18 @@
                         "description": "Whitespace separated list of distributions to sync.\nThe distribution is the path from the repository root to the \"Release\" file you want to access. This is often, but not always, equal to either the codename or the suite of the release you want to sync. If the repository you are trying to sync uses \"flat repository format\", the distribution must end with a \"/\". Based on \"/etc/apt/sources.list\" syntax."
                     },
                     "components": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "Whitespace separatet list of components to sync.\nIf none are supplied, all that are available will be synchronized. Leave blank for repositores using \"flat repository format\"."
                     },
                     "architectures": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "Whitespace separated list of architectures to sync\nIf none are supplied, all that are available will be synchronized. A list of valid architecture specification strings can be found by running \"dpkg-architecture -L\". A sync will download the intersection of the list of architectures provided via this field and those provided by the relevant \"Release\" file. Architecture=\"all\" is always synchronized and does not need to be provided here."
                     },
@@ -13811,8 +13866,10 @@
                         "description": "Sync installer files"
                     },
                     "gpgkey": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "Gpg public key to verify origin releases against"
                     },
@@ -13829,8 +13886,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "name": {
@@ -13839,22 +13898,27 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
-                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
-                        "minimum": 1
+                        "description": "Retain X versions of the repository. Default is null which retains all versions."
                     },
                     "remote": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     },
                     "publish_upstream_release_fields": {
@@ -13862,17 +13926,21 @@
                         "description": "Previously, pulp_deb only synced the Release file fields codename and suite, now version, origin, label, and description are also synced. Setting this setting to False will make Pulp revert to the old behaviour of using it's own internal values for the new fields during publish. This is primarily intended to avoid a sudden change in behaviour for existing Pulp repositories, since many Release file field changes need to be accepted by hosts consuming the published repository. The default for new repositories is True."
                     },
                     "signing_service": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "A reference to an associated signing service. Used if AptPublication.signing_service is not set"
                     },
                     "signing_service_release_overrides": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "format": "uri",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "format": "uri"
                         },
                         "description": "A dictionary of Release distributions and the Signing Service URLs they should use.Example: {\"bionic\": \"/pulp/api/v3/signing-services/433a1f70-c589-4413-a803-c50b842ea9b5/\"}"
                     }
@@ -13973,6 +14041,10 @@
                         ],
                         "readOnly": true,
                         "description": "Various count summaries of the content in the version and the HREF to view them."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "readOnly": true
                     }
                 }
             },
@@ -13986,8 +14058,10 @@
                         "pattern": "^[-a-zA-Z0-9_]+$"
                     },
                     "value": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 },
                 "required": [
@@ -14004,8 +14078,10 @@
                         "pattern": "^[-a-zA-Z0-9_]+$"
                     },
                     "value": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     }
                 },
                 "required": [
@@ -14054,9 +14130,11 @@
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "content_guard": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "An optional content-guard."
                     },
                     "hidden": {
@@ -14067,8 +14145,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "name": {
@@ -14077,15 +14157,19 @@
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "publication": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "Publication to be served"
                     },
                     "checkpoint": {
@@ -14133,9 +14217,11 @@
                         "description": "The URL for accessing the publication as defined by this distribution."
                     },
                     "content_guard": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "An optional content-guard."
                     },
                     "no_content_change_since": {
@@ -14151,8 +14237,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "name": {
@@ -14160,15 +14248,19 @@
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "publication": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "Publication to be served"
                     },
                     "checkpoint": {
@@ -14289,21 +14381,27 @@
                         "description": "The URL of an external content source."
                     },
                     "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "client_key": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded private key used for authentication."
                     },
@@ -14312,57 +14410,72 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "proxy_url": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "proxy_username": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to authenticte to the proxy."
                     },
                     "proxy_password": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "username": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to be used for authentication when syncing."
                     },
                     "password": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "writeOnly": true,
-                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "download_concurrency": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
                     },
                     "max_retries": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "policy": {
@@ -14375,31 +14488,39 @@
                         "description": "The policy to use when downloading content. The possible values include: 'immediate', 'on_demand', and 'streamed'. 'immediate' is the default.\n\n* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
                     },
                     "total_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "connect_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_read_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
@@ -14410,9 +14531,11 @@
                         "description": "Headers for aiohttp.Clientsession"
                     },
                     "rate_limit": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     },
                     "distributions": {
@@ -14421,14 +14544,18 @@
                         "description": "Whitespace separated list of distributions to sync.\nThe distribution is the path from the repository root to the \"Release\" file you want to access. This is often, but not always, equal to either the codename or the suite of the release you want to sync. If the repository you are trying to sync uses \"flat repository format\", the distribution must end with a \"/\". Based on \"/etc/apt/sources.list\" syntax."
                     },
                     "components": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "Whitespace separatet list of components to sync.\nIf none are supplied, all that are available will be synchronized. Leave blank for repositores using \"flat repository format\"."
                     },
                     "architectures": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "Whitespace separated list of architectures to sync\nIf none are supplied, all that are available will be synchronized. A list of valid architecture specification strings can be found by running \"dpkg-architecture -L\". A sync will download the intersection of the list of architectures provided via this field and those provided by the relevant \"Release\" file. Architecture=\"all\" is always synchronized and does not need to be provided here."
                     },
@@ -14445,8 +14572,10 @@
                         "description": "Sync installer files"
                     },
                     "gpgkey": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "Gpg public key to verify origin releases against"
                     },
@@ -14496,13 +14625,17 @@
                         "description": "The URL of an external content source."
                     },
                     "ca_cert": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "tls_validation": {
@@ -14510,28 +14643,35 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "proxy_url": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "download_concurrency": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
-                        "minimum": 1
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
                     },
                     "max_retries": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "policy": {
@@ -14544,31 +14684,39 @@
                         "description": "The policy to use when downloading content. The possible values include: 'immediate', 'on_demand', and 'streamed'. 'immediate' is the default.\n\n* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
                     },
                     "total_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "connect_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_read_timeout": {
-                        "type": "number",
+                        "type": [
+                            "number",
+                            "null"
+                        ],
                         "format": "double",
                         "minimum": 0.0,
-                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
@@ -14579,9 +14727,11 @@
                         "description": "Headers for aiohttp.Clientsession"
                     },
                     "rate_limit": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     },
                     "hidden_fields": {
@@ -14609,13 +14759,17 @@
                         "description": "Whitespace separated list of distributions to sync.\nThe distribution is the path from the repository root to the \"Release\" file you want to access. This is often, but not always, equal to either the codename or the suite of the release you want to sync. If the repository you are trying to sync uses \"flat repository format\", the distribution must end with a \"/\". Based on \"/etc/apt/sources.list\" syntax."
                     },
                     "components": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Whitespace separatet list of components to sync.\nIf none are supplied, all that are available will be synchronized. Leave blank for repositores using \"flat repository format\"."
                     },
                     "architectures": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Whitespace separated list of architectures to sync\nIf none are supplied, all that are available will be synchronized. A list of valid architecture specification strings can be found by running \"dpkg-architecture -L\". A sync will download the intersection of the list of architectures provided via this field and those provided by the relevant \"Release\" file. Architecture=\"all\" is always synchronized and does not need to be provided here."
                     },
                     "sync_sources": {
@@ -14631,8 +14785,10 @@
                         "description": "Sync installer files"
                     },
                     "gpgkey": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "Gpg public key to verify origin releases against"
                     },
                     "ignore_missing_package_indices": {
@@ -14653,8 +14809,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "name": {
@@ -14663,22 +14821,27 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1,
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
-                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
-                        "minimum": 1
+                        "description": "Retain X versions of the repository. Default is null which retains all versions."
                     },
                     "remote": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     },
                     "publish_upstream_release_fields": {
@@ -14686,17 +14849,21 @@
                         "description": "Previously, pulp_deb only synced the Release file fields codename and suite, now version, origin, label, and description are also synced. Setting this setting to False will make Pulp revert to the old behaviour of using it's own internal values for the new fields during publish. This is primarily intended to avoid a sudden change in behaviour for existing Pulp repositories, since many Release file field changes need to be accepted by hosts consuming the published repository. The default for new repositories is True."
                     },
                     "signing_service": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "A reference to an associated signing service. Used if AptPublication.signing_service is not set"
                     },
                     "signing_service_release_overrides": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "format": "uri",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "format": "uri"
                         },
                         "description": "A dictionary of Release distributions and the Signing Service URLs they should use.Example: {\"bionic\": \"/pulp/api/v3/signing-services/433a1f70-c589-4413-a803-c50b842ea9b5/\"}"
                     }
@@ -14739,8 +14906,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     },
                     "latest_version_href": {
@@ -14753,21 +14922,26 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
                         "format": "int64",
-                        "nullable": true,
-                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
-                        "minimum": 1
+                        "description": "Retain X versions of the repository. Default is null which retains all versions."
                     },
                     "remote": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     },
                     "publish_upstream_release_fields": {
@@ -14775,17 +14949,21 @@
                         "description": "Previously, pulp_deb only synced the Release file fields codename and suite, now version, origin, label, and description are also synced. Setting this setting to False will make Pulp revert to the old behaviour of using it's own internal values for the new fields during publish. This is primarily intended to avoid a sudden change in behaviour for existing Pulp repositories, since many Release file field changes need to be accepted by hosts consuming the published repository. The default for new repositories is True."
                     },
                     "signing_service": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
-                        "nullable": true,
                         "description": "A reference to an associated signing service. Used if AptPublication.signing_service is not set"
                     },
                     "signing_service_release_overrides": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "format": "uri",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "format": "uri"
                         },
                         "description": "A dictionary of Release distributions and the Signing Service URLs they should use.Example: {\"bionic\": \"/pulp/api/v3/signing-services/433a1f70-c589-4413-a803-c50b842ea9b5/\"}"
                     }
@@ -14807,8 +14985,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -14874,10 +15054,17 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "artifact": {
                         "type": "string",
@@ -14936,8 +15123,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -14996,10 +15185,17 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "artifacts": {
                         "type": "object",
@@ -15037,8 +15233,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -15101,10 +15299,17 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "artifact": {
                         "type": "string",
@@ -15276,8 +15481,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -15334,8 +15541,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -15392,10 +15601,17 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "artifacts": {
                         "type": "object",
@@ -15431,8 +15647,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -15481,10 +15699,17 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "package": {
                         "type": "string",
@@ -15531,10 +15756,17 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "artifact": {
                         "type": "string",
@@ -15714,8 +15946,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -15732,23 +15966,31 @@
                         "minLength": 1
                     },
                     "version": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1
                     },
                     "origin": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1
                     },
                     "label": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1
                     },
                     "description": {
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "minLength": 1
                     },
                     "architectures": {
@@ -15785,8 +16027,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -15835,10 +16079,17 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "architecture": {
                         "type": "string",
@@ -15867,8 +16118,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -15917,10 +16170,17 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "component": {
                         "type": "string",
@@ -15954,8 +16214,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -16018,10 +16280,17 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "artifacts": {
                         "type": "object",
@@ -16078,10 +16347,17 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "codename": {
                         "type": "string"
@@ -16093,20 +16369,28 @@
                         "type": "string"
                     },
                     "version": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "origin": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "label": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "description": {
-                        "type": "string",
-                        "nullable": true
+                        "type": [
+                            "string",
+                            "null"
+                        ]
                     },
                     "architectures": {
                         "type": "array",
@@ -16140,8 +16424,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -16200,10 +16486,17 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "artifacts": {
                         "type": "object",
@@ -16242,8 +16535,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -16276,8 +16571,10 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
                     },
@@ -16326,10 +16623,17 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "source_package": {
                         "type": "string",
@@ -16376,10 +16680,17 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "string",
-                            "nullable": true
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "artifacts": {
                         "type": "object",

@@ -22898,21 +22898,14 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
-                    "pulp_href": {
+                    "base_url": {
                         "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
-                    "pulp_last_updated": {
-                        "type": "string",
-                        "format": "date-time",
                         "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                        "description": "The URL for accessing the publication as defined by this distribution."
                     },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
+                    "base_path": {
+                        "type": "string",
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "content_guard": {
                         "type": [
@@ -22921,6 +22914,26 @@
                         ],
                         "format": "uri",
                         "description": "An optional content-guard."
+                    },
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
                     "no_content_change_since": {
                         "type": "string",
@@ -22936,29 +22949,16 @@
                             ]
                         }
                     },
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
-                    "base_path": {
-                        "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
-                    },
                     "pulp_created": {
                         "type": "string",
                         "format": "date-time",
                         "readOnly": true,
                         "description": "Timestamp of creation."
                     },
-                    "base_url": {
+                    "prn": {
                         "type": "string",
                         "readOnly": true,
-                        "description": "The URL for accessing the publication as defined by this distribution."
+                        "description": "The Pulp Resource Name (PRN)."
                     }
                 },
                 "required": [
@@ -27707,7 +27707,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2025-07-18",
+                        "default": "2025-07-21",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
