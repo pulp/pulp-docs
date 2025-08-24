@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "gem": "0.8.0.dev",
-            "core": "3.85.1"
+            "core": "3.86.0"
         },
         "x-pulp-domain-enabled": false
     },
