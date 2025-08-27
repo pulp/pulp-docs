@@ -773,6 +773,64 @@
                 }
             }
         },
+        "/pulp/api/v3/content/python/packages/upload/": {
+            "post": {
+                "operationId": "content_python_packages_upload",
+                "description": "Create a Python package.",
+                "summary": "Synchronous Python package upload",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
+                "tags": [
+                    "Content: Packages"
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PythonPackageContentUpload"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PythonPackageContentUpload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/python.PythonPackageContentResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/distributions/python/pypi/": {
             "get": {
                 "operationId": "distributions_python_pypi_list",
@@ -6742,6 +6800,142 @@
                     "name"
                 ]
             },
+            "PythonPackageContentUpload": {
+                "type": "object",
+                "description": "A serializer for requests to synchronously upload Python packages.",
+                "properties": {
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "artifact": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "Artifact file representing the physical content"
+                    },
+                    "file": {
+                        "type": "string",
+                        "format": "binary",
+                        "writeOnly": true,
+                        "description": "An uploaded file that may be turned into the content unit."
+                    },
+                    "upload": {
+                        "type": "string",
+                        "format": "uri",
+                        "writeOnly": true,
+                        "description": "An uncommitted upload that may be turned into the content unit."
+                    },
+                    "file_url": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "minLength": 1,
+                        "description": "A url that Pulp can download and turn into the content unit."
+                    },
+                    "author": {
+                        "type": "string",
+                        "description": "Text containing the author's name. Contact information can also be added, separated with newlines."
+                    },
+                    "author_email": {
+                        "type": "string",
+                        "description": "The author's e-mail address. "
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "A longer description of the package that can run to several paragraphs."
+                    },
+                    "home_page": {
+                        "type": "string",
+                        "description": "The URL for the package's home page."
+                    },
+                    "keywords": {
+                        "type": "string",
+                        "description": "Additional keywords to be used to assist searching for the package in a larger catalog."
+                    },
+                    "license": {
+                        "type": "string",
+                        "description": "Text indicating the license covering the distribution"
+                    },
+                    "platform": {
+                        "type": "string",
+                        "description": "A comma-separated list of platform specifications, summarizing the operating systems supported by the package."
+                    },
+                    "summary": {
+                        "type": "string",
+                        "description": "A one-line summary of what the package does."
+                    },
+                    "classifiers": {
+                        "description": "A JSON list containing classification values for a Python package."
+                    },
+                    "download_url": {
+                        "type": "string",
+                        "description": "Legacy field denoting the URL from which this package can be downloaded."
+                    },
+                    "supported_platform": {
+                        "type": "string",
+                        "description": "Field to specify the OS and CPU for which the binary package was compiled. "
+                    },
+                    "maintainer": {
+                        "type": "string",
+                        "description": "The maintainer's name at a minimum; additional contact information may be provided."
+                    },
+                    "maintainer_email": {
+                        "type": "string",
+                        "description": "The maintainer's e-mail address."
+                    },
+                    "obsoletes_dist": {
+                        "description": "A JSON list containing names of a distutils project's distribution which this distribution renders obsolete, meaning that the two projects should not be installed at the same time."
+                    },
+                    "project_url": {
+                        "type": "string",
+                        "description": "A browsable URL for the project and a label for it, separated by a comma."
+                    },
+                    "project_urls": {
+                        "description": "A dictionary of labels and URLs for the project."
+                    },
+                    "provides_dist": {
+                        "description": "A JSON list containing names of a Distutils project which is contained within this distribution."
+                    },
+                    "requires_external": {
+                        "description": "A JSON list containing some dependency in the system that the distribution is to be used."
+                    },
+                    "requires_dist": {
+                        "description": "A JSON list containing names of some other distutils project required by this distribution."
+                    },
+                    "requires_python": {
+                        "type": "string",
+                        "description": "The Python version(s) that the distribution is guaranteed to be compatible with."
+                    },
+                    "description_content_type": {
+                        "type": "string",
+                        "description": "A string stating the markup syntax (if any) used in the distribution's description, so that tools can intelligently render the description."
+                    },
+                    "provides_extras": {
+                        "description": "A JSON list containing names of optional features provided by the package."
+                    },
+                    "dynamic": {
+                        "description": "A JSON list containing names of other core metadata fields which are permitted to vary between sdist and bdist packages. Fields NOT marked dynamic MUST be the same between bdist and sdist."
+                    },
+                    "license_expression": {
+                        "type": "string",
+                        "description": "Text string that is a valid SPDX license expression."
+                    },
+                    "license_file": {
+                        "description": "A JSON list containing names of the paths to license-related files."
+                    },
+                    "sha256": {
+                        "type": "string",
+                        "minLength": 1,
+                        "default": "",
+                        "description": "The SHA256 digest of this package."
+                    }
+                }
+            },
             "Repair": {
                 "type": "object",
                 "properties": {
@@ -7245,7 +7439,7 @@
                     },
                     "description_content_type": {
                         "type": "string",
-                        "description": "A string stating the markup syntax (if any) used in the distribution’s description, so that tools can intelligently render the description."
+                        "description": "A string stating the markup syntax (if any) used in the distribution's description, so that tools can intelligently render the description."
                     },
                     "provides_extras": {
                         "description": "A JSON list containing names of optional features provided by the package."
@@ -7408,7 +7602,7 @@
                     },
                     "description_content_type": {
                         "type": "string",
-                        "description": "A string stating the markup syntax (if any) used in the distribution’s description, so that tools can intelligently render the description."
+                        "description": "A string stating the markup syntax (if any) used in the distribution's description, so that tools can intelligently render the description."
                     },
                     "provides_extras": {
                         "description": "A JSON list containing names of optional features provided by the package."
