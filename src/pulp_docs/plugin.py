@@ -24,6 +24,8 @@ REST_API_MD = """\
 ---
 template: "rest_api.html"
 ---
+
+# Rest API - {component} {{.hide-h1}}
 """
 
 
@@ -369,7 +371,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                     File.generated(
                         config,
                         src_uri,
-                        content=REST_API_MD,
+                        content=REST_API_MD.format(component=component.title),
                     )
                 )
                 component_nav.add(src_uri)
@@ -383,6 +385,10 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                     api_json = pulp_docs_git.git.show(
                         f"{remote}/docs-data:data/openapi_json/{component.rest_api}-api.json"
                     )
+                # fix the logo url for restapi page, which is defined in the openapi spec file
+                api_json = api_json.replace(
+                    "/pulp-docs/docs/assets/pulp_logo_icon.svg", "/assets/pulp_logo_icon.svg"
+                )
                 src_uri = (component_dir / "api.json").relative_to(component_parent_dir)
                 files.append(File.generated(config, src_uri, content=api_json))
 
