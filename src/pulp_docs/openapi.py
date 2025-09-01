@@ -11,8 +11,9 @@ from importlib.resources import files
 from pathlib import Path
 from typing import NamedTuple, Optional
 
-from pulp_docs.constants import BASE_TMPDIR_NAME
 from pulp_docs.repository import Repos
+
+BASE_TMPDIR_NAME = "pulpdocs_tmp"
 
 
 def main(output_dir: Path, plugins_filter: Optional[list[str]] = None, dry_run: bool = False):
