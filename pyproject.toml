@@ -27,12 +27,6 @@ pulp-docs = "pulp_docs.cli:main"
 [project.entry-points."mkdocs.plugins"]
 PulpDocs = "pulp_docs.plugin:PulpDocsPlugin"
 
-[tool.setuptools]
-include-package-data=true
-
-[tool.setuptools.package-data]
-pulp_docs = ["data/**"]
-
 [tool.setuptools.packages.find]
 where = ["src"]
 
