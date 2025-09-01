@@ -1,3 +1,27 @@
+<!-- General logic for dark theme taken from: -->
+<!-- https://github.com/blueswen/mkdocs-redoc-tag -->
+<!-- MIT License -->
+
+<!-- Copyright (c) 2022 Blueswen -->
+
+<!-- Permission is hereby granted, free of charge, to any person obtaining a copy -->
+<!-- of this software and associated documentation files (the "Software"), to deal -->
+<!-- in the Software without restriction, including without limitation the rights -->
+<!-- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell -->
+<!-- copies of the Software, and to permit persons to whom the Software is -->
+<!-- furnished to do so, subject to the following conditions: -->
+
+<!-- The above copyright notice and this permission notice shall be included in all -->
+<!-- copies or substantial portions of the Software. -->
+
+<!-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR -->
+<!-- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, -->
+<!-- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE -->
+<!-- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER -->
+<!-- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, -->
+<!-- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE -->
+<!-- SOFTWARE. -->
+
 {% extends "base.html" %}
 
 {% block styles %}
@@ -13,6 +37,8 @@
   .menu-content > div:first-child {padding: 1rem;}
   .menu-content > div:first-child img {width: 80%; height: auto;}
 </style>
+<link rel="stylesheet" type="text/css" id="slate-css" media="none" href="../../css/redark.css" />
+<script src="../../js/redark.js" charset="UTF-8"> </script>
 {% endblock %}
 
 {% block site_nav %}
@@ -20,6 +46,7 @@
 
 <!-- Container Snippet taken from: -->
 <!-- https://github.com/squidfunk/mkdocs-material/blob/master/material/templates/base.html -->
+<!-- Added this because redoc-div must be out of <article> or it'll break the page -->
 {% block container %}
   <div class="md-content" data-md-component="content">
     <article class="md-content__inner md-typeset">
@@ -27,16 +54,47 @@
         {% include "partials/content.html" %}
       {% endblock %}
     </article>
-    <!-- Redoc must be out of <article> or it'll break the page -->
-    <div class="pulp-redoc">
-      <redoc spec-url="../api.json"></redoc>
-    </div>
-  </div>
-{% endblock %}
 
-{% block scripts %}
-{{ super() }}
-<script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
+    <div id="redoc-container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
+    <script>
+    const SPEC_URL = "../api.json";
+    const REDOC_CONTAINER = document.getElementById('redoc-container');
+
+    // Initialize Redoc and add theme 'watcher'
+    window.onload = function () {
+      updateThemeMode();
+      const observer = new MutationObserver(() => {
+        updateThemeMode();
+      });
+      observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['data-md-color-scheme']
+      });
+    }
+
+    // Implementation
+    // TODO: find if there is a way of NOT re-init Redoc to avoid current lag
+    function updateThemeMode() {
+      const scheme = document.body.getAttribute("data-md-color-scheme");
+      if (scheme === "slate") {
+        enable_dark_mode();
+      } else {
+        disable_dark_mode();
+      }
+    }
+
+    enable_dark_mode = function(){
+      document.getElementById("slate-css").media = ""
+      Redoc.init(SPEC_URL, { theme: redark }, REDOC_CONTAINER);
+    }
+
+    disable_dark_mode = function(){
+      document.getElementById("slate-css").media = "none"
+      Redoc.init(SPEC_URL, {}, REDOC_CONTAINER);
+    }
+    </script>
+  </div>
 {% endblock %}
 
 {% block footer %}
