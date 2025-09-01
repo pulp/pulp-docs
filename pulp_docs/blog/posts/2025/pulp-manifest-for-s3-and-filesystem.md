@@ -18,6 +18,8 @@ It's exciting to note that this valuable addition was a community contribution f
 This post is about the `pulp-manifest` tool.
 [Sync] and [Publish] workflows for File repositories are documented separately.
 
+<!-- more -->
+
 ## How the S3 Support Works
 
 To generate a PULP_MANIFEST for an S3 bucket, you simply use the command with an S3 path: 

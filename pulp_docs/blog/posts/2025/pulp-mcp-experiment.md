@@ -1,7 +1,8 @@
 ---
 date: 2025-06-23T09:00:00+03:00
 title: "Bridging Worlds: Interacting with LLMs in an MCP Server for Pulp (and the Realities of Local Hardware)"
-author: "André \"decko\" de Brito"
+authors:
+  - decko
 tags:
   - ai
   - mcp
@@ -9,31 +10,13 @@ tags:
   - llm
 ---
 
-## Table of Contents
-* [The Secret Sauce: What Made This Possible](#the-secret-sauce-what-made-this-possible)
-    * [Model Context Protocol (MCP)](#model-context-protocol-mcp)
-    * [FastMCP](#fastmcp)
-    * [Ollama](#ollama)
-    * [Llama Stack](#llama-stack)
-* [My Grand Experiment: Pulp, Meet LLM!](#my-grand-experiment-pulp-meet-llm)
-* [Configuring the AI Agent and its Tools](#configuring-the-ai-agent-and-its-tools)
-* [The Real Talk: Hitting the Wall with Local LLMs](#the-real-talk-hitting-the-wall-with-local-llms)
-    * [Hardware Constraints (for *bigger* models)](#hardware-constraints-for-bigger-models)
-    * [OpenAPI Tool Generation Hiccups](#openapi-tool-generation-hiccups)
-    * [Context Window Limitations (the `3b` model's Achilles' Heel)](#context-window-limitations-the-3b-models-achilles-heel)
-    * [Model Smarts (or Lack Thereof)](#model-smarts-or-lack-thereof)
-    * [The Pulp API Nuance](#the-pulp-api-nuance)
-* [The Silver Lining: Why This Was Still Awesome!](#the-silver-lining-why-this-was-still-awesome)
-* [Where Do We Stack Up? (A Little Benchmark Peep)](#where-do-we-stack-up-a-little-benchmark-peep)
-* [Wrapping Up](#wrapping-up)
-
----
-
 Alright team, and everyone in our awesome Pulp community!
 
 Gather 'round, because I've got a cool project to tell you about – something I've been tinkering with that brings our beloved **Pulp API** into the wild west of LLMs. Imagine being able to chat with an AI, asking it to list your repos, upload content, or maybe even publish a new version, all by just typing out what you want. That's been the dream I've been chasing!
 
 I've been building a **Model Context Protocol (MCP) server** that lets a user interact with an LLM (Large Language Model) directly, and here's the kicker: this MCP server was specifically designed to **talk to the Pulp API!** How cool is that?
+
+<!-- more -->
 
 Let's break down the ingredients of this digital stew:
 
