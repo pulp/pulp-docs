@@ -37,6 +37,14 @@ class ComponentOption(Config):
     git_url = config_options.Type(str, default="")
     rest_api = config_options.Type(str, default="")
 
+    @property
+    def name(self) -> str:
+        return self.path.rpartition("/")[-1]
+
+    @property
+    def label(self) -> str:
+        return self.rest_api
+
 
 @dataclass(frozen=True)
 class Component:
