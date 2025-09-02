@@ -4,9 +4,9 @@ repos:
     rev: "v5.0.0"
     hooks:
       - id: "trailing-whitespace"
-        exclude: "^pulp_docs"
+        exclude: "^pulpproject.org"
       - id: "end-of-file-fixer"
-        exclude: "^pulp_docs"
+        exclude: "^pulpproject.org"
       - id: "check-added-large-files"
       - id: "check-toml"
 
@@ -29,5 +29,5 @@ repos:
     rev: "v1.32.0"
     hooks:
       - id: "typos"
-        exclude: "(^tests)|(^docs)|(^pulp_docs)"
+        exclude: "(^tests)|(^docs)|(^pulpproject.org)"
 ...
