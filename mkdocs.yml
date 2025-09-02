@@ -4,10 +4,10 @@ repo_url: "https://github.com/pulp/pulpcore"
 repo_name: "pulp/pulpcore"
 edit_uri_template: "https://github.com/pulp/pulp-docs/edit/main/pulp_docs/{path}"
 
-docs_dir: "../pulp-docs/pulp_docs"
+docs_dir: "pulpproject.org"
 theme:
   name: material
-  custom_dir: "../pulp-docs/custom"
+  custom_dir: "custom"
   logo: assets/pulp_logo_icon.svg
   favicon: assets/favicon.ico
   features:
