@@ -29,5 +29,6 @@ repos:
     rev: "v1.32.0"
     hooks:
       - id: "typos"
-        exclude: "(^tests)|(^docs)|(^pulpproject.org)"
+        args: ["--force-exclude"]
+        exclude: "(^tests)|(^pulpproject.org)"
 ...
