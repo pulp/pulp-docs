@@ -1,4 +1,5 @@
 import asyncio
+import subprocess
 from pathlib import Path
 
 import click
@@ -120,8 +121,55 @@ def fetch(dest, config_file, path_exclude):
     asyncio.run(clone_repositories(final_repositories_set, dest_path))
 
 
+@click.command()
+@click.argument("site_dir", required=True)
+@click.argument("component", required=True)
+def link_check(site_dir, component):
+    """Run link checker on a Pulp component.
+
+    Requires lychee to be available on the system:
+    <https://lychee.cli.rs/installation/>
+    """
+
+    def validate_lychee():
+        try:
+            subprocess.run(["lychee", "--version"], check=True)
+        except Exception:
+            raise click.ClickException(
+                "An error occurred when trying to run lychee. Please ensure lychee is installed"
+                " and in your PATH. See: <https://lychee.cli.rs/installation/>"
+            )
+
+    def validate_path(path):
+        if not component_path.exists():
+            raise click.ClickException(
+                f"{component!r} doesn't exist in the site directory: {site_path}"
+            )
+
+    site_path = Path(site_dir).absolute()
+    component_path = site_path / component
+    validate_lychee()
+    validate_path(site_path)
+    validate_path(component_path)
+
+    cmd = [
+        "lychee",
+        str(component_path),
+        "--base",
+        str(site_path),
+        "--exclude",
+        "/_SUMMARY/",
+        "--offline",
+    ]
+
+    result = subprocess.run(cmd, check=False)
+    if result.returncode != 0:
+        raise click.ClickException(f"lychee command failed with exit code {result.returncode}")
+
+
 main = mkdocs_cli
 main.add_command(fetch)
+main.add_command(link_check)
 
 for command_name in ["build", "serve"]:
     sub_command = main.commands.get(command_name)
