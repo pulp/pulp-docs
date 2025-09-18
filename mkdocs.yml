@@ -24,6 +24,7 @@ theme:
     - content.code.annotation
     - content.code.copy
     - content.action.edit
+    - announce.dismiss  # enable users dismissing the announce banner
   language: en
   palette:
     - media: "(prefers-color-scheme: light)"
