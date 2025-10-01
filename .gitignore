@@ -1,15 +1,8 @@
-# Byte-compiled / optimized / DLL files
 __pycache__/
-
-# Distribution / packaging
-dist/
 *.egg-info/
-
-# Unit test
 .pytest_cache/
-
-# mkdocs documentation
-/site
-
-# mypy
 .mypy_cache/
+
+dist/
+site/
+*venv*
