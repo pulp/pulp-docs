@@ -8,7 +8,7 @@ test-dist:
 	venv-dist/bin/pip install dist/pulp_docs*.whl twine
 	venv-dist/bin/pulp-docs --version
 	# test mkdocs.yml is accessible via installed package
-	# venv-dist/bin/python -c "from pulp_docs.cli import get_default_mkdocs; assert get_default_mkdocs()"
+	venv-dist/bin/python -c "from pulp_docs.cli import get_default_mkdocs; assert get_default_mkdocs()"
 	venv-dist/bin/twine check --strict dist/pulp_docs-*.whl
 	@echo "Build is fine!"
 
