@@ -1,19 +1,19 @@
 .PHONY: help
 help:
 	@echo "COMMANDS:"
-	@echo "    build      Build the package using python -m build"
-	@echo "    test-dist  Test the built distribution package"
-	@echo "    lint       Run pre-commit hooks on all files"
-	@echo "    docs       Build documentation using mkdocs"
-	@echo "    clean      Remove build artifacts and temporary files"
-	@echo "    help       Show this help message"
+	@echo "    dist-build   Build the distribution package"
+	@echo "    dist-test    Test the built distribution package"
+	@echo "    docs-ci      Build docs for COMPONENT's CI"
+	@echo "    lint         Run pre-commit hooks on all files"
+	@echo "    clean        Remove build artifacts and temporary files"
+	@echo "    help         Show this help message"
 
-.PHONY: build
-build:
+.PHONY: dist-build
+dist-build:
 	python -m build
 
-.PHONY: test-dist
-test-dist:
+.PHONY: dist-test
+dist-test:
 	python -m venv venv-dist
 	venv-dist/bin/pip install dist/pulp_docs*.whl twine
 	venv-dist/bin/pulp-docs --version
@@ -26,9 +26,19 @@ test-dist:
 lint:
 	pre-commit run -a
 
-.PHONY: docs
-docs:
-	mkdocs build
+.PHONY: docs-ci
+docs-ci: clean
+ifndef COMPONENT
+	@echo "Error: COMPONENT is required"
+	@echo "Usage: make docs-ci COMPONENT=<component-name>"
+	@exit 1
+endif
+	$(eval DOCS_PATH := "pulp-docs@..:$(COMPONENT)@..")
+	$(eval DOCS_TMPDIR := "/tmp/pulp-docs-tmp")
+	pulp-docs fetch --path-exclude "$(DOCS_PATH)" --dest "$(DOCS_TMPDIR)"
+	pulp-docs build --path "$(DOCS_PATH):$(DOCS_TMPDIR)"
+	@ls site || (echo "ERROR: something wen't wrong, 'site/' dir doesn't exist"; exit 1)
+
 
 .PHONY: clean
 clean:
