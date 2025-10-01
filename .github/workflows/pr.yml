@@ -12,14 +12,18 @@ jobs:
   code-quality:
     uses: "./.github/workflows/code-quality.yml"
 
+  build:
+    needs: "code-quality"
+    uses: "./.github/workflows/build.yml"
+
+  tests:
+    needs: "build"
+    uses: "./.github/workflows/tests.yml"
+
   docs:
     uses: "./.github/workflows/docs-ci.yml"
     with:
       pulpdocs_ref: "${{ github.head_ref }}"
-
-  tests:
-    needs: "code-quality"
-    uses: "./.github/workflows/tests.yml"
 
   ready-to-ship:
     # This is a dummy dependent task to have a single entry for the branch protection rules.

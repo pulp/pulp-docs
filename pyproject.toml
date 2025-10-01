@@ -1,6 +1,6 @@
 [build-system]
-requires = ["setuptools>=77.0.3"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling~=1.14"]
+build-backend = "hatchling.build"
 
 [project]
 name = "pulp-docs"
@@ -20,6 +20,8 @@ dependencies = [
 ]
 license = "GPL-3.0-or-later"
 license-files = ["LICENSE"]
+descriptions = "Pulp Docs is a documentation aggregation tool for the Pulp Project."
+readme = "README.md"
 
 [project.scripts]
 pulp-docs = "pulp_docs.cli:main"
@@ -27,14 +29,32 @@ pulp-docs = "pulp_docs.cli:main"
 [project.entry-points."mkdocs.plugins"]
 PulpDocs = "pulp_docs.plugin:PulpDocsPlugin"
 
-[tool.setuptools.packages.find]
-where = ["src"]
+###########
+## BUILD ##
+###########
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pulp_docs"]
+
+[tool.hatch.build.targets.wheel.force-include]
+# enable using the installed package directly for development
+"mkdocs.yml" = "pulp_docs/mkdocs.yml"
+"pulpproject.org" = "pulp_docs/pulpproject.org"
+"custom" = "pulp_docs/custom"
+
+#############
+## TESTING ##
+#############
 
 [tool.pytest.ini_options]
 pythonpath = "src"
 addopts = [
     "--import-mode=importlib",
 ]
+
+##########
+## LINT ##
+##########
 
 [tool.ruff]
 line-length = 100

@@ -14,9 +14,15 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: "Install Test Dependencies"
+      - name: "Download built distribution"
+        uses: "actions/download-artifact@v4"
+        with:
+          name: "pulp_docs_package"
+          path: "dist/"
+
+      - name: "Install package and test dependencies"
         run: |
-          pip install -r test_requirements.txt
+          pip install dist/*.whl -r test_requirements.txt
 
       - name: "Run test suite"
         run: |
