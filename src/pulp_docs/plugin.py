@@ -227,7 +227,7 @@ def _render_sitemap_item(nav_item: Page | Section) -> str:
 # jinja2 macros and helpers
 
 
-def component_data(
+def get_component_data(
     component: Component,
 ) -> dict[str, str | list[str]]:
     """Generate data for rendering md templates."""
@@ -289,7 +289,9 @@ def load_components(find_path: list[str], config: PulpDocsPluginConfig, draft: b
     return loaded_components
 
 
-def log_pulp_config(mkdocs_file: str, path: list[str], loaded_components: list[Component]):
+def log_pulp_config(
+    mkdocs_file: str, path: list[str], loaded_components: list[Component], site_dir: str
+):
     components_map = defaultdict(list)
     sorted_components = sorted(loaded_components, key=lambda o: o.path)
     for component in sorted_components:
@@ -298,6 +300,7 @@ def log_pulp_config(mkdocs_file: str, path: list[str], loaded_components: list[C
     display = {
         "config": str(mkdocs_file),
         "path": str(path),
+        "build_output": site_dir,
         "loaded_components": components_map,
     }
     display_str = json.dumps(display, indent=4)
@@ -306,6 +309,10 @@ def log_pulp_config(mkdocs_file: str, path: list[str], loaded_components: list[C
 
 class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
     def on_config(self, config: MkDocsConfig) -> MkDocsConfig | None:
+        # mkdocs may default to the installation dir
+        if "site-packages" in config.site_dir:
+            config.site_dir = str(Path.cwd() / "site")
+
         self.blog = ctx_blog.get()
         self.docstrings = ctx_docstrings.get()
         self.draft = ctx_draft.get()
@@ -316,12 +323,12 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         self.config.components = load_components(self.find_path, self.config, self.draft)
 
         mkdocs_file = self.mkdocs_yml_dir / "mkdocs.yml"
-        log_pulp_config(mkdocs_file, self.find_path, self.config.components)
+        log_pulp_config(mkdocs_file, self.find_path, self.config.components, config.site_dir)
 
         mkdocstrings_config = config.plugins["mkdocstrings"].config
         components_var = []
         for component in self.config.components:
-            components_var.append(component_data(component))
+            components_var.append(get_component_data(component))
             config.watch.append(str(component.component_dir / "docs"))
             mkdocstrings_config.handlers["python"]["paths"].append(str(component.component_dir))
 

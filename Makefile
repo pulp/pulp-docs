@@ -1,3 +1,13 @@
+.PHONY: help
+help:
+	@echo "COMMANDS:"
+	@echo "    build      Build the package using python -m build"
+	@echo "    test-dist  Test the built distribution package"
+	@echo "    lint       Run pre-commit hooks on all files"
+	@echo "    docs       Build documentation using mkdocs"
+	@echo "    clean      Remove build artifacts and temporary files"
+	@echo "    help       Show this help message"
+
 .PHONY: build
 build:
 	python -m build
