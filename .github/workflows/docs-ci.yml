@@ -31,16 +31,16 @@ jobs:
       - name: "Instructions to run locally"
         run: |
           cat <<EOL
-          Ensure you have "pulp-docs" and "${{ github.event.repository.name }}" in your CWD with correct revisions:
+          == Checks
 
-          git -C pulp-docs checkout "${{ inputs.pulpdocs_ref }}"
-          git -C ${{ github.event.repository.name }} checkout "${{ github.head_ref }}"
+          * You have an up-to-date version of pulp-docs: https://github.com/pulp/pulp-docs
+          * CWD is the pulp-docs repository root
+          * The component dir is at the parent dir: '../${{ github.event.repository.name }}'
+          * The component checkout matches: (TODO display correct commit here)
 
-          Then run:
+          == Command
 
-          cd pulp-docs
-          pulp-docs fetch --dest /tmp/pulp-docs-tmp
-          pulp-docs build --path pulp-docs@..:${{ github.event.repository.name }}@..:/tmp/pulp-docs-tmp
+          make docs-ci COMPONENT=${{ github.event.repository.name }}
           EOL
 
       - uses: "actions/setup-python@v5"
@@ -55,12 +55,9 @@ jobs:
 
       - name: "Build Docs"
         working-directory: "pulp-docs"
-        env:
-          DOCS_PATH: "pulp-docs@..:${{ github.event.repository.name }}@.."
-          DOCS_TMPDIR: "/tmp/pulp-docs-tmp"
         run: |
-          pulp-docs fetch --path-exclude "$DOCS_PATH" --dest "$DOCS_TMPDIR"
-          pulp-docs build --path "$DOCS_PATH:$DOCS_TMPDIR"
+          COMPONENT="${{ github.event.repository.name }}"
+          make docs-ci COMPONENT="$COMPONENT"
 
       - name: "Sanity Check"
         working-directory: "pulp-docs"

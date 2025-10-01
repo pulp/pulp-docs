@@ -21,11 +21,11 @@ jobs:
 
       - name: "Build wheels"
         run: |
-          make build
+          make dist-build
 
       - name: "Test distribution"
         run: |
-          make test-dist
+          make dist-test
 
       - name: "Upload wheels"
         uses: "actions/upload-artifact@v4"
