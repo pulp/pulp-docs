@@ -330,7 +330,8 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         for component in self.config.components:
             components_var.append(get_component_data(component))
             config.watch.append(str(component.component_dir / "docs"))
-            mkdocstrings_config.handlers["python"]["paths"].append(str(component.component_dir))
+            component_dir = str(component.component_dir.resolve())
+            mkdocstrings_config.handlers["python"]["paths"].append(component_dir)
 
         macros_plugin = config.plugins["macros"]
         macros_plugin.register_macros({"rss_items": rss_items})
