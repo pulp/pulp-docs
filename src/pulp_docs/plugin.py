@@ -307,6 +307,13 @@ def log_pulp_config(
     log.info(display_str)
 
 
+def get_pulpdocs_git_url(config: PulpDocsPluginConfig):
+    for component in config.components:
+        if component.path == "pulp-docs":
+            return component.git_url
+    raise RuntimeError("Did pulp-docs changed it's name or was removed from mkdocs.yml?")
+
+
 class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
     def on_config(self, config: MkDocsConfig) -> MkDocsConfig | None:
         # mkdocs may default to the installation dir
@@ -320,14 +327,15 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
 
         self.mkdocs_yml_dir = Path(config.docs_dir).parent
         self.find_path = ctx_path.get() or [str(Path().cwd().parent)]
-        self.config.components = load_components(self.find_path, self.config, self.draft)
+        self.loaded_components = load_components(self.find_path, self.config, self.draft)
+        self.pulpdocs_git_url = get_pulpdocs_git_url(self.config)
 
         mkdocs_file = self.mkdocs_yml_dir / "mkdocs.yml"
-        log_pulp_config(mkdocs_file, self.find_path, self.config.components, config.site_dir)
+        log_pulp_config(mkdocs_file, self.find_path, self.loaded_components, config.site_dir)
 
         mkdocstrings_config = config.plugins["mkdocstrings"].config
         components_var = []
-        for component in self.config.components:
+        for component in self.loaded_components:
             components_var.append(get_component_data(component))
             config.watch.append(str(component.component_dir / "docs"))
             component_dir = str(component.component_dir.resolve())
@@ -350,8 +358,8 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         return config
 
     def on_files(self, files: Files, /, *, config: MkDocsConfig) -> Files | None:
-        log.info(f"Loading Pulp components: {self.config.components}")
-        pulp_docs_component = [c for c in self.config.components if c.path == "pulp-docs"]
+        log.info(f"Loading Pulp components: {self.loaded_components}")
+        pulp_docs_component = [c for c in self.loaded_components if c.path == "pulp-docs"]
         if pulp_docs_component:
             pulp_docs_git = Repo(pulp_docs_component[0].repository_dir)
         else:
@@ -360,7 +368,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
 
         user_nav: dict[str, t.Any] = {}
         dev_nav: dict[str, t.Any] = {}
-        for component in self.config.components:
+        for component in self.loaded_components:
             component_dir = component.component_dir
 
             log.info(f"Fetching docs from '{component.title}'.")
@@ -404,23 +412,15 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                     component_nav.add(src_uri)
 
             for src_uri in component_nav.missing_indices():
-                new_file = File.generated(
-                    config,
-                    src_uri,
-                    content=MISSING_INDEX_TEMPLATE.format(component=component.title),
-                )
+                content = MISSING_INDEX_TEMPLATE.format(component=component.title)
+                new_file = File.generated(config, src_uri, content=content)
                 new_file.pulp_meta = {"index": True}
                 files.append(new_file)
 
             if component.rest_api:
                 src_uri = component_slug / "restapi.md"
-                files.append(
-                    File.generated(
-                        config,
-                        src_uri,
-                        content=REST_API_MD.format(component=component.title),
-                    )
-                )
+                content = REST_API_MD.format(component=component.title)
+                files.append(File.generated(config, src_uri, content=content))
                 component_nav.add(src_uri)
                 if pulp_docs_git:  # currently we require pulp_docs repository to be loaded
                     api_json_content = self.get_openapi_spec(component, pulp_docs_git)
@@ -487,17 +487,22 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
             page.edit_url = edit_url
         return page
 
-    def get_openapi_spec(self, component, pulp_docs_git: Repo):
-        try:
-            api_json = pulp_docs_git.git.show(
-                f"docs-data:data/openapi_json/{component.rest_api}-api.json"
-            )
-        except GitCommandError:
-            # Try again on the first remote.
-            remote = pulp_docs_git.remotes[0]
-            api_json = pulp_docs_git.git.show(
-                f"{remote}/docs-data:data/openapi_json/{component.rest_api}-api.json"
-            )
+    def get_openapi_spec(self, component, pulp_docs_git: Repo) -> str:
+        found_locally = False
+        remotes = [""] + [f"{o}/" for o in pulp_docs_git.remotes]
+        for remote in remotes:
+            git_object = f"{remote}docs-data:data/openapi_json/{component.rest_api}-api.json"
+            try:
+                api_json = pulp_docs_git.git.show(git_object)
+                found_locally = True
+                break
+            except GitCommandError:
+                continue
+
+        if not found_locally:
+            pulp_docs_git.git.fetch(self.pulpdocs_git_url, "docs-data")
+            git_object = f"FETCH_HEAD:data/openapi_json/{component.rest_api}-api.json"
+            api_json = pulp_docs_git.git.show(git_object)
         # fix the logo url for restapi page, which is defined in the openapi spec file
         api_json = api_json.replace(
             "/pulp-docs/docs/assets/pulp_logo_icon.svg", "/assets/pulp_logo_icon.svg"
