@@ -1,5 +1,7 @@
 # AI Policy
 
+[//]: # (This policy is copied at https://github.com/pulp/.github/blob/main/profile/README.md . They need to be kept in sync.)
+
 ## Pulp Project Policy on AI Generated Content / AI Assisted Coding
 
 We have received questions about the stance of the Pulp Project on AI Generated and AI Assisted contributions to our project.
@@ -26,4 +28,3 @@ There are three rules for code contributions to the Pulp Project:
     This evidence must be included prior to contribution to the project.
 
 3. **All AI contributions must follow the definition of Open Source as well as any applicable policies & licenses that the Pulp Project uses.**
-
