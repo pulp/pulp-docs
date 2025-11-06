@@ -17,7 +17,7 @@
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "core": "3.87.0.dev"
+            "core": "3.94.0.dev"
         },
         "x-pulp-domain-enabled": false
     },
@@ -8166,7 +8166,7 @@
             },
             "put": {
                 "operationId": "distributions_core_openpgp_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update an open pgp distribution",
                 "parameters": [
                     {
@@ -8221,6 +8221,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OpenPGPDistributionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -8235,7 +8245,7 @@
             },
             "patch": {
                 "operationId": "distributions_core_openpgp_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update an open pgp distribution",
                 "parameters": [
                     {
@@ -8290,6 +8300,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OpenPGPDistributionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -8937,6 +8957,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DomainResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -8951,7 +8981,7 @@
             },
             "patch": {
                 "operationId": "domains_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update a domain",
                 "parameters": [
                     {
@@ -9006,6 +9036,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DomainResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -9922,7 +9962,7 @@
             },
             "put": {
                 "operationId": "exporters_core_filesystem_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update a filesystem exporter",
                 "parameters": [
                     {
@@ -9977,6 +10017,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FilesystemExporterResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -9991,7 +10041,7 @@
             },
             "patch": {
                 "operationId": "exporters_core_filesystem_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update a filesystem exporter",
                 "parameters": [
                     {
@@ -10046,6 +10096,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FilesystemExporterResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -10755,7 +10815,7 @@
             },
             "put": {
                 "operationId": "exporters_core_pulp_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update a pulp exporter",
                 "parameters": [
                     {
@@ -10810,6 +10870,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PulpExporterResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -10824,7 +10894,7 @@
             },
             "patch": {
                 "operationId": "exporters_core_pulp_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update a pulp exporter",
                 "parameters": [
                     {
@@ -10879,6 +10949,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PulpExporterResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -15145,7 +15225,7 @@
             },
             "put": {
                 "operationId": "repositories_core_openpgp_keyring_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update an open pgp keyring",
                 "parameters": [
                     {
@@ -15200,6 +15280,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OpenPGPKeyringResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -15214,7 +15304,7 @@
             },
             "patch": {
                 "operationId": "repositories_core_openpgp_keyring_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update an open pgp keyring",
                 "parameters": [
                     {
@@ -15269,6 +15359,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OpenPGPKeyringResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -18097,6 +18197,7 @@
                                     "-pulp_id",
                                     "-pulp_last_updated",
                                     "-reserved_resources_record",
+                                    "-result",
                                     "-started_at",
                                     "-state",
                                     "-unblocked_at",
@@ -18115,6 +18216,7 @@
                                     "pulp_id",
                                     "pulp_last_updated",
                                     "reserved_resources_record",
+                                    "result",
                                     "started_at",
                                     "state",
                                     "unblocked_at",
@@ -18122,7 +18224,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `state` - State\n* `-state` - State (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `logging_cid` - Logging cid\n* `-logging_cid` - Logging cid (descending)\n* `unblocked_at` - Unblocked at\n* `-unblocked_at` - Unblocked at (descending)\n* `started_at` - Started at\n* `-started_at` - Started at (descending)\n* `finished_at` - Finished at\n* `-finished_at` - Finished at (descending)\n* `error` - Error\n* `-error` - Error (descending)\n* `enc_args` - Enc args\n* `-enc_args` - Enc args (descending)\n* `enc_kwargs` - Enc kwargs\n* `-enc_kwargs` - Enc kwargs (descending)\n* `reserved_resources_record` - Reserved resources record\n* `-reserved_resources_record` - Reserved resources record (descending)\n* `versions` - Versions\n* `-versions` - Versions (descending)\n* `profile_options` - Profile options\n* `-profile_options` - Profile options (descending)\n* `immediate` - Immediate\n* `-immediate` - Immediate (descending)\n* `deferred` - Deferred\n* `-deferred` - Deferred (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `state` - State\n* `-state` - State (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `logging_cid` - Logging cid\n* `-logging_cid` - Logging cid (descending)\n* `unblocked_at` - Unblocked at\n* `-unblocked_at` - Unblocked at (descending)\n* `started_at` - Started at\n* `-started_at` - Started at (descending)\n* `finished_at` - Finished at\n* `-finished_at` - Finished at (descending)\n* `error` - Error\n* `-error` - Error (descending)\n* `enc_args` - Enc args\n* `-enc_args` - Enc args (descending)\n* `enc_kwargs` - Enc kwargs\n* `-enc_kwargs` - Enc kwargs (descending)\n* `reserved_resources_record` - Reserved resources record\n* `-reserved_resources_record` - Reserved resources record (descending)\n* `versions` - Versions\n* `-versions` - Versions (descending)\n* `profile_options` - Profile options\n* `-profile_options` - Profile options (descending)\n* `immediate` - Immediate\n* `-immediate` - Immediate (descending)\n* `deferred` - Deferred\n* `-deferred` - Deferred (descending)\n* `result` - Result\n* `-result` - Result (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -18475,32 +18577,8 @@
                         "in": "query",
                         "name": "worker",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        },
-                        "description": "Filter results where worker matches value"
-                    },
-                    {
-                        "in": "query",
-                        "name": "worker__in",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "string",
-                                "format": "uuid"
-                            }
-                        },
-                        "description": "Filter results where worker is in a comma-separated list of values",
-                        "explode": false,
-                        "style": "form"
-                    },
-                    {
-                        "in": "query",
-                        "name": "worker__isnull",
-                        "schema": {
-                            "type": "boolean"
-                        },
-                        "description": "Filter results where worker has a null value"
+                            "type": "string"
+                        }
                     },
                     {
                         "in": "query",
@@ -22309,7 +22387,7 @@
             "get": {
                 "operationId": "workers_list",
                 "description": "A customized named ModelViewSet that knows how to register itself with the Pulp API router.\n\nThis viewset is discoverable by its name.\n\"Normal\" Django Models and Master/Detail models are supported by the ``register_with`` method.\n\nAttributes:\n    lookup_field (str): The name of the field by which an object should be looked up, in\n        addition to any parent lookups if this ViewSet is nested. Defaults to 'pk'\n    endpoint_name (str): The name of the final path segment that should identify the ViewSet's\n        collection endpoint.\n    nest_prefix (str): Optional prefix under which this ViewSet should be nested. This must\n        correspond to the \"parent_prefix\" of a router with rest_framework_nested.NestedMixin.\n        None indicates this ViewSet should not be nested.\n    parent_lookup_kwargs (dict): Optional mapping of key names that would appear in self.kwargs\n        to django model filter expressions that can be used with the corresponding value from\n        self.kwargs, used only by a nested ViewSet to filter based on the parent object's\n        identity.\n    schema (DefaultSchema): The schema class to use by default in a viewset.",
-                "summary": "List workers",
+                "summary": "List app statuss",
                 "parameters": [
                     {
                         "in": "header",
@@ -22506,24 +22584,28 @@
                             "items": {
                                 "type": "string",
                                 "enum": [
+                                    "-app_type",
                                     "-last_heartbeat",
                                     "-name",
                                     "-pk",
                                     "-pulp_created",
                                     "-pulp_id",
                                     "-pulp_last_updated",
+                                    "-ttl",
                                     "-versions",
+                                    "app_type",
                                     "last_heartbeat",
                                     "name",
                                     "pk",
                                     "pulp_created",
                                     "pulp_id",
                                     "pulp_last_updated",
+                                    "ttl",
                                     "versions"
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `last_heartbeat` - Last heartbeat\n* `-last_heartbeat` - Last heartbeat (descending)\n* `versions` - Versions\n* `-versions` - Versions (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `app_type` - App type\n* `-app_type` - App type (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `versions` - Versions\n* `-versions` - Versions (descending)\n* `ttl` - Ttl\n* `-ttl` - Ttl (descending)\n* `last_heartbeat` - Last heartbeat\n* `-last_heartbeat` - Last heartbeat (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -22627,7 +22709,7 @@
             "get": {
                 "operationId": "workers_read",
                 "description": "A customized named ModelViewSet that knows how to register itself with the Pulp API router.\n\nThis viewset is discoverable by its name.\n\"Normal\" Django Models and Master/Detail models are supported by the ``register_with`` method.\n\nAttributes:\n    lookup_field (str): The name of the field by which an object should be looked up, in\n        addition to any parent lookups if this ViewSet is nested. Defaults to 'pk'\n    endpoint_name (str): The name of the final path segment that should identify the ViewSet's\n        collection endpoint.\n    nest_prefix (str): Optional prefix under which this ViewSet should be nested. This must\n        correspond to the \"parent_prefix\" of a router with rest_framework_nested.NestedMixin.\n        None indicates this ViewSet should not be nested.\n    parent_lookup_kwargs (dict): Optional mapping of key names that would appear in self.kwargs\n        to django model filter expressions that can be used with the corresponding value from\n        self.kwargs, used only by a nested ViewSet to filter based on the parent object's\n        identity.\n    schema (DefaultSchema): The schema class to use by default in a viewset.",
-                "summary": "Inspect a worker",
+                "summary": "Inspect an app status",
                 "parameters": [
                     {
                         "in": "header",
@@ -22799,9 +22881,8 @@
                     "statements"
                 ]
             },
-            "ApiAppStatusResponse": {
+            "AppStatusResponse": {
                 "type": "object",
-                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
                 "properties": {
                     "name": {
                         "type": "string",
@@ -22898,10 +22979,25 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
+                    "base_url": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The URL for accessing the publication as defined by this distribution."
+                    },
                     "no_content_change_since": {
                         "type": "string",
                         "readOnly": true,
                         "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "pulp_labels": {
                         "type": "object",
@@ -22921,31 +23017,10 @@
                         "type": "string",
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
-                    "base_url": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The URL for accessing the publication as defined by this distribution."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
                     "pulp_href": {
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
-                    },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
-                    },
-                    "pulp_last_updated": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
                     "content_guard": {
                         "type": [
@@ -22954,6 +23029,12 @@
                         ],
                         "format": "uri",
                         "description": "An optional content-guard."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
                     "hidden": {
                         "type": "boolean",
@@ -23147,34 +23228,6 @@
                 "required": [
                     "name"
                 ]
-            },
-            "ContentAppStatusResponse": {
-                "type": "object",
-                "description": "Base serializer for use with [pulpcore.app.models.Model][]\n\nThis ensures that all Serializers provide values for the 'pulp_href` field.\n\nThe class provides a default for the ``ref_name`` attribute in the\nModelSerializers's ``Meta`` class. This ensures that the OpenAPI definitions\nof plugins are namespaced properly.",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The name of the worker."
-                    },
-                    "last_heartbeat": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the last time the worker talked to the service."
-                    },
-                    "versions": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
-                        },
-                        "readOnly": true,
-                        "description": "Versions of the components installed."
-                    }
-                }
             },
             "ContentGuardResponse": {
                 "type": "object",
@@ -23695,7 +23748,7 @@
                     "name": {
                         "type": "string",
                         "minLength": 1,
-                        "description": "Unique name of the file system exporter."
+                        "description": "Unique name of the exporter."
                     },
                     "path": {
                         "type": "string",
@@ -23745,7 +23798,7 @@
                     },
                     "name": {
                         "type": "string",
-                        "description": "Unique name of the file system exporter."
+                        "description": "Unique name of the exporter."
                     },
                     "path": {
                         "type": "string",
@@ -24389,10 +24442,13 @@
                         "description": "Timestamp of when this task stopped execution."
                     },
                     "worker": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
                         "readOnly": true,
-                        "description": "The worker associated with this task. This field is empty if a worker is not yet assigned."
+                        "description": "DEPRECATED - Always null"
                     }
                 },
                 "required": [
@@ -26852,7 +26908,7 @@
                     "name": {
                         "type": "string",
                         "minLength": 1,
-                        "description": "Unique name of the file system exporter."
+                        "description": "Unique name of the exporter."
                     },
                     "path": {
                         "type": "string",
@@ -27024,7 +27080,7 @@
                     "name": {
                         "type": "string",
                         "minLength": 1,
-                        "description": "Unique name of the file system exporter."
+                        "description": "Unique name of the exporter."
                     },
                     "path": {
                         "type": "string",
@@ -27410,6 +27466,11 @@
                         },
                         "writeOnly": true,
                         "description": "List of explicit last-exported-repo-version hrefs (replaces last_export)."
+                    },
+                    "meta": {
+                        "type": "object",
+                        "writeOnly": true,
+                        "description": "Dictionary of meta information about the export. Stored in the TOC JSON."
                     }
                 }
             },
@@ -27469,7 +27530,7 @@
                     "toc_info": {
                         "type": "object",
                         "readOnly": true,
-                        "description": "Filename and sha256-checksum of table-of-contents for this export"
+                        "description": "Filename, sha256-checksum and meta of table-of-contents for this export"
                     }
                 }
             },
@@ -27480,7 +27541,7 @@
                     "name": {
                         "type": "string",
                         "minLength": 1,
-                        "description": "Unique name of the file system exporter."
+                        "description": "Unique name of the exporter."
                     },
                     "path": {
                         "type": "string",
@@ -27537,7 +27598,7 @@
                     },
                     "name": {
                         "type": "string",
-                        "description": "Unique name of the file system exporter."
+                        "description": "Unique name of the exporter."
                     },
                     "path": {
                         "type": "string",
@@ -27707,7 +27768,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2025-07-28",
+                        "default": "2025-10-07",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
@@ -28205,21 +28266,21 @@
                     "online_workers": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/WorkerResponse"
+                            "$ref": "#/components/schemas/AppStatusResponse"
                         },
                         "description": "List of online workers known to the application. An online worker is actively heartbeating and can respond to new work."
                     },
                     "online_api_apps": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/ApiAppStatusResponse"
+                            "$ref": "#/components/schemas/AppStatusResponse"
                         },
                         "description": "List of online api apps known to the application. An online api app is actively heartbeating and can serve the rest api to clients."
                     },
                     "online_content_apps": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/ContentAppStatusResponse"
+                            "$ref": "#/components/schemas/AppStatusResponse"
                         },
                         "description": "List of online content apps known to the application. An online content app is actively heartbeating and can serve data to clients."
                     },
@@ -28348,7 +28409,8 @@
                     },
                     "all_tasks_dispatched": {
                         "type": "boolean",
-                        "description": "Whether all tasks have been spawned for this task group."
+                        "description": "Whether all tasks have been spawned for this task group.",
+                        "deprecated": true
                     },
                     "waiting": {
                         "type": "integer",
@@ -28452,7 +28514,11 @@
                         "description": "The logging correlation id associated with this task"
                     },
                     "created_by": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uri",
                         "readOnly": true,
                         "description": "User who dispatched this task."
                     },
@@ -28480,10 +28546,13 @@
                         "description": "A JSON Object of a fatal error encountered during the execution of this task."
                     },
                     "worker": {
-                        "type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
                         "format": "uri",
                         "readOnly": true,
-                        "description": "The worker associated with this task. This field is empty if a worker is not yet assigned."
+                        "description": "DEPRECATED - Always null"
                     },
                     "parent_task": {
                         "type": "string",
@@ -28529,6 +28598,10 @@
                         },
                         "readOnly": true,
                         "description": "A list of resources required by that task."
+                    },
+                    "result": {
+                        "readOnly": true,
+                        "description": "The result of this task."
                     }
                 },
                 "required": [

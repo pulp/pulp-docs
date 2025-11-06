@@ -17,8 +17,8 @@
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "python": "3.19.0.dev",
-            "core": "3.86.0"
+            "python": "3.20.0.dev",
+            "core": "3.93.0"
         },
         "x-pulp-domain-enabled": false
     },
@@ -1293,7 +1293,7 @@
             },
             "put": {
                 "operationId": "distributions_python_pypi_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update a python distribution",
                 "parameters": [
                     {
@@ -1348,6 +1348,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/python.PythonDistributionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -1362,7 +1372,7 @@
             },
             "patch": {
                 "operationId": "distributions_python_pypi_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update a python distribution",
                 "parameters": [
                     {
@@ -1417,6 +1427,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/python.PythonDistributionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -3133,7 +3153,7 @@
             },
             "put": {
                 "operationId": "remotes_python_python_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update a python remote",
                 "parameters": [
                     {
@@ -3188,6 +3208,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/python.PythonRemoteResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -3202,7 +3232,7 @@
             },
             "patch": {
                 "operationId": "remotes_python_python_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update a python remote",
                 "parameters": [
                     {
@@ -3257,6 +3287,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/python.PythonRemoteResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -4289,7 +4329,7 @@
             },
             "put": {
                 "operationId": "repositories_python_python_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update a python repository",
                 "parameters": [
                     {
@@ -4344,6 +4384,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/python.PythonRepositoryResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -4358,7 +4408,7 @@
             },
             "patch": {
                 "operationId": "repositories_python_python_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update a python repository",
                 "parameters": [
                     {
@@ -4413,6 +4463,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/python.PythonRepositoryResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {

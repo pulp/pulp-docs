@@ -17,8 +17,8 @@
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "file": "3.87.0.dev",
-            "core": "3.87.0.dev"
+            "file": "3.94.0.dev",
+            "core": "3.94.0.dev"
         },
         "x-pulp-domain-enabled": false
     },
@@ -395,7 +395,7 @@
             },
             "put": {
                 "operationId": "acs_file_file_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update a file alternate content source",
                 "parameters": [
                     {
@@ -450,6 +450,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/file.FileAlternateContentSourceResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -464,7 +474,7 @@
             },
             "patch": {
                 "operationId": "acs_file_file_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update a file alternate content source",
                 "parameters": [
                     {
@@ -519,6 +529,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/file.FileAlternateContentSourceResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -1874,7 +1894,7 @@
             },
             "put": {
                 "operationId": "distributions_file_file_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update a file distribution",
                 "parameters": [
                     {
@@ -1929,6 +1949,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/file.FileDistributionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -1943,7 +1973,7 @@
             },
             "patch": {
                 "operationId": "distributions_file_file_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update a file distribution",
                 "parameters": [
                     {
@@ -1998,6 +2028,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/file.FileDistributionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -3714,7 +3754,7 @@
             },
             "put": {
                 "operationId": "remotes_file_file_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update a file remote",
                 "parameters": [
                     {
@@ -3769,6 +3809,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/file.FileRemoteResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -3783,7 +3833,7 @@
             },
             "patch": {
                 "operationId": "remotes_file_file_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update a file remote",
                 "parameters": [
                     {
@@ -3838,6 +3888,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/file.FileRemoteResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -4812,7 +4872,7 @@
             },
             "put": {
                 "operationId": "repositories_file_file_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update a file repository",
                 "parameters": [
                     {
@@ -4867,6 +4927,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/file.FileRepositoryResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -4881,7 +4951,7 @@
             },
             "patch": {
                 "operationId": "repositories_file_file_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update a file repository",
                 "parameters": [
                     {
@@ -4936,6 +5006,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/file.FileRepositoryResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {

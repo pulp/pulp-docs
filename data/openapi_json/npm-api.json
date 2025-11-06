@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "npm": "0.5.0.dev",
-            "core": "3.86.0"
+            "core": "3.93.0"
         },
         "x-pulp-domain-enabled": false
     },
@@ -983,7 +983,7 @@
             },
             "put": {
                 "operationId": "distributions_npm_npm_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update a npm distribution",
                 "parameters": [
                     {
@@ -1038,6 +1038,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/npm.NpmDistributionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -1052,7 +1062,7 @@
             },
             "patch": {
                 "operationId": "distributions_npm_npm_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update a npm distribution",
                 "parameters": [
                     {
@@ -1107,6 +1117,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/npm.NpmDistributionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -1796,7 +1816,7 @@
             },
             "put": {
                 "operationId": "remotes_npm_npm_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update a npm remote",
                 "parameters": [
                     {
@@ -1851,6 +1871,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/npm.NpmRemoteResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -1865,7 +1895,7 @@
             },
             "patch": {
                 "operationId": "remotes_npm_npm_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update a npm remote",
                 "parameters": [
                     {
@@ -1920,6 +1950,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/npm.NpmRemoteResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -2606,7 +2646,7 @@
             },
             "put": {
                 "operationId": "repositories_npm_npm_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update a npm repository",
                 "parameters": [
                     {
@@ -2661,6 +2701,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/npm.NpmRepositoryResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -2675,7 +2725,7 @@
             },
             "patch": {
                 "operationId": "repositories_npm_npm_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update a npm repository",
                 "parameters": [
                     {
@@ -2730,6 +2780,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/npm.NpmRepositoryResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {

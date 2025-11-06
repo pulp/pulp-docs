@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "maven": "0.12.0.dev",
-            "core": "3.86.0"
+            "core": "3.93.0"
         },
         "x-pulp-domain-enabled": false
     },
@@ -1003,7 +1003,7 @@
             },
             "put": {
                 "operationId": "distributions_maven_maven_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update a maven distribution",
                 "parameters": [
                     {
@@ -1058,6 +1058,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/maven.MavenDistributionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -1072,7 +1082,7 @@
             },
             "patch": {
                 "operationId": "distributions_maven_maven_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update a maven distribution",
                 "parameters": [
                     {
@@ -1127,6 +1137,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/maven.MavenDistributionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -1816,7 +1836,7 @@
             },
             "put": {
                 "operationId": "remotes_maven_maven_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update a maven remote",
                 "parameters": [
                     {
@@ -1871,6 +1891,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/maven.MavenRemoteResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -1885,7 +1915,7 @@
             },
             "patch": {
                 "operationId": "remotes_maven_maven_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update a maven remote",
                 "parameters": [
                     {
@@ -1940,6 +1970,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/maven.MavenRemoteResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -2626,7 +2666,7 @@
             },
             "put": {
                 "operationId": "repositories_maven_maven_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update a maven repository",
                 "parameters": [
                     {
@@ -2681,6 +2721,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/maven.MavenRepositoryResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -2695,7 +2745,7 @@
             },
             "patch": {
                 "operationId": "repositories_maven_maven_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update a maven repository",
                 "parameters": [
                     {
@@ -2750,6 +2800,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/maven.MavenRepositoryResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {

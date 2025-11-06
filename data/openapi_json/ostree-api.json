@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "ostree": "2.6.0.dev",
-            "core": "3.86.0"
+            "core": "3.93.0"
         },
         "x-pulp-domain-enabled": false
     },
@@ -3120,7 +3120,7 @@
             },
             "put": {
                 "operationId": "distributions_ostree_ostree_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update an ostree distribution",
                 "parameters": [
                     {
@@ -3175,6 +3175,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ostree.OstreeDistributionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -3189,7 +3199,7 @@
             },
             "patch": {
                 "operationId": "distributions_ostree_ostree_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update an ostree distribution",
                 "parameters": [
                     {
@@ -3244,6 +3254,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ostree.OstreeDistributionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -4221,7 +4241,7 @@
             },
             "put": {
                 "operationId": "remotes_ostree_ostree_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update an ostree remote",
                 "parameters": [
                     {
@@ -4276,6 +4296,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ostree.OstreeRemoteResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -4290,7 +4320,7 @@
             },
             "patch": {
                 "operationId": "remotes_ostree_ostree_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update an ostree remote",
                 "parameters": [
                     {
@@ -4345,6 +4375,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ostree.OstreeRemoteResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -5319,7 +5359,7 @@
             },
             "put": {
                 "operationId": "repositories_ostree_ostree_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update an ostree repository",
                 "parameters": [
                     {
@@ -5374,6 +5414,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ostree.OstreeRepositoryResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -5388,7 +5438,7 @@
             },
             "patch": {
                 "operationId": "repositories_ostree_ostree_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update an ostree repository",
                 "parameters": [
                     {
@@ -5443,6 +5493,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ostree.OstreeRepositoryResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {

@@ -17,12 +17,928 @@
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "deb": "3.8.0.dev",
-            "core": "3.86.0"
+            "deb": "3.9.0.dev",
+            "core": "3.93.0"
         },
         "x-pulp-domain-enabled": false
     },
     "paths": {
+        "/pulp/api/v3/acs/deb/deb/": {
+            "get": {
+                "operationId": "acs_deb_deb_list",
+                "description": "ViewSet for ACS.",
+                "summary": "List apt alternate content sources",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "name": "limit",
+                        "required": false,
+                        "in": "query",
+                        "description": "Number of results to return per page.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "name",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__contains",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name contains value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__icontains",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name contains value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__iexact",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Filter results where name is in a comma-separated list of values",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__iregex",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name matches regex value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__istartswith",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name starts with value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__regex",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name matches regex value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "name__startswith",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where name starts with value"
+                    },
+                    {
+                        "name": "offset",
+                        "required": false,
+                        "in": "query",
+                        "description": "The initial index from which to return the results.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "ordering",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "-last_refreshed",
+                                    "-name",
+                                    "-pk",
+                                    "-pulp_created",
+                                    "-pulp_id",
+                                    "-pulp_last_updated",
+                                    "-pulp_type",
+                                    "last_refreshed",
+                                    "name",
+                                    "pk",
+                                    "pulp_created",
+                                    "pulp_id",
+                                    "pulp_last_updated",
+                                    "pulp_type"
+                                ]
+                            }
+                        },
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `last_refreshed` - Last refreshed\n* `-last_refreshed` - Last refreshed (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_href__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_id__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Acs: Deb"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Paginateddeb.AptAlternateContentSourceResponseList"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "operationId": "acs_deb_deb_create",
+                "description": "ViewSet for ACS.",
+                "summary": "Create an apt alternate content source",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
+                "tags": [
+                    "Acs: Deb"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/deb.AptAlternateContentSource"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/deb.AptAlternateContentSource"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/deb.AptAlternateContentSource"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/deb.AptAlternateContentSourceResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_alternate_content_source_href}": {
+            "get": {
+                "operationId": "acs_deb_deb_read",
+                "description": "ViewSet for ACS.",
+                "summary": "Inspect an apt alternate content source",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "path",
+                        "name": "deb_apt_alternate_content_source_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Acs: Deb"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/deb.AptAlternateContentSourceResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "put": {
+                "operationId": "acs_deb_deb_update",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
+                "summary": "Update an apt alternate content source",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "path",
+                        "name": "deb_apt_alternate_content_source_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Acs: Deb"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/deb.AptAlternateContentSource"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/deb.AptAlternateContentSource"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/deb.AptAlternateContentSource"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/deb.AptAlternateContentSourceResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "acs_deb_deb_partial_update",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
+                "summary": "Update an apt alternate content source",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "path",
+                        "name": "deb_apt_alternate_content_source_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Acs: Deb"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Patcheddeb.AptAlternateContentSource"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Patcheddeb.AptAlternateContentSource"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Patcheddeb.AptAlternateContentSource"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/deb.AptAlternateContentSourceResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "acs_deb_deb_delete",
+                "description": "Trigger an asynchronous delete ACS task",
+                "summary": "Delete an apt alternate content source",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "path",
+                        "name": "deb_apt_alternate_content_source_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Acs: Deb"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_alternate_content_source_href}add_role/": {
+            "post": {
+                "operationId": "acs_deb_deb_add_role",
+                "description": "Add a role for this object to users/groups.",
+                "summary": "Add a role",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "path",
+                        "name": "deb_apt_alternate_content_source_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Acs: Deb"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NestedRoleResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_alternate_content_source_href}list_roles/": {
+            "get": {
+                "operationId": "acs_deb_deb_list_roles",
+                "description": "List roles assigned to this object.",
+                "summary": "List roles",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "path",
+                        "name": "deb_apt_alternate_content_source_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Acs: Deb"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ObjectRolesResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_alternate_content_source_href}my_permissions/": {
+            "get": {
+                "operationId": "acs_deb_deb_my_permissions",
+                "description": "List permissions available to the current user on this object.",
+                "summary": "List user permissions",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "path",
+                        "name": "deb_apt_alternate_content_source_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Acs: Deb"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MyPermissionsResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_alternate_content_source_href}refresh/": {
+            "post": {
+                "operationId": "acs_deb_deb_refresh",
+                "description": "Trigger an asynchronous task to create Alternate Content Source content.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "path",
+                        "name": "deb_apt_alternate_content_source_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Acs: Deb"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskGroupOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{deb_apt_alternate_content_source_href}remove_role/": {
+            "post": {
+                "operationId": "acs_deb_deb_remove_role",
+                "description": "Remove a role for this object from users/groups.",
+                "summary": "Remove a role",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "path",
+                        "name": "deb_apt_alternate_content_source_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Acs: Deb"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NestedRole"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NestedRoleResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/pulp/api/v3/content/deb/generic_contents/": {
             "get": {
                 "operationId": "content_deb_generic_contents_list",
@@ -7916,7 +8832,7 @@
             },
             "put": {
                 "operationId": "distributions_deb_apt_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update an apt distribution",
                 "parameters": [
                     {
@@ -7971,6 +8887,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/deb.AptDistributionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -7985,7 +8911,7 @@
             },
             "patch": {
                 "operationId": "distributions_deb_apt_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update an apt distribution",
                 "parameters": [
                     {
@@ -8040,6 +8966,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/deb.AptDistributionResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -10495,7 +11431,7 @@
             },
             "put": {
                 "operationId": "remotes_deb_apt_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update an apt remote",
                 "parameters": [
                     {
@@ -10550,6 +11486,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/deb.AptRemoteResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -10564,7 +11510,7 @@
             },
             "patch": {
                 "operationId": "remotes_deb_apt_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update an apt remote",
                 "parameters": [
                     {
@@ -10619,6 +11565,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/deb.AptRemoteResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -11593,7 +12549,7 @@
             },
             "put": {
                 "operationId": "repositories_deb_apt_update",
-                "description": "Trigger an asynchronous update task",
+                "description": "Update the entity and trigger an asynchronous task if necessary",
                 "summary": "Update an apt repository",
                 "parameters": [
                     {
@@ -11648,6 +12604,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/deb.AptRepositoryResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -11662,7 +12628,7 @@
             },
             "patch": {
                 "operationId": "repositories_deb_apt_partial_update",
-                "description": "Trigger an asynchronous partial update task",
+                "description": "Update the entity partially and trigger an asynchronous task if necessary",
                 "summary": "Update an apt repository",
                 "parameters": [
                     {
@@ -11717,6 +12683,16 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/deb.AptRepositoryResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
                     "202": {
                         "content": {
                             "application/json": {
@@ -13045,6 +14021,37 @@
                     }
                 }
             },
+            "Paginateddeb.AptAlternateContentSourceResponseList": {
+                "type": "object",
+                "required": [
+                    "count",
+                    "results"
+                ],
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "next": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=400&limit=100"
+                    },
+                    "previous": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=200&limit=100"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/deb.AptAlternateContentSourceResponse"
+                        }
+                    }
+                }
+            },
             "Paginateddeb.AptDistributionResponseList": {
                 "type": "object",
                 "required": [
@@ -13603,6 +14610,38 @@
                     }
                 }
             },
+            "Patcheddeb.AptAlternateContentSource": {
+                "type": "object",
+                "description": "Serializer for APT alternate content source.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "Name of Alternate Content Source."
+                    },
+                    "last_refreshed": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "description": "Date of last refresh of AlternateContentSource."
+                    },
+                    "paths": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "description": "List of paths that will be appended to the Remote url when searching for content."
+                    },
+                    "remote": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "The remote to provide alternate content source."
+                    }
+                }
+            },
             "Patcheddeb.AptDistribution": {
                 "type": "object",
                 "description": "Serializer for AptDistributions.",
@@ -13921,6 +14960,11 @@
                         "format": "uri",
                         "description": "An optional remote to use by default when syncing."
                     },
+                    "autopublish": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether to automatically create publications for new repository versions, and update any distributions pointing to this repository. Will create a standard structured APT publication."
+                    },
                     "publish_upstream_release_fields": {
                         "type": "boolean",
                         "description": "Previously, pulp_deb only synced the Release file fields codename and suite, now version, origin, label, and description are also synced. Setting this setting to False will make Pulp revert to the old behaviour of using it's own internal values for the new fields during publish. This is primarily intended to avoid a sudden change in behaviour for existing Pulp repositories, since many Release file field changes need to be accepted by hosts consuming the published repository. The default for new repositories is True."
@@ -14089,6 +15133,20 @@
                     "value"
                 ]
             },
+            "TaskGroupOperationResponse": {
+                "type": "object",
+                "description": "Serializer for asynchronous operations that return a task group.",
+                "properties": {
+                    "task_group": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "The href of the task group."
+                    }
+                },
+                "required": [
+                    "task_group"
+                ]
+            },
             "UnsetLabel": {
                 "type": "object",
                 "description": "Serializer for synchronously UNsetting a label.",
@@ -14118,6 +15176,98 @@
                 },
                 "required": [
                     "key"
+                ]
+            },
+            "deb.AptAlternateContentSource": {
+                "type": "object",
+                "description": "Serializer for APT alternate content source.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "Name of Alternate Content Source."
+                    },
+                    "last_refreshed": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "description": "Date of last refresh of AlternateContentSource."
+                    },
+                    "paths": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "description": "List of paths that will be appended to the Remote url when searching for content."
+                    },
+                    "remote": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "The remote to provide alternate content source."
+                    }
+                },
+                "required": [
+                    "name",
+                    "remote"
+                ]
+            },
+            "deb.AptAlternateContentSourceResponse": {
+                "type": "object",
+                "description": "Serializer for APT alternate content source.",
+                "properties": {
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of Alternate Content Source."
+                    },
+                    "last_refreshed": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "description": "Date of last refresh of AlternateContentSource."
+                    },
+                    "paths": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of paths that will be appended to the Remote url when searching for content."
+                    },
+                    "remote": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "The remote to provide alternate content source."
+                    }
+                },
+                "required": [
+                    "name",
+                    "remote"
                 ]
             },
             "deb.AptDistribution": {
@@ -14844,6 +15994,11 @@
                         "format": "uri",
                         "description": "An optional remote to use by default when syncing."
                     },
+                    "autopublish": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether to automatically create publications for new repository versions, and update any distributions pointing to this repository. Will create a standard structured APT publication."
+                    },
                     "publish_upstream_release_fields": {
                         "type": "boolean",
                         "description": "Previously, pulp_deb only synced the Release file fields codename and suite, now version, origin, label, and description are also synced. Setting this setting to False will make Pulp revert to the old behaviour of using it's own internal values for the new fields during publish. This is primarily intended to avoid a sudden change in behaviour for existing Pulp repositories, since many Release file field changes need to be accepted by hosts consuming the published repository. The default for new repositories is True."
@@ -14943,6 +16098,11 @@
                         ],
                         "format": "uri",
                         "description": "An optional remote to use by default when syncing."
+                    },
+                    "autopublish": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether to automatically create publications for new repository versions, and update any distributions pointing to this repository. Will create a standard structured APT publication."
                     },
                     "publish_upstream_release_fields": {
                         "type": "boolean",
