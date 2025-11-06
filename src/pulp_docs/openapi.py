@@ -12,6 +12,7 @@ from typing import Optional
 
 from mkdocs.config import load_config
 
+from pulp_docs.cli import get_default_mkdocs
 from pulp_docs.plugin import ComponentOption
 
 BASE_TMPDIR_NAME = "pulpdocs_tmp"
@@ -27,7 +28,7 @@ def main(output_dir: Path, plugins_filter: Optional[list[str]] = None, dry_run: 
         return name in plugins_filter or name == "pulpcore"
 
     def get_plugins() -> list[ComponentOption]:
-        mkdocs_yml = str(CURRENT_DIR.parent.parent / "mkdocs.yml")
+        mkdocs_yml = str(get_default_mkdocs())
         pulpdocs_plugin = load_config(mkdocs_yml).plugins["PulpDocs"]
         all_components = pulpdocs_plugin.config.components
         return [c for c in all_components if c.rest_api]
