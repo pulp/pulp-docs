@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "python": "3.21.0.dev",
-            "core": "3.93.0"
+            "core": "3.93.1"
         },
         "x-pulp-domain-enabled": false
     },
@@ -194,6 +194,7 @@
                                     "-requires_external",
                                     "-requires_python",
                                     "-sha256",
+                                    "-size",
                                     "-summary",
                                     "-supported_platform",
                                     "-timestamp_of_interest",
@@ -235,6 +236,7 @@
                                     "requires_external",
                                     "requires_python",
                                     "sha256",
+                                    "size",
                                     "summary",
                                     "supported_platform",
                                     "timestamp_of_interest",
@@ -243,7 +245,7 @@
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `author` - Author\n* `-author` - Author (descending)\n* `author_email` - Author email\n* `-author_email` - Author email (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `home_page` - Home page\n* `-home_page` - Home page (descending)\n* `keywords` - Keywords\n* `-keywords` - Keywords (descending)\n* `license` - License\n* `-license` - License (descending)\n* `metadata_version` - Metadata version\n* `-metadata_version` - Metadata version (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `platform` - Platform\n* `-platform` - Platform (descending)\n* `summary` - Summary\n* `-summary` - Summary (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `classifiers` - Classifiers\n* `-classifiers` - Classifiers (descending)\n* `download_url` - Download url\n* `-download_url` - Download url (descending)\n* `supported_platform` - Supported platform\n* `-supported_platform` - Supported platform (descending)\n* `maintainer` - Maintainer\n* `-maintainer` - Maintainer (descending)\n* `maintainer_email` - Maintainer email\n* `-maintainer_email` - Maintainer email (descending)\n* `obsoletes_dist` - Obsoletes dist\n* `-obsoletes_dist` - Obsoletes dist (descending)\n* `project_url` - Project url\n* `-project_url` - Project url (descending)\n* `project_urls` - Project urls\n* `-project_urls` - Project urls (descending)\n* `provides_dist` - Provides dist\n* `-provides_dist` - Provides dist (descending)\n* `requires_external` - Requires external\n* `-requires_external` - Requires external (descending)\n* `requires_dist` - Requires dist\n* `-requires_dist` - Requires dist (descending)\n* `requires_python` - Requires python\n* `-requires_python` - Requires python (descending)\n* `description_content_type` - Description content type\n* `-description_content_type` - Description content type (descending)\n* `provides_extras` - Provides extras\n* `-provides_extras` - Provides extras (descending)\n* `dynamic` - Dynamic\n* `-dynamic` - Dynamic (descending)\n* `license_expression` - License expression\n* `-license_expression` - License expression (descending)\n* `license_file` - License file\n* `-license_file` - License file (descending)\n* `filename` - Filename\n* `-filename` - Filename (descending)\n* `packagetype` - Packagetype\n* `-packagetype` - Packagetype (descending)\n* `python_version` - Python version\n* `-python_version` - Python version (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `metadata_sha256` - Metadata sha256\n* `-metadata_sha256` - Metadata sha256 (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `author` - Author\n* `-author` - Author (descending)\n* `author_email` - Author email\n* `-author_email` - Author email (descending)\n* `description` - Description\n* `-description` - Description (descending)\n* `home_page` - Home page\n* `-home_page` - Home page (descending)\n* `keywords` - Keywords\n* `-keywords` - Keywords (descending)\n* `license` - License\n* `-license` - License (descending)\n* `metadata_version` - Metadata version\n* `-metadata_version` - Metadata version (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `platform` - Platform\n* `-platform` - Platform (descending)\n* `summary` - Summary\n* `-summary` - Summary (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `classifiers` - Classifiers\n* `-classifiers` - Classifiers (descending)\n* `download_url` - Download url\n* `-download_url` - Download url (descending)\n* `supported_platform` - Supported platform\n* `-supported_platform` - Supported platform (descending)\n* `maintainer` - Maintainer\n* `-maintainer` - Maintainer (descending)\n* `maintainer_email` - Maintainer email\n* `-maintainer_email` - Maintainer email (descending)\n* `obsoletes_dist` - Obsoletes dist\n* `-obsoletes_dist` - Obsoletes dist (descending)\n* `project_url` - Project url\n* `-project_url` - Project url (descending)\n* `project_urls` - Project urls\n* `-project_urls` - Project urls (descending)\n* `provides_dist` - Provides dist\n* `-provides_dist` - Provides dist (descending)\n* `requires_external` - Requires external\n* `-requires_external` - Requires external (descending)\n* `requires_dist` - Requires dist\n* `-requires_dist` - Requires dist (descending)\n* `requires_python` - Requires python\n* `-requires_python` - Requires python (descending)\n* `description_content_type` - Description content type\n* `-description_content_type` - Description content type (descending)\n* `provides_extras` - Provides extras\n* `-provides_extras` - Provides extras (descending)\n* `dynamic` - Dynamic\n* `-dynamic` - Dynamic (descending)\n* `license_expression` - License expression\n* `-license_expression` - License expression (descending)\n* `license_file` - License file\n* `-license_file` - License file (descending)\n* `filename` - Filename\n* `-filename` - Filename (descending)\n* `packagetype` - Packagetype\n* `-packagetype` - Packagetype (descending)\n* `python_version` - Python version\n* `-python_version` - Python version (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `metadata_sha256` - Metadata sha256\n* `-metadata_sha256` - Metadata sha256 (descending)\n* `size` - Size\n* `-size` - Size (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -6567,6 +6569,14 @@
                         "format": "uri",
                         "description": "Publication to be served"
                     },
+                    "repository_version": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uri",
+                        "description": "RepositoryVersion to be served."
+                    },
                     "allow_uploads": {
                         "type": "boolean",
                         "default": true,
@@ -7287,6 +7297,14 @@
                         "format": "uri",
                         "description": "Publication to be served"
                     },
+                    "repository_version": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uri",
+                        "description": "RepositoryVersion to be served."
+                    },
                     "allow_uploads": {
                         "type": "boolean",
                         "default": true,
@@ -7386,6 +7404,14 @@
                         ],
                         "format": "uri",
                         "description": "Publication to be served"
+                    },
+                    "repository_version": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uri",
+                        "description": "RepositoryVersion to be served."
                     },
                     "allow_uploads": {
                         "type": "boolean",
@@ -7731,6 +7757,12 @@
                         "type": "string",
                         "readOnly": true,
                         "description": "The tag that indicates which Python implementation or version the package requires."
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int64",
+                        "readOnly": true,
+                        "description": "The size of the package in bytes."
                     },
                     "sha256": {
                         "type": "string",

@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "ostree": "2.6.0.dev",
-            "core": "3.93.0"
+            "core": "3.93.1"
         },
         "x-pulp-domain-enabled": false
     },
