@@ -17,8 +17,8 @@
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "python": "3.21.0.dev",
-            "core": "3.93.1"
+            "python": "3.22.0.dev",
+            "core": "3.93.2"
         },
         "x-pulp-domain-enabled": false
     },
@@ -5629,6 +5629,57 @@
                     },
                     "required": true
                 },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{python_python_repository_version_href}scan/": {
+            "post": {
+                "operationId": "repositories_python_python_versions_scan",
+                "description": "Scan a repository version for vulnerabilities.",
+                "summary": "Generate vulnerability report",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "path",
+                        "name": "python_python_repository_version_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Repositories: Python Versions"
+                ],
                 "security": [
                     {
                         "basicAuth": []
