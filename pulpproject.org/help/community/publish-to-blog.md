@@ -62,7 +62,7 @@ About the metadata:
 
 - **date**: The publication date and time
 - **title**: The title of your blog post as it will appear on the blog
-- **author**: Your your author name as it shows in the *authors file* (see below)
+- **author**: Your author name as it shows in the *authors file* (see below)
 - **tags**: A list of relevant tags to help categorize your post
 - **links**: These are references you wanna share. These receive a special rendering.
 
