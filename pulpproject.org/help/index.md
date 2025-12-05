@@ -9,8 +9,8 @@ render_macros: true
 If this is the first time navigating trough these docs, we recommend reading the [Documentation Usage](site:help/more/docs-usage/).
 Understaning the docs will help you find what you need more quickly.
 
-For some human help, you should visit the [Get Involved](site:help/community/get-involved/) section.
-There you'll learn about how to can reach out to the Pulp Community.
+For some human help, you should visit the [Community](site:help/community/) section.
+There you'll learn about how to get involved, reach out to the Pulp Community, and even contribute content like blog posts.
 
 Don't hesitate to contact us!
 
