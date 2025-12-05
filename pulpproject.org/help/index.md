@@ -1,45 +1,24 @@
----
-render_macros: true
----
+# Help
 
-# Overview
+Welcome to the Pulp Project community!
+This section contains general resources and guides to help you in your journey.
 
-:wave: Welcome to the help section!
+## Community
 
-If this is the first time navigating trough these docs, we recommend reading the [Documentation Usage](site:help/more/docs-usage/).
-Understaning the docs will help you find what you need more quickly.
+- **[Get Involved](site:help/community/get-involved/)** - Learn how to connect with the community, join our communication channels, and participate in meetings
+- **[PulpCon](site:help/community/pulpcon/)** - Information about our annual community conference, including past editions and materials
+- **[Publish to our blog](site:help/community/publish-to-blog/)** - Step-by-step guide for contributing blog posts to the Pulp Project blog
 
-For some human help, you should visit the [Community](site:help/community/) section.
-There you'll learn about how to get involved, reach out to the Pulp Community, and even contribute content like blog posts.
+## Stay Connected
+
+- **[Community Forum](https://discourse.pulpproject.org/)** - Ask questions, share experiences, and connect with other users
+- **[Matrix Chat Space](https://matrix.to/#/#pulp:matrix.org)** - Real-time discussions with the community and developers
+- **[YouTube Channel](https://www.youtube.com/PulpProject)** - Demos, recordings, and community discussions
+
+## More Resources
+
+- **[Quick Links](site:help/more/quick-links/)** - Quick access to Pulp components links and versioning info
+- **[Why Pulp?](site:help/more/why-pulp/)** - Learn about Pulp's benefits and use cases
+- **[AI Policy](site:help/more/governance/ai_policy/)** - The project's policy on the use of AI and LLMs
 
 Don't hesitate to contact us!
-
----
-
-## Quick Links
-
-!!! note "About versions"
-
-    The `version` column is the latest on main and it's what we publish.
-
-    You might encounter some unreleased content live, but plugins usually release often.
-    Also, we try to include version information on the docs itself.
-
-{%- for title, kind in [("Core", "Core"), ("Content Plugins", "Content"), ("Deployment", "Deployment"), ("Interaction", "Interaction"), ("Others", "Other")] %}
-
-### {{ title }}
-
-Component | Version | Links | &nbsp; | &nbsp;
---- | --- | --- | --- | ---
-{%- for component in components if component.kind == kind %}
-{{ component.title }} | `{{ component.version }}` | {{ component.links | join(" | ") }}
-{%- endfor %}
-{%- endfor %}
-
-## Changes RSS Feed
-
-Check our recent releases with this [RSS changelog feed](https://himdel.eu/feed/pulp-changes.json).
-
-{% for item in rss_items() %}
-- [{{ item.title }}]({{ item.url }})
-{% endfor %}
