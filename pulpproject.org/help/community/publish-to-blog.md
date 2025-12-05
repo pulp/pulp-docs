@@ -107,7 +107,7 @@ A quick way to do it is run `pulp-docs` in the pulp-docs repository:
 uv run pulp-docs serve --draft
 ```
 
-When you everything looks good, submit your PR and we'll review it!
+When everything looks good, submit your PR and we'll review it!
 
 !!! note "Issues with preview"
 
