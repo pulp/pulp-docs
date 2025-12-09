@@ -15,7 +15,7 @@ Check out the material from previous editions:
 
 | Year | Date | PulpcoreAt |#Talks | Schedule | Playlist |
 |------|------|-----|----|----------|----------|
-| 2025 | Dec 01-03 | `3.94` | 15 | [View Schedule](https://hackmd.io/@pulp/pulpcon_2025_schedule) | Watch Playlist*
+| 2025 | Dec 01-03 | `3.94` | 15 | [View Schedule](https://hackmd.io/@pulp/pulpcon_2025_schedule) | [Watch Playlist](https://www.youtube.com/playlist?list=PLwm8_O6oKSS2A7ghGOMQ6qrOoC9MtC--1)
 | 2024 | Nov 04-06 | `3.67` | 9 | [View Schedule](https://hackmd.io/@pulp/pulpcon_2024_schedule) | [Watch Playlist](https://www.youtube.com/playlist?list=PLwm8_O6oKSS3UCjh9mIwqj3xocWxR5uVL) |
 | 2023 | Nov 06-10 | `3.40` | 20 | [View Schedule](https://hackmd.io/@pulp/pulpcon_2023) | [Watch Playlist](https://www.youtube.com/playlist?list=PLwm8_O6oKSS3ePzHYNH1pDjpZaJtHVT1q) |
 | 2022 | Nov 07-11 | `3.21` | 20 | [View Schedule](https://hackmd.io/@pulp/pulpcon2022_schedule) | [Watch Playlist](https://www.youtube.com/playlist?list=PLwm8_O6oKSS1twE1f6Z4W6UDJ-3IoDQ-8) |
