@@ -30,5 +30,5 @@ repos:
     hooks:
       - id: "typos"
         args: ["--force-exclude"]
-        exclude: "(^tests)|(^pulpproject.org)"
+        exclude: "(^tests)|(^pulpproject.org)|(^brand-assets)"
 ...
