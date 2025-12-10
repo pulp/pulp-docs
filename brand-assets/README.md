@@ -30,19 +30,19 @@ Logo colors in [PMS (Pantone Color Matching System)](https://en.wikipedia.org/wi
 
 ### 25 Words
 
-> Pulp fetches, uploads, organizes, and distributes software packages. For example a Python package. Mirror and mix software repositories, test them, and then go into production.
+> Pulp fetches, uploads, organizes, and distributes software packages (for example, a Python package). Mirror and mix software repositories, test them, and then go into production.
 
 ### 50 Words
 
-> Pulp fetches, uploads, organizes, and distributes software packages. For example a Python or RPM package. Pulp downloads remote packages either immediately, as-needed, or upload your own packages. Then mirror, mix, or organize them. Use Pulp to publish the repository of packages for use by pip, yum/dnf, etc.
+> Pulp fetches, uploads, organizes, and distributes software packages (for example, a Python or RPM package). Pulp downloads remote packages either immediately or on-demand, or you can upload your own packages. Then mirror, mix, or organize them. Use Pulp to publish repositories of packages for use by pip, yum/dnf, etc.
 
 ### 100 Words
 
-> Pulp fetches, uploads, organizes, and distributes software packages. For example a Python or RPM package. Pulp downloads remote packages either immediately, as-needed, or upload your own packages. Then mirror, mix, or organize them. Use Pulp to publish the repository of packages for use by pip, yum/dnf, etc.
+> Pulp fetches, uploads, organizes, and distributes software packages (for example a Python or RPM package). Pulp downloads remote packages either immediately or on-demand, or you can upload your own packages. Then mirror, mix, or organize them. Use Pulp to publish repositories of packages for use by pip, yum/dnf, etc.
 >
-> For system administrators, being able to sync packages to test machines before rolling all updates out to consumers increases stability and confidence. Also storing older versions and rolling back changes is easier.
+> For system administrators, being able to sync packages to test machines before rolling all updates out to consumers increases stability and confidence. Keeping older versions and rolling back changes is also easier.
 >
-> For developers, Pulp can support a continuous integration pipeline that test and versions software against ever-changing dependency stacks.
+> For developers, Pulp can support a continuous integration pipeline that tests and versions software against ever-changing dependency stacks.
 
 ## License
 
