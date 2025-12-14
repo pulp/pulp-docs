@@ -17,8 +17,8 @@
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "python": "3.22.0.dev",
-            "core": "3.93.2"
+            "python": "3.23.0.dev",
+            "core": "3.95.2"
         },
         "x-pulp-domain-enabled": false
     },
@@ -827,6 +827,465 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/python.PythonPackageContentResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/pulp/api/v3/content/python/provenance/": {
+            "get": {
+                "operationId": "content_python_provenance_list",
+                "description": "PackageProvenance represents a PEP 740 provenance object for a Python package.\n\nUse ?minimal=true to get a human readable representation of the provenance.",
+                "summary": "List package provenances",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "name": "limit",
+                        "required": false,
+                        "in": "query",
+                        "description": "Number of results to return per page.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "required": false,
+                        "in": "query",
+                        "description": "The initial index from which to return the results.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "ordering",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "-pk",
+                                    "pk"
+                                ]
+                            }
+                        },
+                        "description": "Ordering\n\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "orphaned_for",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "description": "Minutes Content has been orphaned for. -1 uses ORPHAN_PROTECTION_TIME."
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_href__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_id__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_label_select",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter labels by search string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version_added",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version_removed",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Content: Provenance"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Paginatedpython.PackageProvenanceResponseList"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "operationId": "content_python_provenance_create",
+                "description": "Trigger an asynchronous task to create content,optionally create new repository version.",
+                "summary": "Create a package provenance",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
+                "tags": [
+                    "Content: Provenance"
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/python.PackageProvenance"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/python.PackageProvenance"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{python_package_provenance_href}": {
+            "get": {
+                "operationId": "content_python_provenance_read",
+                "description": "PackageProvenance represents a PEP 740 provenance object for a Python package.\n\nUse ?minimal=true to get a human readable representation of the provenance.",
+                "summary": "Inspect a package provenance",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "path",
+                        "name": "python_package_provenance_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Content: Provenance"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/python.PackageProvenanceResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{python_package_provenance_href}set_label/": {
+            "post": {
+                "operationId": "content_python_provenance_set_label",
+                "description": "Set a single pulp_label on the object to a specific value or null.",
+                "summary": "Set a label",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "path",
+                        "name": "python_package_provenance_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Provenance"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{python_package_provenance_href}unset_label/": {
+            "post": {
+                "operationId": "content_python_provenance_unset_label",
+                "description": "Unset a single pulp_label on the object.",
+                "summary": "Unset a label",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "path",
+                        "name": "python_package_provenance_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Content: Provenance"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UnsetLabel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnsetLabelResponse"
                                 }
                             }
                         },
@@ -5775,6 +6234,96 @@
                 }
             }
         },
+        "/pypi/{path}/integrity/{package}/{version}/{filename}/provenance/": {
+            "get": {
+                "operationId": "pypi_integrity_provenance_read",
+                "description": "Gets the provenance for a package.",
+                "summary": "Get package provenance",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "path",
+                        "name": "filename",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "package",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "version",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Pypi: Provenance"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "No response body"
+                    }
+                }
+            }
+        },
         "/pypi/{path}/legacy/": {
             "post": {
                 "operationId": "pypi_legacy_create",
@@ -6204,6 +6753,28 @@
                 "type": "string",
                 "description": "* `windows` - windows\n* `macos` - macos\n* `freebsd` - freebsd\n* `linux` - linux"
             },
+            "FiletypeEnum": {
+                "enum": [
+                    "bdist_wheel",
+                    "sdist"
+                ],
+                "type": "string",
+                "description": "* `bdist_wheel` - bdist_wheel\n* `sdist` - sdist"
+            },
+            "MetadataVersionEnum": {
+                "enum": [
+                    "1.0",
+                    "1.1",
+                    "1.2",
+                    "2.0",
+                    "2.1",
+                    "2.2",
+                    "2.3",
+                    "2.4"
+                ],
+                "type": "string",
+                "description": "* `1.0` - 1.0\n* `1.1` - 1.1\n* `1.2` - 1.2\n* `2.0` - 2.0\n* `2.1` - 2.1\n* `2.2` - 2.2\n* `2.3` - 2.3\n* `2.4` - 2.4"
+            },
             "MyPermissionsResponse": {
                 "type": "object",
                 "properties": {
@@ -6348,6 +6919,35 @@
                         "minLength": 64,
                         "description": "SHA256 of package to validate upload integrity.",
                         "maxLength": 64
+                    },
+                    "protocol_version": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ProtocolVersionEnum"
+                            }
+                        ],
+                        "default": 1,
+                        "description": "Protocol version to use for the upload. Only version 1 is supported.\n\n* `1` - 1"
+                    },
+                    "filetype": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/FiletypeEnum"
+                            }
+                        ],
+                        "description": "Type of artifact to upload.\n\n* `bdist_wheel` - bdist_wheel\n* `sdist` - sdist"
+                    },
+                    "metadata_version": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/MetadataVersionEnum"
+                            }
+                        ],
+                        "description": "Metadata version of the uploaded package.\n\n* `1.0` - 1.0\n* `1.1` - 1.1\n* `1.2` - 1.2\n* `2.0` - 2.0\n* `2.1` - 2.1\n* `2.2` - 2.2\n* `2.3` - 2.3\n* `2.4` - 2.4"
+                    },
+                    "attestations": {
+                        "writeOnly": true,
+                        "description": "A JSON list containing attestations for the package."
                     }
                 },
                 "required": [
@@ -6409,6 +7009,37 @@
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/RepositoryVersionResponse"
+                        }
+                    }
+                }
+            },
+            "Paginatedpython.PackageProvenanceResponseList": {
+                "type": "object",
+                "required": [
+                    "count",
+                    "results"
+                ],
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "next": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=400&limit=100"
+                    },
+                    "previous": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=200&limit=100"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/python.PackageProvenanceResponse"
                         }
                     }
                 }
@@ -6854,6 +7485,11 @@
                             "$ref": "#/components/schemas/ExcludePlatformsEnum"
                         },
                         "description": "List of platforms to exclude syncing Python packages for. Possible valuesinclude: windows, macos, freebsd, and linux."
+                    },
+                    "provenance": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether to sync available provenances for Python packages."
                     }
                 }
             },
@@ -6914,6 +7550,13 @@
                 ],
                 "type": "string",
                 "description": "* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
+            },
+            "ProtocolVersionEnum": {
+                "enum": [
+                    1
+                ],
+                "type": "integer",
+                "description": "* `1` - 1"
             },
             "PythonBanderRemote": {
                 "type": "object",
@@ -7086,6 +7729,10 @@
                         ],
                         "minLength": 1,
                         "description": "The SHA256 digest of the package's METADATA file."
+                    },
+                    "attestations": {
+                        "writeOnly": true,
+                        "description": "A JSON list containing attestations for the package."
                     }
                 }
             },
@@ -7294,6 +7941,118 @@
                 },
                 "required": [
                     "key"
+                ]
+            },
+            "python.PackageProvenance": {
+                "type": "object",
+                "description": "A Serializer for PackageProvenance.",
+                "properties": {
+                    "repository": {
+                        "type": "string",
+                        "format": "uri",
+                        "writeOnly": true,
+                        "description": "A URI of a repository the new content unit should be associated with."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "file": {
+                        "type": "string",
+                        "format": "binary",
+                        "writeOnly": true,
+                        "description": "An uploaded file that may be turned into the content unit."
+                    },
+                    "upload": {
+                        "type": "string",
+                        "format": "uri",
+                        "writeOnly": true,
+                        "description": "An uncommitted upload that may be turned into the content unit."
+                    },
+                    "file_url": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "minLength": 1,
+                        "description": "A url that Pulp can download and turn into the content unit."
+                    },
+                    "package": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "The package that the provenance is for."
+                    },
+                    "verify": {
+                        "type": "boolean",
+                        "writeOnly": true,
+                        "default": true,
+                        "description": "Verify each attestation in the provenance."
+                    }
+                },
+                "required": [
+                    "package"
+                ]
+            },
+            "python.PackageProvenanceResponse": {
+                "type": "object",
+                "description": "A Serializer for PackageProvenance.",
+                "properties": {
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "package": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "The package that the provenance is for."
+                    },
+                    "provenance": {
+                        "readOnly": true
+                    },
+                    "sha256": {
+                        "type": "string",
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "package"
                 ]
             },
             "python.PythonDistribution": {
@@ -7636,6 +8395,10 @@
                         ],
                         "minLength": 1,
                         "description": "The SHA256 digest of the package's METADATA file."
+                    },
+                    "attestations": {
+                        "writeOnly": true,
+                        "description": "A JSON list containing attestations for the package."
                     }
                 },
                 "required": [
@@ -7826,6 +8589,11 @@
                             "null"
                         ],
                         "description": "The SHA256 digest of the package's METADATA file."
+                    },
+                    "provenance": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The created provenance object on upload."
                     }
                 }
             },
@@ -8101,6 +8869,11 @@
                             "$ref": "#/components/schemas/ExcludePlatformsEnum"
                         },
                         "description": "List of platforms to exclude syncing Python packages for. Possible valuesinclude: windows, macos, freebsd, and linux."
+                    },
+                    "provenance": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether to sync available provenances for Python packages."
                     }
                 },
                 "required": [
@@ -8309,6 +9082,11 @@
                             "$ref": "#/components/schemas/ExcludePlatformsEnum"
                         },
                         "description": "List of platforms to exclude syncing Python packages for. Possible valuesinclude: windows, macos, freebsd, and linux."
+                    },
+                    "provenance": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether to sync available provenances for Python packages."
                     }
                 },
                 "required": [

@@ -17,8 +17,8 @@
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "file": "3.94.0.dev",
-            "core": "3.94.0.dev"
+            "file": "3.96.0.dev",
+            "core": "3.96.0.dev"
         },
         "x-pulp-domain-enabled": false
     },
@@ -1424,6 +1424,64 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/UnsetLabelResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/pulp/api/v3/content/file/files/upload/": {
+            "post": {
+                "operationId": "content_file_files_upload",
+                "description": "Synchronously upload a File.",
+                "summary": "Upload a File synchronously.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
+                "tags": [
+                    "Content: Files"
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FileContentUpload"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FileContentUpload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FileContentUploadResponse"
                                 }
                             }
                         },
@@ -6183,6 +6241,138 @@
                     "added",
                     "present",
                     "removed"
+                ]
+            },
+            "FileContentUpload": {
+                "type": "object",
+                "description": "Serializer for File Content.",
+                "properties": {
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "artifact": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "Artifact file representing the physical content"
+                    },
+                    "relative_path": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "Path where the artifact is located relative to distributions base_path"
+                    },
+                    "file": {
+                        "type": "string",
+                        "format": "binary",
+                        "writeOnly": true,
+                        "description": "An uploaded file that may be turned into the content unit."
+                    },
+                    "upload": {
+                        "type": "string",
+                        "format": "uri",
+                        "writeOnly": true,
+                        "description": "An uncommitted upload that may be turned into the content unit."
+                    },
+                    "file_url": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "minLength": 1,
+                        "description": "A url that Pulp can download and turn into the content unit."
+                    }
+                },
+                "required": [
+                    "relative_path"
+                ]
+            },
+            "FileContentUploadResponse": {
+                "type": "object",
+                "description": "Serializer for File Content.",
+                "properties": {
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "artifact": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "Artifact file representing the physical content"
+                    },
+                    "relative_path": {
+                        "type": "string",
+                        "description": "Path where the artifact is located relative to distributions base_path"
+                    },
+                    "md5": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The MD5 checksum if available."
+                    },
+                    "sha1": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The SHA-1 checksum if available."
+                    },
+                    "sha224": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The SHA-224 checksum if available."
+                    },
+                    "sha256": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The SHA-256 checksum if available."
+                    },
+                    "sha384": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The SHA-384 checksum if available."
+                    },
+                    "sha512": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The SHA-512 checksum if available."
+                    }
+                },
+                "required": [
+                    "relative_path"
                 ]
             },
             "MyPermissionsResponse": {
