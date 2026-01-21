@@ -8,20 +8,23 @@ You can find all information regarding the Pulp community's information practice
 
 ## The Information We Collect
 
-This Privacy Statement applies to all information collected by or submitted to the Pulp community ecosystem, including personal data. “Personal data” is data that can be used to identify an individual.
+This Privacy Statement applies to all information collected by or submitted to the Pulp community ecosystem, including personal data.
+“Personal data” is data that can be used to identify an individual.
 
 Examples when  personal data is collected within the Pulp community include but are not limited to:
-   * you create an account on our forum
-   * you sign up to our mailing lists
-   * you contribute code
-   * you participate in surveys and evaluations
-   * you participate in giveaways
-   * you submit questions or comments to us
+
+  - you create an account on our forum
+  - you sign up to our mailing lists
+  - you contribute code
+  - you participate in surveys and evaluations
+  - you participate in giveaways
+  - you submit questions or comments to us
 
 
 ## Our Website
 
-Our website uses Google Analytics but we have [anonymized](https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApi_gat#_gat._anonymizeIp) IP addresses. We have active plans to move from Google Analytics to an open-source alternative in the near future.
+Our website uses Google Analytics but we have [anonymized](https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApi_gat#_gat._anonymizeIp) IP addresses.
+We have active plans to move from Google Analytics to an open-source alternative in the near future.
 
 We do not use any linked Google product, e.g. AdWords.
 Google Analytics data is deleted after 26 months.
@@ -40,9 +43,13 @@ The website embeds videos from [YouTube](https://support.google.com/youtube/answ
 
 ## Our Codebase
 
-The Pulp community uses GitHub to manage the code that comprises the Pulp project. The Pulp community also uses GitHub for issue reporting and tracking. Refer to [GitHub’s privacy policy](https://docs.github.com/en/site-policy/privacy-policies/global-privacy-practices) for details on how GitHub handles the data you post there.
+The Pulp community uses GitHub to manage the code that comprises the Pulp project.
+The Pulp community also uses GitHub for issue reporting and tracking.
+Refer to [GitHub’s privacy policy](https://docs.github.com/en/site-policy/privacy-policies/global-privacy-practices) for details on how GitHub handles the data you post there.
 
-Commit messages can contain names and email addresses. You are free to use pseudonymous data for commit messages. We do prefer a working contact mail in case of needing to contact contributors to the codebase, but it is not mandatory.
+Commit messages can contain names and email addresses.
+You are free to use pseudonymous data for commit messages.
+We do prefer a working contact mail in case of needing to contact contributors to the codebase, but it is not mandatory.
 
 **Legal basis for this data usage: Legitimate interest, consent**
 
@@ -51,11 +58,16 @@ Commit messages can contain names and email addresses. You are free to use pseud
 
 The Pulp community centralizes all asynchronous communication on a self-hosted Discourse server.
 
-When signing up for a Discourse account, you provide a name and email address - and in addition we store the IP address of your most recent connection. The email address is only used to send you updates to your forum topics, personal messages from other users, and digest summaries. You have full control over the emails sent from your Discourse account preferences. The forum also uses cookies to store your session.
+When signing up for a Discourse account, you provide a name and email address - and in addition we store the IP address of your most recent connection.
+The email address is only used to send you updates to your forum topics, personal messages from other users, and digest summaries.
+You have full control over the emails sent from your Discourse account preferences.
+The forum also uses cookies to store your session.
 
-Within Discourse, you can also to provide your name, location, profile picture and further publicly identifiable information in your Discourse profile, but this is opt-in, optional, and at your discretion. We have no requirement that you use your real name.
+Within Discourse, you can also to provide your name, location, profile picture and further publicly identifiable information in your Discourse profile, but this is opt-in, optional, and at your discretion.
+We have no requirement that you use your real name.
 
-We also use the IP addresses and public post data to provide aggregated statistics about the forum community, such as posts-per-month, user engagement, etc. We also use the IP addresses to help identify sock puppeting and spam accounts.
+We also use the IP addresses and public post data to provide aggregated statistics about the forum community, such as posts-per-month, user engagement, etc.
+We also use the IP addresses to help identify sock puppeting and spam accounts.
 
 Please refer to [Discourse's privacy policy](https://discourse.pulpproject.org/privacy) for further information.
 
@@ -65,17 +77,26 @@ You are free to use a VPN, Tor, or other IP / UserAgent masking service without 
 
 ## Pulp Community Matrix
 
-We conduct all Pulp community synchronous communication via Matrix. We also have Libera.Chat IRC bridges from our Matrix room. If you use Libera.Chat IRC, you will need to register your IRC nick to be able to post messages in our channels or to direct message individuals. For more information see, [Matrix's privacy policy](https://matrix.org/legal/privacy-notice) and the [libera.chat's privacy policy](https://libera.chat/privacy/).
+We conduct all Pulp community synchronous communication via Matrix.
+We also have Libera.Chat IRC bridges from our Matrix room.
+If you use Libera.Chat IRC, you will need to register your IRC nick to be able to post messages in our channels or to direct message individuals.
+For more information see, [Matrix's privacy policy](https://matrix.org/legal/privacy-notice) and the [libera.chat's privacy policy](https://libera.chat/privacy/).
 
 ## Third party links
 
-The Pulp community does not control the information collection of sites that can be reached through links shared throughout the communtiy. If you have questions about the data collection procedures of linked sites, please contact those sites directly.
+The Pulp community does not control the information collection of sites that can be reached through links shared throughout the communtiy.
+If you have questions about the data collection procedures of linked sites, please contact those sites directly.
 
 ## Surveys & Forms
 
-The Pulp community runs a survey each year. Completing the survey is opt-in, and providing a contact email address in the survey is optional. Such addresses are stored until the survey analysis is complete, and then deleted from the raw survey data before publication. The survey data is used to gain understanding of the community.
+The Pulp community runs a survey each year.
+Completing the survey is opt-in, and providing a contact email address in the survey is optional.
+Such addresses are stored until the survey analysis is complete, and then deleted from the raw survey data before publication.
+The survey data is used to gain understanding of the community.
 
-We also use forms to collect information to distribute SWAG to community contributors. This includes all the information relevant for distributing SWAG via a courier, including name, address, and phone number, clothing size etc. All of this is opt-in, optional, and your personal information is deleted from the form after distribution.
+We also use forms to collect information to distribute SWAG to community contributors.
+This includes all the information relevant for distributing SWAG via a courier, including name, address, and phone number, clothing size etc.
+All of this is opt-in, optional, and your personal information is deleted from the form after distribution.
 
 
 **Legal basis for this data usage: Legitimate interest, consent**
@@ -83,13 +104,15 @@ We also use forms to collect information to distribute SWAG to community contrib
 
 ## Your choices
 
-You can choose not to provide us with personal data
+You can choose not to provide us with personal data.
 
-Using a VPN, Tor, or other IP / UserAgent masking service will not affect your use of the project website, as it is entirely static. For Discourse, we do not mandate use of real names, and using pseudonyms will not affect the services.
+Using a VPN, Tor, or other IP / UserAgent masking service will not affect your use of the project website, as it is entirely static.
+For Discourse, we do not mandate use of real names, and using pseudonyms will not affect the services.
 
 ## Your accounts on our services
 
-Your Discourse accounts contain options to control what emails are sent to you. 3rd party services such as GitHub retain their own policies and privacy options.
+Your Discourse accounts contain options to control what emails are sent to you.
+3rd party services such as GitHub retain their own policies and privacy options.
 
 ## Your rights
 
@@ -103,22 +126,24 @@ Where the EU General Data Protection Regulation 2016/679 (“GDPR”) applies to
 * The right to receive your personal data in a usable electronic format and transmit it to a third party (also known as the right of data portability)
 * The right to lodge a complaint with your local data protection authority
 
-If you would like to exercise any of these rights, you may do so by contacting the Pulp community at privacy@pulpproject.org. Please understand, however, the rights enumerated above are not absolute in all cases, especially in regards to the right to erase your data:
+If you would like to exercise any of these rights, you may do so by contacting the Pulp community at privacy@pulpproject.org.
+Please understand, however, the rights enumerated above are not absolute in all cases, especially in regards to the right to erase your data:
 
-**Git commits will not be rewritten**
+**Git commits will not be rewritten.**
+
 Contributing to Pulp codebase is opt-in.
 Providing personally identifying information in commit messages is a further opt-in.
 
-The Pulp community has a legitimate interest in contacting contributors and showing IP provenance
+The Pulp community has a legitimate interest in contacting contributors and showing IP provenance.
 
-**Forum posts will not be removed**
+**Forum posts will not be removed.**
 
 Discourse data which is public (i.e forum posts, bug comments etc) will be pseudonymised.
 
-Your account name, handle, and email address will be scrambled, removing your personal data from the site
+Your account name, handle, and email address will be scrambled, removing your personal data from the site.
 
-Posts are not removed, as we have a legitimate interest in retaining the history of discussions about our project
+Posts are not removed, as we have a legitimate interest in retaining the history of discussions about our project.
 
 ## How to Contact Us
 
-If you have any questions about any of these practices or the Pulp project’s use of your personal information, contact us by email at privacy@pulpproject.org
+If you have any questions about any of these practices or the Pulp project’s use of your personal information, contact us by email at privacy@pulpproject.org .
