@@ -153,6 +153,11 @@ plugins:
           path: "pulp-operator"
           git_url: "https://github.com/pulp/pulp-operator"
           kind: "Deployment"
+        - title: "Hugging Face"
+          path: "pulp_hugging_face"
+          git_url: "https://github.com/pulp/pulp_hugging_face"
+          kind: "Content"
+          rest_api: "hugging_face"
   - search
   - site-urls
   - blog:
