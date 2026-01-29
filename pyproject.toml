@@ -25,6 +25,7 @@ readme = "README.md"
 
 [project.scripts]
 pulp-docs = "pulp_docs.cli:main"
+linkchecker = "linkchecker.cli:main"
 
 [project.entry-points."mkdocs.plugins"]
 PulpDocs = "pulp_docs.plugin:PulpDocsPlugin"
