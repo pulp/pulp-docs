@@ -10,15 +10,15 @@
             "url": "https://pulpproject.org"
         },
         "license": {
-            "name": "GPLv2+",
-            "url": "https://raw.githubusercontent.com/pulp/pulpcore/master/LICENSE"
+            "name": "GNU General Public License v2.0 or later",
+            "identifier": "GPL-2.0-or-later"
         },
         "x-logo": {
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "python": "3.23.0.dev",
-            "core": "3.95.2"
+            "python": "3.25.0.dev",
+            "core": "3.102.0"
         },
         "x-pulp-domain-enabled": false
     },
@@ -879,11 +879,29 @@
                                 "type": "string",
                                 "enum": [
                                     "-pk",
-                                    "pk"
+                                    "-provenance",
+                                    "-pulp_created",
+                                    "-pulp_id",
+                                    "-pulp_labels",
+                                    "-pulp_last_updated",
+                                    "-pulp_type",
+                                    "-sha256",
+                                    "-timestamp_of_interest",
+                                    "-upstream_id",
+                                    "pk",
+                                    "provenance",
+                                    "pulp_created",
+                                    "pulp_id",
+                                    "pulp_labels",
+                                    "pulp_last_updated",
+                                    "pulp_type",
+                                    "sha256",
+                                    "timestamp_of_interest",
+                                    "upstream_id"
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `provenance` - Provenance\n* `-provenance` - Provenance (descending)\n* `sha256` - Sha256\n* `-sha256` - Sha256 (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -894,6 +912,29 @@
                             "type": "number"
                         },
                         "description": "Minutes Content has been orphaned for. -1 uses ORPHAN_PROTECTION_TIME."
+                    },
+                    {
+                        "in": "query",
+                        "name": "package",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "description": "Filter results where package matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "package__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        },
+                        "description": "Filter results where package is in a comma-separated list of values",
+                        "explode": false,
+                        "style": "form"
                     },
                     {
                         "in": "query",
@@ -974,6 +1015,27 @@
                             "type": "string"
                         },
                         "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sha256",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where sha256 matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sha256__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Filter results where sha256 is in a comma-separated list of values",
+                        "explode": false,
+                        "style": "form"
                     },
                     {
                         "in": "query",

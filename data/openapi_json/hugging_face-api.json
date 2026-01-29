@@ -17,17 +17,17 @@
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "npm": "0.6.0.dev",
+            "hugging_face": "0.4.0.dev",
             "core": "3.102.0"
         },
         "x-pulp-domain-enabled": false
     },
     "paths": {
-        "/pulp/api/v3/content/npm/packages/": {
+        "/pulp/api/v3/content/hugging_face/hugging-face/": {
             "get": {
-                "operationId": "content_npm_packages_list",
-                "description": "A ViewSet for Package.\n\nDefine endpoint name which will appear in the API endpoint for this content type.\nFor example::\n    http://pulp.example.com/pulp/api/v3/content/npm/units/\n\nAlso specify queryset and serializer for Package.",
-                "summary": "List packages",
+                "operationId": "content_hugging_face_hugging_face_list",
+                "description": "A ViewSet for HuggingFaceContent.\n\nDefine endpoint name which will appear in the API endpoint for this content type.\nFor example::\n    https://pulp.example.com/pulp/api/v3/content/hugging-face/units/\n\nAlso specify queryset and serializer for HuggingFaceContent.",
+                "summary": "List hugging face contents",
                 "parameters": [
                     {
                         "in": "header",
@@ -50,27 +50,6 @@
                         }
                     },
                     {
-                        "in": "query",
-                        "name": "name",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "description": "Filter results where name matches value"
-                    },
-                    {
-                        "in": "query",
-                        "name": "name__in",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "description": "Filter results where name is in a comma-separated list of values",
-                        "explode": false,
-                        "style": "form"
-                    },
-                    {
                         "name": "offset",
                         "required": false,
                         "in": "query",
@@ -87,30 +66,40 @@
                             "items": {
                                 "type": "string",
                                 "enum": [
-                                    "-name",
+                                    "-etag",
+                                    "-last_modified",
                                     "-pk",
                                     "-pulp_created",
                                     "-pulp_id",
                                     "-pulp_labels",
                                     "-pulp_last_updated",
                                     "-pulp_type",
+                                    "-relative_path",
+                                    "-repo_id",
+                                    "-repo_type",
+                                    "-revision",
+                                    "-size",
                                     "-timestamp_of_interest",
                                     "-upstream_id",
-                                    "-version",
-                                    "name",
+                                    "etag",
+                                    "last_modified",
                                     "pk",
                                     "pulp_created",
                                     "pulp_id",
                                     "pulp_labels",
                                     "pulp_last_updated",
                                     "pulp_type",
+                                    "relative_path",
+                                    "repo_id",
+                                    "repo_type",
+                                    "revision",
+                                    "size",
                                     "timestamp_of_interest",
-                                    "upstream_id",
-                                    "version"
+                                    "upstream_id"
                                 ]
                             }
                         },
-                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `name` - Name\n* `-name` - Name (descending)\n* `version` - Version\n* `-version` - Version (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `upstream_id` - Upstream id\n* `-upstream_id` - Upstream id (descending)\n* `pulp_labels` - Pulp labels\n* `-pulp_labels` - Pulp labels (descending)\n* `timestamp_of_interest` - Timestamp of interest\n* `-timestamp_of_interest` - Timestamp of interest (descending)\n* `repo_id` - Repo id\n* `-repo_id` - Repo id (descending)\n* `repo_type` - Repo type\n* `-repo_type` - Repo type (descending)\n* `relative_path` - Relative path\n* `-relative_path` - Relative path (descending)\n* `revision` - Revision\n* `-revision` - Revision (descending)\n* `size` - Size\n* `-size` - Size (descending)\n* `etag` - Etag\n* `-etag` - Etag (descending)\n* `last_modified` - Last modified\n* `-last_modified` - Last modified (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
                         "explode": false,
                         "style": "form"
                     },
@@ -180,6 +169,35 @@
                     },
                     {
                         "in": "query",
+                        "name": "relative_path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where relative_path matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repo_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where repo_id matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repo_type",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "datasets",
+                                "models",
+                                "spaces"
+                            ]
+                        },
+                        "description": "Filter results where repo_type matches value\n\n* `models` - Models\n* `datasets` - Datasets\n* `spaces` - Spaces"
+                    },
+                    {
+                        "in": "query",
                         "name": "repository_version",
                         "schema": {
                             "type": "string"
@@ -204,6 +222,14 @@
                     },
                     {
                         "in": "query",
+                        "name": "revision",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results where revision matches value"
+                    },
+                    {
+                        "in": "query",
                         "name": "fields",
                         "schema": {
                             "type": "array",
@@ -226,7 +252,7 @@
                     }
                 ],
                 "tags": [
-                    "Content: Packages"
+                    "Content: Hugging-Face"
                 ],
                 "security": [
                     {
@@ -241,7 +267,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Paginatednpm.PackageResponseList"
+                                    "$ref": "#/components/schemas/Paginatedhugging_face.HuggingFaceContentResponseList"
                                 }
                             }
                         },
@@ -250,9 +276,9 @@
                 }
             },
             "post": {
-                "operationId": "content_npm_packages_create",
-                "description": "Perform bookkeeping when saving Content.\n\n\"Artifacts\" need to be popped off and saved independently, as they are not actually part\nof the Content model.",
-                "summary": "Create a package",
+                "operationId": "content_hugging_face_hugging_face_create",
+                "description": "Perform bookkeeping when saving Content.\n\n\"Artifacts\" need to be popped off and saved indpendently, as they are not actually part\nof the Content model.",
+                "summary": "Create a hugging face content",
                 "parameters": [
                     {
                         "in": "header",
@@ -267,18 +293,23 @@
                     }
                 ],
                 "tags": [
-                    "Content: Packages"
+                    "Content: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
-                        "multipart/form-data": {
+                        "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.Package"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceContent"
                             }
                         },
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.Package"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceContent"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceContent"
                             }
                         }
                     },
@@ -297,7 +328,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/npm.PackageResponse"
+                                    "$ref": "#/components/schemas/hugging_face.HuggingFaceContentResponse"
                                 }
                             }
                         },
@@ -306,11 +337,11 @@
                 }
             }
         },
-        "{npm_package_href}": {
+        "{hugging_face_hugging_face_content_href}": {
             "get": {
-                "operationId": "content_npm_packages_read",
-                "description": "A ViewSet for Package.\n\nDefine endpoint name which will appear in the API endpoint for this content type.\nFor example::\n    http://pulp.example.com/pulp/api/v3/content/npm/units/\n\nAlso specify queryset and serializer for Package.",
-                "summary": "Inspect a package",
+                "operationId": "content_hugging_face_hugging_face_read",
+                "description": "A ViewSet for HuggingFaceContent.\n\nDefine endpoint name which will appear in the API endpoint for this content type.\nFor example::\n    https://pulp.example.com/pulp/api/v3/content/hugging-face/units/\n\nAlso specify queryset and serializer for HuggingFaceContent.",
+                "summary": "Inspect a hugging face content",
                 "parameters": [
                     {
                         "in": "header",
@@ -325,7 +356,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_package_href",
+                        "name": "hugging_face_hugging_face_content_href",
                         "schema": {
                             "type": "string"
                         },
@@ -355,7 +386,7 @@
                     }
                 ],
                 "tags": [
-                    "Content: Packages"
+                    "Content: Hugging-Face"
                 ],
                 "security": [
                     {
@@ -370,7 +401,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/npm.PackageResponse"
+                                    "$ref": "#/components/schemas/hugging_face.HuggingFaceContentResponse"
                                 }
                             }
                         },
@@ -379,9 +410,9 @@
                 }
             }
         },
-        "{npm_package_href}set_label/": {
+        "{hugging_face_hugging_face_content_href}set_label/": {
             "post": {
-                "operationId": "content_npm_packages_set_label",
+                "operationId": "content_hugging_face_hugging_face_set_label",
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
@@ -398,7 +429,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_package_href",
+                        "name": "hugging_face_hugging_face_content_href",
                         "schema": {
                             "type": "string"
                         },
@@ -406,7 +437,7 @@
                     }
                 ],
                 "tags": [
-                    "Content: Packages"
+                    "Content: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
@@ -450,9 +481,9 @@
                 }
             }
         },
-        "{npm_package_href}unset_label/": {
+        "{hugging_face_hugging_face_content_href}unset_label/": {
             "post": {
-                "operationId": "content_npm_packages_unset_label",
+                "operationId": "content_hugging_face_hugging_face_unset_label",
                 "description": "Unset a single pulp_label on the object.",
                 "summary": "Unset a label",
                 "parameters": [
@@ -469,7 +500,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_package_href",
+                        "name": "hugging_face_hugging_face_content_href",
                         "schema": {
                             "type": "string"
                         },
@@ -477,7 +508,7 @@
                     }
                 ],
                 "tags": [
-                    "Content: Packages"
+                    "Content: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
@@ -521,11 +552,11 @@
                 }
             }
         },
-        "/pulp/api/v3/distributions/npm/npm/": {
+        "/pulp/api/v3/distributions/hugging_face/hugging-face/": {
             "get": {
-                "operationId": "distributions_npm_npm_list",
-                "description": "ViewSet for NPM Distributions.",
-                "summary": "List npm distributions",
+                "operationId": "distributions_hugging_face_hugging_face_list",
+                "description": "A ViewSet for HuggingFaceDistribution.\n\nSimilar to the HuggingFaceContentViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
+                "summary": "List hugging face distributions",
                 "parameters": [
                     {
                         "in": "header",
@@ -824,7 +855,7 @@
                     }
                 ],
                 "tags": [
-                    "Distributions: Npm"
+                    "Distributions: Hugging-Face"
                 ],
                 "security": [
                     {
@@ -839,7 +870,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Paginatednpm.NpmDistributionResponseList"
+                                    "$ref": "#/components/schemas/Paginatedhugging_face.HuggingFaceDistributionResponseList"
                                 }
                             }
                         },
@@ -848,9 +879,9 @@
                 }
             },
             "post": {
-                "operationId": "distributions_npm_npm_create",
+                "operationId": "distributions_hugging_face_hugging_face_create",
                 "description": "Trigger an asynchronous create task",
-                "summary": "Create a npm distribution",
+                "summary": "Create a hugging face distribution",
                 "parameters": [
                     {
                         "in": "header",
@@ -865,23 +896,23 @@
                     }
                 ],
                 "tags": [
-                    "Distributions: Npm"
+                    "Distributions: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmDistribution"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceDistribution"
                             }
                         },
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmDistribution"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceDistribution"
                             }
                         },
                         "multipart/form-data": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmDistribution"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceDistribution"
                             }
                         }
                     },
@@ -909,11 +940,11 @@
                 }
             }
         },
-        "{npm_npm_distribution_href}": {
+        "{hugging_face_hugging_face_distribution_href}": {
             "get": {
-                "operationId": "distributions_npm_npm_read",
-                "description": "ViewSet for NPM Distributions.",
-                "summary": "Inspect a npm distribution",
+                "operationId": "distributions_hugging_face_hugging_face_read",
+                "description": "A ViewSet for HuggingFaceDistribution.\n\nSimilar to the HuggingFaceContentViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
+                "summary": "Inspect a hugging face distribution",
                 "parameters": [
                     {
                         "in": "header",
@@ -928,7 +959,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_distribution_href",
+                        "name": "hugging_face_hugging_face_distribution_href",
                         "schema": {
                             "type": "string"
                         },
@@ -958,7 +989,7 @@
                     }
                 ],
                 "tags": [
-                    "Distributions: Npm"
+                    "Distributions: Hugging-Face"
                 ],
                 "security": [
                     {
@@ -973,7 +1004,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/npm.NpmDistributionResponse"
+                                    "$ref": "#/components/schemas/hugging_face.HuggingFaceDistributionResponse"
                                 }
                             }
                         },
@@ -982,9 +1013,9 @@
                 }
             },
             "put": {
-                "operationId": "distributions_npm_npm_update",
+                "operationId": "distributions_hugging_face_hugging_face_update",
                 "description": "Update the entity and trigger an asynchronous task if necessary",
-                "summary": "Update a npm distribution",
+                "summary": "Update a hugging face distribution",
                 "parameters": [
                     {
                         "in": "header",
@@ -999,7 +1030,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_distribution_href",
+                        "name": "hugging_face_hugging_face_distribution_href",
                         "schema": {
                             "type": "string"
                         },
@@ -1007,23 +1038,23 @@
                     }
                 ],
                 "tags": [
-                    "Distributions: Npm"
+                    "Distributions: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmDistribution"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceDistribution"
                             }
                         },
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmDistribution"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceDistribution"
                             }
                         },
                         "multipart/form-data": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmDistribution"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceDistribution"
                             }
                         }
                     },
@@ -1042,7 +1073,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/npm.NpmDistributionResponse"
+                                    "$ref": "#/components/schemas/hugging_face.HuggingFaceDistributionResponse"
                                 }
                             }
                         },
@@ -1061,9 +1092,9 @@
                 }
             },
             "patch": {
-                "operationId": "distributions_npm_npm_partial_update",
+                "operationId": "distributions_hugging_face_hugging_face_partial_update",
                 "description": "Update the entity partially and trigger an asynchronous task if necessary",
-                "summary": "Update a npm distribution",
+                "summary": "Update a hugging face distribution",
                 "parameters": [
                     {
                         "in": "header",
@@ -1078,7 +1109,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_distribution_href",
+                        "name": "hugging_face_hugging_face_distribution_href",
                         "schema": {
                             "type": "string"
                         },
@@ -1086,23 +1117,23 @@
                     }
                 ],
                 "tags": [
-                    "Distributions: Npm"
+                    "Distributions: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Patchednpm.NpmDistribution"
+                                "$ref": "#/components/schemas/Patchedhugging_face.HuggingFaceDistribution"
                             }
                         },
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/Patchednpm.NpmDistribution"
+                                "$ref": "#/components/schemas/Patchedhugging_face.HuggingFaceDistribution"
                             }
                         },
                         "multipart/form-data": {
                             "schema": {
-                                "$ref": "#/components/schemas/Patchednpm.NpmDistribution"
+                                "$ref": "#/components/schemas/Patchedhugging_face.HuggingFaceDistribution"
                             }
                         }
                     },
@@ -1121,7 +1152,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/npm.NpmDistributionResponse"
+                                    "$ref": "#/components/schemas/hugging_face.HuggingFaceDistributionResponse"
                                 }
                             }
                         },
@@ -1140,9 +1171,9 @@
                 }
             },
             "delete": {
-                "operationId": "distributions_npm_npm_delete",
+                "operationId": "distributions_hugging_face_hugging_face_delete",
                 "description": "Trigger an asynchronous delete task",
-                "summary": "Delete a npm distribution",
+                "summary": "Delete a hugging face distribution",
                 "parameters": [
                     {
                         "in": "header",
@@ -1157,7 +1188,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_distribution_href",
+                        "name": "hugging_face_hugging_face_distribution_href",
                         "schema": {
                             "type": "string"
                         },
@@ -1165,7 +1196,7 @@
                     }
                 ],
                 "tags": [
-                    "Distributions: Npm"
+                    "Distributions: Hugging-Face"
                 ],
                 "security": [
                     {
@@ -1189,9 +1220,9 @@
                 }
             }
         },
-        "{npm_npm_distribution_href}set_label/": {
+        "{hugging_face_hugging_face_distribution_href}set_label/": {
             "post": {
-                "operationId": "distributions_npm_npm_set_label",
+                "operationId": "distributions_hugging_face_hugging_face_set_label",
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
@@ -1208,7 +1239,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_distribution_href",
+                        "name": "hugging_face_hugging_face_distribution_href",
                         "schema": {
                             "type": "string"
                         },
@@ -1216,7 +1247,7 @@
                     }
                 ],
                 "tags": [
-                    "Distributions: Npm"
+                    "Distributions: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
@@ -1260,9 +1291,9 @@
                 }
             }
         },
-        "{npm_npm_distribution_href}unset_label/": {
+        "{hugging_face_hugging_face_distribution_href}unset_label/": {
             "post": {
-                "operationId": "distributions_npm_npm_unset_label",
+                "operationId": "distributions_hugging_face_hugging_face_unset_label",
                 "description": "Unset a single pulp_label on the object.",
                 "summary": "Unset a label",
                 "parameters": [
@@ -1279,7 +1310,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_distribution_href",
+                        "name": "hugging_face_hugging_face_distribution_href",
                         "schema": {
                             "type": "string"
                         },
@@ -1287,7 +1318,7 @@
                     }
                 ],
                 "tags": [
-                    "Distributions: Npm"
+                    "Distributions: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
@@ -1331,11 +1362,462 @@
                 }
             }
         },
-        "/pulp/api/v3/remotes/npm/npm/": {
+        "/pulp/api/v3/publications/hugging_face/hugging-face/": {
             "get": {
-                "operationId": "remotes_npm_npm_list",
-                "description": "A ViewSet for NpmRemote.\n\nSimilar to the PackageViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
-                "summary": "List npm remotes",
+                "operationId": "publications_hugging_face_hugging_face_list",
+                "description": "A ViewSet for HuggingFacePublication.\n\nSimilar to the HuggingFaceContentViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
+                "summary": "List hugging face publications",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "query",
+                        "name": "checkpoint",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where checkpoint matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "content",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Content Unit referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "content__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "name": "limit",
+                        "required": false,
+                        "in": "query",
+                        "description": "Number of results to return per page.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "required": false,
+                        "in": "query",
+                        "description": "The initial index from which to return the results.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "ordering",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "-checkpoint",
+                                    "-complete",
+                                    "-pass_through",
+                                    "-pk",
+                                    "-pulp_created",
+                                    "-pulp_id",
+                                    "-pulp_last_updated",
+                                    "-pulp_type",
+                                    "checkpoint",
+                                    "complete",
+                                    "pass_through",
+                                    "pk",
+                                    "pulp_created",
+                                    "pulp_id",
+                                    "pulp_last_updated",
+                                    "pulp_type"
+                                ]
+                            }
+                        },
+                        "description": "Ordering\n\n* `pulp_id` - Pulp id\n* `-pulp_id` - Pulp id (descending)\n* `pulp_created` - Pulp created\n* `-pulp_created` - Pulp created (descending)\n* `pulp_last_updated` - Pulp last updated\n* `-pulp_last_updated` - Pulp last updated (descending)\n* `pulp_type` - Pulp type\n* `-pulp_type` - Pulp type (descending)\n* `complete` - Complete\n* `-complete` - Complete (descending)\n* `pass_through` - Pass through\n* `-pass_through` - Pass through (descending)\n* `checkpoint` - Checkpoint\n* `-checkpoint` - Checkpoint (descending)\n* `pk` - Pk\n* `-pk` - Pk (descending)",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "prn__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_created",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where pulp_created matches value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_created__gt",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where pulp_created is greater than value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_created__gte",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where pulp_created is greater than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_created__isnull",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "description": "Filter results where pulp_created has a null value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_created__lt",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where pulp_created is less than value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_created__lte",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "description": "Filter results where pulp_created is less than or equal to value"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_created__range",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "date-time"
+                            }
+                        },
+                        "description": "Filter results where pulp_created is between two comma separated values",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_href__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pulp_id__in",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        },
+                        "description": "Multiple values may be separated by commas.",
+                        "explode": false,
+                        "style": "form"
+                    },
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filter results by using NOT, AND and OR operations on other filters"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Repository referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "repository_version",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "description": "Repository Version referenced by HREF/PRN"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Publications: Hugging-Face"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Paginatedhugging_face.HuggingFacePublicationResponseList"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "operationId": "publications_hugging_face_hugging_face_create",
+                "description": "Trigger an asynchronous task to publish content",
+                "summary": "Create a hugging face publication",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    }
+                ],
+                "tags": [
+                    "Publications: Hugging-Face"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/hugging_face.HuggingFacePublication"
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/hugging_face.HuggingFacePublication"
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/hugging_face.HuggingFacePublication"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AsyncOperationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "{hugging_face_hugging_face_publication_href}": {
+            "get": {
+                "operationId": "publications_hugging_face_hugging_face_read",
+                "description": "A ViewSet for HuggingFacePublication.\n\nSimilar to the HuggingFaceContentViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
+                "summary": "Inspect a hugging face publication",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "path",
+                        "name": "hugging_face_hugging_face_publication_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to include in the response."
+                    },
+                    {
+                        "in": "query",
+                        "name": "exclude_fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "A list of fields to exclude from the response."
+                    }
+                ],
+                "tags": [
+                    "Publications: Hugging-Face"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/hugging_face.HuggingFacePublicationResponse"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "publications_hugging_face_hugging_face_delete",
+                "description": "A ViewSet for HuggingFacePublication.\n\nSimilar to the HuggingFaceContentViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
+                "summary": "Delete a hugging face publication",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Task-Diagnostics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "List of profilers to use on tasks."
+                    },
+                    {
+                        "in": "path",
+                        "name": "hugging_face_hugging_face_publication_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Publications: Hugging-Face"
+                ],
+                "security": [
+                    {
+                        "basicAuth": []
+                    },
+                    {
+                        "cookieAuth": []
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No response body"
+                    }
+                }
+            }
+        },
+        "/pulp/api/v3/remotes/hugging_face/hugging-face/": {
+            "get": {
+                "operationId": "remotes_hugging_face_hugging_face_list",
+                "description": "A ViewSet for HuggingFaceRemote.\n\nSimilar to the HuggingFaceContentViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
+                "summary": "List hugging face remotes",
                 "parameters": [
                     {
                         "in": "header",
@@ -1657,7 +2139,7 @@
                     }
                 ],
                 "tags": [
-                    "Remotes: Npm"
+                    "Remotes: Hugging-Face"
                 ],
                 "security": [
                     {
@@ -1672,7 +2154,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Paginatednpm.NpmRemoteResponseList"
+                                    "$ref": "#/components/schemas/Paginatedhugging_face.HuggingFaceRemoteResponseList"
                                 }
                             }
                         },
@@ -1681,9 +2163,9 @@
                 }
             },
             "post": {
-                "operationId": "remotes_npm_npm_create",
-                "description": "A ViewSet for NpmRemote.\n\nSimilar to the PackageViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
-                "summary": "Create a npm remote",
+                "operationId": "remotes_hugging_face_hugging_face_create",
+                "description": "A ViewSet for HuggingFaceRemote.\n\nSimilar to the HuggingFaceContentViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
+                "summary": "Create a hugging face remote",
                 "parameters": [
                     {
                         "in": "header",
@@ -1698,23 +2180,23 @@
                     }
                 ],
                 "tags": [
-                    "Remotes: Npm"
+                    "Remotes: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmRemote"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceRemote"
                             }
                         },
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmRemote"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceRemote"
                             }
                         },
                         "multipart/form-data": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmRemote"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceRemote"
                             }
                         }
                     },
@@ -1733,7 +2215,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/npm.NpmRemoteResponse"
+                                    "$ref": "#/components/schemas/hugging_face.HuggingFaceRemoteResponse"
                                 }
                             }
                         },
@@ -1742,11 +2224,11 @@
                 }
             }
         },
-        "{npm_npm_remote_href}": {
+        "{hugging_face_hugging_face_remote_href}": {
             "get": {
-                "operationId": "remotes_npm_npm_read",
-                "description": "A ViewSet for NpmRemote.\n\nSimilar to the PackageViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
-                "summary": "Inspect a npm remote",
+                "operationId": "remotes_hugging_face_hugging_face_read",
+                "description": "A ViewSet for HuggingFaceRemote.\n\nSimilar to the HuggingFaceContentViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
+                "summary": "Inspect a hugging face remote",
                 "parameters": [
                     {
                         "in": "header",
@@ -1761,7 +2243,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_remote_href",
+                        "name": "hugging_face_hugging_face_remote_href",
                         "schema": {
                             "type": "string"
                         },
@@ -1791,7 +2273,7 @@
                     }
                 ],
                 "tags": [
-                    "Remotes: Npm"
+                    "Remotes: Hugging-Face"
                 ],
                 "security": [
                     {
@@ -1806,7 +2288,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/npm.NpmRemoteResponse"
+                                    "$ref": "#/components/schemas/hugging_face.HuggingFaceRemoteResponse"
                                 }
                             }
                         },
@@ -1815,9 +2297,9 @@
                 }
             },
             "put": {
-                "operationId": "remotes_npm_npm_update",
+                "operationId": "remotes_hugging_face_hugging_face_update",
                 "description": "Update the entity and trigger an asynchronous task if necessary",
-                "summary": "Update a npm remote",
+                "summary": "Update a hugging face remote",
                 "parameters": [
                     {
                         "in": "header",
@@ -1832,7 +2314,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_remote_href",
+                        "name": "hugging_face_hugging_face_remote_href",
                         "schema": {
                             "type": "string"
                         },
@@ -1840,23 +2322,23 @@
                     }
                 ],
                 "tags": [
-                    "Remotes: Npm"
+                    "Remotes: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmRemote"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceRemote"
                             }
                         },
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmRemote"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceRemote"
                             }
                         },
                         "multipart/form-data": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmRemote"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceRemote"
                             }
                         }
                     },
@@ -1875,7 +2357,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/npm.NpmRemoteResponse"
+                                    "$ref": "#/components/schemas/hugging_face.HuggingFaceRemoteResponse"
                                 }
                             }
                         },
@@ -1894,9 +2376,9 @@
                 }
             },
             "patch": {
-                "operationId": "remotes_npm_npm_partial_update",
+                "operationId": "remotes_hugging_face_hugging_face_partial_update",
                 "description": "Update the entity partially and trigger an asynchronous task if necessary",
-                "summary": "Update a npm remote",
+                "summary": "Update a hugging face remote",
                 "parameters": [
                     {
                         "in": "header",
@@ -1911,7 +2393,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_remote_href",
+                        "name": "hugging_face_hugging_face_remote_href",
                         "schema": {
                             "type": "string"
                         },
@@ -1919,23 +2401,23 @@
                     }
                 ],
                 "tags": [
-                    "Remotes: Npm"
+                    "Remotes: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Patchednpm.NpmRemote"
+                                "$ref": "#/components/schemas/Patchedhugging_face.HuggingFaceRemote"
                             }
                         },
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/Patchednpm.NpmRemote"
+                                "$ref": "#/components/schemas/Patchedhugging_face.HuggingFaceRemote"
                             }
                         },
                         "multipart/form-data": {
                             "schema": {
-                                "$ref": "#/components/schemas/Patchednpm.NpmRemote"
+                                "$ref": "#/components/schemas/Patchedhugging_face.HuggingFaceRemote"
                             }
                         }
                     },
@@ -1954,7 +2436,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/npm.NpmRemoteResponse"
+                                    "$ref": "#/components/schemas/hugging_face.HuggingFaceRemoteResponse"
                                 }
                             }
                         },
@@ -1973,9 +2455,9 @@
                 }
             },
             "delete": {
-                "operationId": "remotes_npm_npm_delete",
+                "operationId": "remotes_hugging_face_hugging_face_delete",
                 "description": "Trigger an asynchronous delete task",
-                "summary": "Delete a npm remote",
+                "summary": "Delete a hugging face remote",
                 "parameters": [
                     {
                         "in": "header",
@@ -1990,7 +2472,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_remote_href",
+                        "name": "hugging_face_hugging_face_remote_href",
                         "schema": {
                             "type": "string"
                         },
@@ -1998,7 +2480,7 @@
                     }
                 ],
                 "tags": [
-                    "Remotes: Npm"
+                    "Remotes: Hugging-Face"
                 ],
                 "security": [
                     {
@@ -2022,9 +2504,9 @@
                 }
             }
         },
-        "{npm_npm_remote_href}set_label/": {
+        "{hugging_face_hugging_face_remote_href}set_label/": {
             "post": {
-                "operationId": "remotes_npm_npm_set_label",
+                "operationId": "remotes_hugging_face_hugging_face_set_label",
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
@@ -2041,7 +2523,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_remote_href",
+                        "name": "hugging_face_hugging_face_remote_href",
                         "schema": {
                             "type": "string"
                         },
@@ -2049,7 +2531,7 @@
                     }
                 ],
                 "tags": [
-                    "Remotes: Npm"
+                    "Remotes: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
@@ -2093,9 +2575,9 @@
                 }
             }
         },
-        "{npm_npm_remote_href}unset_label/": {
+        "{hugging_face_hugging_face_remote_href}unset_label/": {
             "post": {
-                "operationId": "remotes_npm_npm_unset_label",
+                "operationId": "remotes_hugging_face_hugging_face_unset_label",
                 "description": "Unset a single pulp_label on the object.",
                 "summary": "Unset a label",
                 "parameters": [
@@ -2112,7 +2594,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_remote_href",
+                        "name": "hugging_face_hugging_face_remote_href",
                         "schema": {
                             "type": "string"
                         },
@@ -2120,7 +2602,7 @@
                     }
                 ],
                 "tags": [
-                    "Remotes: Npm"
+                    "Remotes: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
@@ -2164,11 +2646,11 @@
                 }
             }
         },
-        "/pulp/api/v3/repositories/npm/npm/": {
+        "/pulp/api/v3/repositories/hugging_face/hugging-face/": {
             "get": {
-                "operationId": "repositories_npm_npm_list",
-                "description": "A ViewSet for NpmRepository.\n\nSimilar to the PackageViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
-                "summary": "List npm repositorys",
+                "operationId": "repositories_hugging_face_hugging_face_list",
+                "description": "A ViewSet for HuggingFaceRepository.\n\nSimilar to the HuggingFaceContentViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
+                "summary": "List hugging face repositorys",
                 "parameters": [
                     {
                         "in": "header",
@@ -2487,7 +2969,7 @@
                     }
                 ],
                 "tags": [
-                    "Repositories: Npm"
+                    "Repositories: Hugging-Face"
                 ],
                 "security": [
                     {
@@ -2502,7 +2984,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Paginatednpm.NpmRepositoryResponseList"
+                                    "$ref": "#/components/schemas/Paginatedhugging_face.HuggingFaceRepositoryResponseList"
                                 }
                             }
                         },
@@ -2511,9 +2993,9 @@
                 }
             },
             "post": {
-                "operationId": "repositories_npm_npm_create",
-                "description": "A ViewSet for NpmRepository.\n\nSimilar to the PackageViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
-                "summary": "Create a npm repository",
+                "operationId": "repositories_hugging_face_hugging_face_create",
+                "description": "A ViewSet for HuggingFaceRepository.\n\nSimilar to the HuggingFaceContentViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
+                "summary": "Create a hugging face repository",
                 "parameters": [
                     {
                         "in": "header",
@@ -2528,23 +3010,23 @@
                     }
                 ],
                 "tags": [
-                    "Repositories: Npm"
+                    "Repositories: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmRepository"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceRepository"
                             }
                         },
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmRepository"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceRepository"
                             }
                         },
                         "multipart/form-data": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmRepository"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceRepository"
                             }
                         }
                     },
@@ -2563,7 +3045,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/npm.NpmRepositoryResponse"
+                                    "$ref": "#/components/schemas/hugging_face.HuggingFaceRepositoryResponse"
                                 }
                             }
                         },
@@ -2572,11 +3054,11 @@
                 }
             }
         },
-        "{npm_npm_repository_href}": {
+        "{hugging_face_hugging_face_repository_href}": {
             "get": {
-                "operationId": "repositories_npm_npm_read",
-                "description": "A ViewSet for NpmRepository.\n\nSimilar to the PackageViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
-                "summary": "Inspect a npm repository",
+                "operationId": "repositories_hugging_face_hugging_face_read",
+                "description": "A ViewSet for HuggingFaceRepository.\n\nSimilar to the HuggingFaceContentViewSet above, define endpoint_name,\nqueryset and serializer, at a minimum.",
+                "summary": "Inspect a hugging face repository",
                 "parameters": [
                     {
                         "in": "header",
@@ -2591,7 +3073,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_repository_href",
+                        "name": "hugging_face_hugging_face_repository_href",
                         "schema": {
                             "type": "string"
                         },
@@ -2621,7 +3103,7 @@
                     }
                 ],
                 "tags": [
-                    "Repositories: Npm"
+                    "Repositories: Hugging-Face"
                 ],
                 "security": [
                     {
@@ -2636,7 +3118,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/npm.NpmRepositoryResponse"
+                                    "$ref": "#/components/schemas/hugging_face.HuggingFaceRepositoryResponse"
                                 }
                             }
                         },
@@ -2645,9 +3127,9 @@
                 }
             },
             "put": {
-                "operationId": "repositories_npm_npm_update",
+                "operationId": "repositories_hugging_face_hugging_face_update",
                 "description": "Update the entity and trigger an asynchronous task if necessary",
-                "summary": "Update a npm repository",
+                "summary": "Update a hugging face repository",
                 "parameters": [
                     {
                         "in": "header",
@@ -2662,7 +3144,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_repository_href",
+                        "name": "hugging_face_hugging_face_repository_href",
                         "schema": {
                             "type": "string"
                         },
@@ -2670,23 +3152,23 @@
                     }
                 ],
                 "tags": [
-                    "Repositories: Npm"
+                    "Repositories: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmRepository"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceRepository"
                             }
                         },
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmRepository"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceRepository"
                             }
                         },
                         "multipart/form-data": {
                             "schema": {
-                                "$ref": "#/components/schemas/npm.NpmRepository"
+                                "$ref": "#/components/schemas/hugging_face.HuggingFaceRepository"
                             }
                         }
                     },
@@ -2705,7 +3187,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/npm.NpmRepositoryResponse"
+                                    "$ref": "#/components/schemas/hugging_face.HuggingFaceRepositoryResponse"
                                 }
                             }
                         },
@@ -2724,9 +3206,9 @@
                 }
             },
             "patch": {
-                "operationId": "repositories_npm_npm_partial_update",
+                "operationId": "repositories_hugging_face_hugging_face_partial_update",
                 "description": "Update the entity partially and trigger an asynchronous task if necessary",
-                "summary": "Update a npm repository",
+                "summary": "Update a hugging face repository",
                 "parameters": [
                     {
                         "in": "header",
@@ -2741,7 +3223,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_repository_href",
+                        "name": "hugging_face_hugging_face_repository_href",
                         "schema": {
                             "type": "string"
                         },
@@ -2749,23 +3231,23 @@
                     }
                 ],
                 "tags": [
-                    "Repositories: Npm"
+                    "Repositories: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Patchednpm.NpmRepository"
+                                "$ref": "#/components/schemas/Patchedhugging_face.HuggingFaceRepository"
                             }
                         },
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/Patchednpm.NpmRepository"
+                                "$ref": "#/components/schemas/Patchedhugging_face.HuggingFaceRepository"
                             }
                         },
                         "multipart/form-data": {
                             "schema": {
-                                "$ref": "#/components/schemas/Patchednpm.NpmRepository"
+                                "$ref": "#/components/schemas/Patchedhugging_face.HuggingFaceRepository"
                             }
                         }
                     },
@@ -2784,7 +3266,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/npm.NpmRepositoryResponse"
+                                    "$ref": "#/components/schemas/hugging_face.HuggingFaceRepositoryResponse"
                                 }
                             }
                         },
@@ -2803,9 +3285,9 @@
                 }
             },
             "delete": {
-                "operationId": "repositories_npm_npm_delete",
+                "operationId": "repositories_hugging_face_hugging_face_delete",
                 "description": "Trigger an asynchronous delete task",
-                "summary": "Delete a npm repository",
+                "summary": "Delete a hugging face repository",
                 "parameters": [
                     {
                         "in": "header",
@@ -2820,7 +3302,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_repository_href",
+                        "name": "hugging_face_hugging_face_repository_href",
                         "schema": {
                             "type": "string"
                         },
@@ -2828,7 +3310,7 @@
                     }
                 ],
                 "tags": [
-                    "Repositories: Npm"
+                    "Repositories: Hugging-Face"
                 ],
                 "security": [
                     {
@@ -2852,9 +3334,9 @@
                 }
             }
         },
-        "{npm_npm_repository_href}modify/": {
+        "{hugging_face_hugging_face_repository_href}modify/": {
             "post": {
-                "operationId": "repositories_npm_npm_modify",
+                "operationId": "repositories_hugging_face_hugging_face_modify",
                 "description": "Trigger an asynchronous task to create a new repository version.",
                 "summary": "Modify Repository Content",
                 "parameters": [
@@ -2871,7 +3353,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_repository_href",
+                        "name": "hugging_face_hugging_face_repository_href",
                         "schema": {
                             "type": "string"
                         },
@@ -2879,7 +3361,7 @@
                     }
                 ],
                 "tags": [
-                    "Repositories: Npm"
+                    "Repositories: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
@@ -2923,9 +3405,9 @@
                 }
             }
         },
-        "{npm_npm_repository_href}set_label/": {
+        "{hugging_face_hugging_face_repository_href}set_label/": {
             "post": {
-                "operationId": "repositories_npm_npm_set_label",
+                "operationId": "repositories_hugging_face_hugging_face_set_label",
                 "description": "Set a single pulp_label on the object to a specific value or null.",
                 "summary": "Set a label",
                 "parameters": [
@@ -2942,7 +3424,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_repository_href",
+                        "name": "hugging_face_hugging_face_repository_href",
                         "schema": {
                             "type": "string"
                         },
@@ -2950,7 +3432,7 @@
                     }
                 ],
                 "tags": [
-                    "Repositories: Npm"
+                    "Repositories: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
@@ -2994,9 +3476,9 @@
                 }
             }
         },
-        "{npm_npm_repository_href}sync/": {
+        "{hugging_face_hugging_face_repository_href}sync/": {
             "post": {
-                "operationId": "repositories_npm_npm_sync",
+                "operationId": "repositories_hugging_face_hugging_face_sync",
                 "description": "Trigger an asynchronous task to sync content.",
                 "summary": "Sync from remote",
                 "parameters": [
@@ -3013,7 +3495,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_repository_href",
+                        "name": "hugging_face_hugging_face_repository_href",
                         "schema": {
                             "type": "string"
                         },
@@ -3021,7 +3503,7 @@
                     }
                 ],
                 "tags": [
-                    "Repositories: Npm"
+                    "Repositories: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
@@ -3065,9 +3547,9 @@
                 }
             }
         },
-        "{npm_npm_repository_href}unset_label/": {
+        "{hugging_face_hugging_face_repository_href}unset_label/": {
             "post": {
-                "operationId": "repositories_npm_npm_unset_label",
+                "operationId": "repositories_hugging_face_hugging_face_unset_label",
                 "description": "Unset a single pulp_label on the object.",
                 "summary": "Unset a label",
                 "parameters": [
@@ -3084,7 +3566,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_repository_href",
+                        "name": "hugging_face_hugging_face_repository_href",
                         "schema": {
                             "type": "string"
                         },
@@ -3092,7 +3574,7 @@
                     }
                 ],
                 "tags": [
-                    "Repositories: Npm"
+                    "Repositories: Hugging-Face"
                 ],
                 "requestBody": {
                     "content": {
@@ -3136,10 +3618,10 @@
                 }
             }
         },
-        "{npm_npm_repository_href}versions/": {
+        "{hugging_face_hugging_face_repository_href}versions/": {
             "get": {
-                "operationId": "repositories_npm_npm_versions_list",
-                "description": "A ViewSet for a NpmRepositoryVersion represents a single Npm repository version.",
+                "operationId": "repositories_hugging_face_hugging_face_versions_list",
+                "description": "A ViewSet for a HuggingFaceRepositoryVersion represents a single\nHuggingFace repository version.",
                 "summary": "List repository versions",
                 "parameters": [
                     {
@@ -3175,6 +3657,14 @@
                         "style": "form"
                     },
                     {
+                        "in": "path",
+                        "name": "hugging_face_hugging_face_repository_href",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
                         "name": "limit",
                         "required": false,
                         "in": "query",
@@ -3182,14 +3672,6 @@
                         "schema": {
                             "type": "integer"
                         }
-                    },
-                    {
-                        "in": "path",
-                        "name": "npm_npm_repository_href",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "required": true
                     },
                     {
                         "in": "query",
@@ -3409,7 +3891,7 @@
                     }
                 ],
                 "tags": [
-                    "Repositories: Npm Versions"
+                    "Repositories: Hugging-Face Versions"
                 ],
                 "security": [
                     {
@@ -3433,10 +3915,10 @@
                 }
             }
         },
-        "{npm_npm_repository_version_href}": {
+        "{hugging_face_hugging_face_repository_version_href}": {
             "get": {
-                "operationId": "repositories_npm_npm_versions_read",
-                "description": "A ViewSet for a NpmRepositoryVersion represents a single Npm repository version.",
+                "operationId": "repositories_hugging_face_hugging_face_versions_read",
+                "description": "A ViewSet for a HuggingFaceRepositoryVersion represents a single\nHuggingFace repository version.",
                 "summary": "Inspect a repository version",
                 "parameters": [
                     {
@@ -3452,7 +3934,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_repository_version_href",
+                        "name": "hugging_face_hugging_face_repository_version_href",
                         "schema": {
                             "type": "string"
                         },
@@ -3482,7 +3964,7 @@
                     }
                 ],
                 "tags": [
-                    "Repositories: Npm Versions"
+                    "Repositories: Hugging-Face Versions"
                 ],
                 "security": [
                     {
@@ -3506,7 +3988,7 @@
                 }
             },
             "delete": {
-                "operationId": "repositories_npm_npm_versions_delete",
+                "operationId": "repositories_hugging_face_hugging_face_versions_delete",
                 "description": "Trigger an asynchronous task to delete a repository version.",
                 "summary": "Delete a repository version",
                 "parameters": [
@@ -3523,7 +4005,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_repository_version_href",
+                        "name": "hugging_face_hugging_face_repository_version_href",
                         "schema": {
                             "type": "string"
                         },
@@ -3531,7 +4013,7 @@
                     }
                 ],
                 "tags": [
-                    "Repositories: Npm Versions"
+                    "Repositories: Hugging-Face Versions"
                 ],
                 "security": [
                     {
@@ -3555,9 +4037,9 @@
                 }
             }
         },
-        "{npm_npm_repository_version_href}repair/": {
+        "{hugging_face_hugging_face_repository_version_href}repair/": {
             "post": {
-                "operationId": "repositories_npm_npm_versions_repair",
+                "operationId": "repositories_hugging_face_hugging_face_versions_repair",
                 "description": "Trigger an asynchronous task to repair a repository version.",
                 "parameters": [
                     {
@@ -3573,7 +4055,7 @@
                     },
                     {
                         "in": "path",
-                        "name": "npm_npm_repository_version_href",
+                        "name": "hugging_face_hugging_face_repository_version_href",
                         "schema": {
                             "type": "string"
                         },
@@ -3581,7 +4063,7 @@
                     }
                 ],
                 "tags": [
-                    "Repositories: Npm Versions"
+                    "Repositories: Hugging-Face Versions"
                 ],
                 "requestBody": {
                     "content": {
@@ -3702,7 +4184,7 @@
                     }
                 }
             },
-            "Paginatednpm.NpmDistributionResponseList": {
+            "Paginatedhugging_face.HuggingFaceContentResponseList": {
                 "type": "object",
                 "required": [
                     "count",
@@ -3728,12 +4210,12 @@
                     "results": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/npm.NpmDistributionResponse"
+                            "$ref": "#/components/schemas/hugging_face.HuggingFaceContentResponse"
                         }
                     }
                 }
             },
-            "Paginatednpm.NpmRemoteResponseList": {
+            "Paginatedhugging_face.HuggingFaceDistributionResponseList": {
                 "type": "object",
                 "required": [
                     "count",
@@ -3759,12 +4241,12 @@
                     "results": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/npm.NpmRemoteResponse"
+                            "$ref": "#/components/schemas/hugging_face.HuggingFaceDistributionResponse"
                         }
                     }
                 }
             },
-            "Paginatednpm.NpmRepositoryResponseList": {
+            "Paginatedhugging_face.HuggingFacePublicationResponseList": {
                 "type": "object",
                 "required": [
                     "count",
@@ -3790,12 +4272,12 @@
                     "results": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/npm.NpmRepositoryResponse"
+                            "$ref": "#/components/schemas/hugging_face.HuggingFacePublicationResponse"
                         }
                     }
                 }
             },
-            "Paginatednpm.PackageResponseList": {
+            "Paginatedhugging_face.HuggingFaceRemoteResponseList": {
                 "type": "object",
                 "required": [
                     "count",
@@ -3821,14 +4303,45 @@
                     "results": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/npm.PackageResponse"
+                            "$ref": "#/components/schemas/hugging_face.HuggingFaceRemoteResponse"
                         }
                     }
                 }
             },
-            "Patchednpm.NpmDistribution": {
+            "Paginatedhugging_face.HuggingFaceRepositoryResponseList": {
                 "type": "object",
-                "description": "Serializer for NPM Distributions.",
+                "required": [
+                    "count",
+                    "results"
+                ],
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "next": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=400&limit=100"
+                    },
+                    "previous": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uri",
+                        "example": "http://api.example.org/accounts/?offset=200&limit=100"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/hugging_face.HuggingFaceRepositoryResponse"
+                        }
+                    }
+                }
+            },
+            "Patchedhugging_face.HuggingFaceDistribution": {
+                "type": "object",
+                "description": "A Serializer for HuggingFaceDistribution with pull-through caching support.",
                 "properties": {
                     "base_path": {
                         "type": "string",
@@ -3870,6 +4383,14 @@
                         "format": "uri",
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
+                    "publication": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uri",
+                        "description": "Publication to be served"
+                    },
                     "remote": {
                         "type": [
                             "string",
@@ -3880,9 +4401,9 @@
                     }
                 }
             },
-            "Patchednpm.NpmRemote": {
+            "Patchedhugging_face.HuggingFaceRemote": {
                 "type": "object",
-                "description": "A Serializer for NpmRemote.\n\nAdd any new fields if defined on NpmRemote.\nSimilar to the example above, in PackageSerializer.\nAdditional validators can be added to the parent validators list\n\nFor example::\n\nclass Meta:\n    validators = core_serializers.RemoteSerializer.Meta.validators + [myValidator1, ...]\n\nBy default the 'policy' field in core_serializers.RemoteSerializer only validates the choice\n'immediate'. To add on-demand support for more 'policy' options, e.g. 'streamed' or 'on_demand',\nre-define the 'policy' option as follows::",
+                "description": "A Serializer for HuggingFaceRemote with Hugging Face specific configuration.",
                 "properties": {
                     "name": {
                         "type": "string",
@@ -3998,7 +4519,8 @@
                                 "$ref": "#/components/schemas/PolicyEnum"
                             }
                         ],
-                        "description": "The policy to use when downloading content. The possible values include: 'immediate', 'on_demand', and 'streamed'. 'immediate' is the default.\n\n* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
+                        "default": "on_demand",
+                        "description": "The policy to use when downloading content. The possible values include: 'immediate', 'on_demand', and 'streamed'. 'on_demand' enables pull-through caching.\n\n* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
                     },
                     "total_timeout": {
                         "type": [
@@ -4050,12 +4572,26 @@
                         ],
                         "format": "int64",
                         "description": "Limits requests per second for each concurrent downloader"
+                    },
+                    "hf_hub_url": {
+                        "type": "string",
+                        "format": "uri",
+                        "minLength": 1,
+                        "default": "https://huggingface.co",
+                        "description": "Base URL for Hugging Face Hub"
+                    },
+                    "hf_token": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Hugging Face authentication token for private repositories"
                     }
                 }
             },
-            "Patchednpm.NpmRepository": {
+            "Patchedhugging_face.HuggingFaceRepository": {
                 "type": "object",
-                "description": "A Serializer for NpmRepository.\n\nAdd any new fields if defined on NpmRepository.\nSimilar to the example above, in PackageSerializer.\nAdditional validators can be added to the parent validators list\n\nFor example::\n\nclass Meta:\n    validators = core_serializers.RepositorySerializer.Meta.validators + [myValidator1, ...]",
+                "description": "A Serializer for HuggingFaceRepository.\n\nAdd any new fields if defined on HuggingFaceRepository.\nSimilar to the example above, in HuggingFaceContentSerializer.\nAdditional validators can be added to the parent validators list\n\nFor example::\n\nclass Meta:\n    validators = platform.RepositorySerializer.Meta.validators + [myValidator1, myValidator2]",
                 "properties": {
                     "pulp_labels": {
                         "type": "object",
@@ -4115,6 +4651,15 @@
                         "description": "Will verify that the checksum of all stored files matches what saved in the database. Otherwise only the existence of the files will be checked. Enabled by default"
                     }
                 }
+            },
+            "RepoTypeEnum": {
+                "enum": [
+                    "models",
+                    "datasets",
+                    "spaces"
+                ],
+                "type": "string",
+                "description": "* `models` - Models\n* `datasets` - Datasets\n* `spaces` - Spaces"
             },
             "RepositoryAddRemoveContent": {
                 "type": "object",
@@ -4287,9 +4832,188 @@
                     "key"
                 ]
             },
-            "npm.NpmDistribution": {
+            "hugging_face.HuggingFaceContent": {
                 "type": "object",
-                "description": "Serializer for NPM Distributions.",
+                "description": "A Serializer for HuggingFaceContent.",
+                "properties": {
+                    "repository": {
+                        "type": "string",
+                        "format": "uri",
+                        "writeOnly": true,
+                        "description": "A URI of a repository the new content unit should be associated with."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "artifact": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "Artifact file representing the physical content"
+                    },
+                    "relative_path": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The relative path within the repository"
+                    },
+                    "repo_id": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The Hugging Face repository ID (e.g., 'microsoft/DialoGPT-medium')"
+                    },
+                    "repo_type": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/RepoTypeEnum"
+                            }
+                        ],
+                        "default": "models",
+                        "description": "The type of Hugging Face repository\n\n* `models` - Models\n* `datasets` - Datasets\n* `spaces` - Spaces"
+                    },
+                    "revision": {
+                        "type": "string",
+                        "minLength": 1,
+                        "default": "main",
+                        "description": "The git revision/branch/tag"
+                    },
+                    "size": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64",
+                        "description": "File size in bytes"
+                    },
+                    "etag": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "minLength": 1,
+                        "description": "ETag from Hugging Face"
+                    },
+                    "last_modified": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "description": "Last modified timestamp"
+                    }
+                },
+                "required": [
+                    "artifact",
+                    "relative_path",
+                    "repo_id"
+                ]
+            },
+            "hugging_face.HuggingFaceContentResponse": {
+                "type": "object",
+                "description": "A Serializer for HuggingFaceContent.",
+                "properties": {
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
+                    },
+                    "vuln_report": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "artifact": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "Artifact file representing the physical content"
+                    },
+                    "relative_path": {
+                        "type": "string",
+                        "description": "The relative path within the repository"
+                    },
+                    "repo_id": {
+                        "type": "string",
+                        "description": "The Hugging Face repository ID (e.g., 'microsoft/DialoGPT-medium')"
+                    },
+                    "repo_type": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/RepoTypeEnum"
+                            }
+                        ],
+                        "default": "models",
+                        "description": "The type of Hugging Face repository\n\n* `models` - Models\n* `datasets` - Datasets\n* `spaces` - Spaces"
+                    },
+                    "revision": {
+                        "type": "string",
+                        "default": "main",
+                        "description": "The git revision/branch/tag"
+                    },
+                    "size": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64",
+                        "description": "File size in bytes"
+                    },
+                    "etag": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "ETag from Hugging Face"
+                    },
+                    "last_modified": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time",
+                        "description": "Last modified timestamp"
+                    }
+                },
+                "required": [
+                    "artifact",
+                    "relative_path",
+                    "repo_id"
+                ]
+            },
+            "hugging_face.HuggingFaceDistribution": {
+                "type": "object",
+                "description": "A Serializer for HuggingFaceDistribution with pull-through caching support.",
                 "properties": {
                     "base_path": {
                         "type": "string",
@@ -4331,6 +5055,14 @@
                         "format": "uri",
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
+                    "publication": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uri",
+                        "description": "Publication to be served"
+                    },
                     "remote": {
                         "type": [
                             "string",
@@ -4345,9 +5077,9 @@
                     "name"
                 ]
             },
-            "npm.NpmDistributionResponse": {
+            "hugging_face.HuggingFaceDistributionResponse": {
                 "type": "object",
-                "description": "Serializer for NPM Distributions.",
+                "description": "A Serializer for HuggingFaceDistribution with pull-through caching support.",
                 "properties": {
                     "pulp_href": {
                         "type": "string",
@@ -4419,6 +5151,14 @@
                         "format": "uri",
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
+                    "publication": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uri",
+                        "description": "Publication to be served"
+                    },
                     "remote": {
                         "type": [
                             "string",
@@ -4433,9 +5173,61 @@
                     "name"
                 ]
             },
-            "npm.NpmRemote": {
+            "hugging_face.HuggingFacePublication": {
                 "type": "object",
-                "description": "A Serializer for NpmRemote.\n\nAdd any new fields if defined on NpmRemote.\nSimilar to the example above, in PackageSerializer.\nAdditional validators can be added to the parent validators list\n\nFor example::\n\nclass Meta:\n    validators = core_serializers.RemoteSerializer.Meta.validators + [myValidator1, ...]\n\nBy default the 'policy' field in core_serializers.RemoteSerializer only validates the choice\n'immediate'. To add on-demand support for more 'policy' options, e.g. 'streamed' or 'on_demand',\nre-define the 'policy' option as follows::",
+                "description": "A Serializer for HuggingFacePublication.\n\nAdd any new fields if defined on HuggingFacePublication.\nSimilar to the example above, in HuggingFaceContentSerializer.\nAdditional validators can be added to the parent validators list\n\nFor example::\n\nclass Meta:\n    validators = platform.PublicationSerializer.Meta.validators + [myValidator1, myValidator2]",
+                "properties": {
+                    "repository_version": {
+                        "type": "string",
+                        "format": "uri"
+                    },
+                    "repository": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "A URI of the repository to be published."
+                    }
+                }
+            },
+            "hugging_face.HuggingFacePublicationResponse": {
+                "type": "object",
+                "description": "A Serializer for HuggingFacePublication.\n\nAdd any new fields if defined on HuggingFacePublication.\nSimilar to the example above, in HuggingFaceContentSerializer.\nAdditional validators can be added to the parent validators list\n\nFor example::\n\nclass Meta:\n    validators = platform.PublicationSerializer.Meta.validators + [myValidator1, myValidator2]",
+                "properties": {
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "repository_version": {
+                        "type": "string",
+                        "format": "uri"
+                    },
+                    "repository": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "A URI of the repository to be published."
+                    }
+                }
+            },
+            "hugging_face.HuggingFaceRemote": {
+                "type": "object",
+                "description": "A Serializer for HuggingFaceRemote with Hugging Face specific configuration.",
                 "properties": {
                     "name": {
                         "type": "string",
@@ -4551,7 +5343,8 @@
                                 "$ref": "#/components/schemas/PolicyEnum"
                             }
                         ],
-                        "description": "The policy to use when downloading content. The possible values include: 'immediate', 'on_demand', and 'streamed'. 'immediate' is the default.\n\n* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
+                        "default": "on_demand",
+                        "description": "The policy to use when downloading content. The possible values include: 'immediate', 'on_demand', and 'streamed'. 'on_demand' enables pull-through caching.\n\n* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
                     },
                     "total_timeout": {
                         "type": [
@@ -4603,6 +5396,20 @@
                         ],
                         "format": "int64",
                         "description": "Limits requests per second for each concurrent downloader"
+                    },
+                    "hf_hub_url": {
+                        "type": "string",
+                        "format": "uri",
+                        "minLength": 1,
+                        "default": "https://huggingface.co",
+                        "description": "Base URL for Hugging Face Hub"
+                    },
+                    "hf_token": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Hugging Face authentication token for private repositories"
                     }
                 },
                 "required": [
@@ -4610,9 +5417,9 @@
                     "url"
                 ]
             },
-            "npm.NpmRemoteResponse": {
+            "hugging_face.HuggingFaceRemoteResponse": {
                 "type": "object",
-                "description": "A Serializer for NpmRemote.\n\nAdd any new fields if defined on NpmRemote.\nSimilar to the example above, in PackageSerializer.\nAdditional validators can be added to the parent validators list\n\nFor example::\n\nclass Meta:\n    validators = core_serializers.RemoteSerializer.Meta.validators + [myValidator1, ...]\n\nBy default the 'policy' field in core_serializers.RemoteSerializer only validates the choice\n'immediate'. To add on-demand support for more 'policy' options, e.g. 'streamed' or 'on_demand',\nre-define the 'policy' option as follows::",
+                "description": "A Serializer for HuggingFaceRemote with Hugging Face specific configuration.",
                 "properties": {
                     "pulp_href": {
                         "type": "string",
@@ -4700,7 +5507,8 @@
                                 "$ref": "#/components/schemas/PolicyEnum"
                             }
                         ],
-                        "description": "The policy to use when downloading content. The possible values include: 'immediate', 'on_demand', and 'streamed'. 'immediate' is the default.\n\n* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
+                        "default": "on_demand",
+                        "description": "The policy to use when downloading content. The possible values include: 'immediate', 'on_demand', and 'streamed'. 'on_demand' enables pull-through caching.\n\n* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
                     },
                     "total_timeout": {
                         "type": [
@@ -4772,6 +5580,19 @@
                         },
                         "readOnly": true,
                         "description": "List of hidden (write only) fields"
+                    },
+                    "hf_hub_url": {
+                        "type": "string",
+                        "format": "uri",
+                        "default": "https://huggingface.co",
+                        "description": "Base URL for Hugging Face Hub"
+                    },
+                    "hf_token": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Hugging Face authentication token for private repositories"
                     }
                 },
                 "required": [
@@ -4779,9 +5600,9 @@
                     "url"
                 ]
             },
-            "npm.NpmRepository": {
+            "hugging_face.HuggingFaceRepository": {
                 "type": "object",
-                "description": "A Serializer for NpmRepository.\n\nAdd any new fields if defined on NpmRepository.\nSimilar to the example above, in PackageSerializer.\nAdditional validators can be added to the parent validators list\n\nFor example::\n\nclass Meta:\n    validators = core_serializers.RepositorySerializer.Meta.validators + [myValidator1, ...]",
+                "description": "A Serializer for HuggingFaceRepository.\n\nAdd any new fields if defined on HuggingFaceRepository.\nSimilar to the example above, in HuggingFaceContentSerializer.\nAdditional validators can be added to the parent validators list\n\nFor example::\n\nclass Meta:\n    validators = platform.RepositorySerializer.Meta.validators + [myValidator1, myValidator2]",
                 "properties": {
                     "pulp_labels": {
                         "type": "object",
@@ -4826,9 +5647,9 @@
                     "name"
                 ]
             },
-            "npm.NpmRepositoryResponse": {
+            "hugging_face.HuggingFaceRepositoryResponse": {
                 "type": "object",
-                "description": "A Serializer for NpmRepository.\n\nAdd any new fields if defined on NpmRepository.\nSimilar to the example above, in PackageSerializer.\nAdditional validators can be added to the parent validators list\n\nFor example::\n\nclass Meta:\n    validators = core_serializers.RepositorySerializer.Meta.validators + [myValidator1, ...]",
+                "description": "A Serializer for HuggingFaceRepository.\n\nAdd any new fields if defined on HuggingFaceRepository.\nSimilar to the example above, in HuggingFaceContentSerializer.\nAdditional validators can be added to the parent validators list\n\nFor example::\n\nclass Meta:\n    validators = platform.RepositorySerializer.Meta.validators + [myValidator1, myValidator2]",
                 "properties": {
                     "pulp_href": {
                         "type": "string",
@@ -4901,130 +5722,6 @@
                 },
                 "required": [
                     "name"
-                ]
-            },
-            "npm.Package": {
-                "type": "object",
-                "description": "A Serializer for Package.\n\nAdd serializers for the new fields defined in Package and\nadd those fields to the Meta class keeping fields from the parent class as well.\n\nFor example::\n\nfield1 = serializers.TextField()\nfield2 = serializers.IntegerField()\nfield3 = serializers.CharField()\n\nclass Meta:\n    fields = core_serializers.SingleArtifactContentSerializer.Meta.fields + (\n        'field1', 'field2', 'field3'\n    )\n    model = models.Package",
-                "properties": {
-                    "repository": {
-                        "type": "string",
-                        "format": "uri",
-                        "writeOnly": true,
-                        "description": "A URI of a repository the new content unit should be associated with."
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
-                        },
-                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
-                    },
-                    "artifact": {
-                        "type": "string",
-                        "format": "uri",
-                        "description": "Artifact file representing the physical content"
-                    },
-                    "relative_path": {
-                        "type": "string",
-                        "minLength": 1
-                    },
-                    "file": {
-                        "type": "string",
-                        "format": "binary",
-                        "writeOnly": true,
-                        "description": "An uploaded file that may be turned into the content unit."
-                    },
-                    "upload": {
-                        "type": "string",
-                        "format": "uri",
-                        "writeOnly": true,
-                        "description": "An uncommitted upload that may be turned into the content unit."
-                    },
-                    "file_url": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "minLength": 1,
-                        "description": "A url that Pulp can download and turn into the content unit."
-                    },
-                    "name": {
-                        "type": "string",
-                        "minLength": 1
-                    },
-                    "version": {
-                        "type": "string",
-                        "minLength": 1
-                    }
-                },
-                "required": [
-                    "name",
-                    "relative_path",
-                    "version"
-                ]
-            },
-            "npm.PackageResponse": {
-                "type": "object",
-                "description": "A Serializer for Package.\n\nAdd serializers for the new fields defined in Package and\nadd those fields to the Meta class keeping fields from the parent class as well.\n\nFor example::\n\nfield1 = serializers.TextField()\nfield2 = serializers.IntegerField()\nfield3 = serializers.CharField()\n\nclass Meta:\n    fields = core_serializers.SingleArtifactContentSerializer.Meta.fields + (\n        'field1', 'field2', 'field3'\n    )\n    model = models.Package",
-                "properties": {
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
-                    },
-                    "pulp_last_updated": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
-                        },
-                        "description": "A dictionary of arbitrary key/value pairs used to describe a specific Content instance."
-                    },
-                    "vuln_report": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
-                    "artifact": {
-                        "type": "string",
-                        "format": "uri",
-                        "description": "Artifact file representing the physical content"
-                    },
-                    "relative_path": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "version": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "name",
-                    "relative_path",
-                    "version"
                 ]
             }
         },

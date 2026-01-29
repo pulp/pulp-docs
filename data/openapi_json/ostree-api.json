@@ -10,15 +10,15 @@
             "url": "https://pulpproject.org"
         },
         "license": {
-            "name": "GPLv2+",
-            "url": "https://raw.githubusercontent.com/pulp/pulpcore/master/LICENSE"
+            "name": "GNU General Public License v2.0 or later",
+            "identifier": "GPL-2.0-or-later"
         },
         "x-logo": {
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "ostree": "2.6.0.dev",
-            "core": "3.95.2"
+            "ostree": "2.7.0.dev",
+            "core": "3.102.0"
         },
         "x-pulp-domain-enabled": false
     },

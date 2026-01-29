@@ -10,15 +10,15 @@
             "url": "https://pulpproject.org"
         },
         "license": {
-            "name": "GPLv2+",
-            "url": "https://raw.githubusercontent.com/pulp/pulpcore/master/LICENSE"
+            "url": "https://raw.githubusercontent.com/pulp/pulpcore/master/LICENSE",
+            "name": "GNU General Public License v2.0 or later"
         },
         "x-logo": {
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "rpm": "3.34.0.dev",
-            "core": "3.95.2"
+            "rpm": "3.35.0.dev",
+            "core": "3.102.0"
         },
         "x-pulp-domain-enabled": false
     },
@@ -12722,10 +12722,12 @@
             "LayoutEnum": {
                 "enum": [
                     "nested_alphabetically",
-                    "flat"
+                    "flat",
+                    "nested_by_digest",
+                    "nested_by_both"
                 ],
                 "type": "string",
-                "description": "* `nested_alphabetically` - nested_alphabetically\n* `flat` - flat"
+                "description": "* `nested_alphabetically` - nested_alphabetically\n* `flat` - flat\n* `nested_by_digest` - nested_by_digest\n* `nested_by_both` - nested_by_both"
             },
             "MyPermissionsResponse": {
                 "type": "object",
@@ -13708,7 +13710,7 @@
                             }
                         ],
                         "nullable": true,
-                        "description": "How to layout the packages within the published repository.\n\n* `nested_alphabetically` - nested_alphabetically\n* `flat` - flat"
+                        "description": "How to layout the packages within the published repository.\n\n* `nested_alphabetically` - nested_alphabetically\n* `flat` - flat\n* `nested_by_digest` - nested_by_digest\n* `nested_by_both` - nested_by_both"
                     }
                 }
             },
@@ -15844,7 +15846,7 @@
                             }
                         ],
                         "nullable": true,
-                        "description": "How to layout the packages within the published repository.\n\n* `nested_alphabetically` - nested_alphabetically\n* `flat` - flat"
+                        "description": "How to layout the packages within the published repository.\n\n* `nested_alphabetically` - nested_alphabetically\n* `flat` - flat\n* `nested_by_digest` - nested_by_digest\n* `nested_by_both` - nested_by_both"
                     }
                 }
             },
@@ -15957,7 +15959,7 @@
                             }
                         ],
                         "nullable": true,
-                        "description": "How to layout the packages within the published repository.\n\n* `nested_alphabetically` - nested_alphabetically\n* `flat` - flat"
+                        "description": "How to layout the packages within the published repository.\n\n* `nested_alphabetically` - nested_alphabetically\n* `flat` - flat\n* `nested_by_digest` - nested_by_digest\n* `nested_by_both` - nested_by_both"
                     }
                 }
             },
@@ -16360,7 +16362,7 @@
                             }
                         ],
                         "nullable": true,
-                        "description": "How to layout the packages within the published repository.\n\n* `nested_alphabetically` - nested_alphabetically\n* `flat` - flat"
+                        "description": "How to layout the packages within the published repository.\n\n* `nested_alphabetically` - nested_alphabetically\n* `flat` - flat\n* `nested_by_digest` - nested_by_digest\n* `nested_by_both` - nested_by_both"
                     }
                 },
                 "required": [
@@ -16535,7 +16537,7 @@
                             }
                         ],
                         "nullable": true,
-                        "description": "How to layout the packages within the published repository.\n\n* `nested_alphabetically` - nested_alphabetically\n* `flat` - flat"
+                        "description": "How to layout the packages within the published repository.\n\n* `nested_alphabetically` - nested_alphabetically\n* `flat` - flat\n* `nested_by_digest` - nested_by_digest\n* `nested_by_both` - nested_by_both"
                     }
                 },
                 "required": [

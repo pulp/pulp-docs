@@ -10,14 +10,14 @@
             "url": "https://pulpproject.org"
         },
         "license": {
-            "name": "GPLv2+",
-            "url": "https://raw.githubusercontent.com/pulp/pulpcore/master/LICENSE"
+            "name": "GNU General Public License v2.0 or later",
+            "identifier": "GPL-2.0-or-later"
         },
         "x-logo": {
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "core": "3.96.0.dev"
+            "core": "3.103.0.dev"
         },
         "x-pulp-domain-enabled": false
     },
@@ -23061,24 +23061,10 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
-                    "name": {
+                    "base_url": {
                         "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
-                    "pulp_last_updated": {
-                        "type": "string",
-                        "format": "date-time",
                         "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
-                        }
+                        "description": "The URL for accessing the publication as defined by this distribution."
                     },
                     "pulp_created": {
                         "type": "string",
@@ -23094,34 +23080,48 @@
                         "format": "uri",
                         "description": "An optional content-guard."
                     },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        }
+                    },
+                    "no_content_change_since": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "prn": {
                         "type": "string",
                         "readOnly": true,
                         "description": "The Pulp Resource Name (PRN)."
                     },
-                    "base_url": {
+                    "pulp_last_updated": {
                         "type": "string",
+                        "format": "date-time",
                         "readOnly": true,
-                        "description": "The URL for accessing the publication as defined by this distribution."
-                    },
-                    "base_path": {
-                        "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
                     "pulp_href": {
                         "type": "string",
                         "format": "uri",
                         "readOnly": true
                     },
-                    "no_content_change_since": {
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
+                    },
+                    "base_path": {
                         "type": "string",
-                        "readOnly": true,
-                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     }
                 },
                 "required": [
@@ -23593,7 +23593,7 @@
                                 "$ref": "#/components/schemas/StorageClassEnum"
                             }
                         ],
-                        "description": "Backend storage class for domain.\n\n* `pulpcore.app.models.storage.FileSystem` - Use local filesystem as storage\n* `storages.backends.s3boto3.S3Boto3Storage` - Use Amazon S3 as storage\n* `storages.backends.azure_storage.AzureStorage` - Use Azure Blob as storage"
+                        "description": "Backend storage class for domain.\n\n* `pulpcore.app.models.storage.FileSystem` - Use local filesystem as storage\n* `storages.backends.s3boto3.S3Boto3Storage` - Use Amazon S3 as storage [deprecated]\n* `storages.backends.s3.S3Storage` - Use Amazon S3 as storage\n* `storages.backends.azure_storage.AzureStorage` - Use Azure Blob as storage"
                     },
                     "storage_settings": {
                         "type": "object",
@@ -23626,7 +23626,7 @@
                                 "$ref": "#/components/schemas/StorageClassEnum"
                             }
                         ],
-                        "description": "The new backend storage class to migrate to.\n\n* `pulpcore.app.models.storage.FileSystem` - Use local filesystem as storage\n* `storages.backends.s3boto3.S3Boto3Storage` - Use Amazon S3 as storage\n* `storages.backends.azure_storage.AzureStorage` - Use Azure Blob as storage"
+                        "description": "The new backend storage class to migrate to.\n\n* `pulpcore.app.models.storage.FileSystem` - Use local filesystem as storage\n* `storages.backends.s3boto3.S3Boto3Storage` - Use Amazon S3 as storage [deprecated]\n* `storages.backends.s3.S3Storage` - Use Amazon S3 as storage\n* `storages.backends.azure_storage.AzureStorage` - Use Azure Blob as storage"
                     },
                     "storage_settings": {
                         "type": "object",
@@ -23692,7 +23692,7 @@
                                 "$ref": "#/components/schemas/StorageClassEnum"
                             }
                         ],
-                        "description": "Backend storage class for domain.\n\n* `pulpcore.app.models.storage.FileSystem` - Use local filesystem as storage\n* `storages.backends.s3boto3.S3Boto3Storage` - Use Amazon S3 as storage\n* `storages.backends.azure_storage.AzureStorage` - Use Azure Blob as storage"
+                        "description": "Backend storage class for domain.\n\n* `pulpcore.app.models.storage.FileSystem` - Use local filesystem as storage\n* `storages.backends.s3boto3.S3Boto3Storage` - Use Amazon S3 as storage [deprecated]\n* `storages.backends.s3.S3Storage` - Use Amazon S3 as storage\n* `storages.backends.azure_storage.AzureStorage` - Use Azure Blob as storage"
                     },
                     "storage_settings": {
                         "type": "object",
@@ -26965,7 +26965,7 @@
                                 "$ref": "#/components/schemas/StorageClassEnum"
                             }
                         ],
-                        "description": "Backend storage class for domain.\n\n* `pulpcore.app.models.storage.FileSystem` - Use local filesystem as storage\n* `storages.backends.s3boto3.S3Boto3Storage` - Use Amazon S3 as storage\n* `storages.backends.azure_storage.AzureStorage` - Use Azure Blob as storage"
+                        "description": "Backend storage class for domain.\n\n* `pulpcore.app.models.storage.FileSystem` - Use local filesystem as storage\n* `storages.backends.s3boto3.S3Boto3Storage` - Use Amazon S3 as storage [deprecated]\n* `storages.backends.s3.S3Storage` - Use Amazon S3 as storage\n* `storages.backends.azure_storage.AzureStorage` - Use Azure Blob as storage"
                     },
                     "storage_settings": {
                         "type": "object",
@@ -27850,7 +27850,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2025-11-17",
+                        "default": "2025-12-30",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
@@ -28417,10 +28417,11 @@
                 "enum": [
                     "pulpcore.app.models.storage.FileSystem",
                     "storages.backends.s3boto3.S3Boto3Storage",
+                    "storages.backends.s3.S3Storage",
                     "storages.backends.azure_storage.AzureStorage"
                 ],
                 "type": "string",
-                "description": "* `pulpcore.app.models.storage.FileSystem` - Use local filesystem as storage\n* `storages.backends.s3boto3.S3Boto3Storage` - Use Amazon S3 as storage\n* `storages.backends.azure_storage.AzureStorage` - Use Azure Blob as storage"
+                "description": "* `pulpcore.app.models.storage.FileSystem` - Use local filesystem as storage\n* `storages.backends.s3boto3.S3Boto3Storage` - Use Amazon S3 as storage [deprecated]\n* `storages.backends.s3.S3Storage` - Use Amazon S3 as storage\n* `storages.backends.azure_storage.AzureStorage` - Use Azure Blob as storage"
             },
             "StorageResponse": {
                 "type": "object",
