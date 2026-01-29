@@ -1,7 +1,8 @@
+import argparse
 import os
 from typing import NamedTuple
 
-HEADER_ERROR = "Broken links:"
+HEADER_ERROR = "Found {n} broken links:"
 
 
 class LinkError(NamedTuple):
@@ -19,6 +20,8 @@ def linkchecker(component_rootdir: str, filenames: list[str]) -> int:
             continue
         cumulative_errors.extend(link_errors)
     report_errors(link_errors=cumulative_errors, component_rootdir=component_rootdir)
+    if cumulative_errors:
+        return 1
     return 0
 
 
@@ -47,14 +50,15 @@ def check_line(line: str, basedir: str) -> list[str]:
     invalid_links = []
     relative_path, component_name = os.path.split(basedir)
 
-    for link in get_links(line):
+    for original_link in get_links(line):
+        link = original_link.removeprefix("site:")
         # Filter out external component links
         if not link.startswith(f"{component_name}/"):
             continue
         link_target = os.path.join(relative_path, link)
         if not file_exists(link_target):
             # Store original site: format
-            invalid_links.append(link)
+            invalid_links.append(original_link)
     return invalid_links
 
 
@@ -64,9 +68,9 @@ def get_links(line: str) -> list[str]:
 
     links = []
     # Match inline links: [text](site:path)
-    inline_pattern = r"\[([^\]]+)\]\(site:([^\)]+)\)"
+    inline_pattern = r"\[([^\]]+)\]\((site:[^\)]+)\)"
     # Match reference links: [ref]: site:path
-    reference_pattern = r"\[[^\]]+\]:\s*site:([^\s]+)"
+    reference_pattern = r"\[[^\]]+\]:\s*(site:[^\s]+)"
 
     for match in re.finditer(inline_pattern, line):
         links.append(match.group(2))
@@ -90,23 +94,37 @@ def report_errors(link_errors: list[LinkError], component_rootdir: str):
     """Print link errors to stdout."""
     if not link_errors:
         return
-    print(HEADER_ERROR)
+    print(HEADER_ERROR.format(n=len(link_errors)))
     for error in link_errors:
-        line_str = error.src_line.strip()
+        # line_str = error.src_line.strip()[:85] + " (...)"
         filename = os.path.relpath(error.src_filename, component_rootdir)
         lineno = error.src_lineno + 1
-        print(f"{filename}:{lineno}:{line_str}")
+        print(f"{filename}:{lineno}:{error.link_target}")
 
 
 def parse_arguments():
     """Parse command line arguments."""
-    import argparse
 
     parser = argparse.ArgumentParser(description="Check markdown links")
-    parser.add_argument("basedir", help="Base directory for link checking")
+    parser.add_argument(
+        "--basedir",
+        default=".",
+        help="Base directory for link checking (default: current directory)",
+    )
     parser.add_argument("files", nargs="+", help="Markdown files to check")
     args = parser.parse_args()
-    return args.basedir, args.files
+
+    # Shell-expand and normalize the basedir path
+    basedir = os.path.expanduser(args.basedir)
+    basedir = os.path.expandvars(basedir)
+    basedir = os.path.abspath(basedir)
+
+    if not os.path.exists(basedir):
+        parser.error(f"basedir does not exist: {basedir}")
+    if not os.path.isdir(basedir):
+        parser.error(f"basedir is not a directory: {basedir}")
+
+    return basedir, args.files
 
 
 def main():
