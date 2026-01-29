@@ -1,12 +1,14 @@
 .PHONY: help
 help:
 	@echo "COMMANDS:"
-	@echo "    dist-build   Build the distribution package"
-	@echo "    dist-test    Test the built distribution package"
-	@echo "    docs-ci      Build docs for COMPONENT's CI"
-	@echo "    lint         Run pre-commit hooks on all files"
-	@echo "    clean        Remove build artifacts and temporary files"
-	@echo "    help         Show this help message"
+	@echo "    dist-build      Build the distribution package"
+	@echo "    dist-test       Test the built distribution package"
+	@echo "    docs-ci         Build docs for COMPONENT's CI"
+	@echo "    docs-linkcheck: Check for broken documentation links"
+	@echo "    test            Run the test suite"
+	@echo "    lint            Run pre-commit hooks on all files"
+	@echo "    clean           Remove build artifacts and temporary files"
+	@echo "    help            Show this help message"
 
 .PHONY: dist-build
 dist-build:
@@ -22,9 +24,19 @@ dist-test:
 	venv-dist/bin/twine check --strict dist/pulp_docs-*.whl
 	@echo "Build is fine!"
 
+.PHONY: test
+test:
+	uv run --with-requirements test_requirements.txt pytest
+
 .PHONY: lint
 lint:
 	pre-commit run -a
+
+.PHONY: docs-linkcheck
+docs-linkcheck:
+	@uv run pulp-linkchecker \
+		$$(git ls-files | grep '^docs/**/.*md$$') \
+		&& echo "No broken links found"
 
 .PHONY: docs-ci
 docs-ci: clean
