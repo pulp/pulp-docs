@@ -25,6 +25,7 @@ readme = "README.md"
 
 [project.scripts]
 pulp-docs = "pulp_docs.cli:main"
+pulp-linkchecker = "linkchecker.cli:main"
 
 [project.entry-points."mkdocs.plugins"]
 PulpDocs = "pulp_docs.plugin:PulpDocsPlugin"
@@ -34,7 +35,7 @@ PulpDocs = "pulp_docs.plugin:PulpDocsPlugin"
 ###########
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/pulp_docs"]
+packages = ["src/pulp_docs", "src/linkchecker"]
 
 [tool.hatch.build.targets.wheel.force-include]
 # enable using the installed package directly for development
