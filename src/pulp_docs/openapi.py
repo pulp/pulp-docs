@@ -10,32 +10,29 @@ import tempfile
 from pathlib import Path
 from typing import Optional
 
-from mkdocs.config import load_config
-
 from pulp_docs.cli import get_default_mkdocs
-from pulp_docs.plugin import ComponentOption
+from pulp_docs.plugin import ComponentLoader, ComponentSpec, default_lookup_paths
 
 BASE_TMPDIR_NAME = "pulpdocs_tmp"
 CURRENT_DIR = Path(__file__).parent.absolute()
 
 
-def main(output_dir: Path, plugins_filter: Optional[list[str]] = None, dry_run: bool = False):
-    """Creates openapi json files for all or selected plugins in output dir."""
+def main(output_dir: Path, filter_list: Optional[list[str]] = None, dry_run: bool = False):
+    """Creates openapi json files for found plugins in the output_dir.
 
-    def filter_plugin(name: str) -> bool:
-        if not plugins_filter:
-            return True
-        return name in plugins_filter or name == "pulpcore"
+    Optionally filter the found plugins with a filter list.
+    """
 
-    def get_plugins() -> list[ComponentOption]:
-        mkdocs_yml = str(get_default_mkdocs())
-        pulpdocs_plugin = load_config(mkdocs_yml).plugins["PulpDocs"]
-        all_components = pulpdocs_plugin.config.components
-        return [c for c in all_components if c.rest_api]
+    def select_component_fn(comp: ComponentSpec) -> bool:
+        name = comp.component_name
+        return (bool(filter_list) and name in filter_list) or name == "pulpcore"
 
-    all_plugins = get_plugins()
-    all_plugins = [p for p in all_plugins if filter_plugin(p.name)]
-    openapi = OpenAPIGenerator(plugins=all_plugins, dry_run=dry_run)
+    mkdocs_config = get_default_mkdocs()
+    lookup_paths = default_lookup_paths()
+    component_loader = ComponentLoader(lookup_paths, mkdocs_config=mkdocs_config)
+    all_specs = component_loader.load_all().all_specs
+    selected = list(filter(select_component_fn, all_specs))
+    openapi = OpenAPIGenerator(plugins=selected, dry_run=dry_run)
     openapi.generate(target_dir=output_dir)
 
 
@@ -49,8 +46,8 @@ class OpenAPIGenerator:
         dry_run: Whether it should execute the commands or just show them.
     """
 
-    def __init__(self, plugins: list[ComponentOption], dry_run=False):
-        self.pulpcore = next(filter(lambda p: p.name == "pulpcore", plugins))
+    def __init__(self, plugins: list[ComponentSpec], dry_run=False):
+        self.pulpcore = next(filter(lambda p: p.component_name == "pulpcore", plugins))
         self.plugins = plugins + [self.pulpcore]
         self.dry_run = dry_run
 
@@ -75,7 +72,7 @@ class OpenAPIGenerator:
                 outfile,
             )
 
-    def setup_venv(self, plugin: ComponentOption):
+    def setup_venv(self, plugin: ComponentSpec):
         """
         Creates virtualenv with plugin.
         """
@@ -140,8 +137,8 @@ if __name__ == "__main__":
     dry_run = args.dry_run
     dest = Path(args.output_dir)
 
-    plugins_filter = []
+    filter_list = []
     if args.plugin_list:
-        plugins_filter = [str(p) for p in args.plugin_list.split(",") if p]
+        filter_list = [str(p) for p in args.plugin_list.split(",") if p]
 
-    main(dest, plugins_filter, dry_run)
+    main(dest, filter_list, dry_run)
