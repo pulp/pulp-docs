@@ -1,0 +1,10 @@
+---
+- id: "linkchecker"
+  name: "Link Checker"
+  description: "Validates site: links in markdown files"
+  entry: "linkchecker"
+  language: "python"
+  types: ["markdown"]
+  pass_filenames: true
+  require_serial: true
+...
