@@ -5,10 +5,9 @@ from pathlib import Path
 import click
 import git
 from mkdocs.__main__ import cli as mkdocs_cli
-from mkdocs.config import load_config
 
 from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft, ctx_dryrun, ctx_path
-from pulp_docs.plugin import load_components
+from pulp_docs.plugin import ComponentLoader, default_lookup_paths
 
 
 def blog_callback(ctx: click.Context, param: click.Parameter, value: bool) -> bool:
@@ -122,16 +121,13 @@ dryrun_option = click.option(
 def fetch(dest, config_file, path_exclude):
     """Fetch repositories to destination dir."""
     dest_path = Path(dest)
-    pulpdocs_plugin = load_config(config_file).plugins["PulpDocs"]
-    all_components = pulpdocs_plugin.config.components
-    all_repositories_set = {r.git_url for r in all_components if r.git_url}
-    found_components = load_components(path_exclude, pulpdocs_plugin.config, draft=True)
-    found_repositories_set = {r.git_url for r in found_components}
-    final_repositories_set = all_repositories_set - found_repositories_set
-
+    lookup_paths = default_lookup_paths()
+    component_loader = ComponentLoader(lookup_paths, mkdocs_config=config_file)
+    missing_comps = component_loader.load_all().missing
+    missing_repos = {comp.git_url for comp in missing_comps}
     if not dest_path.exists():
         dest_path.mkdir(parents=True)
-    asyncio.run(clone_repositories(final_repositories_set, dest_path))
+    asyncio.run(clone_repositories(missing_repos, dest_path))
 
 
 main = mkdocs_cli

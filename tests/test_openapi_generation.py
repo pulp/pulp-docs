@@ -7,8 +7,8 @@ from pulp_docs.openapi import main as openapi_main
 class TestOpenApiGeneration:
     def test_dry_run(self, tmp_path: Path, monkeypatch):
         output_dir = tmp_path / "openapi"
-        plugins_filter = ["pulp_rpm", "pulp_file"]
-        openapi_main(output_dir=output_dir, plugins_filter=plugins_filter, dry_run=True)
+        filter_list = ["pulp_rpm", "pulp_file"]
+        openapi_main(output_dir=output_dir, filter_list=filter_list, dry_run=True)
 
     def test_sample_generation(self, tmp_path: Path, monkeypatch):
         output_dir = tmp_path / "openapi"
@@ -17,8 +17,8 @@ class TestOpenApiGeneration:
 
         with monkeypatch.context() as m:
             m.setenv("TMPDIR", str(tmp_path))
-            plugins_filter = ["pulp_rpm", "pulp_file"]
-            openapi_main(output_dir=output_dir, plugins_filter=plugins_filter)
+            filter_list = ["pulp_rpm", "pulp_file"]
+            openapi_main(output_dir=output_dir, filter_list=filter_list)
 
         output_paths = [f for f in output_dir.glob("*.json")]
         output_ls = [f.name for f in output_paths]

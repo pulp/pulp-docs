@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import json
 import sys
 import tomllib
@@ -9,7 +11,7 @@ from pathlib import Path
 import httpx
 import yaml
 from git import GitCommandError, Repo
-from mkdocs.config import Config, config_options
+from mkdocs.config import Config, config_options, load_config
 from mkdocs.config.defaults import MkDocsConfig
 from mkdocs.exceptions import PluginError
 from mkdocs.plugins import BasePlugin, get_plugin_logger
@@ -39,60 +41,188 @@ This is a generated page. See how to add a custom overview page for your plugin
 
 
 @config_options.SubConfig
-class ComponentOption(Config):
-    title = config_options.Type(str)
-    path = config_options.Type(str)
-    kind = config_options.Type(str)
+class ComponentSpec(Config):
+    """The fundamental static specs of a component."""
+
     git_url = config_options.Type(str, default="")
+    path = config_options.Type(str)
+    title = config_options.Type(str)
+    kind = config_options.Type(str)
     rest_api = config_options.Type(str, default="")
 
     @property
-    def name(self) -> str:
+    def component_name(self) -> str:
         return self.path.rpartition("/")[-1]
+
+    @property
+    def repository_name(self) -> str:
+        return self.path.split("/")[0]
 
     @property
     def label(self) -> str:
         return self.rest_api
 
 
+class PulpDocsPluginConfig(Config):
+    components = config_options.ListOfItems(ComponentSpec, default=[])
+
+
 @dataclass(frozen=True)
-class Component:
-    title: str
-    path: str
-    kind: str
-    git_url: str
-    rest_api: str
+class LoadedComponent:
+    """Full representation of a specific loaded component."""
 
-    version: str
+    spec: ComponentSpec
     repository_dir: Path
-    component_dir: Path
+    pkg_version: str
+    git_revision: str
+    git_dirty: bool
 
-    @classmethod
-    def build(cls, find_path: list[str], component_opt: ComponentOption):
-        body = dict(component_opt)
-        repository_name = component_opt.path.split("/")[0]
-        for dir_spec in find_path:
-            repo_filter, _, basedir = dir_spec.rpartition("@")
-            if repo_filter and repo_filter != repository_name:
+    @property
+    def component_dir(self) -> Path:
+        return self.repository_dir.parent / self.spec.path
+
+    @property
+    def component_name(self) -> str:
+        return self.spec.component_name
+
+    @property
+    def repository_name(self) -> str:
+        return self.spec.repository_name
+
+    @property
+    def label(self) -> str:
+        return self.spec.label
+
+
+class LoadResult(t.NamedTuple):
+    all_specs: list[ComponentSpec]
+    loaded: list[LoadedComponent]
+    missing: list[ComponentSpec]
+
+
+class RepositoryFinder:
+    def __init__(self, lookup_paths: list[str] | None = None):
+        # Maps lookup paths to a filter list of repository names
+        # If the filter list is empty, use that path to find any repository
+        self.lookup_dir_to_filter_list: dict[Path, list[str]] = defaultdict(list)
+        for lookup_path in lookup_paths or []:
+            self.add_lookup_path(lookup_path)
+
+    def add_lookup_path(self, lookup_path: str):
+        """Add either global or scoped lookup_path internally.
+
+        A global lookup_path doesn't have a component specifier. E.g: '/some/random/path'
+        A scoped lookup_path have a component specifier. E.g: 'pulpcore@/some/random/path'
+        """
+        repository_name, _, lookup_dir = lookup_path.rpartition("@")
+        path = Path(lookup_dir)
+        if not repository_name:  # lookup path is not scoped (aka, is global)
+            self.lookup_dir_to_filter_list[path].clear()
+        else:
+            self.lookup_dir_to_filter_list[path].append(repository_name)
+
+    def find(self, repo_name: str) -> Path | None:
+        for lookup_dir, filter_list in self.lookup_dir_to_filter_list.items():
+            # apply path scoping if it's a scoped path
+            if filter_list and repo_name not in filter_list:
                 continue
-            basedir = Path(basedir)
-            component_dir = basedir / component_opt.path
-            if component_dir.exists():
-                version = "unknown"
-                try:
-                    pyproject = component_dir / "pyproject.toml"
-                    version = tomllib.loads(pyproject.read_text())["project"]["version"]
-                except Exception:
-                    pass
-                body["version"] = version
-                body["repository_dir"] = basedir / repository_name
-                body["component_dir"] = component_dir
-                return cls(**body)
+            repo_dir = lookup_dir / repo_name
+            if repo_dir.exists():
+                return repo_dir
         return None
 
 
-class PulpDocsPluginConfig(Config):
-    components = config_options.ListOfItems(ComponentOption, default=[])
+class ComponentLoader:
+    def __init__(
+        self,
+        lookup_paths: list[str],
+        mkdocs_config: t.Optional[Path] = None,
+        pulpdocs_plugin: t.Optional[PulpDocsPlugin] = None,
+        draft: bool = False,
+    ):
+        """Manage finding and loading plugins from config file or mkdocs plugin.
+
+        Exactly one of `mkdocs_config` or `pulpdocs_plugin` must be provided.
+
+        Args:
+            lookup_paths: The list of lookup paths for the repositories. A lookup path has
+                the form: [repo@]path. Example: "pulpcore@/tmp/", "/tmp/workdir".
+            mkdocs_config: Load components from an mkdocs config file.
+            pulpdocs_plugin: Load components from a PulpDocsPlugin instance
+            draft: Whether it fails if any component is missing
+        """
+        if bool(mkdocs_config) is bool(pulpdocs_plugin):
+            raise ValueError("Provide exactly one of 'mkdocs_config' or 'pulpdocs_plugin'.")
+        if mkdocs_config:
+            pulpdocs_plugin = load_config(str(mkdocs_config)).plugins["PulpDocs"]  # type: ignore
+        else:
+            pulpdocs_plugin = pulpdocs_plugin
+        self.component_specs: list[ComponentSpec] = pulpdocs_plugin.config.components  # type: ignore
+        self.repository_finder = RepositoryFinder(lookup_paths)
+
+    def load_component(self, comp_spec: ComponentSpec) -> LoadedComponent | None:
+        repo_name = comp_spec.repository_name
+        repo_dir = self.repository_finder.find(repo_name)
+        if repo_dir:
+            comp_dir = repo_dir.parent / comp_spec.component_name
+            extractor = DataExtractor(comp_dir, repo_dir)
+            return LoadedComponent(
+                spec=comp_spec,
+                repository_dir=repo_dir,
+                pkg_version=extractor.package_version() or "unknown",
+                git_revision=extractor.git_revision() or "unknown",
+                git_dirty=extractor.git_dirty(),
+            )
+        return None
+
+    def load_all(self) -> LoadResult:
+        loaded_comps: list[LoadedComponent] = []
+        missing_comps: list[ComponentSpec] = []
+        for comp_spec in self.component_specs:
+            loaded_comp = self.load_component(comp_spec)
+            if loaded_comp:
+                loaded_comps.append(loaded_comp)
+            else:
+                missing_comps.append(comp_spec)
+        return LoadResult(
+            all_specs=self.component_specs,
+            loaded=loaded_comps,
+            missing=missing_comps,
+        )
+
+
+class DataExtractor:
+    def __init__(self, comp_dir: Path, repo_dir: Path):
+        self.comp_dir = comp_dir
+        self.repo_dir = repo_dir
+
+    def package_version(self) -> t.Optional[str]:
+        try:
+            pyproject = self.comp_dir / "pyproject.toml"
+            return tomllib.loads(pyproject.read_text())["project"]["version"]
+        except Exception:
+            log.warning(f"Couldnt' get  version for: {str(self.comp_dir)}")
+        return None
+
+    def git_revision(self) -> t.Optional[str]:
+        try:
+            repo = Repo(self.repo_dir)
+            return repo.head.commit.hexsha
+        except Exception as e:
+            log.warning(f"Couldn't get git revision for: {str(self.repo_dir)}.\n{e}")
+        return None
+
+    def git_dirty(self) -> bool:
+        try:
+            repo = Repo(self.repo_dir)
+            return repo.is_dirty()
+        except Exception as e:
+            log.warning(f"Couldn't check git status for: {str(self.repo_dir)}.\n{e}")
+        return False
+
+
+def default_lookup_paths() -> list[str]:
+    return [str(Path().cwd().parent)]
 
 
 class ComponentNav:
@@ -228,30 +358,30 @@ def _render_sitemap_item(nav_item: Page | Section) -> str:
 
 
 def get_component_data(
-    component: Component,
+    comp: LoadedComponent,
 ) -> dict[str, str | list[str]]:
     """Generate data for rendering md templates."""
-    component_dir = component.component_dir
-    path = component_dir.name
+    comp_dir = comp.component_dir
+    comp_name = comp.component_name
 
     github_org = "pulp"
     try:
-        template_config = component_dir / "template_config.yml"
+        template_config = comp.component_dir / "template_config.yml"
         github_org = yaml.safe_load(template_config.read_text())["github_org"]
     except Exception:
         pass
 
     links = []
-    if component.rest_api:
-        links.append(f"[REST API](site:{path}/restapi/)")
-    links.append(f"[Repository](https://github.com/{github_org}/{path})")
-    if (component_dir / "CHANGES.md").exists():
-        links.append(f"[Changelog](site:{path}/changes/)")
+    if comp.spec.rest_api:
+        links.append(f"[REST API](site:{comp_name}/restapi/)")
+    links.append(f"[Repository](https://github.com/{github_org}/{comp_name})")
+    if (comp_dir / "CHANGES.md").exists():
+        links.append(f"[Changelog](site:{comp_name}/changes/)")
 
     return {
-        "title": f"[{component.title}](site:{path}/)",
-        "kind": component.kind,
-        "version": component.version,
+        "title": f"[{comp.spec.title}](site:{comp_name}/)",
+        "kind": comp.spec.kind,
+        "version": comp.pkg_version,
         "links": links,
     }
 
@@ -272,36 +402,21 @@ def rss_items() -> list:
     return rss_feed["items"][:20]
 
 
-def load_components(find_path: list[str], config: PulpDocsPluginConfig, draft: bool):
-    loaded_components = []
-    for component_opt in config.components:
-        component = Component.build(find_path, component_opt)
-        if component:
-            loaded_components.append(component)
-    all_components = {o.path for o in config.components}
-    missing_components = all_components.difference({o.path for o in loaded_components})
-    if not missing_components:
-        return loaded_components
-    # handle missing_components case
-    missing_components = sorted(missing_components)
-    if not draft:
-        raise PluginError(f"Components missing: {missing_components}.")
-    return loaded_components
-
-
 def log_pulp_config(
-    mkdocs_file: str, path: list[str], loaded_components: list[Component], site_dir: str
+    mkdocs_file: str, path: list[str], loaded_components: list[LoadedComponent], site_dir: str
 ):
-    components_map = defaultdict(list)
-    sorted_components = sorted(loaded_components, key=lambda o: o.path)
-    for component in sorted_components:
-        basedir = str(component.repository_dir.parent)
-        components_map[basedir].append(str(component.path))
+    repo_dir_to_comp_info = defaultdict(list)
+    for comp in loaded_components:
+        repo_dir = str(comp.repository_dir.parent)
+        short_sha = comp.git_revision[:6]
+        dirty = " (DIRTY)" if comp.git_dirty else ""
+        info = f"{short_sha} {str(comp.spec.path)}{dirty}"
+        repo_dir_to_comp_info[repo_dir].append(info)
     display = {
         "config": str(mkdocs_file),
         "path": str(path),
         "build_output": site_dir,
-        "loaded_components": components_map,
+        "loaded_components": repo_dir_to_comp_info,
     }
     display_str = json.dumps(display, indent=4)
     log.info(display_str)
@@ -317,6 +432,7 @@ def get_pulpdocs_git_url(config: PulpDocsPluginConfig):
 class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
     def on_config(self, config: MkDocsConfig) -> MkDocsConfig | None:
         # mkdocs may default to the installation dir
+        self.mkdocs_yml_dir = Path(config.docs_dir).parent
         if "site-packages" in config.site_dir:
             config.site_dir = str(Path.cwd() / "site")
 
@@ -324,18 +440,23 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         self.docstrings = ctx_docstrings.get()
         self.draft = ctx_draft.get()
         self.dryrun = ctx_dryrun.get()
-
-        self.mkdocs_yml_dir = Path(config.docs_dir).parent
-        self.find_path = ctx_path.get() or [str(Path().cwd().parent)]
-        self.loaded_components = load_components(self.find_path, self.config, self.draft)
         self.pulpdocs_git_url = get_pulpdocs_git_url(self.config)
 
+        # Load components
+        lookup_paths = ctx_path.get() or default_lookup_paths()
+        component_loader = ComponentLoader(lookup_paths, pulpdocs_plugin=self)
+        load_result = component_loader.load_all()
+        if load_result.missing and not self.draft:
+            missing_names = sorted([p.component_name for p in load_result.missing])
+            raise PluginError(f"Components missing: {missing_names}.")
+        self.loaded_comps = load_result.loaded
+
         mkdocs_file = self.mkdocs_yml_dir / "mkdocs.yml"
-        log_pulp_config(mkdocs_file, self.find_path, self.loaded_components, config.site_dir)
+        log_pulp_config(mkdocs_file, lookup_paths, self.loaded_comps, config.site_dir)
 
         mkdocstrings_config = config.plugins["mkdocstrings"].config
         components_var = []
-        for component in self.loaded_components:
+        for component in self.loaded_comps:
             components_var.append(get_component_data(component))
             config.watch.append(str(component.component_dir / "docs"))
             component_dir = component.component_dir.resolve()
@@ -359,8 +480,8 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         return config
 
     def on_files(self, files: Files, /, *, config: MkDocsConfig) -> Files | None:
-        log.info(f"Loading Pulp components: {self.loaded_components}")
-        pulp_docs_component = [c for c in self.loaded_components if c.path == "pulp-docs"]
+        log.info(f"Loading Pulp components: {self.loaded_comps}")
+        pulp_docs_component = [c for c in self.loaded_comps if c.spec.path == "pulp-docs"]
         if pulp_docs_component:
             pulp_docs_git = Repo(pulp_docs_component[0].repository_dir)
         else:
@@ -369,77 +490,75 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
 
         user_nav: dict[str, t.Any] = {}
         dev_nav: dict[str, t.Any] = {}
-        for component in self.loaded_components:
-            component_dir = component.component_dir
-
-            log.info(f"Fetching docs from '{component.title}'.")
-            git_repository_dir = component.repository_dir
-            try:
-                git_branch = Repo(git_repository_dir).active_branch.name
-            except TypeError:
-                git_branch = None
-            component_parent_dir = component_dir.parent
-            component_docs_dir = component_dir / "staging_docs"
-            if component_docs_dir.exists():
-                log.warning(f"Found deprecated 'staging_docs' directory in {component.path}.")
-            else:
-                component_docs_dir = component_dir / "docs"
-            component_slug = Path(component_dir.name)
-            assert component_docs_dir.exists()
-
+        for comp in self.loaded_comps:
+            title = comp.spec.title
+            kind = comp.spec.kind
+            git_url = comp.spec.git_url
+            rest_api = comp.spec.rest_api
+            comp_dir = comp.component_dir
+            repo_dir = comp.repository_dir
+            component_slug = Path(comp_dir.name)
             component_nav = ComponentNav(config, component_slug)
 
-            for dirpath, dirnames, filenames in component_docs_dir.walk(follow_symlinks=True):
+            log.info(f"Fetching docs from '{comp.spec.title}'.")
+            try:
+                git_branch = Repo(repo_dir).active_branch.name
+            except TypeError:
+                git_branch = None
+            docs_dir = comp_dir / "staging_docs"
+            if docs_dir.exists():
+                log.warning(f"Found deprecated 'staging_docs' directory in {comp.spec.path}.")
+            else:
+                docs_dir = comp_dir / "docs"
+            if not docs_dir.exists():
+                breakpoint()
+            assert docs_dir.exists()
+
+            for dirpath, dirnames, filenames in docs_dir.walk(follow_symlinks=True):
                 for filename in filenames:
                     abs_src_path = dirpath / filename
                     pulp_meta: dict[str, t.Any] = {}
-                    if abs_src_path == component_docs_dir / "index.md":
+                    if abs_src_path == docs_dir / "index.md":
                         src_uri = component_slug / "index.md"
                         pulp_meta["index"] = True
-                    elif abs_src_path == component_docs_dir / "dev" / "index.md":
+                    elif abs_src_path == docs_dir / "dev" / "index.md":
                         src_uri = component_slug / "docs" / "dev" / "index.md"
                         pulp_meta["index"] = True
                     else:
-                        src_uri = abs_src_path.relative_to(component_parent_dir)
+                        src_uri = abs_src_path.relative_to(comp_dir.parent)
                     log.debug(f"Adding {abs_src_path} as {src_uri}.")
-                    if component.git_url and git_branch:
-                        git_relpath = abs_src_path.relative_to(git_repository_dir)
-                        pulp_meta["edit_url"] = (
-                            f"{component.git_url}/edit/{git_branch}/{git_relpath}"
-                        )
+                    if git_url and git_branch:
+                        git_relpath = abs_src_path.relative_to(repo_dir)
+                        pulp_meta["edit_url"] = f"{git_url}/edit/{git_branch}/{git_relpath}"
                     new_file = File.generated(config, src_uri, abs_src_path=abs_src_path)
                     new_file.pulp_meta = pulp_meta
                     files.append(new_file)
                     component_nav.add(src_uri)
 
             for src_uri in component_nav.missing_indices():
-                content = MISSING_INDEX_TEMPLATE.format(component=component.title)
-                new_file = File.generated(config, src_uri, content=content)
+                content = MISSING_INDEX_TEMPLATE.format(component=title)
+                new_file = File.generated(config, str(src_uri), content=content)
                 new_file.pulp_meta = {"index": True}
                 files.append(new_file)
 
-            if component.rest_api:
+            if rest_api:
                 src_uri = component_slug / "restapi.md"
-                content = REST_API_MD.format(component=component.title)
+                content = REST_API_MD.format(component=title)
                 files.append(File.generated(config, src_uri, content=content))
                 component_nav.add(src_uri)
                 if pulp_docs_git:  # currently we require pulp_docs repository to be loaded
-                    api_json_content = self.get_openapi_spec(component, pulp_docs_git)
-                    src_uri = (component_dir / "api.json").relative_to(component_parent_dir)
+                    api_json_content = self.get_openapi_spec(comp, pulp_docs_git)
+                    src_uri = (comp_dir / "api.json").relative_to(comp_dir.parent)
                     files.append(File.generated(config, src_uri, content=api_json_content))
 
-            component_changes = component_dir / "CHANGES.md"
+            component_changes = comp_dir / "CHANGES.md"
             if component_changes.exists():
                 src_uri = component_slug / "changes.md"
                 files.append(File.generated(config, src_uri, abs_src_path=component_changes))
                 component_nav.add(src_uri)
 
-            user_nav.setdefault(component.kind, []).append(
-                {component.title: component_nav.user_nav()}
-            )
-            dev_nav.setdefault(component.kind, []).append(
-                {component.title: component_nav.dev_nav()}
-            )
+            user_nav.setdefault(kind, []).append({title: component_nav.user_nav()})
+            dev_nav.setdefault(kind, []).append({title: component_nav.dev_nav()})
 
         config.nav[1]["User Manual"].extend([{key: value} for key, value in user_nav.items()])
         config.nav[2]["Developer Manual"].extend([{key: value} for key, value in dev_nav.items()])
@@ -488,11 +607,12 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
             page.edit_url = edit_url
         return page
 
-    def get_openapi_spec(self, component, pulp_docs_git: Repo) -> str:
+    def get_openapi_spec(self, comp: LoadedComponent, pulp_docs_git: Repo) -> str:
+        rest_api = comp.spec.rest_api
         found_locally = False
         remotes = [""] + [f"{o}/" for o in pulp_docs_git.remotes]
         for remote in remotes:
-            git_object = f"{remote}docs-data:data/openapi_json/{component.rest_api}-api.json"
+            git_object = f"{remote}docs-data:data/openapi_json/{rest_api}-api.json"
             try:
                 api_json = pulp_docs_git.git.show(git_object)
                 found_locally = True
@@ -502,7 +622,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
 
         if not found_locally:
             pulp_docs_git.git.fetch(self.pulpdocs_git_url, "docs-data")
-            git_object = f"FETCH_HEAD:data/openapi_json/{component.rest_api}-api.json"
+            git_object = f"FETCH_HEAD:data/openapi_json/{rest_api}-api.json"
             api_json = pulp_docs_git.git.show(git_object)
         # fix the logo url for restapi page, which is defined in the openapi spec file
         api_json = api_json.replace(
