@@ -1,15 +1,18 @@
+from __future__ import annotations
+
 import json
 import sys
 import tomllib
 import typing as t
 from collections import defaultdict
+from contextlib import suppress
 from dataclasses import dataclass
 from pathlib import Path
 
 import httpx
 import yaml
 from git import GitCommandError, Repo
-from mkdocs.config import Config, config_options
+from mkdocs.config import Config, config_options, load_config
 from mkdocs.config.defaults import MkDocsConfig
 from mkdocs.exceptions import PluginError
 from mkdocs.plugins import BasePlugin, get_plugin_logger
@@ -39,7 +42,7 @@ This is a generated page. See how to add a custom overview page for your plugin
 
 
 @config_options.SubConfig
-class ComponentOption(Config):
+class ComponentDefinition(Config):
     title = config_options.Type(str)
     path = config_options.Type(str)
     kind = config_options.Type(str)
@@ -47,12 +50,88 @@ class ComponentOption(Config):
     rest_api = config_options.Type(str, default="")
 
     @property
-    def name(self) -> str:
+    def component_name(self) -> str:
         return self.path.rpartition("/")[-1]
+
+    @property
+    def repository_name(self) -> str:
+        return self.path.split("/")[0]
 
     @property
     def label(self) -> str:
         return self.rest_api
+
+
+class ComponentFinder:
+    def __init__(
+        self, component_defs: list[ComponentDefinition] | None, lookup_paths: list[str] | None
+    ):
+        # maps component names to its definition and lookup paths
+        self.name_to_comp_def: dict[str, ComponentDefinition] = {}
+        self.name_to_lookup_dirs: dict[str, list[Path]] = defaultdict(list)
+        # initial population
+        for comp_def in component_defs or []:
+            self.add_comp_def(comp_def)
+        for lookup_path in lookup_paths or []:
+            self.add_lookup_path(lookup_path)
+
+    def add_lookup_path(self, lookup_path: str):
+        component_name, _, lookup_dir = lookup_path.rpartition("@")
+        self.name_to_lookup_dirs[component_name].append(lookup_dir)
+
+    def add_comp_def(self, comp_def: ComponentDefinition):
+        self.name_to_comp_def[comp_def.component_name] = comp_def
+
+    def load_component(self, comp_name: str) -> Component | None:
+        comp_def = self.name_to_comp_def[comp_name]
+        comp_data = dict(comp_def)
+        lookup_dirs = self.name_to_lookup_dirs[comp_def.component_name]
+        repository_name = comp_def.repository_name
+        for lookup_dir in lookup_dirs:
+            comp_dir = lookup_dir / comp_def.path
+            if comp_dir.exists():
+                comp_data["version"] = self._get_comp_version(comp_dir)
+                comp_data["repository_dir"] = lookup_dir / repository_name
+                comp_data["component_dir"] = comp_dir
+                return Component(**comp_data)
+        return None
+
+    def load_all(self) -> tuple[list[Component], list[ComponentDefinition]]:
+        loaded_comps = []
+        missing_comps = []
+        for comp_name, comp_opt in self.name_to_comp_def.items():
+            component = self.load_component(comp_name)
+            if component:
+                loaded_comps.append(component)
+            else:
+                missing_comps.append(component)
+        return missing_comps, loaded_comps
+
+    def _get_comp_version(self, comp_dir: Path) -> str:
+        with suppress(Exception):
+            pyproject = comp_dir / "pyproject.toml"
+            return tomllib.loads(pyproject.read_text())["project"]["version"]
+        return "unknown"
+
+
+def load_components_from(
+    config_file: Path | None = None,
+    pulpdocs_plugin: PulpDocsPlugin | None = None,
+    lookup_paths: list[str] | None = None,
+) -> tuple[list[Component], list[ComponentDefinition]]:
+    """Load all components defined by pulp-docs using lookup_paths."""
+    if bool(config_file) is bool(pulpdocs_plugin):
+        raise ValueError("Provide exactly one of 'config_file' or 'pulpdocs_plugin'.")
+    _lookup_paths = lookup_paths or [str(Path().cwd().parent)]
+    if config_file:
+        _pulpdocs_plugin = load_config(str(config_file)).plugins["PulpDocs"]
+    else:
+        _pulpdocs_plugin = pulpdocs_plugin
+
+    component_defs = _pulpdocs_plugin.config.components
+    comp_finder = ComponentFinder(component_defs, _lookup_paths)
+    loaded, missing = comp_finder.load_all()
+    return loaded, missing
 
 
 @dataclass(frozen=True)
@@ -67,32 +146,9 @@ class Component:
     repository_dir: Path
     component_dir: Path
 
-    @classmethod
-    def build(cls, find_path: list[str], component_opt: ComponentOption):
-        body = dict(component_opt)
-        repository_name = component_opt.path.split("/")[0]
-        for dir_spec in find_path:
-            repo_filter, _, basedir = dir_spec.rpartition("@")
-            if repo_filter and repo_filter != repository_name:
-                continue
-            basedir = Path(basedir)
-            component_dir = basedir / component_opt.path
-            if component_dir.exists():
-                version = "unknown"
-                try:
-                    pyproject = component_dir / "pyproject.toml"
-                    version = tomllib.loads(pyproject.read_text())["project"]["version"]
-                except Exception:
-                    pass
-                body["version"] = version
-                body["repository_dir"] = basedir / repository_name
-                body["component_dir"] = component_dir
-                return cls(**body)
-        return None
-
 
 class PulpDocsPluginConfig(Config):
-    components = config_options.ListOfItems(ComponentOption, default=[])
+    components = config_options.ListOfItems(ComponentDefinition, default=[])
 
 
 class ComponentNav:
@@ -272,23 +328,6 @@ def rss_items() -> list:
     return rss_feed["items"][:20]
 
 
-def load_components(find_path: list[str], config: PulpDocsPluginConfig, draft: bool):
-    loaded_components = []
-    for component_opt in config.components:
-        component = Component.build(find_path, component_opt)
-        if component:
-            loaded_components.append(component)
-    all_components = {o.path for o in config.components}
-    missing_components = all_components.difference({o.path for o in loaded_components})
-    if not missing_components:
-        return loaded_components
-    # handle missing_components case
-    missing_components = sorted(missing_components)
-    if not draft:
-        raise PluginError(f"Components missing: {missing_components}.")
-    return loaded_components
-
-
 def log_pulp_config(
     mkdocs_file: str, path: list[str], loaded_components: list[Component], site_dir: str
 ):
@@ -317,6 +356,7 @@ def get_pulpdocs_git_url(config: PulpDocsPluginConfig):
 class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
     def on_config(self, config: MkDocsConfig) -> MkDocsConfig | None:
         # mkdocs may default to the installation dir
+        self.mkdocs_yml_dir = Path(config.docs_dir).parent
         if "site-packages" in config.site_dir:
             config.site_dir = str(Path.cwd() / "site")
 
@@ -324,18 +364,24 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         self.docstrings = ctx_docstrings.get()
         self.draft = ctx_draft.get()
         self.dryrun = ctx_dryrun.get()
-
-        self.mkdocs_yml_dir = Path(config.docs_dir).parent
-        self.find_path = ctx_path.get() or [str(Path().cwd().parent)]
-        self.loaded_components = load_components(self.find_path, self.config, self.draft)
         self.pulpdocs_git_url = get_pulpdocs_git_url(self.config)
 
+        # Load components
+        lookup_paths = ctx_path.get() or None
+        loaded_comps, missing_comps = load_components_from(
+            pulpdocs_plugin=self, lookup_paths=lookup_paths
+        )
+        if missing_comps and not self.draft:
+            missing_comps = sorted(missing_comps)
+            raise PluginError(f"Components missing: {missing_comps}.")
+        self.loaded_comps = loaded_comps
+
         mkdocs_file = self.mkdocs_yml_dir / "mkdocs.yml"
-        log_pulp_config(mkdocs_file, self.find_path, self.loaded_components, config.site_dir)
+        log_pulp_config(mkdocs_file, self.find_path, self.loaded_comps, config.site_dir)
 
         mkdocstrings_config = config.plugins["mkdocstrings"].config
         components_var = []
-        for component in self.loaded_components:
+        for component in self.loaded_comps:
             components_var.append(get_component_data(component))
             config.watch.append(str(component.component_dir / "docs"))
             component_dir = component.component_dir.resolve()
@@ -359,8 +405,8 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         return config
 
     def on_files(self, files: Files, /, *, config: MkDocsConfig) -> Files | None:
-        log.info(f"Loading Pulp components: {self.loaded_components}")
-        pulp_docs_component = [c for c in self.loaded_components if c.path == "pulp-docs"]
+        log.info(f"Loading Pulp components: {self.loaded_comps}")
+        pulp_docs_component = [c for c in self.loaded_comps if c.path == "pulp-docs"]
         if pulp_docs_component:
             pulp_docs_git = Repo(pulp_docs_component[0].repository_dir)
         else:
@@ -369,7 +415,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
 
         user_nav: dict[str, t.Any] = {}
         dev_nav: dict[str, t.Any] = {}
-        for component in self.loaded_components:
+        for component in self.loaded_comps:
             component_dir = component.component_dir
 
             log.info(f"Fetching docs from '{component.title}'.")

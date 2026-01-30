@@ -13,7 +13,7 @@ from typing import Optional
 from mkdocs.config import load_config
 
 from pulp_docs.cli import get_default_mkdocs
-from pulp_docs.plugin import ComponentOption
+from pulp_docs.plugin import ComponentDefinition
 
 BASE_TMPDIR_NAME = "pulpdocs_tmp"
 CURRENT_DIR = Path(__file__).parent.absolute()
@@ -27,7 +27,7 @@ def main(output_dir: Path, plugins_filter: Optional[list[str]] = None, dry_run: 
             return True
         return name in plugins_filter or name == "pulpcore"
 
-    def get_plugins() -> list[ComponentOption]:
+    def get_plugins() -> list[ComponentDefinition]:
         mkdocs_yml = str(get_default_mkdocs())
         pulpdocs_plugin = load_config(mkdocs_yml).plugins["PulpDocs"]
         all_components = pulpdocs_plugin.config.components
@@ -49,7 +49,7 @@ class OpenAPIGenerator:
         dry_run: Whether it should execute the commands or just show them.
     """
 
-    def __init__(self, plugins: list[ComponentOption], dry_run=False):
+    def __init__(self, plugins: list[ComponentDefinition], dry_run=False):
         self.pulpcore = next(filter(lambda p: p.name == "pulpcore", plugins))
         self.plugins = plugins + [self.pulpcore]
         self.dry_run = dry_run
@@ -75,7 +75,7 @@ class OpenAPIGenerator:
                 outfile,
             )
 
-    def setup_venv(self, plugin: ComponentOption):
+    def setup_venv(self, plugin: ComponentDefinition):
         """
         Creates virtualenv with plugin.
         """
