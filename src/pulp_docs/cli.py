@@ -130,8 +130,33 @@ def fetch(dest, config_file, path_exclude):
     asyncio.run(clone_repositories(missing_repos, dest_path))
 
 
+@click.command()
+@click.argument("output_dir", type=click.Path(file_okay=False))
+@click.option(
+    "--dry-run/--no-dry-run",
+    default=False,
+    help="Show podman commands without executing them.",
+)
+@click.option(
+    "-l",
+    "--plugin-list",
+    type=str,
+    default="",
+    help="Comma-separated list of plugins to generate schemas for. Uses all if omitted.",
+)
+def openapi(output_dir, dry_run, plugin_list):
+    """Generate OpenAPI JSON schemas using a podman container."""
+    from pulp_docs.openapi import main as openapi_main
+
+    dest = Path(output_dir)
+    filter_list = [p.strip() for p in plugin_list.split(",") if p.strip()] if plugin_list else []
+    exit_code = openapi_main(dest, filter_list, dry_run)
+    raise SystemExit(exit_code)
+
+
 main = mkdocs_cli
 main.add_command(fetch)
+main.add_command(openapi)
 
 
 def get_default_mkdocs() -> Path | None:
