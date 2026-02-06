@@ -2,143 +2,177 @@
 Module for generating open-api json files for selected Pulp plugins.
 """
 
-import argparse
+from __future__ import annotations
+
 import os
 import shutil
 import subprocess
-import tempfile
+import sys
+from contextlib import contextmanager
 from pathlib import Path
-from typing import Optional
+from typing import NamedTuple, Optional
 
 from pulp_docs.cli import get_default_mkdocs
-from pulp_docs.plugin import ComponentLoader, ComponentSpec, default_lookup_paths
+from pulp_docs.plugin import ComponentLoader, default_lookup_paths
 
-BASE_TMPDIR_NAME = "pulpdocs_tmp"
-CURRENT_DIR = Path(__file__).parent.absolute()
+CONTAINER_IMAGE = "quay.io/pulp/pulp-minimal:stable"
+CONTAINER_NAME_PREFIX = "pulpdocs-openapi"
+CONTAINER_OUTPUT_PATH = "/output"
 
 
-def main(output_dir: Path, filter_list: Optional[list[str]] = None, dry_run: bool = False):
+def main(output_dir: Path, filter_list: Optional[list[str]] = None, dry_run: bool = False) -> int:
     """Creates openapi json files for found plugins in the output_dir.
 
     Optionally filter the found plugins with a filter list.
     """
 
-    def select_component_fn(comp: ComponentSpec) -> bool:
-        name = comp.component_name
-        return (bool(filter_list) and name in filter_list) or name == "pulpcore"
+    try:
+        openapi_plugins = get_plugins(filter_list or [])
+        openapi = OpenAPIGenerator(plugins=openapi_plugins, dry_run=dry_run)
+        openapi.generate(output_dir=output_dir)
+    except Exception as e:
+        print(e, file=sys.stderr)
+        return 1
+    return 0
 
+
+def get_plugins(filter_list: list[str]) -> list[OpenApiPlugin]:
     mkdocs_config = get_default_mkdocs()
     lookup_paths = default_lookup_paths()
-    component_loader = ComponentLoader(lookup_paths, mkdocs_config=mkdocs_config)
-    all_specs = component_loader.load_all().all_specs
-    selected = list(filter(select_component_fn, all_specs))
-    openapi = OpenAPIGenerator(plugins=selected, dry_run=dry_run)
-    openapi.generate(target_dir=output_dir)
+    load_result = ComponentLoader(lookup_paths, mkdocs_config=mkdocs_config).load_all()
+    all_specs = load_result.all_specs
+
+    if filter_list:
+        selected = [p for p in all_specs if p.component_name in filter_list]
+    else:
+        selected = all_specs
+
+    return [OpenApiPlugin(git_url=spec.git_url, plugin_label=spec.label) for spec in selected]
+
+
+class OpenApiPlugin(NamedTuple):
+    git_url: str
+    plugin_label: str
 
 
 class OpenAPIGenerator:
-    """
-    Responsible for setting up a python environment with the required
-    Pulp packages to generate openapi schemas for all registered plugins.
+    """Generate openapi schemas for all registered plugins.
 
     Args:
-        plugin_remotes: A list of git remote urls of the required Pulp packages.
+        plugins: A list of OpenApiPlugin with git URLs and labels.
         dry_run: Whether it should execute the commands or just show them.
+        image: The container image to use.
     """
 
-    def __init__(self, plugins: list[ComponentSpec], dry_run=False):
-        self.pulpcore = next(filter(lambda p: p.component_name == "pulpcore", plugins))
-        self.plugins = plugins + [self.pulpcore]
+    def __init__(
+        self,
+        plugins: list[OpenApiPlugin],
+        dry_run: bool = False,
+        image: str = CONTAINER_IMAGE,
+    ):
+        self.plugins = plugins
+        self.git_urls = list({p.git_url for p in plugins})
         self.dry_run = dry_run
+        self.image = image
 
-        # setup working tmpdir
-        self.tmpdir = Path(tempfile.gettempdir()) / BASE_TMPDIR_NAME / "openapi"
-        self.venv_path = os.path.join(self.tmpdir, "venv")
-
-        shutil.rmtree(self.tmpdir, ignore_errors=True)
-        os.makedirs(self.tmpdir, exist_ok=True)
-
-    def generate(self, target_dir: Path):
+    def generate(self, output_dir: Path):
         """Generate openapi json files at target directory."""
+        self._check_podman()
+        output_dir.mkdir(parents=True, exist_ok=True)
+        container = self._init_container(output_dir)
+        with container.run():
+            self._install_plugins(container)
+            self._generate_schemas(container)
+
+    def _init_container(self, output_dir: Path):
+        abs_target = str(output_dir.resolve())
+        return PodmanContainer(
+            image=self.image,
+            volumes={abs_target: CONTAINER_OUTPUT_PATH},
+            env={"PULP_CONTENT_ORIGIN": "NONE"},
+            dry_run=self.dry_run,
+        )
+
+    def _install_plugins(self, container: PodmanContainer):
+        if not self.git_urls:
+            return
+        pip_args = [f"git+{url}" for url in self.git_urls]
+        container.exec("pip", "install", *pip_args)
+
+    def _check_podman(self):
+        if not self.dry_run and not shutil.which("podman"):
+            raise RuntimeError("podman is required but was not found on PATH. ")
+
+    def _generate_schemas(self, container: PodmanContainer):
         for plugin in self.plugins:
-            self.setup_venv(plugin)
-            outfile = str(target_dir / f"{plugin.label}-api.json")
-            self.run_python(
+            outfile = f"{CONTAINER_OUTPUT_PATH}/{plugin.plugin_label}-api.json"
+            container.exec(
                 "pulpcore-manager",
                 "openapi",
                 "--component",
-                plugin.label,
+                plugin.plugin_label,
                 "--file",
                 outfile,
             )
 
-    def setup_venv(self, plugin: ComponentSpec):
-        """
-        Creates virtualenv with plugin.
-        """
-        create_venv_cmd = ("python", "-m", "venv", self.venv_path)
-        # setuptools provides distutils for python >=3.12.
-        install_cmd = ["pip", "install", f"git+{plugin.git_url}", "setuptools"]
 
-        if self.dry_run is True:
-            print(" ".join(create_venv_cmd))
-        else:
-            shutil.rmtree(self.venv_path, ignore_errors=True)
-            subprocess.run(create_venv_cmd, check=True)
+class PodmanContainer:
+    """Manage a podman container lifecycle (create, start, exec, remove).
 
-        self.run_python(*install_cmd)
+    Use the `run` context manager to ensure cleanup::
 
-    def run_python(self, *cmd: str) -> str:
-        """Run a binary command from within the tmp venv.
+        container = PodmanContainer(image="myimage", volumes={"/host": "/container"})
+        with container.run():
+            container.exec("pip", "install", "some-package")
+            container.exec("my-command", "--flag", "value")
+    """
 
-        Basically: $tmp-venv/bin/{first-arg} {remaining-args}
-        """
-        cmd_bin = os.path.join(self.venv_path, f"bin/{cmd[0]}")
-        final_cmd = [cmd_bin] + list(cmd[1:])
-        if self.dry_run is True:
-            cmd_str = " ".join(final_cmd)
-            print(cmd_str)
-            return cmd_str
+    def __init__(
+        self,
+        image: str,
+        volumes: Optional[dict[str, str]] = None,
+        env: Optional[dict[str, str]] = None,
+        name: Optional[str] = None,
+        dry_run: bool = False,
+    ):
+        self.image = image
+        self.volumes = volumes or {}
+        self.env = env or {}
+        self.name = name or f"{CONTAINER_NAME_PREFIX}-{os.getpid()}"
+        self.dry_run = dry_run
 
-        os.environ["PULP_CONTENT_ORIGIN"] = "NONE"
-        result = subprocess.run(final_cmd, check=True)
-        return result.stdout.decode() if result.stdout else ""
+    @contextmanager
+    def run(self):
+        """Start the container and remove it on exit."""
+        self._create()
+        self._start()
+        try:
+            yield self
+        finally:
+            self._remove()
 
+    def exec(self, *cmd: str):
+        """Run a command inside the container."""
+        self._run_podman("exec", self.name, *cmd)
 
-def parse_args():
-    parser = argparse.ArgumentParser(
-        "pulp-docs openapi generation",
-        description="Creates a venv for each plugin and generate its openapi-json to output_dir.",
-    )
-    parser.add_argument(
-        "output_dir", help="The directory where the {plugin}-api.json will be stored."
-    )
-    parser.add_argument(
-        "--dry-run",
-        action="store_true",  # default False
-        help="Dont run the commands, only output how they are constructed.",
-    )
-    parser.add_argument(
-        "-l",
-        "--plugin-list",
-        type=str,
-        help="List of plugins that should be used. Use all if omitted.",
-    )
-    args = parser.parse_args()
+    def _create(self):
+        cmd = ["create", "--name", self.name]
+        for key, value in self.env.items():
+            cmd.extend(["-e", f"{key}={value}"])
+        for host_path, container_path in self.volumes.items():
+            cmd.extend(["-v", f"{host_path}:{container_path}:Z"])
+        cmd.extend([self.image, "sleep", "infinity"])
+        self._run_podman(*cmd)
 
-    # validation
-    if not os.path.isdir(args.output_dir):
-        raise TypeError("Must provide an existing directory.")
-    return args
+    def _start(self):
+        self._run_podman("start", self.name)
 
+    def _remove(self):
+        self._run_podman("rm", "--force", self.name)
 
-if __name__ == "__main__":
-    args = parse_args()
-    dry_run = args.dry_run
-    dest = Path(args.output_dir)
-
-    filter_list = []
-    if args.plugin_list:
-        filter_list = [str(p) for p in args.plugin_list.split(",") if p]
-
-    main(dest, filter_list, dry_run)
+    def _run_podman(self, *args: str):
+        cmd = ["podman", *args]
+        if self.dry_run:
+            print(" ".join(cmd))
+            return
+        subprocess.run(cmd, check=True)
