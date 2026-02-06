@@ -510,8 +510,6 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                 log.warning(f"Found deprecated 'staging_docs' directory in {comp.spec.path}.")
             else:
                 docs_dir = comp_dir / "docs"
-            if not docs_dir.exists():
-                breakpoint()
             assert docs_dir.exists()
 
             for dirpath, dirnames, filenames in docs_dir.walk(follow_symlinks=True):

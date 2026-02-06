@@ -72,6 +72,9 @@ exclude = [
     "venv",
     ".venv",
 ]
+extend-select = [
+    "T100",  # detect breakpoints
+]
 
 [tool.ruff.format]
 quote-style = "double"
