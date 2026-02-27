@@ -12,10 +12,37 @@ class LinkError(NamedTuple):
     src_lineno: int
 
 
+class LinkChecker:
+    def __init__(self, basedir: str):
+        self._relative_path, self._component_name = os.path.split(basedir)
+
+    def is_valid(self, link: str) -> bool:
+        """Return True if link is valid or should be ignored."""
+        rel_link, _ = self._normalize_link(link)
+        if self._should_skip(rel_link):
+            return True
+        abs_link = os.path.join(self._relative_path, rel_link)
+        return file_exists(abs_link)
+
+    def _should_skip(self, link: str) -> bool:
+        if not link.startswith(f"{self._component_name}/"):
+            return True
+        if link.strip("/") == f"{self._component_name}/restapi":
+            return True
+        return False
+
+    def _normalize_link(self, link: str):
+        link = link.removeprefix("site:")
+        link, _, query_string = link.partition("#")
+        link = link.strip()
+        return link, query_string
+
+
 def linkchecker(component_rootdir: str, filenames: list[str]) -> int:
+    checker = LinkChecker(component_rootdir)
     cumulative_errors = []
     for file in filenames:
-        link_errors = check_file(component_rootdir, file)
+        link_errors = check_file(file, checker)
         if not link_errors:
             continue
         cumulative_errors.extend(link_errors)
@@ -25,15 +52,11 @@ def linkchecker(component_rootdir: str, filenames: list[str]) -> int:
     return 0
 
 
-def check_file(component_rootdir: str, src_filename: str) -> list[LinkError]:
-    if not file_exists(src_filename):
-        # log.warning(f"{file} does not exist.")
-        return []
-
+def check_file(src_filename: str, checker: LinkChecker) -> list[LinkError]:
     link_errors = []
     with open(src_filename, "r") as fd:
         for src_lineno, src_line in enumerate(fd):
-            invalid_links = check_line(src_line, component_rootdir)
+            invalid_links = check_line(src_line, checker)
             for link_target in invalid_links:
                 link_error = LinkError(
                     link_target=link_target,
@@ -45,36 +68,9 @@ def check_file(component_rootdir: str, src_filename: str) -> list[LinkError]:
     return link_errors
 
 
-def check_line(line: str, basedir: str) -> list[str]:
-    """Return invalid link in line."""
-    invalid_links = []
-    relative_path, component_name = os.path.split(basedir)
-
-    for original_link in get_links(line):
-        rel_link, query_string = normalize_link(original_link)
-        if should_skip(rel_link, component_name):
-            continue
-        abs_link = os.path.join(relative_path, rel_link)
-        if not file_exists(abs_link):
-            invalid_links.append(original_link)
-    return invalid_links
-
-
-def should_skip(link: str, component_name: str):
-    # Filter out external component links
-    if not link.startswith(f"{component_name}/"):
-        return True
-    # Filter out rest api links
-    if link.strip("/") == f"{component_name}/restapi":
-        return True
-    return False
-
-
-def normalize_link(link: str):
-    link = link.removeprefix("site:")
-    link, _, query_string = link.partition("#")
-    link = link.strip()
-    return link, query_string
+def check_line(line: str, checker: LinkChecker) -> list[str]:
+    """Return invalid links in line."""
+    return [link for link in get_links(line) if not checker.is_valid(link)]
 
 
 def get_links(line: str) -> list[str]:
