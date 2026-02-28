@@ -4,6 +4,7 @@ help:
 	@echo "    dist-build   Build the distribution package"
 	@echo "    dist-test    Test the built distribution package"
 	@echo "    docs-ci      Build docs for COMPONENT's CI"
+	@echo "    test         Run the test suite"
 	@echo "    lint         Run pre-commit hooks on all files"
 	@echo "    clean        Remove build artifacts and temporary files"
 	@echo "    help         Show this help message"
@@ -21,6 +22,10 @@ dist-test:
 	venv-dist/bin/python -c "from pulp_docs.cli import get_default_mkdocs; assert get_default_mkdocs()"
 	venv-dist/bin/twine check --strict dist/pulp_docs-*.whl
 	@echo "Build is fine!"
+
+.PHONY: test
+test:
+	uv run --with-requirements test_requirements.txt pytest
 
 .PHONY: lint
 lint:
