@@ -17,7 +17,7 @@
             "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
-            "core": "3.103.0.dev"
+            "core": "3.105.0.dev"
         },
         "x-pulp-domain-enabled": false
     },
@@ -677,8 +677,7 @@
                         "name": "repository_version",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
@@ -1099,24 +1098,21 @@
                         "name": "repository_version",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
                         "name": "repository_version_added",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
                         "name": "repository_version_removed",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
@@ -1315,24 +1311,21 @@
                         "name": "repository_version",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
                         "name": "repository_version_added",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
                         "name": "repository_version_removed",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
@@ -1802,24 +1795,21 @@
                         "name": "repository_version",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
                         "name": "repository_version_added",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
                         "name": "repository_version_removed",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
@@ -2243,24 +2233,21 @@
                         "name": "repository_version",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
                         "name": "repository_version_added",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
                         "name": "repository_version_removed",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
@@ -2664,24 +2651,21 @@
                         "name": "repository_version",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
                         "name": "repository_version_added",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
                         "name": "repository_version_removed",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
@@ -3093,24 +3077,21 @@
                         "name": "repository_version",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
                         "name": "repository_version_added",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
                         "name": "repository_version_removed",
                         "schema": {
                             "type": "string"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                        }
                     },
                     {
                         "in": "query",
@@ -7365,10 +7346,8 @@
                         "in": "query",
                         "name": "repository",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        },
-                        "description": "Filter results where repository matches value"
+                            "type": "string"
+                        }
                     },
                     {
                         "in": "query",
@@ -7376,11 +7355,9 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "type": "string",
-                                "format": "uuid"
+                                "type": "string"
                             }
                         },
-                        "description": "Filter results where repository is in a comma-separated list of values",
                         "explode": false,
                         "style": "form"
                     },
@@ -7692,10 +7669,8 @@
                         "in": "query",
                         "name": "repository",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        },
-                        "description": "Filter results where repository matches value"
+                            "type": "string"
+                        }
                     },
                     {
                         "in": "query",
@@ -7703,11 +7678,9 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "type": "string",
-                                "format": "uuid"
+                                "type": "string"
                             }
                         },
-                        "description": "Filter results where repository is in a comma-separated list of values",
                         "explode": false,
                         "style": "form"
                     },
@@ -7970,10 +7943,8 @@
                         "in": "query",
                         "name": "repository_version",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        },
-                        "description": "Filter results where repository_version matches value"
+                            "type": "string"
+                        }
                     },
                     {
                         "in": "query",
@@ -11329,10 +11300,8 @@
                         "in": "query",
                         "name": "domain",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        },
-                        "description": "Foreign Key referenced by HREF"
+                            "type": "string"
+                        }
                     },
                     {
                         "in": "path",
@@ -13874,10 +13843,8 @@
                         "in": "query",
                         "name": "repository_version",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        },
-                        "description": "Repository Version referenced by HREF/PRN"
+                            "type": "string"
+                        }
                     },
                     {
                         "in": "query",
@@ -14613,10 +14580,8 @@
                         "in": "query",
                         "name": "remote",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        },
-                        "description": "Foreign Key referenced by HREF"
+                            "type": "string"
+                        }
                     },
                     {
                         "in": "query",
@@ -14960,10 +14925,8 @@
                         "in": "query",
                         "name": "remote",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        },
-                        "description": "Foreign Key referenced by HREF"
+                            "type": "string"
+                        }
                     },
                     {
                         "in": "query",
@@ -18004,10 +17967,8 @@
                         "in": "query",
                         "name": "child_tasks",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        },
-                        "description": "Filter results where child_tasks matches value"
+                            "type": "string"
+                        }
                     },
                     {
                         "in": "query",
@@ -18232,10 +18193,8 @@
                         "in": "query",
                         "name": "parent_task",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        },
-                        "description": "Filter results where parent_task matches value"
+                            "type": "string"
+                        }
                     },
                     {
                         "in": "query",
@@ -18501,10 +18460,8 @@
                         "in": "query",
                         "name": "task_group",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        },
-                        "description": "Filter results where task_group matches value"
+                            "type": "string"
+                        }
                     },
                     {
                         "in": "query",
@@ -21818,10 +21775,8 @@
                         "in": "query",
                         "name": "domain",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        },
-                        "description": "Foreign Key referenced by HREF"
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "limit",
@@ -22297,10 +22252,8 @@
                         "in": "query",
                         "name": "repo_versions",
                         "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        },
-                        "description": "Filter results where repo_versions matches value"
+                            "type": "string"
+                        }
                     },
                     {
                         "in": "query",
@@ -23061,25 +23014,6 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
-                    "base_url": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The URL for accessing the publication as defined by this distribution."
-                    },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
-                    },
-                    "content_guard": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "uri",
-                        "description": "An optional content-guard."
-                    },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
@@ -23089,39 +23023,58 @@
                             ]
                         }
                     },
-                    "no_content_change_since": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "A unique name. Ex, `rawhide` and `stable`."
-                    },
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
                     "pulp_last_updated": {
                         "type": "string",
                         "format": "date-time",
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
-                    "pulp_href": {
+                    "base_url": {
                         "type": "string",
-                        "format": "uri",
-                        "readOnly": true
+                        "readOnly": true,
+                        "description": "The URL for accessing the publication as defined by this distribution."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "base_path": {
+                        "type": "string",
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "hidden": {
                         "type": "boolean",
                         "default": false,
                         "description": "Whether this distribution should be shown in the content app."
                     },
-                    "base_path": {
+                    "pulp_href": {
                         "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "no_content_change_since": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                    },
+                    "content_guard": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uri",
+                        "description": "An optional content-guard."
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     }
                 },
                 "required": [
@@ -23935,6 +23888,44 @@
                         "type": "string",
                         "description": "The URL of an external content source."
                     },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        }
+                    },
+                    "policy": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/GenericRemoteResponsePolicyEnum"
+                            }
+                        ],
+                        "default": "immediate",
+                        "description": "The policy to use when downloading content.\n\n* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
+                    },
+                    "hidden_fields": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "is_set": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "required": [
+                                "is_set",
+                                "name"
+                            ]
+                        },
+                        "readOnly": true,
+                        "description": "List of hidden (write only) fields"
+                    },
                     "ca_cert": {
                         "type": [
                             "string",
@@ -23960,23 +23951,6 @@
                         ],
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
-                        }
-                    },
-                    "download_concurrency": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
-                        "format": "int64",
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
-                    },
                     "max_retries": {
                         "type": [
                             "integer",
@@ -23984,15 +23958,6 @@
                         ],
                         "format": "int64",
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
-                    },
-                    "policy": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/GenericRemoteResponsePolicyEnum"
-                            }
-                        ],
-                        "default": "immediate",
-                        "description": "The policy to use when downloading content.\n\n* `immediate` - When syncing, download all metadata and content now.\n* `on_demand` - When syncing, download metadata, but do not download content now. Instead, download content as clients request it, and save it in Pulp to be served for future client requests.\n* `streamed` - When syncing, download metadata, but do not download content now. Instead,download content as clients request it, but never save it in Pulp. This causes future requests for that same content to have to be downloaded again."
                     },
                     "total_timeout": {
                         "type": [
@@ -24037,6 +24002,14 @@
                         },
                         "description": "Headers for aiohttp.Clientsession"
                     },
+                    "download_concurrency": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64",
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
+                    },
                     "rate_limit": {
                         "type": [
                             "integer",
@@ -24044,26 +24017,6 @@
                         ],
                         "format": "int64",
                         "description": "Limits requests per second for each concurrent downloader"
-                    },
-                    "hidden_fields": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "is_set": {
-                                    "type": "boolean"
-                                }
-                            },
-                            "required": [
-                                "is_set",
-                                "name"
-                            ]
-                        },
-                        "readOnly": true,
-                        "description": "List of hidden (write only) fields"
                     }
                 },
                 "required": [
@@ -25177,6 +25130,15 @@
                         "writeOnly": true,
                         "minLength": 1,
                         "description": "A url that Pulp can download and turn into the content unit."
+                    },
+                    "downloader_config": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/RemoteNetworkConfig"
+                            }
+                        ],
+                        "writeOnly": true,
+                        "description": "Configuration for the download process (e.g., proxies, auth, timeouts). Only applicable when providing a 'file_url."
                     }
                 }
             },
@@ -27850,7 +27812,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2025-12-30",
+                        "default": "2026-01-30",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
@@ -27977,6 +27939,250 @@
                 "required": [
                     "connected"
                 ]
+            },
+            "RemoteNetworkConfig": {
+                "type": "object",
+                "description": "Shared network configuration fields and validation logic used by both\nRemoteSerializer and UploadSerializerFieldsMixin.",
+                "properties": {
+                    "ca_cert": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "minLength": 1,
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                    },
+                    "client_cert": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "minLength": 1,
+                        "description": "A PEM encoded client certificate used for authentication."
+                    },
+                    "client_key": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "writeOnly": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded private key used for authentication."
+                    },
+                    "tls_validation": {
+                        "type": "boolean",
+                        "description": "If True, TLS peer validation must be performed."
+                    },
+                    "proxy_url": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "minLength": 1,
+                        "description": "The proxy URL. Format: scheme://host:port"
+                    },
+                    "proxy_username": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "writeOnly": true,
+                        "minLength": 1,
+                        "description": "The username to authenticte to the proxy."
+                    },
+                    "proxy_password": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "writeOnly": true,
+                        "minLength": 1,
+                        "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
+                    },
+                    "username": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "writeOnly": true,
+                        "minLength": 1,
+                        "description": "The username to be used for authentication when syncing."
+                    },
+                    "password": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "writeOnly": true,
+                        "minLength": 1,
+                        "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
+                    },
+                    "max_retries": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64",
+                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
+                    },
+                    "total_timeout": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double",
+                        "minimum": 0.0,
+                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "connect_timeout": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double",
+                        "minimum": 0.0,
+                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "sock_connect_timeout": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double",
+                        "minimum": 0.0,
+                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "sock_read_timeout": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double",
+                        "minimum": 0.0,
+                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "headers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Headers for aiohttp.Clientsession"
+                    },
+                    "download_concurrency": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64",
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
+                    },
+                    "rate_limit": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64",
+                        "description": "Limits requests per second for each concurrent downloader"
+                    }
+                }
+            },
+            "RemoteNetworkConfigResponse": {
+                "type": "object",
+                "description": "Shared network configuration fields and validation logic used by both\nRemoteSerializer and UploadSerializerFieldsMixin.",
+                "properties": {
+                    "ca_cert": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                    },
+                    "client_cert": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "A PEM encoded client certificate used for authentication."
+                    },
+                    "tls_validation": {
+                        "type": "boolean",
+                        "description": "If True, TLS peer validation must be performed."
+                    },
+                    "proxy_url": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The proxy URL. Format: scheme://host:port"
+                    },
+                    "max_retries": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64",
+                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
+                    },
+                    "total_timeout": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double",
+                        "minimum": 0.0,
+                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "connect_timeout": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double",
+                        "minimum": 0.0,
+                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "sock_connect_timeout": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double",
+                        "minimum": 0.0,
+                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "sock_read_timeout": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "double",
+                        "minimum": 0.0,
+                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "headers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Headers for aiohttp.Clientsession"
+                    },
+                    "download_concurrency": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64",
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
+                    },
+                    "rate_limit": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "format": "int64",
+                        "description": "Limits requests per second for each concurrent downloader"
+                    }
+                }
             },
             "Repair": {
                 "type": "object",
