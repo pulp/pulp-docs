@@ -1,31 +1,68 @@
 import json
+import shutil
 from pathlib import Path
 
-from pulp_docs.openapi import main as openapi_main
+import pytest
+
+from pulp_docs.cli import fetch_repositories
+from pulp_docs.openapi import OpenAPIGenerator, OpenApiPlugin
 
 
-class TestOpenApiGeneration:
-    def test_dry_run(self, tmp_path: Path, monkeypatch):
-        output_dir = tmp_path / "openapi"
-        filter_list = ["pulp_rpm", "pulp_file"]
-        openapi_main(output_dir=output_dir, filter_list=filter_list, dry_run=True)
+@pytest.fixture(scope="session")
+def repositories(tmp_path_factory: pytest.TempPathFactory) -> dict[str, OpenApiPlugin]:
+    """Fetch all component repositories for testing."""
+    dest_path = tmp_path_factory.mktemp("repos")
+    specs = fetch_repositories(dest_path, fetch_all=True)
+    result = {}
+    for spec in specs:
+        if not spec.rest_api:
+            continue
+        repo_path = dest_path / spec.repository_name
+        if repo_path.exists():
+            result[spec.component_name] = OpenApiPlugin(
+                repository_path=repo_path, plugin_label=spec.label
+            )
+    return result
 
-    def test_sample_generation(self, tmp_path: Path, monkeypatch):
-        output_dir = tmp_path / "openapi"
-        output_dir.mkdir()
-        assert len(list(output_dir.glob("*.json"))) == 0
 
-        with monkeypatch.context() as m:
-            m.setenv("TMPDIR", str(tmp_path))
-            filter_list = ["pulp_rpm", "pulp_file"]
-            openapi_main(output_dir=output_dir, filter_list=filter_list)
+class TestOpenAPIGeneratorClass:
+    def test_deduplicate_repository_paths(self, repositories: dict[str, OpenApiPlugin]):
+        """pulpcore and pulp_file share the same repository path."""
+        filter = ["rpm", "file", "core"]
+        plugins = [p for p in repositories.values() if p.plugin_label in filter]
+        gen = OpenAPIGenerator(plugins, dry_run=True)
+        # pulpcore and pulp_file share the same repository
+        assert len(gen.repository_paths) == 2
 
-        output_paths = [f for f in output_dir.glob("*.json")]
-        output_ls = [f.name for f in output_paths]
-        output_labels = [f.rpartition("-")[0] for f in output_ls]
-        assert len(output_ls) == 3
-        assert {"core-api.json", "rpm-api.json", "file-api.json"} == set(output_ls)
+    def test_podman_not_found(self, tmp_path, monkeypatch, repositories: dict[str, OpenApiPlugin]):
+        monkeypatch.setattr(shutil, "which", lambda _: None)
+        core_plugin = repositories["pulpcore"]
+        gen = OpenAPIGenerator([core_plugin])
+        with pytest.raises(RuntimeError, match="podman is required"):
+            gen.generate(output_dir=tmp_path)
 
-        for label, path in zip(output_labels, output_paths):
-            openapi_data = json.loads(path.read_text())
-            assert label in openapi_data["info"]["x-pulp-app-versions"].keys()
+    @pytest.mark.parametrize(
+        "filter",
+        [
+            pytest.param(None, id="all"),
+            pytest.param(["pulp_rpm", "pulp_container", "pulp_python"], id="partial"),
+        ],
+    )
+    def test_generate(self, tmp_path: Path, repositories: dict[str, OpenApiPlugin], filter):
+        """Generate schemas for plugins (all or filtered subset)."""
+        if filter is None:
+            plugins = list(repositories.values())
+        else:
+            plugins = [repositories[name] for name in filter if name in repositories]
+
+        generator = OpenAPIGenerator(plugins)
+        generator.generate(output_dir=tmp_path)
+        files = list(tmp_path.glob("*.json"))
+
+        assert len(files) == len(plugins)
+        for plugin in plugins:
+            schema_file = tmp_path / f"{plugin.plugin_label}-api.json"
+            assert schema_file.exists()
+
+            content = json.loads(schema_file.read_text())
+            assert plugin.plugin_label in content["info"]["x-pulp-app-versions"]

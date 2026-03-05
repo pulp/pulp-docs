@@ -454,6 +454,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         mkdocs_file = self.mkdocs_yml_dir / "mkdocs.yml"
         log_pulp_config(mkdocs_file, lookup_paths, self.loaded_comps, config.site_dir)
 
+        # Configure mkdocs plugins
         mkdocstrings_config = config.plugins["mkdocstrings"].config
         components_var = []
         for component in self.loaded_comps:
