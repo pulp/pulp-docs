@@ -7,7 +7,7 @@ import git
 from mkdocs.__main__ import cli as mkdocs_cli
 
 from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft, ctx_dryrun, ctx_path
-from pulp_docs.plugin import ComponentLoader, default_lookup_paths
+from pulp_docs.plugin import ComponentLoader, ComponentSpec, default_lookup_paths
 
 
 def blog_callback(ctx: click.Context, param: click.Parameter, value: bool) -> bool:
@@ -94,6 +94,53 @@ dryrun_option = click.option(
 )
 
 
+def fetch_repositories(
+    dest: Path,
+    config_file: Path | None = None,
+    component_filter: list[str] | None = None,
+    fetch_all: bool = False,
+) -> list[ComponentSpec]:
+    """Fetch missing repositories and return component specs.
+
+    Args:
+        dest: Destination directory for cloned repositories
+        config_file: Path to mkdocs.yml config file (defaults to bundled config)
+        component_filter: Optional list of component names to fetch (fetches all if None)
+        fetch_all: If True, fetch all components from all_specs (not just missing)
+
+    Returns:
+        List of ComponentSpec objects for the fetched/available components
+    """
+    if config_file is None:
+        config_file = get_default_mkdocs()
+
+    lookup_paths = default_lookup_paths()
+    component_loader = ComponentLoader(lookup_paths, mkdocs_config=config_file)
+    load_result = component_loader.load_all()
+
+    # Determine which components to fetch
+    if fetch_all:
+        to_fetch = load_result.all_specs
+    else:
+        to_fetch = load_result.missing
+
+    if component_filter:
+        to_fetch = [c for c in to_fetch if c.component_name in component_filter]
+
+    repos_to_fetch = {comp.git_url for comp in to_fetch}
+
+    if repos_to_fetch:
+        dest.mkdir(parents=True, exist_ok=True)
+        asyncio.run(clone_repositories(repos_to_fetch, dest))
+
+    # Return specs for requested components
+    specs = load_result.all_specs
+    if component_filter:
+        specs = [s for s in specs if s.component_name in component_filter]
+
+    return specs
+
+
 @click.command()
 @click.option(
     "--dest",
@@ -121,42 +168,11 @@ dryrun_option = click.option(
 def fetch(dest, config_file, path_exclude):
     """Fetch repositories to destination dir."""
     dest_path = Path(dest)
-    lookup_paths = default_lookup_paths()
-    component_loader = ComponentLoader(lookup_paths, mkdocs_config=config_file)
-    missing_comps = component_loader.load_all().missing
-    missing_repos = {comp.git_url for comp in missing_comps}
-    if not dest_path.exists():
-        dest_path.mkdir(parents=True)
-    asyncio.run(clone_repositories(missing_repos, dest_path))
-
-
-@click.command()
-@click.argument("output_dir", type=click.Path(file_okay=False))
-@click.option(
-    "--dry-run/--no-dry-run",
-    default=False,
-    help="Show podman commands without executing them.",
-)
-@click.option(
-    "-l",
-    "--plugin-list",
-    type=str,
-    default="",
-    help="Comma-separated list of plugins to generate schemas for. Uses all if omitted.",
-)
-def openapi(output_dir, dry_run, plugin_list):
-    """Generate OpenAPI JSON schemas using a podman container."""
-    from pulp_docs.openapi import main as openapi_main
-
-    dest = Path(output_dir)
-    filter_list = [p.strip() for p in plugin_list.split(",") if p.strip()] if plugin_list else []
-    exit_code = openapi_main(dest, filter_list, dry_run)
-    raise SystemExit(exit_code)
+    fetch_repositories(dest_path, config_file)
 
 
 main = mkdocs_cli
 main.add_command(fetch)
-main.add_command(openapi)
 
 
 def get_default_mkdocs() -> Path | None:
