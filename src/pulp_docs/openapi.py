@@ -7,51 +7,37 @@ from __future__ import annotations
 import os
 import shutil
 import subprocess
-import sys
 from contextlib import contextmanager
 from pathlib import Path
 from typing import NamedTuple, Optional
-
-from pulp_docs.cli import get_default_mkdocs
-from pulp_docs.plugin import ComponentLoader, default_lookup_paths
 
 CONTAINER_IMAGE = "quay.io/pulp/pulp-minimal:stable"
 CONTAINER_NAME_PREFIX = "pulpdocs-openapi"
 CONTAINER_OUTPUT_PATH = "/output"
 
 
-def main(output_dir: Path, filter_list: Optional[list[str]] = None, dry_run: bool = False) -> int:
-    """Creates openapi json files for found plugins in the output_dir.
+class PodmanError(Exception):
+    """Raised when a podman command fails."""
 
-    Optionally filter the found plugins with a filter list.
-    """
-
-    try:
-        openapi_plugins = get_plugins(filter_list or [])
-        openapi = OpenAPIGenerator(plugins=openapi_plugins, dry_run=dry_run)
-        openapi.generate(output_dir=output_dir)
-    except Exception as e:
-        print(e, file=sys.stderr)
-        return 1
-    return 0
+    pass
 
 
-def get_plugins(filter_list: list[str]) -> list[OpenApiPlugin]:
-    mkdocs_config = get_default_mkdocs()
-    lookup_paths = default_lookup_paths()
-    load_result = ComponentLoader(lookup_paths, mkdocs_config=mkdocs_config).load_all()
-    all_specs = load_result.all_specs
+class PluginInstallError(Exception):
+    """Raised when plugin installation fails."""
 
-    if filter_list:
-        selected = [p for p in all_specs if p.component_name in filter_list]
-    else:
-        selected = all_specs
-
-    return [OpenApiPlugin(git_url=spec.git_url, plugin_label=spec.label) for spec in selected]
+    def __init__(self, repository_paths: list[Path]):
+        plugins_str = ", ".join(str(path.name) for path in repository_paths)
+        message = (
+            "Failed to install plugins.\n"
+            "Are all these components Pulp projects with REST APIs?\n"
+            f"Trying with: {plugins_str}"
+        )
+        super().__init__(message)
+        self.repository_paths = repository_paths
 
 
 class OpenApiPlugin(NamedTuple):
-    git_url: str
+    repository_path: Path
     plugin_label: str
 
 
@@ -59,7 +45,7 @@ class OpenAPIGenerator:
     """Generate openapi schemas for all registered plugins.
 
     Args:
-        plugins: A list of OpenApiPlugin with git URLs and labels.
+        plugins: A list of OpenApiPlugin with repository paths and labels.
         dry_run: Whether it should execute the commands or just show them.
         image: The container image to use.
     """
@@ -71,12 +57,14 @@ class OpenAPIGenerator:
         image: str = CONTAINER_IMAGE,
     ):
         self.plugins = plugins
-        self.git_urls = list({p.git_url for p in plugins})
+        self.repository_paths = list({p.repository_path for p in plugins if p.repository_path})
         self.dry_run = dry_run
         self.image = image
 
     def generate(self, output_dir: Path):
         """Generate openapi json files at target directory."""
+        if not self.repository_paths:
+            return  # nothing to do here
         self._check_podman()
         output_dir.mkdir(parents=True, exist_ok=True)
         container = self._init_container(output_dir)
@@ -86,18 +74,26 @@ class OpenAPIGenerator:
 
     def _init_container(self, output_dir: Path):
         abs_target = str(output_dir.resolve())
+        volumes = {abs_target: CONTAINER_OUTPUT_PATH}
+
+        # Mount repository paths as volumes using repository names
+        for repo_path in self.repository_paths:
+            container_repo_path = f"/repos/{repo_path.name}"
+            volumes[str(repo_path.resolve())] = container_repo_path
+
         return PodmanContainer(
             image=self.image,
-            volumes={abs_target: CONTAINER_OUTPUT_PATH},
+            volumes=volumes,
             env={"PULP_CONTENT_ORIGIN": "NONE"},
             dry_run=self.dry_run,
         )
 
     def _install_plugins(self, container: PodmanContainer):
-        if not self.git_urls:
-            return
-        pip_args = [f"git+{url}" for url in self.git_urls]
-        container.exec("pip", "install", *pip_args)
+        pip_args = [f"/repos/{repo_path.name}" for repo_path in self.repository_paths]
+        try:
+            container.exec("pip", "install", *pip_args)
+        except PodmanError as e:
+            raise PluginInstallError(self.repository_paths) from e
 
     def _check_podman(self):
         if not self.dry_run and not shutil.which("podman"):
@@ -175,4 +171,10 @@ class PodmanContainer:
         if self.dry_run:
             print(" ".join(cmd))
             return
-        subprocess.run(cmd, check=True)
+        try:
+            subprocess.run(cmd, check=True)
+        except subprocess.CalledProcessError as e:
+            cmd_str = " ".join(cmd)
+            raise PodmanError(
+                f"Podman command failed: {cmd_str}\nReturn code: {e.returncode}"
+            ) from e
