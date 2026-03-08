@@ -14,7 +14,7 @@
             "identifier": "GPL-2.0-or-later"
         },
         "x-logo": {
-            "url": "https://pulpproject.org/pulp-docs/docs/assets/pulp_logo_icon.svg"
+            "url": "https://pulpproject.org/assets/pulp_logo_icon.svg"
         },
         "x-pulp-app-versions": {
             "core": "3.105.0.dev"
@@ -14194,10 +14194,11 @@
                         "schema": {
                             "type": "string",
                             "enum": [
-                                "file.file"
+                                "file.file",
+                                "file.git"
                             ]
                         },
-                        "description": "Pulp type\n\n* `file.file` - file.file"
+                        "description": "Pulp type\n\n* `file.file` - file.file\n* `file.git` - file.git"
                     },
                     {
                         "in": "query",
@@ -14207,11 +14208,12 @@
                             "items": {
                                 "type": "string",
                                 "enum": [
-                                    "file.file"
+                                    "file.file",
+                                    "file.git"
                                 ]
                             }
                         },
-                        "description": "Multiple values may be separated by commas.\n\n* `file.file` - file.file",
+                        "description": "Multiple values may be separated by commas.\n\n* `file.file` - file.file\n* `file.git` - file.git",
                         "explode": false,
                         "style": "form"
                     },
@@ -23014,55 +23016,6 @@
                 "type": "object",
                 "description": "A serializer for ArtifactDistribution.",
                 "properties": {
-                    "pulp_last_updated": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
-                    },
-                    "content_guard": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "format": "uri",
-                        "description": "An optional content-guard."
-                    },
-                    "hidden": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Whether this distribution should be shown in the content app."
-                    },
-                    "base_path": {
-                        "type": "string",
-                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
-                    },
-                    "no_content_change_since": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
-                    },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
-                    "base_url": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The URL for accessing the publication as defined by this distribution."
-                    },
-                    "pulp_created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of creation."
-                    },
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
@@ -23075,6 +23028,55 @@
                     "name": {
                         "type": "string",
                         "description": "A unique name. Ex, `rawhide` and `stable`."
+                    },
+                    "base_path": {
+                        "type": "string",
+                        "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
+                    },
+                    "no_content_change_since": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Timestamp since when the distributed content served by this distribution has not changed. If equals to `null`, no guarantee is provided about content changes."
+                    },
+                    "hidden": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether this distribution should be shown in the content app."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
+                    },
+                    "base_url": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The URL for accessing the publication as defined by this distribution."
+                    },
+                    "content_guard": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "uri",
+                        "description": "An optional content-guard."
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
+                    },
+                    "pulp_created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of creation."
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     }
                 },
                 "required": [
@@ -24008,7 +24010,8 @@
                             "null"
                         ],
                         "format": "int64",
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
                     },
                     "rate_limit": {
                         "type": [
@@ -24607,7 +24610,8 @@
                             "string",
                             "null"
                         ],
-                        "minLength": 1
+                        "minLength": 1,
+                        "maxLength": 16
                     },
                     "created": {
                         "type": "string",
@@ -24649,7 +24653,8 @@
                         "type": [
                             "string",
                             "null"
-                        ]
+                        ],
+                        "maxLength": 16
                     },
                     "created": {
                         "type": "string",
@@ -25001,7 +25006,8 @@
                             "null"
                         ],
                         "format": "int64",
-                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
                     },
                     "remote": {
                         "type": [
@@ -25078,7 +25084,8 @@
                             "null"
                         ],
                         "format": "int64",
-                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
                     },
                     "remote": {
                         "type": [
@@ -25328,7 +25335,8 @@
                         "type": [
                             "string",
                             "null"
-                        ]
+                        ],
+                        "maxLength": 16
                     },
                     "created": {
                         "type": "string",
@@ -25507,7 +25515,9 @@
                             "null"
                         ],
                         "format": "int64",
-                        "description": "The time in minutes for how long Pulp will hold orphan Content and Artifacts before they become candidates for deletion by this orphan cleanup task. This should ideally be longer than your longest running task otherwise any content created during that task could be cleaned up before the task finishes. If not specified, a default value is taken from the setting ORPHAN_PROTECTION_TIME."
+                        "description": "The time in minutes for how long Pulp will hold orphan Content and Artifacts before they become candidates for deletion by this orphan cleanup task. This should ideally be longer than your longest running task otherwise any content created during that task could be cleaned up before the task finishes. If not specified, a default value is taken from the setting ORPHAN_PROTECTION_TIME.",
+                        "maximum": 4294967295,
+                        "minimum": 0
                     }
                 }
             },
@@ -27105,7 +27115,8 @@
                             "null"
                         ],
                         "format": "int64",
-                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
                     },
                     "remote": {
                         "type": [
@@ -27812,7 +27823,7 @@
                     "finished_before": {
                         "type": "string",
                         "format": "date-time",
-                        "default": "2026-02-02",
+                        "default": "2026-02-06",
                         "description": "Purge tasks completed earlier than this timestamp. Format '%Y-%m-%d[T%H:%M:%S]'"
                     },
                     "states": {
@@ -28074,7 +28085,8 @@
                             "null"
                         ],
                         "format": "int64",
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
                     },
                     "rate_limit": {
                         "type": [
@@ -28172,7 +28184,8 @@
                             "null"
                         ],
                         "format": "int64",
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
                     },
                     "rate_limit": {
                         "type": [
@@ -28283,7 +28296,8 @@
                             "null"
                         ],
                         "format": "int64",
-                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
                     },
                     "remote": {
                         "type": [
@@ -28639,7 +28653,8 @@
                             "null"
                         ],
                         "format": "int64",
-                        "description": "Total number of bytes"
+                        "description": "Total number of bytes",
+                        "minimum": 0
                     },
                     "used": {
                         "type": [
@@ -28647,7 +28662,8 @@
                             "null"
                         ],
                         "format": "int64",
-                        "description": "Number of bytes in use"
+                        "description": "Number of bytes in use",
+                        "minimum": 0
                     },
                     "free": {
                         "type": [
@@ -28655,7 +28671,8 @@
                             "null"
                         ],
                         "format": "int64",
-                        "description": "Number of free bytes"
+                        "description": "Number of free bytes",
+                        "minimum": 0
                     }
                 },
                 "required": [
