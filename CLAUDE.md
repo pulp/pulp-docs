@@ -7,9 +7,9 @@ Indicate the situation and recommend adding clarifiation to CLAUDE.md file.
 ## What This Project Does
 
 `pulp-docs` is a documentation tool for the Pulp Project ecosystem.
-It main feature is aggregating repositories to build a single website.
+Its main feature is aggregating repositories to build a single website.
 
-## Useuful Commands
+## Useful Commands
 
 ```bash
 make lint  # always run this after significant changes
