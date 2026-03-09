@@ -13,11 +13,11 @@ repos:
   - repo: "https://github.com/astral-sh/ruff-pre-commit"
     rev: "v0.11.10"
     hooks:
-      # Run the linter.
-      - id: "ruff-check"
-        args: ["--show-fixes"]
       # Run the formatter.
       - id: "ruff-format"
+      # Run the linter.
+      - id: "ruff-check"
+        args: ["--show-fixes", "--fix"]
 
   - repo: "https://github.com/adrienverge/yamllint"
     rev: "v1.37.1"
