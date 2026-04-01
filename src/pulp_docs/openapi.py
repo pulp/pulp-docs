@@ -4,9 +4,10 @@ Module for generating open-api json files for selected Pulp plugins.
 
 from __future__ import annotations
 
-import os
 import shutil
 import subprocess
+import tempfile
+import uuid
 from contextlib import contextmanager
 from pathlib import Path
 from typing import NamedTuple, Optional
@@ -61,16 +62,26 @@ class OpenAPIGenerator:
         self.dry_run = dry_run
         self.image = image
 
-    def generate(self, output_dir: Path):
-        """Generate openapi json files at target directory."""
+    def generate(self) -> dict[str, Path]:
+        """
+        Generate openapi json files.
+
+        Return map of plugin labels to generated spec path.
+        """
         if not self.repository_paths:
-            return  # nothing to do here
+            return {}
         self._check_podman()
-        output_dir.mkdir(parents=True, exist_ok=True)
+        output_dir = Path(tempfile.TemporaryDirectory(delete=False).name)
         container = self._init_container(output_dir)
+        label_to_specfile = {}
         with container.run():
             self._install_plugins(container)
-            self._generate_schemas(container)
+            for plugin in self.plugins:
+                filename = f"{plugin.plugin_label}-api.json"
+                self._generate_schema(container, plugin.plugin_label, filename)
+                file_path = output_dir / filename
+                label_to_specfile[plugin.plugin_label] = file_path
+        return label_to_specfile
 
     def _init_container(self, output_dir: Path):
         abs_target = str(output_dir.resolve())
@@ -99,17 +110,17 @@ class OpenAPIGenerator:
         if not self.dry_run and not shutil.which("podman"):
             raise RuntimeError("podman is required but was not found on PATH. ")
 
-    def _generate_schemas(self, container: PodmanContainer):
-        for plugin in self.plugins:
-            outfile = f"{CONTAINER_OUTPUT_PATH}/{plugin.plugin_label}-api.json"
-            container.exec(
-                "pulpcore-manager",
-                "openapi",
-                "--component",
-                plugin.plugin_label,
-                "--file",
-                outfile,
-            )
+    def _generate_schema(
+        self, container: PodmanContainer, plugin_label: str, filename: str
+    ) -> Path:
+        container.exec(
+            "pulpcore-manager",
+            "openapi",
+            "--component",
+            plugin_label,
+            "--file",
+            f"{CONTAINER_OUTPUT_PATH}/{filename}",
+        )
 
 
 class PodmanContainer:
@@ -134,7 +145,7 @@ class PodmanContainer:
         self.image = image
         self.volumes = volumes or {}
         self.env = env or {}
-        self.name = name or f"{CONTAINER_NAME_PREFIX}-{os.getpid()}"
+        self.name = name or f"{CONTAINER_NAME_PREFIX}-{uuid.uuid4().hex[:8]}"
         self.dry_run = dry_run
 
     @contextmanager

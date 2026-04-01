@@ -1,6 +1,5 @@
 import json
 import shutil
-from pathlib import Path
 
 import pytest
 
@@ -34,12 +33,20 @@ class TestOpenAPIGeneratorClass:
         # pulpcore and pulp_file share the same repository
         assert len(gen.repository_paths) == 2
 
-    def test_podman_not_found(self, tmp_path, monkeypatch, repositories: dict[str, OpenApiPlugin]):
+    def test_two_generators_have_unique_container_names(self, tmp_path, repositories):
+        plugins = list(repositories.values())[:1]
+        gen1 = OpenAPIGenerator(plugins, dry_run=True)
+        gen2 = OpenAPIGenerator(plugins, dry_run=True)
+        container1 = gen1._init_container(tmp_path)
+        container2 = gen2._init_container(tmp_path)
+        assert container1.name != container2.name
+
+    def test_podman_not_found(self, monkeypatch, repositories: dict[str, OpenApiPlugin]):
         monkeypatch.setattr(shutil, "which", lambda _: None)
         core_plugin = repositories["pulpcore"]
         gen = OpenAPIGenerator([core_plugin])
         with pytest.raises(RuntimeError, match="podman is required"):
-            gen.generate(output_dir=tmp_path)
+            gen.generate()
 
     @pytest.mark.parametrize(
         "filter",
@@ -48,7 +55,7 @@ class TestOpenAPIGeneratorClass:
             pytest.param(["pulp_rpm", "pulp_container", "pulp_python"], id="partial"),
         ],
     )
-    def test_generate(self, tmp_path: Path, repositories: dict[str, OpenApiPlugin], filter):
+    def test_generate(self, repositories: dict[str, OpenApiPlugin], filter):
         """Generate schemas for plugins (all or filtered subset)."""
         if filter is None:
             plugins = list(repositories.values())
@@ -56,12 +63,11 @@ class TestOpenAPIGeneratorClass:
             plugins = [repositories[name] for name in filter if name in repositories]
 
         generator = OpenAPIGenerator(plugins)
-        generator.generate(output_dir=tmp_path)
-        files = list(tmp_path.glob("*.json"))
+        result = generator.generate()
 
-        assert len(files) == len(plugins)
+        assert len(result) == len(plugins)
         for plugin in plugins:
-            schema_file = tmp_path / f"{plugin.plugin_label}-api.json"
+            schema_file = result[plugin.plugin_label]
             assert schema_file.exists()
 
             content = json.loads(schema_file.read_text())

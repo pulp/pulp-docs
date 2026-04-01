@@ -5,7 +5,7 @@ import sys
 import tomllib
 import typing as t
 from collections import defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 
 import httpx
@@ -21,6 +21,7 @@ from mkdocs.structure.pages import Page
 from mkdocs.utils.templates import TemplateContext
 
 from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft, ctx_dryrun, ctx_path
+from pulp_docs.openapi import OpenAPIGenerator, OpenApiPlugin
 
 log = get_plugin_logger(__name__)
 
@@ -76,6 +77,7 @@ class LoadedComponent:
     pkg_version: str
     git_revision: str
     git_dirty: bool
+    openapi_spec: t.Optional[Path] = None
 
     @property
     def component_dir(self) -> Path:
@@ -171,23 +173,38 @@ class ComponentLoader:
                 repository_dir=repo_dir,
                 pkg_version=extractor.package_version() or "unknown",
                 git_revision=extractor.git_revision() or "unknown",
-                git_dirty=extractor.git_dirty(),
+                git_dirty=extractor.is_git_dirty(),
             )
         return None
 
     def load_all(self) -> LoadResult:
-        loaded_comps: list[LoadedComponent] = []
+        loaded_comp_map: dict[str, LoadedComponent] = {}
         missing_comps: list[ComponentSpec] = []
+
+        # find component and extract data from repository state
         for comp_spec in self.component_specs:
             loaded_comp = self.load_component(comp_spec)
             if loaded_comp:
-                loaded_comps.append(loaded_comp)
+                loaded_comp_map[loaded_comp.label] = loaded_comp
             else:
                 missing_comps.append(comp_spec)
+
+        # update with generated openapi
+        openapi_plugins = [
+            OpenApiPlugin(repository_path=p.repository_dir, plugin_label=p.label)
+            for p in loaded_comp_map
+            if p.spec.rest_api
+        ]
+        generator = OpenAPIGenerator(openapi_plugins)
+        result = generator.generate()
+        for label, spec_path in result.items():
+            original_comp = loaded_comp_map[label]
+            loaded_comp_map[label] = replace(original_comp, openapi_spec=spec_path)
+
         return LoadResult(
             all_specs=self.component_specs,
-            loaded=loaded_comps,
-            missing=missing_comps,
+            loaded=sorted(loaded_comp_map.values()),
+            missing=sorted(missing_comps),
         )
 
 
@@ -212,7 +229,7 @@ class DataExtractor:
             log.warning(f"Couldn't get git revision for: {str(self.repo_dir)}.\n{e}")
         return None
 
-    def git_dirty(self) -> bool:
+    def is_git_dirty(self) -> bool:
         try:
             repo = Repo(self.repo_dir)
             return repo.is_dirty()
