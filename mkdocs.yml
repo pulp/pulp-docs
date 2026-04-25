@@ -108,6 +108,11 @@ plugins:
           git_url: "https://github.com/pulp/pulp_rpm"
           kind: "Content"
           rest_api: "rpm"
+        - title: "Rust"
+          path: "pulp_rust"
+          git_url: "https://github.com/pulp/pulp_rust"
+          kind: "Content"
+          rest_api: "rust"
 
         #TODO Fix cli code paths for docstrings
         - title: "Pulp CLI"
