@@ -29,6 +29,7 @@ jobs:
 
       - name: "Install System dependencies"
         run: |
+          sudo apt update
           sudo apt -y install $(tr '\n' ' ' < requirements_ubuntu.txt)
 
       - name: "Install Python dependencies"
