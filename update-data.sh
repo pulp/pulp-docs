@@ -13,5 +13,8 @@ then
 fi
 
 git add data/*
-git commit -m "Update data files: $(date --iso-8601=minutes)"
-git push origin docs-data
+if test -n "$(git status --porcelain)"
+then
+  git commit -m "Update data files: $(date --iso-8601=minutes)"
+  git push origin docs-data
+fi
