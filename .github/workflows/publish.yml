@@ -14,18 +14,18 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
-      - uses: "actions/checkout@v4"
+      - uses: "actions/checkout@v6"
         with:
           fetch-depth: 0
           path: "pulp-docs"
-      - uses: "actions/setup-python@v5"
+      - uses: "actions/setup-python@v6"
         with:
           python-version: "3.13"
       - name: "Build HTML site for pulpproject.org."
         run: |
           .github/workflows/scripts/build_all_docs.sh
       - name: "Upload documentation site"
-        uses: "actions/upload-artifact@v4"
+        uses: "actions/upload-artifact@v7"
         with:
           name: "pulpproject.org.tar"
           path: "pulp-docs/pulpproject.org.tar"
@@ -40,17 +40,17 @@ jobs:
       PULP_DOCS_KEY: "${{ secrets.PULP_DOCS_KEY }}"
 
     steps:
-      - uses: "actions/checkout@v4"
+      - uses: "actions/checkout@v6"
         with:
           fetch-depth: 1
           path: "pulp-docs"
 
-      - uses: "actions/setup-python@v5"
+      - uses: "actions/setup-python@v6"
         with:
           python-version: "3.13"
 
       - name: "Download built docs"
-        uses: "actions/download-artifact@v4"
+        uses: "actions/download-artifact@v8"
         with:
           name: "pulpproject.org.tar"
           path: "pulp-docs/"
