@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: "Checkout pulp-docs repository"
         if: "${{ github.event.repository.name != 'pulp-docs' }}"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v6"
         with:
           repository: "pulp/pulp-docs"
           path: "pulp-docs"
@@ -23,7 +23,7 @@ jobs:
           fetch-depth: 0
 
       - name: "Checkout component repository"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v6"
         with:
           path: "${{ github.event.repository.name }}"
           fetch-depth: 0
@@ -43,7 +43,7 @@ jobs:
           make docs-ci COMPONENT=${{ github.event.repository.name }}
           EOL
 
-      - uses: "actions/setup-python@v5"
+      - uses: "actions/setup-python@v6"
         with:
           python-version: "3.12"
 
