@@ -20,7 +20,7 @@ jobs:
           path: "pulp-docs"
 
       - name: "Install UV"
-        uses: astral-sh/setup-uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
 
       - name: "Build HTML site for pulpproject.org."
         shell: bash
@@ -57,5 +57,6 @@ jobs:
 
       - name: "Publish docs to pulpproject.org"
         run: |
-          .github/workflows/scripts/publish_all_docs.sh
+          tar xf pulpproject.org.tar
+          .github/workflows/scripts/publish_all_docs.sh "$(pwd)/site"
 ...

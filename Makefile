@@ -39,7 +39,6 @@ docs-prod: clean
 	uv run --isolated pulp-docs fetch --fetch-all --dest "$(FETCHDIR)"
 	uv run --isolated pulp-docs build --path "pulp-docs@..:$(FETCHDIR)"
 	@ls site || (echo "ERROR: something went wrong, 'site/' dir doesn't exist"; exit 1)
-	tar cvf pulpproject.org.tar site
 
 .PHONY: docs-linkcheck
 docs-linkcheck:
