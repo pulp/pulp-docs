@@ -18,12 +18,16 @@ jobs:
         with:
           fetch-depth: 0
           path: "pulp-docs"
-      - uses: "actions/setup-python@v6"
-        with:
-          python-version: "3.13"
+
+      - name: "Install UV"
+        uses: astral-sh/setup-uv
+
       - name: "Build HTML site for pulpproject.org."
+        shell: bash
         run: |
-          .github/workflows/scripts/build_all_docs.sh
+          make docs-prod
+          tar cvf pulpproject.org.tar site
+
       - name: "Upload documentation site"
         uses: "actions/upload-artifact@v7"
         with:
@@ -44,10 +48,6 @@ jobs:
         with:
           fetch-depth: 1
           path: "pulp-docs"
-
-      - uses: "actions/setup-python@v6"
-        with:
-          python-version: "3.13"
 
       - name: "Download built docs"
         uses: "actions/download-artifact@v8"

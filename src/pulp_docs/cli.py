@@ -165,10 +165,15 @@ def fetch_repositories(
         "[repo1@]path1 [:[repo2@]path2 [...]]."
     ),
 )
-def fetch(dest, config_file, path_exclude):
+@click.option(
+    "--fetch-all/--no-fetch-all",
+    default=False,
+    help="Fetch all components, not just missing ones.",
+)
+def fetch(dest, config_file, path_exclude, fetch_all):
     """Fetch repositories to destination dir."""
     dest_path = Path(dest)
-    fetch_repositories(dest_path, config_file)
+    fetch_repositories(dest_path, config_file, fetch_all=fetch_all)
 
 
 main = mkdocs_cli
