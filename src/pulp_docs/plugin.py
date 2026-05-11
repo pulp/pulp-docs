@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import json
 import os
 import sys
@@ -104,14 +102,26 @@ class LoadResult(t.NamedTuple):
 
 
 class RepositoryFinder:
+    """Locate repository directories from a list of lookup paths."""
+
     def __init__(self, lookup_paths: list[str] | None = None):
         # Maps lookup paths to a filter list of repository names
         # If the filter list is empty, use that path to find any repository
         self.lookup_dir_to_filter_list: dict[Path, list[str]] = defaultdict(list)
         for lookup_path in lookup_paths or []:
-            self.add_lookup_path(lookup_path)
+            self._add_lookup_path(lookup_path)
 
-    def add_lookup_path(self, lookup_path: str):
+    def find(self, repo_name: str) -> Path | None:
+        for lookup_dir, filter_list in self.lookup_dir_to_filter_list.items():
+            # apply path scoping if it's a scoped path
+            if filter_list and repo_name not in filter_list:
+                continue
+            repo_dir = lookup_dir / repo_name
+            if repo_dir.exists():
+                return repo_dir
+        return None
+
+    def _add_lookup_path(self, lookup_path: str):
         """Add either global or scoped lookup_path internally.
 
         A global lookup_path doesn't have a component specifier. E.g: '/some/random/path'
@@ -124,44 +134,38 @@ class RepositoryFinder:
         else:
             self.lookup_dir_to_filter_list[path].append(repository_name)
 
-    def find(self, repo_name: str) -> Path | None:
-        for lookup_dir, filter_list in self.lookup_dir_to_filter_list.items():
-            # apply path scoping if it's a scoped path
-            if filter_list and repo_name not in filter_list:
-                continue
-            repo_dir = lookup_dir / repo_name
-            if repo_dir.exists():
-                return repo_dir
-        return None
-
 
 class ComponentLoader:
     def __init__(
         self,
         lookup_paths: list[str],
-        mkdocs_config: t.Optional[Path] = None,
-        pulpdocs_plugin: t.Optional[PulpDocsPlugin] = None,
+        component_specs: list[ComponentSpec],
         draft: bool = False,
     ):
         """Manage finding and loading plugins from config file or mkdocs plugin.
 
-        Exactly one of `mkdocs_config` or `pulpdocs_plugin` must be provided.
-
         Args:
             lookup_paths: The list of lookup paths for the repositories. A lookup path has
                 the form: [repo@]path. Example: "pulpcore@/tmp/", "/tmp/workdir".
-            mkdocs_config: Load components from an mkdocs config file.
-            pulpdocs_plugin: Load components from a PulpDocsPlugin instance
+            component_specs: The list of component specs to load.
             draft: Whether it fails if any component is missing
         """
-        if bool(mkdocs_config) is bool(pulpdocs_plugin):
-            raise ValueError("Provide exactly one of 'mkdocs_config' or 'pulpdocs_plugin'.")
-        if mkdocs_config:
-            pulpdocs_plugin = load_config(str(mkdocs_config)).plugins["PulpDocs"]  # type: ignore
-        else:
-            pulpdocs_plugin = pulpdocs_plugin
-        self.component_specs: list[ComponentSpec] = pulpdocs_plugin.config.components  # type: ignore
+        self.component_specs = component_specs
         self.repository_finder = RepositoryFinder(lookup_paths)
+        self.draft = draft
+
+    @classmethod
+    def from_mkdocs_config(
+        cls, mkdocs_config: Path, lookup_paths: list[str], draft: bool = False
+    ) -> "ComponentLoader":
+        plugin = load_config(str(mkdocs_config)).plugins["PulpDocs"]  # type: ignore
+        return cls.from_plugin(plugin, lookup_paths, draft=draft)
+
+    @classmethod
+    def from_plugin(
+        cls, pulpdocs_plugin: "PulpDocsPlugin", lookup_paths: list[str], draft: bool = False
+    ) -> "ComponentLoader":
+        return cls(lookup_paths, pulpdocs_plugin.config.components, draft=draft)
 
     def load_all(self, generate_openapi: bool = False) -> LoadResult:
         loaded_comps: list[LoadedComponent] = []
@@ -474,7 +478,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
 
         # Load components
         lookup_paths = ctx_path.get() or default_lookup_paths()
-        component_loader = ComponentLoader(lookup_paths, pulpdocs_plugin=self)
+        component_loader = ComponentLoader.from_plugin(self, lookup_paths)
         load_result = component_loader.load_all(generate_openapi=True)
         if load_result.missing and not self.draft:
             missing_names = sorted([p.component_name for p in load_result.missing])

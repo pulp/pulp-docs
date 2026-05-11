@@ -115,7 +115,7 @@ def fetch_repositories(
         config_file = get_default_mkdocs()
 
     lookup_paths = default_lookup_paths()
-    component_loader = ComponentLoader(lookup_paths, mkdocs_config=config_file)
+    component_loader = ComponentLoader.from_mkdocs_config(config_file, lookup_paths)
     load_result = component_loader.load_all()
 
     # Determine which components to fetch
