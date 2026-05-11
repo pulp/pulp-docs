@@ -21,7 +21,7 @@ from mkdocs.structure.pages import Page
 from mkdocs.utils.templates import TemplateContext
 
 from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft, ctx_dryrun, ctx_path
-from pulp_docs.openapi import HostOpenAPIGenerator, OpenApiPlugin
+from pulp_docs.openapi import OpenAPIGenerator, OpenApiPlugin
 
 log = get_plugin_logger(__name__)
 
@@ -203,7 +203,7 @@ class ComponentLoader:
             for comp in loaded
             if comp.spec.rest_api
         ]
-        generator = HostOpenAPIGenerator(openapi_plugins)
+        generator = OpenAPIGenerator(openapi_plugins)
         label_to_spec = generator.generate()
         return [
             replace(comp, openapi_spec=label_to_spec[comp.label])

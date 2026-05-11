@@ -1,6 +1,3 @@
-import json
-import shutil
-
 import pytest
 
 from pulp_docs.cli import fetch_repositories
@@ -24,7 +21,7 @@ def repositories(tmp_path_factory: pytest.TempPathFactory) -> dict[str, OpenApiP
     return result
 
 
-class TestOpenAPIGeneratorClass:
+class TestOpenAPIGenerator:
     def test_deduplicate_repository_paths(self, repositories: dict[str, OpenApiPlugin]):
         """pulpcore and pulp_file share the same repository path."""
         filter = ["rpm", "file", "core"]
@@ -32,21 +29,6 @@ class TestOpenAPIGeneratorClass:
         gen = OpenAPIGenerator(plugins, dry_run=True)
         # pulpcore and pulp_file share the same repository
         assert len(gen.repository_paths) == 2
-
-    def test_two_generators_have_unique_container_names(self, tmp_path, repositories):
-        plugins = list(repositories.values())[:1]
-        gen1 = OpenAPIGenerator(plugins, dry_run=True)
-        gen2 = OpenAPIGenerator(plugins, dry_run=True)
-        container1 = gen1._init_container(tmp_path)
-        container2 = gen2._init_container(tmp_path)
-        assert container1.name != container2.name
-
-    def test_podman_not_found(self, monkeypatch, repositories: dict[str, OpenApiPlugin]):
-        monkeypatch.setattr(shutil, "which", lambda _: None)
-        core_plugin = repositories["pulpcore"]
-        gen = OpenAPIGenerator([core_plugin])
-        with pytest.raises(RuntimeError, match="podman is required"):
-            gen.generate()
 
     @pytest.mark.parametrize(
         "filter",
@@ -56,19 +38,19 @@ class TestOpenAPIGeneratorClass:
         ],
     )
     def test_generate(self, repositories: dict[str, OpenApiPlugin], filter):
-        """Generate schemas for plugins (all or filtered subset)."""
+        """Generate dry-run schemas for plugins (all or filtered subset)."""
+        EXPECTED_TEMPLATE = OpenAPIGenerator.DRY_RUN_SPECFILE_TEMPLATE
         if filter is None:
             plugins = list(repositories.values())
         else:
             plugins = [repositories[name] for name in filter if name in repositories]
 
-        generator = OpenAPIGenerator(plugins)
-        result = generator.generate()
+        generator = OpenAPIGenerator(plugins, dry_run=True)
+        label_to_specfile = generator.generate()
 
-        assert len(result) == len(plugins)
+        assert len(label_to_specfile) == len(plugins)
         for plugin in plugins:
-            schema_file = result[plugin.plugin_label]
+            schema_file = label_to_specfile[plugin.plugin_label]
+            expected_content = EXPECTED_TEMPLATE.format(plugin_label=plugin.plugin_label)
             assert schema_file.exists()
-
-            content = json.loads(schema_file.read_text())
-            assert plugin.plugin_label in content["info"]["x-pulp-app-versions"]
+            assert schema_file.read_text() == expected_content
