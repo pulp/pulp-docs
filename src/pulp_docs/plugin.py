@@ -10,7 +10,7 @@ from pathlib import Path
 
 import httpx
 import yaml
-from git import GitCommandError, Repo
+from git import Repo
 from mkdocs.config import Config, config_options, load_config
 from mkdocs.config.defaults import MkDocsConfig
 from mkdocs.exceptions import PluginError
@@ -504,13 +504,6 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
 
     def on_files(self, files: Files, /, *, config: MkDocsConfig) -> Files | None:
         log.info(f"Loading Pulp components: {self.loaded_comps}")
-        pulp_docs_component = [c for c in self.loaded_comps if c.spec.path == "pulp-docs"]
-        if pulp_docs_component:
-            pulp_docs_git = Repo(pulp_docs_component[0].repository_dir)
-        else:
-            log.warning("Pulp Docs repository is missing. Can't get api.json for plugins.")
-            pulp_docs_git = None
-
         user_nav: dict[str, t.Any] = {}
         dev_nav: dict[str, t.Any] = {}
         for comp in self.loaded_comps:
@@ -567,8 +560,8 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                 content = REST_API_MD.format(component=title)
                 files.append(File.generated(config, src_uri, content=content))
                 component_nav.add(src_uri)
-                if pulp_docs_git:  # currently we require pulp_docs repository to be loaded
-                    api_json_content = self.get_openapi_spec(comp, pulp_docs_git)
+                if comp.openapi_spec:
+                    api_json_content = comp.openapi_spec.read_text()
                     src_uri = (comp_dir / "api.json").relative_to(comp_dir.parent)
                     files.append(File.generated(config, src_uri, content=api_json_content))
 
@@ -627,26 +620,3 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         if edit_url := pulp_meta.get("edit_url"):
             page.edit_url = edit_url
         return page
-
-    def get_openapi_spec(self, comp: LoadedComponent, pulp_docs_git: Repo) -> str:
-        rest_api = comp.spec.rest_api
-        found_locally = False
-        remotes = [""] + [f"{o}/" for o in pulp_docs_git.remotes]
-        for remote in remotes:
-            git_object = f"{remote}docs-data:data/openapi_json/{rest_api}-api.json"
-            try:
-                api_json = pulp_docs_git.git.show(git_object)
-                found_locally = True
-                break
-            except GitCommandError:
-                continue
-
-        if not found_locally:
-            pulp_docs_git.git.fetch(self.pulpdocs_git_url, "docs-data")
-            git_object = f"FETCH_HEAD:data/openapi_json/{rest_api}-api.json"
-            api_json = pulp_docs_git.git.show(git_object)
-        # fix the logo url for restapi page, which is defined in the openapi spec file
-        api_json = api_json.replace(
-            "/pulp-docs/docs/assets/pulp_logo_icon.svg", "/assets/pulp_logo_icon.svg"
-        )
-        return api_json
