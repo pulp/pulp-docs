@@ -4,6 +4,7 @@ help:
 	@echo "    dist-build      Build the distribution package"
 	@echo "    dist-test       Test the built distribution package"
 	@echo "    docs-ci         Build docs for COMPONENT's CI"
+	@echo "    docs-prod       Build the full production docs site"
 	@echo "    docs-linkcheck: Check for broken documentation links"
 	@echo "    test            Run the test suite"
 	@echo "    lint            Run pre-commit hooks on all files"
@@ -31,6 +32,14 @@ test:
 .PHONY: lint
 lint:
 	pre-commit run -a
+
+.PHONY: docs-prod
+docs-prod: clean
+	$(eval FETCHDIR := $(shell mktemp -d))
+	uv run --isolated pulp-docs fetch --fetch-all --dest "$(FETCHDIR)"
+	uv run --isolated pulp-docs build --path "pulp-docs@..:$(FETCHDIR)"
+	@ls site || (echo "ERROR: something went wrong, 'site/' dir doesn't exist"; exit 1)
+	tar cvf pulpproject.org.tar site
 
 .PHONY: docs-linkcheck
 docs-linkcheck:
