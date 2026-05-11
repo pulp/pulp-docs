@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 import tomllib
 import typing as t
@@ -21,7 +22,7 @@ from mkdocs.structure.pages import Page
 from mkdocs.utils.templates import TemplateContext
 
 from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft, ctx_dryrun, ctx_path
-from pulp_docs.openapi import OpenAPIGenerator, OpenApiPlugin
+from pulp_docs.openapi import OpenAPIGenerator, OpenApiPlugin, PulpResolutionError
 
 log = get_plugin_logger(__name__)
 
@@ -203,8 +204,15 @@ class ComponentLoader:
             for comp in loaded
             if comp.spec.rest_api
         ]
+        labels = [p.plugin_label for p in openapi_plugins]
+        log.info(f"Generating OpenAPI specs for: {labels}")
         generator = OpenAPIGenerator(openapi_plugins)
-        label_to_spec = generator.generate()
+        try:
+            label_to_spec = generator.generate()
+        except PulpResolutionError as e:
+            raise PluginError(str(e)) from None
+
+        # Update LoadedComponent with generated openapi specs
         return [
             replace(comp, openapi_spec=label_to_spec[comp.label])
             if comp.label in label_to_spec
@@ -470,7 +478,9 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         load_result = component_loader.load_all(generate_openapi=True)
         if load_result.missing and not self.draft:
             missing_names = sorted([p.component_name for p in load_result.missing])
-            raise PluginError(f"Components missing: {missing_names}.")
+            raise PluginError(
+                f"Components missing: {missing_names}\nMaybe you want to use --draft?"
+            )
         self.loaded_comps = load_result.loaded
 
         mkdocs_file = self.mkdocs_yml_dir / "mkdocs.yml"
@@ -528,9 +538,9 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
                 docs_dir = comp_dir / "docs"
             assert docs_dir.exists()
 
-            for dirpath, dirnames, filenames in docs_dir.walk(follow_symlinks=True):
+            for dirpath, dirnames, filenames in os.walk(docs_dir, followlinks=True):
                 for filename in filenames:
-                    abs_src_path = dirpath / filename
+                    abs_src_path = Path(dirpath) / filename
                     pulp_meta: dict[str, t.Any] = {}
                     if abs_src_path == docs_dir / "index.md":
                         src_uri = component_slug / "index.md"

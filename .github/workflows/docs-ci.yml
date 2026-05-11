@@ -31,14 +31,8 @@ jobs:
       - name: "Instructions to run locally"
         run: |
           cat <<EOL
-          == Checks
-
-          * You have an up-to-date version of pulp-docs: https://github.com/pulp/pulp-docs
-          * CWD is the pulp-docs repository root
-          * The component dir is at the parent dir: '../${{ github.event.repository.name }}'
-          * The component checkout matches: (TODO display correct commit here)
-
-          == Command
+          Ensure you have pulp-docs (https://github.com/pulp/pulp-docs) and
+          the component in the same working dir. Then, cd to pulp-docs and run:
 
           make docs-ci COMPONENT=${{ github.event.repository.name }}
           EOL
@@ -46,12 +40,6 @@ jobs:
       - uses: "actions/setup-python@v6"
         with:
           python-version: "3.12"
-
-      - name: "Install pulp-docs"
-        working-directory: "pulp-docs"
-        run: |
-          pip install --upgrade pip
-          pip install -r doc_requirements.txt
 
       - name: "Build Docs"
         working-directory: "pulp-docs"

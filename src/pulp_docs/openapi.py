@@ -11,6 +11,12 @@ from pathlib import Path
 from typing import NamedTuple
 
 
+class PulpResolutionError(Exception):
+    """Raised when uv cannot resolve plugin dependencies due to incompatibilities."""
+
+    pass
+
+
 class OpenApiPlugin(NamedTuple):
     repository_path: Path
     plugin_label: str
@@ -39,8 +45,7 @@ class OpenAPIGenerator:
         """
         if not self.plugins:
             return {}
-        output_dir = Path(tempfile.TemporaryDirectory(delete=False).name)
-        output_dir.mkdir(parents=True, exist_ok=True)
+        output_dir = Path(tempfile.mkdtemp())
         label_to_specfile = {}
         for plugin in self.plugins:
             filename = f"{plugin.plugin_label}-api.json"
@@ -50,7 +55,7 @@ class OpenAPIGenerator:
         return label_to_specfile
 
     def _generate_schema(self, plugin_label: str, output_file: Path):
-        cmd = ["uv", "run", "--isolated", "--with", "setuptools", "--with", "pulp_rust"]
+        cmd = ["uv", "run", "--isolated", "--with", "setuptools"]
         for repo_path in self.repository_paths:
             cmd.extend(["--with", str(repo_path.resolve())])
         cmd.extend(
@@ -64,7 +69,20 @@ class OpenAPIGenerator:
             subprocess.run(
                 cmd,
                 check=True,
+                stderr=subprocess.PIPE,
                 env={**os.environ, "PULP_CONTENT_ORIGIN": "NONE"},
             )
         except subprocess.CalledProcessError as e:
-            raise RuntimeError(f"uv run failed (exit {e.returncode}): {' '.join(cmd)}") from e
+            # catch UV resolution error based on their error message
+            stderr = e.stderr.decode()
+            _, found, message = stderr.partition("╰─▶ ")
+            if found:
+                message = (
+                    "Package resolution error (from uv).\n"
+                    "Maybe you want to use `--draft --path <plugin>@<path>` to narrow used plugins?"
+                    f"\n\nError message:\n{message.strip()}"
+                )
+                raise PulpResolutionError(message) from e
+            raise RuntimeError(
+                f"uv run failed (exit {e.returncode}): {' '.join(cmd)}\n{stderr}"
+            ) from e
