@@ -2,8 +2,6 @@
 Module for generating open-api json files for selected Pulp plugins.
 """
 
-from __future__ import annotations
-
 import os
 import subprocess
 import tempfile
