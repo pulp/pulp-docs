@@ -1,8 +1,11 @@
+DOCS_IMAGE ?= pulp-docs
+
 .PHONY: help
 help:
 	@echo "COMMANDS:"
 	@echo "    dist-build      Build the distribution package"
 	@echo "    dist-test       Test the built distribution package"
+	@echo "    docs-image      Build the docs container image"
 	@echo "    docs-ci         Build docs for COMPONENT's CI"
 	@echo "    docs-prod       Build the full production docs site"
 	@echo "    docs-linkcheck: Check for broken documentation links"
@@ -33,31 +36,44 @@ test:
 lint:
 	pre-commit run -a
 
-.PHONY: docs-prod
-docs-prod: clean
-	$(eval FETCHDIR := $(shell mktemp -d))
-	uv run --isolated pulp-docs fetch --fetch-all --dest "$(FETCHDIR)"
-	uv run --isolated pulp-docs build --path "pulp-docs@..:$(FETCHDIR)"
-	@ls site || (echo "ERROR: something went wrong, 'site/' dir doesn't exist"; exit 1)
-
 .PHONY: docs-linkcheck
 docs-linkcheck:
 	@uv run pulp-linkchecker \
 		$$(git ls-files | grep '^docs/**/.*md$$') \
 		&& echo "No broken links found"
 
+.PHONY: docs-image
+docs-image:
+	docker build -t $(DOCS_IMAGE) .
+
+.PHONY: docs-prod
+docs-prod: clean docs-image
+	docker run --rm \
+		--user $(shell id -u):$(shell id -g) \
+		-v $(CURDIR):/pulp-docs \
+		$(DOCS_IMAGE) \
+		/pulp-docs/ci/scripts/build_docs_prod.sh
+
+# avoid double mount if COMPONENT is pulp-docs
+ifeq ($(COMPONENT),pulp-docs)
+_COMPONENT_MOUNT =
+else
+_COMPONENT_MOUNT = -v $(CURDIR)/../$(COMPONENT):/$(COMPONENT)
+endif
+
 .PHONY: docs-ci
-docs-ci: clean
+docs-ci: clean docs-image
 ifndef COMPONENT
 	@echo "Error: COMPONENT is required"
 	@echo "Usage: make docs-ci COMPONENT=<component-name>"
 	@exit 1
 endif
-	$(eval DOCS_PATH := "pulp-docs@..:$(COMPONENT)@..")
-	$(eval DOCS_TMPDIR := "/tmp/pulp-docs-tmp")
-	pulp-docs fetch --path-exclude "$(DOCS_PATH)" --dest "$(DOCS_TMPDIR)"
-	pulp-docs build --path "$(DOCS_PATH):$(DOCS_TMPDIR)"
-	@ls site || (echo "ERROR: something wen't wrong, 'site/' dir doesn't exist"; exit 1)
+	docker run --rm \
+		--user $(shell id -u):$(shell id -g) \
+		-v $(CURDIR):/pulp-docs \
+		$(_COMPONENT_MOUNT) \
+		$(DOCS_IMAGE) \
+		/pulp-docs/ci/scripts/build_docs_ci.sh $(COMPONENT)
 
 
 .PHONY: clean
