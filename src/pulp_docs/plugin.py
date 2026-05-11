@@ -21,7 +21,7 @@ from mkdocs.structure.pages import Page
 from mkdocs.utils.templates import TemplateContext
 
 from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft, ctx_dryrun, ctx_path
-from pulp_docs.openapi import OpenAPIGenerator, OpenApiPlugin
+from pulp_docs.openapi import HostOpenAPIGenerator, OpenApiPlugin
 
 log = get_plugin_logger(__name__)
 
@@ -162,6 +162,26 @@ class ComponentLoader:
         self.component_specs: list[ComponentSpec] = pulpdocs_plugin.config.components  # type: ignore
         self.repository_finder = RepositoryFinder(lookup_paths)
 
+    def load_all(self, generate_openapi: bool = False) -> LoadResult:
+        loaded_comps: list[LoadedComponent] = []
+        missing_comps: list[ComponentSpec] = []
+
+        for comp_spec in self.component_specs:
+            loaded_comp = self.load_component(comp_spec)
+            if loaded_comp:
+                loaded_comps.append(loaded_comp)
+            else:
+                missing_comps.append(comp_spec)
+
+        if generate_openapi:
+            loaded_comps = self.generate_openapi_specs(loaded_comps)
+
+        return LoadResult(
+            all_specs=self.component_specs,
+            loaded=sorted(loaded_comps, key=lambda c: c.component_name),
+            missing=sorted(missing_comps, key=lambda c: c.component_name),
+        )
+
     def load_component(self, comp_spec: ComponentSpec) -> LoadedComponent | None:
         repo_name = comp_spec.repository_name
         repo_dir = self.repository_finder.find(repo_name)
@@ -177,35 +197,20 @@ class ComponentLoader:
             )
         return None
 
-    def load_all(self) -> LoadResult:
-        loaded_comp_map: dict[str, LoadedComponent] = {}
-        missing_comps: list[ComponentSpec] = []
-
-        # find component and extract data from repository state
-        for comp_spec in self.component_specs:
-            loaded_comp = self.load_component(comp_spec)
-            if loaded_comp:
-                loaded_comp_map[loaded_comp.label] = loaded_comp
-            else:
-                missing_comps.append(comp_spec)
-
-        # update with generated openapi
+    def generate_openapi_specs(self, loaded: list[LoadedComponent]) -> list[LoadedComponent]:
         openapi_plugins = [
-            OpenApiPlugin(repository_path=p.repository_dir, plugin_label=p.label)
-            for p in loaded_comp_map
-            if p.spec.rest_api
+            OpenApiPlugin(repository_path=comp.repository_dir, plugin_label=comp.label)
+            for comp in loaded
+            if comp.spec.rest_api
         ]
-        generator = OpenAPIGenerator(openapi_plugins)
-        result = generator.generate()
-        for label, spec_path in result.items():
-            original_comp = loaded_comp_map[label]
-            loaded_comp_map[label] = replace(original_comp, openapi_spec=spec_path)
-
-        return LoadResult(
-            all_specs=self.component_specs,
-            loaded=sorted(loaded_comp_map.values()),
-            missing=sorted(missing_comps),
-        )
+        generator = HostOpenAPIGenerator(openapi_plugins)
+        label_to_spec = generator.generate()
+        return [
+            replace(comp, openapi_spec=label_to_spec[comp.label])
+            if comp.label in label_to_spec
+            else comp
+            for comp in loaded
+        ]
 
 
 class DataExtractor:
@@ -462,7 +467,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         # Load components
         lookup_paths = ctx_path.get() or default_lookup_paths()
         component_loader = ComponentLoader(lookup_paths, pulpdocs_plugin=self)
-        load_result = component_loader.load_all()
+        load_result = component_loader.load_all(generate_openapi=True)
         if load_result.missing and not self.draft:
             missing_names = sorted([p.component_name for p in load_result.missing])
             raise PluginError(f"Components missing: {missing_names}.")

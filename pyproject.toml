@@ -16,6 +16,7 @@ dependencies = [
     "mkdocs-literate-nav~=0.6.1",
     "httpx",
     "rich",
+    "uv",
     "GitPython~=3.1.44",
 ]
 license = "GPL-3.0-or-later"
