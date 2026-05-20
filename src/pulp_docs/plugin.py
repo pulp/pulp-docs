@@ -19,7 +19,7 @@ from mkdocs.structure.nav import Link, Navigation, Section
 from mkdocs.structure.pages import Page
 from mkdocs.utils.templates import TemplateContext
 
-from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft, ctx_dryrun, ctx_path
+from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft, ctx_dryrun, ctx_openapi, ctx_path
 from pulp_docs.openapi import OpenAPIGenerator, OpenApiPlugin, PulpResolutionError
 
 log = get_plugin_logger(__name__)
@@ -479,7 +479,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         # Load components
         lookup_paths = ctx_path.get() or default_lookup_paths()
         component_loader = ComponentLoader.from_plugin(self, lookup_paths)
-        load_result = component_loader.load_all(generate_openapi=True)
+        load_result = component_loader.load_all(generate_openapi=ctx_openapi.get())
         if load_result.missing and not self.draft:
             missing_names = sorted([p.component_name for p in load_result.missing])
             raise PluginError(

@@ -6,7 +6,7 @@ import click
 import git
 from mkdocs.__main__ import cli as mkdocs_cli
 
-from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft, ctx_dryrun, ctx_path
+from pulp_docs.context import ctx_blog, ctx_docstrings, ctx_draft, ctx_dryrun, ctx_openapi, ctx_path
 from pulp_docs.plugin import ComponentLoader, ComponentSpec, default_lookup_paths
 
 
@@ -91,6 +91,20 @@ dryrun_option = click.option(
     default=False,
     callback=dryrun_callback,
     help="Only gather and parse all configuration, but don't run.",
+)
+
+
+def openapi_callback(ctx: click.Context, param: click.Parameter, value: bool) -> bool:
+    ctx_openapi.set(value)
+    return value
+
+
+openapi_option = click.option(
+    "--openapi/--no-openapi",
+    expose_value=False,
+    default=False,
+    callback=openapi_callback,
+    help="Generate OpenAPI specs.",
 )
 
 
@@ -211,3 +225,5 @@ for command_name in ["build", "serve"]:
     config_file_opt = next(filter(lambda opt: opt.name == "config_file", serve_options))
     config_file_opt.envvar = "PULPDOCS_DIR"
     config_file_opt.default = get_default_mkdocs()
+
+openapi_option(main.commands.get("serve"))
