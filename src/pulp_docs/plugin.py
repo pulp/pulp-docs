@@ -183,7 +183,7 @@ class ComponentLoader:
 
         return LoadResult(
             all_specs=self.component_specs,
-            loaded=sorted(loaded_comps, key=lambda c: c.component_name),
+            loaded=loaded_comps,
             missing=sorted(missing_comps, key=lambda c: c.component_name),
         )
 
