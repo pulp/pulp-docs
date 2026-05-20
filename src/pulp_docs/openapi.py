@@ -2,11 +2,29 @@
 Module for generating open-api json files for selected Pulp plugins.
 """
 
+import json
 import os
 import subprocess
 import tempfile
 from pathlib import Path
 from typing import NamedTuple
+
+
+def annotate_api_json(api_json: str) -> str:
+    """Append version info from x-pulp-app-versions to the spec description."""
+    spec = json.loads(api_json)
+    versions = spec.get("info", {}).get("x-pulp-app-versions", {})
+    if not versions:
+        return api_json
+    non_core = [f"pulp_{k} {v}" for k, v in versions.items() if k != "core"]
+    core = [f"pulpcore {v}" for k, v in versions.items() if k == "core"]
+    # core is secondary: shown in parens when a plugin is present, primary otherwise
+    parts = non_core + [f"({c})" for c in core] if non_core else core
+    version_string = " ".join(parts)
+    existing_desc = spec["info"].get("description", "")
+    description = f"{existing_desc}\n\nGenerated from: {version_string}".strip()
+    spec["info"]["description"] = description
+    return json.dumps(spec, indent=2)
 
 
 class PulpResolutionError(Exception):
@@ -70,6 +88,7 @@ class OpenAPIGenerator:
                 stderr=subprocess.PIPE,
                 env={**os.environ, "PULP_CONTENT_ORIGIN": "NONE"},
             )
+            output_file.write_text(annotate_api_json(output_file.read_text()))
         except subprocess.CalledProcessError as e:
             # catch UV resolution error based on their error message
             stderr = e.stderr.decode()
