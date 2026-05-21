@@ -5,26 +5,31 @@ on:
   workflow_call:
 
 jobs:
-  run-test:
+  unit:
     runs-on: "ubuntu-latest"
     steps:
       - uses: "actions/checkout@v6"
-      - name: "Set up Python"
-        uses: "actions/setup-python@v6"
+
+      - name: "Set up uv"
+        uses: "astral-sh/setup-uv@v5"
         with:
           python-version: "3.12"
 
-      - name: "Download built distribution"
-        uses: "actions/download-artifact@v8"
+      - name: "Run unit tests"
+        run: |
+          make test
+
+  integration:
+    runs-on: "ubuntu-latest"
+    needs: "unit"
+    steps:
+      - uses: "actions/checkout@v6"
+
+      - name: "Set up uv"
+        uses: "astral-sh/setup-uv@v5"
         with:
-          name: "pulp_docs_package"
-          path: "dist/"
+          python-version: "3.12"
 
-      - name: "Install package and test dependencies"
+      - name: "Run integration tests"
         run: |
-          pip install dist/*.whl -r test_requirements.txt
-
-      - name: "Run test suite"
-        run: |
-          pytest -sv
-...
+          make test-integration
