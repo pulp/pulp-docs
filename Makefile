@@ -3,16 +3,17 @@ DOCS_IMAGE ?= pulp-docs
 .PHONY: help
 help:
 	@echo "COMMANDS:"
-	@echo "    dist-build      Build the distribution package"
-	@echo "    dist-test       Test the built distribution package"
-	@echo "    docs-image      Build the docs container image"
-	@echo "    docs-ci         Build docs for COMPONENT's CI"
-	@echo "    docs-prod       Build the full production docs site"
-	@echo "    docs-linkcheck: Check for broken documentation links"
-	@echo "    test            Run the test suite"
-	@echo "    lint            Run pre-commit hooks on all files"
-	@echo "    clean           Remove build artifacts and temporary files"
-	@echo "    help            Show this help message"
+	@echo "    dist-build        Build the distribution package"
+	@echo "    dist-test         Test the built distribution package"
+	@echo "    docs-image        Build the docs container image"
+	@echo "    docs-ci           Build docs for COMPONENT's CI"
+	@echo "    docs-prod         Build the full production docs site"
+	@echo "    docs-linkcheck    Check for broken documentation links"
+	@echo "    test              Run the test suite"
+	@echo "    test-integration  Run integration tests (USE_EXISTING_SITE=1 to skip build)"
+	@echo "    lint              Run pre-commit hooks on all files"
+	@echo "    clean             Remove build artifacts and temporary files"
+	@echo "    help              Show this help message"
 
 .PHONY: dist-build
 dist-build:
@@ -31,6 +32,15 @@ dist-test:
 .PHONY: test
 test:
 	uv run --with-requirements test_requirements.txt pytest
+
+_INTEGRATION_DEPS =
+ifndef USE_EXISTING_SITE
+_INTEGRATION_DEPS = docs-prod
+endif
+
+.PHONY: test-integration
+test-integration: $(_INTEGRATION_DEPS)
+	uv run --with-requirements test_requirements.txt pytest -vv tests/integration/
 
 .PHONY: lint
 lint:
