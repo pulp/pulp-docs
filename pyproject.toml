@@ -52,6 +52,10 @@ packages = ["src/pulp_docs", "src/linkchecker"]
 pythonpath = "src"
 addopts = [
     "--import-mode=importlib",
+    "--ignore=tests/integration",
+]
+markers = [
+    "integration: end-to-end tests that build the full site and require all repositories",
 ]
 
 ##########
