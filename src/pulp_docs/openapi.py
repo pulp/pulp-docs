@@ -50,8 +50,10 @@ class OpenAPIGenerator:
     DRY_RUN_SPECFILE_TEMPLATE = "dry-run specfile for: {plugin_label}"
 
     def __init__(self, plugins: list[OpenApiPlugin], dry_run: bool = False):
-        self.plugins = plugins
-        self.repository_paths = list({p.repository_path for p in plugins if p.repository_path})
+        missing = [p.plugin_label for p in plugins if not p.repository_path]
+        if missing:
+            raise ValueError(f"Plugins missing repository path: {missing}")
+        self.label_to_path = {p.plugin_label: p.repository_path for p in plugins}
         self.dry_run = dry_run
 
     def generate(self) -> dict[str, Path]:
@@ -59,21 +61,21 @@ class OpenAPIGenerator:
 
         Returns map of plugin labels to generated spec path.
         """
-        if not self.plugins:
+        if not self.label_to_path:
             return {}
         output_dir = Path(tempfile.mkdtemp())
         label_to_specfile = {}
-        for plugin in self.plugins:
-            filename = f"{plugin.plugin_label}-api.json"
+        for label in self.label_to_path:
+            filename = f"{label}-api.json"
             file_path = output_dir / filename
-            self._generate_schema(plugin.plugin_label, file_path)
-            label_to_specfile[plugin.plugin_label] = file_path
+            self._generate_schema(label, file_path)
+            label_to_specfile[label] = file_path
         return label_to_specfile
 
     def _generate_schema(self, plugin_label: str, output_file: Path):
         cmd = ["uv", "run", "--isolated", "--with", "setuptools"]
-        for repo_path in self.repository_paths:
-            cmd.extend(["--with", str(repo_path.resolve())])
+        repo_path = self.label_to_path[plugin_label]
+        cmd.extend(["--with", str(repo_path.resolve())])
         cmd.extend(
             ["pulpcore-manager", "openapi", "--component", plugin_label, "--file", str(output_file)]
         )
