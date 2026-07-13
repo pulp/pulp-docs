@@ -22,13 +22,14 @@ def repositories(tmp_path_factory: pytest.TempPathFactory) -> dict[str, OpenApiP
 
 
 class TestOpenAPIGenerator:
-    def test_deduplicate_repository_paths(self, repositories: dict[str, OpenApiPlugin]):
-        """pulpcore and pulp_file share the same repository path."""
+    def test_label_to_path_mapping(self, repositories: dict[str, OpenApiPlugin]):
+        """Each plugin label maps to its repository path."""
         filter = ["rpm", "file", "core"]
         plugins = [p for p in repositories.values() if p.plugin_label in filter]
         gen = OpenAPIGenerator(plugins, dry_run=True)
-        # pulpcore and pulp_file share the same repository
-        assert len(gen.repository_paths) == 2
+        assert len(gen.label_to_path) == len(plugins)
+        for plugin in plugins:
+            assert gen.label_to_path[plugin.plugin_label] == plugin.repository_path
 
     @pytest.mark.parametrize(
         "filter",
