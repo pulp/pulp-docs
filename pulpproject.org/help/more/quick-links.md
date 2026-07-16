@@ -23,11 +23,3 @@ Component | Version | Links | &nbsp; | &nbsp;
 {{ component.title }} | `{{ component.version }}` | {{ component.links | join(" | ") }}
 {%- endfor %}
 {%- endfor %}
-
-## Changes RSS Feed
-
-Check our recent releases with this [RSS changelog feed](https://himdel.eu/feed/pulp-changes.json).
-
-{% for item in rss_items() %}
-- [{{ item.title }}]({{ item.url }})
-{% endfor %}
