@@ -85,6 +85,12 @@ endif
 		$(DOCS_IMAGE) \
 		/pulp-docs/ci/scripts/build_docs_ci.sh $(COMPONENT)
 
+.PHONY: serve
+serve:
+	uv run --isolated pulp-docs serve \
+		--draft \
+		--path pulp-docs@..
+
 
 .PHONY: clean
 clean:
