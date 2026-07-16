@@ -226,4 +226,8 @@ for command_name in ["build", "serve"]:
     config_file_opt.envvar = "PULPDOCS_DIR"
     config_file_opt.default = get_default_mkdocs()
 
-openapi_option(main.commands.get("serve"))
+# Enable livereload by default
+serve_cmd = main.commands.get("serve")
+livereload_opt = next(filter(lambda opt: opt.name == "livereload", serve_cmd.params))
+livereload_opt.default = True
+openapi_option(serve_cmd)
