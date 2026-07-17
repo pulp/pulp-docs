@@ -48,7 +48,22 @@ nav:
     - "dev/index.md"
   - Blog:
     - "blog/index.md"
-  - Help: "help/"
+  - Help:
+    - "help/index.md"
+    - Community:
+      - "help/community/get-involved.md"
+      - "help/community/pulpcon.md"
+      - "help/community/publish-to-blog.md"
+    - More:
+      - "help/more/why-pulp.md"
+      - "help/more/quick-links.md"
+      - "help/more/brand-guide.md"
+      - "help/more/docs-usage.md"
+    - Governance:
+      - "help/more/governance/licenses.md"
+      - "help/more/governance/privacy.md"
+      - "help/more/governance/code-of-conduct.md"
+      - "help/more/governance/ai_policy.md"
 plugins:
   - PulpDocs:
       components:
@@ -242,4 +257,5 @@ markdown_extensions:
   - pymdownx.tilde
 
 copyright: |
-  &copy; 2025 <a href="https://github.com/pulp"  target="_blank" rel="noopener">Pulp Project</a>
+  &copy; 2026 <a href="https://github.com/pulp"  target="_blank" rel="noopener">Pulp Project</a>.
+  Website licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.
