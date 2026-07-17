@@ -38,6 +38,13 @@
   line-height: 1.1;
 }
 
+.md-typeset .sponsors-table table:not([class]) td {
+  vertical-align: middle;
+}
+
+.sponsors-table img {
+  min-width: 240px;
+}
 :root {
   --md-primary-fg-color:        #347dbe;
   --md-primary-fg-color--light: #ECB7B7;
