@@ -7,7 +7,6 @@ from collections import defaultdict
 from dataclasses import dataclass, replace
 from pathlib import Path
 
-import httpx
 import yaml
 from git import Repo
 from mkdocs.config import Config, config_options, load_config
@@ -420,22 +419,6 @@ def get_component_data(
     }
 
 
-def rss_items() -> list:
-    # that's Himdel's rss feed: https://github.com/himdel
-    # TODO move this fetching to js.
-    response = httpx.get("https://himdel.eu/feed/pulp-changes.json")
-    if response.is_error:
-        return [
-            {
-                "url": "#",
-                "title": "Could not fetch the feed. Please, open an issue in https://github.com/pulp/pulp-docs/.",
-            }
-        ]
-
-    rss_feed = json.loads(response.content)
-    return rss_feed["items"][:20]
-
-
 def log_pulp_config(
     mkdocs_file: str, path: list[str], loaded_components: list[LoadedComponent], site_dir: str
 ):
@@ -501,7 +484,6 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
             mkdocstrings_config.handlers["python"]["paths"].append(str(component_dir / "src"))
 
         macros_plugin = config.plugins["macros"]
-        macros_plugin.register_macros({"rss_items": rss_items})
         macros_plugin.register_variables({"components": components_var})
 
         blog_plugin = config.plugins["material/blog"]
