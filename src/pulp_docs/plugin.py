@@ -23,6 +23,21 @@ from pulp_docs.openapi import OpenAPIGenerator, OpenApiPlugin, PulpResolutionErr
 
 log = get_plugin_logger(__name__)
 
+
+def get_nav_node(nav: list[t.Any], name: str) -> t.Any:
+    """Get a navigation node by name from a nav list.
+
+    Example:
+        >>> nav = [{"Home": "index.md"}, {"User Manual": ["user/index.md"]}]
+        >>> get_nav_node(nav, "User Manual")
+        ["user/index.md"]
+    """
+    for item in nav:
+        if isinstance(item, dict) and name in item:
+            return item[name]
+    raise PluginError(f"Navigation node '{name}' not found in nav structure")
+
+
 REST_API_MD = """\
 ---
 template: "rest_api.html"
@@ -446,6 +461,67 @@ def get_pulpdocs_git_url(config: PulpDocsPluginConfig):
     raise RuntimeError("Did pulp-docs changed it's name or was removed from mkdocs.yml?")
 
 
+def process_governance_files(
+    governance_comp: LoadedComponent,
+    files: Files,
+    config: MkDocsConfig,
+) -> list[t.Any]:
+    """Process governance component files with custom permalink mappings.
+
+    Args:
+        governance_comp: The loaded governance component
+        files: MkDocs files collection
+        config: MkDocs config
+
+    Returns:
+        Navigation structure for governance files
+    """
+    # Mapping: "permalink" -> source_file_path
+    file_mappings = [
+        ("help/more/governance/code-of-conduct.md", "CODE_OF_CONDUCT.md"),
+        ("security.md", "SECURITY.md"),
+        ("security/vulnerability-management.md", "docs/vulnerability-management-policy.md"),
+    ]
+
+    repo_dir = governance_comp.repository_dir
+    git_url = governance_comp.spec.git_url
+
+    for permalink, source_path in file_mappings:
+        abs_src_path = repo_dir / source_path
+        if abs_src_path.exists():
+            src_uri = Path(permalink)
+            pulp_meta: dict[str, t.Any] = {}
+            git_relpath = abs_src_path.relative_to(repo_dir)
+            pulp_meta["edit_url"] = f"{git_url}/edit/main/{git_relpath}"
+
+            # Adapt original links to website links
+            content = abs_src_path.read_text()
+            content = content.replace(
+                "docs/vulnerability-management-policy.md", "site:security/vulnerability-management/"
+            )
+            content = content.replace("../SECURITY.md", "site:security/")
+
+            new_file = File.generated(config, str(src_uri), content=content)
+            new_file.pulp_meta = pulp_meta  # type: ignore[attr-defined]
+            files.append(new_file)
+            log.debug(f"Added governance file: {abs_src_path} as {src_uri}")
+        else:
+            log.warning(f"Governance file not found: {abs_src_path}")
+
+    # Build navigation structure
+    nav_structure = [
+        {"Code of Conduct": "help/more/governance/code-of-conduct.md"},
+        {
+            "Security": [
+                {"Security Policy": "security.md"},
+                {"Vulnerability Management": "security/vulnerability-management.md"},
+            ]
+        },
+    ]
+
+    return nav_structure
+
+
 class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
     def on_config(self, config: MkDocsConfig) -> MkDocsConfig | None:
         # mkdocs may default to the installation dir
@@ -502,6 +578,7 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
         log.info(f"Loading Pulp components: {self.loaded_comps}")
         user_nav: dict[str, t.Any] = {}
         dev_nav: dict[str, t.Any] = {}
+        gov_nav: list[t.Any] = []
         for comp in self.loaded_comps:
             title = comp.spec.title
             kind = comp.spec.kind
@@ -513,6 +590,10 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
             component_nav = ComponentNav(config, component_slug)
 
             log.info(f"Fetching docs from '{comp.spec.title}'.")
+            if comp.component_name == "governance":
+                gov_nav = process_governance_files(comp, files, config)
+                continue
+
             try:
                 git_branch = Repo(repo_dir).active_branch.name
             except TypeError:
@@ -570,8 +651,17 @@ class PulpDocsPlugin(BasePlugin[PulpDocsPluginConfig]):
             user_nav.setdefault(kind, []).append({title: component_nav.user_nav()})
             dev_nav.setdefault(kind, []).append({title: component_nav.dev_nav()})
 
-        config.nav[1]["User Manual"].extend([{key: value} for key, value in user_nav.items()])
-        config.nav[2]["Developer Manual"].extend([{key: value} for key, value in dev_nav.items()])
+        user_manual_nav = get_nav_node(config.nav, "User Manual")
+        user_manual_nav.extend([{key: value} for key, value in user_nav.items()])
+
+        dev_manual_nav = get_nav_node(config.nav, "Developer Manual")
+        dev_manual_nav.extend([{key: value} for key, value in dev_nav.items()])
+
+        # Process governance component with custom permalinks
+        help_nav = get_nav_node(config.nav, "Help")
+        governance_nav = get_nav_node(help_nav, "Governance")
+        governance_nav.extend(gov_nav)
+
         return files
 
     def on_page_context(
