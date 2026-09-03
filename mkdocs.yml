@@ -62,7 +62,6 @@ nav:
     - Governance:
       - "help/more/governance/licenses.md"
       - "help/more/governance/privacy.md"
-      - "help/more/governance/code-of-conduct.md"
       - "help/more/governance/ai_policy.md"
 plugins:
   - PulpDocs:
@@ -163,6 +162,10 @@ plugins:
         - title: "OCI Env"
           path: "oci_env"
           git_url: "https://github.com/pulp/oci_env"
+          kind: "Other"
+        - title: "Pulp Governance"
+          path: "governance"
+          git_url: "https://github.com/pulp/governance"
           kind: "Other"
 
         - title: "Pulp OCI Images"
