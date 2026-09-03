@@ -1,5 +1,19 @@
 {% extends "base.html" %}
 
+
+{# https://squidfunk.github.io/mkdocs-material/setup/setting-up-the-header/#announcement-bar #}
+{% block announce %}
+  <div style="text-align: center;">
+    🍊
+    <b>Virtual PulpCon 2026 CfP is open!</b>
+    <a href="https://discourse.pulpproject.org/t/virtual-pulpcon-2026-call-for-proposals/2337" target="_blank" rel="noopener noreferrer">
+      Submit your talk
+    </a>
+    before Oct 09!
+    🍊
+  </div>
+{% endblock %}
+
 {% block footer %}
 <footer class="md-footer">
   {% if "navigation.footer" in features %}
