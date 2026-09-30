@@ -1,4 +1,4 @@
-FROM ghcr.io/pulp/pulp-ci-centos9:latest
+FROM ghcr.io/pulp/pulp-ci-centos10:latest
 
 ENV UV_CACHE_DIR=/pulp-docs/.cache/uv/
 
