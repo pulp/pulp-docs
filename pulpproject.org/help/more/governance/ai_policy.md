@@ -24,11 +24,9 @@ There are four rules for code contributions to the Pulp Project:
     You are expected to understand and have reviewed any contributions you make using AI tool assistance.
     If you are opening an issue or pull request, we expect you to be able to explain the issue and/or proposed changes in your own words. 
 
-2. **Autonomous AI agents should not be used to reply to questions from maintainers.**
+2. **All GitHub comments, including answers to maintainer questions, must be clearly marked as AI-generated and kept succinct.**
 
-    AI agents *may* be used to file issues, produce reproducers, and analysis - but direct interactions with maintainers should remain human-to-human.
-    If you wish to include context from an interaction with AI in your comments, it must be in a quote block (e.g., using >) and disclosed as such.
-    Like contributions, comments/issues written with AI assistance should be reviewed by the contributor for relevance and accuracy and accompanied by human commentary.
+    Begin AI-generated comments with `[AI-generated]`. Comments must be reviewed for relevance and accuracy before posting.
 
 3. **If there are any copyrighted materials that are included in any contribution, the author must confirm that they have permission to use that material from the owners.**
 
